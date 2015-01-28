@@ -1254,7 +1254,7 @@ body
   font-size: 100%;
   line-height: 1.5;
   color: #000;
-  background: url(../images/05.jpg);
+  background: url(../images/05.jpg) linear-gradient(to right, rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5));
   -webkit-font-smoothing: antialiased; 
   -moz-hyphens: none!important;
   -ms-hyphens: none!important;
