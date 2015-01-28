@@ -38,7 +38,7 @@
                     <div class="step step_choice step_now">1 <div></div> </div>
                     <div class="step step_img">2 <div></div> </div>
                     <div class="step step_procedure">3 <div></div>  </div> -->
-                    <h3 class="heading heading_dashboard">Выберите актуальную зону</h3>
+                    <h3 class="heading heading_dashboard">Переместить элементы</h3>
                 </div>
                 <div class="btn btn_back invisible"><span>‹</span> Назад</div>
 
@@ -54,7 +54,7 @@
                       <div>Насильственное следование некой жизненной стратегии, стойкие убеждения и ценности, основанные на опасениях и самоограничениях, навязчивые мысли и действия  по типу "частого мытья рук» или чего иного, постоянное беспокойство по поводу «курса валют»; ситуации по проверке себя с вовлечением окружающих «…ой, а не забыл ли я выключить чайник…утюг…газовый кран.. .дверь дома», «…проверь ты, а то я не уверен/на..»; страх высоты или нанесения себе повреждения ножиком или другим опасным предметом; создание больших запасов еды по типу «битком забитого холодильника, мешка сахара и муки»<div class="btn btn_lg btn_success btn_choice" data-protocol ="v5">Выбрать</div></div>
                     </div>
                 </div> -->
-                <div class="machine_screen clearfix hidden">
+                <div class="machine_screen clearfix">
                     <div class="bbody">
 
                         <!-- upload form -->
