@@ -1254,9 +1254,7 @@ body
   font-size: 100%;
   line-height: 1.5;
   color: #000;
-  /*background: url(../images/point-bgr.png);*/
-  background: url(../images/Orange-Flower_.jpg) center center/100%;
-  /*background: linear-gradient(to bottom, #F2EAE2, #F6EEE6);*/
+  background: url(../images/05.jpg);
   -webkit-font-smoothing: antialiased; 
   -moz-hyphens: none!important;
   -ms-hyphens: none!important;
@@ -2200,16 +2198,15 @@ be set to display none.
 .home-page-content
 {
     min-height: 300px;
-    /*background: #F4F4F4;*/
+    background: #F4F4F4;
     padding: 20px;
     margin: 10px auto 30px;
     position: relative;
-    /*-webkit-box-shadow: 0 1px 8px #d3cec7;*/
-    /*-moz-box-shadow: 0 1px 8px #d3cec7;*/
-    /*-ms-box-shadow: 0 1px 8px #d3cec7;*/
-    /*-o-box-shadow: 0 1px 8px #d3cec7;*/
-    /*box-shadow: 0 1px 8px #d3cec7;*/
-    border: 1px solid #F1E9E1;
+    -webkit-box-shadow: 0 1px 8px #d3cec7;
+    -moz-box-shadow: 0 1px 8px #d3cec7;
+    -ms-box-shadow: 0 1px 8px #d3cec7;
+    -o-box-shadow: 0 1px 8px #d3cec7;
+    box-shadow: 0 1px 8px #d3cec7;
 }
 .home .home-page-content
 {
