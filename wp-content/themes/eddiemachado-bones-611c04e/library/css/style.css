@@ -1255,12 +1255,7 @@ body
   line-height: 1.5;
   color: #000;
   /*background: url(../images/point-bgr.png);*/
-  background: url(../images/Orange-Flower.jpg) center center/100%;
-  filter: blur(6px);
-  -o-filter: blur(6px);
-  -ms-filter: blur(6px);
-  -moz-filter: blur(6px);
-  -webkit-filter: blur(6px);
+  background: url(../images/Orange-Flower_.jpg) center center/100%;
   /*background: linear-gradient(to bottom, #F2EAE2, #F6EEE6);*/
   -webkit-font-smoothing: antialiased; 
   -moz-hyphens: none!important;
