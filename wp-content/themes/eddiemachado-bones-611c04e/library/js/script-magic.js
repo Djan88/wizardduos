@@ -108,7 +108,7 @@ jQuery(function() {
     {
         // jQuery('.step_img div').text('Фото загружено');
         jQuery('.heading_dashboard').text('Перенесите зоны с шаблона на фото клиента')
-        cur_screen = 2;
+        cur_screen = 1;
         jQuery('.step').eq(cur_screen-1).addClass('step_done');
         jQuery('.step').eq(cur_screen-2).addClass('step_done');
         jQuery('.step').eq(cur_screen).addClass('step_now');
