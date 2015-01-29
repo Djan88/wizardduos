@@ -59,6 +59,8 @@ li
 {
     /*background: url(../images/vitruvian_man.png) center 25px/100% no-repeat;*/
     /*background: url(../images/wizduos.jpg) center 25px/100% no-repeat;*/
+    /*background: url(../images/wizduos.jpg) center 25px/100% no-repeat;*/
+    background: url(../images/wizards_svg.jpg) center 25px/100% no-repeat;
     background: #fff;
     height: 600px;
 }
@@ -459,7 +461,7 @@ div#inner-header
 path, line, polyline 
 {
   stroke: #000;
-  stroke-width: 5px;
+  stroke-width: 10px;
 }
 path 
 {
@@ -467,5 +469,8 @@ path
 }
 #example
 {
-  width: 1000px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: -70px;
 }

@@ -167,14 +167,14 @@
                             <path d="M1868 1933 c7 -3 16 -2 19 1 4 3 -2 6 -13 5 -11 0 -14 -3 -6 -6z"/>
                             </g>
                             </svg>
-                            <li id="draggable0" class="itemlist_item item_list__mid draggable" style="left: 95px; top: 37px;">V0</li>
-                            <li id="draggable1" class="itemlist_item item_list__mid draggable" style="left: 168px; top: 54px;">V1</li>
-                            <li id="draggable2" class="itemlist_item item_list__mid draggable" style="left: 168px; top: 105px;">V2</li>
-                            <li id="draggable3" class="itemlist_item item_list__mid draggable" style="left: 168px; top: 166px;">V3</li>
-                            <li id="draggable4" class="itemlist_item item_list__mid draggable" style="left: 168px; top: 210px;">V4</li>
-                            <li id="draggable5" class="itemlist_item item_list__mid draggable" style="left: 168px; top: 252px;">V5</li>
-                            <li id="draggableD1" class="itemlist_item item_list__mid draggable" style="left: 121px; top: 64px;">D+</li>
-                            <li id="draggableD11" class="itemlist_item item_list__mid draggable" style="left: 121px; top: 84px; font-size: 22px; pading-top: 10px;">D++</li>
+                            <li id="draggable0" class="itemlist_item item_list__mid draggable" style="left: 101px; top: 21px;">V0</li>
+                            <li id="draggable1" class="itemlist_item item_list__mid draggable" style="left: 100px; top: 66px;">V1</li>
+                            <li id="draggable2" class="itemlist_item item_list__mid draggable" style="left: 94px; top: 121px;">V2</li>
+                            <li id="draggable3" class="itemlist_item item_list__mid draggable" style="left: 93px; top: 176px;">V3</li>
+                            <li id="draggable4" class="itemlist_item item_list__mid draggable" style="left: 90px; top: 234px;">V4</li>
+                            <li id="draggable5" class="itemlist_item item_list__mid draggable" style="left: 90px; top: 282px;">V5</li>
+                            <li id="draggableD1" class="itemlist_item item_list__mid draggable" style="left: 52px; top: 65px;">D+</li>
+                            <li id="draggableD11" class="itemlist_item item_list__mid draggable" style="left: 53px; top: 20px; font-size: 22px; padding-top: 10px;">D++</li>
                             <!-- <li id="draggableClean" class="itemlist_item item_list__mid itemlist_item__clear draggable" style="left: 20px; top: 262px;"></li> -->
                             <!-- <li id="draggableS2" class="itemlist_item item_list__mid draggable" style="left: 216px; top: 110px;">S2</li> -->
                             <!-- <li id="draggableS2_1" class="itemlist_item item_list__mid draggable" style="left: 212px; top: 163px;">S2</li> -->
@@ -182,26 +182,26 @@
                             <!-- <li id="draggableS4" class="itemlist_item item_list__mid draggable" style="left: 201px; top: 244px;">S4</li> -->
                             <!-- <li id="draggableS5" class="itemlist_item item_list__mid draggable" style="left: 218px; top: 298px;">S5</li> -->
                             <!-- <li id="draggableS6" class="itemlist_item item_list__mid draggable" style="left: 239px; top: 429px;">S6</li> -->
-                            <li id="draggable6" class="itemlist_item item_list__mid draggable" style="left: 168px; top: 514px;">V6</li>
-                            <li id="draggableD2" class="itemlist_item item_list__mid draggable" style="left: 115px; top: 110px;">D2</li>
-                            <li id="draggableD3" class="itemlist_item item_list__mid draggable" style="left: 131px; top: 197px;">D3</li>
-                            <li id="draggableD5" class="itemlist_item item_list__mid draggable" style="left: 116px; top: 298px;">D5</li>
-                            <li id="draggableD4" class="itemlist_item item_list__mid draggable" style="left: 134px; top: 244px;">D4</li>
-                            <li id="draggableD6" class="itemlist_item item_list__mid draggable" style="left: 164px; top: 244px;">D6</li>
-                            <li id="draggableD7" class="itemlist_item item_list__mid draggable" style="left: 134px; top: 244px;">D7</li>
+                            <li id="draggable6" class="itemlist_item item_list__mid draggable" style="left: 89px; top: 355px;">V6</li>
+                            <li id="draggableD2" class="itemlist_item item_list__mid draggable" style="left: 43px; top: 122px;">D2</li>
+                            <li id="draggableD3" class="itemlist_item item_list__mid draggable" style="left: 59px; top: 205px;">D3</li>
+                            <li id="draggableD5" class="itemlist_item item_list__mid draggable" style="left: 55px; top: 328px;">D5</li>
+                            <li id="draggableD4" class="itemlist_item item_list__mid draggable" style="left: 57px; top: 260px;">D4</li>
+                            <li id="draggableD6" class="itemlist_item item_list__mid draggable" style="left: 51px; top: 404px;">D6</li>
+                            <li id="draggableD7" class="itemlist_item item_list__mid draggable" style="left: 51px; top: 496px;">D7</li>
                             <!-- <li id="draggableClean_2" class="itemlist_item item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
                             <!-- <li id="draggableClean_3" class="itemlist_item item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
                             <!-- <li id="draggableClean_4" class="itemlist_item item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
                             <!-- <li id="draggableClean_5" class="itemlist_item item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
 
-                            <li id="draggable0_1" class="itemlist_item item_list__mid draggable" style="left: 368px; top: 16px;">V0</li>
-                            <li id="draggable1_1" class="itemlist_item item_list__mid draggable" style="left: 368px; top: 54px;">V1</li>
-                            <li id="draggable2_1" class="itemlist_item item_list__mid draggable" style="left: 368px; top: 105px;">V2</li>
-                            <li id="draggable3_1" class="itemlist_item item_list__mid draggable" style="left: 368px; top: 166px;">V3</li>
-                            <li id="draggable4_1" class="itemlist_item item_list__mid draggable" style="left: 368px; top: 210px;">V4</li>
-                            <li id="draggable5_1" class="itemlist_item item_list__mid draggable" style="left: 368px; top: 252px;">V5</li>
-                            <li id="draggableD1_1" class="itemlist_item item_list__mid draggable" style="left: 321px; top: 64px;">D+</li>
-                            <li id="draggableD11_1" class="itemlist_item item_list__mid draggable" style="left: 321px; top: 84px; font-size: 22px; pading-top: 10px;">D++</li>
+                            <li id="draggable0_1" class="itemlist_item item_list__mid draggable" style="left: 248px; top: 30px;">V0</li>
+                            <li id="draggable1_1" class="itemlist_item item_list__mid draggable" style="left: 247px; top: 81px;">V1</li>
+                            <li id="draggable2_1" class="itemlist_item item_list__mid draggable" style="left: 247px; top: 127px;">V2</li>
+                            <li id="draggable3_1" class="itemlist_item item_list__mid draggable" style="left: 247px; top: 183px;">V3</li>
+                            <li id="draggable4_1" class="itemlist_item item_list__mid draggable" style="left: 245px; top: 242px;">V4</li>
+                            <li id="draggable5_1" class="itemlist_item item_list__mid draggable" style="left: 245px; top: 293px;">V5</li>
+                            <li id="draggableD1_1" class="itemlist_item item_list__mid draggable" style="left: 194px; top: 81px;">D+</li>
+                            <li id="draggableD11_1" class="itemlist_item item_list__mid draggable" style="left: 197px; top: 29px; font-size: 22px; padding-top: 10px;">D++</li>
                             <!-- <li id="draggableClean_1" class="itemlist_item item_list__mid itemlist_item__clear draggable" style="left: 20px; top: 262px;"></li> -->
                             <!-- <li id="draggableS2_1" class="itemlist_item item_list__mid draggable" style="left: 216px; top: 110px;">S2</li> -->
                             <!-- <li id="draggableS2_1_1" class="itemlist_item item_list__mid draggable" style="left: 212px; top: 163px;">S2</li> -->
@@ -209,13 +209,13 @@
                             <!-- <li id="draggableS4_1" class="itemlist_item item_list__mid draggable" style="left: 201px; top: 244px;">S4</li> -->
                             <!-- <li id="draggableS5_1" class="itemlist_item item_list__mid draggable" style="left: 218px; top: 298px;">S5</li> -->
                             <!-- <li id="draggableS6_1" class="itemlist_item item_list__mid draggable" style="left: 239px; top: 429px;">S6</li> -->
-                            <li id="draggable6_1" class="itemlist_item item_list__mid draggable" style="left: 368px; top: 514px;">V6</li>
-                            <li id="draggableD2_1" class="itemlist_item item_list__mid draggable" style="left: 315px; top: 110px;">D2</li>
-                            <li id="draggableD3_1" class="itemlist_item item_list__mid draggable" style="left: 331px; top: 197px;">D3</li>
-                            <li id="draggableD5_1" class="itemlist_item item_list__mid draggable" style="left: 316px; top: 298px;">D5</li>
-                            <li id="draggableD4_1" class="itemlist_item item_list__mid draggable" style="left: 334px; top: 244px;">D4</li>
-                            <li id="draggableD6_1" class="itemlist_item item_list__mid draggable" style="left: 364px; top: 244px;">D6</li>
-                            <li id="draggableD7_1" class="itemlist_item item_list__mid draggable" style="left: 334px; top: 244px;">D7</li>
+                            <li id="draggable6_1" class="itemlist_item item_list__mid draggable" style="left: 242px; top: 362px;">V6</li>
+                            <li id="draggableD2_1" class="itemlist_item item_list__mid draggable" style="left: 209px; top: 129px;">D2</li>
+                            <li id="draggableD3_1" class="itemlist_item item_list__mid draggable" style="left: 224px; top: 205px;">D3</li>
+                            <li id="draggableD5_1" class="itemlist_item item_list__mid draggable" style="left: 220px; top: 331px;">D5</li>
+                            <li id="draggableD4_1" class="itemlist_item item_list__mid draggable" style="left: 213px; top: 261px;">D4</li>
+                            <li id="draggableD6_1" class="itemlist_item item_list__mid draggable" style="left: 215px; top: 408px;">D6</li>
+                            <li id="draggableD7_1" class="itemlist_item item_list__mid draggable" style="left: 214px; top: 452px;">D7</li>
                             <!-- <li id="draggableClean_2_1" class="itemlist_item item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
                             <!-- <li id="draggableClean_3_1" class="itemlist_item item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
                             <!-- <li id="draggableClean_4_1" class="itemlist_item item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
