@@ -60,8 +60,8 @@ li
     /*background: url(../images/vitruvian_man.png) center 25px/100% no-repeat;*/
     /*background: url(../images/wizduos.jpg) center 25px/100% no-repeat;*/
     /*background: url(../images/wizduos.jpg) center 25px/100% no-repeat;*/
-    background: url(../images/wizards_svg.jpg) center 25px/100% no-repeat;
-    background: #fff;
+    background: url(../images/wizards_svg.jpg) center 0/100% no-repeat;
+    /*background: #fff;*/
     height: 600px;
 }
 .itemlist-two
