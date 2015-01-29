@@ -1254,9 +1254,9 @@ body
   font-size: 100%;
   line-height: 1.5;
   color: #000;
-  /*background: linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.4)), url(../images/05.jpg) 0 0/15px;*/
-  background: radial-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.4)), url(../images/05.jpg) 0 0/15px;
-  -webkit-font-smoothing: antialiased; 
+  /*background: linear-gradient(to right, #fff, #0A51AF);*/
+  background: radial-gradient(#fff, #0A51AF);
+  -webkit-font-smoothing: antialiased;
   -moz-hyphens: none!important;
   -ms-hyphens: none!important;
   -webkit-hyphens: none!important;
@@ -1393,11 +1393,11 @@ HEADER STYLES
   /*background: url(../images/topbar_bg.png) center -45px/100% no-repeat;*/
   background: #F4F4F4;
   height: 50px;
-  -webkit-box-shadow: 0 1px 8px #d3cec7;
-  -moz-box-shadow: 0 1px 8px #d3cec7;
-  -ms-box-shadow: 0 1px 8px #d3cec7;
-  -o-box-shadow: 0 1px 8px #d3cec7;
-  box-shadow: 0 1px 8px #d3cec7;
+  -webkit-box-shadow: 0 1px 8px #000;
+  -moz-box-shadow: 0 1px 8px #000;
+  -ms-box-shadow: 0 1px 8px #000;
+  -o-box-shadow: 0 1px 8px #000;
+  box-shadow: 0 1px 8px #000;
 }
 .btn.btn_logout 
 {
@@ -1790,11 +1790,21 @@ SIDEBARS & ASIDES
 /*********************
 FOOTER STYLES
 *********************/
-.footer {
+.footer 
+{
   clear: both;
-  background-color: #323944;
-  color: #f8f9fa; }
-
+  background-color: #F4F4F4;
+  color: #000;
+  -webkit-box-shadow: 0 0px 8px #000;
+  -moz-box-shadow: 0 0px 8px #000;
+  -ms-box-shadow: 0 0px 8px #000;
+  -o-box-shadow: 0 0px 8px #000;
+  box-shadow: 0 0px 8px #000; 
+}
+.footer a
+{
+  color: #000;
+}
 /*
 if you checked out the link above:
 http://www.alistapart.com/articles/organizing-mobile/
@@ -2058,7 +2068,7 @@ you can add resource intensive styles.
   
   ******************************************************************/
   .wrap {
-    width: 1800px; 
+    max-width: 1800px; 
     padding: 10px 10px 0;
     } }
 
@@ -2203,11 +2213,11 @@ be set to display none.
     padding: 20px;
     margin: 10px auto 30px;
     position: relative;
-    -webkit-box-shadow: 0 1px 8px #d3cec7;
+    /*-webkit-box-shadow: 0 1px 8px #d3cec7;
     -moz-box-shadow: 0 1px 8px #d3cec7;
     -ms-box-shadow: 0 1px 8px #d3cec7;
     -o-box-shadow: 0 1px 8px #d3cec7;
-    box-shadow: 0 1px 8px #d3cec7;
+    box-shadow: 0 1px 8px #d3cec7;*/
 }
 .home .home-page-content
 {
