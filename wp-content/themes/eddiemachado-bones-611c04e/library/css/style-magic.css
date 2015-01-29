@@ -58,7 +58,8 @@ li
 .itemlist-one
 {
     /*background: url(../images/vitruvian_man.png) center 25px/100% no-repeat;*/
-    background: url(../images/wizduos.jpg) center 25px/100% no-repeat;
+    /*background: url(../images/wizduos.jpg) center 25px/100% no-repeat;*/
+    background: #fff;
     height: 600px;
 }
 .itemlist-two
@@ -454,4 +455,17 @@ path {
 div#inner-header 
 {
     padding: 10px 10px 0;
+}
+path, line, polyline 
+{
+  stroke: #000;
+  stroke-width: 5px;
+}
+path 
+{
+  fill: transparent;
+}
+#example
+{
+  width: 1000px;
 }

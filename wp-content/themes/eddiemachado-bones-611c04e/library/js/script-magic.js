@@ -345,4 +345,5 @@ jQuery('#main').on('click', '.fast-protocol', function() {
         oReader.readAsDataURL(oFile);
     }
     jQuery('#image_file').on('change', fileSelectHandler);
+    var a = new Vivus('example', {type: 'delayed', duration: 400});
 });
