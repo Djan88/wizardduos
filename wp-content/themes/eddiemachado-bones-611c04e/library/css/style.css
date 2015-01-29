@@ -2562,22 +2562,19 @@ be set to display none.
 {
   background: #68B000;
 }
-.btn_back 
+header .btn_back 
 {
-  display: block;
-  margin: auto;
-  width: 120px;
-  border: 1px solid #204371;
-  background: transparent;
-  color: #204371;
+  width: 90px;
   text-transform: uppercase;
   font-weight: 600;
-  position: absolute;
+  position: relative;
   padding-left: 35px;
-  margin-bottom: 15px;
-  left: 44%;
-  top: 85px;
-  z-index: 10;
+  float: left;
+  margin-left: 0;
+}
+header .btn 
+{
+  margin-left: 5px;
 }
 .work-area .btn_back 
 {
