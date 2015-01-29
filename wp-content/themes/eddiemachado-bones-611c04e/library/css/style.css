@@ -1400,6 +1400,7 @@ HEADER STYLES
   box-shadow: 0 1px 8px #000;
   position: fixed;
   width: 100%;
+  z-index: 5;
 }
 .btn.btn_logout 
 {
@@ -1930,7 +1931,7 @@ you can add resource intensive styles.
   *********************/
   .wrap {
     /*width: 760px; */
-    min-width: 960px;
+    min-width: 875px;
   }
 
   /*********************

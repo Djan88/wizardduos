@@ -57,7 +57,8 @@ li
 }
 .itemlist-one
 {
-    background: url(../images/vitruvian_man.png) center 25px/100% no-repeat;
+    /*background: url(../images/vitruvian_man.png) center 25px/100% no-repeat;*/
+    background: url(../images/wizduos.jpg) center 25px/100% no-repeat;
     height: 600px;
 }
 .itemlist-two
