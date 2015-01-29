@@ -188,7 +188,7 @@
                             <li id="draggableD5" class="itemlist_item item_list__mid draggable" style="left: 55px; top: 328px;">D5</li>
                             <li id="draggableD4" class="itemlist_item item_list__mid draggable" style="left: 57px; top: 260px;">D4</li>
                             <li id="draggableD6" class="itemlist_item item_list__mid draggable" style="left: 51px; top: 404px;">D6</li>
-                            <li id="draggableD7" class="itemlist_item item_list__mid draggable" style="left: 51px; top: 496px;">D7</li>
+                            <li id="draggableD7" class="itemlist_item item_list__mid draggable" style="left: 51px; top: 450px;">D7</li>
                             <!-- <li id="draggableClean_2" class="itemlist_item item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
                             <!-- <li id="draggableClean_3" class="itemlist_item item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
                             <!-- <li id="draggableClean_4" class="itemlist_item item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
