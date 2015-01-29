@@ -107,7 +107,7 @@ jQuery(function() {
     if(croppedImg.hasAttribute('src'))
     {
         // jQuery('.step_img div').text('Фото загружено');
-        jQuery('.heading_dashboard').text('Перенесите зоны с шаблона на фото клиента')
+        jQuery('.heading_dashboard').text('Перенесите зоны с шаблона на фото клиентов')
         cur_screen = 1;
         jQuery('.step').eq(cur_screen-1).addClass('step_done');
         jQuery('.step').eq(cur_screen-2).addClass('step_done');

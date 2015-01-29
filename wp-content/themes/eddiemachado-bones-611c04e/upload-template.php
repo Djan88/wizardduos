@@ -38,7 +38,7 @@
                     <div class="step step_choice step_now">1 <div></div> </div>
                     <div class="step step_img">2 <div></div> </div>
                     <div class="step step_procedure">3 <div></div>  </div> -->
-                    <h3 class="heading heading_dashboard">Переместить элементы</h3>
+                    <h3 class="heading heading_dashboard">Загрузите фото</h3>
                 </div>
                 <!-- <div class="btn btn_back invisible"><span>‹</span> Назад</div> -->
 
@@ -90,7 +90,7 @@
                              width="200.000000pt" height="241.000000pt" viewBox="0 0 200.000000 241.000000"
                              preserveAspectRatio="xMidYMid meet">
                             <metadata>
-                            Created by potrace 1.10, written by Peter Selinger 2001-2011
+                            <!-- Created by potrace 1.10, written by Peter Selinger 2001-2011 -->
                             </metadata>
                             <g transform="translate(0.000000,241.000000) scale(0.100000,-0.100000)"
                             fill="#000000" stroke="none">

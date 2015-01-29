@@ -69,6 +69,8 @@ li
     /*background: url(../images/man.jpg) 0 0/100% no-repeat;*/
     padding: 20px 0;
     float: right;
+    width: 30%;
+    min-width: 392px;
 }
 .itemlist_item:hover, .itemlist_item:active
 {
@@ -149,8 +151,8 @@ input {
 .itemlist.itemlist-two img 
 {
     display: inline!important;
-    margin: 10px;
-    width: 370px;
+    /*margin: 10px;*/
+    width: 100%;
 }
 .steps
 {
