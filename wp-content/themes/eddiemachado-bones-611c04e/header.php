@@ -77,6 +77,7 @@
 
                         </nav> -->
                         <?php if(is_user_logged_in()){ ?>
+                            <div class="btn btn_sm btn_warning btn__wizard" >Выполнить</div>
                             <a class="btn btn_sm btn_warning btn_logout" href="<?php echo home_url(); ?>/wp-login.php?action=logout&amp;_wpnonce=a6cad512ba">Выйти</a>
                         <?php }?>
 
