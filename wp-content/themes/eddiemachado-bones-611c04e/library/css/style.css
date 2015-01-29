@@ -2562,6 +2562,10 @@ be set to display none.
 {
   background: #68B000;
 }
+header .btn 
+{
+  margin-left: 5px;
+}
 header .btn_back 
 {
   width: 90px;
@@ -2571,10 +2575,6 @@ header .btn_back
   padding-left: 35px;
   float: left;
   margin-left: 0;
-}
-header .btn 
-{
-  margin-left: 5px;
 }
 .work-area .btn_back 
 {
