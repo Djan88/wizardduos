@@ -444,3 +444,13 @@ path {
     padding: 7px 25px;
     font-size: 15px;
 }
+.btn__wizard 
+{
+    font-weight: 600!important;
+    text-transform: uppercase;
+    float: right;
+}
+div#inner-header 
+{
+    padding: 10px 10px 0;
+}
