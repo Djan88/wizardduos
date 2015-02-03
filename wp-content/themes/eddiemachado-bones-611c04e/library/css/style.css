@@ -1467,6 +1467,10 @@ POSTS & CONTENT STYLES
        -o-box-shadow: 0 -2px 8px #000;
           box-shadow: 0 -2px 8px #000;
 }
+.home #content 
+{
+  background: transparent;
+}
 
 .hentry, .sidebar
 {
