@@ -1328,7 +1328,7 @@ LAYOUT & GRID STYLES
 .wrap 
 {
   width: 96%;
-  min-width: 960px;
+  min-width: 875px;
   margin: 0 auto; 
 }
 
