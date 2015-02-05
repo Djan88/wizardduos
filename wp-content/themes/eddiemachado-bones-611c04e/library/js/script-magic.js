@@ -120,6 +120,7 @@ jQuery(function() {
             .removeClass('invisible')
             .addClass('animated')
             .addClass('fadeIn');
+        jQuery('.btn__wizard').removeClass('hidden');
         jQuery('.itemlist-two').append(croppedImg);
     }
 
@@ -168,7 +169,7 @@ jQuery('#main').on('click', '.fast-protocol', function() {
 // Возврат на предыдущий шаг
     jQuery('.btn_back').on('click', function(event) {
         // console.log(cur_screen);
-        jQuery('.btn__crop').addClass('hidden');
+        jQuery('.btn__crop, .btn__wizard').addClass('hidden');
         jQuery('.machine_screen')
             .addClass('hidden')
             .removeClass('fadeIn')
