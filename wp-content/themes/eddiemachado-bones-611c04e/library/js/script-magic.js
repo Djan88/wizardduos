@@ -45,13 +45,13 @@ jQuery(function() {
     }
 
     jQuery( ".box_rounded" ).draggable({ snap: false });
-    jQuery( ".box_rounded .draggable" ).draggable({ snap: false });
     jQuery( ".box_rounded" ).resizable({
       aspectRatio: 1/ 1
     });
     jQuery('.sort, .box_rounded').sortable({
       connectWith: ".connectedSortable"
     }).disableSelection();
+    jQuery( ".draggable" ).draggable({ snap: false });
     
     jQuery( ".select_program" ).accordion({ active: 100 });
 
