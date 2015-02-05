@@ -489,3 +489,7 @@ path
     stroke: #fff!important;
     stroke-width: 20px;
 }
+.btn_alert
+{
+    background: #FF5B1E;
+}
