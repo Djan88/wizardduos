@@ -49,7 +49,7 @@ jQuery(function() {
       aspectRatio: 1/ 1
     });
 
-    $( ".itemlist-two" ).droppable();
+    jQuery(".itemlist-two" ).droppable();
     
     jQuery( ".select_program" ).accordion({ active: 100 });
 
