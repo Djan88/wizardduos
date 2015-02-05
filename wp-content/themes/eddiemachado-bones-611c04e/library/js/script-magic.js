@@ -45,6 +45,9 @@ jQuery(function() {
     }
 
     jQuery( ".draggable, .box_rounded" ).draggable({ snap: false });
+    jQuery( ".box_rounded" ).resizable({
+      aspectRatio: 1/ 1
+    })
     
     jQuery( ".select_program" ).accordion({ active: 100 });
 
