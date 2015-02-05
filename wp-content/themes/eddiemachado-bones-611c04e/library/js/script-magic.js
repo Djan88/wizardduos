@@ -45,6 +45,7 @@ jQuery(function() {
     }
 
     jQuery( ".box_rounded" ).draggable({ snap: false });
+    jQuery( ".box_rounded .draggable" ).draggable({ snap: false });
     jQuery( ".box_rounded" ).resizable({
       aspectRatio: 1/ 1
     });
