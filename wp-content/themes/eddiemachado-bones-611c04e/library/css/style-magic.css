@@ -270,11 +270,11 @@ input[type=submit]:hover, input[type=submit]:active {
 {
     cursor: progress;
 }
-.ui-draggable-dragging
+.itemlist_item.ui-draggable-dragging
 {
     position: relative;
 }
-.ui-draggable-dragging:before, .itemlist_item:hover:before
+.itemlist_item.ui-draggable-dragging:before, .itemlist_item.itemlist_item:hover:before
 {
     content: '';
     position: absolute;
@@ -283,7 +283,7 @@ input[type=submit]:hover, input[type=submit]:active {
     top: 26px;
     left: -475px;
 }
-.ui-draggable-dragging:after, .itemlist_item:hover:after
+.itemlist_item.ui-draggable-dragging:after, .itemlist_item.itemlist_item:hover:after
 {
     content: '';
     position: absolute;
@@ -510,6 +510,6 @@ path
     height: 700px;
     border: 2px dashed #fff;
     border-radius: 50%;
-    position: relative;
+    position: absolute;
     margin: 150px auto;
 }
