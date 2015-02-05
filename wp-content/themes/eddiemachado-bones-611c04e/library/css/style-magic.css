@@ -476,3 +476,15 @@ path
   left: 0;
   top: -70px;
 }
+.people #example 
+{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 230px;
+}
+.people #example path, line, polyline 
+{
+    stroke: #fff!important;
+    stroke-width: 20px;
+}
