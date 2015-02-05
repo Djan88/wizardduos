@@ -229,9 +229,9 @@
                             <li class="itemlist_item">4</li>
                             <li class="itemlist_item">5</li>
                         -->
-                        <div class="box_rounded"></div>
                         <li class="itemlist-two-li"></li>
                         </ul>
+                        <div class="box_rounded"></div>
                         <div class="contentAlignCenter">
                             <!-- <div class="btn btn_lg btn_trans_action btn__wizard" >Выполнить</div> -->
                         </div>
