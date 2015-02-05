@@ -85,7 +85,7 @@
 
                 <div class="machine_screen work-area clearfix hidden">
                     <div id="snaptarget" class="wrapper">
-                        <ul class="itemlist itemlist-one" id="itemlist-one">
+                        <ul class=" connectedSortable itemlist itemlist-one" id="itemlist-one">
                             <svg id="example" height="700" version="1.0" xmlns="http://www.w3.org/2000/svg"
                              width="200.000000pt" height="241.000000pt" viewBox="0 0 200.000000 241.000000"
                              preserveAspectRatio="xMidYMid meet">
@@ -221,7 +221,7 @@
                             <!-- <li id="draggableClean_4_1" class="itemlist_item item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
                             <!-- <li id="draggableClean_5_1" class="itemlist_item item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
                         </ul>
-                        <ul class="itemlist itemlist-two" id="itemlist-two">
+                        <ul class="itemlist connectedSortable itemlist-two" id="itemlist-two">
                         <!--
                             <li class="itemlist_item">1</li>
                             <li class="itemlist_item">2</li>
