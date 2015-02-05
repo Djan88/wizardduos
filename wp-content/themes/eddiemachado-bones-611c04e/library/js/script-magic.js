@@ -303,7 +303,7 @@ jQuery('#main').on('click', '.fast-protocol', function() {
                     jQuery('.step2').fadeIn(500);
                     jQuery('.btn__crop').removeClass('hidden');
                     jQuery('.btn__crop').addClass('btn_alert');
-                    setTimeout("jQuery('.btn__crop').removeClass('btn_alert')", 2000);
+                    setTimeout("jQuery('.btn__crop').removeClass('btn_alert')", 3000);
                     // display some basic image info
                     var sResultFileSize = bytesToSize(oFile.size);
                     jQuery('#filesize').val(sResultFileSize);
