@@ -99,6 +99,9 @@ jQuery(function() {
         }
         main_heading()
     });
+    jQuery('.btn_crop').on('click', function(event) {
+        jQuery('.crop_photo').click();
+    });
 
 // ШАГ 2 (переход к магии)
 //Если фото уже обрезано
@@ -165,6 +168,7 @@ jQuery('#main').on('click', '.fast-protocol', function() {
 // Возврат на предыдущий шаг
     jQuery('.btn_back').on('click', function(event) {
         // console.log(cur_screen);
+        jQuery('.btn_crop').addClass('hidden');
         jQuery('.machine_screen')
             .addClass('hidden')
             .removeClass('fadeIn')

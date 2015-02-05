@@ -481,7 +481,8 @@ path
     width: 100%;
     position: absolute;
     left: 0;
-    top: 230px;
+    right: 0;
+    top: 50%;
 }
 .people #example path, line, polyline 
 {
