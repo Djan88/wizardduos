@@ -230,7 +230,7 @@
                             <li class="itemlist_item">5</li>
                         -->
                         <li class="itemlist-two-li">
-                            <ul class="box_rounded connectedSortable sort"></ul>
+                            <ul class="box_rounded connectedSortable"></ul>
                         </li>
                         </ul>
                         <div class="contentAlignCenter">

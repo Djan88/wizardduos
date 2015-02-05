@@ -48,7 +48,7 @@ jQuery(function() {
     jQuery( ".box_rounded" ).resizable({
       aspectRatio: 1/ 1
     });
-    jQuery('.sort').sortable({
+    jQuery('.sort, .box_rounded').sortable({
       connectWith: ".connectedSortable"
     }).disableSelection();
     
