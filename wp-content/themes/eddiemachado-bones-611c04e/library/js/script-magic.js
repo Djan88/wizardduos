@@ -48,10 +48,9 @@ jQuery(function() {
     jQuery( ".box_rounded" ).resizable({
       aspectRatio: 1/ 1
     });
-    jQuery('.itemlist').sortable({
+    jQuery('.sort').sortable({
       connectWith: ".connectedSortable"
     }).disableSelection();
-    jQuery( ".box_rounded" ).droppable();
     
     jQuery( ".select_program" ).accordion({ active: 100 });
 

@@ -85,7 +85,7 @@
 
                 <div class="machine_screen work-area clearfix hidden">
                     <div id="snaptarget" class="wrapper">
-                        <ul class="connectedSortable Sort itemlist itemlist-one" id="itemlist-one">
+                        <ul class="connectedSortable sort itemlist itemlist-one" id="itemlist-one">
                             <svg id="example" height="700" version="1.0" xmlns="http://www.w3.org/2000/svg"
                              width="200.000000pt" height="241.000000pt" viewBox="0 0 200.000000 241.000000"
                              preserveAspectRatio="xMidYMid meet">
@@ -230,7 +230,7 @@
                             <li class="itemlist_item">5</li>
                         -->
                         <li class="itemlist-two-li">
-                            <ul class="box_rounded connectedSortable Sort"></ul>
+                            <ul class="box_rounded connectedSortable sort"></ul>
                         </li>
                         </ul>
                         <div class="contentAlignCenter">
