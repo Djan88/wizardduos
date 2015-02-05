@@ -44,7 +44,7 @@ jQuery(function() {
         jQuery('.step_choice div').text(curChoice);
     }
 
-    jQuery( ".draggable" ).draggable({ snap: false });
+    jQuery( ".draggable, .box_rounded" ).draggable({ snap: false });
     
     jQuery( ".select_program" ).accordion({ active: 100 });
 

@@ -504,3 +504,12 @@ path
     height: 35px;
     background: url(../images/right_arrow_gif.GIF) no-repeat;
 }
+.box_rounded
+{
+    width: 700px;
+    height: 700px;
+    border: 2px dashed #fff;
+    border-radius: 50%;
+    position: relative;
+    margin: 150px auto;
+}
