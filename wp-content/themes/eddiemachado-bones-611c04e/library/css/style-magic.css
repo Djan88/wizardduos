@@ -491,7 +491,16 @@ path
 }
 .btn_alert
 {
-    background: #FF5B1E;
-    color: #fff;
-    border-color: #fff;
+    position: relative;
+}
+.btn_alert:before
+{
+    position: absolute;
+    left: -30px;
+    top: 5px;
+    content: '';
+    display: block;
+    width: 30px;
+    height: 20px;
+    background: url(../images/right_arrow_gif.GIF) no-repeat;
 }
