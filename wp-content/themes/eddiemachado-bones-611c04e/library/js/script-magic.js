@@ -51,7 +51,6 @@ jQuery(function() {
     jQuery('.itemlist').sortable({
       connectWith: ".connectedSortable"
     }).disableSelection();
-  });
     jQuery( ".box_rounded" ).droppable();
     
     jQuery( ".select_program" ).accordion({ active: 100 });
