@@ -11,6 +11,8 @@
     <div id="inner-content" class="wrap cf">
 
         <div id="main" class="m-all t-2of3 cf" role="main">
+
+            <div class="home-page-content">
             <div class="people">
                 <svg id="example" height="200" version="1.0" xmlns="http://www.w3.org/2000/svg"
                  width="200.000000pt" height="241.000000pt" viewBox="0 0 200.000000 241.000000"
@@ -94,8 +96,6 @@
                 </g>
                 </svg>
             </div>
-
-            <div class="home-page-content">
                 
                 <?php if(is_user_logged_in()){ ?>
                     <!-- Если зашел подписчик -->
