@@ -44,7 +44,7 @@ jQuery(function() {
         jQuery('.step_choice div').text(curChoice);
     }
 
-    jQuery( ".draggable, .box_rounded" ).draggable({ snap: false });
+    jQuery( ".box_rounded" ).draggable({ snap: false });
     jQuery( ".box_rounded" ).resizable({
       aspectRatio: 1/ 1
     });
