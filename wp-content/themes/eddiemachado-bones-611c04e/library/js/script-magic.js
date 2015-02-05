@@ -300,7 +300,7 @@ jQuery('#main').on('click', '.fast-protocol', function() {
 
                     // display step 2
                     jQuery('.step2').fadeIn(500);
-
+                    jQuery('.btn__crop').removeClass('hidden');
                     // display some basic image info
                     var sResultFileSize = bytesToSize(oFile.size);
                     jQuery('#filesize').val(sResultFileSize);

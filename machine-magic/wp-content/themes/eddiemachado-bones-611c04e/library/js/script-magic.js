@@ -68,8 +68,7 @@ jQuery(function() {
             oImage.onload = function () { // onload event handler
 
                 // display step 2
-                // jQuery('.step2').fadeIn(500);
-                jQuery('.btn__crop').removeClass('hidden');
+                jQuery('.step2').fadeIn(500);
                 // display some basic image info
                 var sResultFileSize = bytesToSize(oFile.size);
                 jQuery('#filesize').val(sResultFileSize);
