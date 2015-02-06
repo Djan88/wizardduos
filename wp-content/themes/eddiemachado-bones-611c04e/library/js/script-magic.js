@@ -7,7 +7,9 @@ jQuery(function() {
         curChoice,
         protocol,
         checkPoints,
+        _thatElem,
         main_heading,
+        dragElem,
         pointsStatus = true,
         supportsStorage = function(){
             try {
@@ -44,18 +46,25 @@ jQuery(function() {
         jQuery('.step_choice div').text(curChoice);
     }
 
-    jQuery( ".box_rounded" ).draggable({ snap: false });
-    jQuery( ".box_rounded .draggable" ).draggable({ snap: false });
+    jQuery( ".draggable, .box_rounded" ).draggable({ 
+        snap: false,
+        start: function() {
+                _that = jQuery( this );
+                dragElem = jQuery(this).html();
+                console.log(dragElem);
+            },
+    });
     jQuery( ".box_rounded" ).resizable({
       aspectRatio: 1/ 1
     });
-    jQuery('.sort, .box_rounded').sortable({
-      connectWith: ".connectedSortable"
-    }).disableSelection();
+    jQuery( ".box_rounded" ).droppable({
+      drop: function( event, ui ) {
+        console.log(jQuery( this ));
+      }
+    });
     
     jQuery( ".select_program" ).accordion({ active: 100 });
 
-    
     jQuery('.show_form').on('click', function(event) {
         jQuery('.login__form')
             .removeClass('hidden')
