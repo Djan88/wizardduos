@@ -373,5 +373,5 @@ jQuery('#main').on('click', '.fast-protocol', function() {
     setTimeout(jQuery(".paranja").animate({
         opacity: 0,
         zIndex: -1
-      }, 2500 ), 5000);
+      }, 3500 ), 5000);
 });
