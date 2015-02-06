@@ -371,7 +371,7 @@ jQuery('#main').on('click', '.fast-protocol', function() {
     jQuery('#image_file').on('change', fileSelectHandler);
     var a = new Vivus('example', {type: 'delayed', duration: 400});
     setTimeout(jQuery(".paranja").animate({
-        opacity: 0.1,
+        opacity: 0,
         zIndex: -1
-      }, 1500 ), 5000);
+      }, 2500 ), 5000);
 });
