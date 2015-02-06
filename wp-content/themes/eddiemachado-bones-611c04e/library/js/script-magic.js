@@ -61,8 +61,8 @@ jQuery(function() {
       drop: function( event, ui ) {
         jQuery(this).append(dragElem);
         _that.css({
-            left: '0',
-            top: '0'
+            left: '46%',
+            top: '46%'
         });
       }
     });
