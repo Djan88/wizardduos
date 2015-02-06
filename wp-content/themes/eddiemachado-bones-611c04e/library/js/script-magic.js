@@ -60,7 +60,10 @@ jQuery(function() {
     jQuery( ".box_rounded" ).droppable({
       drop: function( event, ui ) {
         jQuery(this).append(dragElem);
-        // remove(_that);
+        dragElem.css({
+            left: '0',
+            top: '0'
+        });
       }
     });
     
