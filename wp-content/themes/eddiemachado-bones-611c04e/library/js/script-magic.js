@@ -7,9 +7,7 @@ jQuery(function() {
         curChoice,
         protocol,
         checkPoints,
-        _thatElem,
         main_heading,
-        dragElem,
         pointsStatus = true,
         supportsStorage = function(){
             try {
@@ -45,28 +43,27 @@ jQuery(function() {
         protocol = localStorage.getItem('protocol');
         jQuery('.step_choice div').text(curChoice);
     }
-
+    //Перетягивание элементов
     jQuery( ".draggable, .box_rounded" ).draggable({ 
-        snap: false,
-        start: function() {
-                _that = jQuery( this );
-                dragElem = this;
-                console.log(dragElem);
-            },
+        snap: false
     });
+    //Изменение размера круга
     jQuery( ".box_rounded" ).resizable({
       aspectRatio: 1/ 1
     });
-    jQuery( ".box_rounded" ).droppable({
-      drop: function( event, ui ) {
-        jQuery(this).append(dragElem);
-        _that.css({
-            left: '46%',
-            top: '46%'
-        });
-      }
-    });
-    
+    //Отлавливание сбрасываемых элементов
+    // jQuery( ".box_rounded" ).droppable({
+    //   drop: function( event, ui ) {
+    //     jQuery(this).append(dragElem);
+    //     _that.css({
+    //         left: '42%',
+    //         top: '42%'
+    //     });
+    //     _that = undefined;
+    //     dragElem = undefined;
+    //   }
+    // });
+    //Аккордион
     jQuery( ".select_program" ).accordion({ active: 100 });
 
     jQuery('.show_form').on('click', function(event) {
@@ -372,5 +369,9 @@ jQuery('#main').on('click', '.fast-protocol', function() {
         oReader.readAsDataURL(oFile);
     }
     jQuery('#image_file').on('change', fileSelectHandler);
-    var a = new Vivus('example', {type: 'delayed', duration: 400});
+    var a = new Vivus('example', {type: 'delayed', duration: 300});
+    setTimeout(jQuery(".paranja").animate({
+        opacity: 0.1,
+        zIndex: -1
+      }, 1500 ), 3000);
 });

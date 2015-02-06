@@ -7,7 +7,7 @@
 <?php get_header(); ?>
 
 <div id="content">
-
+    <div class="paranja"></div>
     <div id="inner-content" class="wrap cf">
 
         <div id="main" class="m-all t-2of3 cf" role="main">

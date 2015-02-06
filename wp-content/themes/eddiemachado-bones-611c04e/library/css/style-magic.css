@@ -483,6 +483,7 @@ path
     left: 0;
     right: 0;
     top: -180px;
+    z-index: 2;
 }
 .people #example path, line, polyline 
 {
@@ -513,4 +514,13 @@ path
     position: absolute;
     margin: 150px auto;
     right: 10px;
+}
+.paranja 
+{
+    position: absolute;
+    width: 100%;
+    height: 2000px;
+    top: 0;
+    background: #000;
+    z-index: 1;
 }
