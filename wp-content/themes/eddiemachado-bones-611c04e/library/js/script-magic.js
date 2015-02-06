@@ -50,7 +50,7 @@ jQuery(function() {
         snap: false,
         start: function() {
                 _that = jQuery( this );
-                dragElem = jQuery(this).html();
+                dragElem = jQuery(this);
                 console.log(dragElem);
             },
     });
