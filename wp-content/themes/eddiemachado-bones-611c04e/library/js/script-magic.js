@@ -369,8 +369,8 @@ jQuery('#main').on('click', '.fast-protocol', function() {
         oReader.readAsDataURL(oFile);
     }
     jQuery('#image_file').on('change', fileSelectHandler);
-    var a = new Vivus('example', {type: 'delayed', duration: 400}, jQuery(".paranja").animate({
+    var a = new Vivus('example', {type: 'delayed', duration: 400}, function(jQuery(".paranja").animate({
         opacity: 0.1,
         zIndex: -1
-      }, 1500 ));
+      }, 1500 )));
 });
