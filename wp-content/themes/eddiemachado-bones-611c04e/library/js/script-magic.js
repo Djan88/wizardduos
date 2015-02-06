@@ -59,7 +59,8 @@ jQuery(function() {
     });
     jQuery( ".box_rounded" ).droppable({
       drop: function( event, ui ) {
-        console.log(jQuery( this ));
+        jQuery(this).append(dragElem);
+        remove(_that);
       }
     });
     
