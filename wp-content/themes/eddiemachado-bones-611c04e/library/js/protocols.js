@@ -58,7 +58,7 @@
                     .removeClass('hidden')
                     .css({
                         opacity: 0.8,
-                        transform: 'scale(0.5)',
+                        transform: 'scale(1)',
                         background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat',
                         borderColor: 'transparent'
                     });;
