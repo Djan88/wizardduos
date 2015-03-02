@@ -232,7 +232,7 @@
                         <li class="itemlist-two-li"></li>
                         </ul>
                         <div class="box_rounded">
-                            <li id="draggableD12" class="itemlist_item item_list__mid draggable hidden" style="left: 48%; top: 0px;"></li>
+                            <li id="draggableD12" class="itemlist_item item_list__mid draggable hidden" style="left: 40%; top: 0px;"></li>
                         </div>
                         <div class="contentAlignCenter">
                             <!-- <div class="btn btn_lg btn_trans_action btn__wizard" >Выполнить</div> -->
