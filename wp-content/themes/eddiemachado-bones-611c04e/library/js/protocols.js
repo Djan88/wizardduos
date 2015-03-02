@@ -20,8 +20,8 @@
             text: "Что вы хотите делать дальше?",   
             type: "success",   
             showCancelButton: true,   
-            // confirmButtonColor: "#DD6B55",   
-            // confirmButtonText: "Продолжить сессию",   
+            confirmButtonColor: "#DD6B55",   
+            confirmButtonText: "Продолжить сессию",   
             cancelButtonText: "Выйти"
         }, 
         function(isConfirm){   

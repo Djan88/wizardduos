@@ -524,3 +524,7 @@ path
     background: #000;
     z-index: 1;
 }
+.confirm
+{
+    display: none;
+}
