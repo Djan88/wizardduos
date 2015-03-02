@@ -74,6 +74,7 @@
                     .removeClass('btn__wizard_inAction');                
             }
         }, 1000);
+    };
     v3 = function(){
     //фаза 1
         cur_animation_val = 0;
