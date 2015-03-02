@@ -65,7 +65,7 @@
                 count_animation += 1;
                 if(count_animation <= 30){
                     cur_animation_val += 6;
-                    jQuery('.box_rounded').css('transform', 'rotate('+0+'deg) scale(1)');
+                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                 } else {
                     cur_animation_val -= 6;
                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
