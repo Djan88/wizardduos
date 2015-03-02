@@ -43,7 +43,7 @@
         cur_animation_val = 0;
         count_animation = 1;
         phaseOne = setInterval(function(){
-            if (count_animation <= 12){                                                                         //120
+            if (count_animation <= 120){                                                                         //120
                 jQuery('#draggableD11, #draggableD11_1').css({
                     color: 'transparent',
                     borderColor: 'transparent',
@@ -54,6 +54,7 @@
                     background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/drenag.png) 0 0/100% no-repeat',
                     zIndex: '1000'
                 });
+                jQuery('#draggableD12').removeClass('hidden');
                 count_animation += 1;
             } else {
                 clearInterval(phaseOne);
@@ -68,6 +69,7 @@
                     paddingTop: '2px',
                     zIndex: '1'
                 });
+                jQuery('#draggableD12').addClass('hidden');
                 onEnd();
                 jQuery( ".btn__wizard" )
                     .text('Выполнить')
