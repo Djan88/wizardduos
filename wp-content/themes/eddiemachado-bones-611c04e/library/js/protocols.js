@@ -20,8 +20,8 @@
             text: "Что вы хотите делать дальше?",   
             type: "success",   
             showCancelButton: true,   
-            confirmButtonColor: "#DD6B55",   
-            confirmButtonText: "Продолжить сессию",   
+            // confirmButtonColor: "#DD6B55",   
+            // confirmButtonText: "Продолжить сессию",   
             cancelButtonText: "Выйти"
         }, 
         function(isConfirm){   
@@ -43,7 +43,7 @@
         cur_animation_val = 0;
         count_animation = 1;
         phaseOne = setInterval(function(){
-            if (count_animation <= 120){                                                                         //120
+            if (count_animation <= 12){                                                                         //120
                 jQuery('#draggableD11, #draggableD11_1').css({
                     color: 'transparent',
                     borderColor: 'transparent',
