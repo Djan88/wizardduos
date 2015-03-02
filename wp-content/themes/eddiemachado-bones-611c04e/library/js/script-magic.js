@@ -5,7 +5,7 @@ jQuery(function() {
         nextScreen,
         croppedImg,
         curChoice,
-        protocol,
+        protocol = 'duos',
         checkPoints,
         main_heading,
         pointsStatus = true,
@@ -145,9 +145,9 @@ jQuery(function() {
 jQuery( ".btn__wizard" ).on('click', function(event) {
     pointsStatus = true;
     checkPoints();
-    if(pointsStatus == false){
-        swal("Не все зоны перенесены", "Перед началом процедуры необходимо перенести все зоны", "info")
-    } else {
+    // if(pointsStatus == false){
+    //     swal("Не все зоны перенесены", "Перед началом процедуры необходимо перенести все зоны", "info")
+    // } else {
         jQuery(this)
             .addClass('btn__wizard_inAction')
             .text('Выполняется');
@@ -156,22 +156,12 @@ jQuery( ".btn__wizard" ).on('click', function(event) {
             jQuery('.btn_back').addClass('invisible');
             protocol = localStorage.getItem('protocol');
             console.log(protocol);
-            if(protocol == 'v2'){
+            if(protocol == 'duos'){
                 v2();
-            } else if(protocol == 'v3'){
-                v3();
-            } else if(protocol == 'v4'){
-                v4();
-            } else if(protocol == 'v5'){
-                v5();
-            } else if(protocol == 'v6'){
-                v6();
-            } else if(protocol == 'v7'){
-                v7();
             } else{
                 console.log('нет протокола с id '+ protocol)
             }
-    }
+    // }
     main_heading()
 });
 //Быстрая смена протокола
