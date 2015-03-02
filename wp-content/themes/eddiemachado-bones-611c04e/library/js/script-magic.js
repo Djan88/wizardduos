@@ -39,6 +39,7 @@ jQuery(function() {
     }
     //Получение данных из локального хранилища
     if(supportsStorage && localStorage.getItem('curChoice')){
+        localStorage.setItem( 'protocol', 'duos');
         curChoice = localStorage.getItem('curChoice');
         protocol = localStorage.getItem('protocol');
         jQuery('.step_choice div').text(curChoice);
@@ -85,7 +86,7 @@ jQuery(function() {
 // ШАГ 1 (К загрузке фото)
     jQuery( ".btn_choice" ).on('click', function(event) {
         protocol = jQuery(this).data('protocol');
-        localStorage.setItem('protocol', protocol);
+        localStorage.setItem('protocol', 'duos');
         if(jQuery(this).hasClass('btn_choice__choiced')){
             jQuery(this)
                 .removeClass('btn_choice__choiced')
