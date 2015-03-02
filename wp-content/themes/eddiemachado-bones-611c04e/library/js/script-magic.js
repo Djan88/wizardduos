@@ -158,7 +158,7 @@ jQuery( ".btn__wizard" ).on('click', function(event) {
             protocol = localStorage.getItem('protocol');
             console.log(protocol);
             if(protocol == 'duos'){
-                v2();
+                duos();
             } else{
                 console.log('нет протокола с id '+ protocol)
             }
