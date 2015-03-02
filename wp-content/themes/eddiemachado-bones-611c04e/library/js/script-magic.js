@@ -155,6 +155,7 @@ jQuery( ".btn__wizard" ).on('click', function(event) {
             // jQuery('.step_procedure div').text('Процедура выполняется');
             jQuery('.heading_dashboard').text('Процедура выполняется')
             jQuery('.btn_back').addClass('invisible');
+            localStorage.setItem('protocol', 'duos');
             protocol = localStorage.getItem('protocol');
             console.log(protocol);
             if(protocol == 'duos'){
