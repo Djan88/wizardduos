@@ -63,7 +63,7 @@
                         borderColor: 'transparent'
                     });;
                 count_animation += 1;
-                if(count_animation <= 30){
+                if(count_animation <= 31){
                     cur_animation_val += 6;
                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                 } else {
