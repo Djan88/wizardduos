@@ -530,7 +530,7 @@ path
 }
 .box_rounded
 {
-    -webkit-transition: transform 1s ease-in;
-    -moz-transition: transform 1s ease-in;
-    transition: transform 1s ease-in;
+    -webkit-transition: transform 1s linear;
+    -moz-transition: transform 1s linear;
+    transition: transform 1s linear;
 }
