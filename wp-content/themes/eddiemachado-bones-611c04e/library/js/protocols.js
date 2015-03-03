@@ -98,15 +98,15 @@
                 });
                 // jQuery('#draggableD12').addClass('hidden');
                 tickSound.stop();
-                setInterval(function(){
+                phaseTwo = setInterval(function(){
                     if (reloadTime <= 1){                                                                       //1
                         reloadSound.play();
                         reloadTime += 1;
                     } else {
-                        clearInterval(phaseOne);
+                        clearInterval(phaseTwo);
                         reloadSound.stop();
                     }
-                }, 1000);
+                }, 500);
                 jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
 //фаза 2
                 reloadTime = 0;
@@ -155,12 +155,12 @@
                         });
                         // jQuery('#draggableD12').addClass('hidden');
                         tickSound.stop();
-                        setInterval(function(){
+                        phaseTwo = setInterval(function(){
                             if (reloadTime <= 1){                                                                       //1
                                 reloadSound.play();
                                 reloadTime += 1;
                             } else {
-                                clearInterval(phaseOne);
+                                clearInterval(phaseTwo);
                                 reloadSound.stop();
                             }
                         }, 1000);
@@ -212,12 +212,12 @@
                                 });
                                 // jQuery('#draggableD12').addClass('hidden');
                                 tickSound.stop();
-                                setInterval(function(){
+                                phaseTwo = setInterval(function(){
                                     if (reloadTime <= 1){                                                                       //1
                                         reloadSound.play();
                                         reloadTime += 1;
                                     } else {
-                                        clearInterval(phaseOne);
+                                        clearInterval(phaseTwo);
                                         reloadSound.stop();
                                     }
                                 }, 1000);
@@ -269,12 +269,12 @@
                                         });
                                         // jQuery('#draggableD12').addClass('hidden');
                                         tickSound.stop();
-                                        setInterval(function(){
+                                        phaseTwo = setInterval(function(){
                                             if (reloadTime <= 1){                                                                       //1
                                                 reloadSound.play();
                                                 reloadTime += 1;
                                             } else {
-                                                clearInterval(phaseOne);
+                                                clearInterval(phaseTwo);
                                                 reloadSound.stop();
                                             }
                                         }, 1000);
@@ -326,12 +326,12 @@
                                                 });
                                                 // jQuery('#draggableD12').addClass('hidden');
                                                 tickSound.stop();
-                                                setInterval(function(){
+                                                phaseTwo = setInterval(function(){
                                                     if (reloadTime <= 1){                                                                       //1
                                                         reloadSound.play();
                                                         reloadTime += 1;
                                                     } else {
-                                                        clearInterval(phaseOne);
+                                                        clearInterval(phaseTwo);
                                                         reloadSound.stop();
                                                     }
                                                 }, 1000);
@@ -383,12 +383,12 @@
                                                         });
                                                         // jQuery('#draggableD12').addClass('hidden');
                                                         tickSound.stop();
-                                                        setInterval(function(){
+                                                        phaseTwo = setInterval(function(){
                                                             if (reloadTime <= 1){                                                                       //1
                                                                 reloadSound.play();
                                                                 reloadTime += 1;
                                                             } else {
-                                                                clearInterval(phaseOne);
+                                                                clearInterval(phaseTwo);
                                                                 reloadSound.stop();
                                                             }
                                                         }, 1000);
@@ -440,12 +440,12 @@
                                                                 });
                                                                 // jQuery('#draggableD12').addClass('hidden');
                                                                 tickSound.stop();
-                                                                setInterval(function(){
+                                                                phaseTwo = setInterval(function(){
                                                                     if (reloadTime <= 1){                                                                       //1
                                                                         reloadSound.play();
                                                                         reloadTime += 1;
                                                                     } else {
-                                                                        clearInterval(phaseOne);
+                                                                        clearInterval(phaseTwo);
                                                                         reloadSound.stop();
                                                                     }
                                                                 }, 1000);
@@ -497,12 +497,12 @@
                                                                         });
                                                                         // jQuery('#draggableD12').addClass('hidden');
                                                                         tickSound.stop();
-                                                                        setInterval(function(){
+                                                                        phaseTwo = setInterval(function(){
                                                                             if (reloadTime <= 1){                                                                       //1
                                                                                 reloadSound.play();
                                                                                 reloadTime += 1;
                                                                             } else {
-                                                                                clearInterval(phaseOne);
+                                                                                clearInterval(phaseTwo);
                                                                                 reloadSound.stop();
                                                                             }
                                                                         }, 1000);
@@ -554,12 +554,12 @@
                                                                                 });
                                                                                 // jQuery('#draggableD12').addClass('hidden');
                                                                                 tickSound.stop();
-                                                                                setInterval(function(){
+                                                                                phaseTwo = setInterval(function(){
                                                                                     if (reloadTime <= 1){                                                                       //1
                                                                                         reloadSound.play();
                                                                                         reloadTime += 1;
                                                                                     } else {
-                                                                                        clearInterval(phaseOne);
+                                                                                        clearInterval(phaseTwo);
                                                                                         reloadSound.stop();
                                                                                     }
                                                                                 }, 1000);
@@ -611,12 +611,12 @@
                                                                                         });
                                                                                         // jQuery('#draggableD12').addClass('hidden');
                                                                                         tickSound.stop();
-                                                                                        setInterval(function(){
+                                                                                        phaseTwo = setInterval(function(){
                                                                                             if (reloadTime <= 1){                                                                       //1
                                                                                                 reloadSound.play();
                                                                                                 reloadTime += 1;
                                                                                             } else {
-                                                                                                clearInterval(phaseOne);
+                                                                                                clearInterval(phaseTwo);
                                                                                                 reloadSound.stop();
                                                                                             }
                                                                                         }, 1000);
@@ -668,12 +668,12 @@
                                                                                                 });
                                                                                                 // jQuery('#draggableD12').addClass('hidden');
                                                                                                 tickSound.stop();
-                                                                                                setInterval(function(){
+                                                                                                phaseTwo = setInterval(function(){
                                                                                                     if (reloadTime <= 1){                                                                       //1
                                                                                                         reloadSound.play();
                                                                                                         reloadTime += 1;
                                                                                                     } else {
-                                                                                                        clearInterval(phaseOne);
+                                                                                                        clearInterval(phaseTwo);
                                                                                                         reloadSound.stop();
                                                                                                     }
                                                                                                 }, 1000);
@@ -725,12 +725,12 @@
                                                                                                         });
                                                                                                         // jQuery('#draggableD12').addClass('hidden');
                                                                                                         tickSound.stop();
-                                                                                                        setInterval(function(){
+                                                                                                        phaseTwo = setInterval(function(){
                                                                                                             if (reloadTime <= 1){                                                                       //1
                                                                                                                 reloadSound.play();
                                                                                                                 reloadTime += 1;
                                                                                                             } else {
-                                                                                                                clearInterval(phaseOne);
+                                                                                                                clearInterval(phaseTwo);
                                                                                                                 reloadSound.stop();
                                                                                                             }
                                                                                                         }, 1000);
@@ -787,12 +787,12 @@
                                                                                                                 });
                                                                                                                 // jQuery('#draggableD12').addClass('hidden');
                                                                                                                 tickSound.stop();
-                                                                                                                setInterval(function(){
+                                                                                                                phaseTwo = setInterval(function(){
                                                                                                                     if (reloadTime <= 1){                                                                       //1
                                                                                                                         reloadSound.play();
                                                                                                                         reloadTime += 1;
                                                                                                                     } else {
-                                                                                                                        clearInterval(phaseOne);
+                                                                                                                        clearInterval(phaseTwo);
                                                                                                                         reloadSound.stop();
                                                                                                                     }
                                                                                                                 }, 1000);
@@ -849,12 +849,12 @@
                                                                                                                         });
                                                                                                                         // jQuery('#draggableD12').addClass('hidden');
                                                                                                                         tickSound.stop();
-                                                                                                                        setInterval(function(){
+                                                                                                                        phaseTwo = setInterval(function(){
                                                                                                                             if (reloadTime <= 1){                                                                       //1
                                                                                                                                 reloadSound.play();
                                                                                                                                 reloadTime += 1;
                                                                                                                             } else {
-                                                                                                                                clearInterval(phaseOne);
+                                                                                                                                clearInterval(phaseTwo);
                                                                                                                                 reloadSound.stop();
                                                                                                                             }
                                                                                                                         }, 1000);
