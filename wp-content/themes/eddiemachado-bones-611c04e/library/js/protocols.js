@@ -55,7 +55,7 @@
         cur_animation_val = 0;
         count_animation = 1;
         phaseOne = setInterval(function(){
-            if (count_animation <= 90){                                                                         //90
+            if (count_animation <= 60){                                                                         //60
                 tickSound.play();
                 jQuery('#draggableD11, #draggableD11_1').css({
                     color: 'transparent',
@@ -177,7 +177,7 @@
                         cur_animation_val = 0;
                         count_animation = 1;
                         phaseOne = setInterval(function(){
-                            if (count_animation <= 60){                                                                         //60
+                            if (count_animation <= 90){                                                                         //90
                                 tickSound.play();
                                 jQuery('#draggableD2, #draggableD2_1').css({
                                     color: 'transparent',
