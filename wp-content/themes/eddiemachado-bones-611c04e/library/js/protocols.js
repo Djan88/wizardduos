@@ -962,6 +962,7 @@
                                                                                                                                     paddingTop: '5px',
                                                                                                                                     zIndex: '1'
                                                                                                                                 });
+                                                                                                                                tickSound.stop();
                                                                                                                                 jQuery('#draggableD12').addClass('hidden');
                                                                                                                                 jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                                                                                                 jQuery('#draggableD12').css('transform', 'rotate(0deg)');
