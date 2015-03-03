@@ -13,7 +13,7 @@
         protocol,
         v2,
         v3,
-        mySound = new buzz.sound( "/sounds/tick", {
+        tickSound = new buzz.sound( "/sounds/tick", {
             formats: [ "ogg", "mp3", "wav" ]
         });
 
@@ -51,7 +51,7 @@
         count_animation = 1;
         phaseOne = setInterval(function(){
             if (count_animation <= 90){                                                                         //90
-                mySound.play();
+                tickSound.play();
                 jQuery('#draggableD11, #draggableD11_1').css({
                     color: 'transparent',
                     borderColor: 'transparent',
@@ -92,6 +92,7 @@
                     zIndex: '1'
                 });
                 // jQuery('#draggableD12').addClass('hidden');
+                tickSound.stop();
                 jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
 //фаза 2
                 cur_animation_val = 0;
