@@ -64,7 +64,7 @@
                     transform: 'scale(1)',
                     borderWidth: '1px',
                     paddingTop: '4px',
-                    background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/drenag.png) 0 0/100% no-repeat',
+                    background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat',
                     zIndex: '1000'
                 });
                 jQuery('#draggableD12')
@@ -116,7 +116,7 @@
                 cur_animation_val = 0;
                 count_animation = 1;
                 phaseOne = setInterval(function(){
-                    if (count_animation <= 90){                                                                         //90
+                    if (count_animation <= 60){                                                                         //60
                         tickSound.play();
                         jQuery('#draggableD1, #draggableD1_1').css({
                             color: 'transparent',
@@ -125,7 +125,7 @@
                             transform: 'scale(1)',
                             borderWidth: '1px',
                             paddingTop: '4px',
-                            background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/drenag.png) 0 0/100% no-repeat',
+                            background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat',
                             zIndex: '1000'
                         });
                         jQuery('#draggableD12')
@@ -177,7 +177,7 @@
                         cur_animation_val = 0;
                         count_animation = 1;
                         phaseOne = setInterval(function(){
-                            if (count_animation <= 90){                                                                         //90
+                            if (count_animation <= 60){                                                                         //60
                                 tickSound.play();
                                 jQuery('#draggableD2, #draggableD2_1').css({
                                     color: 'transparent',
