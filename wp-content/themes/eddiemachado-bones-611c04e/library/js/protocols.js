@@ -80,10 +80,10 @@
                     opacity: 1,
                     transform: 'scale(0.5)',
                     borderWidth: '2px',
-                    paddingTop: '6px',
+                    paddingTop: '9px',
                     zIndex: '1'
                 });
-                jQuery('#draggableD12').addClass('hidden');
+                // jQuery('#draggableD12').addClass('hidden');
                 jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
 //фаза 2
                 cur_animation_val = 0;
@@ -129,7 +129,7 @@
                             paddingTop: '5px',
                             zIndex: '1'
                         });
-                        jQuery('#draggableD12').addClass('hidden');
+                        // jQuery('#draggableD12').addClass('hidden');
                         jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
 //фаза 3
                         cur_animation_val = 0;
@@ -175,7 +175,7 @@
                                     paddingTop: '5px',
                                     zIndex: '1'
                                 });
-                                jQuery('#draggableD12').addClass('hidden');
+                                // jQuery('#draggableD12').addClass('hidden');
                                 jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
 //фаза 4
                                 cur_animation_val = 0;
@@ -221,7 +221,7 @@
                                             paddingTop: '5px',
                                             zIndex: '1'
                                         });
-                                        jQuery('#draggableD12').addClass('hidden');
+                                        // jQuery('#draggableD12').addClass('hidden');
                                         jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
 //фаза 5
                                         cur_animation_val = 0;
@@ -267,7 +267,7 @@
                                                     paddingTop: '5px',
                                                     zIndex: '1'
                                                 });
-                                                jQuery('#draggableD12').addClass('hidden');
+                                                // jQuery('#draggableD12').addClass('hidden');
                                                 jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
 //фаза 6
                                                 cur_animation_val = 0;
@@ -313,7 +313,7 @@
                                                             paddingTop: '5px',
                                                             zIndex: '1'
                                                         });
-                                                        jQuery('#draggableD12').addClass('hidden');
+                                                        // jQuery('#draggableD12').addClass('hidden');
                                                         jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
 //фаза 7
                                                         cur_animation_val = 0;
@@ -359,7 +359,7 @@
                                                                     paddingTop: '5px',
                                                                     zIndex: '1'
                                                                 });
-                                                                jQuery('#draggableD12').addClass('hidden');
+                                                                // jQuery('#draggableD12').addClass('hidden');
                                                                 jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
 //фаза 8
                                                                 cur_animation_val = 0;
@@ -405,7 +405,7 @@
                                                                             paddingTop: '5px',
                                                                             zIndex: '1'
                                                                         });
-                                                                        jQuery('#draggableD12').addClass('hidden');
+                                                                        // jQuery('#draggableD12').addClass('hidden');
                                                                         jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
 //фаза 9
                                                                         cur_animation_val = 0;
