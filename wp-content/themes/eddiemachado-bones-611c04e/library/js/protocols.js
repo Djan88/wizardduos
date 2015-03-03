@@ -114,6 +114,7 @@
                 count_animation = 1;
                 phaseOne = setInterval(function(){
                     if (count_animation <= 90){                                                                         //90
+                        tickSound.play();
                         jQuery('#draggableD1, #draggableD1_1').css({
                             color: 'transparent',
                             borderColor: 'transparent',
@@ -171,6 +172,7 @@
                         count_animation = 1;
                         phaseOne = setInterval(function(){
                             if (count_animation <= 90){                                                                         //90
+                                tickSound.play();
                                 jQuery('#draggableD2, #draggableD2_1').css({
                                     color: 'transparent',
                                     borderColor: 'transparent',
@@ -228,6 +230,7 @@
                                 count_animation = 1;
                                 phaseOne = setInterval(function(){
                                     if (count_animation <= 90){                                                                         //90
+                                        tickSound.play();
                                         jQuery('#draggableD22, #draggableD22_1').css({
                                             color: 'transparent',
                                             borderColor: 'transparent',
@@ -285,6 +288,7 @@
                                         count_animation = 1;
                                         phaseOne = setInterval(function(){
                                             if (count_animation <= 90){                                                                         //90
+                                                tickSound.play();
                                                 jQuery('#draggableD3, #draggableD3_1').css({
                                                     color: 'transparent',
                                                     borderColor: 'transparent',
@@ -342,6 +346,7 @@
                                                 count_animation = 1;
                                                 phaseOne = setInterval(function(){
                                                     if (count_animation <= 90){                                                                         //90
+                                                        tickSound.play();
                                                         jQuery('#draggableD4, #draggableD4_1').css({
                                                             color: 'transparent',
                                                             borderColor: 'transparent',
@@ -399,6 +404,7 @@
                                                         count_animation = 1;
                                                         phaseOne = setInterval(function(){
                                                             if (count_animation <= 90){                                                                         //90
+                                                                tickSound.play();
                                                                 jQuery('#draggableD5, #draggableD5_1').css({
                                                                     color: 'transparent',
                                                                     borderColor: 'transparent',
@@ -456,6 +462,7 @@
                                                                 count_animation = 1;
                                                                 phaseOne = setInterval(function(){
                                                                     if (count_animation <= 90){                                                                         //90
+                                                                        tickSound.play();
                                                                         jQuery('#draggableD6, #draggableD6_1').css({
                                                                             color: 'transparent',
                                                                             borderColor: 'transparent',
@@ -513,6 +520,7 @@
                                                                         count_animation = 1;
                                                                         phaseOne = setInterval(function(){
                                                                             if (count_animation <= 90){                                                                         //90
+                                                                                tickSound.play();
                                                                                 jQuery('#draggableD7, #draggableD7_1').css({
                                                                                     color: 'transparent',
                                                                                     borderColor: 'transparent',
@@ -570,6 +578,7 @@
                                                                                 count_animation = 1;
                                                                                 phaseOne = setInterval(function(){
                                                                                     if (count_animation <= 90){                                                                         //90
+                                                                                        tickSound.play();
                                                                                         jQuery('#draggable6, #draggable6_1').css({
                                                                                             color: 'transparent',
                                                                                             borderColor: 'transparent',
@@ -627,6 +636,7 @@
                                                                                         count_animation = 1;
                                                                                         phaseOne = setInterval(function(){
                                                                                             if (count_animation <= 90){                                                                         //90
+                                                                                                tickSound.play();
                                                                                                 jQuery('#draggable5, #draggable5_1').css({
                                                                                                     color: 'transparent',
                                                                                                     borderColor: 'transparent',
@@ -684,6 +694,7 @@
                                                                                                 count_animation = 1;
                                                                                                 phaseOne = setInterval(function(){
                                                                                                     if (count_animation <= 90){                                                                         //90
+                                                                                                        tickSound.play();
                                                                                                         jQuery('#draggable4, #draggable4_1').css({
                                                                                                             color: 'transparent',
                                                                                                             borderColor: 'transparent',
@@ -741,6 +752,7 @@
                                                                                                         count_animation = 1;
                                                                                                         phaseOne = setInterval(function(){
                                                                                                             if (count_animation <= 90){                                                                         //90
+                                                                                                                tickSound.play();
                                                                                                                 jQuery('#draggable3, #draggable3_1').css({
                                                                                                                     color: 'transparent',
                                                                                                                     borderColor: 'transparent',
@@ -803,6 +815,7 @@
                                                                                                                 count_animation = 1;
                                                                                                                 phaseOne = setInterval(function(){
                                                                                                                     if (count_animation <= 90){                                                                         //90
+                                                                                                                        tickSound.play();
                                                                                                                         jQuery('#draggable2, #draggable2_1').css({
                                                                                                                             color: 'transparent',
                                                                                                                             borderColor: 'transparent',
@@ -865,6 +878,7 @@
                                                                                                                         count_animation = 1;
                                                                                                                         phaseOne = setInterval(function(){
                                                                                                                             if (count_animation <= 90){                                                                         //90
+                                                                                                                                tickSound.play();
                                                                                                                                 jQuery('#draggable1, #draggable1_1').css({
                                                                                                                                     color: 'transparent',
                                                                                                                                     borderColor: 'transparent',
