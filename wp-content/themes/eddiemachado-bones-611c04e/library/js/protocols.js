@@ -12,7 +12,10 @@
         onEnd,
         protocol,
         v2,
-        v3;
+        v3,
+        mySound = new buzz.sound( "/sounds/tick", {
+            formats: [ "ogg", "mp3", "wav" ]
+        });
 
     onEnd = function(){
         swal({   
@@ -36,6 +39,10 @@
                 jQuery(location).attr('href','/wizard');
             } 
         });
+        var endSound = new buzz.sound( "/sounds/duos", {
+            formats: [ "ogg", "mp3", "wav" ]
+        });
+        endSound.play();
     }
 
     duos = function(){
@@ -44,6 +51,7 @@
         count_animation = 1;
         phaseOne = setInterval(function(){
             if (count_animation <= 90){                                                                         //90
+                mySound.play();
                 jQuery('#draggableD11, #draggableD11_1').css({
                     color: 'transparent',
                     borderColor: 'transparent',
