@@ -528,7 +528,7 @@ path
 {
     display: none;
 }
-.box_rounded
+.box_rounded, #draggableD12
 {
     -webkit-transition: transform 1s linear;
     -moz-transition: transform 1s linear;

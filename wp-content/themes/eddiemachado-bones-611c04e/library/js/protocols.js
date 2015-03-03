@@ -110,6 +110,7 @@
                     }
                 }, 500);
                 jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
+                jQuery('#draggableD12').css('transform', 'rotate(0deg)');
 //фаза 2
                 reloadTime = 0;
                 cur_animation_val = 0;
@@ -133,12 +134,14 @@
                                 opacity: 0.8,
                                 transform: 'scale(1)',
                                 background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat',
+                                transform: 'rotate('+cur_animation_val+'deg)',
                                 borderColor: 'transparent'
                             });;
                         count_animation += 1;
                         if(count_animation <= 31){
                             cur_animation_val += 6;
                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                            jQuery('#draggableD12').css('transform', 'rotate(-'+cur_animation_val+'deg)');
                         } else {
                             cur_animation_val -= 6;
                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -168,6 +171,7 @@
                             }
                         }, 1000);
                         jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
+                        jQuery('#draggableD12').css('transform', 'rotate(0deg)');
 //фаза 3
                         reloadTime = 0;
                         cur_animation_val = 0;
@@ -191,12 +195,14 @@
                                         opacity: 0.8,
                                         transform: 'scale(1)',
                                         background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat',
+                                        transform: 'rotate('+cur_animation_val+'deg)',
                                         borderColor: 'transparent'
                                     });;
                                 count_animation += 1;
                                 if(count_animation <= 31){
                                     cur_animation_val += 6;
                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                    jQuery('#draggableD12').css('transform', 'rotate(-'+cur_animation_val+'deg)');
                                 } else {
                                     cur_animation_val -= 6;
                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -226,6 +232,7 @@
                                     }
                                 }, 1000);
                                 jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
+                                jQuery('#draggableD12').css('transform', 'rotate(0deg)');
 //фаза 4
                                 reloadTime = 0;
                                 cur_animation_val = 0;
@@ -249,12 +256,14 @@
                                                 opacity: 0.8,
                                                 transform: 'scale(1)',
                                                 background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat',
+                                                transform: 'rotate('+cur_animation_val+'deg)',
                                                 borderColor: 'transparent'
                                             });;
                                         count_animation += 1;
                                         if(count_animation <= 31){
                                             cur_animation_val += 6;
                                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                            jQuery('#draggableD12').css('transform', 'rotate(-'+cur_animation_val+'deg)');
                                         } else {
                                             cur_animation_val -= 6;
                                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -284,6 +293,7 @@
                                             }
                                         }, 1000);
                                         jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
+                                        jQuery('#draggableD12').css('transform', 'rotate(0deg)');
 //фаза 5
                                         reloadTime = 0;
                                         cur_animation_val = 0;
@@ -307,12 +317,14 @@
                                                         opacity: 0.8,
                                                         transform: 'scale(1)',
                                                         background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat',
+                                                        transform: 'rotate('+cur_animation_val+'deg)',
                                                         borderColor: 'transparent'
                                                     });;
                                                 count_animation += 1;
                                                 if(count_animation <= 31){
                                                     cur_animation_val += 6;
                                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                    jQuery('#draggableD12').css('transform', 'rotate(-'+cur_animation_val+'deg)');
                                                 } else {
                                                     cur_animation_val -= 6;
                                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -342,6 +354,7 @@
                                                     }
                                                 }, 1000);
                                                 jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
+                                                jQuery('#draggableD12').css('transform', 'rotate(0deg)');
 //фаза 6
                                                 reloadTime = 0;
                                                 cur_animation_val = 0;
@@ -365,12 +378,14 @@
                                                                 opacity: 0.8,
                                                                 transform: 'scale(1)',
                                                                 background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat',
+                                                                transform: 'rotate('+cur_animation_val+'deg)',
                                                                 borderColor: 'transparent'
                                                             });;
                                                         count_animation += 1;
                                                         if(count_animation <= 31){
                                                             cur_animation_val += 6;
                                                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                            jQuery('#draggableD12').css('transform', 'rotate(-'+cur_animation_val+'deg)');
                                                         } else {
                                                             cur_animation_val -= 6;
                                                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -400,6 +415,7 @@
                                                             }
                                                         }, 1000);
                                                         jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
+                                                        jQuery('#draggableD12').css('transform', 'rotate(0deg)');
 //фаза 7
                                                         reloadTime = 0;
                                                         cur_animation_val = 0;
@@ -423,12 +439,14 @@
                                                                         opacity: 0.8,
                                                                         transform: 'scale(1)',
                                                                         background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat',
+                                                                        transform: 'rotate('+cur_animation_val+'deg)',
                                                                         borderColor: 'transparent'
                                                                     });;
                                                                 count_animation += 1;
                                                                 if(count_animation <= 31){
                                                                     cur_animation_val += 6;
                                                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                    jQuery('#draggableD12').css('transform', 'rotate(-'+cur_animation_val+'deg)');
                                                                 } else {
                                                                     cur_animation_val -= 6;
                                                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -458,6 +476,7 @@
                                                                     }
                                                                 }, 1000);
                                                                 jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
+                                                                jQuery('#draggableD12').css('transform', 'rotate(0deg)');
 //фаза 8
                                                                 reloadTime = 0;
                                                                 cur_animation_val = 0;
@@ -481,12 +500,14 @@
                                                                                 opacity: 0.8,
                                                                                 transform: 'scale(1)',
                                                                                 background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat',
+                                                                                transform: 'rotate('+cur_animation_val+'deg)',
                                                                                 borderColor: 'transparent'
                                                                             });;
                                                                         count_animation += 1;
                                                                         if(count_animation <= 31){
                                                                             cur_animation_val += 6;
                                                                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                            jQuery('#draggableD12').css('transform', 'rotate(-'+cur_animation_val+'deg)');
                                                                         } else {
                                                                             cur_animation_val -= 6;
                                                                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -516,6 +537,7 @@
                                                                             }
                                                                         }, 1000);
                                                                         jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
+                                                                        jQuery('#draggableD12').css('transform', 'rotate(0deg)');
 //фаза 9
                                                                         reloadTime = 0;
                                                                         cur_animation_val = 0;
@@ -539,12 +561,14 @@
                                                                                         opacity: 0.8,
                                                                                         transform: 'scale(1)',
                                                                                         background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat',
+                                                                                        transform: 'rotate('+cur_animation_val+'deg)',
                                                                                         borderColor: 'transparent'
                                                                                     });;
                                                                                 count_animation += 1;
                                                                                 if(count_animation <= 31){
                                                                                     cur_animation_val += 6;
                                                                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                    jQuery('#draggableD12').css('transform', 'rotate(-'+cur_animation_val+'deg)');
                                                                                 } else {
                                                                                     cur_animation_val -= 6;
                                                                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -574,6 +598,7 @@
                                                                                     }
                                                                                 }, 1000);
                                                                                 jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
+                                                                                jQuery('#draggableD12').css('transform', 'rotate(0deg)');
 //фаза 10
                                                                                 reloadTime = 0;
                                                                                 cur_animation_val = 0;
@@ -597,14 +622,16 @@
                                                                                                 opacity: 0.8,
                                                                                                 transform: 'scale(1)',
                                                                                                 background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat',
+                                                                                                transform: 'rotate('+cur_animation_val+'deg)',
                                                                                                 borderColor: 'transparent'
                                                                                             });;
                                                                                         count_animation += 1;
                                                                                         if(count_animation <= 31){
-                                                                                            cur_animation_val += 6;
-                                                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                        } else {
                                                                                             cur_animation_val -= 6;
+                                                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                            jQuery('#draggableD12').css('transform', 'rotate(-'+cur_animation_val+'deg)');
+                                                                                        } else {
+                                                                                            cur_animation_val += 6;
                                                                                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                                                                         }
                                                                                     } else {
@@ -632,6 +659,7 @@
                                                                                             }
                                                                                         }, 1000);
                                                                                         jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
+                                                                                        jQuery('#draggableD12').css('transform', 'rotate(0deg)');
 //фаза 11
                                                                                         reloadTime = 0;
                                                                                         cur_animation_val = 0;
@@ -655,14 +683,16 @@
                                                                                                         opacity: 0.8,
                                                                                                         transform: 'scale(1)',
                                                                                                         background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat',
+                                                                                                        transform: 'rotate('+cur_animation_val+'deg)',
                                                                                                         borderColor: 'transparent'
                                                                                                     });;
                                                                                                 count_animation += 1;
                                                                                                 if(count_animation <= 31){
-                                                                                                    cur_animation_val += 6;
-                                                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                } else {
                                                                                                     cur_animation_val -= 6;
+                                                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                                    jQuery('#draggableD12').css('transform', 'rotate(-'+cur_animation_val+'deg)');
+                                                                                                } else {
+                                                                                                    cur_animation_val += 6;
                                                                                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                                                                                 }
                                                                                             } else {
@@ -690,6 +720,7 @@
                                                                                                     }
                                                                                                 }, 1000);
                                                                                                 jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
+                                                                                                jQuery('#draggableD12').css('transform', 'rotate(0deg)');
 //фаза 12
                                                                                                 reloadTime = 0;
                                                                                                 cur_animation_val = 0;
@@ -713,14 +744,16 @@
                                                                                                                 opacity: 0.8,
                                                                                                                 transform: 'scale(1)',
                                                                                                                 background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat',
+                                                                                                                transform: 'rotate('+cur_animation_val+'deg)',
                                                                                                                 borderColor: 'transparent'
                                                                                                             });;
                                                                                                         count_animation += 1;
                                                                                                         if(count_animation <= 31){
-                                                                                                            cur_animation_val += 6;
-                                                                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                        } else {
                                                                                                             cur_animation_val -= 6;
+                                                                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                                            jQuery('#draggableD12').css('transform', 'rotate(-'+cur_animation_val+'deg)');
+                                                                                                        } else {
+                                                                                                            cur_animation_val += 6;
                                                                                                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                                                                                         }
                                                                                                     } else {
@@ -748,6 +781,7 @@
                                                                                                             }
                                                                                                         }, 1000);
                                                                                                         jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
+                                                                                                        jQuery('#draggableD12').css('transform', 'rotate(0deg)');
 //фаза 13
                                                                                                         reloadTime = 0;
                                                                                                         cur_animation_val = 0;
@@ -771,6 +805,7 @@
                                                                                                                         opacity: 0.8,
                                                                                                                         transform: 'scale(1)',
                                                                                                                         background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat',
+                                                                                                                        transform: 'rotate('+cur_animation_val+'deg)',
                                                                                                                         borderColor: 'transparent'
                                                                                                                     });;
                                                                                                                 count_animation += 1;
@@ -780,10 +815,11 @@
                                                                                                                     });
                                                                                                                 }
                                                                                                                 if(count_animation <= 31){
-                                                                                                                    cur_animation_val += 6;
-                                                                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                } else {
                                                                                                                     cur_animation_val -= 6;
+                                                                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                                                    jQuery('#draggableD12').css('transform', 'rotate(-'+cur_animation_val+'deg)');
+                                                                                                                } else {
+                                                                                                                    cur_animation_val += 6;
                                                                                                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                                                                                                 }
                                                                                                             } else {
@@ -811,6 +847,7 @@
                                                                                                                     }
                                                                                                                 }, 1000);
                                                                                                                 jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
+                                                                                                                jQuery('#draggableD12').css('transform', 'rotate(0deg)');
 //фаза 14
                                                                                                                 reloadTime = 0;
                                                                                                                 cur_animation_val = 0;
@@ -834,6 +871,7 @@
                                                                                                                                 opacity: 0.8,
                                                                                                                                 transform: 'scale(1)',
                                                                                                                                 background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat',
+                                                                                                                                transform: 'rotate('+cur_animation_val+'deg)',
                                                                                                                                 borderColor: 'transparent'
                                                                                                                             });;
                                                                                                                         count_animation += 1;
@@ -843,10 +881,11 @@
                                                                                                                             });
                                                                                                                         }
                                                                                                                         if(count_animation <= 31){
-                                                                                                                            cur_animation_val += 6;
-                                                                                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                        } else {
                                                                                                                             cur_animation_val -= 6;
+                                                                                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                                                            jQuery('#draggableD12').css('transform', 'rotate(-'+cur_animation_val+'deg)');
+                                                                                                                        } else {
+                                                                                                                            cur_animation_val += 6;
                                                                                                                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                                                                                                         }
                                                                                                                     } else {
@@ -874,6 +913,7 @@
                                                                                                                             }
                                                                                                                         }, 1000);
                                                                                                                         jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
+                                                                                                                        jQuery('#draggableD12').css('transform', 'rotate(0deg)');
 //фаза 15
                                                                                                                         reloadTime = 0;
                                                                                                                         cur_animation_val = 0;
@@ -897,14 +937,16 @@
                                                                                                                                         opacity: 0.8,
                                                                                                                                         transform: 'scale(1)',
                                                                                                                                         background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat',
+                                                                                                                                        transform: 'rotate('+cur_animation_val+'deg)',
                                                                                                                                         borderColor: 'transparent'
                                                                                                                                     });;
                                                                                                                                 count_animation += 1;
                                                                                                                                 if(count_animation <= 31){
-                                                                                                                                    cur_animation_val += 6;
-                                                                                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                                } else {
                                                                                                                                     cur_animation_val -= 6;
+                                                                                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                                                                    jQuery('#draggableD12').css('transform', 'rotate(-'+cur_animation_val+'deg)');
+                                                                                                                                } else {
+                                                                                                                                    cur_animation_val += 6;
                                                                                                                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                                                                                                                 }
                                                                                                                             } else {
@@ -922,6 +964,7 @@
                                                                                                                                 });
                                                                                                                                 jQuery('#draggableD12').addClass('hidden');
                                                                                                                                 jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
+                                                                                                                                jQuery('#draggableD12').css('transform', 'rotate(0deg)');
                                                                                                                                 onEnd();
                                                                                                                             }
                                                                                                                         }, 1000);
