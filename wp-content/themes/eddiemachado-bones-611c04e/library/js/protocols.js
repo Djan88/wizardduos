@@ -40,7 +40,7 @@
             } 
         });
         var endSound = new buzz.sound( "/sounds/duos", {
-            formats: [ "ogg", "mp3", "wav" ]
+            formats: [ "ogg", "mp3" ]
         });
         endSound.play();
     }
