@@ -13,8 +13,12 @@
         protocol,
         v2,
         v3,
+        reloadTime,
         tickSound = new buzz.sound( "/sounds/tick", {
-            formats: [ "ogg", "mp3", "wav" ]
+            formats: [ "ogg", "mp3" ]
+        }),
+        reloadSound = new buzz.sound( "/sounds/reload", {
+            formats: [ "ogg", "mp3" ]
         });
 
     onEnd = function(){
@@ -47,6 +51,7 @@
 
     duos = function(){
     //фаза 1
+        reloadTime = 0;
         cur_animation_val = 0;
         count_animation = 1;
         phaseOne = setInterval(function(){
@@ -93,6 +98,16 @@
                 });
                 // jQuery('#draggableD12').addClass('hidden');
                 tickSound.stop();
+                setInterval(function(){
+                    if (reloadTime <= 1){                                                                       //1
+                        reloadSound.play();
+                        reloadTime += 1;
+                    } else {
+                        clearInterval(phaseOne);
+                        reloadSound.stop();
+                    }
+                }, 1000);
+                reloadSound.play();
                 jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
 //фаза 2
                 cur_animation_val = 0;
