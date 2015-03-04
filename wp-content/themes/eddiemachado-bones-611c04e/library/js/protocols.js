@@ -975,8 +975,15 @@
                                                                                                                     });;
                                                                                                                 count_animation += 1;
                                                                                                                 if(count_animation >= 45){
-                                                                                                                    jQuery('#draggable3, #draggable3_1').css({
+                                                                                                                    jQuery('#draggable3, #draggable3_1, #draggable0, #draggable0_1').css({
                                                                                                                         background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/edinenie_s_tvorcom.jpg) 0 0/100% no-repeat',
+                                                                                                                        color: 'transparent',
+                                                                                                                        borderColor: 'transparent',
+                                                                                                                        opacity: 0.8,
+                                                                                                                        transform: 'scale(1)',
+                                                                                                                        borderWidth: '1px',
+                                                                                                                        paddingTop: '4px',
+                                                                                                                        zIndex: '1000'
                                                                                                                     });
                                                                                                                 }
                                                                                                                 if(count_animation <= 31){
@@ -1003,7 +1010,7 @@
                                                                                                             } else {
                                                                                                                 clearInterval(phaseOne);
                                                                                                                 count_animation = 1;
-                                                                                                                jQuery('#draggable3, #draggable3_1').css({
+                                                                                                                jQuery('#draggable3, #draggable3_1, #draggable0, #draggable0_1').css({
                                                                                                                     background: 'transparent',
                                                                                                                     color: 'red',
                                                                                                                     borderColor: 'red',

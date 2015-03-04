@@ -70,6 +70,7 @@ li
     padding: 20px 0;
     float: right;
     width: 30%;
+    margin-right: 5%;
     min-width: 392px;
 }
 .itemlist_item:hover, .itemlist_item:active
