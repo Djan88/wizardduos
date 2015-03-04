@@ -85,17 +85,6 @@
                     d12Val += 18;
                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                 } else {
-                    phaseTwo = setInterval(function(){
-                        if (reloadTime <= 1){                                                                       //1
-                            tickSound.stop();
-                            reloadSound.play();
-                            reloadTime += 1;
-                        } else {
-                            clearInterval(phaseTwo);
-                            reloadSound.stop();
-                            tickSound.play();
-                        }
-                    }, 1000);
                     cur_animation_val -= 6;
                     d12Val +=12;
                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -115,7 +104,7 @@
                     zIndex: '1'
                 });
                 // jQuery('#draggableD12').addClass('hidden');
-                reloadTime = 0;
+                tickSound.stop();
                 phaseTwo = setInterval(function(){
                     if (reloadTime <= 1){                                                                       //1
                         tickSound.stop();
@@ -161,17 +150,6 @@
                             d12Val += 18; 
                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                         } else {
-                            phaseTwo = setInterval(function(){
-                                if (reloadTime <= 1){                                                                       //1
-                                    tickSound.stop();
-                                    reloadSound.play();
-                                    reloadTime += 1;
-                                } else {
-                                    clearInterval(phaseTwo);
-                                    reloadSound.stop();
-                                    tickSound.play();
-                                }
-                            }, 1000);
                             d12Val += 18;
                             cur_animation_val -= 6;
                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -191,7 +169,7 @@
                             zIndex: '1'
                         });
                         // jQuery('#draggableD12').addClass('hidden');
-                        reloadTime = 0;
+                        tickSound.stop();
                         phaseTwo = setInterval(function(){
                             if (reloadTime <= 1){                                                                       //1
                                 tickSound.stop();
@@ -239,33 +217,11 @@
                                     d12Val+= 18;
                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                 } else if (count_animation >= 31 && count_animation <= 61){
-                                    phaseTwo = setInterval(function(){
-                                        if (reloadTime <= 1){                                                                       //1
-                                            tickSound.stop();
-                                            reloadSound.play();
-                                            reloadTime += 1;
-                                        } else {
-                                            clearInterval(phaseTwo);
-                                            reloadSound.stop();
-                                            tickSound.play();
-                                        }
-                                    }, 1000);
                                     cur_animation_val -= 6;
                                     d12Val+= 18;
                                     jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                 } else if (count_animation >= 61 && count_animation <= 91){
-                                    phaseTwo = setInterval(function(){
-                                        if (reloadTime1 <= 1){                                                                       //1
-                                            tickSound.stop();
-                                            reloadSound.play();
-                                            reloadTime1 += 1;
-                                        } else {
-                                            clearInterval(phaseTwo);
-                                            reloadSound.stop();
-                                            tickSound.play();
-                                        }
-                                    }, 1000);
                                     cur_animation_val -= 6;
                                     d12Val+= 18;
                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -291,6 +247,7 @@
                                     zIndex: '1'
                                 });
                                 // jQuery('#draggableD12').addClass('hidden');
+                                tickSound.stop();
                                 phaseTwo = setInterval(function(){
                                     if (reloadTime <= 1){                                                                       //1
                                         tickSound.stop();
@@ -338,15 +295,6 @@
                                             d12Val+= 18;
                                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                         } else if (count_animation >= 31 && count_animation <= 61){
-                                            phaseTwo = setInterval(function(){
-                                                if (reloadTime <= 1){                                                                       //1
-                                                    reloadSound.play();
-                                                    reloadTime += 1;
-                                                } else {
-                                                    clearInterval(phaseTwo);
-                                                    reloadSound.stop();
-                                                }
-                                            }, 1000);
                                             cur_animation_val -= 6;
                                             d12Val+= 18;
                                             jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
