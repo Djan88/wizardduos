@@ -80,11 +80,6 @@
                 if(count_animation <= 31){
                     cur_animation_val += 6;
                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                } else if (count_animation >= 31 && count_animation <= 61){
-                    cur_animation_val -= 6;
-                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                    jQuery('#draggableD12').css('transform', 'rotate('+cur_animation_val+'deg)');
-                    jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat');
                 } else {
                     cur_animation_val -= 6;
                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -146,11 +141,6 @@
                         if(count_animation <= 31){
                             cur_animation_val += 6;
                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                        } else if (count_animation >= 31 && count_animation <= 61){
-                            cur_animation_val -= 6;
-                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                            jQuery('#draggableD12').css('transform', 'rotate('+cur_animation_val+'deg)');
-                            jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat');
                         } else {
                             cur_animation_val -= 6;
                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -212,7 +202,7 @@
                                 if(count_animation <= 31){
                                     cur_animation_val += 6;
                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                } else if (count_animation >= 31 && count_animation <= 61){
+                                } else if (count_animation >= 61 && count_animation <= 91){
                                     cur_animation_val -= 6;
                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                     jQuery('#draggableD12').css('transform', 'rotate('+cur_animation_val+'deg)');
