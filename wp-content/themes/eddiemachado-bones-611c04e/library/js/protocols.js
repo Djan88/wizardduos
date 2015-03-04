@@ -300,15 +300,6 @@
                                             jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                         } else if (count_animation >= 61 && count_animation <= 91){
-                                            phaseTwo = setInterval(function(){
-                                                if (reloadTime1 <= 1){                                                                       //1
-                                                    reloadSound.play();
-                                                    reloadTime1 += 1;
-                                                } else {
-                                                    clearInterval(phaseTwo);
-                                                    reloadSound.stop();
-                                                }
-                                            }, 1000);
                                             cur_animation_val -= 6;
                                             d12Val+= 18;
                                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -377,11 +368,24 @@
                                                 count_animation += 1;
                                                 if(count_animation <= 31){
                                                     cur_animation_val += 6;
+                                                    d12Val+= 18;
                                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                } else if (count_animation >= 31 && count_animation <= 61){
+                                                    cur_animation_val -= 6;
+                                                    d12Val+= 18;
+                                                    jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
+                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                } else if (count_animation >= 61 && count_animation <= 91){
+                                                    cur_animation_val -= 6;
+                                                    d12Val+= 18;
+                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                    jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
+                                                    jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat');
                                                 } else {
+                                                    d12Val+= 18;
                                                     cur_animation_val -= 6;
                                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                    jQuery('#draggableD12').css('transform', 'rotate('+cur_animation_val+'deg)');
+                                                    jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                                                 }
                                             } else {
                                                 clearInterval(phaseOne);
@@ -440,11 +444,24 @@
                                                         count_animation += 1;
                                                         if(count_animation <= 31){
                                                             cur_animation_val += 6;
+                                                            d12Val+= 18;
                                                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                        } else if (count_animation >= 31 && count_animation <= 61){
+                                                            cur_animation_val -= 6;
+                                                            d12Val+= 18;
+                                                            jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
+                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                        } else if (count_animation >= 61 && count_animation <= 91){
+                                                            cur_animation_val -= 6;
+                                                            d12Val+= 18;
+                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                            jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
+                                                            jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat');
                                                         } else {
+                                                            d12Val+= 18;
                                                             cur_animation_val -= 6;
                                                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                            jQuery('#draggableD12').css('transform', 'rotate('+cur_animation_val+'deg)');
+                                                            jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                                                         }
                                                     } else {
                                                         clearInterval(phaseOne);
@@ -503,11 +520,24 @@
                                                                 count_animation += 1;
                                                                 if(count_animation <= 31){
                                                                     cur_animation_val += 6;
+                                                                    d12Val+= 18;
                                                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                } else if (count_animation >= 31 && count_animation <= 61){
+                                                                    cur_animation_val -= 6;
+                                                                    d12Val+= 18;
+                                                                    jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
+                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                } else if (count_animation >= 61 && count_animation <= 91){
+                                                                    cur_animation_val -= 6;
+                                                                    d12Val+= 18;
+                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                    jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
+                                                                    jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat');
                                                                 } else {
+                                                                    d12Val+= 18;
                                                                     cur_animation_val -= 6;
                                                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                    jQuery('#draggableD12').css('transform', 'rotate('+cur_animation_val+'deg)');
+                                                                    jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                                                                 }
                                                             } else {
                                                                 clearInterval(phaseOne);
@@ -566,11 +596,24 @@
                                                                         count_animation += 1;
                                                                         if(count_animation <= 31){
                                                                             cur_animation_val += 6;
+                                                                            d12Val+= 18;
                                                                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                        } else if (count_animation >= 31 && count_animation <= 61){
+                                                                            cur_animation_val -= 6;
+                                                                            d12Val+= 18;
+                                                                            jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
+                                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                        } else if (count_animation >= 61 && count_animation <= 91){
+                                                                            cur_animation_val -= 6;
+                                                                            d12Val+= 18;
+                                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                            jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
+                                                                            jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat');
                                                                         } else {
+                                                                            d12Val+= 18;
                                                                             cur_animation_val -= 6;
                                                                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                            jQuery('#draggableD12').css('transform', 'rotate('+cur_animation_val+'deg)');
+                                                                            jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                                                                         }
                                                                     } else {
                                                                         clearInterval(phaseOne);
@@ -629,11 +672,24 @@
                                                                                 count_animation += 1;
                                                                                 if(count_animation <= 31){
                                                                                     cur_animation_val += 6;
+                                                                                    d12Val+= 18;
                                                                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                } else if (count_animation >= 31 && count_animation <= 61){
+                                                                                    cur_animation_val -= 6;
+                                                                                    d12Val+= 18;
+                                                                                    jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
+                                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                } else if (count_animation >= 61 && count_animation <= 91){
+                                                                                    cur_animation_val -= 6;
+                                                                                    d12Val+= 18;
+                                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                    jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
+                                                                                    jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat');
                                                                                 } else {
+                                                                                    d12Val+= 18;
                                                                                     cur_animation_val -= 6;
                                                                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                    jQuery('#draggableD12').css('transform', 'rotate('+cur_animation_val+'deg)');
+                                                                                    jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                                                                                 }
                                                                             } else {
                                                                                 clearInterval(phaseOne);
@@ -691,12 +747,25 @@
                                                                                             });;
                                                                                         count_animation += 1;
                                                                                         if(count_animation <= 31){
+                                                                                            cur_animation_val += 6;
+                                                                                            d12Val+= 18;
+                                                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                        } else if (count_animation >= 31 && count_animation <= 61){
+                                                                                            cur_animation_val -= 6;
+                                                                                            d12Val+= 18;
+                                                                                            jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
+                                                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                        } else if (count_animation >= 61 && count_animation <= 91){
+                                                                                            cur_animation_val -= 6;
+                                                                                            d12Val+= 18;
+                                                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                            jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
+                                                                                            jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat');
+                                                                                        } else {
+                                                                                            d12Val+= 18;
                                                                                             cur_animation_val -= 6;
                                                                                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                        } else {
-                                                                                            cur_animation_val += 6;
-                                                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                            jQuery('#draggableD12').css('transform', 'rotate('+cur_animation_val+'deg)');
+                                                                                            jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                                                                                         }
                                                                                     } else {
                                                                                         clearInterval(phaseOne);
@@ -754,12 +823,25 @@
                                                                                                     });;
                                                                                                 count_animation += 1;
                                                                                                 if(count_animation <= 31){
+                                                                                                    cur_animation_val += 6;
+                                                                                                    d12Val+= 18;
+                                                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                                } else if (count_animation >= 31 && count_animation <= 61){
+                                                                                                    cur_animation_val -= 6;
+                                                                                                    d12Val+= 18;
+                                                                                                    jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
+                                                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                                } else if (count_animation >= 61 && count_animation <= 91){
+                                                                                                    cur_animation_val -= 6;
+                                                                                                    d12Val+= 18;
+                                                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                                    jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
+                                                                                                    jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat');
+                                                                                                } else {
+                                                                                                    d12Val+= 18;
                                                                                                     cur_animation_val -= 6;
                                                                                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                } else {
-                                                                                                    cur_animation_val += 6;
-                                                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                    jQuery('#draggableD12').css('transform', 'rotate('+cur_animation_val+'deg)');
+                                                                                                    jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                                                                                                 }
                                                                                             } else {
                                                                                                 clearInterval(phaseOne);
@@ -817,12 +899,25 @@
                                                                                                             });;
                                                                                                         count_animation += 1;
                                                                                                         if(count_animation <= 31){
+                                                                                                            cur_animation_val += 6;
+                                                                                                            d12Val+= 18;
+                                                                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                                        } else if (count_animation >= 31 && count_animation <= 61){
+                                                                                                            cur_animation_val -= 6;
+                                                                                                            d12Val+= 18;
+                                                                                                            jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
+                                                                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                                        } else if (count_animation >= 61 && count_animation <= 91){
+                                                                                                            cur_animation_val -= 6;
+                                                                                                            d12Val+= 18;
+                                                                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                                            jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
+                                                                                                            jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat');
+                                                                                                        } else {
+                                                                                                            d12Val+= 18;
                                                                                                             cur_animation_val -= 6;
                                                                                                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                        } else {
-                                                                                                            cur_animation_val += 6;
-                                                                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                            jQuery('#draggableD12').css('transform', 'rotate('+cur_animation_val+'deg)');
+                                                                                                            jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                                                                                                         }
                                                                                                     } else {
                                                                                                         clearInterval(phaseOne);
@@ -885,12 +980,25 @@
                                                                                                                     });
                                                                                                                 }
                                                                                                                 if(count_animation <= 31){
+                                                                                                                    cur_animation_val += 6;
+                                                                                                                    d12Val+= 18;
+                                                                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                                                } else if (count_animation >= 31 && count_animation <= 61){
+                                                                                                                    cur_animation_val -= 6;
+                                                                                                                    d12Val+= 18;
+                                                                                                                    jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
+                                                                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                                                } else if (count_animation >= 61 && count_animation <= 91){
+                                                                                                                    cur_animation_val -= 6;
+                                                                                                                    d12Val+= 18;
+                                                                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                                                    jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
+                                                                                                                    jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat');
+                                                                                                                } else {
+                                                                                                                    d12Val+= 18;
                                                                                                                     cur_animation_val -= 6;
                                                                                                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                } else {
-                                                                                                                    cur_animation_val += 6;
-                                                                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                    jQuery('#draggableD12').css('transform', 'rotate('+cur_animation_val+'deg)');
+                                                                                                                    jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                                                                                                                 }
                                                                                                             } else {
                                                                                                                 clearInterval(phaseOne);
@@ -953,12 +1061,25 @@
                                                                                                                             });
                                                                                                                         }
                                                                                                                         if(count_animation <= 31){
+                                                                                                                            cur_animation_val += 6;
+                                                                                                                            d12Val+= 18;
+                                                                                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                                                        } else if (count_animation >= 31 && count_animation <= 61){
+                                                                                                                            cur_animation_val -= 6;
+                                                                                                                            d12Val+= 18;
+                                                                                                                            jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
+                                                                                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                                                        } else if (count_animation >= 61 && count_animation <= 91){
+                                                                                                                            cur_animation_val -= 6;
+                                                                                                                            d12Val+= 18;
+                                                                                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                                                            jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
+                                                                                                                            jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat');
+                                                                                                                        } else {
+                                                                                                                            d12Val+= 18;
                                                                                                                             cur_animation_val -= 6;
                                                                                                                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                        } else {
-                                                                                                                            cur_animation_val += 6;
-                                                                                                                            jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                            jQuery('#draggableD12').css('transform', 'rotate('+cur_animation_val+'deg)');
+                                                                                                                            jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                                                                                                                         }
                                                                                                                     } else {
                                                                                                                         clearInterval(phaseOne);
@@ -1016,12 +1137,25 @@
                                                                                                                                     });;
                                                                                                                                 count_animation += 1;
                                                                                                                                 if(count_animation <= 31){
+                                                                                                                                    cur_animation_val += 6;
+                                                                                                                                    d12Val+= 18;
+                                                                                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                                                                } else if (count_animation >= 31 && count_animation <= 61){
+                                                                                                                                    cur_animation_val -= 6;
+                                                                                                                                    d12Val+= 18;
+                                                                                                                                    jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
+                                                                                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                                                                } else if (count_animation >= 61 && count_animation <= 91){
+                                                                                                                                    cur_animation_val -= 6;
+                                                                                                                                    d12Val+= 18;
+                                                                                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                                                                    jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
+                                                                                                                                    jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat');
+                                                                                                                                } else {
+                                                                                                                                    d12Val+= 18;
                                                                                                                                     cur_animation_val -= 6;
                                                                                                                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                                } else {
-                                                                                                                                    cur_animation_val += 6;
-                                                                                                                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                                    jQuery('#draggableD12').css('transform', 'rotate('+cur_animation_val+'deg)');
+                                                                                                                                    jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                                                                                                                                 }
                                                                                                                             } else {
                                                                                                                                 clearInterval(phaseOne);
