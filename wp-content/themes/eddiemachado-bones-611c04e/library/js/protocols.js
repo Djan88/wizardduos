@@ -212,7 +212,10 @@
                                     d12Val+= 12;
                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                 } else if (count_animation >= 31 && count_animation <= 61){
+                                    cur_animation_val -= 6;
+                                    d12Val+= 12;
                                     jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
+                                    jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                 } else if (count_animation >= 61 && count_animation <= 91){
                                     cur_animation_val -= 6;
                                     d12Val+= 12;
