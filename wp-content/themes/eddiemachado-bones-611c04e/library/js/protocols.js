@@ -80,20 +80,10 @@
                     });;
                 count_animation += 1;
                 if(count_animation <= 31){
-                    cur_animation_val += 12;
-                    d12Val +=6;
+                    cur_animation_val += 6;
+                    d12Val += 12;
                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                 } else {
-                    phaseTwo = setInterval(function(){
-                        if (reloadTime <= 1){                                                                       //1
-                            reloadSound.play();
-                            reloadTime += 1;
-                        } else {
-                            clearInterval(phaseTwo);
-                            reloadSound.stop();
-                            reloadTime = 0;
-                        }
-                    }, 500);
                     cur_animation_val -= 6;
                     d12Val +=12;
                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
