@@ -87,11 +87,13 @@
                 } else {
                     phaseTwo = setInterval(function(){
                         if (reloadTime <= 1){                                                                       //1
+                            tickSound.stop();
                             reloadSound.play();
                             reloadTime += 1;
                         } else {
                             clearInterval(phaseTwo);
                             reloadSound.stop();
+                            tickSound.play();
                         }
                     }, 1000);
                     cur_animation_val -= 6;
@@ -108,22 +110,23 @@
                     borderColor: 'red',
                     opacity: 1,
                     transform: 'scale(0.5)',
-                    borderWidth: '2px',
+                    borderWidth: '1px',
                     paddingTop: '9px',
                     zIndex: '1'
                 });
                 // jQuery('#draggableD12').addClass('hidden');
-                tickSound.stop();
                 reloadTime = 0;
                 phaseTwo = setInterval(function(){
                     if (reloadTime <= 1){                                                                       //1
+                        tickSound.stop();
                         reloadSound.play();
                         reloadTime += 1;
                     } else {
                         clearInterval(phaseTwo);
                         reloadSound.stop();
+                        tickSound.play();
                     }
-                }, 500);
+                }, 1000);
                 jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                 jQuery('#draggableD12').css('transform', 'rotate(0deg)');
 //фаза 2
@@ -133,7 +136,6 @@
                 count_animation = 1;
                 phaseOne = setInterval(function(){
                     if (count_animation <= 60){                                                                         //60
-                        tickSound.play();
                         jQuery('#draggableD1, #draggableD1_1').css({
                             color: 'transparent',
                             borderColor: 'transparent',
@@ -159,13 +161,15 @@
                             d12Val += 18; 
                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                         } else {
-                            phaseThree = setInterval(function(){
+                            phaseTwo = setInterval(function(){
                                 if (reloadTime <= 1){                                                                       //1
+                                    tickSound.stop();
                                     reloadSound.play();
                                     reloadTime += 1;
                                 } else {
-                                    clearInterval(phaseThree);
+                                    clearInterval(phaseTwo);
                                     reloadSound.stop();
+                                    tickSound.play();
                                 }
                             }, 1000);
                             d12Val += 18;
@@ -182,20 +186,21 @@
                             borderColor: 'red',
                             opacity: 1,
                             transform: 'scale(0.5)',
-                            borderWidth: '2px',
+                            borderWidth: '1px',
                             paddingTop: '5px',
                             zIndex: '1'
                         });
                         // jQuery('#draggableD12').addClass('hidden');
-                        tickSound.stop();
                         reloadTime = 0;
-                        phaseThree = setInterval(function(){
+                        phaseTwo = setInterval(function(){
                             if (reloadTime <= 1){                                                                       //1
+                                tickSound.stop();
                                 reloadSound.play();
                                 reloadTime += 1;
                             } else {
-                                clearInterval(phaseThree);
+                                clearInterval(phaseTwo);
                                 reloadSound.stop();
+                                tickSound.play();
                             }
                         }, 1000);
                         jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
