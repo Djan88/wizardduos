@@ -159,12 +159,12 @@
                             d12Val += 18; 
                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                         } else {
-                            phaseTwo = setInterval(function(){
+                            phaseThree = setInterval(function(){
                                 if (reloadTime <= 1){                                                                       //1
                                     reloadSound.play();
                                     reloadTime += 1;
                                 } else {
-                                    clearInterval(phaseTwo);
+                                    clearInterval(phaseThree);
                                     reloadSound.stop();
                                 }
                             }, 1000);
@@ -189,12 +189,12 @@
                         // jQuery('#draggableD12').addClass('hidden');
                         tickSound.stop();
                         reloadTime = 0;
-                        phaseTwo = setInterval(function(){
+                        phaseThree = setInterval(function(){
                             if (reloadTime <= 1){                                                                       //1
                                 reloadSound.play();
                                 reloadTime += 1;
                             } else {
-                                clearInterval(phaseTwo);
+                                clearInterval(phaseThree);
                                 reloadSound.stop();
                             }
                         }, 1000);
