@@ -92,7 +92,7 @@
                     }, 500);
                     cur_animation_val -= 6;
                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                    jQuery('#draggableD12').css('transform', '-rotate('+cur_animation_val+'deg)');
+                    jQuery('#draggableD12').css('transform', 'rotate(-'+cur_animation_val+'deg)');
                 }
             } else {
                 clearInterval(phaseOne);
@@ -162,7 +162,7 @@
                             }, 500);
                             cur_animation_val -= 6;
                             jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                            jQuery('#draggableD12').css('transform', '-rotate('+cur_animation_val+'deg)');
+                            jQuery('#draggableD12').css('transform', 'rotate(-'+cur_animation_val+'deg)');
                         }
                     } else {
                         clearInterval(phaseOne);
@@ -232,7 +232,7 @@
                                     }, 500);
                                     cur_animation_val -= 6;
                                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                    jQuery('#draggableD12').css('transform', '-rotate('+cur_animation_val+'deg)');
+                                    jQuery('#draggableD12').css('transform', 'rotate(-'+cur_animation_val+'deg)');
                                     jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat');
                                 } else {
                                     phaseTwo = setInterval(function(){
