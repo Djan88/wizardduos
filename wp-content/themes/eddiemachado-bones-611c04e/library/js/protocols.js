@@ -100,7 +100,6 @@
                     jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                 }
             } else {
-                reloadTime = 0;
                 clearInterval(phaseOne);
                 count_animation = 1;
                 jQuery('#draggableD11, #draggableD11_1').css({
@@ -115,6 +114,7 @@
                 });
                 // jQuery('#draggableD12').addClass('hidden');
                 tickSound.stop();
+                reloadTime = 0;
                 phaseTwo = setInterval(function(){
                     if (reloadTime <= 1){                                                                       //1
                         reloadSound.play();
@@ -174,7 +174,6 @@
                             jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                         }
                     } else {
-                        reloadTime = 0;
                         clearInterval(phaseOne);
                         count_animation = 1;
                         jQuery('#draggableD1, #draggableD1_1').css({
@@ -189,6 +188,7 @@
                         });
                         // jQuery('#draggableD12').addClass('hidden');
                         tickSound.stop();
+                        reloadTime = 0;
                         phaseTwo = setInterval(function(){
                             if (reloadTime <= 1){                                                                       //1
                                 reloadSound.play();
@@ -269,7 +269,6 @@
                                     jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                                 }
                             } else {
-                                reloadTime = 0;
                                 clearInterval(phaseOne);
                                 count_animation = 1;
                                 jQuery('#draggableD2, #draggableD2_1').css({
@@ -284,6 +283,7 @@
                                 });
                                 // jQuery('#draggableD12').addClass('hidden');
                                 tickSound.stop();
+                                reloadTime = 0;
                                 phaseTwo = setInterval(function(){
                                     if (reloadTime <= 1){                                                                       //1
                                         reloadSound.play();
