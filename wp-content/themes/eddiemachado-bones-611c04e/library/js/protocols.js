@@ -13,6 +13,7 @@
         protocol,
         v2,
         v3,
+        d12Val,
         reloadTime,
         tickSound = new buzz.sound( "/sounds/tick", {
             formats: [ "ogg", "mp3" ]
@@ -53,6 +54,7 @@
     //фаза 1
         reloadTime = 0;
         cur_animation_val = 0;
+        d12Val = 0;
         count_animation = 1;
         phaseOne = setInterval(function(){
             if (count_animation <= 60){                                                                         //60
@@ -73,12 +75,13 @@
                         opacity: 0.8,
                         transform: 'scale(1)',
                         background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat',
-                        transform: 'rotate(-'+cur_animation_val+'deg)',
+                        transform: 'rotate(-'+d12Val+'deg)',
                         borderColor: 'transparent'
                     });;
                 count_animation += 1;
                 if(count_animation <= 31){
-                    cur_animation_val += 6;
+                    cur_animation_val += 12;
+                    d12Val +=6;
                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                 } else {
                     phaseTwo = setInterval(function(){
@@ -88,11 +91,13 @@
                         } else {
                             clearInterval(phaseTwo);
                             reloadSound.stop();
+                            reloadTime = 0;
                         }
                     }, 500);
                     cur_animation_val -= 6;
+                    d12Val +=12;
                     jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                    jQuery('#draggableD12').css('transform', 'rotate(-'+cur_animation_val+'deg)');
+                    jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                 }
             } else {
                 clearInterval(phaseOne);
