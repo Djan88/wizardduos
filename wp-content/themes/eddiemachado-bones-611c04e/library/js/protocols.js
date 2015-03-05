@@ -190,7 +190,7 @@ duos = function(){
                     cur_animation_val = 0;
                     count_animation = 1;
                     phaseOne = setInterval(function(){
-                        if (count_animation <= 90){                                                                         //90
+                        if (count_animation <= 85){                                                                         //90
                             tickSound.play();
                             jQuery('#draggableD2, #draggableD2_1').css({
                                 color: 'transparent',
@@ -217,12 +217,12 @@ duos = function(){
                                 cur_animation_val += 6;
                                 d12Val+= 36;
                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                            } else if (count_animation >= 30 && count_animation <= 60){
+                            } else if (count_animation >= 30 && count_animation <= 55){
                                 cur_animation_val -= 6;
                                 d12Val+= 36;
                                 jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                            } else if (count_animation >= 60 && count_animation <= 90){
+                            } else if (count_animation >= 55 && count_animation <= 85){
                                 cur_animation_val -= 6;
                                 d12Val+= 36;
                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -269,7 +269,7 @@ duos = function(){
                             cur_animation_val = 0;
                             count_animation = 1;
                             phaseOne = setInterval(function(){
-                                if (count_animation <= 90){                                                                         //90
+                                if (count_animation <= 85){                                                                         //90
                                     tickSound.play();
                                     jQuery('#draggableD22, #draggableD22_1').css({
                                         color: 'transparent',
@@ -295,12 +295,12 @@ duos = function(){
                                         cur_animation_val += 6;
                                         d12Val+= 36;
                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                    } else if (count_animation >= 30 && count_animation <= 60){
+                                    } else if (count_animation >= 30 && count_animation <= 55){
                                         cur_animation_val -= 6;
                                         d12Val+= 36;
                                         jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                    } else if (count_animation >= 60 && count_animation <= 90){
+                                    } else if (count_animation >= 55 && count_animation <= 85){
                                         cur_animation_val -= 6;
                                         d12Val+= 36;
                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -345,7 +345,7 @@ duos = function(){
                                     cur_animation_val = 0;
                                     count_animation = 1;
                                     phaseOne = setInterval(function(){
-                                        if (count_animation <= 90){                                                                         //90
+                                        if (count_animation <= 85){                                                                         //90
                                             tickSound.play();
                                             jQuery('#draggableD3, #draggableD3_1').css({
                                                 color: 'transparent',
@@ -371,12 +371,12 @@ duos = function(){
                                                 cur_animation_val += 6;
                                                 d12Val+= 36;
                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                            } else if (count_animation >= 30 && count_animation <= 60){
+                                            } else if (count_animation >= 30 && count_animation <= 55){
                                                 cur_animation_val -= 6;
                                                 d12Val+= 36;
                                                 jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                            } else if (count_animation >= 60 && count_animation <= 90){
+                                            } else if (count_animation >= 55 && count_animation <= 85){
                                                 cur_animation_val -= 6;
                                                 d12Val+= 36;
                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -421,7 +421,7 @@ duos = function(){
                                             cur_animation_val = 0;
                                             count_animation = 1;
                                             phaseOne = setInterval(function(){
-                                                if (count_animation <= 90){                                                                         //90
+                                                if (count_animation <= 85){                                                                         //90
                                                     tickSound.play();
                                                     jQuery('#draggableD4, #draggableD4_1').css({
                                                         color: 'transparent',
@@ -447,12 +447,12 @@ duos = function(){
                                                         cur_animation_val += 6;
                                                         d12Val+= 36;
                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                    } else if (count_animation >= 30 && count_animation <= 60){
+                                                    } else if (count_animation >= 30 && count_animation <= 55){
                                                         cur_animation_val -= 6;
                                                         d12Val+= 36;
                                                         jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                    } else if (count_animation >= 60 && count_animation <= 90){
+                                                    } else if (count_animation >= 55 && count_animation <= 85){
                                                         cur_animation_val -= 6;
                                                         d12Val+= 36;
                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -497,7 +497,7 @@ duos = function(){
                                                     cur_animation_val = 0;
                                                     count_animation = 1;
                                                     phaseOne = setInterval(function(){
-                                                        if (count_animation <= 90){                                                                         //90
+                                                        if (count_animation <= 85){                                                                         //90
                                                             tickSound.play();
                                                             jQuery('#draggableD5, #draggableD5_1').css({
                                                                 color: 'transparent',
@@ -523,12 +523,12 @@ duos = function(){
                                                                 cur_animation_val += 6;
                                                                 d12Val+= 36;
                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                            } else if (count_animation >= 30 && count_animation <= 60){
+                                                            } else if (count_animation >= 30 && count_animation <= 55){
                                                                 cur_animation_val -= 6;
                                                                 d12Val+= 36;
                                                                 jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                            } else if (count_animation >= 60 && count_animation <= 90){
+                                                            } else if (count_animation >= 55 && count_animation <= 85){
                                                                 cur_animation_val -= 6;
                                                                 d12Val+= 36;
                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -573,7 +573,7 @@ duos = function(){
                                                             cur_animation_val = 0;
                                                             count_animation = 1;
                                                             phaseOne = setInterval(function(){
-                                                                if (count_animation <= 90){                                                                         //90
+                                                                if (count_animation <= 85){                                                                         //90
                                                                     tickSound.play();
                                                                     jQuery('#draggableD6, #draggableD6_1').css({
                                                                         color: 'transparent',
@@ -599,12 +599,12 @@ duos = function(){
                                                                         cur_animation_val += 6;
                                                                         d12Val+= 36;
                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                    } else if (count_animation >= 30 && count_animation <= 60){
+                                                                    } else if (count_animation >= 30 && count_animation <= 55){
                                                                         cur_animation_val -= 6;
                                                                         d12Val+= 36;
                                                                         jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                    } else if (count_animation >= 60 && count_animation <= 90){
+                                                                    } else if (count_animation >= 55 && count_animation <= 85){
                                                                         cur_animation_val -= 6;
                                                                         d12Val+= 36;
                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -649,7 +649,7 @@ duos = function(){
                                                                     cur_animation_val = 0;
                                                                     count_animation = 1;
                                                                     phaseOne = setInterval(function(){
-                                                                        if (count_animation <= 90){                                                                         //90
+                                                                        if (count_animation <= 85){                                                                         //90
                                                                             tickSound.play();
                                                                             jQuery('#draggableD7, #draggableD7_1').css({
                                                                                 color: 'transparent',
@@ -675,12 +675,12 @@ duos = function(){
                                                                                 cur_animation_val += 6;
                                                                                 d12Val+= 36;
                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                            } else if (count_animation >= 30 && count_animation <= 60){
+                                                                            } else if (count_animation >= 30 && count_animation <= 55){
                                                                                 cur_animation_val -= 6;
                                                                                 d12Val+= 36;
                                                                                 jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                            } else if (count_animation >= 60 && count_animation <= 90){
+                                                                            } else if (count_animation >= 55 && count_animation <= 85){
                                                                                 cur_animation_val -= 6;
                                                                                 d12Val+= 36;
                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -725,7 +725,7 @@ duos = function(){
                                                                             cur_animation_val = 0;
                                                                             count_animation = 1;
                                                                             phaseOne = setInterval(function(){
-                                                                                if (count_animation <= 90){                                                                         //90
+                                                                                if (count_animation <= 85){                                                                         //90
                                                                                     tickSound.play();
                                                                                     jQuery('#draggable6, #draggable6_1').css({
                                                                                         color: 'transparent',
@@ -751,12 +751,12 @@ duos = function(){
                                                                                         cur_animation_val += 6;
                                                                                         d12Val+= 36;
                                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                    } else if (count_animation >= 30 && count_animation <= 60){
+                                                                                    } else if (count_animation >= 30 && count_animation <= 55){
                                                                                         cur_animation_val -= 6;
                                                                                         d12Val+= 36;
                                                                                         jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                    } else if (count_animation >= 60 && count_animation <= 90){
+                                                                                    } else if (count_animation >= 55 && count_animation <= 85){
                                                                                         cur_animation_val -= 6;
                                                                                         d12Val+= 36;
                                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -801,7 +801,7 @@ duos = function(){
                                                                                     cur_animation_val = 0;
                                                                                     count_animation = 1;
                                                                                     phaseOne = setInterval(function(){
-                                                                                        if (count_animation <= 90){                                                                         //90
+                                                                                        if (count_animation <= 85){                                                                         //90
                                                                                             tickSound.play();
                                                                                             jQuery('#draggable5, #draggable5_1').css({
                                                                                                 color: 'transparent',
@@ -827,12 +827,12 @@ duos = function(){
                                                                                                 cur_animation_val += 6;
                                                                                                 d12Val+= 36;
                                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                            } else if (count_animation >= 30 && count_animation <= 60){
+                                                                                            } else if (count_animation >= 30 && count_animation <= 55){
                                                                                                 cur_animation_val -= 6;
                                                                                                 d12Val+= 36;
                                                                                                 jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                            } else if (count_animation >= 60 && count_animation <= 90){
+                                                                                            } else if (count_animation >= 55 && count_animation <= 85){
                                                                                                 cur_animation_val -= 6;
                                                                                                 d12Val+= 36;
                                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -877,7 +877,7 @@ duos = function(){
                                                                                             cur_animation_val = 0;
                                                                                             count_animation = 1;
                                                                                             phaseOne = setInterval(function(){
-                                                                                                if (count_animation <= 90){                                                                         //90
+                                                                                                if (count_animation <= 85){                                                                         //90
                                                                                                     tickSound.play();
                                                                                                     jQuery('#draggable4, #draggable4_1').css({
                                                                                                         color: 'transparent',
@@ -903,12 +903,12 @@ duos = function(){
                                                                                                         cur_animation_val += 6;
                                                                                                         d12Val+= 36;
                                                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                    } else if (count_animation >= 30 && count_animation <= 60){
+                                                                                                    } else if (count_animation >= 30 && count_animation <= 55){
                                                                                                         cur_animation_val -= 6;
                                                                                                         d12Val+= 36;
                                                                                                         jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                    } else if (count_animation >= 60 && count_animation <= 90){
+                                                                                                    } else if (count_animation >= 55 && count_animation <= 85){
                                                                                                         cur_animation_val -= 6;
                                                                                                         d12Val+= 36;
                                                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -953,7 +953,7 @@ duos = function(){
                                                                                                     cur_animation_val = 0;
                                                                                                     count_animation = 1;
                                                                                                     phaseOne = setInterval(function(){
-                                                                                                        if (count_animation <= 90){                                                                         //90
+                                                                                                        if (count_animation <= 85){                                                                         //90
                                                                                                             tickSound.play();
                                                                                                             jQuery('#draggable3, #draggable3_1').css({
                                                                                                                 color: 'transparent',
@@ -991,12 +991,12 @@ duos = function(){
                                                                                                                 cur_animation_val += 6;
                                                                                                                 d12Val+= 36;
                                                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                            } else if (count_animation >= 30 && count_animation <= 60){
+                                                                                                            } else if (count_animation >= 30 && count_animation <= 55){
                                                                                                                 cur_animation_val -= 6;
                                                                                                                 d12Val+= 36;
                                                                                                                 jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                            } else if (count_animation >= 60 && count_animation <= 90){
+                                                                                                            } else if (count_animation >= 55 && count_animation <= 85){
                                                                                                                 cur_animation_val -= 6;
                                                                                                                 d12Val+= 36;
                                                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -1041,7 +1041,7 @@ duos = function(){
                                                                                                             cur_animation_val = 0;
                                                                                                             count_animation = 1;
                                                                                                             phaseOne = setInterval(function(){
-                                                                                                                if (count_animation <= 90){                                                                         //90
+                                                                                                                if (count_animation <= 85){                                                                         //90
                                                                                                                     tickSound.play();
                                                                                                                     jQuery('#draggable2, #draggable2_1').css({
                                                                                                                         color: 'transparent',
@@ -1079,12 +1079,12 @@ duos = function(){
                                                                                                                         cur_animation_val += 6;
                                                                                                                         d12Val+= 36;
                                                                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                    } else if (count_animation >= 30 && count_animation <= 60){
+                                                                                                                    } else if (count_animation >= 30 && count_animation <= 55){
                                                                                                                         cur_animation_val -= 6;
                                                                                                                         d12Val+= 36;
                                                                                                                         jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                    } else if (count_animation >= 60 && count_animation <= 90){
+                                                                                                                    } else if (count_animation >= 55 && count_animation <= 85){
                                                                                                                         cur_animation_val -= 6;
                                                                                                                         d12Val+= 36;
                                                                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -1129,7 +1129,7 @@ duos = function(){
                                                                                                                     cur_animation_val = 0;
                                                                                                                     count_animation = 1;
                                                                                                                     phaseOne = setInterval(function(){
-                                                                                                                        if (count_animation <= 90){                                                                         //90
+                                                                                                                        if (count_animation <= 85){                                                                         //90
                                                                                                                             tickSound.play();
                                                                                                                             jQuery('#draggable1, #draggable1_1').css({
                                                                                                                                 color: 'transparent',
@@ -1155,12 +1155,12 @@ duos = function(){
                                                                                                                                 cur_animation_val += 6;
                                                                                                                                 d12Val+= 36;
                                                                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                            } else if (count_animation >= 30 && count_animation <= 60){
+                                                                                                                            } else if (count_animation >= 30 && count_animation <= 55){
                                                                                                                                 cur_animation_val -= 6;
                                                                                                                                 d12Val+= 36;
                                                                                                                                 jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                            } else if (count_animation >= 60 && count_animation <= 90){
+                                                                                                                            } else if (count_animation >= 55 && count_animation <= 85){
                                                                                                                                 cur_animation_val -= 6;
                                                                                                                                 d12Val+= 36;
                                                                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
