@@ -535,3 +535,8 @@ path
     -moz-transition: transform 1s linear;
     transition: transform 1s linear;
 }
+.work-area
+{
+    width: 870px;
+    margin: auto;
+}
