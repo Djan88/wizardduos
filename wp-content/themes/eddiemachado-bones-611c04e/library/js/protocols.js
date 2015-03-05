@@ -58,7 +58,7 @@ duos = function(){
     d12Val = 0;
     count_animation = 1;
     phaseOne = setInterval(function(){
-        if (count_animation <= 60){                                                                         //60
+        if (count_animation <= 55){                                                                         //55
             tickSound.play();
             jQuery('#draggableD11, #draggableD11_1').css({
                 color: 'transparent',
@@ -80,7 +80,6 @@ duos = function(){
                     borderColor: 'transparent'
                 });;
             count_animation += 1;
-            console.log(count_animation);
             if(count_animation <= 30){
                 cur_animation_val += 6;
                 d12Val+= 36;
@@ -125,7 +124,7 @@ duos = function(){
             cur_animation_val = 0;
             count_animation = 1;
             phaseOne = setInterval(function(){
-                if (count_animation <= 60){                                                                         //60
+                if (count_animation <= 55){                                                                         //55
                     jQuery('#draggableD1, #draggableD1_1').css({
                         color: 'transparent',
                         borderColor: 'transparent',
@@ -213,6 +212,7 @@ duos = function(){
                                     borderColor: 'transparent'
                                 });;
                             count_animation += 1;
+                            console.log(count_animation);
                             if(count_animation <= 30){
                                 cur_animation_val += 6;
                                 d12Val+= 36;
