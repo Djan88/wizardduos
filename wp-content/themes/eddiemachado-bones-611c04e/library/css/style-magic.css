@@ -535,8 +535,10 @@ path
     -moz-transition: transform 1s linear;
     transition: transform 1s linear;
 }
-.work-area
-{
-    width: 870px;
-    margin: auto;
+@media (max-width: 2150px) {
+    .work-area
+    {
+        width: 870px;
+        margin: auto;
+    }
 }
