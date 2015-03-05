@@ -29,7 +29,7 @@ onEnd = function(){
         text: "Что вы хотите делать дальше?",   
         type: "success",   
         showCancelButton: true,   
-        confirmButtonColor: "#DD6B55",   
+        confirmButtonColor: "#DD6B58",   
         confirmButtonText: "Продолжить сессию",   
         cancelButtonText: "Выйти"
     }, 
@@ -58,7 +58,7 @@ duos = function(){
     d12Val = 0;
     count_animation = 1;
     phaseOne = setInterval(function(){
-        if (count_animation <= 55){                                                                         //55
+        if (count_animation <= 58){                                                                         //58
             tickSound.play();
             jQuery('#draggableD11, #draggableD11_1').css({
                 color: 'transparent',
@@ -124,7 +124,7 @@ duos = function(){
             cur_animation_val = 0;
             count_animation = 1;
             phaseOne = setInterval(function(){
-                if (count_animation <= 55){                                                                         //55
+                if (count_animation <= 58){                                                                         //58
                     jQuery('#draggableD1, #draggableD1_1').css({
                         color: 'transparent',
                         borderColor: 'transparent',
@@ -217,12 +217,12 @@ duos = function(){
                                 cur_animation_val += 6;
                                 d12Val+= 36;
                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                            } else if (count_animation >= 30 && count_animation <= 55){
+                            } else if (count_animation >= 30 && count_animation <= 58){
                                 cur_animation_val -= 6;
                                 d12Val+= 36;
                                 jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                            } else if (count_animation >= 55 && count_animation <= 85){
+                            } else if (count_animation >= 58 && count_animation <= 85){
                                 cur_animation_val -= 6;
                                 d12Val+= 36;
                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -296,12 +296,12 @@ duos = function(){
                                         cur_animation_val += 6;
                                         d12Val+= 36;
                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                    } else if (count_animation >= 30 && count_animation <= 55){
+                                    } else if (count_animation >= 30 && count_animation <= 58){
                                         cur_animation_val -= 6;
                                         d12Val+= 36;
                                         jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                    } else if (count_animation >= 55 && count_animation <= 85){
+                                    } else if (count_animation >= 58 && count_animation <= 85){
                                         cur_animation_val -= 6;
                                         d12Val+= 36;
                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -373,12 +373,12 @@ duos = function(){
                                                 cur_animation_val += 6;
                                                 d12Val+= 36;
                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                            } else if (count_animation >= 30 && count_animation <= 55){
+                                            } else if (count_animation >= 30 && count_animation <= 58){
                                                 cur_animation_val -= 6;
                                                 d12Val+= 36;
                                                 jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                            } else if (count_animation >= 55 && count_animation <= 85){
+                                            } else if (count_animation >= 58 && count_animation <= 85){
                                                 cur_animation_val -= 6;
                                                 d12Val+= 36;
                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -450,12 +450,12 @@ duos = function(){
                                                         cur_animation_val += 6;
                                                         d12Val+= 36;
                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                    } else if (count_animation >= 30 && count_animation <= 55){
+                                                    } else if (count_animation >= 30 && count_animation <= 58){
                                                         cur_animation_val -= 6;
                                                         d12Val+= 36;
                                                         jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                    } else if (count_animation >= 55 && count_animation <= 85){
+                                                    } else if (count_animation >= 58 && count_animation <= 85){
                                                         cur_animation_val -= 6;
                                                         d12Val+= 36;
                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -527,12 +527,12 @@ duos = function(){
                                                                 cur_animation_val += 6;
                                                                 d12Val+= 36;
                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                            } else if (count_animation >= 30 && count_animation <= 55){
+                                                            } else if (count_animation >= 30 && count_animation <= 58){
                                                                 cur_animation_val -= 6;
                                                                 d12Val+= 36;
                                                                 jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                            } else if (count_animation >= 55 && count_animation <= 85){
+                                                            } else if (count_animation >= 58 && count_animation <= 85){
                                                                 cur_animation_val -= 6;
                                                                 d12Val+= 36;
                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -604,12 +604,12 @@ duos = function(){
                                                                         cur_animation_val += 6;
                                                                         d12Val+= 36;
                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                    } else if (count_animation >= 30 && count_animation <= 55){
+                                                                    } else if (count_animation >= 30 && count_animation <= 58){
                                                                         cur_animation_val -= 6;
                                                                         d12Val+= 36;
                                                                         jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                    } else if (count_animation >= 55 && count_animation <= 85){
+                                                                    } else if (count_animation >= 58 && count_animation <= 85){
                                                                         cur_animation_val -= 6;
                                                                         d12Val+= 36;
                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -681,12 +681,12 @@ duos = function(){
                                                                                 cur_animation_val += 6;
                                                                                 d12Val+= 36;
                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                            } else if (count_animation >= 30 && count_animation <= 55){
+                                                                            } else if (count_animation >= 30 && count_animation <= 58){
                                                                                 cur_animation_val -= 6;
                                                                                 d12Val+= 36;
                                                                                 jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                            } else if (count_animation >= 55 && count_animation <= 85){
+                                                                            } else if (count_animation >= 58 && count_animation <= 85){
                                                                                 cur_animation_val -= 6;
                                                                                 d12Val+= 36;
                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -758,12 +758,12 @@ duos = function(){
                                                                                         cur_animation_val += 6;
                                                                                         d12Val+= 36;
                                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                    } else if (count_animation >= 30 && count_animation <= 55){
+                                                                                    } else if (count_animation >= 30 && count_animation <= 58){
                                                                                         cur_animation_val -= 6;
                                                                                         d12Val+= 36;
                                                                                         jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                    } else if (count_animation >= 55 && count_animation <= 85){
+                                                                                    } else if (count_animation >= 58 && count_animation <= 85){
                                                                                         cur_animation_val -= 6;
                                                                                         d12Val+= 36;
                                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -835,12 +835,12 @@ duos = function(){
                                                                                                 cur_animation_val += 6;
                                                                                                 d12Val+= 36;
                                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                            } else if (count_animation >= 30 && count_animation <= 55){
+                                                                                            } else if (count_animation >= 30 && count_animation <= 58){
                                                                                                 cur_animation_val -= 6;
                                                                                                 d12Val+= 36;
                                                                                                 jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                            } else if (count_animation >= 55 && count_animation <= 85){
+                                                                                            } else if (count_animation >= 58 && count_animation <= 85){
                                                                                                 cur_animation_val -= 6;
                                                                                                 d12Val+= 36;
                                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -912,12 +912,12 @@ duos = function(){
                                                                                                         cur_animation_val += 6;
                                                                                                         d12Val+= 36;
                                                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                    } else if (count_animation >= 30 && count_animation <= 55){
+                                                                                                    } else if (count_animation >= 30 && count_animation <= 58){
                                                                                                         cur_animation_val -= 6;
                                                                                                         d12Val+= 36;
                                                                                                         jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                    } else if (count_animation >= 55 && count_animation <= 85){
+                                                                                                    } else if (count_animation >= 58 && count_animation <= 85){
                                                                                                         cur_animation_val -= 6;
                                                                                                         d12Val+= 36;
                                                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -1001,12 +1001,12 @@ duos = function(){
                                                                                                                 cur_animation_val += 6;
                                                                                                                 d12Val+= 36;
                                                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                            } else if (count_animation >= 30 && count_animation <= 55){
+                                                                                                            } else if (count_animation >= 30 && count_animation <= 58){
                                                                                                                 cur_animation_val -= 6;
                                                                                                                 d12Val+= 36;
                                                                                                                 jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                            } else if (count_animation >= 55 && count_animation <= 85){
+                                                                                                            } else if (count_animation >= 58 && count_animation <= 85){
                                                                                                                 cur_animation_val -= 6;
                                                                                                                 d12Val+= 36;
                                                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -1090,12 +1090,12 @@ duos = function(){
                                                                                                                         cur_animation_val += 6;
                                                                                                                         d12Val+= 36;
                                                                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                    } else if (count_animation >= 30 && count_animation <= 55){
+                                                                                                                    } else if (count_animation >= 30 && count_animation <= 58){
                                                                                                                         cur_animation_val -= 6;
                                                                                                                         d12Val+= 36;
                                                                                                                         jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                    } else if (count_animation >= 55 && count_animation <= 85){
+                                                                                                                    } else if (count_animation >= 58 && count_animation <= 85){
                                                                                                                         cur_animation_val -= 6;
                                                                                                                         d12Val+= 36;
                                                                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
@@ -1167,12 +1167,12 @@ duos = function(){
                                                                                                                                 cur_animation_val += 6;
                                                                                                                                 d12Val+= 36;
                                                                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                            } else if (count_animation >= 30 && count_animation <= 55){
+                                                                                                                            } else if (count_animation >= 30 && count_animation <= 58){
                                                                                                                                 cur_animation_val -= 6;
                                                                                                                                 d12Val+= 36;
                                                                                                                                 jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                            } else if (count_animation >= 55 && count_animation <= 85){
+                                                                                                                            } else if (count_animation >= 58 && count_animation <= 85){
                                                                                                                                 cur_animation_val -= 6;
                                                                                                                                 d12Val+= 36;
                                                                                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
