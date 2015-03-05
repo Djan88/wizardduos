@@ -80,6 +80,7 @@ duos = function(){
                     borderColor: 'transparent'
                 });;
             count_animation += 1;
+            console.log(count_animation);
             if(count_animation <= 30){
                 cur_animation_val += 6;
                 d12Val+= 36;
