@@ -520,7 +520,7 @@ path
 {
     position: absolute;
     width: 100%;
-    height: 2000px;
+    /*height: 2000px;*/
     top: 0;
     background: #000;
     z-index: 1;
@@ -535,7 +535,7 @@ path
     -moz-transition: transform 1s linear;
     transition: transform 1s linear;
 }
-@media (max-width: 2150px) {
+@media (max-width: 1900px) {
     .work-area
     {
         width: 870px;
