@@ -28,22 +28,14 @@ onEnd = function(){
         title: "Процедура окончена",   
         text: "Что вы хотите делать дальше?",   
         type: "success",   
-        showCancelButton: true,   
         confirmButtonColor: "#DD6B56",   
-        confirmButtonText: "Продолжить сессию",   
-        cancelButtonText: "Выйти"
+        confirmButtonText: "Выйти"
     }, 
     function(isConfirm){   
         if (isConfirm) {
-            var protocol = undefined;     
-            jQuery('.fast-protocol-wrap')
-                .removeClass('hidden')
-                .addClass('animated')
-                .addClass('fadeIn');
-        } else {
             var protocol = undefined;    
             jQuery(location).attr('href','/wizard');
-        } 
+        }
     });
     var endSound = new buzz.sound( "/sounds/duos", {
         formats: [ "ogg", "mp3" ]
