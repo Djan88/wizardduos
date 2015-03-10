@@ -21,7 +21,7 @@
             <form action="http://sprypay.ru/sppi/" method="POST" class="pay-form">
                 <input type="hidden" name="spPurpose" value="Доступ к WizardDuos">
                 <input type="hidden" name="spAmount" value="55000.00">
-                <input type="hidden" name="spShopId" value="221915">
+                <input type="hidden" name="spShopId" value="222137">
                 <input type="hidden" name="spCurrency" value="rur">
                 <input type="hidden" name="spSuccessUrl" value="<?=site_url('pay_success')?>">
                 <input type="hidden" name="spSuccessMethod" value="1">
