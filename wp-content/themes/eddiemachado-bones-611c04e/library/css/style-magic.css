@@ -542,3 +542,20 @@ path
         margin: auto;
     }
 }
+
+.pay-form
+{
+    text-align: right;
+}
+
+.pay-form__email
+{
+    display: inline-block !important;
+    margin: 0 10px 0 0 !important;
+    width: 190px !important;
+}
+
+.pay-form__submit
+{
+    vertical-align: middle;
+}
