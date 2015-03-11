@@ -19,7 +19,7 @@ jQuery(function() {
 
     //Функция проверки положения точек
     checkPoints = function(){
-        jQuery('.itemlist_item').each(function() {
+        jQuery('.itemZone').each(function() {
             if(parseFloat(jQuery(this).css('left')) < 350){
                 pointsStatus = false;
                 console.log(jQuery(this)+ ' status '+pointsStatus);
