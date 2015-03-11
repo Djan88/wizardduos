@@ -559,3 +559,7 @@ path
 {
     vertical-align: middle;
 }
+.supportlink
+{
+    float: right;
+}
