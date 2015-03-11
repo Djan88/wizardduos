@@ -10,11 +10,11 @@
 
     <div id="inner-content" class="wrap cf">
 
-        <div id="main" class="m-all t-2of3 cf home-page-content" role="main">
+        <div id="main" class="m-all t-2of3 cf home-page-content" role="main" style="margin-bottom: 30px; text-align: center;">
         <?php $curr_user = wp_get_current_user(); ?>
             <h1 class="page-title" itemprop="headline" style="text-align: center"><?php the_title(); ?></h1>
 
-            <div style="margin-bottom: 30px; text-align: center;">
+            <div>
                 <?=$post->post_content?>
             </div>
 
