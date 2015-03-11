@@ -14,7 +14,7 @@
         <?php $curr_user = wp_get_current_user(); ?>
             <h1 class="page-title" itemprop="headline" style="text-align: center"><?php the_title(); ?></h1>
 
-            <div style="margin-bottom: 30px">
+            <div style="margin-bottom: 30px; text-align: center;">
                 <?=$post->post_content?>
             </div>
 
