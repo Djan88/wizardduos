@@ -527,7 +527,7 @@ path
 }
 .confirm
 {
-    display: none;
+    /*display: none;*/
 }
 .box_rounded, #draggableD12
 {
