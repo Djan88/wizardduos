@@ -22,8 +22,7 @@ jQuery(function() {
         jQuery('.itemlist_item').each(function() {
             if(parseFloat(jQuery(this).css('left')) < 350){
                 pointsStatus = false;
-                console.log('status '+pointsStatus);
-                jQuery(this).css('borderColor:', 'blue!important');
+                console.log(jQuery(this)+ ' status '+pointsStatus);
             }
         });
     }
