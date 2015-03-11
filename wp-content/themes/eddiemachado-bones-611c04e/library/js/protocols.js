@@ -182,7 +182,7 @@ duos = function(){
                     cur_animation_val = 0;
                     count_animation = 1;
                     phaseOne = setInterval(function(){
-                        if (count_animation <= 85){                                                                         //90
+                        if (count_animation <= 90){                                                                         //90
                             tickSound.play();
                             jQuery('#draggableD2, #draggableD2_1').css({
                                 color: 'transparent',
@@ -214,13 +214,13 @@ duos = function(){
                                 d12Val+= 36;
                                 jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                            } else if (count_animation >= 57 && count_animation <= 75){
+                            } else if (count_animation >= 57 && count_animation <= 73){
                                 cur_animation_val -= 6;
                                 d12Val+= 36;
                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                 jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                                 jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat');
-                            } else if (count_animation >= 75 && count_animation <= 85){
+                            } else if (count_animation >= 73 && count_animation <= 90){
                                 cur_animation_val += 6;
                                 d12Val+= 36;
                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
