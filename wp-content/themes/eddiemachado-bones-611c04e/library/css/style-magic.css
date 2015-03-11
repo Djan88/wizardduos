@@ -508,8 +508,8 @@ path
 }
 .box_rounded
 {
-    width: 300px;
-    height: 300px;
+    width: 600px;
+    height: 600px;
     border: 2px dashed crimson;
     border-radius: 50%;
     position: absolute;
