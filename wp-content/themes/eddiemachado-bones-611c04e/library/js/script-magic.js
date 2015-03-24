@@ -140,6 +140,7 @@ jQuery(function() {
             .addClass('fadeIn');
         jQuery('.btn__wizard').removeClass('hidden');
         jQuery('.itemlist-two').append(croppedImg);
+        jQuery('.work-area').find('.returned').draggable({ axis: "y" });
     }
 
 //ШАГ 3 (Старт процедуры)
