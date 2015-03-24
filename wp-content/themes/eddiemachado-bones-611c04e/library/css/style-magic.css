@@ -69,7 +69,7 @@ li
     /*background: url(../images/man.jpg) 0 0/100% no-repeat;*/
     padding: 20px 0;
     float: right;
-    width: 30%;
+    width: 45%;
     margin-right: 5%;
     min-width: 392px;
 }
@@ -538,7 +538,7 @@ path
 @media (max-width: 1900px) {
     .work-area
     {
-        width: 870px;
+        /*width: 870px;*/
         margin: auto;
     }
 }
