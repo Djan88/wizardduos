@@ -5,9 +5,10 @@ jQuery(function() {
         nextScreen,
         croppedImg,
         curChoice,
-        protocol = 'duos',
+        protocol,
         checkPoints,
         main_heading,
+        set_prot,
         pointsStatus = true,
         supportsStorage = function(){
             try {
@@ -36,13 +37,6 @@ jQuery(function() {
             jQuery('.heading_dashboard').text('Загрузите фото');
             jQuery('.btn_back').removeClass('hidden');
         }
-    }
-    //Получение данных из локального хранилища
-    if(supportsStorage && localStorage.getItem('curChoice')){
-        localStorage.setItem( 'protocol', 'duos');
-        curChoice = localStorage.getItem('curChoice');
-        protocol = localStorage.getItem('protocol');
-        jQuery('.step_choice div').text(curChoice);
     }
     //Перетягивание элементов
     jQuery( ".draggable, .box_rounded" ).draggable({ 
@@ -81,6 +75,23 @@ jQuery(function() {
             .removeClass('hidden')
             .addClass('animated')
             .addClass('fadeIn')
+    }
+    // Выбор протокола
+    set_prot = function(){
+        protocol = jQuery(this).data('prot');
+        jQuery('.prot-item').removeClass('cur_prot');
+        jQuery(this).addClass('cur_prot');
+        localStorage.setItem( 'protocol', protocol);
+    }
+    jQuery('.prot-item').on('click', function() {
+        set_prot();
+        nextScreen();
+    });
+    //Получение данных из локального хранилища
+    if(supportsStorage && localStorage.getItem('curChoice')){
+        curChoice = localStorage.getItem('curChoice');
+        protocol = localStorage.getItem('protocol');
+        jQuery('.step_choice div').text(curChoice);
     }
 
 // ШАГ 1 (К загрузке фото)
