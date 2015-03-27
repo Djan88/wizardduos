@@ -96,7 +96,7 @@ jQuery(function() {
 // ШАГ 1 (К загрузке фото)
     jQuery( ".btn_choice" ).on('click', function(event) {
         protocol = jQuery(this).data('protocol');
-        localStorage.setItem('protocol', 'duos');
+        localStorage.setItem('protocol', protocol);
         if(jQuery(this).hasClass('btn_choice__choiced')){
             jQuery(this)
                 .removeClass('btn_choice__choiced')
