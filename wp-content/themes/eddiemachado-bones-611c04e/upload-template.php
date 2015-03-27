@@ -56,9 +56,9 @@
                 </div> -->
                 <div class="machine_screen clearfix">
                     <div class="protList">
-                        <button class="btn btn_sm btn_warning prot-item" data-prot="mw">Назад</button>
-                        <button class="btn btn_sm btn_warning prot-item" data-prot="ww">Назад</button>
-                        <button class="btn btn_sm btn_warning prot-item" data-prot="mm">Назад</button>
+                        <button class="btn btn_sm btn_warning btn_choice" data-protocol="mw">Назад</button>
+                        <button class="btn btn_sm btn_warning btn_choice" data-protocol="ww">Назад</button>
+                        <button class="btn btn_sm btn_warning btn_choice" data-protocol="mm">Назад</button>
                     </div>
                 </div>
                 <div class="machine_screen clearfix hidden">

@@ -38,6 +38,22 @@ jQuery(function() {
             jQuery('.btn_back').removeClass('hidden');
         }
     }
+    // // Выбор протокола
+    // set_prot = function(){
+    //     protocol = jQuery(this).data('prot');
+    //     jQuery('.prot-item').removeClass('cur_prot');
+    //     jQuery(this).addClass('cur_prot');
+    //     localStorage.setItem( 'protocol', protocol);
+    // }
+    jQuery('.prot-item').on('click', function() {
+        set_prot();
+    });
+    //Получение данных из локального хранилища
+    if(supportsStorage && localStorage.getItem('curChoice')){
+        curChoice = localStorage.getItem('curChoice');
+        protocol = localStorage.getItem('protocol');
+        jQuery('.step_choice div').text(curChoice);
+    }
     //Перетягивание элементов
     jQuery( ".draggable, .box_rounded" ).draggable({ 
         snap: false
@@ -75,23 +91,6 @@ jQuery(function() {
             .removeClass('hidden')
             .addClass('animated')
             .addClass('fadeIn')
-    }
-    // Выбор протокола
-    set_prot = function(){
-        protocol = jQuery(this).data('prot');
-        jQuery('.prot-item').removeClass('cur_prot');
-        jQuery(this).addClass('cur_prot');
-        localStorage.setItem( 'protocol', protocol);
-    }
-    jQuery('.prot-item').on('click', function() {
-        set_prot();
-        nextScreen();
-    });
-    //Получение данных из локального хранилища
-    if(supportsStorage && localStorage.getItem('curChoice')){
-        curChoice = localStorage.getItem('curChoice');
-        protocol = localStorage.getItem('protocol');
-        jQuery('.step_choice div').text(curChoice);
     }
 
 // ШАГ 1 (К загрузке фото)
