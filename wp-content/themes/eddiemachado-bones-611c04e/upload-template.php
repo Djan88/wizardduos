@@ -56,9 +56,9 @@
                 </div> -->
                 <div class="machine_screen clearfix">
                     <div class="protList">
-                        <button class="btn btn_lg btn_success btn_choice mw" data-protocol="mw">М/Ж</button>
-                        <button class="btn btn_lg btn_success btn_choice ww" data-protocol="ww">Назад</button>
-                        <button class="btn btn_lg btn_success btn_choice mm" data-protocol="mm">Назад</button>
+                        <button class="btn btn_lg btn_success btn_choice mw" data-protocol="mw"></button>
+                        <button class="btn btn_lg btn_success btn_choice ww" data-protocol="ww"></button>
+                        <button class="btn btn_lg btn_success btn_choice mm" data-protocol="mm"></button>
                     </div>
                 </div>
                 <div class="machine_screen clearfix hidden">
