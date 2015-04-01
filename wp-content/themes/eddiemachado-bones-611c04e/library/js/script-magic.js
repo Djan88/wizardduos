@@ -106,13 +106,6 @@ jQuery(function() {
             localStorage.setItem('curChoice', curChoice);
             jQuery('.step_choice div').text(curChoice);
             cur_screen += 1;
-            jQuery(".btn_choice")
-                .removeClass('btn_choice__choiced')
-                .text('Выбрать');
-            jQuery(this)
-                .addClass('btn_choice__choiced')
-                .text('Выбрано')
-                .append('<pre> ✓</pre>');
                 nextScreen()
                 jQuery('.step')
                     .eq(cur_screen-1)
