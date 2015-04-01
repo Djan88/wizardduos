@@ -576,12 +576,15 @@ path
 .mw
 {
     background: #204371 url(../images/mw.png) center center/45% no-repeat;
+    height: 46px;
 }
 .mm
 {
     background: #204371 url(../images/mm.png) center center/45% no-repeat;
+    height: 46px;
 }
 .ww
 {
     background: #204371 url(../images/ww.png) center center/45% no-repeat;
+    height: 46px;
 }
