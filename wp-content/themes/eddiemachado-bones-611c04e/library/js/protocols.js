@@ -1799,7 +1799,7 @@ mm = function(){
             phaseOne = setInterval(function(){
                 if (count_animation <= 56){                                                                         //56
                     tickSound.play();
-                    jQuery('#draggable1, #draggable1_1').css({
+                    jQuery('#draggableD1, #draggableD1_1').css({
                         color: 'transparent',
                         borderColor: 'transparent',
                         opacity: 0.8,
@@ -1814,25 +1814,25 @@ mm = function(){
                         .css({
                             opacity: 0.8,
                             transform: 'scale(1)',
-                            background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat',
-                            transform: 'rotate(-'+d12Val+'deg)',
+                            background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat',
+                            transform: 'rotate('+d12Val+'deg)',
                             borderColor: 'transparent'
                         });;
                     count_animation += 1;
                     if(count_animation <= 30){
                         cur_animation_val += 6;
                         d12Val+= 36;
-                        jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                        jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
                     } else {
                         cur_animation_val -= 6;
                         d12Val+= 36;
-                        jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                        jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
+                        jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
+                        jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                     }
                 } else {
                     clearInterval(phaseOne);
                     count_animation = 1;
-                    jQuery('#draggable1, #draggable1_1').css({
+                    jQuery('#draggableD1, #draggableD1_1').css({
                         background: 'transparent',
                         color: 'red',
                         borderColor: 'red',
@@ -1865,7 +1865,7 @@ mm = function(){
                     phaseOne = setInterval(function(){
                         if (count_animation <= 56){                                                                         //56
                             tickSound.play();
-                            jQuery('#draggable2, #draggable2_1').css({
+                            jQuery('#draggableD2, #draggableD2_1').css({
                                 color: 'transparent',
                                 borderColor: 'transparent',
                                 opacity: 0.8,
@@ -1880,25 +1880,25 @@ mm = function(){
                                 .css({
                                     opacity: 0.8,
                                     transform: 'scale(1)',
-                                    background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat',
-                                    transform: 'rotate(-'+d12Val+'deg)',
+                                    background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat',
+                                    transform: 'rotate('+d12Val+'deg)',
                                     borderColor: 'transparent'
                                 });;
                             count_animation += 1;
                             if(count_animation <= 30){
                                 cur_animation_val += 6;
                                 d12Val+= 36;
-                                jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
                             } else {
                                 cur_animation_val -= 6;
                                 d12Val+= 36;
-                                jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
+                                jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
+                                jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                             }
                         } else {
                             clearInterval(phaseOne);
                             count_animation = 1;
-                            jQuery('#draggable2, #draggable2_1').css({
+                            jQuery('#draggableD2, #draggableD2_1').css({
                                 background: 'transparent',
                                 color: 'red',
                                 borderColor: 'red',
