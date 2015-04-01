@@ -165,7 +165,7 @@ jQuery( ".btn__wizard" ).on('click', function(event) {
             if(protocol == 'mw'){
                 mw();
             } else if(protocol == 'ww'){
-                mw();
+                ww();
             } else if(protocol == 'mm'){
                 mm();
             } else{
