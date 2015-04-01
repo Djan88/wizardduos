@@ -573,3 +573,7 @@ path
     display: inline-block;
     margin: 40px 10px;
 }
+.mw
+{
+    background: #204371 url(../images/mw.png) right center/100%;
+}
