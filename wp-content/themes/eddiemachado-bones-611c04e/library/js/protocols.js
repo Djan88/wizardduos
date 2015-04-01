@@ -25,13 +25,13 @@ var count_animation = 1,
 
 onEnd = function(){
     swal({   
-        title: "Процедура окончена",   
-        text: "Что вы хотите делать дальше?",   
+        title: "Процедура окончена",
+        text: "Что вы хотите делать дальше?",
         type: "success",   
-        confirmButtonColor: "#DD6B56",   
+        confirmButtonColor: "#DD6B56",
         confirmButtonText: "Выйти"
     }, 
-    function(isConfirm){   
+    function(isConfirm){
         if (isConfirm) {
             var protocol = undefined;    
             jQuery(location).attr('href','/wizard');
@@ -204,7 +204,7 @@ mw = function(){
                                     borderColor: 'transparent'
                                 });;
                             count_animation += 1;
-                            console.log(count_animation);
+                            // console.log(count_animation);
                             if(count_animation <= 30){
                                 cur_animation_val += 6;
                                 d12Val+= 36;
@@ -1680,6 +1680,7 @@ ww = function(){
                                                     }
                                                 } else {
                                                     clearInterval(phaseOne);
+                                                    tickSound.stop();
                                                     count_animation = 1;
                                                     jQuery('#draggable6, #draggable6_1').css({
                                                         background: 'transparent',
