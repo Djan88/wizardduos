@@ -1766,7 +1766,7 @@ mm = function(){
         } else {
             clearInterval(phaseOne);
             count_animation = 1;
-            jQuery('#draggable11, #draggable11_1').css({
+            jQuery('#draggableD11, #draggableD11_1').css({
                 background: 'transparent',
                 color: 'red',
                 borderColor: 'red',
