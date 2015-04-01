@@ -563,3 +563,13 @@ path
 {
     float: right;
 }
+.protList 
+{
+    width: 500px;
+    margin: auto;
+}
+.protList .btn 
+{
+    display: inline-block;
+    margin: 40px 10px;
+}

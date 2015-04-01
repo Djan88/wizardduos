@@ -43,7 +43,7 @@ onEnd = function(){
     endSound.play();
 }
 
-duos = function(){
+mw = function(){
 //фаза 1
     reloadTime = 0;
     cur_animation_val = 0;
