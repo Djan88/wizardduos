@@ -164,6 +164,10 @@ jQuery( ".btn__wizard" ).on('click', function(event) {
             console.log(protocol);
             if(protocol == 'mw'){
                 mw();
+            } else if(protocol == 'ww'){
+                mw();
+            } else if(protocol == 'mm'){
+                mm();
             } else{
                 console.log('нет протокола с id '+ protocol)
             }
