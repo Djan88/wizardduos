@@ -1732,7 +1732,7 @@ mm = function(){
     count_animation = 1;
     phaseOne = setInterval(function(){
         console.log(count_animation);
-        if (count_animation <= 51){                                                                         //56
+        if (count_animation <= 47){                                                                         //56
             tickSound.play();
             jQuery('#draggableD1, #draggableD1_1').css({
                 color: 'transparent',
@@ -1798,7 +1798,7 @@ mm = function(){
             d12Val = 0;
             count_animation = 1;
             phaseOne = setInterval(function(){
-                if (count_animation <= 56){                                                                         //56
+                if (count_animation <= 47){                                                                         //56
                     tickSound.play();
                     jQuery('#draggableD2, #draggableD2_1').css({
                         color: 'transparent',
@@ -1820,7 +1820,7 @@ mm = function(){
                             borderColor: 'transparent'
                         });;
                     count_animation += 1;
-                    if(count_animation <= 30){
+                    if(count_animation <= 25){
                         cur_animation_val += 6;
                         d12Val+= 36;
                         jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
@@ -1864,7 +1864,7 @@ mm = function(){
                     d12Val = 0;
                     count_animation = 1;
                     phaseOne = setInterval(function(){
-                        if (count_animation <= 56){                                                                         //56
+                        if (count_animation <= 47){                                                                         //56
                             tickSound.play();
                             jQuery('#draggableD3, #draggableD3_1').css({
                                 color: 'transparent',
@@ -1886,7 +1886,7 @@ mm = function(){
                                     borderColor: 'transparent'
                                 });;
                             count_animation += 1;
-                            if(count_animation <= 30){
+                            if(count_animation <= 25){
                                 cur_animation_val += 6;
                                 d12Val+= 36;
                                 jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
@@ -1930,7 +1930,7 @@ mm = function(){
                             d12Val = 0;
                             count_animation = 1;
                             phaseOne = setInterval(function(){
-                                if (count_animation <= 56){                                                                         //56
+                                if (count_animation <= 47){                                                                         //56
                                     tickSound.play();
                                     jQuery('#draggableD4, #draggableD4_1').css({
                                         color: 'transparent',
@@ -1952,7 +1952,7 @@ mm = function(){
                                             borderColor: 'transparent'
                                         });;
                                     count_animation += 1;
-                                    if(count_animation <= 30){
+                                    if(count_animation <= 25){
                                         cur_animation_val += 6;
                                         d12Val+= 36;
                                         jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
@@ -1996,7 +1996,7 @@ mm = function(){
                                     d12Val = 0;
                                     count_animation = 1;
                                     phaseOne = setInterval(function(){
-                                        if (count_animation <= 56){                                                                         //56
+                                        if (count_animation <= 47){                                                                         //56
                                             tickSound.play();
                                             jQuery('#draggableD5, #draggableD5_1').css({
                                                 color: 'transparent',
@@ -2018,7 +2018,7 @@ mm = function(){
                                                     borderColor: 'transparent'
                                                 });;
                                             count_animation += 1;
-                                            if(count_animation <= 30){
+                                            if(count_animation <= 25){
                                                 cur_animation_val += 6;
                                                 d12Val+= 36;
                                                 jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
@@ -2063,7 +2063,7 @@ mm = function(){
                                             d12Val = 0;
                                             count_animation = 1;
                                             phaseOne = setInterval(function(){
-                                                if (count_animation <= 56){                                                                         //56
+                                                if (count_animation <= 47){                                                                         //56
                                                     tickSound.play();
                                                     jQuery('#draggableD6, #draggableD6_1').css({
                                                         color: 'transparent',
@@ -2085,7 +2085,7 @@ mm = function(){
                                                             borderColor: 'transparent'
                                                         });;
                                                     count_animation += 1;
-                                                    if(count_animation <= 30){
+                                                    if(count_animation <= 25){
                                                         cur_animation_val += 6;
                                                         d12Val+= 36;
                                                         jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
@@ -2130,7 +2130,7 @@ mm = function(){
                                                     d12Val = 0;
                                                     count_animation = 1;
                                                     phaseOne = setInterval(function(){
-                                                        if (count_animation <= 56){                                                                         //56
+                                                        if (count_animation <= 47){                                                                         //56
                                                             tickSound.play();
                                                             jQuery('#draggableD7, #draggableD7_1').css({
                                                                 color: 'transparent',
@@ -2152,7 +2152,7 @@ mm = function(){
                                                                     borderColor: 'transparent'
                                                                 });;
                                                             count_animation += 1;
-                                                            if(count_animation <= 30){
+                                                            if(count_animation <= 25){
                                                                 cur_animation_val += 6;
                                                                 d12Val+= 36;
                                                                 jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
