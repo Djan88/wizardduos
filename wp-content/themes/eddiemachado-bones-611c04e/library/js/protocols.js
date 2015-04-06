@@ -2186,7 +2186,6 @@ mm = function(){
                                                                 } else {
                                                                     clearInterval(phaseTwo);
                                                                     reloadSound.stop();
-                                                                    tickSound.play();
                                                                 }
                                                             }, 1000);
                                                             tickSound.stop();
