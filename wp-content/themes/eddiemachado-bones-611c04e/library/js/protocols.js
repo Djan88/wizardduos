@@ -1732,7 +1732,7 @@ mm = function(){
     count_animation = 1;
     phaseOne = setInterval(function(){
         console.log(count_animation);
-        if (count_animation <= 56){                                                                         //56
+        if (count_animation <= 51){                                                                         //56
             tickSound.play();
             jQuery('#draggableD1, #draggableD1_1').css({
                 color: 'transparent',
@@ -1754,7 +1754,7 @@ mm = function(){
                     borderColor: 'transparent'
                 });;
             count_animation += 1;
-            if(count_animation <= 30){
+            if(count_animation <= 25){
                 cur_animation_val += 6;
                 d12Val+= 36;
                 jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
