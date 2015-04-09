@@ -130,6 +130,17 @@ jQuery(function() {
     croppedImg = jQuery('#main').children()[0];
     if(croppedImg.hasAttribute('src'))
     {
+        if(protocol == 'mw'){
+            
+        } else if(protocol == 'ww'){
+            
+        } else if(protocol == 'mm'){
+            jQuery('#draggableD11, #draggableD11_1')
+                .addClass('hidden')
+                .css('left', '550px');
+        } else{
+            console.log('нет протокола с id '+ protocol)
+        }
         // jQuery('.step_img div').text('Фото загружено');
         jQuery('.heading_dashboard').text('Перенесите зоны с шаблона на фото клиентов')
         cur_screen = 2;
