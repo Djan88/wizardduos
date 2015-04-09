@@ -130,6 +130,7 @@ jQuery(function() {
     croppedImg = jQuery('#main').children()[0];
     if(croppedImg.hasAttribute('src'))
     {
+        protocol = localStorage.getItem('protocol');
         if(protocol == 'mw'){
             
         } else if(protocol == 'ww'){
@@ -138,9 +139,9 @@ jQuery(function() {
             jQuery('#draggableD11, #draggableD11_1')
                 .addClass('hidden')
                 .css('left', '550px');
-        } else{
+        } else {
             console.log('нет протокола с id '+ protocol)
-        }
+        };
         // jQuery('.step_img div').text('Фото загружено');
         jQuery('.heading_dashboard').text('Перенесите зоны с шаблона на фото клиентов')
         cur_screen = 2;
