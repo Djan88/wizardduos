@@ -1758,7 +1758,7 @@ mm = function(){
                 transform: 'scale(1)',
                 borderWidth: '1px',
                 paddingTop: '8px',
-                background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/oct.png) 0 0/100% no-repeat',
+                background: 'url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/oct.png) 0 0/100% no-repeat',
                 zIndex: '1000'
             });
             if (count_animation <= 3){
