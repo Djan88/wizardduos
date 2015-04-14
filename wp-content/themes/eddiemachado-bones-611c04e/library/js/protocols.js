@@ -1755,7 +1755,7 @@ mm = function(){
                 color: '#000',
                 borderColor: 'transparent',
                 opacity: 0.8,
-                transform: 'scale(1)rotateX(180deg)',
+                transform: 'scale(1) rotateY(180deg)',
                 borderWidth: '1px',
                 paddingTop: '8px',
                 background: 'url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/oct.png) 0 0/100% no-repeat',
