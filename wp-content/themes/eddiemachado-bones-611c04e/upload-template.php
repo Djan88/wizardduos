@@ -261,7 +261,7 @@
                             <!-- <li id="draggableClean_5" class="itemlist_item itemZone item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
 
                             <li id="draggable0_1" class="itemlist_item itemZone item_list__mid draggable" style="left: 159px; top: 428px;">V0</li>
-                            <li id="draggable1_1" class="itemlist_item itemZone item_list__mid draggable" style="left: 159px; top: 447px;">V1</li>
+                            <li id="draggable1_1" class="itemlist_item itemZone item_list__mid draggable" style="left: 159px; top: 472px;">V1</li>
                             <li id="draggable2_1" class="itemlist_item itemZone item_list__mid draggable" style="left: 159px; top: 539px;">V2</li>
                             <li id="draggable3_1" class="itemlist_item itemZone item_list__mid draggable" style="left: 159px; top: 591px;">V3</li>
                             <li id="draggable4_1" class="itemlist_item itemZone item_list__mid draggable" style="left: 159px; top: 641px;">V4</li>
