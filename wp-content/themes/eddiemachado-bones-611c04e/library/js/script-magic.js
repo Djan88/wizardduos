@@ -144,6 +144,7 @@ jQuery(function() {
             jQuery('.itemlist-mm').removeClass('hidden');
             jQuery('.itemlist-mw, .itemlist-ww').remove();
             jQuery('.itemlist-mm').find('.example_non_anim').removeClass('hidden');
+            jQuery('.itemlist-one').css('background', 'url(../images/mm_1_1.png) center 0/100% no-repeat');
         } else {
             console.log('нет протокола с id '+ protocol)
         };
