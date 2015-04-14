@@ -138,13 +138,13 @@ jQuery(function() {
         } else if(protocol == 'ww'){
             
         } else if(protocol == 'mm'){
-            jQuery('#draggableD11, #draggableD11_1')
-                .addClass('hidden')
-                .css('left', '550px');
             jQuery('.itemlist-mm').removeClass('hidden');
             jQuery('.itemlist-mw, .itemlist-ww').remove();
             jQuery('.itemlist-mm').find('.example_non_anim').removeClass('hidden');
-            jQuery('.itemlist-one').css('background', 'url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/mm_1_1.png) center 0/100% no-repeat');
+            jQuery('.itemlist-one').css({
+                background: 'url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/mm_1_1.png) center 0/100% no-repeat',
+                height: '1000px'
+            });
         } else {
             console.log('нет протокола с id '+ protocol)
         };
