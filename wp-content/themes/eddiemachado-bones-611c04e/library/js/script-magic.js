@@ -139,6 +139,8 @@ jQuery(function() {
             jQuery('#draggableD11, #draggableD11_1')
                 .addClass('hidden')
                 .css('left', '550px');
+            jQuery('.itemlist-mm').removeClass('hidden');
+            jQuery('.itemlist-mw').find('.itemlist_item').css('left', '551px;');
         } else {
             console.log('нет протокола с id '+ protocol)
         };
@@ -162,9 +164,9 @@ jQuery(function() {
 jQuery( ".btn__wizard" ).on('click', function(event) {
     pointsStatus = true;
     checkPoints();
-    // if(pointsStatus == false){
-    //     swal("Не все зоны перенесены", "Перед началом процедуры необходимо перенести все зоны", "info")
-    // } else {
+    if(pointsStatus == false){
+        swal("Не все зоны перенесены", "Перед началом процедуры необходимо перенести все зоны", "info")
+    } else {
         jQuery(this)
             .addClass('btn__wizard_inAction')
             .text('Выполняется');
@@ -183,7 +185,7 @@ jQuery( ".btn__wizard" ).on('click', function(event) {
             } else{
                 console.log('нет протокола с id '+ protocol)
             }
-    // }
+    }
     main_heading()
 });
 //Быстрая смена протокола
