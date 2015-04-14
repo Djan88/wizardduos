@@ -92,7 +92,7 @@
 
                 <div class="machine_screen work-area clearfix hidden">
                     <div id="snaptarget" class="wrapper">
-                        <ul class="itemlist itemlist-one" id="itemlist-one itemlist-mw hidden">
+                        <ul class="itemlist itemlist-one hidden" id="itemlist-one itemlist-mw">
                             <svg id="example_non_anim" height="700" version="1.0" xmlns="http://www.w3.org/2000/svg"
                              width="200.000000pt" height="241.000000pt" viewBox="0 0 200.000000 241.000000"
                              preserveAspectRatio="xMidYMid meet">
@@ -230,7 +230,7 @@
                             <!-- <li id="draggableClean_4_1" class="itemlist_item itemZone item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
                             <!-- <li id="draggableClean_5_1" class="itemlist_item itemZone item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
                         </ul>
-                        <ul class="itemlist itemlist-one" id="itemlist-one itemlist-ww hidden">
+                        <ul class="itemlist itemlist-one hidden" id="itemlist-one itemlist-ww">
                             <img src="/wp-content/themes/eddiemachado-bones-611c04e/library/images/ww_1_1.png" alt="ww" id="example_non_anim">
                             <li id="draggable0" class="itemlist_item itemZone item_list__mid draggable" style="left: 101px; top: 21px;">V0</li>
                             <li id="draggable1" class="itemlist_item itemZone item_list__mid draggable" style="left: 100px; top: 66px;">V1</li>
@@ -288,7 +288,7 @@
                             <!-- <li id="draggableClean_4_1" class="itemlist_item itemZone item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
                             <!-- <li id="draggableClean_5_1" class="itemlist_item itemZone item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
                         </ul>
-                        <ul class="itemlist itemlist-one" id="itemlist-one itemlist-mm hidden">
+                        <ul class="itemlist itemlist-one hidden" id="itemlist-one itemlist-mm">
                             <img src="/wp-content/themes/eddiemachado-bones-611c04e/library/images/mm_1_1.png" alt="ww" id="example_non_anim">
                             <!-- <li id="draggable0" class="itemlist_item itemZone item_list__mid draggable" style="left: 101px; top: 21px;">V0</li> -->
                             <!-- <li id="draggable1" class="itemlist_item itemZone item_list__mid draggable" style="left: 100px; top: 66px;">V1</li> -->
