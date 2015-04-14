@@ -16,6 +16,7 @@ var count_animation = 1,
     v2,
     v3,
     d12Val,
+    let,
     count_animation_let = 0,
     cur_let,
     letters = {
@@ -69,7 +70,7 @@ mw = function(){
         if (count_animation <= 56){                                                                         //56
             tickSound.play();
             jQuery('#draggableD11, #draggableD11_1').css({
-                color: 'transparent',
+                // color: 'transparent',
                 borderColor: 'transparent',
                 opacity: 0.8,
                 transform: 'scale(1)',
@@ -78,14 +79,19 @@ mw = function(){
                 background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat',
                 zIndex: '1000'
             });
-            setInterval(function(){
+            let = setInterval(function(){
                 if (count_animation_let <= 3){
                     cur_let = Math.round(Math.random() * (7 - 0))
                     console.log(letters[cur_let]);
                     jQuery('#draggableD11, #draggableD11_1').text(letters[cur_let]);
+                    count_animation++;
+                } else {
+                   clearInterval(let);
+                    jQuery('#draggableD11, #draggableD11_1').css({
+                        color: 'transparent'
+                    });
                 }
-                count_animation++;
-            }, 500);
+            }, 1000);
             jQuery('#draggableD12')
                 .removeClass('hidden')
                 .css({
