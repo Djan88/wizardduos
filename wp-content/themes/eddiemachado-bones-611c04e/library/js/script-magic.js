@@ -141,8 +141,9 @@ jQuery(function() {
                 .addClass('hidden')
                 .css('left', '550px');
             jQuery('.itemlist-mm').removeClass('hidden');
-            var sss = jQuery('.itemlist-mw').find('.itemlist_item');
-            console.log(sss);
+            jQuery('.itemlist-mw').find('.itemlist_item').each(function() {
+                jQuery(this).css('left', '551px;')
+            });
         } else {
             console.log('нет протокола с id '+ protocol)
         };
