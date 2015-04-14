@@ -231,7 +231,7 @@
                             <!-- <li id="draggableClean_5_1" class="itemlist_item itemZone item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
                         </ul>
                         <ul class="itemlist itemlist-one hidden itemlist-ww" id="itemlist-one itemlist-ww">
-                            <img src="/wp-content/themes/eddiemachado-bones-611c04e/library/images/ww_1_1.png" alt="ww" id="example_non_anim" class="example_non_anim">
+                            <!-- <img src="/wp-content/themes/eddiemachado-bones-611c04e/library/images/ww_1_1.png" alt="ww" id="example_non_anim" class="example_non_anim"> -->
                             <li id="draggable0" class="itemlist_item itemZone item_list__mid draggable" style="left: 101px; top: 21px;">V0</li>
                             <li id="draggable1" class="itemlist_item itemZone item_list__mid draggable" style="left: 100px; top: 66px;">V1</li>
                             <li id="draggable2" class="itemlist_item itemZone item_list__mid draggable" style="left: 94px; top: 121px;">V2</li>
@@ -296,7 +296,7 @@
                             <!-- <li id="draggable3" class="itemlist_item itemZone item_list__mid draggable" style="left: 93px; top: 176px;">V3</li> -->
                             <!-- <li id="draggable4" class="itemlist_item itemZone item_list__mid draggable" style="left: 90px; top: 234px;">V4</li> -->
                             <!-- <li id="draggable5" class="itemlist_item itemZone item_list__mid draggable" style="left: 90px; top: 282px;">V5</li> -->
-                            <li id="draggableD1" class="itemlist_item itemZone item_list__mid draggable" style="left: 86px; top: 16px;">D+</li>
+                            <li id="draggableD1" class="itemlist_item itemZone item_list__mid draggable" style="left: 95px; top: 16px;">D+</li>
                             <!-- <li id="draggableD11" class="itemlist_item itemZone item_list__mid draggable" style="left: 53px; top: 20px; font-size: 22px; padding-top: 10px;">D++</li> -->
                             <!-- <li id="draggableClean" class="itemlist_item itemZone item_list__mid itemlist_item__clear draggable" style="left: 20px; top: 262px;"></li> -->
                             <!-- <li id="draggableS2" class="itemlist_item itemZone item_list__mid draggable" style="left: 216px; top: 110px;">S2</li> -->

@@ -136,7 +136,13 @@ jQuery(function() {
         if(protocol == 'mw'){
             
         } else if(protocol == 'ww'){
-            
+            jQuery('.itemlist-ww').removeClass('hidden');
+            jQuery('.itemlist-mw, .itemlist-mm').remove();
+            jQuery('.itemlist-ww').find('.example_non_anim').removeClass('hidden');
+            jQuery('.itemlist-one').css({
+                background: 'url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/ww_1_1.png) center 0/100% no-repeat',
+                height: '1000px'
+            });
         } else if(protocol == 'mm'){
             jQuery('.itemlist-mm').removeClass('hidden');
             jQuery('.itemlist-mw, .itemlist-ww').remove();
