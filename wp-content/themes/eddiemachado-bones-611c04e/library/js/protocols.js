@@ -1750,6 +1750,7 @@ mm = function(){
         console.log(count_animation);
         if (count_animation <= 47){                                                                         //56
             tickSound.play();
+            jQuery('#draggableD1, #draggableD1_1').text(' ');
             jQuery('#draggableD1, #draggableD1_1').css({
                 // color: 'transparent',
                 borderColor: 'transparent',
@@ -1760,19 +1761,6 @@ mm = function(){
                 background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/oct.png) 0 0/100% no-repeat',
                 zIndex: '1000'
             });
-            let = setInterval(function(){
-                if (count_animation_let <= 3){
-                    cur_let = Math.round(Math.random() * (7 - 0))
-                    console.log(letters[cur_let]);
-                    jQuery('#draggableD1, #draggableD1_1').text(letters[cur_let]);
-                    count_animation++;
-                } else {
-                   clearInterval(let);
-                    jQuery('#draggableD1, #draggableD1_1').css({
-                        // color: 'transparent'
-                    });
-                }
-            }, 1000);
             jQuery('#draggableD12')
                 .removeClass('hidden')
                 .css({
@@ -1806,6 +1794,7 @@ mm = function(){
                 paddingTop: '9px',
                 zIndex: '1'
             });
+            jQuery('#draggableD1, #draggableD1_1').text('D+');
             // jQuery('#draggableD12').addClass('hidden');
             tickSound.stop();
             phaseTwo = setInterval(function(){
