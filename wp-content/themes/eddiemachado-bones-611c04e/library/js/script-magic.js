@@ -1,6 +1,7 @@
 jQuery(function() {
     //Скрываем возможно загруженное изображение
     jQuery('#main img:first-child').addClass('returned hidden');
+    jQuery('.itemlist-one').find('img').removeClass('returned hidden');
     var cur_screen = 0,
         nextScreen,
         croppedImg,
@@ -142,6 +143,7 @@ jQuery(function() {
                 .css('left', '550px');
             jQuery('.itemlist-mm').removeClass('hidden');
             jQuery('.itemlist-mw, .itemlist-ww').remove();
+            jQuery('.itemlist-mm').find('.example_non_anim').removeClass('hidden');
         } else {
             console.log('нет протокола с id '+ protocol)
         };
