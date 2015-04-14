@@ -70,7 +70,7 @@ mw = function(){
         if (count_animation <= 56){                                                                         //56
             tickSound.play();
             jQuery('#draggableD11, #draggableD11_1').css({
-                // color: 'transparent',
+                color: 'red',
                 borderColor: 'transparent',
                 opacity: 0.8,
                 transform: 'scale(1)',
@@ -88,7 +88,7 @@ mw = function(){
                 } else {
                    clearInterval(let);
                     jQuery('#draggableD11, #draggableD11_1').css({
-                        color: 'transparent'
+                        // color: 'transparent'
                     });
                 }
             }, 1000);
