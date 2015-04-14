@@ -134,7 +134,9 @@ jQuery(function() {
         protocol = localStorage.getItem('protocol');
         console.log('protocol: '+protocol);
         if(protocol == 'mw'){
-            
+            jQuery('.itemlist-mw').removeClass('hidden');
+            jQuery('.itemlist-ww, .itemlist-mm').remove();
+            jQuery('.itemlist-mw').find('.example_non_anim').removeClass('hidden');
         } else if(protocol == 'ww'){
             jQuery('.itemlist-ww').removeClass('hidden');
             jQuery('.itemlist-mw, .itemlist-mm').remove();
