@@ -1,7 +1,7 @@
 jQuery(function() {
     //Скрываем возможно загруженное изображение
     jQuery('#main img:first-child').addClass('returned hidden');
-    jQuery('.itemlist-one').find('img').removeClass('returned hidden');
+    // jQuery('.itemlist-one').find('img').removeClass('returned hidden');
     var cur_screen = 0,
         nextScreen,
         croppedImg,
@@ -144,7 +144,7 @@ jQuery(function() {
             jQuery('.itemlist-mm').removeClass('hidden');
             jQuery('.itemlist-mw, .itemlist-ww').remove();
             jQuery('.itemlist-mm').find('.example_non_anim').removeClass('hidden');
-            jQuery('.itemlist-one').css('background', 'url(../images/mm_1_1.png) center 0/100% no-repeat');
+            jQuery('.itemlist-one').css('background', 'url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/mm_1_1.png) center 0/100% no-repeat');
         } else {
             console.log('нет протокола с id '+ protocol)
         };
