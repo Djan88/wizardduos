@@ -131,6 +131,7 @@ jQuery(function() {
     if(croppedImg.hasAttribute('src'))
     {
         protocol = localStorage.getItem('protocol');
+        console.log('protocol: '+protocol);
         if(protocol == 'mw'){
             
         } else if(protocol == 'ww'){
