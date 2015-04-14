@@ -1801,7 +1801,7 @@ mm = function(){
                 opacity: 1,
                 transform: 'scale(0.5)',
                 borderWidth: '1px',
-                paddingTop: '9px',
+                paddingTop: '7px',
                 zIndex: '1'
             });
             jQuery('#draggableD1, #draggableD1_1').text('D+');
