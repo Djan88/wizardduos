@@ -16,6 +16,18 @@ var count_animation = 1,
     v2,
     v3,
     d12Val,
+    count_animation_let = 0,
+    cur_let,
+    letters = {
+        0: 'Б',
+        1: 'Т',
+        2: 'Н',
+        3: 'М',
+        4: 'Г',
+        5: 'Р',
+        6: 'В',
+        7: 'Х',
+    },
     reloadTime,
     reloadTime1,
     tickSound = new buzz.sound( "/sounds/tick", {
@@ -51,6 +63,8 @@ mw = function(){
     cur_animation_val = 0;
     d12Val = 0;
     count_animation = 1;
+    count_animation_let = 0;
+    cur_let;
     phaseOne = setInterval(function(){
         if (count_animation <= 56){                                                                         //56
             tickSound.play();
@@ -64,6 +78,14 @@ mw = function(){
                 background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat',
                 zIndex: '1000'
             });
+            setInterval(function(){
+                if (count_animation_let <= 3){
+                    cur_let = Math.round(Math.random() * (7 - 0))
+                    console.log(letters[cur_let]);
+                    jQuery('#draggableD11, #draggableD11_1').text(letters[cur_let]);
+                }
+                count_animation++;
+            }, 500);
             jQuery('#draggableD12')
                 .removeClass('hidden')
                 .css({
