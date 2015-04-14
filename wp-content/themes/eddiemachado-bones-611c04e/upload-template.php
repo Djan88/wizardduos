@@ -92,7 +92,7 @@
 
                 <div class="machine_screen work-area clearfix hidden">
                     <div id="snaptarget" class="wrapper">
-                        <ul class="itemlist itemlist-one hidden" id="itemlist-one itemlist-mw">
+                        <ul class="itemlist itemlist-one hidden itemlist-mw" id="itemlist-one itemlist-mw">
                             <svg id="example_non_anim" height="700" version="1.0" xmlns="http://www.w3.org/2000/svg"
                              width="200.000000pt" height="241.000000pt" viewBox="0 0 200.000000 241.000000"
                              preserveAspectRatio="xMidYMid meet">
