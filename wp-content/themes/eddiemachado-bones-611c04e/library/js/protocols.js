@@ -1752,12 +1752,12 @@ mm = function(){
             tickSound.play();
             jQuery('#draggableD1, #draggableD1_1').text(' ');
             jQuery('#draggableD1, #draggableD1_1').css({
-                // color: 'transparent',
+                color: '#000',
                 borderColor: 'transparent',
                 opacity: 0.8,
                 transform: 'scale(1)',
                 borderWidth: '1px',
-                paddingTop: '6px',
+                paddingTop: '8px',
                 background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/oct.png) 0 0/100% no-repeat',
                 zIndex: '1000'
             });
