@@ -1751,7 +1751,7 @@ mm = function(){
         if (count_animation <= 47){                                                                         //56
             tickSound.play();
             jQuery('#draggableD1, #draggableD1_1').css({
-                color: 'transparent',
+                // color: 'transparent',
                 borderColor: 'transparent',
                 opacity: 0.8,
                 transform: 'scale(1)',
