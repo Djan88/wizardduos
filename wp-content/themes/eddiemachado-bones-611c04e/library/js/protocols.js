@@ -1783,13 +1783,13 @@ mm = function(){
             count_animation += 1;
             if(count_animation <= 50){
                 cur_animation_val += 6;
-                d12Val+= 36;
+                d12Val+= 18;
                 jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val/2+'deg) scale(1)');
             } else {
                 cur_animation_val -= 6;
-                d12Val+= 36;
+                d12Val+= 18;
                 jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val/2+'deg) scale(1)');
-                jQuery('#draggableD12').css('transform', 'rotate('+d12Val/2+'deg)');
+                jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
             }
         } else {
             clearInterval(phaseOne);
