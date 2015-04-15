@@ -1747,7 +1747,7 @@ mm = function(){
     count_animation_let = 0;
     cur_let;
     phaseOne = setInterval(function(){
-        console.log(count_animation);
+        // console.log(count_animation); 
         if (count_animation <= 94){                                                                         //56
             tickSound.play();
             jQuery('#draggableD1, #draggableD1_1').text(' ');
