@@ -1748,7 +1748,7 @@ mm = function(){
     cur_let;
     phaseOne = setInterval(function(){
         console.log(count_animation);
-        if (count_animation <= 47){                                                                         //56
+        if (count_animation <= 94){                                                                         //56
             tickSound.play();
             jQuery('#draggableD1, #draggableD1_1').text(' ');
             jQuery('#draggableD1, #draggableD1_1').css({
@@ -1781,7 +1781,7 @@ mm = function(){
                     borderColor: 'transparent'
                 });;
             count_animation += 1;
-            if(count_animation <= 25){
+            if(count_animation <= 50){
                 cur_animation_val += 6;
                 d12Val+= 36;
                 jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
@@ -2234,5 +2234,5 @@ mm = function(){
                 }
             }, 1000);
         }
-    }, 1000);
+    }, 500);
 };
