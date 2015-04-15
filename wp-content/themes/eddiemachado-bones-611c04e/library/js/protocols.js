@@ -1763,7 +1763,7 @@ mm = function(){
             });
             if (count_animation <= 47){
                 cur_let = Math.round(Math.random() * (7 - 0))
-                console.log(letters[cur_let]);
+                // console.log(letters[cur_let]);
                 jQuery('#draggableD1, #draggableD1_1').text(letters[cur_let]);
             } else {
                 jQuery('#draggableD1, #draggableD1_1').css({
