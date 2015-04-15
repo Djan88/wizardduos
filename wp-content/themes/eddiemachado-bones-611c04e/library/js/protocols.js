@@ -1747,7 +1747,7 @@ mm = function(){
     count_animation_let = 0;
     cur_let;
     phaseOne = setInterval(function(){
-        // console.log(count_animation); 
+        console.log(count_animation); 
         if (count_animation <= 94){                                                                         //56
             tickSound.play();
             jQuery('#draggableD1, #draggableD1_1').text(' ');
@@ -1761,7 +1761,7 @@ mm = function(){
                 background: 'url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/oct.png) 0 0/100% no-repeat',
                 zIndex: '1000'
             });
-            if (count_animation <= 3){
+            if (count_animation <= 94){
                 cur_let = Math.round(Math.random() * (7 - 0))
                 console.log(letters[cur_let]);
                 jQuery('#draggableD1, #draggableD1_1').text(letters[cur_let]);
