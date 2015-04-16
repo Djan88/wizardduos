@@ -1832,9 +1832,9 @@ mm = function(){
             if (count_animation <= 94){
                 cur_let = Math.round(Math.random() * (7 - 0))
                 // console.log(letters[cur_let]);
-                jQuery('#draggableD1,').text(letters[cur_let]);
+                jQuery('#draggableD1').text(letters[cur_let]);
                 cur_let = Math.round(Math.random() * (7 - 0))
-                jQuery('#draggableD1_1,').text(letters[cur_let]);
+                jQuery('#draggableD1_1').text(letters[cur_let]);
             } else {
                 jQuery('#draggableD1, #draggableD1_1').css({
                     color: 'transparent',
