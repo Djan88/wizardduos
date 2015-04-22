@@ -38,7 +38,7 @@
                     <div class="step step_choice step_now">1 <div></div> </div>
                     <div class="step step_img">2 <div></div> </div>
                     <div class="step step_procedure">3 <div></div>  </div> -->
-                    <h3 class="heading heading_dashboard">Выберите протокол</h3>
+                    <h3 class="heading heading_dashboard">Выберите протокол работы</h3>
                 </div>
                 <!-- <div class="btn btn_back invisible"><span>‹</span> Назад</div> -->
 

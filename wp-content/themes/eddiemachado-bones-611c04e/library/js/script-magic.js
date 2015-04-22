@@ -32,7 +32,7 @@ jQuery(function() {
     main_heading = function(){
         // console.log(cur_screen);
         if(cur_screen == 0){
-            jQuery('.heading_dashboard').text('Выберите актуальную зону');
+            jQuery('.heading_dashboard').text('Выберите протокол работы');
             jQuery('.btn_back').addClass('hidden');
         } else if (cur_screen == 1){
             jQuery('.heading_dashboard').text('Загрузите фото');
