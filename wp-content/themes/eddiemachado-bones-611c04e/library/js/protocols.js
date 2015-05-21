@@ -77,6 +77,29 @@ mw = function(){
                 background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat',
                 zIndex: '1000'
             });
+            jQuery('#draggableD1, #draggableD1_1').text(' ');
+            jQuery('#draggableD1, #draggableD1_1').css({
+                color: '#000',
+                borderColor: 'transparent',
+                opacity: 0.8,
+                transform: 'scale(1) rotateY(180deg)',
+                borderWidth: '1px',
+                paddingTop: '8px',
+                background: 'url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/oct.png) 0 0/100% no-repeat',
+                zIndex: '1000'
+            });
+            if (count_animation <= 188){
+                cur_let = Math.round(Math.random() * (7 - 0))
+                // console.log(letters[cur_let]);
+                jQuery('#draggableD1').text(letters[cur_let]);
+                cur_let = Math.round(Math.random() * (7 - 0))
+                jQuery('#draggableD1_1').text(letters[cur_let]);
+            } else {
+                jQuery('#draggableD1, #draggableD1_1').css({
+                    color: 'transparent',
+                    paddingTop: '4px'
+                });
+            }
             jQuery('#draggableD12')
                 .removeClass('hidden')
                 .css({
@@ -100,6 +123,17 @@ mw = function(){
         } else {
             clearInterval(phaseOne);
             count_animation = 1;
+            jQuery('#draggableD1, #draggableD1_1').css({
+                background: 'transparent',
+                color: 'red',
+                borderColor: 'red',
+                opacity: 1,
+                transform: 'scale(0.5)',
+                borderWidth: '1px',
+                paddingTop: '7px',
+                zIndex: '1'
+            });
+            jQuery('#draggableD1, #draggableD1_1').text('D+');
             jQuery('#draggableD11, #draggableD11_1').css({
                 background: 'transparent',
                 color: 'red',
