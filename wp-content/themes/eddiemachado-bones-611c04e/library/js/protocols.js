@@ -1273,6 +1273,7 @@ mw = function(){
         //фаза 16
                                                                                                                     cur_animation_val = 55;
                                                                                                                     count_animation = 1;
+                                                                                                                    jQuery('.box_rounded').addClass('hidden');
                                                                                                                     phaseSeven_one = setInterval(function(){
                                                                                                                         if (count_animation <= 22){                                                                         //22
                                                                                                                             cur_animation_val += 1.5;
