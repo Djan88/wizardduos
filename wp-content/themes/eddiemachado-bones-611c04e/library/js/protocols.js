@@ -125,21 +125,24 @@ mw = function(){
             }, 1000);
             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
-//фаза 2
+
+//фаза 3
             reloadTime = 0;
+            reloadTime1 = 0;
             d12Val = 0;
             cur_animation_val = 0;
             count_animation = 1;
             phaseOne = setInterval(function(){
-                if (count_animation <= 56){                                                                         //56
-                    jQuery('#draggableD1, #draggableD1_1').css({
+                if (count_animation <= 86){                                                                         //90
+                    tickSound.play();
+                    jQuery('#draggableD2, #draggableD2_1').css({
                         color: 'transparent',
                         borderColor: 'transparent',
                         opacity: 0.8,
                         transform: 'scale(1)',
                         borderWidth: '1px',
                         paddingTop: '4px',
-                        background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat',
+                        background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/disfunction.jpg) 0 0/100% no-repeat',
                         zIndex: '1000'
                     });
                     jQuery('#draggableD12')
@@ -152,26 +155,45 @@ mw = function(){
                             borderColor: 'transparent'
                         });;
                     count_animation += 1;
+                    // console.log(count_animation);
                     if(count_animation <= 30){
                         cur_animation_val += 6;
-                        d12Val+= 36; 
+                        d12Val+= 36;
                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                    } else if (count_animation >= 30 && count_animation <= 57){
+                        cur_animation_val -= 6;
+                        d12Val+= 36;
+                        jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
+                        jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                    } else if (count_animation >= 57 && count_animation <= 73){
+                        cur_animation_val -= 6;
+                        d12Val+= 36;
+                        jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                        jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
+                        jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat');
+                    } else if (count_animation >= 73 && count_animation <= 86){
+                        cur_animation_val += 6;
+                        d12Val+= 36;
+                        jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                        jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
+                        jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat');
                     } else {
                         d12Val+= 36;
-                        cur_animation_val -= 6;
+                        cur_animation_val += 6;
                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                        jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
+                        jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
+                        jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat');
                     }
                 } else {
                     clearInterval(phaseOne);
                     count_animation = 1;
-                    jQuery('#draggableD1, #draggableD1_1').css({
+                    jQuery('#draggableD2, #draggableD2_1').css({
                         background: 'transparent',
                         color: 'red',
                         borderColor: 'red',
                         opacity: 1,
                         transform: 'scale(0.5)',
-                        borderWidth: '1px',
+                        borderWidth: '2px',
                         paddingTop: '5px',
                         zIndex: '1'
                     });
@@ -190,16 +212,16 @@ mw = function(){
                     }, 1000);
                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
-//фаза 3
+//фаза 4
                     reloadTime = 0;
                     reloadTime1 = 0;
                     d12Val = 0;
                     cur_animation_val = 0;
                     count_animation = 1;
                     phaseOne = setInterval(function(){
-                        if (count_animation <= 86){                                                                         //90
+                        if (count_animation <= 85){                                                                         //90
                             tickSound.play();
-                            jQuery('#draggableD2, #draggableD2_1').css({
+                            jQuery('#draggableD22, #draggableD22_1').css({
                                 color: 'transparent',
                                 borderColor: 'transparent',
                                 opacity: 0.8,
@@ -219,7 +241,6 @@ mw = function(){
                                     borderColor: 'transparent'
                                 });;
                             count_animation += 1;
-                            // console.log(count_animation);
                             if(count_animation <= 30){
                                 cur_animation_val += 6;
                                 d12Val+= 36;
@@ -251,7 +272,7 @@ mw = function(){
                         } else {
                             clearInterval(phaseOne);
                             count_animation = 1;
-                            jQuery('#draggableD2, #draggableD2_1').css({
+                            jQuery('#draggableD22, #draggableD22_1').css({
                                 background: 'transparent',
                                 color: 'red',
                                 borderColor: 'red',
@@ -265,18 +286,16 @@ mw = function(){
                             tickSound.stop();
                             phaseTwo = setInterval(function(){
                                 if (reloadTime <= 1){                                                                       //1
-                                    tickSound.stop();
                                     reloadSound.play();
                                     reloadTime += 1;
                                 } else {
                                     clearInterval(phaseTwo);
                                     reloadSound.stop();
-                                    tickSound.play();
                                 }
                             }, 1000);
                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
-//фаза 4
+//фаза 5
                             reloadTime = 0;
                             reloadTime1 = 0;
                             d12Val = 0;
@@ -285,7 +304,7 @@ mw = function(){
                             phaseOne = setInterval(function(){
                                 if (count_animation <= 85){                                                                         //90
                                     tickSound.play();
-                                    jQuery('#draggableD22, #draggableD22_1').css({
+                                    jQuery('#draggableD3, #draggableD3_1').css({
                                         color: 'transparent',
                                         borderColor: 'transparent',
                                         opacity: 0.8,
@@ -336,7 +355,7 @@ mw = function(){
                                 } else {
                                     clearInterval(phaseOne);
                                     count_animation = 1;
-                                    jQuery('#draggableD22, #draggableD22_1').css({
+                                    jQuery('#draggableD3, #draggableD3_1').css({
                                         background: 'transparent',
                                         color: 'red',
                                         borderColor: 'red',
@@ -359,7 +378,7 @@ mw = function(){
                                     }, 1000);
                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
-//фаза 5
+//фаза 6
                                     reloadTime = 0;
                                     reloadTime1 = 0;
                                     d12Val = 0;
@@ -368,7 +387,7 @@ mw = function(){
                                     phaseOne = setInterval(function(){
                                         if (count_animation <= 85){                                                                         //90
                                             tickSound.play();
-                                            jQuery('#draggableD3, #draggableD3_1').css({
+                                            jQuery('#draggableD4, #draggableD4_1').css({
                                                 color: 'transparent',
                                                 borderColor: 'transparent',
                                                 opacity: 0.8,
@@ -419,7 +438,7 @@ mw = function(){
                                         } else {
                                             clearInterval(phaseOne);
                                             count_animation = 1;
-                                            jQuery('#draggableD3, #draggableD3_1').css({
+                                            jQuery('#draggableD4, #draggableD4_1').css({
                                                 background: 'transparent',
                                                 color: 'red',
                                                 borderColor: 'red',
@@ -442,7 +461,7 @@ mw = function(){
                                             }, 1000);
                                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
-//фаза 6
+//фаза 7
                                             reloadTime = 0;
                                             reloadTime1 = 0;
                                             d12Val = 0;
@@ -451,7 +470,7 @@ mw = function(){
                                             phaseOne = setInterval(function(){
                                                 if (count_animation <= 85){                                                                         //90
                                                     tickSound.play();
-                                                    jQuery('#draggableD4, #draggableD4_1').css({
+                                                    jQuery('#draggableD5, #draggableD5_1').css({
                                                         color: 'transparent',
                                                         borderColor: 'transparent',
                                                         opacity: 0.8,
@@ -502,7 +521,7 @@ mw = function(){
                                                 } else {
                                                     clearInterval(phaseOne);
                                                     count_animation = 1;
-                                                    jQuery('#draggableD4, #draggableD4_1').css({
+                                                    jQuery('#draggableD5, #draggableD5_1').css({
                                                         background: 'transparent',
                                                         color: 'red',
                                                         borderColor: 'red',
@@ -525,7 +544,7 @@ mw = function(){
                                                     }, 1000);
                                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
-//фаза 7
+//фаза 8
                                                     reloadTime = 0;
                                                     reloadTime1 = 0;
                                                     d12Val = 0;
@@ -534,7 +553,7 @@ mw = function(){
                                                     phaseOne = setInterval(function(){
                                                         if (count_animation <= 85){                                                                         //90
                                                             tickSound.play();
-                                                            jQuery('#draggableD5, #draggableD5_1').css({
+                                                            jQuery('#draggableD6, #draggableD6_1').css({
                                                                 color: 'transparent',
                                                                 borderColor: 'transparent',
                                                                 opacity: 0.8,
@@ -585,7 +604,7 @@ mw = function(){
                                                         } else {
                                                             clearInterval(phaseOne);
                                                             count_animation = 1;
-                                                            jQuery('#draggableD5, #draggableD5_1').css({
+                                                            jQuery('#draggableD6, #draggableD6_1').css({
                                                                 background: 'transparent',
                                                                 color: 'red',
                                                                 borderColor: 'red',
@@ -608,7 +627,7 @@ mw = function(){
                                                             }, 1000);
                                                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
-//фаза 8
+//фаза 9
                                                             reloadTime = 0;
                                                             reloadTime1 = 0;
                                                             d12Val = 0;
@@ -617,7 +636,7 @@ mw = function(){
                                                             phaseOne = setInterval(function(){
                                                                 if (count_animation <= 85){                                                                         //90
                                                                     tickSound.play();
-                                                                    jQuery('#draggableD6, #draggableD6_1').css({
+                                                                    jQuery('#draggableD7, #draggableD7_1').css({
                                                                         color: 'transparent',
                                                                         borderColor: 'transparent',
                                                                         opacity: 0.8,
@@ -668,7 +687,7 @@ mw = function(){
                                                                 } else {
                                                                     clearInterval(phaseOne);
                                                                     count_animation = 1;
-                                                                    jQuery('#draggableD6, #draggableD6_1').css({
+                                                                    jQuery('#draggableD7, #draggableD7_1').css({
                                                                         background: 'transparent',
                                                                         color: 'red',
                                                                         borderColor: 'red',
@@ -691,23 +710,23 @@ mw = function(){
                                                                     }, 1000);
                                                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
-//фаза 9
+//фаза 10
                                                                     reloadTime = 0;
                                                                     reloadTime1 = 0;
                                                                     d12Val = 0;
                                                                     cur_animation_val = 0;
                                                                     count_animation = 1;
                                                                     phaseOne = setInterval(function(){
-                                                                        if (count_animation <= 85){                                                                         //90
+                                                                        if (count_animation <= 83){                                                                         //90
                                                                             tickSound.play();
-                                                                            jQuery('#draggableD7, #draggableD7_1').css({
+                                                                            jQuery('#draggable6, #draggable6_1').css({
                                                                                 color: 'transparent',
                                                                                 borderColor: 'transparent',
                                                                                 opacity: 0.8,
                                                                                 transform: 'scale(1)',
                                                                                 borderWidth: '1px',
                                                                                 paddingTop: '4px',
-                                                                                background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/disfunction.jpg) 0 0/100% no-repeat',
+                                                                                background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/povregdenie_demona.jpg) 0 0/100% no-repeat',
                                                                                 zIndex: '1000'
                                                                             });
                                                                             jQuery('#draggableD12')
@@ -751,7 +770,7 @@ mw = function(){
                                                                         } else {
                                                                             clearInterval(phaseOne);
                                                                             count_animation = 1;
-                                                                            jQuery('#draggableD7, #draggableD7_1').css({
+                                                                            jQuery('#draggable6, #draggable6_1').css({
                                                                                 background: 'transparent',
                                                                                 color: 'red',
                                                                                 borderColor: 'red',
@@ -774,7 +793,7 @@ mw = function(){
                                                                             }, 1000);
                                                                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
-//фаза 10
+//фаза 11
                                                                             reloadTime = 0;
                                                                             reloadTime1 = 0;
                                                                             d12Val = 0;
@@ -783,14 +802,14 @@ mw = function(){
                                                                             phaseOne = setInterval(function(){
                                                                                 if (count_animation <= 83){                                                                         //90
                                                                                     tickSound.play();
-                                                                                    jQuery('#draggable6, #draggable6_1').css({
+                                                                                    jQuery('#draggable5, #draggable5_1').css({
                                                                                         color: 'transparent',
                                                                                         borderColor: 'transparent',
                                                                                         opacity: 0.8,
                                                                                         transform: 'scale(1)',
                                                                                         borderWidth: '1px',
                                                                                         paddingTop: '4px',
-                                                                                        background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/povregdenie_demona.jpg) 0 0/100% no-repeat',
+                                                                                        background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/disfunction.jpg) 0 0/100% no-repeat',
                                                                                         zIndex: '1000'
                                                                                     });
                                                                                     jQuery('#draggableD12')
@@ -798,43 +817,43 @@ mw = function(){
                                                                                         .css({
                                                                                             opacity: 0.8,
                                                                                             transform: 'scale(1)',
-                                                                                            background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat',
-                                                                                            transform: 'rotate(-'+d12Val+'deg)',
+                                                                                            background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat',
+                                                                                            transform: 'rotate('+d12Val+'deg)',
                                                                                             borderColor: 'transparent'
                                                                                         });;
                                                                                     count_animation += 1;
-                                                                                    if(count_animation <= 30){
+                                                                                    if(count_animation <= 15){
+                                                                                        cur_animation_val -= 6;
+                                                                                        d12Val+= 36;
+                                                                                        jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                    } else if (count_animation >= 15 && count_animation <= 30){
                                                                                         cur_animation_val += 6;
                                                                                         d12Val+= 36;
+                                                                                        jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                                                                     } else if (count_animation >= 30 && count_animation <= 57){
-                                                                                        cur_animation_val -= 6;
-                                                                                        d12Val+= 36;
-                                                                                        jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
-                                                                                        jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                    } else if (count_animation >= 57 && count_animation <= 73){
-                                                                                        cur_animation_val -= 6;
-                                                                                        d12Val+= 36;
-                                                                                        jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                        jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
-                                                                                        jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat');
-                                                                                    } else if (count_animation >= 73 && count_animation <= 86){
                                                                                         cur_animation_val += 6;
                                                                                         d12Val+= 36;
                                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                        jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
-                                                                                        jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat');
+                                                                                        jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
+                                                                                        jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat');
+                                                                                    } else if (count_animation >= 67 && count_animation <= 83){
+                                                                                        cur_animation_val -= 6;
+                                                                                        d12Val+= 36;
+                                                                                        jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
+                                                                                        jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
+                                                                                        jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat');
                                                                                     } else {
                                                                                         d12Val+= 36;
-                                                                                        cur_animation_val += 6;
+                                                                                        cur_animation_val -= 6;
                                                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                        jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
-                                                                                        jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat');
+                                                                                        jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
+                                                                                        jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat');
                                                                                     }
                                                                                 } else {
                                                                                     clearInterval(phaseOne);
                                                                                     count_animation = 1;
-                                                                                    jQuery('#draggable6, #draggable6_1').css({
+                                                                                    jQuery('#draggable5, #draggable5_1').css({
                                                                                         background: 'transparent',
                                                                                         color: 'red',
                                                                                         borderColor: 'red',
@@ -857,7 +876,7 @@ mw = function(){
                                                                                     }, 1000);
                                                                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
-//фаза 11
+//фаза 12
                                                                                     reloadTime = 0;
                                                                                     reloadTime1 = 0;
                                                                                     d12Val = 0;
@@ -866,7 +885,7 @@ mw = function(){
                                                                                     phaseOne = setInterval(function(){
                                                                                         if (count_animation <= 83){                                                                         //90
                                                                                             tickSound.play();
-                                                                                            jQuery('#draggable5, #draggable5_1').css({
+                                                                                            jQuery('#draggable4, #draggable4_1').css({
                                                                                                 color: 'transparent',
                                                                                                 borderColor: 'transparent',
                                                                                                 opacity: 0.8,
@@ -917,7 +936,7 @@ mw = function(){
                                                                                         } else {
                                                                                             clearInterval(phaseOne);
                                                                                             count_animation = 1;
-                                                                                            jQuery('#draggable5, #draggable5_1').css({
+                                                                                            jQuery('#draggable4, #draggable4_1').css({
                                                                                                 background: 'transparent',
                                                                                                 color: 'red',
                                                                                                 borderColor: 'red',
@@ -940,7 +959,7 @@ mw = function(){
                                                                                             }, 1000);
                                                                                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                                                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
-//фаза 12
+//фаза 13
                                                                                             reloadTime = 0;
                                                                                             reloadTime1 = 0;
                                                                                             d12Val = 0;
@@ -949,7 +968,7 @@ mw = function(){
                                                                                             phaseOne = setInterval(function(){
                                                                                                 if (count_animation <= 83){                                                                         //90
                                                                                                     tickSound.play();
-                                                                                                    jQuery('#draggable4, #draggable4_1').css({
+                                                                                                    jQuery('#draggable3, #draggable3_1').css({
                                                                                                         color: 'transparent',
                                                                                                         borderColor: 'transparent',
                                                                                                         opacity: 0.8,
@@ -959,6 +978,20 @@ mw = function(){
                                                                                                         background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/disfunction.jpg) 0 0/100% no-repeat',
                                                                                                         zIndex: '1000'
                                                                                                     });
+                                                                                                    
+                                                                                                    count_animation += 1;
+                                                                                                    if(count_animation >= 45){
+                                                                                                        jQuery('#draggable3, #draggable3_1, #draggable0, #draggable0_1').css({
+                                                                                                            background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/edinenie_s_tvorcom.jpg) 0 0/100% no-repeat',
+                                                                                                            color: 'transparent',
+                                                                                                            borderColor: 'transparent',
+                                                                                                            opacity: 0.8,
+                                                                                                            transform: 'scale(1)',
+                                                                                                            borderWidth: '1px',
+                                                                                                            paddingTop: '4px',
+                                                                                                            zIndex: '1000'
+                                                                                                        });
+                                                                                                    }
                                                                                                     jQuery('#draggableD12')
                                                                                                         .removeClass('hidden')
                                                                                                         .css({
@@ -967,7 +1000,7 @@ mw = function(){
                                                                                                             background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat',
                                                                                                             transform: 'rotate('+d12Val+'deg)',
                                                                                                             borderColor: 'transparent'
-                                                                                                        });;
+                                                                                                        });
                                                                                                     count_animation += 1;
                                                                                                     if(count_animation <= 15){
                                                                                                         cur_animation_val -= 6;
@@ -1000,7 +1033,7 @@ mw = function(){
                                                                                                 } else {
                                                                                                     clearInterval(phaseOne);
                                                                                                     count_animation = 1;
-                                                                                                    jQuery('#draggable4, #draggable4_1').css({
+                                                                                                    jQuery('#draggable3, #draggable3_1, #draggable0, #draggable0_1').css({
                                                                                                         background: 'transparent',
                                                                                                         color: 'red',
                                                                                                         borderColor: 'red',
@@ -1023,7 +1056,7 @@ mw = function(){
                                                                                                     }, 1000);
                                                                                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                                                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
-//фаза 13
+//фаза 14
                                                                                                     reloadTime = 0;
                                                                                                     reloadTime1 = 0;
                                                                                                     d12Val = 0;
@@ -1032,7 +1065,7 @@ mw = function(){
                                                                                                     phaseOne = setInterval(function(){
                                                                                                         if (count_animation <= 83){                                                                         //90
                                                                                                             tickSound.play();
-                                                                                                            jQuery('#draggable3, #draggable3_1').css({
+                                                                                                            jQuery('#draggable2, #draggable2_1').css({
                                                                                                                 color: 'transparent',
                                                                                                                 borderColor: 'transparent',
                                                                                                                 opacity: 0.8,
@@ -1045,7 +1078,7 @@ mw = function(){
                                                                                                             
                                                                                                             count_animation += 1;
                                                                                                             if(count_animation >= 45){
-                                                                                                                jQuery('#draggable3, #draggable3_1, #draggable0, #draggable0_1').css({
+                                                                                                                jQuery('#draggable2, #draggable2_1, #draggable0, #draggable0_1').css({
                                                                                                                     background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/edinenie_s_tvorcom.jpg) 0 0/100% no-repeat',
                                                                                                                     color: 'transparent',
                                                                                                                     borderColor: 'transparent',
@@ -1097,7 +1130,7 @@ mw = function(){
                                                                                                         } else {
                                                                                                             clearInterval(phaseOne);
                                                                                                             count_animation = 1;
-                                                                                                            jQuery('#draggable3, #draggable3_1, #draggable0, #draggable0_1').css({
+                                                                                                            jQuery('#draggable2, #draggable2_1, #draggable0, #draggable0_1').css({
                                                                                                                 background: 'transparent',
                                                                                                                 color: 'red',
                                                                                                                 borderColor: 'red',
@@ -1120,7 +1153,7 @@ mw = function(){
                                                                                                             }, 1000);
                                                                                                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                                                                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
-//фаза 14
+//фаза 15
                                                                                                             reloadTime = 0;
                                                                                                             reloadTime1 = 0;
                                                                                                             d12Val = 0;
@@ -1129,7 +1162,7 @@ mw = function(){
                                                                                                             phaseOne = setInterval(function(){
                                                                                                                 if (count_animation <= 83){                                                                         //90
                                                                                                                     tickSound.play();
-                                                                                                                    jQuery('#draggable2, #draggable2_1').css({
+                                                                                                                    jQuery('#draggable1, #draggable1_1').css({
                                                                                                                         color: 'transparent',
                                                                                                                         borderColor: 'transparent',
                                                                                                                         opacity: 0.8,
@@ -1139,20 +1172,6 @@ mw = function(){
                                                                                                                         background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/disfunction.jpg) 0 0/100% no-repeat',
                                                                                                                         zIndex: '1000'
                                                                                                                     });
-                                                                                                                    
-                                                                                                                    count_animation += 1;
-                                                                                                                    if(count_animation >= 45){
-                                                                                                                        jQuery('#draggable2, #draggable2_1, #draggable0, #draggable0_1').css({
-                                                                                                                            background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/edinenie_s_tvorcom.jpg) 0 0/100% no-repeat',
-                                                                                                                            color: 'transparent',
-                                                                                                                            borderColor: 'transparent',
-                                                                                                                            opacity: 0.8,
-                                                                                                                            transform: 'scale(1)',
-                                                                                                                            borderWidth: '1px',
-                                                                                                                            paddingTop: '4px',
-                                                                                                                            zIndex: '1000'
-                                                                                                                        });
-                                                                                                                    }
                                                                                                                     jQuery('#draggableD12')
                                                                                                                         .removeClass('hidden')
                                                                                                                         .css({
@@ -1194,7 +1213,7 @@ mw = function(){
                                                                                                                 } else {
                                                                                                                     clearInterval(phaseOne);
                                                                                                                     count_animation = 1;
-                                                                                                                    jQuery('#draggable2, #draggable2_1, #draggable0, #draggable0_1').css({
+                                                                                                                    jQuery('#draggable1, #draggable1_1').css({
                                                                                                                         background: 'transparent',
                                                                                                                         color: 'red',
                                                                                                                         borderColor: 'red',
@@ -1204,96 +1223,11 @@ mw = function(){
                                                                                                                         paddingTop: '5px',
                                                                                                                         zIndex: '1'
                                                                                                                     });
-                                                                                                                    // jQuery('#draggableD12').addClass('hidden');
                                                                                                                     tickSound.stop();
-                                                                                                                    phaseTwo = setInterval(function(){
-                                                                                                                        if (reloadTime <= 1){                                                                       //1
-                                                                                                                            reloadSound.play();
-                                                                                                                            reloadTime += 1;
-                                                                                                                        } else {
-                                                                                                                            clearInterval(phaseTwo);
-                                                                                                                            reloadSound.stop();
-                                                                                                                        }
-                                                                                                                    }, 1000);
+                                                                                                                    jQuery('#draggableD12').addClass('hidden');
                                                                                                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                                                                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
-//фаза 15
-                                                                                                                    reloadTime = 0;
-                                                                                                                    reloadTime1 = 0;
-                                                                                                                    d12Val = 0;
-                                                                                                                    cur_animation_val = 0;
-                                                                                                                    count_animation = 1;
-                                                                                                                    phaseOne = setInterval(function(){
-                                                                                                                        if (count_animation <= 83){                                                                         //90
-                                                                                                                            tickSound.play();
-                                                                                                                            jQuery('#draggable1, #draggable1_1').css({
-                                                                                                                                color: 'transparent',
-                                                                                                                                borderColor: 'transparent',
-                                                                                                                                opacity: 0.8,
-                                                                                                                                transform: 'scale(1)',
-                                                                                                                                borderWidth: '1px',
-                                                                                                                                paddingTop: '4px',
-                                                                                                                                background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/disfunction.jpg) 0 0/100% no-repeat',
-                                                                                                                                zIndex: '1000'
-                                                                                                                            });
-                                                                                                                            jQuery('#draggableD12')
-                                                                                                                                .removeClass('hidden')
-                                                                                                                                .css({
-                                                                                                                                    opacity: 0.8,
-                                                                                                                                    transform: 'scale(1)',
-                                                                                                                                    background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.png) 0 0/100% no-repeat',
-                                                                                                                                    transform: 'rotate('+d12Val+'deg)',
-                                                                                                                                    borderColor: 'transparent'
-                                                                                                                                });
-                                                                                                                            count_animation += 1;
-                                                                                                                            if(count_animation <= 15){
-                                                                                                                                cur_animation_val -= 6;
-                                                                                                                                d12Val+= 36;
-                                                                                                                                jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                            } else if (count_animation >= 15 && count_animation <= 30){
-                                                                                                                                cur_animation_val += 6;
-                                                                                                                                d12Val+= 36;
-                                                                                                                                jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
-                                                                                                                                jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                            } else if (count_animation >= 30 && count_animation <= 57){
-                                                                                                                                cur_animation_val += 6;
-                                                                                                                                d12Val+= 36;
-                                                                                                                                jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                                jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
-                                                                                                                                jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat');
-                                                                                                                            } else if (count_animation >= 67 && count_animation <= 83){
-                                                                                                                                cur_animation_val -= 6;
-                                                                                                                                d12Val+= 36;
-                                                                                                                                jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                                jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
-                                                                                                                                jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat');
-                                                                                                                            } else {
-                                                                                                                                d12Val+= 36;
-                                                                                                                                cur_animation_val -= 6;
-                                                                                                                                jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
-                                                                                                                                jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
-                                                                                                                                jQuery('#draggableD12').css('background', '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/lovushka.jpg) 0 0/100% no-repeat');
-                                                                                                                            }
-                                                                                                                        } else {
-                                                                                                                            clearInterval(phaseOne);
-                                                                                                                            count_animation = 1;
-                                                                                                                            jQuery('#draggable1, #draggable1_1').css({
-                                                                                                                                background: 'transparent',
-                                                                                                                                color: 'red',
-                                                                                                                                borderColor: 'red',
-                                                                                                                                opacity: 1,
-                                                                                                                                transform: 'scale(0.5)',
-                                                                                                                                borderWidth: '2px',
-                                                                                                                                paddingTop: '5px',
-                                                                                                                                zIndex: '1'
-                                                                                                                            });
-                                                                                                                            tickSound.stop();
-                                                                                                                            jQuery('#draggableD12').addClass('hidden');
-                                                                                                                            jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
-                                                                                                                            jQuery('#draggableD12').css('transform', 'rotate(0deg)');
-                                                                                                                            onEnd();
-                                                                                                                        }
-                                                                                                                    }, 1000);
+                                                                                                                    onEnd();
                                                                                                                 }
                                                                                                             }, 1000);
                                                                                                         }
