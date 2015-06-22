@@ -1461,6 +1461,10 @@ ww = function(){
                 background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/edinenie_s_tvorcom.jpg) 0 0/100% no-repeat',
                 zIndex: '1000'
             });
+            jQuery('#draggable0').css({
+                background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/waterfall.jpg) 0 0/100% no-repeat',
+                zIndex: '1000'
+            });
             jQuery('#draggableD12')
                 .removeClass('hidden')
                 .css({
