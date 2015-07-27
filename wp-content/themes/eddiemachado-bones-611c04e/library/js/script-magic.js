@@ -137,20 +137,20 @@ jQuery(function() {
             jQuery('.itemlist-mw').removeClass('hidden');
             jQuery('.itemlist-ww, .itemlist-mm').remove();
             jQuery('.itemlist-mw').find('.example_non_anim').removeClass('hidden');
-        } else if(protocol == 'ww'){
-            jQuery('.itemlist-ww').removeClass('hidden');
-            jQuery('.itemlist-mw, .itemlist-mm').remove();
-            jQuery('.itemlist-ww').find('.example_non_anim').removeClass('hidden');
-            jQuery('.itemlist-one').css({
-                background: 'url(http://aquamaritime.crimea.ua/wp-content/themes/eddiemachado-bones-611c04e/library/images/ww_1_1.jpg) 50% 2px / 97% no-repeat',
-                height: '1000px'
-            });
         } else if(protocol == 'mm'){
             jQuery('.itemlist-mm').removeClass('hidden');
             jQuery('.itemlist-mw, .itemlist-ww').remove();
             jQuery('.itemlist-mm').find('.example_non_anim').removeClass('hidden');
             jQuery('.itemlist-one').css({
                 background: 'url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/mm_1_2.jpg) center -1px/100% no-repeat',
+                height: '1000px'
+            });
+        } else if(protocol == 'ww'){
+            jQuery('.itemlist-ww').removeClass('hidden');
+            jQuery('.itemlist-mw, .itemlist-mm').remove();
+            jQuery('.itemlist-ww').find('.example_non_anim').removeClass('hidden');
+            jQuery('.itemlist-one').css({
+                background: 'url(http://aquamaritime.crimea.ua/wp-content/themes/eddiemachado-bones-611c04e/library/images/ww_1_2.jpg) 50% 2px / 97% no-repeat',
                 height: '1000px'
             });
         } else {
