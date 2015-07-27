@@ -142,7 +142,7 @@ jQuery(function() {
             jQuery('.itemlist-mw, .itemlist-mm').remove();
             jQuery('.itemlist-ww').find('.example_non_anim').removeClass('hidden');
             jQuery('.itemlist-one').css({
-                background: 'url(http://aquamaritime.crimea.ua/wp-content/themes/eddiemachado-bones-611c04e/library/images/ww_1_3.jpg) 50% 2px / 97% no-repeat',
+                background: 'url(http://aquamaritime.crimea.ua/wp-content/themes/eddiemachado-bones-611c04e/library/images/ww_1_1.jpg) 50% 2px / 97% no-repeat',
                 height: '1000px'
             });
         } else if(protocol == 'mm'){
