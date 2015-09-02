@@ -256,14 +256,14 @@ mw = function(){
                     phaseOne = setInterval(function(){
                         if (count_animation <= 86){                                                                         //90
                             tickSound.play();
-                            jQuery('#draggableD2, #draggableD2_1').css({
+                            jQuery('#draggable6, #draggable6_1').css({
                                 color: 'transparent',
                                 borderColor: 'transparent',
                                 opacity: 0.8,
                                 transform: 'scale(1)',
                                 borderWidth: '1px',
                                 paddingTop: '4px',
-                                background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/disfunction.jpg) 0 0/100% no-repeat',
+                                background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/daemon.jpg) 0 0/100% no-repeat',
                                 zIndex: '1000'
                             });
                             jQuery('#draggableD12')
@@ -308,7 +308,7 @@ mw = function(){
                         } else {
                             clearInterval(phaseOne);
                             count_animation = 1;
-                            jQuery('#draggableD2, #draggableD2_1').css({
+                            jQuery('#draggable6, #draggable6_1').css({
                                 background: 'transparent',
                                 color: 'red',
                                 borderColor: 'red',
