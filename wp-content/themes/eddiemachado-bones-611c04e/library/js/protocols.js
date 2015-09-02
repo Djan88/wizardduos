@@ -1142,7 +1142,7 @@ mw = function(){
                                                                                                         } else {
                                                                                                             clearInterval(phaseOne);
                                                                                                             count_animation = 1;
-                                                                                                            jQuery('#draggableD4, #draggableD4').css({
+                                                                                                            jQuery('#draggableD4, #draggableD4_1').css({
                                                                                                                 background: 'transparent',
                                                                                                                 color: 'red',
                                                                                                                 borderColor: 'red',
