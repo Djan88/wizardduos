@@ -197,7 +197,7 @@ mw = function(){
                             borderColor: 'transparent'
                         });;
                     count_animation += 1;
-                    if(count_animation <= 30){
+                    if(count_animation <= 120){
                         cur_animation_val += 1.5;
                         d12Val+= 9;
                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
