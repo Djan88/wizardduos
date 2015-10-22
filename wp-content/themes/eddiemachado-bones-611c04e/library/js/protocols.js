@@ -175,7 +175,7 @@ mw = function(){
                         background: 'url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/oct.png) 0 0/100% no-repeat',
                         zIndex: '1000'
                     });
-                    if (count_animation <= 188){
+                    if (count_animation <= 224){
                         cur_let = Math.round(Math.random() * (7 - 0))
                         // console.log(letters[cur_let]);
                         jQuery('#draggableD1').text(letters[cur_let]);
