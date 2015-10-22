@@ -263,7 +263,7 @@ mw = function(){
                                 transform: 'scale(1)',
                                 borderWidth: '1px',
                                 paddingTop: '4px',
-                                background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/povregdenie_demona.png) 0 0/100% no-repeat',
+                                background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/povregdenie_demona.jpg) 0 0/100% no-repeat',
                                 zIndex: '1000'
                             });
                             jQuery('#draggableD12')
