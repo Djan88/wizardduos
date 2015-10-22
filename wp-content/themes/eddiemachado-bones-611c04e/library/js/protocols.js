@@ -1434,9 +1434,9 @@ mw = function(){
                                                                                                                                                 paddingTop: '4px',
                                                                                                                                                 zIndex: '1000'
                                                                                                                                             });
-                                                                                                                                            count_animation += 0.375;
+                                                                                                                                            count_animation += 1;
                                                                                                                                         } else if(count_animation <= 156) {                                                         //39
-                                                                                                                                            count_animation += 0.375;
+                                                                                                                                            count_animation += 1;
                                                                                                                                         } else {
                                                                                                                                             clearInterval(phaseSeven_one);
                                                                                                                                             count_animation = 1;
@@ -1466,9 +1466,9 @@ mw = function(){
                                                                                                                                                         paddingTop: '4px',
                                                                                                                                                         zIndex: '1000'
                                                                                                                                                     });
-                                                                                                                                                    count_animation += 0.375;
+                                                                                                                                                    count_animation += 1;
                                                                                                                                                 } else if(count_animation <= 280) {                                                         //70
-                                                                                                                                                    count_animation += 0.375;
+                                                                                                                                                    count_animation += 1;
                                                                                                                                                 } else {
                                                                                                                                                     clearInterval(phaseSeven_one);
                                                                                                                                                     count_animation = 1;
@@ -1498,9 +1498,9 @@ mw = function(){
                                                                                                                                                                 paddingTop: '4px',
                                                                                                                                                                 zIndex: '1000'
                                                                                                                                                             });
-                                                                                                                                                            count_animation += 0.375;
+                                                                                                                                                            count_animation += 1;
                                                                                                                                                         } else if(count_animation <= 308) {                                                         //77
-                                                                                                                                                            count_animation += 0.375;
+                                                                                                                                                            count_animation += 1;
                                                                                                                                                         } else {
                                                                                                                                                             clearInterval(phaseSeven_one);
                                                                                                                                                             count_animation = 1;
@@ -1530,9 +1530,9 @@ mw = function(){
                                                                                                                                                                         paddingTop: '4px',
                                                                                                                                                                         zIndex: '1000'
                                                                                                                                                                     });
-                                                                                                                                                                    count_animation += 0.375;
+                                                                                                                                                                    count_animation += 1;
                                                                                                                                                                 } else if(count_animation <= 228) {                                                         //57
-                                                                                                                                                                    count_animation += 0.375;
+                                                                                                                                                                    count_animation += 1;
                                                                                                                                                                 } else {
                                                                                                                                                                     clearInterval(phaseSeven_one);
                                                                                                                                                                     count_animation = 1;
