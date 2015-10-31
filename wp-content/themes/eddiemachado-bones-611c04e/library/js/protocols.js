@@ -1600,7 +1600,7 @@ ww = function(){
     d12Val = 0;
     count_animation = 1;
     phaseOne = setInterval(function(){
-        if (count_animation <= 224){                                                                         //56
+        if (count_animation <= 240){                                                                         //56
             tickSound.play();
             jQuery('#draggable0, #draggable0_1, #draggable3, #draggable3_1').css({
                 color: 'transparent',
@@ -1670,7 +1670,7 @@ ww = function(){
             d12Val = 0;
             count_animation = 1;
             phaseOne = setInterval(function(){
-                if (count_animation <= 224){                                                                         //56
+                if (count_animation <= 240){                                                                         //56
                     tickSound.play();
                     jQuery('#draggable1, #draggable1_1').css({
                         color: 'transparent',
@@ -1736,7 +1736,7 @@ ww = function(){
                     d12Val = 0;
                     count_animation = 1;
                     phaseOne = setInterval(function(){
-                        if (count_animation <= 224){                                                                         //56
+                        if (count_animation <= 240){                                                                         //56
                             tickSound.play();
                             jQuery('#draggable2, #draggable2_1').css({
                                 color: 'transparent',
@@ -1802,7 +1802,7 @@ ww = function(){
                             d12Val = 0;
                             count_animation = 1;
                             phaseOne = setInterval(function(){
-                                if (count_animation <= 224){                                                                         //56
+                                if (count_animation <= 240){                                                                         //56
                                     tickSound.play();
                                     jQuery('#draggable3, #draggable3_1').css({
                                         color: 'transparent',
@@ -1868,7 +1868,7 @@ ww = function(){
                                     d12Val = 0;
                                     count_animation = 1;
                                     phaseOne = setInterval(function(){
-                                        if (count_animation <= 224){                                                                         //56
+                                        if (count_animation <= 240){                                                                         //56
                                             tickSound.play();
                                             jQuery('#draggable4, #draggable4_1').css({
                                                 color: 'transparent',
@@ -1934,7 +1934,7 @@ ww = function(){
                                             d12Val = 0;
                                             count_animation = 1;
                                             phaseOne = setInterval(function(){
-                                                if (count_animation <= 224){                                                                         //56
+                                                if (count_animation <= 240){                                                                         //56
                                                     tickSound.play();
                                                     jQuery('#draggable5, #draggable5_1').css({
                                                         color: 'transparent',
@@ -2000,7 +2000,7 @@ ww = function(){
                                                     d12Val = 0;
                                                     count_animation = 1;
                                                     phaseOne = setInterval(function(){
-                                                        if (count_animation <= 224){                                                                         //56
+                                                        if (count_animation <= 240){                                                                         //56
                                                             tickSound.play();
                                                             jQuery('#draggable6, #draggable6_1').css({
                                                                 color: 'transparent',
