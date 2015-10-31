@@ -40,16 +40,20 @@ var count_animation = 1,
 
 onEnd = function(){
     swal({   
-        title: "Процедура окончена",
-        text: "Что вы хотите делать дальше?",
+        title: "Процедура окончена",   
+        text: "Что вы хотите делать дальше?",   
         type: "success",   
-        confirmButtonColor: "#DD6B56",
-        confirmButtonText: "Выйти"
+        showCancelButton: true,   
+        confirmButtonColor: "#DD6B55",   
+        confirmButtonText: "Выйти",   
+        cancelButtonText: "Повторить сессию"
     }, 
     function(isConfirm){
         if (isConfirm) {
             var protocol = undefined;    
             jQuery(location).attr('href','/wizard');
+        } else {
+            
         }
     });
     var endSound = new buzz.sound( "/sounds/duos", {
