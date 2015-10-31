@@ -1600,7 +1600,7 @@ ww = function(){
     d12Val = 0;
     count_animation = 1;
     phaseOne = setInterval(function(){
-        if (count_animation <= 56){                                                                         //56
+        if (count_animation <= 224){                                                                         //56
             tickSound.play();
             jQuery('#draggable0, #draggable0_1, #draggable3, #draggable3_1').css({
                 color: 'transparent',
@@ -1626,13 +1626,13 @@ ww = function(){
                     borderColor: 'transparent'
                 });;
             count_animation += 1;
-            if(count_animation <= 30){
-                cur_animation_val += 6;
-                d12Val+= 36;
+            if(count_animation <= 120){
+                cur_animation_val += 1.5;
+                d12Val+= 9;
                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
             } else {
-                cur_animation_val -= 6;
-                d12Val+= 36;
+                cur_animation_val -= 1.5;
+                d12Val+= 9;
                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                 jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
             }
@@ -1661,7 +1661,7 @@ ww = function(){
                     reloadSound.stop();
                     tickSound.play();
                 }
-            }, 1000);
+            }, 250);
             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
 //фаза 2
@@ -1670,7 +1670,7 @@ ww = function(){
             d12Val = 0;
             count_animation = 1;
             phaseOne = setInterval(function(){
-                if (count_animation <= 56){                                                                         //56
+                if (count_animation <= 224){                                                                         //56
                     tickSound.play();
                     jQuery('#draggable1, #draggable1_1').css({
                         color: 'transparent',
@@ -1692,13 +1692,13 @@ ww = function(){
                             borderColor: 'transparent'
                         });;
                     count_animation += 1;
-                    if(count_animation <= 30){
-                        cur_animation_val += 6;
-                        d12Val+= 36;
+                    if(count_animation <= 120){
+                        cur_animation_val += 1.5;
+                        d12Val+= 9;
                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                     } else {
-                        cur_animation_val -= 6;
-                        d12Val+= 36;
+                        cur_animation_val -= 1.5;
+                        d12Val+= 9;
                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                         jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                     }
@@ -1727,7 +1727,7 @@ ww = function(){
                             reloadSound.stop();
                             tickSound.play();
                         }
-                    }, 1000);
+                    }, 250);
                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
         //фаза 3
@@ -1736,7 +1736,7 @@ ww = function(){
                     d12Val = 0;
                     count_animation = 1;
                     phaseOne = setInterval(function(){
-                        if (count_animation <= 56){                                                                         //56
+                        if (count_animation <= 224){                                                                         //56
                             tickSound.play();
                             jQuery('#draggable2, #draggable2_1').css({
                                 color: 'transparent',
@@ -1758,13 +1758,13 @@ ww = function(){
                                     borderColor: 'transparent'
                                 });;
                             count_animation += 1;
-                            if(count_animation <= 30){
-                                cur_animation_val += 6;
-                                d12Val+= 36;
+                            if(count_animation <= 120){
+                                cur_animation_val += 1.5;
+                                d12Val+= 9;
                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                             } else {
-                                cur_animation_val -= 6;
-                                d12Val+= 36;
+                                cur_animation_val -= 1.5;
+                                d12Val+= 9;
                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                 jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                             }
@@ -1793,7 +1793,7 @@ ww = function(){
                                     reloadSound.stop();
                                     tickSound.play();
                                 }
-                            }, 1000);
+                            }, 250);
                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
                 //фаза 4
@@ -1802,7 +1802,7 @@ ww = function(){
                             d12Val = 0;
                             count_animation = 1;
                             phaseOne = setInterval(function(){
-                                if (count_animation <= 56){                                                                         //56
+                                if (count_animation <= 224){                                                                         //56
                                     tickSound.play();
                                     jQuery('#draggable3, #draggable3_1').css({
                                         color: 'transparent',
@@ -1824,13 +1824,13 @@ ww = function(){
                                             borderColor: 'transparent'
                                         });;
                                     count_animation += 1;
-                                    if(count_animation <= 30){
-                                        cur_animation_val += 6;
-                                        d12Val+= 36;
+                                    if(count_animation <= 120){
+                                        cur_animation_val += 1.5;
+                                        d12Val+= 9;
                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                     } else {
-                                        cur_animation_val -= 6;
-                                        d12Val+= 36;
+                                        cur_animation_val -= 1.5;
+                                        d12Val+= 9;
                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                         jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                     }
@@ -1859,7 +1859,7 @@ ww = function(){
                                             reloadSound.stop();
                                             tickSound.play();
                                         }
-                                    }, 1000);
+                                    }, 250);
                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
                         //фаза 5
@@ -1868,7 +1868,7 @@ ww = function(){
                                     d12Val = 0;
                                     count_animation = 1;
                                     phaseOne = setInterval(function(){
-                                        if (count_animation <= 56){                                                                         //56
+                                        if (count_animation <= 224){                                                                         //56
                                             tickSound.play();
                                             jQuery('#draggable4, #draggable4_1').css({
                                                 color: 'transparent',
@@ -1890,13 +1890,13 @@ ww = function(){
                                                     borderColor: 'transparent'
                                                 });;
                                             count_animation += 1;
-                                            if(count_animation <= 30){
-                                                cur_animation_val += 6;
-                                                d12Val+= 36;
+                                            if(count_animation <= 120){
+                                                cur_animation_val += 1.5;
+                                                d12Val+= 9;
                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                             } else {
-                                                cur_animation_val -= 6;
-                                                d12Val+= 36;
+                                                cur_animation_val -= 1.5;
+                                                d12Val+= 9;
                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                                 jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                             }
@@ -1925,7 +1925,7 @@ ww = function(){
                                                     reloadSound.stop();
                                                     tickSound.play();
                                                 }
-                                            }, 1000);
+                                            }, 250);
                                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
                                 //фаза 6
@@ -1934,7 +1934,7 @@ ww = function(){
                                             d12Val = 0;
                                             count_animation = 1;
                                             phaseOne = setInterval(function(){
-                                                if (count_animation <= 56){                                                                         //56
+                                                if (count_animation <= 224){                                                                         //56
                                                     tickSound.play();
                                                     jQuery('#draggable5, #draggable5_1').css({
                                                         color: 'transparent',
@@ -1956,13 +1956,13 @@ ww = function(){
                                                             borderColor: 'transparent'
                                                         });;
                                                     count_animation += 1;
-                                                    if(count_animation <= 30){
-                                                        cur_animation_val += 6;
-                                                        d12Val+= 36;
+                                                    if(count_animation <= 120){
+                                                        cur_animation_val += 1.5;
+                                                        d12Val+= 9;
                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                                     } else {
-                                                        cur_animation_val -= 6;
-                                                        d12Val+= 36;
+                                                        cur_animation_val -= 1.5;
+                                                        d12Val+= 9;
                                                         jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                                         jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                     }
@@ -1991,7 +1991,7 @@ ww = function(){
                                                             reloadSound.stop();
                                                             tickSound.play();
                                                         }
-                                                    }, 1000);
+                                                    }, 250);
                                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
                                         //фаза 7
@@ -2000,7 +2000,7 @@ ww = function(){
                                                     d12Val = 0;
                                                     count_animation = 1;
                                                     phaseOne = setInterval(function(){
-                                                        if (count_animation <= 56){                                                                         //56
+                                                        if (count_animation <= 224){                                                                         //56
                                                             tickSound.play();
                                                             jQuery('#draggable6, #draggable6_1').css({
                                                                 color: 'transparent',
@@ -2022,13 +2022,13 @@ ww = function(){
                                                                     borderColor: 'transparent'
                                                                 });;
                                                             count_animation += 1;
-                                                            if(count_animation <= 30){
-                                                                cur_animation_val += 6;
-                                                                d12Val+= 36;
+                                                            if(count_animation <= 120){
+                                                                cur_animation_val += 1.5;
+                                                                d12Val+= 9;
                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                                             } else {
-                                                                cur_animation_val -= 6;
-                                                                d12Val+= 36;
+                                                                cur_animation_val -= 1.5;
+                                                                d12Val+= 9;
                                                                 jQuery('.box_rounded').css('transform', 'rotate('+cur_animation_val+'deg) scale(1)');
                                                                 jQuery('#draggableD12').css('transform', 'rotate(-'+d12Val+'deg)');
                                                             }
@@ -2057,26 +2057,26 @@ ww = function(){
                                                                     clearInterval(phaseTwo);
                                                                     reloadSound.stop();
                                                                 }
-                                                            }, 1000);
+                                                            }, 250);
                                                             tickSound.stop();
                                                             jQuery('#draggableD12').addClass('hidden');
                                                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
                                                             onEnd();
                                                         }
-                                                    }, 1000);
+                                                    }, 250);
                                                 }
-                                            }, 1000);
+                                            }, 250);
                                         }
-                                    }, 1000);
+                                    }, 250);
                                 }
-                            }, 1000);
+                            }, 250);
                         }
-                    }, 1000);
+                    }, 250);
                 }
-            }, 1000);
+            }, 250);
         }
-    }, 1000);
+    }, 250);
 };
 
 mm = function(){
@@ -2160,7 +2160,7 @@ mm = function(){
                     reloadSound.stop();
                     tickSound.play();
                 }
-            }, 1000);
+            }, 250);
             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
 //фаза 2
@@ -2169,7 +2169,7 @@ mm = function(){
             d12Val = 0;
             count_animation = 1;
             phaseOne = setInterval(function(){
-                if (count_animation <= 47){                                                                         //56
+                if (count_animation <= 188){                                                                         //56
                     tickSound.play();
                     jQuery('#draggableD2, #draggableD2_1').css({
                         color: 'transparent',
@@ -2191,13 +2191,13 @@ mm = function(){
                             borderColor: 'transparent'
                         });;
                     count_animation += 1;
-                    if(count_animation <= 25){
-                        cur_animation_val += 6;
-                        d12Val+= 36;
+                    if(count_animation <= 100){
+                        cur_animation_val += 1.5;
+                        d12Val+= 9;
                         jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
                     } else {
-                        cur_animation_val -= 6;
-                        d12Val+= 36;
+                        cur_animation_val -= 1.5;
+                        d12Val+= 9;
                         jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
                         jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                     }
@@ -2226,7 +2226,7 @@ mm = function(){
                             reloadSound.stop();
                             tickSound.play();
                         }
-                    }, 1000);
+                    }, 250);
                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
         //фаза 3
@@ -2235,7 +2235,7 @@ mm = function(){
                     d12Val = 0;
                     count_animation = 1;
                     phaseOne = setInterval(function(){
-                        if (count_animation <= 47){                                                                         //56
+                        if (count_animation <= 188){                                                                         //56
                             tickSound.play();
                             jQuery('#draggableD3, #draggableD3_1').css({
                                 color: 'transparent',
@@ -2257,13 +2257,13 @@ mm = function(){
                                     borderColor: 'transparent'
                                 });;
                             count_animation += 1;
-                            if(count_animation <= 25){
-                                cur_animation_val += 6;
-                                d12Val+= 36;
+                            if(count_animation <= 100){
+                                cur_animation_val += 1.5;
+                                d12Val+= 9;
                                 jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
                             } else {
-                                cur_animation_val -= 6;
-                                d12Val+= 36;
+                                cur_animation_val -= 1.5;
+                                d12Val+= 9;
                                 jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
                                 jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                             }
@@ -2292,7 +2292,7 @@ mm = function(){
                                     reloadSound.stop();
                                     tickSound.play();
                                 }
-                            }, 1000);
+                            }, 250);
                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
                 //фаза 4
@@ -2301,7 +2301,7 @@ mm = function(){
                             d12Val = 0;
                             count_animation = 1;
                             phaseOne = setInterval(function(){
-                                if (count_animation <= 47){                                                                         //56
+                                if (count_animation <= 188){                                                                         //56
                                     tickSound.play();
                                     jQuery('#draggableD4, #draggableD4_1').css({
                                         color: 'transparent',
@@ -2323,13 +2323,13 @@ mm = function(){
                                             borderColor: 'transparent'
                                         });;
                                     count_animation += 1;
-                                    if(count_animation <= 25){
-                                        cur_animation_val += 6;
-                                        d12Val+= 36;
+                                    if(count_animation <= 100){
+                                        cur_animation_val += 1.5;
+                                        d12Val+= 9;
                                         jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
                                     } else {
-                                        cur_animation_val -= 6;
-                                        d12Val+= 36;
+                                        cur_animation_val -= 1.5;
+                                        d12Val+= 9;
                                         jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
                                         jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                                     }
@@ -2358,7 +2358,7 @@ mm = function(){
                                             reloadSound.stop();
                                             tickSound.play();
                                         }
-                                    }, 1000);
+                                    }, 250);
                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
                         //фаза 5
@@ -2367,7 +2367,7 @@ mm = function(){
                                     d12Val = 0;
                                     count_animation = 1;
                                     phaseOne = setInterval(function(){
-                                        if (count_animation <= 47){                                                                         //56
+                                        if (count_animation <= 188){                                                                         //56
                                             tickSound.play();
                                             jQuery('#draggableD5, #draggableD5_1').css({
                                                 color: 'transparent',
@@ -2389,13 +2389,13 @@ mm = function(){
                                                     borderColor: 'transparent'
                                                 });;
                                             count_animation += 1;
-                                            if(count_animation <= 25){
-                                                cur_animation_val += 6;
-                                                d12Val+= 36;
+                                            if(count_animation <= 100){
+                                                cur_animation_val += 1.5;
+                                                d12Val+= 9;
                                                 jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
                                             } else {
-                                                cur_animation_val -= 6;
-                                                d12Val+= 36;
+                                                cur_animation_val -= 1.5;
+                                                d12Val+= 9;
                                                 jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
                                                 jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                                             }
@@ -2425,7 +2425,7 @@ mm = function(){
                                                     reloadSound.stop();
                                                     tickSound.play();
                                                 }
-                                            }, 1000);
+                                            }, 250);
                                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
                                 //фаза 6
@@ -2434,7 +2434,7 @@ mm = function(){
                                             d12Val = 0;
                                             count_animation = 1;
                                             phaseOne = setInterval(function(){
-                                                if (count_animation <= 47){                                                                         //56
+                                                if (count_animation <= 188){                                                                         //56
                                                     tickSound.play();
                                                     jQuery('#draggableD6, #draggableD6_1').css({
                                                         color: 'transparent',
@@ -2456,13 +2456,13 @@ mm = function(){
                                                             borderColor: 'transparent'
                                                         });;
                                                     count_animation += 1;
-                                                    if(count_animation <= 25){
-                                                        cur_animation_val += 6;
-                                                        d12Val+= 36;
+                                                    if(count_animation <= 100){
+                                                        cur_animation_val += 1.5;
+                                                        d12Val+= 9;
                                                         jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
                                                     } else {
-                                                        cur_animation_val -= 6;
-                                                        d12Val+= 36;
+                                                        cur_animation_val -= 1.5;
+                                                        d12Val+= 9;
                                                         jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
                                                         jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                                                     }
@@ -2492,7 +2492,7 @@ mm = function(){
                                                             reloadSound.stop();
                                                             tickSound.play();
                                                         }
-                                                    }, 1000);
+                                                    }, 250);
                                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
                                         //фаза 7
@@ -2501,7 +2501,7 @@ mm = function(){
                                                     d12Val = 0;
                                                     count_animation = 1;
                                                     phaseOne = setInterval(function(){
-                                                        if (count_animation <= 47){                                                                         //56
+                                                        if (count_animation <= 188){                                                                         //56
                                                             tickSound.play();
                                                             jQuery('#draggableD7, #draggableD7_1').css({
                                                                 color: 'transparent',
@@ -2523,13 +2523,13 @@ mm = function(){
                                                                     borderColor: 'transparent'
                                                                 });;
                                                             count_animation += 1;
-                                                            if(count_animation <= 25){
-                                                                cur_animation_val += 6;
-                                                                d12Val+= 36;
+                                                            if(count_animation <= 100){
+                                                                cur_animation_val += 1.5;
+                                                                d12Val+= 9;
                                                                 jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
                                                             } else {
-                                                                cur_animation_val -= 6;
-                                                                d12Val+= 36;
+                                                                cur_animation_val -= 1.5;
+                                                                d12Val+= 9;
                                                                 jQuery('.box_rounded').css('transform', 'rotate(-'+cur_animation_val+'deg) scale(1)');
                                                                 jQuery('#draggableD12').css('transform', 'rotate('+d12Val+'deg)');
                                                             }
@@ -2558,24 +2558,24 @@ mm = function(){
                                                                     clearInterval(phaseTwo);
                                                                     reloadSound.stop();
                                                                 }
-                                                            }, 1000);
+                                                            }, 250);
                                                             tickSound.stop();
                                                             jQuery('#draggableD12').addClass('hidden');
                                                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
                                                             onEnd();
                                                         }
-                                                    }, 1000);
+                                                    }, 250);
                                                 }
-                                            }, 1000);
+                                            }, 250);
                                         }
-                                    }, 1000);
+                                    }, 250);
                                 }
-                            }, 1000);
+                            }, 250);
                         }
-                    }, 1000);
+                    }, 250);
                 }
-            }, 1000);
+            }, 250);
         }
     }, 250);
 };
