@@ -588,3 +588,15 @@ path
     background: #204371 url(../images/ww.png) center center/45% no-repeat;
     height: 46px;
 }
+.user_info
+{
+    width: 450px;
+    margin: auto;
+    text-align: left;
+}
+.user_info th, .user_info td
+{
+    border: 1px solid #555;
+    border-collapse: collapse;
+    padding: 5px;
+}
