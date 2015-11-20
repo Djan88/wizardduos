@@ -600,3 +600,8 @@ path
     border-collapse: collapse;
     padding: 5px;
 }
+.register-form-wrap
+{
+    width: 500px;
+    margin: auto;
+}
