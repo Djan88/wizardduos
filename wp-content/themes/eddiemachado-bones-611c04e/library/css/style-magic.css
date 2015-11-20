@@ -608,7 +608,7 @@ path
     border-radius: 6px;
     padding: 5px;
 }
-.register-form-wrap input[type="text"] 
+.register-form-wrap input[type="text"], .register-form-wrap input[type="email"], .register-form-wrap input[type="tel"]
 {
-    width: 100%!important;
+    max-width: 100%!important;
 }
