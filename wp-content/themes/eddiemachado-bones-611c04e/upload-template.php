@@ -53,7 +53,7 @@
                     <h5 class="heading">Заполните форму</h5>
                     <h6 class="heading">Внесите данные по вашему аккаунту из таблицы выше</h6>
                     <hr>
-                    <?php echo do_shortcode('[contact-form-7 id="111" title="Продление лицензии"]'); ?>
+                    <?php echo do_shortcode('[contact-form-7 id="84" title="продление"]'); ?>
                     <h5 class="heading">или позвоните по телефону</h5>
                     <hr>
                     <h3 class="heading">+7 (495) 255-05-61 — Роман</h3>
