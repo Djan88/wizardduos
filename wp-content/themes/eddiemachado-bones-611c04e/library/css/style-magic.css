@@ -604,4 +604,11 @@ path
 {
     width: 500px;
     margin: auto;
+    border: 1px solid #555;
+    border-radius: 6px;
+    padding: 5px;
+}
+.register-form-wrap input[type="text"] 
+{
+    width: 100%!important;
 }
