@@ -152,8 +152,9 @@ input {
 .itemlist.itemlist-two img 
 {
     display: inline!important;
-    /*margin: 10px;*/
-    width: 100%;
+    /* margin: 10px; */
+    width: auto;
+    max-height: 1200px;
 }
 .steps
 {
