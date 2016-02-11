@@ -227,7 +227,7 @@
                             <!-- <li id="draggableS6" class="itemlist_item itemZone item_list__mid draggable" style="left: 239px; top: 429px;">S6</li> -->
                             <li id="draggable6" class="itemlist_item itemZone item_list__mid draggable" style="left: 89px; top: 355px;">V6</li>
                             <li id="draggableD2" class="itemlist_item itemZone item_list__mid draggable" style="left: 43px; top: 122px;">D2</li>
-                            <li id="draggableD22" class="itemlist_item itemZone item_list__mid draggable" style="left: 63px; top: 175px;">D2</li>
+                            <li id="draggableD22" class="itemlist_item itemZone item_list__mid draggable" style="left: 30px; top: 200px;">D2</li>
                             <li id="draggableD3" class="itemlist_item itemZone item_list__mid draggable" style="left: 59px; top: 205px;">D3</li>
                             <li id="draggableD5" class="itemlist_item itemZone item_list__mid draggable" style="left: 55px; top: 328px;">D5</li>
                             <li id="draggableD4" class="itemlist_item itemZone item_list__mid draggable" style="left: 57px; top: 260px;">D4</li>

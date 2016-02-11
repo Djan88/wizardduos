@@ -1327,7 +1327,7 @@ mw = function(){
                                                                                                                             // jQuery('#draggableD12').addClass('hidden');
                                                                                                                             tickSound.stop();
                                                                                                                             phaseTwo = setInterval(function(){
-                                                                                                                                if (reloadTime <= 1){                                                                       //1
+                                                                                                                                if (reloadTime <= 1){
                                                                                                                                     reloadSound.play();
                                                                                                                                     reloadTime += 1;
                                                                                                                                 } else {
@@ -1337,7 +1337,6 @@ mw = function(){
                                                                                                                             }, 250);
                                                                                                                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                                                                                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
-
                                                                                                 //фаза 16
                                                                                                                             reloadTime = 0;
                                                                                                                             reloadTime1 = 0;
@@ -1345,7 +1344,7 @@ mw = function(){
                                                                                                                             cur_animation_val = 0;
                                                                                                                             count_animation = 1;
                                                                                                                             phaseOne = setInterval(function(){
-                                                                                                                                if (count_animation <= 332){                                                                         //90
+                                                                                                                                if (count_animation <= 332){
                                                                                                                                     tickSound.play();
                                                                                                                                     jQuery('#draggableD7, #draggableD7_1').css({
                                                                                                                                         color: 'transparent',
@@ -1421,7 +1420,6 @@ mw = function(){
                                                                                                                                     }, 250);
                                                                                                                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                                                                                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
-                //фаза 17
                                                                                                                                     cur_animation_val = 55;
                                                                                                                                     count_animation = 1;
                                                                                                                                     jQuery('.box_rounded').addClass('hidden');
@@ -1616,8 +1614,8 @@ ww = function(){
                 background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/edinenie_s_tvorcom.jpg) 0 0/100% no-repeat',
                 zIndex: '1000'
             });
-            jQuery('#draggable0').css({
-                background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/waterfall.jpg) 0 0/100% no-repeat',
+            jQuery('#draggable0, #draggable0_1').css({
+                background: '#fff url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/plod.png) 0 0/100% no-repeat',
                 zIndex: '1000'
             });
             jQuery('#draggableD12')
