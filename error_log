@@ -1,6 +1,1 @@
-[28-Apr-2015 10:28:55 UTC] PHP Warning:  exif_read_data(9fa940ccb629e38eeb8dc1e96cc24b91): Incorrect APP1 Exif Identifier Code in /home/wizardduos/public_html/wp-content/themes/eddiemachado-bones-611c04e/functions.php on line 346
-[28-Apr-2015 10:29:17 UTC] PHP Warning:  exif_read_data(4c6e05f40887c965c8d3c1ef0b44e9d4): Incorrect APP1 Exif Identifier Code in /home/wizardduos/public_html/wp-content/themes/eddiemachado-bones-611c04e/functions.php on line 346
-[14-May-2015 19:03:09 Europe/Simferopol] PHP Warning:  require(ABSPATHwp-includes/load.php): failed to open stream: No such file or directory in /home/wizardduos/public_html/wp-settings.php on line 21
-[14-May-2015 19:03:09 Europe/Simferopol] PHP Warning:  require(ABSPATHwp-includes/load.php): failed to open stream: No such file or directory in /home/wizardduos/public_html/wp-settings.php on line 21
-[14-May-2015 19:03:09 Europe/Simferopol] PHP Fatal error:  require(): Failed opening required 'ABSPATHwp-includes/load.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/wizardduos/public_html/wp-settings.php on line 21
-[27-Aug-2015 10:58:51 UTC] PHP Warning:  exif_read_data(e808189a47fe5213e390097cd39734fd): Incorrect APP1 Exif Identifier Code in /home/wizardduos/public_html/wp-content/themes/eddiemachado-bones-611c04e/functions.php on line 346
+[20-Feb-2016 11:18:04 UTC] PHP Warning:  imagecopyresampled() expects parameter 2 to be resource, boolean given in /home/wizardduos/public_html/wp-content/themes/eddiemachado-bones-611c04e/functions.php on line 390

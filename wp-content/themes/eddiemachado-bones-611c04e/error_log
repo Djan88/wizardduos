@@ -1,0 +1,9 @@
+[01-Mar-2016 11:07:53 Europe/Simferopol] PHP Fatal error:  Call to undefined function language_attributes() in /home/wizardduos/public_html/wp-content/themes/eddiemachado-bones-611c04e/header.php on line 3
+[01-Mar-2016 11:07:54 Europe/Simferopol] PHP Fatal error:  Call to undefined function current_user_can() in /home/wizardduos/public_html/wp-content/themes/eddiemachado-bones-611c04e/functions.php on line 15
+[01-Mar-2016 11:07:54 Europe/Simferopol] PHP Fatal error:  Call to undefined function is_front_page() in /home/wizardduos/public_html/wp-content/themes/eddiemachado-bones-611c04e/footer.php on line 1
+[01-Mar-2016 11:07:56 Europe/Simferopol] PHP Fatal error:  Call to undefined function get_header() in /home/wizardduos/public_html/wp-content/themes/eddiemachado-bones-611c04e/archive.php on line 1
+[01-Mar-2016 11:07:56 Europe/Simferopol] PHP Fatal error:  Call to undefined function get_header() in /home/wizardduos/public_html/wp-content/themes/eddiemachado-bones-611c04e/404.php on line 1
+[01-Mar-2016 11:07:57 Europe/Simferopol] PHP Fatal error:  Call to undefined function get_header() in /home/wizardduos/public_html/wp-content/themes/eddiemachado-bones-611c04e/404.php on line 1
+[13-Mar-2016 16:59:52 Europe/Simferopol] PHP Fatal error:  Call to undefined function current_user_can() in /home/wizardduos/public_html/wp-content/themes/eddiemachado-bones-611c04e/functions.php on line 15
+[13-Mar-2016 16:59:52 Europe/Simferopol] PHP Fatal error:  Call to undefined function get_header() in /home/wizardduos/public_html/wp-content/themes/eddiemachado-bones-611c04e/404.php on line 1
+[13-Mar-2016 16:59:52 Europe/Simferopol] PHP Fatal error:  Call to undefined function is_front_page() in /home/wizardduos/public_html/wp-content/themes/eddiemachado-bones-611c04e/footer.php on line 1

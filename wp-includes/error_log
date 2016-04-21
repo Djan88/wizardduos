@@ -1,0 +1,6 @@
+[11-Apr-2016 01:53:50 Europe/Simferopol] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/wizardduos/public_html/wp-includes/functions.php on line 8
+[11-Apr-2016 01:53:50 Europe/Simferopol] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/wizardduos/public_html/wp-includes/functions.php on line 8
+[11-Apr-2016 01:53:50 Europe/Simferopol] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/wizardduos/public_html/wp-includes/functions.php on line 8
+[11-Apr-2016 01:54:06 Europe/Simferopol] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/wizardduos/public_html/wp-includes/functions.php on line 8
+[11-Apr-2016 01:54:06 Europe/Simferopol] PHP Warning:  require(ABSPATHWPINC/option.php): failed to open stream: No such file or directory in /home/wizardduos/public_html/wp-includes/functions.php on line 8
+[11-Apr-2016 01:54:06 Europe/Simferopol] PHP Fatal error:  require(): Failed opening required 'ABSPATHWPINC/option.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/wizardduos/public_html/wp-includes/functions.php on line 8
