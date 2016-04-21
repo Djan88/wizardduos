@@ -3,11 +3,11 @@
  * Plugin Name: Basic User Avatars
  * Plugin URI:  http://wordpress.org/extend/basic-user-avatars
  * Description: Adds an avatar upload field to user profiles. Also provides front-end avatar management via a shortcode and bbPress support. No frills. Fork of Simple Local Avatars 1.3.
- * Version:     1.0.0
+ * Version:     1.0.3
  * Author:      Jared Atchison
  * Author URI:  http://jaredatchison.com
  *
- * ----------------------------------------------------------------------------//
+ * ---------------------------------------------------------------------------//
  * This plugin is a fork of Simple Local Avatars v1.3.1 by Jake Goldman (10up).
  *
  * Orignal author url:  http://get10up.com
@@ -15,7 +15,7 @@
  *
  * If you want some snazzy ajax and some other nifty features, check out Simple
  * Local Avatars 2.0+
- * ----------------------------------------------------------------------------//
+ * ---------------------------------------------------------------------------//
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,16 +27,25 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
+ * You should have received a copy of the GNU General Public License
+ * along with WP Forms. If not, see <http://www.gnu.org/licenses/>.
+ *
  * @author     Jared Atchison
- * @version    1.0.0
+ * @version    1.0.3
  * @package    JA_BasicLocalAvatars
- * @copyright  Copyright (c) 2013, Jared Atchison
+ * @copyright  Copyright (c) 2015, Jared Atchison
  * @link       http://jaredatchison.com
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
 class basic_user_avatars {
 
+	/**
+	 * User ID
+	 *
+	 * @since 1.0.0
+	 * @var int
+	 */
 	private $user_id_being_edited;
 
 	/**
@@ -45,6 +54,9 @@ class basic_user_avatars {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
+
+		// Text domain
+		$this->load_textdomain();
 
 		// Actions
 		add_action( 'admin_init',                array( $this, 'admin_init'               )        );
@@ -60,7 +72,18 @@ class basic_user_avatars {
 		// Filters
 		add_filter( 'get_avatar',                array( $this, 'get_avatar'               ), 10, 5 );
 		add_filter( 'avatar_defaults',           array( $this, 'avatar_defaults'          )        );
+	}
 
+	/**
+	 * Loads the plugin language files.
+	 *
+	 * @since 1.0.1
+	 */
+	public function load_textdomain() {
+		$domain = 'basic-user-avatars';
+		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
+		load_textdomain( $domain, WP_LANG_DIR . '/' . $domain . '/' . $domain . '-' . $locale . '.mo' );
+		load_plugin_textdomain( $domain, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 	/**
@@ -69,9 +92,6 @@ class basic_user_avatars {
 	 * @since 1.0.0
 	 */
 	public function admin_init() {
-
-		// Load the textdomain so we can support other languages
-		load_plugin_textdomain( 'basic-user-avatars', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
 		// Register/add the Discussion setting to restrict avatar upload capabilites
 		register_setting( 'discussion', 'basic_user_avatars_caps', array( $this, 'sanitize_options' ) );
@@ -89,7 +109,7 @@ class basic_user_avatars {
 		?>
 		<label for="basic_user_avatars_caps">
 			<input type="checkbox" name="basic_user_avatars_caps" id="basic_user_avatars_caps" value="1" <?php checked( $options['basic_user_avatars_caps'], 1 ); ?>/>
-			<?php _e( 'Разрешить загрузку локальных аватарок только пользователям с разрешением на загрузку файлов (авторы и выше)', 'basic-user-avatars' ); ?>
+			<?php _e( 'Only allow users with file upload capabilities to upload local avatars (Authors and above)', 'basic-user-avatars' ); ?>
 		</label>
 		<?php
 	}
@@ -201,15 +221,15 @@ class basic_user_avatars {
 					echo '<input type="file" name="basic-user-avatar" id="basic-local-avatar" /><br />';
 
 					if ( empty( $profileuser->basic_user_avatar ) ) {
-						echo '<span class="description">' . __( 'Аватар не загружен. Используйте поле загрузки файла для добавления аватара.', 'basic-user-avatars' ) . '</span>';
+						echo '<span class="description">' . __( 'No local avatar is set. Use the upload field to add a local avatar.', 'basic-user-avatars' ) . '</span>';
 					} else {
-						echo '<input type="checkbox" name="basic-user-avatar-erase" value="1" /> ' . __( 'Удалить аватар', 'basic-user-avatars' ) . '<br />';
-						echo '<span class="description">' . __( 'Вы можете загрузить новый аватар или удалить существующий.', 'basic-user-avatars' ) . '</span>';
+						echo '<input type="checkbox" name="basic-user-avatar-erase" value="1" /> ' . __( 'Delete local avatar', 'basic-user-avatars' ) . '<br />';
+						echo '<span class="description">' . __( 'Replace the local avatar by uploading a new avatar, or erase the local avatar (falling back to a gravatar) by checking the delete option.', 'basic-user-avatars' ) . '</span>';
 					}
 
 				} else {
 					if ( empty( $profileuser->basic_user_avatar ) ) {
-						echo '<span class="description">' . __( 'Аватар не загружен. Set up your avatar at Gravatar.com.', 'basic-user-avatars' ) . '</span>';
+						echo '<span class="description">' . __( 'No local avatar is set. Set up your avatar at Gravatar.com.', 'basic-user-avatars' ) . '</span>';
 					} else {
 						echo '<span class="description">' . __( 'You do not have media management permissions. To change your local avatar, contact the site administrator.', 'basic-user-avatars' ) . '</span>';
 					}	
@@ -312,21 +332,21 @@ class basic_user_avatars {
 				echo '<p><input type="file" name="basic-user-avatar" id="basic-local-avatar" /></p>';
 
 				if ( empty( $profileuser->basic_user_avatar ) ) {
-					echo '<p class="description">' . __( 'Аватар не загружен.<br>Добавить аватар можно используя поле выше.', 'basic-user-avatars' ) . '</p>';
+					echo '<p class="description">' . __( 'No local avatar is set. Use the upload field to add a local avatar.', 'basic-user-avatars' ) . '</p>';
 				} else {
-					echo '<input type="checkbox" name="basic-user-avatar-erase" value="1" /> ' . __( 'Удалить аватар', 'basic-user-avatars' ) . '<br />';
-					echo '<p class="description">' . __( 'Вы можете загрузить новый аватар или удалить существующий.', 'basic-user-avatars' ) . '</p>';
+					echo '<input type="checkbox" name="basic-user-avatar-erase" value="1" /> ' . __( 'Delete local avatar', 'basic-user-avatars' ) . '<br />';
+					echo '<p class="description">' . __( 'Replace the local avatar by uploading a new avatar, or erase the local avatar (falling back to a gravatar) by checking the delete option.', 'basic-user-avatars' ) . '</p>';
 				}
 
 			} else {
 				if ( empty( $profileuser->basic_user_avatar ) ) {
-					echo '<p class="description">' . __( 'Аватар не загружен. Set up your avatar at Gravatar.com.', 'basic-user-avatars' ) . '</p>';
+					echo '<p class="description">' . __( 'No local avatar is set. Set up your avatar at Gravatar.com.', 'basic-user-avatars' ) . '</p>';
 				} else {
 					echo '<p class="description">' . __( 'You do not have media management permissions. To change your local avatar, contact the site administrator.', 'basic-user-avatars' ) . '</p>';
 				}	
 			}
 			?>
-			<input type="submit" name="manage_avatar_submit" value="Обновить аватар" />
+			<input type="submit" name="manage_avatar_submit" value="<?php _e( 'Update Avatar', 'basic-user-avatars' ); ?>" />
 		</form>
 		<?php
 		return ob_get_clean();
@@ -359,15 +379,15 @@ class basic_user_avatars {
 					echo '<br /><input type="file" name="basic-user-avatar" id="basic-local-avatar" /><br />';
 
 					if ( empty( $profileuser->basic_user_avatar ) ) {
-						echo '<span class="description" style="margin-left:0;">' . __( 'Аватар не загружен.<br>Добавить аватар можно используя поле выше.', 'basic-user-avatars' ) . '</span>';
+						echo '<span class="description" style="margin-left:0;">' . __( 'No local avatar is set. Use the upload field to add a local avatar.', 'basic-user-avatars' ) . '</span>';
 					} else {
 						echo '<input type="checkbox" name="basic-user-avatar-erase" value="1" style="width:auto" /> ' . __( 'Delete local avatar', 'basic-user-avatars' ) . '<br />';
-						echo '<span class="description" style="margin-left:0;">' . __( 'Вы можете загрузить новый аватар или удалить существующий.', 'basic-user-avatars' ) . '</span>';
+						echo '<span class="description" style="margin-left:0;">' . __( 'Replace the local avatar by uploading a new avatar, or erase the local avatar (falling back to a gravatar) by checking the delete option.', 'basic-user-avatars' ) . '</span>';
 					}
 
 				} else {
 					if ( empty( $profileuser->basic_user_avatar ) ) {
-						echo '<span class="description" style="margin-left:0;">' . __( 'Аватар не загружен. Set up your avatar at Gravatar.com.', 'basic-user-avatars' ) . '</span>';
+						echo '<span class="description" style="margin-left:0;">' . __( 'No local avatar is set. Set up your avatar at Gravatar.com.', 'basic-user-avatars' ) . '</span>';
 					} else {
 						echo '<span class="description" style="margin-left:0;">' . __( 'You do not have media management permissions. To change your local avatar, contact the site administrator.', 'basic-user-avatars' ) . '</span>';
 					}	

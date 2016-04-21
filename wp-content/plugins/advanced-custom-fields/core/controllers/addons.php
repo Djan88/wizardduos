@@ -172,11 +172,11 @@ class acf_addons
 			'url' => 'http://wordpress.org/extend/plugins/acf-field-date-time-picker/'
 		);
 		$free[] = array(
-			'title' => __("Location Field",'acf'),
+			'title' => __("Google Map Extended",'acf'),
 			'description' => __("Find addresses and coordinates of a desired location",'acf'),
 			'thumbnail' => $dir . 'images/add-ons/google-maps-field-thumb.jpg',
-			'active' => class_exists('acf_field_location'),
-			'url' => 'https://github.com/elliotcondon/acf-location-field/'
+			'active' => class_exists('acf_field_google_map_extended'),
+			'url' => 'https://wordpress.org/plugins/advanced-custom-fields-google-map-extended/'
 		);
 		$free[] = array(
 			'title' => __("Contact Form 7 Field",'acf'),
@@ -216,7 +216,7 @@ class acf_addons
 			</div>
 			<div class="footer">
 				<?php if( $addon['active'] ): ?>
-					<a class="button button-disabled"><span class="tick"></span><?php _e("Installed",'acf'); ?></a>
+					<a class="button button-disabled"><span class="acf-sprite-tick"></span><?php _e("Installed",'acf'); ?></a>
 				<?php else: ?>
 					<a target="_blank" href="<?php echo $addon['url']; ?>" class="button"><?php _e("Purchase & Install",'acf'); ?></a>
 				<?php endif; ?>
@@ -237,7 +237,7 @@ class acf_addons
 			</div>
 			<div class="footer">
 				<?php if( $addon['active'] ): ?>
-					<a class="button button-disabled"><span class="tick"></span><?php _e("Installed",'acf'); ?></a>
+					<a class="button button-disabled"><span class="acf-sprite-tick"></span><?php _e("Installed",'acf'); ?></a>
 				<?php else: ?>
 					<a target="_blank" href="<?php echo $addon['url']; ?>" class="button"><?php _e("Download",'acf'); ?></a>
 				<?php endif; ?>

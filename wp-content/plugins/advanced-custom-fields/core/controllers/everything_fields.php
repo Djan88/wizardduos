@@ -69,11 +69,19 @@ class acf_everything_fields
 	function attachment_fields_to_edit( $form_fields, $post ) 
 	{
 		// vars
+		$screen = get_current_screen();
 		$post_id = $post->ID;
+		
+
+		if( $screen && $screen->base == 'post' ) {
+			
+			return $form_fields;
+			
+		}
 		
 		
 		// get field groups
-		$filter = array( 'ef_media' => 'all' );
+		$filter = array( 'post_type' => 'attachment' );
 		$metabox_ids = array();
 		$metabox_ids = apply_filters( 'acf/location/match_field_groups', $metabox_ids, $filter );
 		
@@ -193,7 +201,7 @@ if( !isset($_POST['acf_nonce']) || !wp_verify_nonce($_POST['acf_nonce'], 'input'
 	function validate_page()
 	{
 		// global
-		global $pagenow;
+		global $pagenow, $wp_version;
 		
 		
 		// vars
@@ -201,7 +209,7 @@ if( !isset($_POST['acf_nonce']) || !wp_verify_nonce($_POST['acf_nonce'], 'input'
 		
 		
 		// validate page
-		if( in_array( $pagenow, array( 'edit-tags.php', 'profile.php', 'user-new.php', 'user-edit.php', 'media.php' ) ) )
+		if( in_array( $pagenow, array( 'edit-tags.php', 'term.php', 'profile.php', 'user-new.php', 'user-edit.php', 'media.php' ) ) )
 		{
 			$return = true;
 		}
@@ -211,6 +219,14 @@ if( !isset($_POST['acf_nonce']) || !wp_verify_nonce($_POST['acf_nonce'], 'input'
 		if( $pagenow == "admin.php" && isset( $_GET['page'], $_GET['id'] ) && $_GET['page'] == "shopp-categories" )
 		{
 			$return = true;
+		}
+		
+		
+		// WP4
+		if( $pagenow === 'upload.php' && version_compare($wp_version, '4.0', '>=') ) {
+			
+			$return = true;
+			
 		}
 		
 		
@@ -259,26 +275,43 @@ if( !isset($_POST['acf_nonce']) || !wp_verify_nonce($_POST['acf_nonce'], 'input'
 				$this->data['option_name'] = "shopp_category_" . $_GET['id'];
 			}
 			
-		}
-		if( $pagenow == "edit-tags.php" && isset($_GET['taxonomy']) )
-		{
-			// filter
-			$_GET['taxonomy'] = filter_var($_GET['taxonomy'], FILTER_SANITIZE_STRING);
+		} elseif( $pagenow == "edit-tags.php" || $pagenow == "term.php" ) {
+			
+			// vars
+			$taxonomy = 'post_tag';
+			$term_id = 0;
 			
 			
+			// $_GET
+			if( !empty($_GET['taxonomy']) ) {
+				
+				$taxonomy = filter_var($_GET['taxonomy'], FILTER_SANITIZE_STRING);
+				
+			}
+			
+			if( !empty($_GET['tag_ID']) ) {
+				
+				$term_id = filter_var($_GET['tag_ID'], FILTER_SANITIZE_NUMBER_INT);
+				
+			}
+			
+			
+			// update filter
+			$filter['ef_taxonomy'] = $taxonomy;
+			
+			
+			// add
 			$this->data['page_type'] = "taxonomy";
-			$filter['ef_taxonomy'] = $_GET['taxonomy'];
-			
 			$this->data['page_action'] = "add";
 			$this->data['option_name'] = "";
 			
-			if( isset($_GET['action']) && $_GET['action'] == "edit" )
-			{
-				// filter
-				$_GET['tag_ID'] = filter_var($_GET['tag_ID'], FILTER_SANITIZE_NUMBER_INT);
 			
+			// edit
+			if( $term_id ) {
+				
 				$this->data['page_action'] = "edit";
-				$this->data['option_name'] = $_GET['taxonomy'] . "_" . $_GET['tag_ID'];
+				$this->data['option_name'] = $taxonomy . "_" . $term_id;
+				
 			}
 			
 		}
@@ -314,11 +347,11 @@ if( !isset($_POST['acf_nonce']) || !wp_verify_nonce($_POST['acf_nonce'], 'input'
 			$this->data['option_name'] = "";
 
 		}
-		elseif( $pagenow == "media.php" )
+		elseif( $pagenow == "media.php" || $pagenow == 'upload.php' )
 		{
 			
 			$this->data['page_type'] = "media";
-			$filter['ef_media'] = 'all';
+			$filter['post_type'] = 'attachment';
 			
 			$this->data['page_action'] = "add";
 			$this->data['option_name'] = "";
@@ -332,7 +365,7 @@ if( !isset($_POST['acf_nonce']) || !wp_verify_nonce($_POST['acf_nonce'], 'input'
 				$this->data['page_action'] = "edit";
 				$this->data['option_name'] = $_GET['attachment_id'];
 			}
-			
+
 		}
 		
 		
@@ -418,7 +451,7 @@ $(document).ready(function(){
 				}
 				else
 				{
-					echo "$('#your-profile > p.submit').before( html );";
+					echo "$('#your-profile .form-table:last').after( html );";
 				}
 			}
 			elseif($this->data['page_type'] == "shopp_category")
@@ -433,7 +466,7 @@ $(document).ready(function(){
 				}
 				else
 				{
-					echo "$('#edittag > table.form-table:last > tbody').append( html );";
+					echo "$('#edittag > table.form-table:first > tbody').append( html );";
 				}
 			}
 			elseif($this->data['page_type'] == "media")
@@ -667,12 +700,26 @@ $(document).ready(function(){
 				{
 					continue;
 				}
-
+				
+				
+				// layout dictates heading
+				$title = true;
+				
+				if( $acf['options']['layout'] == 'no_box' )
+				{
+					$title = false;
+				}
+				
 
 				// title 
 				if( $options['page_action'] == "edit" && $options['page_type'] == 'user' )
 				{
-					echo '<h3>' .$acf['title'] . '</h3><table class="form-table"><tbody>';
+					if( $title )
+					{
+						echo '<h3>' .$acf['title'] . '</h3>';
+					}
+					
+					echo '<table class="form-table"><tbody>';
 				}
 				
 				
@@ -680,7 +727,7 @@ $(document).ready(function(){
 				if( $layout == 'tr' )
 				{
 					//nonce
-					echo '<tr><td colspan="2"><input type="hidden" name="acf_nonce" value="' . wp_create_nonce( 'input' ) . '" /></td></tr>';
+					echo '<tr style="display:none;"><td colspan="2"><input type="hidden" name="acf_nonce" value="' . wp_create_nonce( 'input' ) . '" /></td></tr>';
 				}
 				else
 				{
