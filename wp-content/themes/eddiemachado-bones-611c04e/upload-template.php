@@ -45,7 +45,7 @@
                     <th>Дата активации лицензии</th><td><?php echo $user_reg; ?></td>
                   </tr>
                 </table>
-                <h3 class="heading">Вы можете продлить лицензию на 1 год со скидкой 50%</h3>
+                <h3 class="heading hidden">Вы можете продлить лицензию на 1 год со скидкой 50%</h3>
                 <!-- <a href="#contact_form_pop" class="btn btn_lg btn_success btn_licens fancybox">Продлить лицензию</a> -->
                 <div class="register-form-wrap">
                   <div id="contact_form_pop">
