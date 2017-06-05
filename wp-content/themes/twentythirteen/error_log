@@ -1,0 +1,1 @@
+[04-Mar-2017 14:52:59 Europe/Simferopol] PHP Fatal error:  Call to undefined function get_header() in /home/wizardduos/public_html/wp-content/themes/twentythirteen/search.php on line 10
