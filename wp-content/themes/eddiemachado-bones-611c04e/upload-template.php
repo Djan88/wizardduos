@@ -52,10 +52,7 @@
                     <h5 class="heading">Заполните форму</h5>
                     <h6 class="heading">Внесите данные по вашему аккаунту из таблицы выше</h6>
                     <hr>
-                    <?php echo do_shortcode('[contact-form-7 id="84" title="продление"]'); ?>
-                    <h5 class="heading">или позвоните по телефону</h5>
-                    <hr>
-                    <h3 class="heading">+7 (495) 255-05-61 — Роман</h3>
+                    <?php echo do_shortcode('[contact-form-7 id="103" title="Продление"]'); ?>
                   </div>
                 </div>
                 <h6 style="color:red;">Не сообщайте посторонним лицам ваш пароль на вход в программу.<br>Администрация проекта никогда не попросит его!</h6>
