@@ -9,15 +9,8 @@ class WordPress_Module extends Red_Module {
 		return self::MODULE_ID;
 	}
 
-	public function can_edit_config() {
-		return false;
-	}
-
-	public function render_config() {
-	}
-
-	public function get_config() {
-		return array();
+	public function get_name() {
+		return 'WordPress';
 	}
 
 	public function start() {
@@ -34,15 +27,15 @@ class WordPress_Module extends Red_Module {
 	}
 
 	public function init() {
-		$url = $_SERVER['REQUEST_URI'];
+		$url = apply_filters( 'redirection_url_source', Redirection_Request::get_request_url() );
 
 		// Make sure we don't try and redirect something essential
-		if ( !$this->protected_url( $url ) && $this->matched === false ) {
+		if ( $url && ! $this->protected_url( $url ) && $this->matched === false ) {
 			do_action( 'redirection_first', $url, $this );
 
 			$redirects = Red_Item::get_for_url( $url, 'wp' );
 
-			foreach ( (array)$redirects AS $item ) {
+			foreach ( (array) $redirects as $item ) {
 				if ( $item->matches( $url ) ) {
 					$this->matched = $item;
 					break;
@@ -62,20 +55,20 @@ class WordPress_Module extends Red_Module {
 			$options = red_get_options();
 
 			if ( isset( $options['expire_404'] ) && $options['expire_404'] >= 0 ) {
-				RE_404::create( $this->get_url(), $this->get_user_agent(), $this->get_ip(), $this->get_referrer() );
+				RE_404::create( Redirection_Request::get_request_url(), Redirection_Request::get_user_agent(), Redirection_Request::get_ip(), Redirection_Request::get_referrer() );
 			}
 		}
 	}
 
 	public function status_header( $status ) {
 		// Fix for incorrect headers sent when using FastCGI/IIS
-		if ( substr( php_sapi_name(), 0, 3 ) == 'cgi' )
+		if ( substr( php_sapi_name(), 0, 3 ) === 'cgi' )
 			return str_replace( 'HTTP/1.1', 'Status:', $status );
 		return $status;
 	}
 
 	public function send_headers( $obj ) {
-		if ( !empty( $this->matched ) && $this->matched->match->action_code == '410' ) {
+		if ( ! empty( $this->matched ) && $this->matched->match->action_code === '410' ) {
 			add_filter( 'status_header', array( &$this, 'set_header_410' ) );
 		}
 	}
@@ -87,26 +80,32 @@ class WordPress_Module extends Red_Module {
 	public function wp_redirect( $url, $status ) {
 		global $wp_version, $is_IIS;
 
-    	if ( $is_IIS ) {
+		if ( $is_IIS ) {
 			header( "Refresh: 0;url=$url" );
 			return $url;
 		}
-		elseif ( $status == 301 && php_sapi_name() == 'cgi-fcgi' ) {
-            $servers_to_check = array( 'lighttpd', 'nginx' );
-            foreach ( $servers_to_check as $name ) {
-                if ( stripos( $_SERVER['SERVER_SOFTWARE'], $name ) !== false ) {
-                    status_header( $status );
-                    header( "Location: $url" );
-                    exit( 0 );
-                }
-            }
-        }
+		elseif ( $status === 301 && php_sapi_name() === 'cgi-fcgi' ) {
+			$servers_to_check = array( 'lighttpd', 'nginx' );
 
-        status_header( $status );
+			foreach ( $servers_to_check as $name ) {
+				if ( stripos( $_SERVER['SERVER_SOFTWARE'], $name ) !== false ) {
+					status_header( $status );
+					header( "Location: $url" );
+					exit( 0 );
+				}
+			}
+		}
+		elseif ( $status == 307) {
+			status_header( $status );
+			header( "Cache-Control: no-cache, must-revalidate, max-age=0" );
+			header( "Expires: Sat, 26 Jul 1997 05:00:00 GMT" );
+			return $url;
+		}
+		status_header( $status );
 		return $url;
 	}
 
-	public function update( $data ) {
+	public function update( array $data ) {
 		return false;
 	}
 
@@ -121,39 +120,5 @@ class WordPress_Module extends Red_Module {
 		if ( $this->matched )
 			$skip[] = $_SERVER['REQUEST_URI'];
 		return $skip;
-	}
-
-	public function get_name() {
-		return __( 'WordPress', 'redirection' );
-	}
-
-	public function get_description() {
-		return __( 'WordPress-powered redirects. This requires no further configuration, and you can track hits.', 'redirection' );
-	}
-
-	private function get_url() {
-		if ( isset( $_SERVER['REQUEST_URI'] ) )
-			return $_SERVER['REQUEST_URI'];
-		return '';
-	}
-
-	private function get_user_agent() {
-		if ( isset( $_SERVER['HTTP_USER_AGENT'] ) )
-			return $_SERVER['HTTP_USER_AGENT'];
-		return false;
-	}
-
-	private function get_referrer() {
-		if ( isset( $_SERVER['HTTP_REFERER'] ) )
-			return $_SERVER['HTTP_REFERER'];
-		return false;
-	}
-
-	private function get_ip() {
-		if ( isset( $_SERVER['REMOTE_ADDR'] ) )
-		  return $_SERVER['REMOTE_ADDR'];
-		elseif ( isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) )
-		  return $_SERVER['HTTP_X_FORWARDED_FOR'];
-		return '';
 	}
 }

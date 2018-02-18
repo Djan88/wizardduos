@@ -3,11 +3,13 @@
 Plugin Name: Advanced Custom Fields
 Plugin URI: http://www.advancedcustomfields.com/
 Description: Customise WordPress with powerful, professional and intuitive fields
-Version: 4.4.7
+Version: 4.4.11
 Author: Elliot Condon
 Author URI: http://www.elliotcondon.com/
 License: GPL
 Copyright: Elliot Condon
+Text Domain: acf
+Domain Path: /lang
 */
 
 if( !class_exists('acf') ):
@@ -43,7 +45,7 @@ class acf
 			'path'				=> apply_filters('acf/helpers/get_path', __FILE__),
 			'dir'				=> apply_filters('acf/helpers/get_dir', __FILE__),
 			'hook'				=> basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ ),
-			'version'			=> '4.4.7',
+			'version'			=> '4.4.11',
 			'upgrade_version'	=> '3.4.1',
 			'include_3rd_party'	=> false
 		);

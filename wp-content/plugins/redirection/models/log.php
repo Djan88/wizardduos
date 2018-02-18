@@ -1,16 +1,16 @@
 <?php
 
 class RE_Log {
-	var $id;
-	var $created;
-	var $url;
-	var $agent;
-	var $referrer;
-	var $ip;
-	var $redirection_id;
+	public $id;
+	public $created;
+	public $url;
+	public $agent;
+	public $referrer;
+	public $ip;
+	public $redirection_id;
 
 	function __construct( $values ) {
-		foreach ( $values AS $key => $value ) {
+		foreach ( $values as $key => $value ) {
 		 	$this->$key = $value;
 		}
 
@@ -36,10 +36,10 @@ class RE_Log {
 			'ip'      => $ip,
 		);
 
-		if ( !empty( $agent ) )
+		if ( ! empty( $agent ) )
 			$insert['agent'] = $agent;
 
-		if ( !empty( $referrer ) )
+		if ( ! empty( $referrer ) )
 			$insert['referrer'] = $referrer;
 
 		$insert['sent_to']        = $target;
@@ -47,13 +47,17 @@ class RE_Log {
 		$insert['group_id']       = isset( $extra['group_id'] ) ? $extra['group_id'] : 0;
 
 		$insert = apply_filters( 'redirection_log_data', $insert );
-		do_action( 'redirection_log', $insert );
+		if ( $insert ) {
+			do_action( 'redirection_log', $insert );
 
-		$wpdb->insert( $wpdb->prefix.'redirection_logs', $insert );
+			$wpdb->insert( $wpdb->prefix.'redirection_logs', $insert );
+		}
+
+		return $wpdb->insert_id;
 	}
 
 	static function show_url( $url ) {
-		return implode('&#8203;/', explode( '/', substr( $url, 0, 80 ) ) ).( strlen( $url ) > 80 ? '...' : '' );
+		return $url;
 	}
 
 	static function delete( $id ) {
@@ -75,19 +79,19 @@ class RE_Log {
 		global $wpdb;
 
 		$where = array();
-		if ( $type == 'module' )
+		if ( $type === 'module' )
 			$where[] = $wpdb->prepare( 'module_id=%d', $id );
-		elseif ( $type == 'group' )
+		elseif ( $type === 'group' )
 			$where[] = $wpdb->prepare( 'group_id=%d AND redirection_id IS NOT NULL', $id );
-		elseif ( $type == 'redirect' )
+		elseif ( $type === 'redirect' )
 			$where[] = $wpdb->prepare( 'redirection_id=%d', $id );
 
-		if ( isset( $_REQUEST['s'] ) )
-			$where[] = $wpdb->prepare( 'url LIKE %s', '%'.like_escape( $_REQUEST['s'] ).'%' );
+		// if ( isset( $_REQUEST['s'] ) )
+		// 	$where[] = $wpdb->prepare( 'url LIKE %s', '%'.$wpdb->esc_like( $_REQUEST['s'] ).'%' );
 
-		$where_cond = "";
+		$where_cond = '';
 		if ( count( $where ) > 0 )
-			$where_cond = " WHERE ".implode( ' AND ', $where );
+			$where_cond = ' WHERE '.implode( ' AND ', $where );
 
 		$wpdb->query( "DELETE FROM {$wpdb->prefix}redirection_logs ".$where_cond );
 	}
@@ -108,8 +112,8 @@ class RE_Log {
 
 		$extra = '';
 		$sql = "SELECT COUNT(*) FROM {$wpdb->prefix}redirection_logs";
-		if ( isset( $_REQUEST['s'] ) )
-			$extra = $wpdb->prepare( " WHERE url LIKE %s", '%'.like_escape( $_REQUEST['s'] ).'%' );
+		// if ( isset( $_REQUEST['s'] ) )
+		// 	$extra = $wpdb->prepare( ' WHERE url LIKE %s', '%'.$wpdb->esc_like( $_REQUEST['s'] ).'%' );
 
 		$total_items = $wpdb->get_var( $sql.$extra );
 		$exported = 0;
@@ -118,7 +122,7 @@ class RE_Log {
 			$rows = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}redirection_logs LIMIT %d,%d", $exported, 100 ) );
 			$exported += count( $rows );
 
-			foreach ( $rows AS $row ) {
+			foreach ( $rows as $row ) {
 				$csv = array(
 					$row->created,
 					$row->url,
@@ -135,30 +139,39 @@ class RE_Log {
 				break;
 		}
 	}
+
+	public function to_json() {
+		return array(
+			'sent_to' => $this->sent_to,
+			'ip' => $this->ip,
+		);
+	}
 }
 
 class RE_404 {
-	var $id;
-	var $created;
-	var $url;
-	var $agent;
-	var $referrer;
-	var $ip;
+	public $id;
+	public $created;
+	public $url;
+	public $agent;
+	public $referrer;
+	public $ip;
 
 	function __construct( $values ) {
-		foreach ( $values AS $key => $value ) {
+		foreach ( $values as $key => $value ) {
 		 	$this->$key = $value;
-		 }
+		}
 
-		$this->created = mysql2date ('U', $this->created);
+		$this->created = mysql2date( 'U', $this->created );
 	}
 
 	static function get_by_id( $id ) {
 		global $wpdb;
 
 		$row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}redirection_404 WHERE id=%d", $id ) );
-		if ( $row )
+		if ( $row ) {
 			return new RE_404( $row );
+		}
+
 		return false;
 	}
 
@@ -171,13 +184,18 @@ class RE_404 {
 			'ip'      => ip2long( $ip ),
 		);
 
-		if ( !empty( $agent ) )
+		if ( ! empty( $agent ) ) {
 			$insert['agent'] = $agent;
+		}
 
-		if ( !empty( $referrer ) )
+		if ( ! empty( $referrer ) ) {
 			$insert['referrer'] = $referrer;
+		}
 
-		$wpdb->insert( $wpdb->prefix.'redirection_404', $insert );
+		$insert = apply_filters( 'redirection_404_data', $insert );
+		if ( $insert ) {
+			$wpdb->insert( $wpdb->prefix.'redirection_404', $insert );
+		}
 	}
 
 	static function delete( $id ) {
@@ -190,12 +208,12 @@ class RE_404 {
 		global $wpdb;
 
 		$where = array();
-		if ( isset( $_REQUEST['s'] ) )
-			$where[] = $wpdb->prepare( 'url LIKE %s', '%'.like_escape( $_REQUEST['s'] ).'%' );
+		// if ( isset( $_REQUEST['s'] ) )
+		// 	$where[] = $wpdb->prepare( 'url LIKE %s', '%'.$wpdb->esc_like( $_REQUEST['s'] ).'%' );
 
-		$where_cond = "";
+		$where_cond = '';
 		if ( count( $where ) > 0 )
-			$where_cond = " WHERE ".implode( ' AND ', $where );
+			$where_cond = ' WHERE '.implode( ' AND ', $where );
 
 		$wpdb->query( "DELETE FROM {$wpdb->prefix}redirection_404 ".$where_cond );
 	}
@@ -203,7 +221,7 @@ class RE_404 {
 	static function export_to_csv() {
 		global $wpdb;
 
-		$filename = 'redirection-log-'.date_i18n( get_option( 'date_format' ) ).'.csv';
+		$filename = 'redirection-404-'.date_i18n( get_option( 'date_format' ) ).'.csv';
 
 		header( 'Content-Type: text/csv' );
 		header( 'Cache-Control: no-cache, must-revalidate' );
@@ -216,8 +234,8 @@ class RE_404 {
 
 		$extra = '';
 		$sql = "SELECT COUNT(*) FROM {$wpdb->prefix}redirection_404";
-		if ( isset( $_REQUEST['s'] ) )
-			$extra = $wpdb->prepare( " WHERE url LIKE %s", '%'.like_escape( $_REQUEST['s'] ).'%' );
+		// if ( isset( $_REQUEST['s'] ) )
+		// 	$extra = $wpdb->prepare( ' WHERE url LIKE %s', '%'.$wpdb->esc_like( $_REQUEST['s'] ).'%' );
 
 		$total_items = $wpdb->get_var( $sql.$extra );
 		$exported = 0;
@@ -226,7 +244,7 @@ class RE_404 {
 			$rows = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}redirection_404 LIMIT %d,%d", $exported, 100 ) );
 			$exported += count( $rows );
 
-			foreach ( $rows AS $row ) {
+			foreach ( $rows as $row ) {
 				$csv = array(
 					$row->created,
 					$row->url,
@@ -240,5 +258,74 @@ class RE_404 {
 			if ( count( $rows ) < 100 )
 				break;
 		}
+	}
+
+	public function to_json() {
+		return array(
+			'ip' => long2ip( $this->ip ),
+		);
+	}
+}
+
+class RE_Filter_Log {
+	static function get( $table, $construct, array $params ) {
+		global $wpdb;
+
+		$orderby = 'id';
+		$direction = 'DESC';
+		$limit = RED_DEFAULT_PER_PAGE;
+		$offset = 0;
+		$where = '';
+
+		if ( isset( $params['orderBy'] ) && in_array( $params['orderBy'], array( 'ip', 'url' ), true ) ) {
+			$orderby = $params['orderBy'];
+		}
+
+		if ( isset( $params['direction'] ) && in_array( $params['direction'], array( 'asc', 'desc' ), true ) ) {
+			$direction = strtoupper( $params['direction'] );
+		}
+
+		if ( isset( $params['filter'] ) && strlen( $params['filter'] ) > 0 ) {
+			if ( isset( $params['filterBy'] ) && $params['filterBy'] === 'ip' ) {
+				$where = $wpdb->prepare( "WHERE ip=%s", $params['filter'] );
+			} else {
+				$where = $wpdb->prepare( 'WHERE url LIKE %s', '%'.$wpdb->esc_like( trim( $params['filter'] ) ).'%' );
+			}
+		}
+
+		if ( isset( $params['perPage'] ) ) {
+			$limit = intval( $params['perPage'], 10 );
+			$limit = min( 100, $limit );
+			$limit = max( 5, $limit );
+		}
+
+		if ( isset( $params['page'] ) ) {
+			$offset = intval( $params['page'], 10 );
+			$offset = max( 0, $offset );
+			$offset *= $limit;
+		}
+
+		$table = $wpdb->prefix.$table;
+		$sql = trim( "SELECT * FROM {$table} $where " ).$wpdb->prepare( " ORDER BY $orderby $direction LIMIT %d,%d", $offset, $limit );
+
+		$rows		= $wpdb->get_results( $sql );
+		$total_items = $wpdb->get_var( "SELECT COUNT(*) FROM {$table} ".$where );
+		$items = array();
+
+		foreach ( $rows as $row ) {
+			$item = new $construct( $row );
+			$items[] = array_merge( $item->to_json(), array(
+				'id' => intval( $item->id, 10 ),
+				'created' => date_i18n( get_option( 'date_format' ), $item->created ).' '.gmdate( get_option( 'time_format' ), $item->created ),
+				'url' => $item->url,
+				'agent' => $item->agent,
+				'referrer' => $item->referrer,
+			) );
+		}
+
+		return array(
+			'items' => $items,
+			'total' => intval( $total_items, 10 ),
+		);
 	}
 }
