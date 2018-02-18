@@ -85,7 +85,7 @@ jQuery(function() {
     });
     jQuery('.no_second_btn').on('click', function(event) {
         localStorage.setItem('no_second', true);
-        window.location.href = '/wizard';
+        jQuery(this.addClass('active'))
     });
 
 // ШАГ 1 (К загрузке фото)
@@ -176,11 +176,9 @@ jQuery(function() {
             jQuery('.btn__wizard').removeClass('hidden');
             jQuery('.work-area').find('.returned').draggable();
         } else {
-            jQuery('.no_second').removeClass('hidden');
             jQuery('.machine_screen_prots').addClass('hidden');
             localStorage.setItem('croppedImg', jQuery('#main').children().attr('src'));
             jQuery('.heading_dashboard').text('Загрузите второе фото');
-            jQuery('.no_second').removeClass('hidden');
             jQuery('.machine_screen_load')
                 .removeClass('hidden')
                 .addClass('animated')
@@ -229,7 +227,7 @@ jQuery('#main').on('click', '.fast-protocol', function() {
 // Возврат на предыдущий шаг
     jQuery('.btn_back').on('click', function(event) {
         // console.log(cur_screen);
-        jQuery('.btn__crop, .btn__wizard').addClass('hidden');
+        jQuery('.btn__crop, .btn__wizard, .no_second_header').addClass('hidden');
         jQuery('.machine_screen')
             .addClass('hidden')
             .removeClass('fadeIn')
@@ -362,6 +360,7 @@ jQuery('#main').on('click', '.fast-protocol', function() {
                     // display step 2
                     jQuery('.step2').fadeIn(500);
                     jQuery('.btn__crop').removeClass('hidden');
+                    jQuery('.no_second_header').removeClass('hidden');
                     jQuery('.btn__crop').addClass('btn_alert');
                     setTimeout("jQuery('.btn__crop').removeClass('btn_alert')", 3000);
                     // display some basic image info

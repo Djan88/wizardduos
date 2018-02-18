@@ -461,7 +461,7 @@ path {
     padding: 7px 25px;
     font-size: 15px;
 }
-.btn__wizard, .btn__crop
+.btn__wizard, .btn__crop, #inner-header .no_second_btn
 {
     font-weight: 600!important;
     text-transform: uppercase;
@@ -622,4 +622,8 @@ path
 .register-form-wrap input[type="text"], .register-form-wrap input[type="email"], .register-form-wrap input[type="tel"]
 {
     max-width: 100%!important;
+}
+.no_second_btn.active
+{
+    background-color: #004a8a;
 }

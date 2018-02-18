@@ -104,8 +104,8 @@
                         <input type="submit" class="crop_photo" value="Редактировать фото" name="mci_magic" />
                         </div>
                         </form>
-                        <div class="no_second hidden">
-                            <div class="btn btn_lg btn_primary no_second_btn">Пропустить</div>
+                        <div class="no_second">
+                            <div class="btn btn_lg btn_primary no_second_btn">1 фото</div>
                             <div class="no_second_text">Если Вы хотите пропустить этот шаг нажмите стответствующую кнопку</div>
                         </div>
                     </div>
