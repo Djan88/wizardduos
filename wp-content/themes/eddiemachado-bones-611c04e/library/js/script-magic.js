@@ -45,7 +45,7 @@ jQuery(function() {
         set_prot();
     });
     //Получение данных из локального хранилища
-    if(supportsStorage){
+    if(supportsStorage && localStorage.getItem('curChoice')){
         curChoice = localStorage.getItem('curChoice');
         protocol = localStorage.getItem('protocol');
         no_second = localStorage.getItem('no_second');
@@ -82,16 +82,18 @@ jQuery(function() {
         localStorage.removeItem('croppedImgTwo');
         localStorage.removeItem('croppedImg');
     });
-    if (no_second = '1') {
-        jQuery('.no_second_btn').addClass('active').text('Активирован режим с 1 фото');
-    }
+    // if (no_second = '1') {
+    //     jQuery('.no_second_btn').addClass('active').text('Активирован режим с 1 фото');
+    // }
     jQuery('.no_second_btn').on('click', function(event) {
         if (jQuery(this).hasClass('active')) {
             localStorage.setItem('no_second', '2');
             jQuery(this).text('Активирован режим с 2 фото');
+            console.log(localStorage.getItem('no_second'))
         } else {
             localStorage.setItem('no_second', '1');
             jQuery(this).text('Активирован режим с 1 фото');
+            console.log(localStorage.getItem('no_second'))
         }
         jQuery(this).toggleClass('active')
     });
