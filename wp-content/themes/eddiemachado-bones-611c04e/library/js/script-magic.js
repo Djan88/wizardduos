@@ -377,14 +377,8 @@ jQuery('#main').on('click', '.fast-protocol', function() {
                             jcrop_api = this;
                         });
                     },3000);
-
                 };
-
-
-
-
             });
-
         };
 
         // read selected file as DataURL

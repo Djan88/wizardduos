@@ -80,7 +80,7 @@
                         <button class="btn btn_lg btn_success btn_choice mm" data-protocol="mm"></button>
                     </div>
                 </div>
-                <div class="machine_screen clearfix hidden">
+                <div class="machine_screen machine_screen_load clearfix hidden">
                     <div class="bbody">
 
                         <!-- upload form -->
