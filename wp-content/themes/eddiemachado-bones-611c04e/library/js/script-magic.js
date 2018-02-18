@@ -86,8 +86,10 @@ jQuery(function() {
     jQuery('.no_second_btn').on('click', function(event) {
         if (jQuery(this).hasClass('active')) {
             localStorage.setItem('no_second', false);
+            jQuery(this).text('Нажмите если хотите загружать 2 фото');
         } else {
             localStorage.setItem('no_second', true);
+            jQuery(this).text('Нажмите если не хотите загружать 2 фото');
         }
         jQuery(this).toggleClass('active')
     });
