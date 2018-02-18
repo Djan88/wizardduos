@@ -1,26 +1,45 @@
-# Translation of Twenty Twelve in Russian
-# This file is distributed under the same license as the Twenty Twelve package.
+# Translation of Themes - Twenty Twelve in Russian
+# This file is distributed under the same license as the Themes - Twenty Twelve package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2015-04-23 17:24:43+0000\n"
+"PO-Revision-Date: 2015-07-18 10:36:59+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: GlotPress/2.1.0-alpha\n"
-"Project-Id-Version: Twenty Twelve\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: ru\n"
+"Project-Id-Version: Themes - Twenty Twelve\n"
+
+#. Description of the plugin/theme
+msgid "The 2012 theme for WordPress is a fully responsive theme that looks great on any device. Features include a front page template with its own widgets, an optional display font, styling for post formats on both index and single views, and an optional no-sidebar page template. Make it yours with a custom menu, header image, and background."
+msgstr "Тема 2012 для WordPress создана по принципам адаптивного дизайна и превосходно выглядит на любом устройстве. Она содержит шаблон главной страницы со своими собственными виджетами, дополнительный шрифт, стили для форматов записей, а также одноколоночный шаблон для страниц. Сделайте её своей, добавив произвольное меню, изображение заголовка и фон."
+
+#. Theme Name of the plugin/theme
+msgid "Twenty Twelve"
+msgstr "Twenty Twelve"
+
+#. Template Name of the plugin/theme
+msgid "Full-width Page Template, No Sidebar"
+msgstr "Шаблон без боковой колонки"
+
+#. Template Name of the plugin/theme
+msgid "Front Page Template"
+msgstr "Шаблон главной страницы"
 
 #: tag.php:21
 msgid "Tag Archives: %s"
 msgstr "Архив метки: %s"
 
-#: functions.php:251
-msgid "First Front Page Widget Area"
-msgstr "Первая область главной страницы"
+#: single.php:22
+msgctxt "Next post link"
+msgid "&rarr;"
+msgstr "&rarr;"
 
-#: functions.php:283 single.php:20
-msgid "Post navigation"
-msgstr "Навигация по записям"
+#: single.php:21
+msgctxt "Previous post link"
+msgid "&larr;"
+msgstr "&larr;"
 
 #: search.php:38
 msgid "Sorry, but nothing matched your search criteria. Please try again with some different keywords."
@@ -30,72 +49,190 @@ msgstr "Извините, по вашему запросу ничего не н�
 msgid "Search Results for: %s"
 msgstr "Результаты поиска: %s"
 
-#: functions.php:241
-msgid "Main Sidebar"
-msgstr "Главная боковая колонка"
-
-#: functions.php:212
-msgid "Page %s"
-msgstr "Страница %s"
+#: index.php:42
+msgid "Ready to publish your first post? <a href=\"%s\">Get started here</a>."
+msgstr "Готовы опубликовать свою первую запись? <a href=\"%s\">Начните отсюда</a>."
 
 #: index.php:38
 msgid "No posts to display"
 msgstr "Нет записей для отображения"
 
+#: image.php:42
+msgid "Next &rarr;"
+msgstr "Следующее &rarr;"
+
+#: image.php:41
+msgid "&larr; Previous"
+msgstr "&larr; Предыдущее"
+
+#: image.php:26
+msgid "<span class=\"meta-prep meta-prep-entry-date\">Published </span> <span class=\"entry-date\"><time class=\"entry-date\" datetime=\"%1$s\">%2$s</time></span> at <a href=\"%3$s\" title=\"Link to full-size image\">%4$s &times; %5$s</a> in <a href=\"%6$s\" title=\"Return to %7$s\" rel=\"gallery\">%8$s</a>."
+msgstr "<span class=\"meta-prep meta-prep-entry-date\">Опубликовано </span> <span class=\"entry-date\"><time class=\"entry-date\" datetime=\"%1$s\">%2$s</time></span> с разрешением <a href=\"%3$s\" title=\"Ссылка на полноразмерное изображение\">%4$s &times; %5$s</a> в галерее <a href=\"%6$s\" title=\"Вернуться: %7$s\" rel=\"gallery\">%8$s</a>."
+
+#: header.php:44
+msgid "Skip to content"
+msgstr "Перейти к содержимому"
+
+#: header.php:43
+msgid "Menu"
+msgstr "Меню"
+
+#: functions.php:419
+msgid "This entry was posted on %3$s<span class=\"by-author\"> by %4$s</span>."
+msgstr "Запись опубликована %3$s<span class=\"by-author\"> автором %4$s</span>."
+
+#: functions.php:417
+msgid "This entry was posted in %1$s on %3$s<span class=\"by-author\"> by %4$s</span>."
+msgstr "Запись опубликована %3$s<span class=\"by-author\"> автором %4$s</span> в рубрике %1$s."
+
+#. Translators: 1 is category, 2 is tag, 3 is the date and 4 is the author's
+#. name.
+#: functions.php:415
+msgid "This entry was posted in %1$s and tagged %2$s on %3$s<span class=\"by-author\"> by %4$s</span>."
+msgstr "Запись опубликована %3$s<span class=\"by-author\"> автором %4$s</span> в рубрике %1$s с метками %2$s."
+
+#: functions.php:409
+msgid "View all posts by %s"
+msgstr "Посмотреть все записи автора %s"
+
+#. Translators: used between list items, there is a space after the comma.
+#: functions.php:395 functions.php:398
+msgid ", "
+msgstr ", "
+
+#: functions.php:374
+msgid "Reply"
+msgstr "Ответить"
+
+#: functions.php:365
+msgid "Your comment is awaiting moderation."
+msgstr "Ваш комментарий ожидает проверки."
+
+#. translators: 1: date, 2: time
+#: functions.php:359
+msgid "%1$s at %2$s"
+msgstr "%1$s в %2$s"
+
+#: functions.php:353
+msgid "Post author"
+msgstr "Автор записи"
+
+#: functions.php:338
+msgid "(Edit)"
+msgstr "(Изменить)"
+
+#: functions.php:338
+msgid "Pingback:"
+msgstr "Уведомление:"
+
+#: functions.php:313
+msgid "Newer posts <span class=\"meta-nav\">&rarr;</span>"
+msgstr "Следующие записи <span class=\"meta-nav\">&rarr;</span>"
+
+#: functions.php:312
+msgid "<span class=\"meta-nav\">&larr;</span> Older posts"
+msgstr "<span class=\"meta-nav\">&larr;</span> Предыдущие записи"
+
+#: functions.php:311 single.php:20
+msgid "Post navigation"
+msgstr "Навигация по записям"
+
+#: functions.php:289
+msgid "Second Front Page Widget Area"
+msgstr "Вторая область главной страницы"
+
+#: functions.php:281 functions.php:291
+msgid "Appears when using the optional Front Page template with a page set as Static Front Page"
+msgstr "Отображается, если в качестве главной выбрана статическая страница с соответствующим шаблоном."
+
+#: functions.php:279
+msgid "First Front Page Widget Area"
+msgstr "Первая область главной страницы"
+
+#: functions.php:271
+msgid "Appears on posts and pages except the optional Front Page template, which has its own widgets"
+msgstr "Отображается в записях и на страницах, за исключением главной страницы, имеющей свои собственные виджеты."
+
+#: functions.php:269
+msgid "Main Sidebar"
+msgstr "Главная боковая колонка"
+
+#: functions.php:240
+msgid "Page %s"
+msgstr "Страница %s"
+
+#. translators: To add an additional Open Sans character subset specific to
+#. your language, translate this to 'greek', 'cyrillic' or 'vietnamese'. Do not
+#. translate into your own language.
+#: functions.php:110
+msgctxt "Open Sans font: add new subset (greek, cyrillic, vietnamese)"
+msgid "no-subset"
+msgstr "cyrillic"
+
+#. translators: If there are characters in your language that are not supported
+#. by Open Sans, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:104
+msgctxt "Open Sans font: on or off"
+msgid "on"
+msgstr "on"
+
 #: functions.php:64
 msgid "Primary Menu"
 msgstr "Основное меню"
+
+#: footer.php:16
+msgid "Proudly powered by %s"
+msgstr "Сайт работает на %s"
+
+#: footer.php:16
+msgid "Semantic Personal Publishing Platform"
+msgstr "Современная персональная платформа для публикаций"
+
+#: content.php:66
+msgid "View all posts by %s <span class=\"meta-nav\">&rarr;</span>"
+msgstr "Посмотреть все записи автора %s <span class=\"meta-nav\">&rarr;</span>"
+
+#: content.php:16
+msgid "Featured post"
+msgstr "Избранная запись"
+
+#: content-page.php:21 content.php:45 image.php:102
+msgid "Pages:"
+msgstr "Страниц:"
+
+#: content-none.php:17 index.php:53
+msgid "Apologies, but no results were found. Perhaps searching will help find a related post."
+msgstr "Извините, результатов не найдено. Попробуйте найти нужную запись с помощью поиска."
+
+#: content-none.php:13 index.php:49 search.php:34
+msgid "Nothing Found"
+msgstr "Ничего не найдено"
+
+#: content-link.php:12
+msgid "Link"
+msgstr "Ссылка"
+
+#: content-aside.php:26 content-image.php:26 content-link.php:24
+#: content-page.php:24 content-quote.php:23 content-status.php:40
+#: content.php:51 functions.php:370 image.php:37
+msgid "Edit"
+msgstr "Изменить"
 
 #: content-aside.php:23 content-image.php:23 content-link.php:21
 #: content-quote.php:20 content-status.php:37 content.php:33
 msgid "% Replies"
 msgstr "Комментарии (%)"
 
-#: content.php:66
-msgid "View all posts by %s <span class=\"meta-nav\">&rarr;</span>"
-msgstr "Посмотреть все записи автора %s <span class=\"meta-nav\">&rarr;</span>"
-
-#: footer.php:16
-msgid "Semantic Personal Publishing Platform"
-msgstr "Современная персональная платформа для публикаций"
-
-#: footer.php:16
-msgid "Proudly powered by %s"
-msgstr "Сайт работает на %s"
-
-#: functions.php:243
-msgid "Appears on posts and pages except the optional Front Page template, which has its own widgets"
-msgstr "Отображается в записях и на страницах, за исключением главной страницы, имеющей свои собственные виджеты."
-
-#: image.php:42
-msgid "Next &rarr;"
-msgstr "Следующее &rarr;"
-
-#: content-none.php:17 index.php:53
-msgid "Apologies, but no results were found. Perhaps searching will help find a related post."
-msgstr "Извините, результатов не найдено. Попробуйте найти нужную запись с помощью поиска."
-
-#: content-page.php:21 content.php:45 image.php:102
-msgid "Pages:"
-msgstr "Страницы:"
-
-#: content.php:16
-msgid "Featured post"
-msgstr "Избранная запись"
-
-#: content-aside.php:23 content-image.php:23 content-link.php:21
-#: content-quote.php:20 content-status.php:37 content.php:33
-msgid "Leave a reply"
-msgstr "Добавить комментарий"
-
 #: content-aside.php:23 content-image.php:23 content-link.php:21
 #: content-quote.php:20 content-status.php:37 content.php:33
 msgid "1 Reply"
 msgstr "1 комментарий"
 
-#: comments.php:53
-msgid "Comments are closed."
-msgstr "Комментарии запрещены."
+#: content-aside.php:23 content-image.php:23 content-link.php:21
+#: content-quote.php:20 content-status.php:37 content.php:33
+msgid "Leave a reply"
+msgstr "Добавить комментарий"
 
 #: content-aside.php:20 content-link.php:18 content-quote.php:17
 #: content-status.php:15
@@ -107,97 +244,21 @@ msgstr "Постоянная ссылка: %s"
 msgid "Continue reading <span class=\"meta-nav\">&rarr;</span>"
 msgstr "Читать далее <span class=\"meta-nav\">&rarr;</span>"
 
-#: content-aside.php:26 content-image.php:26 content-link.php:24
-#: content-page.php:24 content-quote.php:23 content-status.php:40
-#: content.php:51 functions.php:342 image.php:37
-msgid "Edit"
-msgstr "Изменить"
-
-#: content-link.php:12
-msgid "Link"
-msgstr "Ссылка"
-
-#: content-none.php:13 index.php:49 search.php:34
-msgid "Nothing Found"
-msgstr "Ничего не найдено"
-
-#. Description of the plugin/theme
-msgid "The 2012 theme for WordPress is a fully responsive theme that looks great on any device. Features include a front page template with its own widgets, an optional display font, styling for post formats on both index and single views, and an optional no-sidebar page template. Make it yours with a custom menu, header image, and background."
-msgstr "Тема 2012 для WordPress создана по принципам адаптивного дизайна и превосходно выглядит на любом устройстве. Она содержит шаблон главной страницы со своими собственными виджетами, дополнительный шрифт, стили для форматов записей, а также одноколоночный шаблон для страниц. Сделайте её своей, добавив произвольное меню, изображение заголовка и фон."
-
-#. #-#-#-#-#  twentytwelve.pot (Twenty Twelve 1.8)  #-#-#-#-#
-#. Author URI of the plugin/theme
-#: footer.php:16
-msgid "https://wordpress.org/"
-msgstr "https://wordpress.org/"
-
-#. Template Name of the plugin/theme
-msgid "Full-width Page Template, No Sidebar"
-msgstr "Шаблон без боковой колонки"
-
-#: image.php:41
-msgid "&larr; Previous"
-msgstr "&larr; Предыдущее"
+#: comments.php:53
+msgid "Comments are closed."
+msgstr "Обсуждение закрыто."
 
 #: comments.php:44
 msgid "Newer Comments &rarr;"
 msgstr "Следующие комментарии &rarr;"
 
-#. Theme URI of the plugin/theme
-msgid "https://wordpress.org/themes/twentytwelve/"
-msgstr "https://wordpress.org/themes/twentytwelve/"
-
-#: single.php:21
-msgctxt "Previous post link"
-msgid "&larr;"
-msgstr "&larr;"
-
-#: single.php:22
-msgctxt "Next post link"
-msgid "&rarr;"
-msgstr "&rarr;"
-
-#. Template Name of the plugin/theme
-msgid "Front Page Template"
-msgstr "Шаблон главной страницы"
-
-#: functions.php:325
-msgid "Post author"
-msgstr "Автор записи"
-
-#. translators: 1: date, 2: time
-#: functions.php:331
-msgid "%1$s at %2$s"
-msgstr "%1$s в %2$s"
-
-#: functions.php:337
-msgid "Your comment is awaiting moderation."
-msgstr "Ваш комментарий ожидает проверки."
-
-#. Translators: used between list items, there is a space after the comma.
-#: functions.php:367 functions.php:370
-msgid ", "
-msgstr ", "
-
-#: functions.php:381
-msgid "View all posts by %s"
-msgstr "Посмотреть все записи автора %s"
-
-#: header.php:44
-msgid "Skip to content"
-msgstr "Перейти к содержимому"
-
-#: header.php:43
-msgid "Menu"
-msgstr "Меню"
-
 #: comments.php:43
 msgid "&larr; Older Comments"
 msgstr "&larr; Предыдущие комментарии"
 
-#: functions.php:310
-msgid "(Edit)"
-msgstr "(Изменить)"
+#: comments.php:42
+msgid "Comment navigation"
+msgstr "Навигация по комментариям"
 
 #: comments.php:31
 msgid "One thought on &ldquo;%2$s&rdquo;"
@@ -206,122 +267,62 @@ msgstr[0] "%2$s: %1$s комментарий"
 msgstr[1] "%2$s: %1$s комментария"
 msgstr[2] "%2$s: %1$s комментариев"
 
-#: comments.php:42
-msgid "Comment navigation"
-msgstr "Навигация по комментариям"
-
-#. translators: To add an additional Open Sans character subset specific to
-#. your language, translate this to 'greek', 'cyrillic' or 'vietnamese'. Do not
-#. translate into your own language.
-#: functions.php:107
-msgctxt "Open Sans font: add new subset (greek, cyrillic, vietnamese)"
-msgid "no-subset"
-msgstr "cyrillic"
-
-#. translators: If there are characters in your language that are not supported
-#. by Open Sans, translate this to 'off'. Do not translate into your own
-#. language.
-#: functions.php:101
-msgctxt "Open Sans font: on or off"
-msgid "on"
-msgstr "on"
-
-#: functions.php:310
-msgid "Pingback:"
-msgstr "Уведомление:"
-
-#: author.php:32
-msgid "Author Archives: %s"
-msgstr "Архив автора: %s"
+#: category.php:21
+msgid "Category Archives: %s"
+msgstr "Архив рубрики: %s"
 
 #: author.php:63 content.php:62
 msgid "About %s"
 msgstr "Об авторе %s"
 
-#: category.php:21
-msgid "Category Archives: %s"
-msgstr "Архив рубрики: %s"
-
-#: index.php:42
-msgid "Ready to publish your first post? <a href=\"%s\">Get started here</a>."
-msgstr "Готовы опубликовать свою первую запись? <a href=\"%s\">Начните отсюда</a>."
-
-#: archive.php:33
-msgctxt "yearly archives date format"
-msgid "Y"
-msgstr "Y"
-
-#: functions.php:391
-msgid "This entry was posted on %3$s<span class=\"by-author\"> by %4$s</span>."
-msgstr "Запись опубликована %3$s<span class=\"by-author\"> автором %4$s</span>."
+#: author.php:32
+msgid "Author Archives: %s"
+msgstr "Архив автора: %s"
 
 #: archive.php:35
 msgid "Archives"
 msgstr "Архивы"
 
 #: archive.php:33
+msgctxt "yearly archives date format"
+msgid "Y"
+msgstr "Y"
+
+#: archive.php:33
 msgid "Yearly Archives: %s"
 msgstr "Архив за год: %s"
-
-#: 404.php:17
-msgid "This is somewhat embarrassing, isn&rsquo;t it?"
-msgstr "Неприятная новость"
-
-#: 404.php:21
-msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
-msgstr "Запрошенную информацию найти не удалось. Возможно, будет полезен поиск по сайту."
-
-#: archive.php:29
-msgid "Daily Archives: %s"
-msgstr "Архив за день: %s"
-
-#: archive.php:31
-msgid "Monthly Archives: %s"
-msgstr "Архив за месяц: %s"
 
 #: archive.php:31
 msgctxt "monthly archives date format"
 msgid "F Y"
 msgstr "F Y"
 
-#: functions.php:285
-msgid "Newer posts <span class=\"meta-nav\">&rarr;</span>"
-msgstr "Следующие записи <span class=\"meta-nav\">&rarr;</span>"
+#: archive.php:31
+msgid "Monthly Archives: %s"
+msgstr "Архив за месяц: %s"
 
-#: functions.php:389
-msgid "This entry was posted in %1$s on %3$s<span class=\"by-author\"> by %4$s</span>."
-msgstr "Запись опубликована %3$s<span class=\"by-author\"> автором %4$s</span> в рубрике %1$s."
+#: archive.php:29
+msgid "Daily Archives: %s"
+msgstr "Архив за день: %s"
 
-#: functions.php:261
-msgid "Second Front Page Widget Area"
-msgstr "Вторая область главной страницы"
+#: 404.php:21
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "Запрошенную информацию найти не удалось. Возможно, будет полезен поиск по сайту."
 
-#. Translators: 1 is category, 2 is tag, 3 is the date and 4 is the author's
-#. name.
-#: functions.php:387
-msgid "This entry was posted in %1$s and tagged %2$s on %3$s<span class=\"by-author\"> by %4$s</span>."
-msgstr "Запись опубликована %3$s<span class=\"by-author\"> автором %4$s</span> в рубрике %1$s с метками %2$s."
+#: 404.php:17
+msgid "This is somewhat embarrassing, isn&rsquo;t it?"
+msgstr "Неприятная новость"
 
-#: functions.php:346
-msgid "Reply"
-msgstr "Ответить"
+#. #-#-#-#-#  twentytwelve.pot (Twenty Twelve 2.4)  #-#-#-#-#
+#. Author URI of the plugin/theme
+#: footer.php:16
+msgid "https://wordpress.org/"
+msgstr "https://ru.wordpress.org/"
 
 #. Author of the plugin/theme
 msgid "the WordPress team"
 msgstr "Команда WordPress"
 
-#: image.php:26
-msgid "<span class=\"meta-prep meta-prep-entry-date\">Published </span> <span class=\"entry-date\"><time class=\"entry-date\" datetime=\"%1$s\">%2$s</time></span> at <a href=\"%3$s\" title=\"Link to full-size image\">%4$s &times; %5$s</a> in <a href=\"%6$s\" title=\"Return to %7$s\" rel=\"gallery\">%8$s</a>."
-msgstr "<span class=\"meta-prep meta-prep-entry-date\">Опубликовано </span> <span class=\"entry-date\"><time class=\"entry-date\" datetime=\"%1$s\">%2$s</time></span> с разрешением <a href=\"%3$s\" title=\"Ссылка на полноразмерное изображение\">%4$s &times; %5$s</a> в галерее <a href=\"%6$s\" title=\"Вернуться: %7$s\" rel=\"gallery\">%8$s</a>."
-
-#: functions.php:253 functions.php:263
-msgid "Appears when using the optional Front Page template with a page set as Static Front Page"
-msgstr "Отображается, если в качестве главной выбрана статическая страница с соответствующим шаблоном."
-
-#. Theme Name of the plugin/theme
-msgid "Twenty Twelve"
-msgstr "Twenty Twelve"
-
-#: functions.php:284
-msgid "<span class=\"meta-nav\">&larr;</span> Older posts"
-msgstr "<span class=\"meta-nav\">&larr;</span> Предыдущие записи"
+#. Theme URI of the plugin/theme
+msgid "https://wordpress.org/themes/twentytwelve/"
+msgstr "https://wordpress.org/themes/twentytwelve/"
