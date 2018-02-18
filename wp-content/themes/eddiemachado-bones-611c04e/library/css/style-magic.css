@@ -158,10 +158,9 @@ input {
     margin: auto;
     margin-bottom: 15px;
 }
-.itemlist.itemlist-two img 
+.itemlist.itemlist-two img, .itemlist.itemlist-three img
 {
     display: inline!important;
-    /* margin: 10px; */
     width: auto;
     max-height: 1200px;
     max-width: 100%;
