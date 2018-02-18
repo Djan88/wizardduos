@@ -5,6 +5,7 @@ jQuery(function() {
     var cur_screen = 0,
         nextScreen,
         croppedImg,
+        croppedImgTwo,
         curChoice,
         protocol,
         checkPoints,
@@ -39,13 +40,6 @@ jQuery(function() {
             jQuery('.btn_back').removeClass('hidden');
         }
     }
-    // // Выбор протокола
-    // set_prot = function(){
-    //     protocol = jQuery(this).data('prot');
-    //     jQuery('.prot-item').removeClass('cur_prot');
-    //     jQuery(this).addClass('cur_prot');
-    //     localStorage.setItem( 'protocol', protocol);
-    // }
     jQuery('.prot-item').on('click', function() {
         set_prot();
     });
@@ -63,18 +57,6 @@ jQuery(function() {
     jQuery( ".box_rounded" ).resizable({
       aspectRatio: 1/ 1
     });
-    //Отлавливание сбрасываемых элементов
-    // jQuery( ".box_rounded" ).droppable({
-    //   drop: function( event, ui ) {
-    //     jQuery(this).append(dragElem);
-    //     _that.css({
-    //         left: '42%',
-    //         top: '42%'
-    //     });
-    //     _that = undefined;
-    //     dragElem = undefined;
-    //   }
-    // });
     //Аккордион
     jQuery( ".select_program" ).accordion({ active: 100 });
 
@@ -93,6 +75,11 @@ jQuery(function() {
             .addClass('animated')
             .addClass('fadeIn')
     }
+
+    jQuery('.homelink').on('click', function(event) {
+        localStorage.removeItem('croppedImgTwo');
+        localStorage.removeItem('croppedImg');
+    });
 
 // ШАГ 1 (К загрузке фото)
     jQuery( ".btn_choice" ).on('click', function(event) {
@@ -129,47 +116,56 @@ jQuery(function() {
 //Если фото уже обрезано
     jQuery('.step_img:after').css('content', curChoice);
     croppedImg = jQuery('#main').children()[0];
-    if(croppedImg.hasAttribute('src'))
-    {
-        protocol = localStorage.getItem('protocol');
-        console.log('protocol: '+protocol);
-        if(protocol == 'mw'){
-            jQuery('.itemlist-mw').removeClass('hidden');
-            jQuery('.itemlist-ww, .itemlist-mm').remove();
-            jQuery('.itemlist-mw').find('.example_non_anim').removeClass('hidden');
-        } else if(protocol == 'mm'){
-            jQuery('.itemlist-mm').removeClass('hidden');
-            jQuery('.itemlist-mw, .itemlist-ww').remove();
-            jQuery('.itemlist-mm').find('.example_non_anim').removeClass('hidden');
-            jQuery('.itemlist-one').css({
-                background: 'url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/mm_1_2.jpg) center -1px/100% no-repeat',
-                height: '1000px'
-            });
-        } else if(protocol == 'ww'){
-            jQuery('.itemlist-ww').removeClass('hidden');
-            jQuery('.itemlist-mw, .itemlist-mm').remove();
-            jQuery('.itemlist-ww').find('.example_non_anim').removeClass('hidden');
-            jQuery('.itemlist-one').css({
-                background: 'url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/women.jpg) 50% 2px / 97% no-repeat',
-                height: '1000px'
-            });
+    if(croppedImg.hasAttribute('src')){
+        if(supportsStorage && localStorage.getItem('croppedImg')){
+            localStorage.setItem('croppedImgTwo', jQuery('#main').children()[0]);
+            croppedImg = localStorage.getItem('croppedImg');
+            croppedImgTwo = jQuery('#main').children()[0];
+
+            protocol = localStorage.getItem('protocol');
+            console.log('protocol: '+protocol);
+            if(protocol == 'mw'){
+                jQuery('.itemlist-mw').removeClass('hidden');
+                jQuery('.itemlist-ww, .itemlist-mm').remove();
+                jQuery('.itemlist-mw').find('.example_non_anim').removeClass('hidden');
+            } else if(protocol == 'mm'){
+                jQuery('.itemlist-mm').removeClass('hidden');
+                jQuery('.itemlist-mw, .itemlist-ww').remove();
+                jQuery('.itemlist-mm').find('.example_non_anim').removeClass('hidden');
+                jQuery('.itemlist-one').css({
+                    background: 'url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/mm_1_2.jpg) center -1px/100% no-repeat',
+                    height: '1000px'
+                });
+            } else if(protocol == 'ww'){
+                jQuery('.itemlist-ww').removeClass('hidden');
+                jQuery('.itemlist-mw, .itemlist-mm').remove();
+                jQuery('.itemlist-ww').find('.example_non_anim').removeClass('hidden');
+                jQuery('.itemlist-one').css({
+                    background: 'url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/women.jpg) 50% 2px / 97% no-repeat',
+                    height: '1000px'
+                });
+            } else {
+                console.log('нет протокола с id '+ protocol)
+            };
+            // jQuery('.step_img div').text('Фото загружено');
+            jQuery('.heading_dashboard').text('Перенесите зоны с шаблона на фото клиентов')
+            cur_screen = 2;
+            jQuery('.step').eq(cur_screen-1).addClass('step_done');
+            jQuery('.step').eq(cur_screen-2).addClass('step_done');
+            jQuery('.step').eq(cur_screen).addClass('step_now');
+            nextScreen();
+            jQuery('.btn_back')
+                .removeClass('invisible')
+                .addClass('animated')
+                .addClass('fadeIn');
+            jQuery('.btn__wizard').removeClass('hidden');
+            jQuery('.itemlist-two').append(croppedImg);
+            jQuery('.work-area').find('.returned').draggable();
         } else {
-            console.log('нет протокола с id '+ protocol)
-        };
-        // jQuery('.step_img div').text('Фото загружено');
-        jQuery('.heading_dashboard').text('Перенесите зоны с шаблона на фото клиентов')
-        cur_screen = 2;
-        jQuery('.step').eq(cur_screen-1).addClass('step_done');
-        jQuery('.step').eq(cur_screen-2).addClass('step_done');
-        jQuery('.step').eq(cur_screen).addClass('step_now');
-        nextScreen();
-        jQuery('.btn_back')
-            .removeClass('invisible')
-            .addClass('animated')
-            .addClass('fadeIn');
-        jQuery('.btn__wizard').removeClass('hidden');
-        jQuery('.itemlist-two').append(croppedImg);
-        jQuery('.work-area').find('.returned').draggable();
+            localStorage.setItem('croppedImg', jQuery('#main').children()[0]);
+            jQuery('.machine_screen').addClass('hidden');
+            jQuery('.machine_screen').eq(2).removeClass('hidden').addClass('animated').addClass('fadeIn');
+        }
     }
 
 //ШАГ 3 (Старт процедуры)

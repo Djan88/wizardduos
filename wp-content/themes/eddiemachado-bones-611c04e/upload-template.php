@@ -73,20 +73,6 @@
                     <div class="step step_procedure">3 <div></div>  </div> -->
                     <h3 class="heading heading_dashboard">Выберите протокол работы</h3>
                 </div>
-                <!-- <div class="btn btn_back invisible"><span>‹</span> Назад</div> -->
-
-                <!-- <div class="machine_screen clearfix">
-                    <div id="accordion" class="select_program">
-                      <h3><span class="protocol_acent">(V2)</span>ЛЮДИ И ОТНОШЕНИЯ. ВЕЩИ, ПРЕДМЕТЫ И ДОСТИЖЕНИЕ ЦЕЛЕЙ</h3>
-                      <div>"Забыть ее/его не могу; простить ее/его не могу; только все мысли о нем/ней; хочу ее/его;" "хочу достичь/стать/получить качества и статус"; либо "хочу заработать/купить/продать/выгодную сделку/кредит";<div class="btn btn_lg btn_success btn_choice" data-protocol ="v2">Выбрать</div></div>
-                      <h3><span class="protocol_acent">(V3)</span>РАЗДРАЖЕНИЕ И НЕПРИЯТИЕ</h3>
-                      <div>"Не могу с этим смириться/ это все не правильно/ раздражение от чьих-то действий, чаще бытовых,внешнего вида или слов/ грусть-тоска зеленая/ усталость от жизни;"<div class="btn btn_lg btn_success btn_choice" data-protocol ="v3">Выбрать</div></div>
-                      <h3><span class="protocol_acent">(V4)</span>СУЕТА, БЕСПОКОЙСТВО И НАПРЯЖЕНИЕ</h3>
-                      <div>«… опоздаю не успею… тороплюсь, не успеваю… напряжение в теле и голове… а что будет… а кто что скажет/подумает про меня… а как я буду выглядеть в глазах окружающих… я стараюсь все лучшим образом делать… и  далее, в этом роде…"<div class="btn btn_lg btn_success btn_choice" data-protocol ="v4">Выбрать</div></div>
-                      <h3><span class="protocol_acent">(V5)</span>ОДНИ И ТЕ ЖЕ "ГРАБЛИ»: РЕЦИВЫ ПРОБЛЕМНЫХ СИТУАЦИЙ В ЛИЧНОЙ ЖИЗНИ</h3>
-                      <div>Насильственное следование некой жизненной стратегии, стойкие убеждения и ценности, основанные на опасениях и самоограничениях, навязчивые мысли и действия  по типу "частого мытья рук» или чего иного, постоянное беспокойство по поводу «курса валют»; ситуации по проверке себя с вовлечением окружающих «…ой, а не забыл ли я выключить чайник…утюг…газовый кран.. .дверь дома», «…проверь ты, а то я не уверен/на..»; страх высоты или нанесения себе повреждения ножиком или другим опасным предметом; создание больших запасов еды по типу «битком забитого холодильника, мешка сахара и муки»<div class="btn btn_lg btn_success btn_choice" data-protocol ="v5">Выбрать</div></div>
-                    </div>
-                </div> -->
                 <div class="machine_screen clearfix">
                     <div class="protList">
                         <button class="btn btn_lg btn_success btn_choice mw" data-protocol="mw"></button>
@@ -98,7 +84,6 @@
                     <div class="bbody">
 
                         <!-- upload form -->
-
                         <form id="upload_form" action="/wizard/" enctype="multipart/form-data" method="post"><!-- hidden crop params -->
                         <input id="x1" name="mci_x1" type="hidden" />
                         <input id="y1" name="mci_y1" type="hidden" />
