@@ -131,6 +131,7 @@ jQuery(function() {
     croppedImg = jQuery('#main').children()[0];
     if(croppedImg.hasAttribute('src')){
         if((supportsStorage && localStorage.getItem('croppedImg')) || no_second == true){
+            console.log(no_second);
             croppedImg = localStorage.getItem('croppedImg');
             jQuery('.itemlist-two_img').attr('src', croppedImg);
             if (no_second == true) {
@@ -141,10 +142,10 @@ jQuery(function() {
                 croppedImgTwo = jQuery('#main').children().attr('src');
                 jQuery('.itemlist-three_img').attr('src', croppedImgTwo);
             }
-            console.log(croppedImg)
-            console.log(croppedImgTwo)
+            // console.log(croppedImg)
+            // console.log(croppedImgTwo)
             protocol = localStorage.getItem('protocol');
-            console.log('protocol: '+protocol);
+            // console.log('protocol: '+protocol);
             if(protocol == 'mw'){
                 jQuery('.itemlist-mw').removeClass('hidden');
                 jQuery('.itemlist-ww, .itemlist-mm').remove();
