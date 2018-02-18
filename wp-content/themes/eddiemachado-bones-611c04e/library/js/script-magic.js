@@ -81,22 +81,6 @@ jQuery(function() {
         localStorage.removeItem('croppedImgTwo');
         localStorage.removeItem('croppedImg');
     });
-    // if (no_second = '1') {
-    //     jQuery('.no_second_btn').addClass('active').text('Активирован режим с 1 фото');
-    // }
-    no_second = localStorage.getItem('no_second');
-    jQuery('.no_second_btn').on('click', function(event) {
-        if (jQuery(this).hasClass('active')) {
-            localStorage.setItem('no_second', '2');
-            jQuery(this).text('Активирован режим с 2 фото');
-            console.log(localStorage.getItem('no_second'))
-        } else {
-            localStorage.setItem('no_second', '1');
-            jQuery(this).text('Активирован режим с 1 фото');
-            console.log(localStorage.getItem('no_second'))
-        }
-        jQuery(this).toggleClass('active')
-    });
 
 // ШАГ 1 (К загрузке фото)
     jQuery( ".btn_choice" ).on('click', function(event) {
@@ -132,7 +116,23 @@ jQuery(function() {
 // ШАГ 2 (переход к магии)
 //Если фото уже загружено
     jQuery('.step_img:after').css('content', curChoice);
-    croppedImg = jQuery('#main').children()[0];
+    no_second = localStorage.getItem('no_second');
+    if (no_second == '1') {
+        jQuery('.no_second_btn').addClass('active').text('Активирован режим с 1 фото');
+    }
+    jQuery('.no_second_btn').on('click', function(event) {
+        if (jQuery(this).hasClass('active')) {
+            localStorage.setItem('no_second', '2');
+            jQuery(this).text('Активирован режим с 2 фото');
+            console.log(localStorage.getItem('no_second'))
+        } else {
+            localStorage.setItem('no_second', '1');
+            jQuery(this).text('Активирован режим с 1 фото');
+            console.log(localStorage.getItem('no_second'))
+        }
+        jQuery(this).toggleClass('active')
+    });
+    croppedImg = jQuery('.returned');
     if(croppedImg.hasAttribute('src')){
         if((supportsStorage && localStorage.getItem('croppedImg'))){
             croppedImg = localStorage.getItem('croppedImg');
