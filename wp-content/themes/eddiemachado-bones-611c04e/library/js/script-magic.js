@@ -89,7 +89,7 @@ jQuery(function() {
         } else {
             localStorage.setItem('no_second', true);
         }
-        jQuery(this.toggleClass('active'))
+        jQuery(this).toggleClass('active')
     });
 
 // ШАГ 1 (К загрузке фото)
