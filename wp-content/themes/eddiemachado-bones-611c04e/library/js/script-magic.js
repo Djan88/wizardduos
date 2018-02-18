@@ -132,7 +132,8 @@ jQuery(function() {
             jQuery('.no_second_header').text('Активирован режим с 1 фото');
             console.log(localStorage.getItem('no_second'))
         }
-        jQuery(this).toggleClass('active')
+        jQuery(this).toggleClass('active');
+        jQuery('.no_second_header').toggleClass('active');
     });
     croppedImg = jQuery('body').find('.returned').attr('src');
     if (no_second == '1') {

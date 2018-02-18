@@ -636,3 +636,7 @@ path
     padding: 5px;
     color: #fd2828;
 }
+.no_second_header.no_second_btn.active 
+{
+    color: #fff;
+}
