@@ -133,6 +133,9 @@ jQuery(function() {
         jQuery(this).toggleClass('active')
     });
     croppedImg = jQuery('body').find('.returned');
+    if (no_second == '1') {
+        localStorage.setItem('croppedImg', croppedImg)
+    }
     if(croppedImg.attr('src')){
         if((supportsStorage && localStorage.getItem('croppedImg'))){
             croppedImg = localStorage.getItem('croppedImg');
@@ -186,7 +189,6 @@ jQuery(function() {
             jQuery('.btn__wizard').removeClass('hidden');
             jQuery('.work-area').find('.returned').draggable();
         } else {
-            console.log(no_second);
             if (no_second == '2') {
                 jQuery('.machine_screen_prots').addClass('hidden');
                 localStorage.setItem('croppedImg', jQuery('#main').children().attr('src'));
