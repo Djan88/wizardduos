@@ -210,7 +210,9 @@ jQuery(function() {
                    .addClass('animated')
                    .addClass('fadeIn');
                jQuery('.btn__wizard').removeClass('hidden');
-               jQuery('.itemlist-two_img').attr('src', croppedImg).css('width', '350px');;
+               jQuery('.itemlist-two_img').attr('src', croppedImg);
+               jQuery('.itemlist-two').css('width', '350px');
+               jQuery('.itemlist-three').addClass('hidden');
                jQuery('.itemlist-three_img').addClass('hidden');
                jQuery('.work-area').find('.returned').draggable(); 
             } else {
