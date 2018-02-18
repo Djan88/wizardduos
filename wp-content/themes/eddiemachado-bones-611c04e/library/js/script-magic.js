@@ -164,7 +164,10 @@ jQuery(function() {
         } else {
             localStorage.setItem('croppedImg', jQuery('#main').children()[0]);
             jQuery('.machine_screen').addClass('hidden');
-            jQuery('.machine_screen').eq(2).removeClass('hidden').addClass('animated').addClass('fadeIn');
+            jQuery('.machine_screen_load')
+                .removeClass('hidden')
+                .addClass('animated')
+                .addClass('fadeIn');
         }
     }
 
