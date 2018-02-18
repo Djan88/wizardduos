@@ -86,10 +86,10 @@ jQuery(function() {
     jQuery('.no_second_btn').on('click', function(event) {
         if (jQuery(this).hasClass('active')) {
             localStorage.setItem('no_second', false);
-            jQuery(this).text('Нажмите если хотите загружать 2 фото');
+            jQuery(this).text('Режим с 2 фото');
         } else {
             localStorage.setItem('no_second', true);
-            jQuery(this).text('Нажмите если не хотите загружать 2 фото');
+            jQuery(this).text('Режим с 1 фото');
         }
         jQuery(this).toggleClass('active')
     });
@@ -130,7 +130,7 @@ jQuery(function() {
     jQuery('.step_img:after').css('content', curChoice);
     croppedImg = jQuery('#main').children()[0];
     if(croppedImg.hasAttribute('src')){
-        if(supportsStorage && localStorage.getItem('croppedImg')){
+        if((supportsStorage && localStorage.getItem('croppedImg')) || no_second == true){
             croppedImg = localStorage.getItem('croppedImg');
             jQuery('.itemlist-two_img').attr('src', croppedImg);
             if (no_second == true) {
