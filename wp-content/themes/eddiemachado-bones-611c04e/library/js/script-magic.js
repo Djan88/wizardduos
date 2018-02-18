@@ -142,8 +142,8 @@ jQuery(function() {
                 croppedImgTwo = jQuery('#main').children().attr('src');
                 jQuery('.itemlist-three_img').attr('src', croppedImgTwo);
             }
-            // console.log(croppedImg)
-            // console.log(croppedImgTwo)
+            console.log(croppedImg)
+            console.log(croppedImgTwo)
             protocol = localStorage.getItem('protocol');
             // console.log('protocol: '+protocol);
             if(protocol == 'mw'){
