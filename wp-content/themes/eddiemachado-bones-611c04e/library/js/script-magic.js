@@ -84,8 +84,12 @@ jQuery(function() {
         localStorage.setItem('no_second', false);
     });
     jQuery('.no_second_btn').on('click', function(event) {
-        localStorage.setItem('no_second', true);
-        jQuery(this.addClass('active'))
+        if (jQuery(this).hasClass('active')) {
+            localStorage.setItem('no_second', false);
+        } else {
+            localStorage.setItem('no_second', true);
+        }
+        jQuery(this.toggleClass('active'))
     });
 
 // ШАГ 1 (К загрузке фото)
