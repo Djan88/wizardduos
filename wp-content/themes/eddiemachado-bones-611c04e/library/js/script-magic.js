@@ -130,7 +130,7 @@ jQuery(function() {
     });
 
 // ШАГ 2 (переход к магии)
-//Если фото уже обрезано
+//Если фото уже загружено
     jQuery('.step_img:after').css('content', curChoice);
     croppedImg = jQuery('#main').children()[0];
     if(croppedImg.hasAttribute('src')){
