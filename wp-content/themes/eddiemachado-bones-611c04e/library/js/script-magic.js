@@ -83,13 +83,16 @@ jQuery(function() {
         localStorage.removeItem('croppedImg');
         localStorage.setItem('no_second', '2');
     });
+    if (no_second = '1') {
+        jQuery('.no_second_btn').addClass('active').text('Активирован режим с 1 фото');
+    }
     jQuery('.no_second_btn').on('click', function(event) {
         if (jQuery(this).hasClass('active')) {
-            localStorage.setItem('no_second', '1');
-            jQuery(this).text('Активирован режим с 1 фото');
-        } else {
             localStorage.setItem('no_second', '2');
             jQuery(this).text('Активирован режим с 2 фото');
+        } else {
+            localStorage.setItem('no_second', '1');
+            jQuery(this).text('Активирован режим с 1 фото');
         }
         jQuery(this).toggleClass('active')
     });
