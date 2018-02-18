@@ -69,9 +69,8 @@ li
     /*background: url(../images/man.jpg) 0 0/100% no-repeat;*/
     padding: 20px 0;
     float: left;
-    width: 20%;
     margin-left: 1%;
-    min-width: 200px;
+    width: 200px;
     border-color: transparent;
 }
 .itemlist-three
@@ -79,9 +78,8 @@ li
    /*background: url(../images/man.jpg) 0 0/100% no-repeat;*/
    padding: 20px 0;
    float: left;
-   width: 20%;
    margin-left: 1%;
-   min-width: 200px; 
+   width: 200px; 
    border-color: transparent;
 }
 .itemlist_item:hover, .itemlist_item:active

@@ -8,6 +8,7 @@ jQuery(function() {
         croppedImgTwo,
         curChoice,
         protocol,
+        no_second,
         checkPoints,
         main_heading,
         set_prot,
@@ -44,10 +45,15 @@ jQuery(function() {
         set_prot();
     });
     //Получение данных из локального хранилища
-    if(supportsStorage && localStorage.getItem('curChoice')){
+    if(supportsStorage){
         curChoice = localStorage.getItem('curChoice');
         protocol = localStorage.getItem('protocol');
+        no_second = localStorage.getItem('no_second');
         jQuery('.step_choice div').text(curChoice);
+    }
+    if (no_second == true) {
+        jQuery('.no_second_text').removeClass('hidden')
+        jQuery('.machine_screen').addClass('hidden');
     }
     //Перетягивание элементов
     jQuery( ".draggable, .box_rounded" ).draggable({ 
@@ -79,6 +85,7 @@ jQuery(function() {
     jQuery('.homelink').on('click', function(event) {
         localStorage.removeItem('croppedImgTwo');
         localStorage.removeItem('croppedImg');
+        localStorage.setItem('no_second', false)
     });
 
 // ШАГ 1 (К загрузке фото)
@@ -164,19 +171,65 @@ jQuery(function() {
             jQuery('.itemlist-three_img').attr('src', croppedImgTwo);
             jQuery('.work-area').find('.returned').draggable();
         } else {
-            localStorage.setItem('croppedImg', jQuery('#main').children().attr('src'));
-            jQuery('.heading_dashboard').text('Загрузите второе фото');
-            jQuery('.machine_screen').addClass('hidden');
-            jQuery('.machine_screen_load')
-                .removeClass('hidden')
-                .addClass('animated')
-                .addClass('fadeIn');
+            if (no_second == true) {
+               croppedImg = localStorage.getItem('croppedImg');
+               protocol = localStorage.getItem('protocol');
+               console.log('protocol: '+protocol);
+               if(protocol == 'mw'){
+                   jQuery('.itemlist-mw').removeClass('hidden');
+                   jQuery('.itemlist-ww, .itemlist-mm').remove();
+                   jQuery('.itemlist-mw').find('.example_non_anim').removeClass('hidden');
+               } else if(protocol == 'mm'){
+                   jQuery('.itemlist-mm').removeClass('hidden');
+                   jQuery('.itemlist-mw, .itemlist-ww').remove();
+                   jQuery('.itemlist-mm').find('.example_non_anim').removeClass('hidden');
+                   jQuery('.itemlist-one').css({
+                       background: 'url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/mm_1_2.jpg) center -1px/100% no-repeat',
+                       height: '1000px'
+                   });
+               } else if(protocol == 'ww'){
+                   jQuery('.itemlist-ww').removeClass('hidden');
+                   jQuery('.itemlist-mw, .itemlist-mm').remove();
+                   jQuery('.itemlist-ww').find('.example_non_anim').removeClass('hidden');
+                   jQuery('.itemlist-one').css({
+                       background: 'url(/wp-content/themes/eddiemachado-bones-611c04e/library/images/women.jpg) 50% 2px / 97% no-repeat',
+                       height: '1000px'
+                   });
+               } else {
+                   console.log('нет протокола с id '+ protocol)
+               };
+               // jQuery('.step_img div').text('Фото загружено');
+               jQuery('.heading_dashboard').text('Перенесите зоны с шаблона на фото клиентов')
+               cur_screen = 2;
+               jQuery('.step').eq(cur_screen-1).addClass('step_done');
+               jQuery('.step').eq(cur_screen-2).addClass('step_done');
+               jQuery('.step').eq(cur_screen).addClass('step_now');
+               nextScreen();
+               jQuery('.btn_back')
+                   .removeClass('invisible')
+                   .addClass('animated')
+                   .addClass('fadeIn');
+               jQuery('.btn__wizard').removeClass('hidden');
+               jQuery('.itemlist-two_img').attr('src', croppedImg).css('width', '350px');;
+               jQuery('.itemlist-three_img').addClass('hidden');
+               jQuery('.work-area').find('.returned').draggable(); 
+            } else {
+                localStorage.setItem('croppedImg', jQuery('#main').children().attr('src'));
+                jQuery('.heading_dashboard').text('Загрузите второе фото');
+                jQuery('.no_second').removeClass('hidden')
+                localStorage.setItem('no_second', true)
+                jQuery('.machine_screen_load')
+                    .removeClass('hidden')
+                    .addClass('animated')
+                    .addClass('fadeIn');
+            }
         }
     }
 
 //ШАГ 3 (Старт процедуры)
 jQuery( ".btn__wizard" ).on('click', function(event) {
     pointsStatus = true;
+    localStorage.setItem('no_second', false)
     checkPoints();
     // if(pointsStatus == false){
     //     swal("Не все зоны перенесены", "Перед началом процедуры необходимо перенести все зоны", "info")
