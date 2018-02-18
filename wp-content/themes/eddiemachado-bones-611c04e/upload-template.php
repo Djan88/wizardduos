@@ -106,7 +106,7 @@
                         </form>
                         <div class="no_second">
                             <div class="btn btn_lg btn_primary no_second_btn">Активирован режим с 2 фото</div>
-                            <div class="no_second_text">Если Вы хотите пропустить этот шаг нажмите стответствующую кнопку</div>
+                            <div class="no_second_text">Программа может загрузить фото двух клиентов поочередно. Если Вы предварительно склееили два фото в одно выберите режим работы с одним фото!</div>
                         </div>
                     </div>
                 </div>
