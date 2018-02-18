@@ -85,7 +85,7 @@ jQuery(function() {
     });
     jQuery('.no_second_btn').on('click', function(event) {
         localStorage.setItem('no_second', true);
-        nextScreen();
+        window.location.href = '/wizard';
     });
 
 // ШАГ 1 (К загрузке фото)
