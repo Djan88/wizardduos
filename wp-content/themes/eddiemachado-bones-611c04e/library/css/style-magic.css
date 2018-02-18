@@ -72,6 +72,7 @@ li
     width: 30%;
     margin-left: 1%;
     min-width: 200px;
+    border-color: transparent;
 }
 .itemlist-three
 {
@@ -81,6 +82,7 @@ li
    width: 30%;
    margin-left: 1%;
    min-width: 200px; 
+   border-color: transparent;
 }
 .itemlist_item:hover, .itemlist_item:active
 {
