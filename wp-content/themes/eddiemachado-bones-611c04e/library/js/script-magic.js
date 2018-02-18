@@ -133,7 +133,7 @@ jQuery(function() {
         jQuery(this).toggleClass('active')
     });
     croppedImg = jQuery('body').find('.returned');
-    if(croppedImg.hasAttribute('src')){
+    if(croppedImg.attr('src')){
         if((supportsStorage && localStorage.getItem('croppedImg'))){
             croppedImg = localStorage.getItem('croppedImg');
             jQuery('.itemlist-two_img').attr('src', croppedImg);
