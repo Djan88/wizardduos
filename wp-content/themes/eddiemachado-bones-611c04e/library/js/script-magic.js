@@ -132,14 +132,14 @@ jQuery(function() {
         }
         jQuery(this).toggleClass('active')
     });
-    croppedImg = jQuery('body').find('.returned').attr('src');
+    croppedImg = jQuery('body').find('.returned');
     if (no_second == '1') {
         localStorage.setItem('croppedImg', croppedImg)
     }
     if(croppedImg.attr('src')){
         if((supportsStorage && localStorage.getItem('croppedImg'))){
             croppedImg = localStorage.getItem('croppedImg');
-            jQuery('.itemlist-two_img').attr('src', croppedImg);
+            jQuery('.itemlist-two_img').attr('src', croppedImg.attr('src'));
             if (no_second == '1') {
                 jQuery('.itemlist-two').css('width', '350px');
                 jQuery('.itemlist-three').addClass('hidden');
