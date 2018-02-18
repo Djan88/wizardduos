@@ -121,7 +121,6 @@ jQuery(function() {
             localStorage.setItem('croppedImgTwo', jQuery('#main').children().attr('src'));
             croppedImg = localStorage.getItem('croppedImg');
             croppedImgTwo = jQuery('#main').children().attr('src');
-            jQuery('.heading_dashboard').text('Загрузите второе фото');
             console.log(croppedImg)
             console.log(croppedImgTwo)
             protocol = localStorage.getItem('protocol');
@@ -166,6 +165,7 @@ jQuery(function() {
             jQuery('.work-area').find('.returned').draggable();
         } else {
             localStorage.setItem('croppedImg', jQuery('#main').children().attr('src'));
+            jQuery('.heading_dashboard').text('Загрузите второе фото');
             jQuery('.machine_screen').addClass('hidden');
             jQuery('.machine_screen_load')
                 .removeClass('hidden')
