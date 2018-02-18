@@ -79,7 +79,7 @@
                         <?php if(is_user_logged_in()){ ?>
                             <a class="btn btn_sm btn_warning btn_logout" href="<?php echo home_url(); ?>/wp-login.php?action=logout&amp;_wpnonce=a6cad512ba">Выйти</a>
                             <div class="btn btn_sm btn_warning btn__wizard hidden" >Выполнить</div>
-                            <div class="btn btn_lg btn_warning no_second_header no_second_btn hidden">Активирован режим с 2 фото</div>
+                            <div class="btn btn_sm btn_warning no_second_header no_second_btn hidden">Активирован режим с 2 фото</div>
                             <div class="btn btn_sm btn_warning btn__crop hidden" >Редактивровать фото</div>
                             <div class="btn btn_sm btn_warning btn_back invisible"><span>‹</span> Назад</div>
                         <?php }?>
