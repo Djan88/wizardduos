@@ -118,9 +118,9 @@ jQuery(function() {
     croppedImg = jQuery('#main').children()[0];
     if(croppedImg.hasAttribute('src')){
         if(supportsStorage && localStorage.getItem('croppedImg')){
-            localStorage.setItem('croppedImgTwo', jQuery('#main').children()[0]);
+            localStorage.setItem('croppedImgTwo', jQuery('#main').children()[0].attr('src'));
             croppedImg = localStorage.getItem('croppedImg');
-            croppedImgTwo = jQuery('#main').children()[0];
+            croppedImgTwo = jQuery('#main').children()[0].attr('src');
             console.log(croppedImg)
             console.log(croppedImgTwo)
             protocol = localStorage.getItem('protocol');
@@ -163,7 +163,7 @@ jQuery(function() {
             jQuery('.itemlist-two').append(croppedImg);
             jQuery('.work-area').find('.returned').draggable();
         } else {
-            localStorage.setItem('croppedImg', jQuery('#main').children()[0]);
+            localStorage.setItem('croppedImg', jQuery('#main').children()[0].attr('src'));
             jQuery('.machine_screen').addClass('hidden');
             jQuery('.machine_screen_load')
                 .removeClass('hidden')
