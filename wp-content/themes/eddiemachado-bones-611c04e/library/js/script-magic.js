@@ -45,7 +45,7 @@ jQuery(function() {
         set_prot();
     });
     //Получение данных из локального хранилища
-    if(supportsStorage){
+    if(supportsStorage && localStorage.getItem('curChoice')){
         curChoice = localStorage.getItem('curChoice');
         protocol = localStorage.getItem('protocol');
         no_second = localStorage.getItem('no_second');
