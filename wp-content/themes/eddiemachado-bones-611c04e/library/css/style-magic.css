@@ -162,10 +162,10 @@ input {
 }
 .itemlist.itemlist-two img, .itemlist.itemlist-three img
 {
-    display: inline!important;
-    width: auto;
+    display: block!important;
     max-height: 1200px;
     max-width: 100%;
+    width: 100%;
 }
 .steps
 {
@@ -526,7 +526,8 @@ path
     border-radius: 50%;
     position: absolute;
     margin: 150px auto;
-    right: 10px;
+    left: 10px;
+    top: 0;
 }
 .paranja 
 {
