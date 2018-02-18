@@ -139,6 +139,7 @@ jQuery(function() {
         localStorage.setItem('croppedImg', croppedImg)
     }
     if(croppedImg){
+        jQuery('.no_second').addClass('hidden');
         if((supportsStorage && localStorage.getItem('croppedImg'))){
             croppedImg = localStorage.getItem('croppedImg');
             jQuery('.itemlist-two_img').attr('src', croppedImg);
