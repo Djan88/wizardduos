@@ -8,7 +8,7 @@ jQuery(function() {
         croppedImgTwo,
         curChoice,
         protocol,
-        no_second,
+        no_second = '2',
         checkPoints,
         main_heading,
         set_prot,
@@ -81,15 +81,15 @@ jQuery(function() {
     jQuery('.homelink').on('click', function(event) {
         localStorage.removeItem('croppedImgTwo');
         localStorage.removeItem('croppedImg');
-        localStorage.setItem('no_second', false);
+        localStorage.setItem('no_second', '2');
     });
     jQuery('.no_second_btn').on('click', function(event) {
         if (jQuery(this).hasClass('active')) {
-            localStorage.setItem('no_second', false);
-            jQuery(this).text('Режим с 2 фото');
+            localStorage.setItem('no_second', '1');
+            jQuery(this).text('Активирован режим с 1 фото');
         } else {
-            localStorage.setItem('no_second', true);
-            jQuery(this).text('Режим с 1 фото');
+            localStorage.setItem('no_second', '2');
+            jQuery(this).text('Активирован режим с 2 фото');
         }
         jQuery(this).toggleClass('active')
     });
@@ -130,11 +130,10 @@ jQuery(function() {
     jQuery('.step_img:after').css('content', curChoice);
     croppedImg = jQuery('#main').children()[0];
     if(croppedImg.hasAttribute('src')){
-        if((supportsStorage && localStorage.getItem('croppedImg')) || no_second == true){
-            console.log(no_second);
+        if((supportsStorage && localStorage.getItem('croppedImg'))){
             croppedImg = localStorage.getItem('croppedImg');
             jQuery('.itemlist-two_img').attr('src', croppedImg);
-            if (no_second == true) {
+            if (no_second == '1') {
                 jQuery('.itemlist-two').css('width', '350px');
                 jQuery('.itemlist-three').addClass('hidden');
             } else {
@@ -183,13 +182,16 @@ jQuery(function() {
             jQuery('.btn__wizard').removeClass('hidden');
             jQuery('.work-area').find('.returned').draggable();
         } else {
-            jQuery('.machine_screen_prots').addClass('hidden');
-            localStorage.setItem('croppedImg', jQuery('#main').children().attr('src'));
-            jQuery('.heading_dashboard').text('Загрузите второе фото');
-            jQuery('.machine_screen_load')
-                .removeClass('hidden')
-                .addClass('animated')
-                .addClass('fadeIn');
+            console.log(no_second);
+            if (no_second == '2') {
+                jQuery('.machine_screen_prots').addClass('hidden');
+                localStorage.setItem('croppedImg', jQuery('#main').children().attr('src'));
+                jQuery('.heading_dashboard').text('Загрузите второе фото');
+                jQuery('.machine_screen_load')
+                    .removeClass('hidden')
+                    .addClass('animated')
+                    .addClass('fadeIn');
+            }
         }
     }
 
