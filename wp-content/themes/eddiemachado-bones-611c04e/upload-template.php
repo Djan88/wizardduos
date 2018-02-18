@@ -359,20 +359,14 @@
                             <li id="draggableD4_1" class="itemlist_item itemZone item_list__mid draggable" style="left: 115px; top: 717px;">D4</li>
                             <li id="draggableD6_1" class="itemlist_item itemZone item_list__mid draggable" style="left: 130px; top: 880px;">D6</li>
                             <li id="draggableD7_1" class="itemlist_item itemZone item_list__mid draggable" style="left: 131px; top: 934px;">D7</li>
-                            <!-- <li id="draggableClean_2_1" class="itemlist_item itemZone item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
-                            <!-- <li id="draggableClean_3_1" class="itemlist_item itemZone item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
-                            <!-- <li id="draggableClean_4_1" class="itemlist_item itemZone item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
-                            <!-- <li id="draggableClean_5_1" class="itemlist_item itemZone item_list__mid itemlist_item__clear draggable inopaciti" style="left: 535px; top: 80px;"></li> -->
                         </ul>
                         <ul class="itemlist itemlist-two" id="itemlist-two">
-                        <!--
-                            <li class="itemlist_item">1</li>
-                            <li class="itemlist_item">2</li>
-                            <li class="itemlist_item">3</li>
-                            <li class="itemlist_item">4</li>
-                            <li class="itemlist_item">5</li>
-                        -->
-                        <li class="itemlist-two-li"></li>
+                            <img class="itemlist-two_img" src="" alt="">
+                            <li class="itemlist-two-li"></li>
+                        </ul>
+                        <ul class="itemlist itemlist-three" id="itemlist-three">
+                            <img class="itemlist-three_img" src="" alt="">
+                            <li class="itemlist-three-li"></li>
                         </ul>
                         <div class="box_rounded">
                             <li id="draggableD12" class="itemlist_item item_list__mid draggable hidden" style="left: 45%; top: 5px;"></li>

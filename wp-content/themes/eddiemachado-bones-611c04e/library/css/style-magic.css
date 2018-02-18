@@ -68,10 +68,19 @@ li
 {
     /*background: url(../images/man.jpg) 0 0/100% no-repeat;*/
     padding: 20px 0;
-    float: right;
-    width: 45%;
-    margin-right: 5%;
-    min-width: 392px;
+    float: left;
+    width: 30%;
+    margin-left: 1%;
+    min-width: 200px;
+}
+.itemlist-three
+{
+   /*background: url(../images/man.jpg) 0 0/100% no-repeat;*/
+   padding: 20px 0;
+   float: left;
+   width: 30%;
+   margin-left: 1%;
+   min-width: 200px; 
 }
 .itemlist_item:hover, .itemlist_item:active
 {

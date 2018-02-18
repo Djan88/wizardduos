@@ -160,7 +160,8 @@ jQuery(function() {
                 .addClass('animated')
                 .addClass('fadeIn');
             jQuery('.btn__wizard').removeClass('hidden');
-            jQuery('.itemlist-two').append(croppedImg);
+            jQuery('.itemlist-two_img').attr('src', croppedImg);
+            jQuery('.itemlist-three_img').attr('src', croppedImgTwo);
             jQuery('.work-area').find('.returned').draggable();
         } else {
             localStorage.setItem('croppedImg', jQuery('#main').children().attr('src'));
