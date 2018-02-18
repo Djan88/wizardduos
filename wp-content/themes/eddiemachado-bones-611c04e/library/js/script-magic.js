@@ -121,6 +121,7 @@ jQuery(function() {
             localStorage.setItem('croppedImgTwo', jQuery('#main').children().attr('src'));
             croppedImg = localStorage.getItem('croppedImg');
             croppedImgTwo = jQuery('#main').children().attr('src');
+            jQuery('.heading_dashboard').text('Загрузите фото');
             console.log(croppedImg)
             console.log(croppedImgTwo)
             protocol = localStorage.getItem('protocol');
