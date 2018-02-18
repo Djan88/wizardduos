@@ -105,8 +105,8 @@
                         </div>
                         </form>
                         <div class="no_second">
-                            <div class="btn btn_lg btn_primary no_second_btn hidden">Пропустить</div>
-                            <div class="no_second_text hidden">Если Вы хотите пропустить этот шаг нажмите стответствующую кнопку</div>
+                            <div class="btn btn_lg btn_primary no_second_btn">Пропустить</div>
+                            <div class="no_second_text">Если Вы хотите пропустить этот шаг нажмите стответствующую кнопку</div>
                         </div>
                     </div>
                 </div>
