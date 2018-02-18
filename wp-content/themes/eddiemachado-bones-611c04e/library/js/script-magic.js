@@ -132,7 +132,7 @@ jQuery(function() {
         }
         jQuery(this).toggleClass('active')
     });
-    if(jQuery('#main').find(jQuery('.returned')).hasAttribute('src')){
+    if(jQuery('#main').find('.returned').hasAttribute('src')){
         croppedImg = jQuery('.returned');
         if((supportsStorage && localStorage.getItem('croppedImg'))){
             croppedImg = localStorage.getItem('croppedImg');
