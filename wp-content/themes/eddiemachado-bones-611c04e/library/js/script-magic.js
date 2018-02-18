@@ -48,7 +48,6 @@ jQuery(function() {
     if(supportsStorage && localStorage.getItem('curChoice')){
         curChoice = localStorage.getItem('curChoice');
         protocol = localStorage.getItem('protocol');
-        no_second = localStorage.getItem('no_second');
         jQuery('.step_choice div').text(curChoice);
     }
     //Перетягивание элементов
@@ -85,6 +84,7 @@ jQuery(function() {
     // if (no_second = '1') {
     //     jQuery('.no_second_btn').addClass('active').text('Активирован режим с 1 фото');
     // }
+    no_second = localStorage.getItem('no_second');
     jQuery('.no_second_btn').on('click', function(event) {
         if (jQuery(this).hasClass('active')) {
             localStorage.setItem('no_second', '2');
