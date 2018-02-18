@@ -51,9 +51,6 @@ jQuery(function() {
         no_second = localStorage.getItem('no_second');
         jQuery('.step_choice div').text(curChoice);
     }
-    if (no_second == true) {
-        
-    }
     //Перетягивание элементов
     jQuery( ".draggable, .box_rounded" ).draggable({ 
         snap: false
@@ -88,6 +85,7 @@ jQuery(function() {
     });
     jQuery('.no_second_btn').on('click', function(event) {
         localStorage.setItem('no_second', true);
+        nextScreen();
     });
 
 // ШАГ 1 (К загрузке фото)
@@ -103,7 +101,7 @@ jQuery(function() {
             localStorage.setItem('curChoice', curChoice);
             jQuery('.step_choice div').text(curChoice);
             cur_screen += 1;
-                nextScreen()
+                nextScreen();
                 jQuery('.step')
                     .eq(cur_screen-1)
                     .addClass('step_done');
@@ -127,9 +125,16 @@ jQuery(function() {
     croppedImg = jQuery('#main').children()[0];
     if(croppedImg.hasAttribute('src')){
         if(supportsStorage && localStorage.getItem('croppedImg')){
-            localStorage.setItem('croppedImgTwo', jQuery('#main').children().attr('src'));
             croppedImg = localStorage.getItem('croppedImg');
-            croppedImgTwo = jQuery('#main').children().attr('src');
+            jQuery('.itemlist-two_img').attr('src', croppedImg);
+            if (no_second == true) {
+                jQuery('.itemlist-two').css('width', '350px');
+                jQuery('.itemlist-three').addClass('hidden');
+            } else {
+                localStorage.setItem('croppedImgTwo', jQuery('#main').children().attr('src'));
+                croppedImgTwo = jQuery('#main').children().attr('src');
+                jQuery('.itemlist-three_img').attr('src', croppedImgTwo);
+            }
             console.log(croppedImg)
             console.log(croppedImgTwo)
             protocol = localStorage.getItem('protocol');
@@ -169,8 +174,6 @@ jQuery(function() {
                 .addClass('animated')
                 .addClass('fadeIn');
             jQuery('.btn__wizard').removeClass('hidden');
-            jQuery('.itemlist-two_img').attr('src', croppedImg);
-            jQuery('.itemlist-three_img').attr('src', croppedImgTwo);
             jQuery('.work-area').find('.returned').draggable();
         } else {
             jQuery('.no_second').removeClass('hidden');
