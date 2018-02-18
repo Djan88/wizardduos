@@ -132,8 +132,8 @@ jQuery(function() {
         }
         jQuery(this).toggleClass('active')
     });
-    if(jQuery('#main').find('.returned').hasAttribute('src')){
-        croppedImg = jQuery('.returned');
+    croppedImg = jQuery('body').find('.returned');
+    if(croppedImg.hasAttribute('src')){
         if((supportsStorage && localStorage.getItem('croppedImg'))){
             croppedImg = localStorage.getItem('croppedImg');
             jQuery('.itemlist-two_img').attr('src', croppedImg);
