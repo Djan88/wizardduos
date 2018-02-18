@@ -73,7 +73,7 @@
                     <div class="step step_procedure">3 <div></div>  </div> -->
                     <h3 class="heading heading_dashboard">Выберите протокол работы</h3>
                 </div>
-                <div class="machine_screen clearfix">
+                <div class="machine_screen machine_screen_prots clearfix">
                     <div class="protList">
                         <button class="btn btn_lg btn_success btn_choice mw" data-protocol="mw"></button>
                         <button class="btn btn_lg btn_success btn_choice ww" data-protocol="ww"></button>
@@ -104,8 +104,10 @@
                         <input type="submit" class="crop_photo" value="Редактировать фото" name="mci_magic" />
                         </div>
                         </form>
-                        <div class="btn btn_lg btn_default no_second hidden">Пропустить</div>
-                        <div class="no_second_text hidden">Если Вы хотите пропустить этот шаг нажмите стответствующую кнопку</div>
+                        <div class="no_second">
+                            <div class="btn btn_lg btn_primary no_second_btn hidden">Пропустить</div>
+                            <div class="no_second_text hidden">Если Вы хотите пропустить этот шаг нажмите стответствующую кнопку</div>
+                        </div>
                     </div>
                 </div>
 

@@ -52,8 +52,7 @@ jQuery(function() {
         jQuery('.step_choice div').text(curChoice);
     }
     if (no_second == true) {
-        jQuery('.no_second_text').removeClass('hidden')
-        jQuery('.machine_screen').addClass('hidden');
+        
     }
     //Перетягивание элементов
     jQuery( ".draggable, .box_rounded" ).draggable({ 
@@ -85,7 +84,10 @@ jQuery(function() {
     jQuery('.homelink').on('click', function(event) {
         localStorage.removeItem('croppedImgTwo');
         localStorage.removeItem('croppedImg');
-        localStorage.setItem('no_second', false)
+        localStorage.setItem('no_second', false);
+    });
+    jQuery('.no_second_btn').on('click', function(event) {
+        localStorage.setItem('no_second', true);
     });
 
 // ШАГ 1 (К загрузке фото)
@@ -172,10 +174,10 @@ jQuery(function() {
             jQuery('.work-area').find('.returned').draggable();
         } else {
             nextScreen();
+            jQuery('.machine_screen_prots').addClass('hidden');
             localStorage.setItem('croppedImg', jQuery('#main').children().attr('src'));
             jQuery('.heading_dashboard').text('Загрузите второе фото');
-            jQuery('.no_second').removeClass('hidden')
-            localStorage.setItem('no_second', true)
+            jQuery('.no_second').removeClass('hidden');
             jQuery('.machine_screen_load')
                 .removeClass('hidden')
                 .addClass('animated')
