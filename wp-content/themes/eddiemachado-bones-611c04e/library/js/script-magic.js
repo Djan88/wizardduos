@@ -132,7 +132,7 @@ jQuery(function() {
         }
         jQuery(this).toggleClass('active')
     });
-    croppedImg = jQuery('body').find('.returned');
+    croppedImg = jQuery('body').find('.returned').attr('src');
     if (no_second == '1') {
         localStorage.setItem('croppedImg', croppedImg)
     }
