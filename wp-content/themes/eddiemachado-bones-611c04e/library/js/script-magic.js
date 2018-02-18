@@ -45,7 +45,7 @@ jQuery(function() {
         set_prot();
     });
     //Получение данных из локального хранилища
-    if(supportsStorage && localStorage.getItem('curChoice')){
+    if(supportsStorage){
         curChoice = localStorage.getItem('curChoice');
         protocol = localStorage.getItem('protocol');
         no_second = localStorage.getItem('no_second');
@@ -81,7 +81,6 @@ jQuery(function() {
     jQuery('.homelink').on('click', function(event) {
         localStorage.removeItem('croppedImgTwo');
         localStorage.removeItem('croppedImg');
-        localStorage.setItem('no_second', '2');
     });
     if (no_second = '1') {
         jQuery('.no_second_btn').addClass('active').text('Активирован режим с 1 фото');
