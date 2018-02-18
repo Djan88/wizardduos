@@ -171,6 +171,7 @@ jQuery(function() {
             jQuery('.itemlist-three_img').attr('src', croppedImgTwo);
             jQuery('.work-area').find('.returned').draggable();
         } else {
+            nextScreen();
             localStorage.setItem('croppedImg', jQuery('#main').children().attr('src'));
             jQuery('.heading_dashboard').text('Загрузите второе фото');
             jQuery('.no_second').removeClass('hidden')
