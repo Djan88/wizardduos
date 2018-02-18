@@ -121,7 +121,8 @@ jQuery(function() {
             localStorage.setItem('croppedImgTwo', jQuery('#main').children()[0]);
             croppedImg = localStorage.getItem('croppedImg');
             croppedImgTwo = jQuery('#main').children()[0];
-
+            console.log(croppedImg)
+            console.log(croppedImgTwo)
             protocol = localStorage.getItem('protocol');
             console.log('protocol: '+protocol);
             if(protocol == 'mw'){
