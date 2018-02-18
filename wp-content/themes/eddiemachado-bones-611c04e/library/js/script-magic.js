@@ -36,7 +36,7 @@ jQuery(function() {
             jQuery('.heading_dashboard').text('Выберите протокол работы');
             jQuery('.btn_back').addClass('hidden');
         } else if (cur_screen == 1){
-            jQuery('.heading_dashboard').text('Загрузите фото');
+            jQuery('.heading_dashboard').text('Загрузите первое фото');
             jQuery('.btn_back').removeClass('hidden');
         }
     }
@@ -121,7 +121,7 @@ jQuery(function() {
             localStorage.setItem('croppedImgTwo', jQuery('#main').children().attr('src'));
             croppedImg = localStorage.getItem('croppedImg');
             croppedImgTwo = jQuery('#main').children().attr('src');
-            jQuery('.heading_dashboard').text('Загрузите фото');
+            jQuery('.heading_dashboard').text('Загрузите второе фото');
             console.log(croppedImg)
             console.log(croppedImgTwo)
             protocol = localStorage.getItem('protocol');
