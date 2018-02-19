@@ -44,12 +44,6 @@ jQuery(function() {
     jQuery('.prot-item').on('click', function() {
         set_prot();
     });
-    
-    // Создаем график
-    jQuery('.chart').easyPieChart({
-       lineWidth: 3,
-       size: 110
-    });
 
     //Получение данных из локального хранилища
     if(supportsStorage && localStorage.getItem('curChoice')){
@@ -276,6 +270,12 @@ jQuery('#main').on('click', '.fast-protocol', function() {
         };
         cur_screen -= 1;
         main_heading()
+    });
+
+    // Создаем график
+    jQuery('.chart').easyPieChart({
+       lineWidth: 3,
+       size: 110
     });
 
 //CROPPING SCRIPT
