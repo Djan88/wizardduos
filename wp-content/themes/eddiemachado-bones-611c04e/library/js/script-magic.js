@@ -78,7 +78,7 @@ jQuery(function() {
             .addClass('fadeIn')
     }
 
-    jQuery('.homelink').on('click', function(event) {
+    jQuery('.homelink, .to_home').on('click', function(event) {
         localStorage.removeItem('croppedImgTwo');
         localStorage.removeItem('croppedImg');
     });
