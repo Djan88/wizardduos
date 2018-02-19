@@ -44,6 +44,13 @@ jQuery(function() {
     jQuery('.prot-item').on('click', function() {
         set_prot();
     });
+    
+    // Создаем график
+    jQuery('.chart').easyPieChart({
+       lineWidth: 3,
+       size: 110
+    });
+
     //Получение данных из локального хранилища
     if(supportsStorage && localStorage.getItem('curChoice')){
         curChoice = localStorage.getItem('curChoice');
@@ -431,9 +438,4 @@ jQuery('#main').on('click', '.fast-protocol', function() {
         opacity: 0,
         zIndex: -1
       }, 1500 ), 5000);
-    
-    jQuery('.chart').easyPieChart({
-       lineWidth: 3,
-       size: 110
-    });
 });
