@@ -67,7 +67,7 @@ li
 .itemlist-two
 {
     /*background: url(../images/man.jpg) 0 0/100% no-repeat;*/
-    padding: 20px 0;
+    padding-bottom: 20px;
     float: left;
     margin-left: 1%;
     width: 250px;
@@ -76,7 +76,7 @@ li
 .itemlist-three
 {
    /*background: url(../images/man.jpg) 0 0/100% no-repeat;*/
-   padding: 20px 0;
+   padding-bottom: 20px;
    float: left;
    margin-left: 1%;
    width: 250px; 
@@ -658,9 +658,11 @@ path
   position: absolute;
   padding-top: 25px;
   text-align: center;
-  right: 0;
-  top: -80px;
-  color: #687273;
+  right: -15px;
+  top: -60px;
+  color: #fff;
+  background: #555;
+  border-radius: 50%;
 }
 
 .chart span
@@ -669,7 +671,6 @@ path
   font-size: 2em;
   font-weight: normal;
   height: 35px;
-  padding-top: 5px;
 }
 
 .chart canvas
