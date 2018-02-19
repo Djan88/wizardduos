@@ -679,3 +679,10 @@ path
   left: 0;
   top: 0;
 }
+.to_home 
+{
+    font-weight: 600;
+    float: left;
+    margin-right: 5px;
+    text-transform: uppercase;
+}
