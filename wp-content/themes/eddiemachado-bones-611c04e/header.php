@@ -82,7 +82,7 @@
                             <div class="btn btn_sm btn_warning no_second_header no_second_btn hidden">Активирован режим с 2 фото</div>
                             <div class="btn btn_sm btn_warning btn__crop hidden" >Редактивровать фото</div>
                             <div class="btn btn_sm btn_warning btn_back invisible"><span>‹</span> Назад</div>
-                            <a href="/" class="btn btn_sm btn_warning to_home">Главная</div>
+                            <a href="/" class="btn btn_sm btn_warning to_home">Главная</a>
                         <?php }?>
 
                     </div>
