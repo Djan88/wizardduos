@@ -431,4 +431,9 @@ jQuery('#main').on('click', '.fast-protocol', function() {
         opacity: 0,
         zIndex: -1
       }, 1500 ), 5000);
+    
+    jQuery('.chart').easyPieChart({
+       lineWidth: 3,
+       size: 110
+    });
 });
