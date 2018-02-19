@@ -210,7 +210,6 @@ jQuery(function() {
 //ШАГ 3 (Старт процедуры)
 jQuery( ".btn__wizard, .cancel" ).on('click', function(event) {
     pointsStatus = true;
-    localStorage.setItem('no_second', false)
     checkPoints();
     // if(pointsStatus == false){
     //     swal("Не все зоны перенесены", "Перед началом процедуры необходимо перенести все зоны", "info")
