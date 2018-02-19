@@ -196,6 +196,7 @@ jQuery(function() {
                 .addClass('fadeIn');
             jQuery('.btn__wizard').removeClass('hidden');
             jQuery('.work-area').find('.returned').draggable();
+            jQuery('.work-area').find('.itemlist-three_img').draggable();
         } else {
             if (no_second == '2') {
                 jQuery('.machine_screen_prots').addClass('hidden');

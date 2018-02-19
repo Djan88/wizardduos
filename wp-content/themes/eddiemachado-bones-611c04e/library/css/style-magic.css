@@ -163,10 +163,11 @@ input {
 }
 .itemlist.itemlist-two img, .itemlist.itemlist-three img
 {
-    display: block!important;
+    display: inline-block!important;
+    vertical-align: top;
     max-height: 1200px;
     max-width: 100%;
-    width: 100%;
+    width: 240px;
 }
 .steps
 {
