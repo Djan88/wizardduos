@@ -118,6 +118,9 @@ jQuery(function() {
 //Если фото уже загружено
     jQuery('.step_img:after').css('content', curChoice);
     no_second = localStorage.getItem('no_second');
+    if (no_second == null) {
+        localStorage.setItem('no_second', '2')
+    }
     if (no_second == '1') {
         jQuery('.no_second_btn').addClass('active').text('Активирован режим с 1 фото');
     }
