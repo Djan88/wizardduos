@@ -2154,7 +2154,7 @@ mm = function(){
     jQuery('.chart').data('easyPieChart').update(0);
     jQuery('.chart').find('span').text('0');
     phaseOne = setInterval(function(){
-        console.log(count_animation);
+        // console.log(count_animation);
         if (count_animation <= 200){                                                                         //56
             tickSound.play();
             jQuery('#draggableD1, #draggableD1_1').text(' ');

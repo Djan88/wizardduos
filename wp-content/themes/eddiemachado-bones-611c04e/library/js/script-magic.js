@@ -211,7 +211,7 @@ jQuery(function() {
     }
 
 //ШАГ 3 (Старт процедуры)
-jQuery( ".btn__wizard, .cancel" ).on('click', function(event) {
+jQuery( "body" ).on('click', '.btn__wizard, .cancel' function(event) {
     pointsStatus = true;
     checkPoints();
     // if(pointsStatus == false){
