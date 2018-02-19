@@ -72,6 +72,7 @@ li
     margin-left: 1%;
     width: 250px;
     border-color: transparent;
+    z-index: 555;
 }
 .itemlist-three
 {
@@ -81,6 +82,7 @@ li
    margin-left: 1%;
    width: 250px; 
    border-color: transparent;
+   z-index: 555;
 }
 .itemlist_item:hover, .itemlist_item:active
 {
@@ -526,6 +528,7 @@ path
     margin: 150px auto;
     left: 10px;
     top: 0;
+    z-index: 999;
 }
 .paranja 
 {
