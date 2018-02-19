@@ -150,8 +150,7 @@ jQuery(function() {
             croppedImg = localStorage.getItem('croppedImg');
             jQuery('.itemlist-two_img').attr('src', croppedImg);
             if (no_second == '1') {
-                jQuery('.itemlist-two').css('width', '350px');
-                jQuery('.itemlist-three').addClass('hidden');
+                jQuery('.itemlist-three_img').addClass('hidden');
             } else {
                 localStorage.setItem('croppedImgTwo', jQuery('#main').children().attr('src'));
                 croppedImgTwo = jQuery('#main').children().attr('src');

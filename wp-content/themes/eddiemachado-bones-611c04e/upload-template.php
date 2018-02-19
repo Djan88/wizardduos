@@ -265,11 +265,8 @@
                         </ul>
                         <ul class="itemlist itemlist-two" id="itemlist-two">
                             <img class="itemlist-two_img" src="" alt="">
-                            <li class="itemlist-two-li"></li>
-                        </ul>
-                        <ul class="itemlist itemlist-three" id="itemlist-three">
                             <img class="itemlist-three_img" src="" alt="">
-                            <li class="itemlist-three-li"></li>
+                            <li class="itemlist-two-li"></li>
                         </ul>
                         <div class="box_rounded">
                             <li id="draggableD12" class="itemlist_item item_list__mid draggable hidden" style="left: 45%; top: 5px;"></li>
