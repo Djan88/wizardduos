@@ -2471,10 +2471,10 @@ be set to display none.
 }
 .btn_warning:active, .btn_warning:focus
 {
-    background-color: #ec971f;
+    /*background-color: #ec971f;
     -webkit-box-shadow: 0px 0px 10px #ec971f;
        -moz-box-shadow: 0px 0px 10px #ec971f;
-            box-shadow: 0px 0px 10px #ec971f;
+            box-shadow: 0px 0px 10px #ec971f;*/
 }
 .btn_primary:active, .btn_primary:focus
 {

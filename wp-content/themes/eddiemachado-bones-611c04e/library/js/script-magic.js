@@ -432,6 +432,7 @@ jQuery('#main').on('click', '.fast-protocol', function() {
         // read selected file as DataURL
         oReader.readAsDataURL(oFile);
     }
+    console.log(localStorage.getItem('no_second'))
     jQuery('#image_file').on('change', fileSelectHandler);
     var a = new Vivus('example', {type: 'delayed', duration: 400});
     setTimeout(jQuery(".paranja").animate({
