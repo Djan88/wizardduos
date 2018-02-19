@@ -149,6 +149,8 @@ mw = function(){
             }, 250);
             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+            jQuery('.chart').data('easyPieChart').update(6);
+            jQuery('.chart').find('span').text('6');
 
         //фаза 2
             reloadTime = 0;
@@ -250,6 +252,8 @@ mw = function(){
                     }, 250);
                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                    jQuery('.chart').data('easyPieChart').update(12);
+                    jQuery('.chart').find('span').text('12');
 
         //фаза 3
                     reloadTime = 0;
@@ -337,6 +341,8 @@ mw = function(){
                             }, 250);
                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                            jQuery('.chart').data('easyPieChart').update(18);
+                            jQuery('.chart').find('span').text('18');
         //фаза 4
                             reloadTime = 0;
                             reloadTime1 = 0;
@@ -420,6 +426,8 @@ mw = function(){
                                     }, 250);
                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                                    jQuery('.chart').data('easyPieChart').update(24);
+                                    jQuery('.chart').find('span').text('24');
         //фаза 5
                                     reloadTime = 0;
                                     reloadTime1 = 0;
@@ -503,6 +511,8 @@ mw = function(){
                                             }, 250);
                                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                                            jQuery('.chart').data('easyPieChart').update(30);
+                                            jQuery('.chart').find('span').text('30');
         //фаза 6
                                             reloadTime = 0;
                                             reloadTime1 = 0;
@@ -586,6 +596,8 @@ mw = function(){
                                                     }, 250);
                                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                                                    jQuery('.chart').data('easyPieChart').update(36);
+                                                    jQuery('.chart').find('span').text('36');
         //фаза 7
                                                     reloadTime = 0;
                                                     reloadTime1 = 0;
@@ -669,6 +681,8 @@ mw = function(){
                                                             }, 250);
                                                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                                                            jQuery('.chart').data('easyPieChart').update(42);
+                                                            jQuery('.chart').find('span').text('42');
         //фаза 8
                                                             reloadTime = 0;
                                                             reloadTime1 = 0;
@@ -752,6 +766,8 @@ mw = function(){
                                                                     }, 250);
                                                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                                                                    jQuery('.chart').data('easyPieChart').update(48);
+                                                                    jQuery('.chart').find('span').text('48');
         //фаза 9
                                                                     reloadTime = 0;
                                                                     reloadTime1 = 0;
@@ -835,6 +851,8 @@ mw = function(){
                                                                             }, 250);
                                                                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                                                                            jQuery('.chart').data('easyPieChart').update(54);
+                                                                            jQuery('.chart').find('span').text('54');
         //фаза 10
                                                                             reloadTime = 0;
                                                                             reloadTime1 = 0;
@@ -918,6 +936,8 @@ mw = function(){
                                                                                     }, 250);
                                                                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                                                                                    jQuery('.chart').data('easyPieChart').update(60);
+                                                                                    jQuery('.chart').find('span').text('60');
         //фаза 11
                                                                                     reloadTime = 0;
                                                                                     reloadTime1 = 0;
@@ -1001,6 +1021,8 @@ mw = function(){
                                                                                             }, 250);
                                                                                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                                                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                                                                                            jQuery('.chart').data('easyPieChart').update(66);
+                                                                                            jQuery('.chart').find('span').text('66');
         //фаза 12
                                                                                             reloadTime = 0;
                                                                                             reloadTime1 = 0;
@@ -1084,7 +1106,9 @@ mw = function(){
                                                                                                     }, 250);
                                                                                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                                                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
-        //фаза 13
+                                                                                                    jQuery('.chart').data('easyPieChart').update(72);
+                                                                                                    jQuery('.chart').find('span').text('72');
+                                                                //фаза 13
                                                                                                     reloadTime = 0;
                                                                                                     reloadTime1 = 0;
                                                                                                     d12Val = 0;
@@ -1169,7 +1193,9 @@ mw = function(){
                                                                                                             }, 250);
                                                                                                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                                                                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
-        //фаза 14
+                                                                                                            jQuery('.chart').data('easyPieChart').update(78);
+                                                                                                            jQuery('.chart').find('span').text('78');
+                                                                                //фаза 14
                                                                                                             reloadTime = 0;
                                                                                                             reloadTime1 = 0;
                                                                                                             d12Val = 0;
@@ -1254,7 +1280,9 @@ mw = function(){
                                                                                                                     }, 250);
                                                                                                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                                                                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
-        //фаза 15
+                                                                                                                    jQuery('.chart').data('easyPieChart').update(84);
+                                                                                                                    jQuery('.chart').find('span').text('84');
+                                                                                                //фаза 15
                                                                                                                     reloadTime = 0;
                                                                                                                     reloadTime1 = 0;
                                                                                                                     d12Val = 0;
@@ -1337,6 +1365,8 @@ mw = function(){
                                                                                                                             }, 250);
                                                                                                                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                                                                                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                                                                                                                            jQuery('.chart').data('easyPieChart').update(90);
+                                                                                                                            jQuery('.chart').find('span').text('90');
                                                                                                 //фаза 16
                                                                                                                             reloadTime = 0;
                                                                                                                             reloadTime1 = 0;
@@ -1420,6 +1450,9 @@ mw = function(){
                                                                                                                                     }, 250);
                                                                                                                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                                                                                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                                                                                                                                    jQuery('.chart').data('easyPieChart').update(96);
+                                                                                                                                    jQuery('.chart').find('span').text('96');
+                                                                                                                        //фаза 17
                                                                                                                                     cur_animation_val = 55;
                                                                                                                                     count_animation = 1;
                                                                                                                                     jQuery('.box_rounded').addClass('hidden');
@@ -1452,7 +1485,9 @@ mw = function(){
                                                                                                                                                 paddingTop: '2px',
                                                                                                                                                 zIndex: '1'
                                                                                                                                             });
-                                                                                                                        //Этап 7-1-2
+                                                                                                                                            jQuery('.chart').data('easyPieChart').update(97);
+                                                                                                                                            jQuery('.chart').find('span').text('97');
+                                                                                                                        //Этап 17-1-2
                                                                                                                                             cur_animation_val = 10;
                                                                                                                                             count_animation = 1;
                                                                                                                                             phaseSeven_one = setInterval(function(){
@@ -1484,7 +1519,9 @@ mw = function(){
                                                                                                                                                         paddingTop: '2px',
                                                                                                                                                         zIndex: '1'
                                                                                                                                                     });
-                                                                                                                        //Этап 7-1-3
+                                                                                                                                                    jQuery('.chart').data('easyPieChart').update(98);
+                                                                                                                                                    jQuery('.chart').find('span').text('98');
+                                                                                                                        //Этап 17-1-3
                                                                                                                                                     cur_animation_val = 270;
                                                                                                                                                     count_animation = 1;
                                                                                                                                                     phaseSeven_one = setInterval(function(){
@@ -1516,7 +1553,9 @@ mw = function(){
                                                                                                                                                                 paddingTop: '2px',
                                                                                                                                                                 zIndex: '1'
                                                                                                                                                             });
-                                                                                                                        //Этап 7-1-4
+                                                                                                                                                            jQuery('.chart').data('easyPieChart').update(99);
+                                                                                                                                                            jQuery('.chart').find('span').text('99');
+                                                                                                                        //Этап 17-1-4
                                                                                                                                                             cur_animation_val = 300;
                                                                                                                                                             count_animation = 1;
                                                                                                                                                             phaseSeven_one = setInterval(function(){
@@ -1548,6 +1587,8 @@ mw = function(){
                                                                                                                                                                         paddingTop: '2px',
                                                                                                                                                                         zIndex: '1'
                                                                                                                                                                     });
+                                                                                                                                                                    jQuery('.chart').data('easyPieChart').update(100);
+                                                                                                                                                                    jQuery('.chart').find('span').text('100');
                                                                                                                                                                     tickSound.stop();
                                                                                                                                                                     jQuery('#draggableD12').addClass('hidden');
                                                                                                                                                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
