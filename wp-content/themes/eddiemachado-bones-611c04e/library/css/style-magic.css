@@ -70,7 +70,7 @@ li
     padding: 20px 0;
     float: left;
     margin-left: 1%;
-    width: 200px;
+    width: 250px;
     border-color: transparent;
 }
 .itemlist-three
@@ -79,7 +79,7 @@ li
    padding: 20px 0;
    float: left;
    margin-left: 1%;
-   width: 200px; 
+   width: 250px; 
    border-color: transparent;
 }
 .itemlist_item:hover, .itemlist_item:active
@@ -643,4 +643,38 @@ path
 .sweet-alert .icon 
 {
     width: 80px!important;
+}
+.work-area 
+{
+    position: relative;
+}
+.chart
+{
+  display: inline-block;
+  width: 110px;
+  height: 110px;
+  margin: 0 10px;
+  vertical-align: top;
+  position: absolute;
+  padding-top: 25px;
+  text-align: center;
+  right: 0;
+  top: -80px;
+  color: #687273;
+}
+
+.chart span
+{
+  display: block;
+  font-size: 2em;
+  font-weight: normal;
+  height: 35px;
+  padding-top: 5px;
+}
+
+.chart canvas
+{
+  position: absolute;
+  left: 0;
+  top: 0;
 }

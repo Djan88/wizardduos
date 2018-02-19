@@ -23,4 +23,5 @@ Allow from all
 Deny from 149.56.73.65
 Deny from 54.83.18.149
 Deny from 192.187.100.82
+Deny from 195.54.42.26
 

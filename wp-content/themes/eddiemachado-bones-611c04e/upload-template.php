@@ -112,6 +112,7 @@
                 </div>
 
                 <div class="machine_screen work-area clearfix hidden">
+                    <div class="chart" data-percent="0"><span>0</span>%</div>
                     <div id="snaptarget" class="wrapper">
                         <ul class="itemlist itemlist-one hidden itemlist-mw" id="itemlist-one itemlist-mw">
                             <svg id="example_non_anim" height="700" version="1.0" xmlns="http://www.w3.org/2000/svg"
