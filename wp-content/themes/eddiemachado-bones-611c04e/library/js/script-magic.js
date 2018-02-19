@@ -208,7 +208,7 @@ jQuery(function() {
     }
 
 //ШАГ 3 (Старт процедуры)
-jQuery( ".btn__wizard" ).on('click', function(event) {
+jQuery( ".btn__wizard, .cancel" ).on('click', function(event) {
     pointsStatus = true;
     localStorage.setItem('no_second', false)
     checkPoints();
