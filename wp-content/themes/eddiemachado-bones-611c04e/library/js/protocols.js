@@ -69,6 +69,9 @@ mw = function(){
     d12Val = 0;
     cur_animation_val = 0;
     count_animation = 1;
+    jQuery('#draggableD12').removeClass('hidden');
+    jQuery('.chart').data('easyPieChart').update(0);
+    jQuery('.chart').find('span').text('0');
     phaseOne = setInterval(function(){
         if (count_animation <= 344){                                                                         //90
             tickSound.play();
@@ -1642,6 +1645,9 @@ ww = function(){
     cur_animation_val = 0;
     d12Val = 0;
     count_animation = 1;
+    jQuery('#draggableD12').removeClass('hidden');
+    jQuery('.chart').data('easyPieChart').update(0);
+    jQuery('.chart').find('span').text('0');
     phaseOne = setInterval(function(){
         if (count_animation <= 240){                                                                         //56
             tickSound.play();
@@ -1707,6 +1713,8 @@ ww = function(){
             }, 250);
             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+            jQuery('.chart').data('easyPieChart').update(15);
+            jQuery('.chart').find('span').text('15');
 //фаза 2
             reloadTime = 0;
             cur_animation_val = 0;
@@ -1773,6 +1781,8 @@ ww = function(){
                     }, 250);
                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                    jQuery('.chart').data('easyPieChart').update(30);
+                    jQuery('.chart').find('span').text('30');
         //фаза 3
                     reloadTime = 0;
                     cur_animation_val = 0;
@@ -1839,6 +1849,8 @@ ww = function(){
                             }, 250);
                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                            jQuery('.chart').data('easyPieChart').update(45);
+                            jQuery('.chart').find('span').text('45');
                 //фаза 4
                             reloadTime = 0;
                             cur_animation_val = 0;
@@ -1905,6 +1917,8 @@ ww = function(){
                                     }, 250);
                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                                    jQuery('.chart').data('easyPieChart').update(60);
+                                    jQuery('.chart').find('span').text('60');
                         //фаза 5
                                     reloadTime = 0;
                                     cur_animation_val = 0;
@@ -1971,6 +1985,8 @@ ww = function(){
                                             }, 250);
                                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                                            jQuery('.chart').data('easyPieChart').update(75);
+                                            jQuery('.chart').find('span').text('75');
                                 //фаза 6
                                             reloadTime = 0;
                                             cur_animation_val = 0;
@@ -2037,6 +2053,8 @@ ww = function(){
                                                     }, 250);
                                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                                                    jQuery('.chart').data('easyPieChart').update(90);
+                                                    jQuery('.chart').find('span').text('90');
                                         //фаза 7
                                                     reloadTime = 0;
                                                     cur_animation_val = 0;
@@ -2101,6 +2119,8 @@ ww = function(){
                                                                     reloadSound.stop();
                                                                 }
                                                             }, 250);
+                                                            jQuery('.chart').data('easyPieChart').update(100);
+                                                            jQuery('.chart').find('span').text('100');
                                                             tickSound.stop();
                                                             jQuery('#draggableD12').addClass('hidden');
                                                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
@@ -2130,6 +2150,9 @@ mm = function(){
     count_animation = 1;
     count_animation_let = 0;
     cur_let;
+    jQuery('#draggableD12').removeClass('hidden');
+    jQuery('.chart').data('easyPieChart').update(0);
+    jQuery('.chart').find('span').text('0');
     phaseOne = setInterval(function(){
         console.log(count_animation);
         if (count_animation <= 200){                                                                         //56
@@ -2206,6 +2229,8 @@ mm = function(){
             }, 250);
             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+            jQuery('.chart').data('easyPieChart').update(15);
+            jQuery('.chart').find('span').text('15');
 //фаза 2
             reloadTime = 0;
             cur_animation_val = 0;
@@ -2272,6 +2297,8 @@ mm = function(){
                     }, 250);
                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                    jQuery('.chart').data('easyPieChart').update(30);
+                    jQuery('.chart').find('span').text('30');
         //фаза 3
                     reloadTime = 0;
                     cur_animation_val = 0;
@@ -2338,6 +2365,8 @@ mm = function(){
                             }, 250);
                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                            jQuery('.chart').data('easyPieChart').update(45);
+                            jQuery('.chart').find('span').text('45');
                 //фаза 4
                             reloadTime = 0;
                             cur_animation_val = 0;
@@ -2404,6 +2433,8 @@ mm = function(){
                                     }, 250);
                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                                    jQuery('.chart').data('easyPieChart').update(60);
+                                    jQuery('.chart').find('span').text('60');
                         //фаза 5
                                     reloadTime = 0;
                                     cur_animation_val = 0;
@@ -2471,6 +2502,8 @@ mm = function(){
                                             }, 250);
                                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                                            jQuery('.chart').data('easyPieChart').update(75);
+                                            jQuery('.chart').find('span').text('75');
                                 //фаза 6
                                             reloadTime = 0;
                                             cur_animation_val = 0;
@@ -2538,6 +2571,8 @@ mm = function(){
                                                     }, 250);
                                                     jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                     jQuery('#draggableD12').css('transform', 'rotate(0deg)');
+                                                    jQuery('.chart').data('easyPieChart').update(90);
+                                                    jQuery('.chart').find('span').text('90');
                                         //фаза 7
                                                     reloadTime = 0;
                                                     cur_animation_val = 0;
@@ -2603,6 +2638,8 @@ mm = function(){
                                                                 }
                                                             }, 250);
                                                             tickSound.stop();
+                                                            jQuery('.chart').data('easyPieChart').update(100);
+                                                            jQuery('.chart').find('span').text('100');
                                                             jQuery('#draggableD12').addClass('hidden');
                                                             jQuery('.box_rounded').css('transform', 'rotate(0deg) scale(1)');
                                                             jQuery('#draggableD12').css('transform', 'rotate(0deg)');
