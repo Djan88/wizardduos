@@ -52,6 +52,8 @@ onEnd = function(){
         if (isConfirm) {
             var protocol = undefined;    
             jQuery(location).attr('href','/wizard');
+            localStorage.removeItem('croppedImgTwo');
+            localStorage.removeItem('croppedImg');
         } else {
             
         }
