@@ -151,7 +151,7 @@ jQuery(function() {
             jQuery('.itemlist-two_img').attr('src', croppedImg);
             if (no_second == '1') {
                 jQuery('.itemlist-three_img').addClass('hidden');
-                jQuery('.itemlist-two_img').css('width', '490px;');
+                jQuery('.itemlist-two_img').css('width', '490px');
             } else {
                 localStorage.setItem('croppedImgTwo', jQuery('#main').children().attr('src'));
                 croppedImgTwo = jQuery('#main').children().attr('src');
