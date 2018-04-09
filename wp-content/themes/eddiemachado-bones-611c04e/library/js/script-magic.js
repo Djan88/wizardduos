@@ -215,9 +215,9 @@ jQuery(function() {
 jQuery( "body" ).on('click', '.btn__wizard, .cancel', function(event) {
     pointsStatus = true;
     checkPoints();
-    if(pointsStatus == false){
-        swal("Не все зоны перенесены", "Перед началом процедуры необходимо перенести все зоны", "info")
-    } else {
+    // if(pointsStatus == false){
+    //     swal("Не все зоны перенесены", "Перед началом процедуры необходимо перенести все зоны", "info")
+    // } else {
         jQuery(this)
             .addClass('btn__wizard_inAction')
             .text('Выполняется');
@@ -236,7 +236,7 @@ jQuery( "body" ).on('click', '.btn__wizard, .cancel', function(event) {
             } else{
                 console.log('нет протокола с id '+ protocol)
             }
-    }
+    // }
     main_heading()
 });
 //Быстрая смена протокола
