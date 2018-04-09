@@ -72,6 +72,7 @@ mw = function(){
     cur_animation_val = 0;
     count_animation = 1;
     jQuery('#draggableD12').removeClass('hidden');
+    jQuery('.box_rounded').removeClass('hidden');
     jQuery('.chart').data('easyPieChart').update(0);
     jQuery('.chart').find('span').text('0');
     phaseOne = setInterval(function(){
@@ -1648,6 +1649,7 @@ ww = function(){
     d12Val = 0;
     count_animation = 1;
     jQuery('#draggableD12').removeClass('hidden');
+    jQuery('.box_rounded').removeClass('hidden');
     jQuery('.chart').data('easyPieChart').update(0);
     jQuery('.chart').find('span').text('0');
     phaseOne = setInterval(function(){
@@ -2153,6 +2155,7 @@ mm = function(){
     count_animation_let = 0;
     cur_let;
     jQuery('#draggableD12').removeClass('hidden');
+    jQuery('.box_rounded').removeClass('hidden');
     jQuery('.chart').data('easyPieChart').update(0);
     jQuery('.chart').find('span').text('0');
     phaseOne = setInterval(function(){
