@@ -691,3 +691,97 @@ path
     margin-right: 5px;
     text-transform: uppercase;
 }
+.subscriber_wrap
+{
+    height: auto!important;
+}
+.home-page-content.subscriber
+{
+    width: auto!important;
+    position: static!important;
+    left: 0;
+    top: 0;
+    margin-top: 0;
+    background: #EBEBDD;
+    padding: 20px;
+    cursor: auto;
+    padding-top: 0;
+    margin: auto;
+    border: 1px solid #3F4568;
+    position: relative;
+    border-radius: 6px;
+}
+.toRegistration, .toLogin 
+{
+    color: #204371;
+    text-decoration: underline;
+    font-weight: bold;
+    cursor: pointer;
+}
+img.wizard-machine_items.hidden 
+{
+    display: block!important;
+    margin: auto;
+    max-width: 600px;
+}
+.vitrin 
+{
+    font-size: 18px;
+    font-weight: 500;
+    color: #455253;
+}
+h1.vitrin_heading, .vitrin h2, .vitrin h3, .vitrin h4 {
+    border-bottom: 3px solid;
+    font-weight: 600;
+    color: #475357;
+    text-align: center;
+}
+.subscriber_wrapper
+{
+    background: #F0F0E2;
+}
+.vitrin-content 
+{
+    width: 70%;
+    margin: auto;
+    min-width: 250px;
+    padding: 15px;
+    border: 1px solid #181B2E;
+    border-radius: 6px;
+    background: #F6F5EE;
+    color: #455253;
+}
+.vitrin-centered
+{
+    text-align: center;
+}
+.vitrin a 
+{
+    border: none;
+    display: inline;
+    color: #646773;
+    text-transform: initial;
+    text-decoration: underline;
+    margin-right: 0;
+}
+.footer.vitrin 
+{
+    font-size: 14px;
+    color: #fff;
+}
+.vitrin-price 
+{
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 6px;
+    background: #1CA4D6;
+    color: #fff;
+    font-weight: bold;
+    font-size: 22px;
+    text-decoration: underline;
+}
+.vitrin_heading 
+{
+    padding: 10px 0;
+}
