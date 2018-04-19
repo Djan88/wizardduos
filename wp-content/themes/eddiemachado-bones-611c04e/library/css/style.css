@@ -2245,7 +2245,7 @@ be set to display none.
 }
 .home .login__form input#wp-submit, .home a
 {
-  color: #fff;
+  color: #555;
 }
 .home .home-page-content .home-content
 {
@@ -2342,7 +2342,7 @@ be set to display none.
 {
   margin: auto;
   border: 1px solid #fff;
-  background: transparent!important;
+  background: #eee!important;
 }
 .login__form input#wp-submit, .home a
 {
