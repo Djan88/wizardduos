@@ -82,6 +82,16 @@ jQuery(function() {
         localStorage.removeItem('croppedImgTwo');
         localStorage.removeItem('croppedImg');
     });
+    
+    // Регистрация/Вход
+    jQuery('.toRegistration').on('click', function(event) {
+      jQuery('#loginform').addClass('hidden');
+      jQuery('#registerform').removeClass('hidden');
+    });
+    jQuery('.toLogin').on('click', function(event) {
+      jQuery('#loginform').removeClass('hidden');
+      jQuery('#registerform').addClass('hidden');
+    });
 
 // ШАГ 1 (К загрузке фото)
     jQuery( ".btn_choice" ).on('click', function(event) {
