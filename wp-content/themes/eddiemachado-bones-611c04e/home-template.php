@@ -10,7 +10,7 @@
     <div class="paranja"></div>
     <div id="inner-content" class="wrap cf">
 
-        <div id="main" class="m-all t-2of3 cf <?php if(current_user_can('subscriber')){ ?>subscriber_wrap<?php } ?>" role="main">
+        <div id="main" class="m-all t-2of3 cf" role="main">
 
             <div class="home-page-content <?php if(current_user_can('subscriber')){ ?>subscriber<?php } ?>">
             <?php if(!is_user_logged_in() && !current_user_can('subscriber')){ ?>

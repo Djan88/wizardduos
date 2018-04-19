@@ -46,7 +46,7 @@
 
     <body <?php body_class(); ?>>
 
-        <div id="container">
+        <div id="container"  <?php if(current_user_can('subscriber')){ ?>class="subscriber_wrap"<?php } ?>>
 
             <?php if(!is_front_page()){ ?>
                 <header class="header" role="banner">
