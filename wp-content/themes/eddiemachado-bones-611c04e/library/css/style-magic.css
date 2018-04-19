@@ -752,11 +752,13 @@ h1.vitrin_heading, .vitrin h2, .vitrin h3, .vitrin h4 {
     text-transform: initial;
     text-decoration: underline;
     margin-right: 0;
+    background: transparent!important;
 }
 .footer.vitrin 
 {
     font-size: 14px;
     color: #fff;
+    background-color: #323944;
 }
 .vitrin-price 
 {
@@ -774,3 +776,7 @@ h1.vitrin_heading, .vitrin h2, .vitrin h3, .vitrin h4 {
 {
     padding: 10px 0;
 }
+div#main 
+{
+    height: auto!important;
+
