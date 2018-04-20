@@ -206,11 +206,10 @@
                 <?php } else { ?>
                     <div class="home-content" style="text-align: center;">
                         <?php the_content(); ?>
-                        <div class="btn btn_lg btn_trans show_form">Вход для сертифицированных пользователей</div>
                         <!-- <div><a href="/pay/" target="_blank" class="btn btn_lg btn_trans" style="margin-top: 10px; margin-left: 15px;">Оплата доступа</a></div> -->
                         <!-- <div><a href="/consultation/" target="_blank" class="btn btn_lg btn_trans" style="margin-top: 10px; margin-left: 15px;">Оплата консультации</a></div> -->
                     </div>
-                    <div class="login__form hidden" id="loginform">
+                    <div class="login__form" id="loginform">
                         <form name="loginform" id="loginform" action="<?php echo esc_url( site_url( 'wp-login.php', 'login_post' ) ); ?>" method="post">
                             <p>
                                 <label for="user_login"><?php _e('Username') ?><br />
