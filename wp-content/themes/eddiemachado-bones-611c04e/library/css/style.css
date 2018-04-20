@@ -2251,6 +2251,7 @@ be set to display none.
 .home .home-page-content .home-content
 {
   font-size: 25px;
+  margin-bottom: 20px;
 }
 .home .home-page-content:before, .home .home-page-content:after
 {
