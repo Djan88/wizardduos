@@ -776,7 +776,7 @@ h1.vitrin_heading, .vitrin h2, .vitrin h3, .vitrin h4 {
 {
     padding: 10px 0;
 }
-div#main 
+div#main.subscriber_inner
 {
     height: auto!important;
 
