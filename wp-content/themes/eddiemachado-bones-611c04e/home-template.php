@@ -111,7 +111,7 @@
                                   <b>"WizardDuos"</b> — это интерактивный веб-проект для коррекции парных отношений. Работа осуществляется по цифровым фотографиям пациентов. Для эффективной работы в программе оператору необходимо обладать базовыми навыками биологического центрирования и прочесть книгу Чикурова Юрия Валентиновича <b>"Биологическое Центрирование. Практическое руководство".</b>
                                 </p>
                                 <p>
-                                  <img src="<?php bloginfo('template_url'); ?>/library/images/items.png" alt="wizard-machine_items" class="wizard-machine_items">
+                                  <img src="<?php bloginfo('template_url'); ?>/library/images/wd.png" alt="wizard-machine_items" class="wizard-machine_items">
                                 </p>
                                 <p>
                                   <b>"WizardDuos"</b> существует с 2015 г. За это время программа значительно расширилась. Пользователям стали доступны вспомогательные механизмы, среди которых возможность склеивать фото непосредственно в <b>"WizardDuos"</b>, без привлечения сторонних программ. Оператору достаточно просто загрузить фото клиентов поочередно.
@@ -132,7 +132,7 @@
                                 </p>
                                 <p>
                                     <h3>"WizardDuos". Учебный фильм</h3>
-                                    <iframe style="display: block;margin: auto;" width="560" height="315" src="https://www.youtube.com/embed/9XI9Z7kHmmY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/oG4oxgS-th0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                                 </p>
                               </div>
                             </div>
