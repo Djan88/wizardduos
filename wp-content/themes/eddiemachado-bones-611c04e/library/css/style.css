@@ -2242,6 +2242,7 @@ be set to display none.
     color: #fff;
     box-shadow: none;
     text-align: center;
+    margin-bottom: 30px;
 }
 .home .login__form input#wp-submit, .home a
 {
