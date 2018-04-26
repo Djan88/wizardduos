@@ -41,6 +41,7 @@
         <script src='<?php bloginfo('template_url'); ?>/library/js/easypie.js'></script>
         <script src='<?php bloginfo('template_url'); ?>/library/js/pieChartPlugin.js'></script>
         <script src='<?php bloginfo('template_url'); ?>/library/js/protocols.js'></script>
+        <script src="<?php bloginfo('template_url'); ?>/library/js/bootstrap.js"></script>
         <script src='<?php bloginfo('template_url'); ?>/library/js/script-magic.js'></script>
         <?php if(is_front_page()) { ?>
             <div class="modal fade" id="myModal_login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

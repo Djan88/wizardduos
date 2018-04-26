@@ -39,6 +39,7 @@
         <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/library/css/jquery-ui.css">
         <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/library/css/jquery.Jcrop.min.css">
         <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/library/css/style-magic.css">
+        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/library/css/bootstrap.css">
         <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/library/css/animate.css">
         <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/library/css/sweet-alert.css">
 
