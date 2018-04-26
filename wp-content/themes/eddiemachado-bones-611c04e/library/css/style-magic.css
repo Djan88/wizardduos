@@ -783,6 +783,10 @@ h1.vitrin_heading, .vitrin h2, .vitrin h3, .vitrin h4 {
     padding: 0;
     margin-top: 0;
 }
+#myModal_login .modal-content
+{
+    background: radial-gradient(#fff, #0A51AF);
+}
 div#main.subscriber_inner
 {
     height: auto!important;

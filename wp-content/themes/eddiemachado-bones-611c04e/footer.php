@@ -72,7 +72,7 @@
                             ?>
                             <p class="forgetmenot"><label for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" <?php checked( $rememberme ); ?> /> <?php esc_attr_e('Remember Me'); ?></label></p>
                             <p class="submit">
-                                <input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Log In'); ?>" />
+                                <input type="submit" name="wp-submit" id="wp-submit" class="btn btn_warning btn_lg" value="<?php esc_attr_e('Log In'); ?>" />
                                 <?php   if ( $interim_login ) { ?>
                                     <input type="hidden" name="interim-login" value="1" />
                                 <?php   } else { ?>
@@ -101,13 +101,13 @@
                             <p id="reg_passmail">Подтверждение регистрации будет отправлено на ваш e-mail.</p>
                             <br class="clear">
                             <input type="hidden" name="redirect_to" value="">
-                            <p class="submit"><input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="Регистрация"></p>
+                            <p class="submit"><input type="submit" name="wp-submit" id="wp-submit" class="btn btn_warning btn_lg" value="Регистрация"></p>
                             <p class="note_small">У Вас уже есть учетная запись? <span class="toLogin">Войдите</span> в "WizardMachine" используя свои логин и пароль</p>
                         </form>
                     </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                            <button type="button" class="btn btn_warning" data-dismiss="modal">Закрыть</button>
                         </div>
                     </div>
                 </div>
