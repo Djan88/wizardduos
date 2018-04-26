@@ -480,13 +480,19 @@ path
   left: 0;
   top: -70px;
 }
+.people 
+{
+    height: 200px;
+    position: relative;
+    margin-bottom: 10px;
+}
 .people #example 
 {
     width: 100%;
     position: absolute;
     left: 0;
     right: 0;
-    top: -180px;
+    top: 0;
     z-index: 2;
 }
 .people #example path, line, polyline 
@@ -774,7 +780,8 @@ h1.vitrin_heading, .vitrin h2, .vitrin h3, .vitrin h4 {
 }
 .vitrin_heading 
 {
-    padding: 10px 0;
+    padding: 0;
+    margin-top: 0;
 }
 div#main.subscriber_inner
 {

@@ -1264,9 +1264,14 @@ body
 }
 body.home
 {
-  background: url(../images/bg_wizard.jpg) 80% 50%/110%;
+  background: radial-gradient(#fff, #0A51AF);
   background-size: cover;
   background-position-x: center;
+}
+.home iframe 
+{
+    margin: auto;
+    display: block;
 }
 body.home #main
 {
@@ -1461,7 +1466,7 @@ and more scalable.
 POSTS & CONTENT STYLES
 *********************/
 #content {
-  padding-top: 50px;
+  /*padding-top: 50px;*/
   background: radial-gradient(#fff, #0A51AF);
   -webkit-box-shadow: 0 -2px 8px #000;
      -moz-box-shadow: 0 -2px 8px #000;
@@ -2223,7 +2228,7 @@ be set to display none.
 
 .home-page-content
 {
-    min-height: 300px;
+    /*min-height: 300px;*/
     background: #F4F4F4;
     padding: 20px;
     margin: 10px auto 30px;
@@ -2242,7 +2247,7 @@ be set to display none.
     color: #fff;
     box-shadow: none;
     text-align: center;
-    margin-bottom: 60px;
+    /*margin-bottom: 60px;*/
 }
 .home .login__form input#wp-submit, .home a
 {
@@ -2251,7 +2256,7 @@ be set to display none.
 .home .home-page-content .home-content
 {
   font-size: 25px;
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
 }
 .home .home-page-content:before, .home .home-page-content:after
 {
