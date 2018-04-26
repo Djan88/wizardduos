@@ -206,7 +206,7 @@
                 <?php } else { ?>
                     <div class="home-content" style="text-align: center;">
                         <?php //the_content(); ?>
-                        <button class="button button-primary button-large login_btn" data-toggle="modal" data-target="#myModal_login">ВХОД</button>
+                        <button class="btn btn_warning btn_lg login_btn" data-toggle="modal" data-target="#myModal_login">ВХОД</button>
                         
                     </div>
                     
