@@ -212,7 +212,7 @@
         </div>
         <footer class="footer vitrin" role="contentinfo">
             <div id="inner-footer" class="wrap cf">
-                <p class="source-org copyright">© 2018 <a class="homelink" href="<?php echo home_url(); ?>/wp-login.php?action=logout&amp;_wpnonce=a6cad512ba">Выйти</a> Версия 3.0 <span class="supportlink">Поддержка пользователей: <a href="mailto:wizardmachine@yandex.ru">wizardmachine@yandex.ru</a></span>
+                <p class="source-org copyright">© 2018 <a class="homelink" href="<?php echo home_url(); ?>/wp-login.php?action=logout&amp;_wpnonce=a6cad512ba">Выйти</a> Версия 3.0 <a href="/oferta">Оферта</a><span class="supportlink">Поддержка пользователей: <a href="mailto:wizardmachine@yandex.ru">wizardmachine@yandex.ru</a></span>
                 </p>
             </div>
         </footer>
