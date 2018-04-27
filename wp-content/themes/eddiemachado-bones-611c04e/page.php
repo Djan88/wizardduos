@@ -14,10 +14,6 @@
 
 									<h1 class="page-title" itemprop="headline"><?php the_title(); ?></h1>
 
-									<p class="byline vcard">
-										<?php printf( __( '<time class="updated" datetime="%1$s" pubdate>%2$s</time>', 'bonestheme' ), get_the_time('Y-m-j'), get_the_time(get_option('date_format')), get_the_author_link( get_the_author_meta( 'ID' ) )); ?>
-									</p>
-
 								</header> <?php // end article header ?>
 
 								<section class="entry-content cf" itemprop="articleBody">
@@ -71,7 +67,7 @@
 
 						</div>
 
-						<?php get_sidebar(); ?>
+						<?php //get_sidebar(); ?>
 
 				</div>
 
