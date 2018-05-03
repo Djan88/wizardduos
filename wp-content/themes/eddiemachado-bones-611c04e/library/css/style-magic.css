@@ -784,6 +784,12 @@ h1.vitrin_heading, .vitrin h2, .vitrin h3, .vitrin h4 {
     padding: 0;
     margin-top: 0;
 }
+.vitrin.vitrin-content img 
+{
+    display: block;
+    margin: auto;
+    max-width: 80%;
+}
 #myModal_login .modal-content
 {
     background: radial-gradient(#fff, #0A51AF);
