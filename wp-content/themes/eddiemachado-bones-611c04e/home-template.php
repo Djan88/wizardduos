@@ -98,7 +98,7 @@
                 </svg>
             </div>
             <?php } ?>
-                <?php if(!is_user_logged_in() || current_user_can('subscriber')){ ?>
+                <?php if(is_user_logged_in()){ ?>
                     <!-- Если зашел подписчик -->
                     <?php if(current_user_can('contributor') || current_user_can('administrator')) { ?>
                         
@@ -135,7 +135,7 @@
         </div>
 
     </div>
-    <?php if(!is_user_logged_in()){ ?>
+    <?php if(!is_user_logged_in() || current_user_can('subscriber')){ ?>
         <div class="col-md-12">
           <h1 class="vitrin_heading">Интерактивный веб-проект "WizardDuos"</h1>
           <div class="row">
