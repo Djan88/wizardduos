@@ -705,6 +705,7 @@ path
     border: 1px solid #3F4568;
     position: relative;
     border-radius: 6px;
+    display: none;
 }
 .toRegistration, .toLogin 
 {

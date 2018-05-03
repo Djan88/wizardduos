@@ -13,6 +13,7 @@
         <div id="main" class="m-all t-2of3 cf <?php if(current_user_can('subscriber')){ ?>subscriber_inner<?php } ?>" role="main">
 
             <div class="home-page-content <?php if(current_user_can('subscriber')){ ?>subscriber<?php } ?>">
+            <?php if(!current_user_can('subscriber')){ ?>
             <div class="people">
                 <svg id="example" height="200" version="1.0" xmlns="http://www.w3.org/2000/svg"
                  width="200.000000pt" height="241.000000pt" viewBox="0 0 200.000000 241.000000"
@@ -96,7 +97,8 @@
                 </g>
                 </svg>
             </div>
-                <?php if(is_user_logged_in()){ ?>
+            <?php } ?>
+                <?php if(!is_user_logged_in() || current_user_can('subscriber')){ ?>
                     <!-- Если зашел подписчик -->
                     <?php if(current_user_can('contributor') || current_user_can('administrator')) { ?>
                         
@@ -133,7 +135,7 @@
         </div>
 
     </div>
-    <?php if(!is_user_logged_in() || current_user_can('subscriber')){ ?>
+    <?php if(!is_user_logged_in()){ ?>
         <div class="col-md-12">
           <h1 class="vitrin_heading">Интерактивный веб-проект "WizardDuos"</h1>
           <div class="row">
