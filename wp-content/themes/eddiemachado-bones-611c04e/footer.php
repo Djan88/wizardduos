@@ -19,7 +19,7 @@
                             )); ?>
                         </nav>
 
-                        <p class="source-org copyright">&copy; <?php echo date('Y'); ?> <a href="/" class="homelink"><?php bloginfo( 'name' ); ?></a>. Версия 3.0 <span class="supportlink">Поддержка пользователей: <a href="mailto:wizardmachine@yandex.ru">wizardmachine@yandex.ru</a></span></p>
+                        <p class="source-org copyright">&copy; <?php echo date('Y'); ?> <a href="/" class="homelink"><?php bloginfo( 'name' ); ?></a>. Версия 3.0 <span class="supportlink">Поддержка пользователей: <a href="mailto:info@chikurov.com">info@chikurov.com</a></span></p>
 
                     </div>
 

@@ -785,6 +785,11 @@ h1.vitrin_heading, .vitrin h2, .vitrin h3, .vitrin h4 {
 {
     border: 2px solid darkred;
     color: darkgoldenrod;
+    margin: 10px auto;
+}
+.subscriber_info {
+    text-align: center;
+    font-size: 18px;
 }
 h1.vitrin_heading 
 {
