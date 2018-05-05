@@ -845,7 +845,7 @@ footer.footer.vitrin a
 }
 .vitrin-nav .btn:hover
 {
-    background-color: #204371;
+    background-color: #204371!important;
     color: #fff!important;
     text-decoration: none;
 }
