@@ -141,11 +141,11 @@
           <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <?php if(is_user_logged_in()){ ?>
-                    <div class="vitrin vitrin-content">
+                    <div class="vitrin vitrin-content vitrin-nav">
                        <div class="btn-group">
-                          <a href="/wizard" class="btn btn-default btn-large btn_disbled">Начать</a>
-                          <a href="/kabinet" class="btn btn-default btn-large">Личный кабинет</a>
-                          <a class="btn btn-default btn-large" href="<?php echo home_url(); ?>/wp-login.php?action=logout&amp;_wpnonce=a6cad512ba">Выйти</a>
+                          <a href="/wizard" class="btn btn-warning btn-large btn_disbled">Начать</a>
+                          <a href="/kabinet" class="btn btn-warning btn-large">Личный кабинет</a>
+                          <a class="btn btn-warning btn-large" href="<?php echo home_url(); ?>/wp-login.php?action=logout&amp;_wpnonce=a6cad512ba">Выйти</a>
                         </div> 
                     </div>
                 <?php } ?>
