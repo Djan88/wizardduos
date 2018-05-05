@@ -107,11 +107,13 @@
                         <div class="home-content">
                             <?php the_content(); ?>
                         </div>
-                        <a href="/wizard" class="button button-primary button-large">Начать</a> или 
-                        <?php if(is_user_logged_in()){ ?>
-                            <a class="button button-primary button-large" href="<?php echo home_url(); ?>/wp-login.php?action=logout&amp;_wpnonce=a6cad512ba">Выйти</a>
+                        <div class="btn-group">
+                          <a href="/wizard" class="btn btn-default btn-large">Начать</a>
+                          <a href="/kabinet" class="btn btn-default btn-large">Личный кабинет</a>
+                          <a class="btn btn-default btn-large" href="<?php echo home_url(); ?>/wp-login.php?action=logout&amp;_wpnonce=a6cad512ba">Выйти</a>
+                        </div>
+                        <a href="/wizard" class="button button-primary button-large">Начать</a>
                             
-                        <?php }?>
 
                         <?php endwhile; ?>
 
@@ -143,7 +145,7 @@
               <div class="vitrin vitrin-content">
                 <p>Добрый день!</p>
                 <p>
-                  <b>"WizardDuos"</b> — это интерактивный веб-проект для коррекции парных отношений. Работа осуществляется по цифровым фотографиям пациентов. Для эффективной работы в программе оператору необходимо обладать базовыми навыками биологического центрирования и прочесть книгу Чикурова Юрия Валентиновича <b>"Биологическое Центрирование. Практическое руководство".</b>
+                  <b>"WizardDuos"</b> — это интерактивный веб-проект для коррекции парных отношений. Работа осуществляется по цифровым фотографиям пациентов. Для эффективной работы в программе оператору необходимо обладать базовыми навыками биологического центрирования и уверенный пониманием материала изложенного в книге Чикурова Юрия Валентиновича <b>"Биологическое Центрирование. Практическое руководство".</b>
                 </p>
                 <p>
                   <img src="<?php bloginfo('template_url'); ?>/library/images/wd.png" alt="wizard-machine_items" class="wizard-machine_items">
