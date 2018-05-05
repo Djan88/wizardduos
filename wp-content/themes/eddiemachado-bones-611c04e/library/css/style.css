@@ -2231,7 +2231,7 @@ be set to display none.
     /*min-height: 300px;*/
     background: #F4F4F4;
     padding: 20px;
-    margin: 10px auto 30px;
+    margin: 35px auto 30px;
     position: relative;
     /*-webkit-box-shadow: 0 1px 8px #d3cec7;
     -moz-box-shadow: 0 1px 8px #d3cec7;
@@ -2467,6 +2467,8 @@ be set to display none.
 .btn_warning:hover, .btn_neitral:hover
 {
     background-color: #204371;
+    color: #fff!important;
+    text-decoration: none;
 }
 .btn_primary:hover
 {
