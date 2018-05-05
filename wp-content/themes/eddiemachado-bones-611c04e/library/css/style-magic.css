@@ -838,5 +838,14 @@ footer.footer.vitrin a
 }
 .vitrin-nav .btn
 {
-    
+    color: #204371;
+    text-decoration: none;
+    border: 1px solid #204371;
+    text-transform: uppercase;
+}
+.vitrin-nav .btn:hover
+{
+    background-color: #204371;
+    color: #fff!important;
+    text-decoration: none;
 }
