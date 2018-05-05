@@ -1,0 +1,39 @@
+#rcl-office .planContainer .price p {
+	height: 2.6em;
+	line-height: 2.6em;
+}
+.wau-account-box{
+    /* padding: 10px; */
+    background: #fff;
+    border: 5px solid #8598b3;
+    margin: 20px 0;
+}
+.wau-account-box .wau-account-box-title{
+    text-align: center;
+    font-size: 20px;
+    padding: 10px 0;
+    background: #435470;
+    margin-bottom: 20px;
+    color: #fff; 
+}
+.wau-account-box .wau-account-box-title span{
+    
+}
+.wau-account-box .wau-account-description{
+    padding: 0 10px;
+}
+.wau-active-notice{
+    text-align: center;
+    background: #f7814d;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 0;
+}
+.wau-active-notice span{
+    display: block;
+}
+
+.wau-dialog .rcl-types-connects{
+    margin:10px auto;
+}
+

@@ -1,0 +1,209 @@
+#options-wp-access-ultimate{
+    display:block;
+    border: none;
+    padding: 0;
+}
+#options-wp-access-ultimate div.rcl-option label.option-title{
+    font-size: 16px;
+}
+#prime-options{
+    max-width: 750px;
+    border:none;
+}
+#prime-options .wrap-recall-options .option-block{
+    max-width: 700px;
+}
+#prime-options h3{
+    margin: 5px 0;
+}
+#prime-options select{
+    width: 100%;
+}
+#prime-options .rcl-option{
+    margin-bottom:15px;
+}
+#prime-options .rcl-field-notice{
+    font-size:12px;
+}
+#wau-manager{
+    
+}
+#wau-manager .manager-box{
+    
+}
+#wau-manager .manage-accounts{
+    float: left;
+    max-width: 500px;
+}
+#wau-manager .manage-tariffs{
+    border: 2px solid #4c8cbd;
+    overflow: hidden;
+    width: auto;
+    display: block;
+    max-width: 600px;
+}
+#wau-manager .manager-form{
+    padding: 10px;
+    background: #eaeaea;
+    border: 1px solid #ccc;
+}
+#wau-manager .manager-form .form-field{
+    
+}
+#wau-manager .manager-box .form-buttons{
+    text-align:right;
+}
+#wau-manager .manager-box .form-buttons input{
+    width:auto;
+}
+#wau-manager .rcl-custom-fields-box .field-controls{
+    
+}
+#wau-manager .rcl-custom-fields-box .field-controls a{
+    border: 1px solid #ccc;
+    padding: 5px;
+    background: #f5f5f5;
+}
+#wau-manager .rcl-custom-fields-box .field-controls .field-trash{
+    color:rgba(229, 57, 53, 0.7);
+}
+#wau-manager .rcl-custom-fields-box .field-controls a:before{
+    
+}
+#wau-manager .rcl-custom-fields-box .field-controls .field-edit:before{
+    content: "\f107";
+}
+#wau-manager .rcl-custom-fields-box .field-controls .field-trash:before{
+    content: "\f182";
+}
+#wau-manager .rcl-custom-fields-box .field-controls .get-tariffs:before{
+    content: "\f325";
+}
+#wau-manager .rcl-custom-fields-box .type-accounts:before{
+    content: "\f318";
+}
+#wau-manager .rcl-custom-fields-box .type-tariffs:before{
+    content: "\f203";
+}
+#wau-manager .rcl-custom-fields-box .rcl-custom-field{
+    margin-bottom: 5px;
+}
+#wau-manager .rcl-custom-fields-box .tariffs-list ul > .rcl-custom-field{
+    /*margin-bottom: 0px;*/
+}
+#wau-manager .rcl-custom-fields-box .active-account{
+    
+}
+#wau-manager .rcl-custom-fields-box .active-account > .field-header:before{
+    border-style: solid;
+    border-width: 22px 0px 22px 23px;
+    content: "";
+    height: 0;
+    right: -23px;
+    position: absolute;
+    top: 0px;
+    width: 0;
+    border-color: transparent transparent transparent rgb(76, 140, 189);
+}
+#wau-manager .rcl-custom-fields-box .active-account > .field-header{
+    border: 2px solid rgb(76, 140, 189);
+}
+#wau-manager .rcl-custom-fields-box .children-box{
+    min-height: 0px;
+    margin-left:20px;
+    margin-top: 5px;
+}
+#wau-manager .rcl-custom-fields-box .rcl-sortable-fields .must-receive{
+    min-height: 5px;
+    margin:2px 0 2px 20px;
+    /*border: 1px solid #fff;*/
+    /*background: rgb(234, 234, 234);*/
+    padding: 5px;
+}
+#wau-manager .rcl-custom-fields-box .rcl-sortable-fields .must-receive .children-box{
+    margin-top:0;
+}
+#wau-manager .rcl-custom-fields-box .rcl-sortable-fields .must-receive .rcl-custom-field{
+    margin-bottom:0;
+}
+#wau-manager .rcl-custom-fields-box .rcl-sortable-fields .children-box li{
+    /*margin-bottom:0;*/
+}
+#wau-manager .tariffs-list{
+    position:relative;
+}
+
+#wau-manager .tariffs-list .list-receive{
+    /*position:absolute;
+    top:0;
+    width:100%;*/
+    
+}
+#wau-manager .tariffs-list .list-receive .rcl-custom-field .field-header{
+    /*padding:0;*/
+}
+#wau-manager .tariffs-list .list-receive .rcl-custom-field .field-header .field-type{
+    /*display:none;*/
+}
+#wau-manager .tariffs-list .list-receive .rcl-custom-field .field-header .field-controls{
+    /*display:none;*/
+}
+#wau-tariffs-list{
+    /*max-height: 600px;
+    overflow: auto;
+    border: 2px solid #ccc;
+    padding: 10px;*/
+}
+#wau-tariffs-list .field-header{
+    border-color: #4c8cbd;
+}
+#wau-tariffs-list ul{
+    /*position:absolute;
+    top:0;
+    width:100%;*/
+}
+#wau-manager .ui-sortable-helper{
+    box-shadow: 5px 5px 5px #797979;
+}
+#wau-manager .ui-sortable-helper .field-header{
+    background: #fff;
+}
+
+.wau-accounts-list{
+    display: inline-block;
+}
+.wau-accounts-list .wau-account{
+    padding: 5px;
+    background: #fff;
+    margin: 5px 0;
+}
+.wau-accounts-list .wau-account:before{
+    font-family: dashicons;
+    font-size: 16px;
+    line-height: 1;
+    vertical-align: text-bottom;
+}
+.wau-accounts-list .wau-account .account-check{
+    
+}
+.wau-accounts-list .wau-account .account-name{
+    font-size: 15px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+.wau-accounts-list .wau-account .account-time{
+    display: none;
+}
+.wau-accounts-list .wau-account .account-check:checked ~ .account-time {
+    display: inline-block;
+}
+.wau-accounts-list .wau-childrens-list{
+    
+}
+.wau-accounts-list .wau-childrens-list .wau-account{
+    padding-left: 15px;
+}
+.wau-accounts-list .wau-childrens-list .wau-account:before{
+    content: "\f344";
+    margin-right: 5px;
+}

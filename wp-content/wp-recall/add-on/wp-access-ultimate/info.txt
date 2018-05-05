@@ -1,0 +1,7 @@
+Name: WP Access Ultimate;
+Version: 1.2.2;
+Support Core: 16.14.0;
+ItemID: 17342;
+Description: Платный временный многоуровневый доступ к контенту сайта;
+Author: Плечев Андрей;
+Author URI: http://codeseller.ru/;
