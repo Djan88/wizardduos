@@ -18,46 +18,9 @@
                 $sImage = uploadImageFile();
                 echo '<img src="'.$sImage.'" />';
             }
-            $user = get_current_user_id();
-            $cur_user_data = get_userdata($user);
-            $user_reg = $cur_user_data->get('user_registered');
-            $user_login = $cur_user_data->get('user_login');
-            $user_mail = $cur_user_data->get('user_email');
-            $year_val = 31536000;
-            $regtime = strtotime($user_reg);
-            $cur_data = time();
-            $ratio =($cur_data - $regtime) - $year_val;
-            echo '<div class="hidden user_reg"> Текущая дата- '.$cur_data.', Дата регистрации- '.$user_reg.', Дата преобразованная регистрации- '.$regtime.'" </div><div class="hidden user_reg"> Разница= '.$ratio.'" </div>';
         ?>
 
-        <?php if(current_user_can('contributor') && $ratio > 0) { ?>
-            <div class="machine_screen clearfix" style="text-align:center;">
-                <h2 class="heading heading_dashboard">Срок действия вашей лицензии истек</h2>
-                <h3 class="heading">Информация по вашему аккаунту</h3>
-                <table class="user_info">
-                  <tr>
-                    <th>Ваш логин</th><td><?php echo $user_login; ?></td>
-                  </tr>
-                  <tr>
-                    <th>Ваш email </th><td><?php echo $user_mail; ?></td>
-                  </tr>
-                  <tr>
-                    <th>Дата активации лицензии</th><td><?php echo $user_reg; ?></td>
-                  </tr>
-                </table>
-                <h3 class="heading hidden">Вы можете продлить лицензию на 1 год со скидкой 50%</h3>
-                <!-- <a href="#contact_form_pop" class="btn btn_lg btn_success btn_licens fancybox">Продлить лицензию</a> -->
-                <div class="register-form-wrap">
-                  <div id="contact_form_pop">
-                    <h5 class="heading">Заполните форму</h5>
-                    <h6 class="heading">Внесите данные по вашему аккаунту из таблицы выше</h6>
-                    <hr>
-                    <?php echo do_shortcode('[contact-form-7 id="103" title="Продление"]'); ?>
-                  </div>
-                </div>
-                <h6 style="color:red;">Не сообщайте посторонним лицам ваш пароль на вход в программу.<br>Администрация проекта никогда не попросит его!</h6>
-            </div>
-        <?php } else if(current_user_can('contributor') || current_user_can('administrator')) { ?>
+        <?php if(current_user_can('contributor') || current_user_can('administrator')) { ?>
                 
                 <div class="fast-protocol-wrap clearfix hidden">
                   <div class="btn btn_sm btn_warning fast-protocol" data-fast="v2">V2</div> 
