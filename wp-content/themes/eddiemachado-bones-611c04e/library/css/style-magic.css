@@ -786,6 +786,10 @@ h1.vitrin_heading, .vitrin h2, .vitrin h3, .vitrin h4 {
     border: 2px solid darkred;
     color: darkgoldenrod;
 }
+h1.vitrin_heading 
+{
+    color: #fff;
+}
 .vitrin_heading 
 {
     padding: 0;
