@@ -143,10 +143,13 @@
                 <?php if(is_user_logged_in()){ ?>
                     <div class="vitrin vitrin-content vitrin-nav">
                        <div class="btn-group">
-                          <a href="/wizard" class="btn btn-warning btn-large btn_disbled">Начать</a>
                           <a href="/kabinet" class="btn btn-warning btn-large">Личный кабинет</a>
                           <a class="btn btn-warning btn-large" href="<?php echo home_url(); ?>/wp-login.php?action=logout&amp;_wpnonce=a6cad512ba">Выйти</a>
                         </div> 
+                    </div>
+                    <div class="vitrin vitrin-content vitrin-article vitrin-centered">
+                        Вы видите это сообщение, потому, что зарегистрированы на сайте <a href="http://wizardduos.ru/">"WizardDuos"</a> но на данный момент не имеете действующего доступа к программе.<br>
+                        Узнайте как получить доступ к программе по <a href="#howto">этой ссылке</a>
                     </div>
                 <?php } ?>
               <div class="vitrin vitrin-content">
@@ -183,26 +186,28 @@
           </div>
         </div>
         <div class="col-md-12 vitrin">
-          <h2>Стоимость приобретения "WizardDuos".</h2>
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="vitrin vitrin-content vitrin-centered">
-                <p>
-                    Стоимость подключения к программе на 1 год составляет <div class="vitrin-price">35 000 руб.</div>
-                </p>
-                <p>
-                    Через год и далее Вы сможете продлить Вашу учетную запись за <div class="vitrin-price">25 000 руб.</div>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-12 vitrin">
-            <h2>Как приобрести доступ к программе?</h2>
+            <h2>Как приобрести доступ к "WizardDuos"?</h2>
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                     <div class="vitrin vitrin-content vitrin-centered">
-                        Для того чтоб приобрести доступ к программе напишите на <a href="mailto:info@chikurov.com">info@chikurov.com</a>
+                        Стоимость получения доступа к программе на 1 год составляет <div class="vitrin-price">35 000 руб.</div> Через год и далее Вы сможете продлить Вашу учетную запись за <div class="vitrin-price">25 000 руб.</div>
+                        <a name="howto"></a>
+                    </div>
+                    <div class="vitrin vitrin-content vitrin-pay">
+                        <b>Чтоб получить доступ к программе необходимо сделать следующее:</b>
+                        <p>
+                            <span class="article_main">— </span><span class="reg_login toLogin" data-toggle="modal" data-target="#myModal_login">Войдите</span> на сайт. Если у Вас еще нет учетной записи "WizardDuos" — <span class="reg_login toRegistration" data-toggle="modal" data-target="#myModal_login">зарегистрируйтесь</span>
+                        </p>
+                        <p>
+                            <span class="article_main">— </span> Войдите в <a target="_blank" href="/kabinet">личный кабинет</a> пользователя.
+                        </p>
+                        <p>
+                            <span class="article_main">— </span> Выберите вкладку <b>"Все доступы"</b>, нажмите "Приобрести" -&gt; "Оплатить через "Робокасса" -&gt; Выберите удобный для Вас способ и произведите оплату.<br>
+                            <i style="text-align: center;">(Напоминаем что начиная со второго года пользователи "WizardDuos" получают скидку на продление лицензии 30%. Оплату продления со скидкой можно произвести на вкладке "Текущий доступ")</i>
+                        </p>
+                        <p>
+                            По завершении оплаты на Вашу почту поступит письмо с подтверждением. С этой минуты Ваш доступ к программе "WizardDuos" активен! Приятного пользования!
+                        </p>
                     </div>
                 </div>
             </div>
