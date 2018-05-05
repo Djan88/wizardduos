@@ -112,8 +112,6 @@
                           <a href="/kabinet" class="btn btn-default btn-large">Личный кабинет</a>
                           <a class="btn btn-default btn-large" href="<?php echo home_url(); ?>/wp-login.php?action=logout&amp;_wpnonce=a6cad512ba">Выйти</a>
                         </div>
-                        <a href="/wizard" class="button button-primary button-large">Начать</a>
-                            
 
                         <?php endwhile; ?>
 
