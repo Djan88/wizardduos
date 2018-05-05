@@ -2415,7 +2415,7 @@ be set to display none.
 }
 .btn:hover
 {
-  color: #fff!important;
+  /*color: #fff!important;*/
 }
 .btn_lg
 {
