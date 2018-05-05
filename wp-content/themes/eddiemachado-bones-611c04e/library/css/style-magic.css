@@ -829,3 +829,6 @@ footer.footer.vitrin a
 {
     color: #00a1ff;
 }
+.page-id-133 .btn_back, page-id-133 .btn__wizard {
+    display: none;
+}
