@@ -190,7 +190,7 @@
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                     <div class="vitrin vitrin-content vitrin-centered">
-                        Стоимость получения доступа к программе на 1 год составляет <div class="vitrin-price">35 000 руб.</div> Через год и далее Вы сможете продлить Вашу учетную запись за <div class="vitrin-price">25 000 руб.</div>
+                        Стоимость получения доступа к программе на 1 год составляет <div class="vitrin-price">35 000 руб.</div> Через год и далее Вы сможете продлить Вашу учетную запись за <div class="vitrin-price">24 990 руб.</div>
                         <a name="howto"></a>
                     </div>
                     <div class="vitrin vitrin-content vitrin-pay">
