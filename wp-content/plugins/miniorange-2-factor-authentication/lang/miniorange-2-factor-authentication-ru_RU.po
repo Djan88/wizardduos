@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniOrange 2 Factor Authentication\n"
 "POT-Creation-Date: 2018-05-04 15:14+0530\n"
-"PO-Revision-Date: 2018-05-28 21:31+0300\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2018-05-30 21:36+0300\n"
+"Last-Translator: IvanAvraamov <i.avraamov@yandex.ruy>\n"
 "Language-Team: miniOrange\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -846,8 +846,8 @@ msgstr "Сканировать QR-код"
 msgid ""
 "Identify yourself by scanning the QR code with miniOrange Authenticator app."
 msgstr ""
-"Подтвердите личность, сканируя QR-код с помощью приложения \"miniOrange "
-"Authenticator\"."
+"Подтвердите личность, сканируя QR-код с помощью приложения miniOrange "
+"Authenticator."
 
 #: miniorange_2_factor_common_login.php:648
 #: miniorange_2_factor_configuration.php:257
@@ -961,7 +961,7 @@ msgstr "Параметры входа в систему"
 #: miniorange_2_factor_configuration.php:169
 #: miniorange_2_factor_mobile_configuration.php:29
 msgid "Register with miniOrange"
-msgstr "Регистрация с помощью \"miniOrange\""
+msgstr "Регистрация с помощью miniOrange"
 
 #: miniorange_2_factor_configuration.php:173
 msgid "Already have an account?"
@@ -1036,7 +1036,7 @@ msgstr "Я не получал никакого сообщения с подтв
 #: miniorange_2_factor_configuration.php:298
 msgid ""
 "If you can't see the email from miniOrange in your mails, please check your "
-msgstr "Если вы не видите электронную почту от miniOrange в своих письмах,"
+msgstr "Если вы не видите электронную почту от miniOrange в своих письмах"
 
 #: miniorange_2_factor_configuration.php:299
 msgid "SPAM Folder"
@@ -1309,7 +1309,7 @@ msgid ""
 "form."
 msgstr ""
 "Этот короткий код обеспечивает\n"
-"                            «Включить Запомнить устройство» из вашей "
+"                            'Включить Запомнить устройство' из вашей "
 "пользовательской формы входа."
 
 #: miniorange_2_factor_configuration.php:627
@@ -1431,11 +1431,11 @@ msgstr "Сохранить настройки"
 
 #: miniorange_2_factor_configuration.php:870
 msgid "Sign In to your miniOrange Account"
-msgstr "Войдите в свою учетную запись \"miniOrange\""
+msgstr "Войдите в свою учетную запись miniOrange"
 
 #: miniorange_2_factor_configuration.php:874
 msgid "Enter your miniOrange username and password to login."
-msgstr "Введите имя пользователя и пароль \"miniOrange\" для входа в систему."
+msgstr "Введите имя пользователя и пароль miniOrange для входа в систему."
 
 #: miniorange_2_factor_configuration.php:876
 msgid "FORGOT PASSWORD?"
@@ -1726,8 +1726,7 @@ msgstr "Пользовательский ИД"
 
 #: miniorange_2_factor_mobile_configuration.php:290
 msgid "User Email Registered with miniOrange"
-msgstr ""
-"Пользовательская электронная почта, зарегистрированная в \"miniOrange\""
+msgstr "Пользовательская электронная почта, зарегистрированная в miniOrange"
 
 #: miniorange_2_factor_mobile_configuration.php:298
 msgid "Activated 2nd Factor"
@@ -1739,7 +1738,7 @@ msgstr "Пользователь Wordpress, у которого есть 2 фа�
 
 #: miniorange_2_factor_mobile_configuration.php:316
 msgid " to reset your miniOrange account's password."
-msgstr "для сброса пароля учетной записи \"miniOrange\"."
+msgstr "для сброса пароля учетной записи miniOrange."
 
 #: miniorange_2_factor_mobile_configuration.php:326
 msgid "Deactivate plugin"
@@ -1812,7 +1811,7 @@ msgstr ""
 
 #: miniorange_2_factor_mobile_configuration.php:1168
 msgid "Click on 'Upgrade' button of your preferred plan above."
-msgstr "Нажмите кнопку «Обновить» вашего предпочтительного плана выше."
+msgstr "Нажмите кнопку 'Обновить' вашего предпочтительного плана выше."
 
 #: miniorange_2_factor_mobile_configuration.php:1169
 msgid ""
@@ -1820,9 +1819,8 @@ msgid ""
 "username and password, after which you will be redirected to the payment "
 "page."
 msgstr ""
-"Вы будете перенаправлены на консоль \"miniOrange\". Введите имя пользователя "
-"и пароль \"miniOrange\", после чего вы будете перенаправлены на страницу "
-"оплаты."
+"Вы будете перенаправлены на консоль miniOrange. Введите имя пользователя и "
+"пароль miniOrange, после чего вы будете перенаправлены на страницу оплаты."
 
 #: miniorange_2_factor_mobile_configuration.php:1171
 msgid ""
@@ -1843,7 +1841,7 @@ msgstr ""
 
 #: miniorange_2_factor_mobile_configuration.php:1173
 msgid "Download the premium plugin from the miniOrange Console."
-msgstr "Загрузите премиальный плагин из консоли \"miniOrange\"."
+msgstr "Загрузите премиальный плагин из консоли miniOrange."
 
 #: miniorange_2_factor_mobile_configuration.php:1174
 msgid ""
@@ -1878,10 +1876,10 @@ msgid ""
 "attempted to resolve any issues with our support team, which couldn't get "
 "resolved then we will refund the whole amount within 10 days of the purchase."
 msgstr ""
-"В \"miniOrange\" мы хотим, чтобы вы были на 100% довольны своей покупкой. "
-"Если платный плагин, который вы приобрели, не работает как рекламируемый, и "
-"вы попытались решить любые проблемы в нашей команде поддержки, которые не "
-"могли быть решены, мы вернем всю сумму в течение 10 дней с момента покупки."
+"В miniOrange мы хотим, чтобы вы были на 100% довольны своей покупкой. Если "
+"платный плагин, который вы приобрели, не работает как рекламируемый, и вы "
+"попытались решить любые проблемы в нашей команде поддержки, которые не могли "
+"быть решены, мы вернем всю сумму в течение 10 дней с момента покупки."
 
 #: miniorange_2_factor_mobile_configuration.php:1198
 msgid ""
@@ -2028,7 +2026,7 @@ msgstr "10000 - 20000 пользователей - 1449$ в год"
 
 #: miniorange_2_factor_settings.php:287
 msgid "miniOrange 2-Factor Plugin:"
-msgstr "Плагин двухфакторной аутентификации \"miniOrange\""
+msgstr "Плагин двухфакторной аутентификации miniOrange"
 
 #: miniorange_2_factor_settings.php:287
 msgid "You have"
@@ -2052,7 +2050,7 @@ msgstr "Закрыть это уведомление."
 
 #: miniorange_2_factor_settings.php:296 miniorange_2_factor_settings.php:307
 msgid "miniOrange 2-Factor Plugin: "
-msgstr "Плагин двухфакторной аутентификации \"miniOrange\""
+msgstr "Плагин двухфакторной аутентификации miniOrange"
 
 #: miniorange_2_factor_settings.php:296
 msgid "You have not configured your 2-factor authentication method yet."
