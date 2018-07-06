@@ -124,6 +124,12 @@ jQuery(function() {
         jQuery('.crop_photo').click();
     });
 
+    // Очистка буффера фото перед стартом
+    jQuery('.before_start').on('click', function(event) {
+        localStorage.removeItem('croppedImg');
+        localStorage.removeItem('croppedImgTwo');
+    });
+
 // ШАГ 2 (переход к магии)
 //Если фото уже загружено
     jQuery('.step_img:after').css('content', curChoice);
@@ -139,12 +145,10 @@ jQuery(function() {
             localStorage.setItem('no_second', '2');
             jQuery(this).text('Активирован режим с 2 фото');
             jQuery('.no_second_header').text('Активирован режим с 2 фото');
-            console.log(localStorage.getItem('no_second'))
         } else {
             localStorage.setItem('no_second', '1');
             jQuery(this).text('Активирован режим с 1 фото');
             jQuery('.no_second_header').text('Активирован режим с 1 фото');
-            console.log(localStorage.getItem('no_second'))
         }
         jQuery(this).toggleClass('active');
         jQuery('.no_second_header').toggleClass('active');
