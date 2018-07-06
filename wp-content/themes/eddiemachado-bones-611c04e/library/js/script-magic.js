@@ -125,7 +125,7 @@ jQuery(function() {
     });
 
     // Очистка буффера фото перед стартом
-    jQuery('.before_start').on('click', function(event) {
+    jQuery('.before_start, .btn_choice').on('click', function(event) {
         localStorage.removeItem('croppedImg');
         localStorage.removeItem('croppedImgTwo');
     });
