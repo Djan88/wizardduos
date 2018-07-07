@@ -106,6 +106,11 @@ function bones_custom_image_sizes( $sizes ) {
     ) );
 }
 
+//fix for cookie error while login.
+setcookie(TEST_COOKIE, 'WP Cookie check', 0, COOKIEPATH, COOKIE_DOMAIN); 
+if ( SITECOOKIEPATH != COOKIEPATH ) 
+setcookie(TEST_COOKIE, 'WP Cookie check', 0, SITECOOKIEPATH, COOKIE_DOMAIN); Источник: http://jkeks.ru/jkeks.ru/archives/8175
+
 /*
 The function above adds the ability to use the dropdown menu to select
 the new images sizes you have just created from within the media manager
