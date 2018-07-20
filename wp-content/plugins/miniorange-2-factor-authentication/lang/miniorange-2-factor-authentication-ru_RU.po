@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniOrange 2 Factor Authentication\n"
 "POT-Creation-Date: 2018-07-19 22:39+0530\n"
-"PO-Revision-Date: 2018-07-20 13:21+0300\n"
+"PO-Revision-Date: 2018-07-20 13:50+0300\n"
 "Language-Team: miniOrange\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3291,7 +3291,7 @@ msgstr ""
 #: miniorange_2_factor_mobile_configuration.php:1845
 #: miniorange_2_factor_user_inline_registration.php:775
 msgid "Verify Your Phone"
-msgstr ""
+msgstr "Проверка телефонного номера"
 
 #: miniorange_2_factor_mobile_configuration.php:1856
 #: miniorange_2_factor_user_inline_registration.php:804
