@@ -63,7 +63,7 @@ class Miniorange_User_Register{
 					jQuery('#mo2f_2factor_test_push_form').submit();
 				}else if(currentMethod == 'SOFT TOKEN'){
 					jQuery('#mo2f_2factor_test_softtoken_form').submit();
-				}else if(currentMethod == 'SMS' || currentMethod == 'PHONE VERIFICATION' || currentMethod == 'SMS AND EMAIL'){
+				}else if(currentMethod == 'SMS' || currentMethod == 'PHONE VERIFICATION' || currentMethod == 'SMS AND EMAIL'||currentMethod == 'OTP_OVER_EMAIL'){
 					jQuery('#mo2f_test_2factor_method').val(currentMethod);
 					jQuery('#mo2f_2factor_test_smsotp_form').submit();
 				}else if(currentMethod == 'OUT OF BAND EMAIL'){
@@ -92,8 +92,10 @@ class Miniorange_User_Register{
 		global $wpdb;
 		global $current_user;
 		$current_user = wp_get_current_user();
+		global $dbQueries;
+		$user_registration_status = $dbQueries->get_user_detail( 'mo_2factor_user_registration_status',$current_user->ID);
 		if(mo_2factor_is_curl_installed()==0){ ?>
-			<p style="color:red;">(Warning: <a href="http://php.net/manual/en/curl.installation.php" target="_blank">PHP CURL extension</a> is not installed or disabled)</p>
+			<p style="color:red;"> (<?php echo __('Warning: ','miniorange-2-factor-authentication');?><a href="http://php.net/manual/en/curl.installation.php" target="_blank"> <?php echo __('PHP CURL extension','miniorange-2-factor-authentication');?></a> <?php echo __('is not installed or disabled','miniorange-2-factor-authentication');?>)</p>
 		<?php
 		}
 		
@@ -104,16 +106,16 @@ class Miniorange_User_Register{
 		?>
 		<div id="tab">
 			<h2 class="nav-tab-wrapper">
-				<a href="admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=2factor_setup" class="nav-tab <?php echo $mo2f_active_tab == '2factor_setup' ? 'nav-tab-active' : ''; ?>" id="mo2f_tab1"><?php if(get_user_meta($current_user->ID,'mo_2factor_user_registration_status',true) == 'MO_2_FACTOR_INITIALIZE_TWO_FACTOR' || get_user_meta($current_user->ID,'mo_2factor_user_registration_status',true) == 'MO_2_FACTOR_INITIALIZE_MOBILE_REGISTRATION' || get_user_meta($current_user->ID,'mo_2factor_user_registration_status',true) == 'MO_2_FACTOR_PLUGIN_SETTINGS'){ ?>User Profile <?php }else{ ?> Account Setup <?php } ?></a> 
-				<a href="admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mobile_configure" class="nav-tab <?php echo $mo2f_active_tab == 'mobile_configure' ? 'nav-tab-active' : ''; ?>" id="mo2f_tab2">Setup Two-Factor</a>
+				<a href="admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=2factor_setup" class="nav-tab <?php echo $mo2f_active_tab == '2factor_setup' ? 'nav-tab-active' : ''; ?>" id="mo2f_tab1"><?php if($user_registration_status == 'MO_2_FACTOR_INITIALIZE_TWO_FACTOR' || $user_registration_status == 'MO_2_FACTOR_INITIALIZE_MOBILE_REGISTRATION' || $user_registration_status == 'MO_2_FACTOR_PLUGIN_SETTINGS'){ ?>User Profile <?php }else{ ?> Account Setup <?php } ?></a> 
+				<a href="admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mobile_configure" class="nav-tab <?php echo $mo2f_active_tab == 'mobile_configure' ? 'nav-tab-active' : ''; ?>" id="mo2f_tab2"><?php echo __('Setup Two-Factor','miniorange-2-factor-authentication');?></a>
 				
 				<?php if(get_site_option('mo2f_deviceid_enabled' )){ ?>
 				<!-- <a href="admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=advance_option" class="nav-tab <?php //echo $mo2f_active_tab == 'advance_option' ? 'nav-tab-active' : ''; ?>" id="mo2f_tab5">Device Management</a> -->
 				<?php 
 				}
 				?>
-				<a href="admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mo2f_demo" class="nav-tab <?php echo $mo2f_active_tab == 'mo2f_demo' ? 'nav-tab-active' : ''; ?>" id="mo2f_tab4">How To Setup</a>
-				<a href="admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mo2f_help" class="nav-tab <?php echo $mo2f_active_tab == 'mo2f_help' ? 'nav-tab-active' : ''; ?>" id="mo2f_tab3">Help & Troubleshooting</a>
+				
+				
 			</h2>
 		</div>
 		
@@ -151,14 +153,14 @@ class Miniorange_User_Register{
 		}else{
 			unset($_SESSION[ 'mo2f_google_auth' ]);
 			unset($_SESSION[ 'mo2f_mobile_support' ]);
-			if(get_user_meta($current_user->ID,'mo_2factor_user_registration_status',true) == 'MO_2_FACTOR_OTP_DELIVERED_SUCCESS' || get_user_meta($current_user->ID,'mo_2factor_user_registration_status',true) == 'MO_2_FACTOR_OTP_DELIVERED_FAILURE'){
+			if($user_registration_status == 'MO_2_FACTOR_OTP_DELIVERED_SUCCESS' || $user_registration_status == 'MO_2_FACTOR_OTP_DELIVERED_FAILURE'){
 				mo2f_show_user_otp_validation_page();
-			}else if(get_user_meta($current_user->ID,'mo_2factor_user_registration_status',true) == 'MO_2_FACTOR_INITIALIZE_MOBILE_REGISTRATION') {
+			}else if($user_registration_status == 'MO_2_FACTOR_INITIALIZE_MOBILE_REGISTRATION') {
 				$mo2f_second_factor = mo2f_get_activated_second_factor($current_user);
 				mo2f_show_instruction_to_allusers($current_user,$mo2f_second_factor);
-			}else if(get_user_meta($current_user->ID,'mo_2factor_user_registration_status',true) == 'MO_2_FACTOR_INITIALIZE_TWO_FACTOR') {
+			}else if($user_registration_status == 'MO_2_FACTOR_INITIALIZE_TWO_FACTOR') {
 				mo2f_show_instruction_to_allusers($current_user,'NONE');
-			}else if(get_user_meta($current_user->ID,'mo_2factor_user_registration_status',true) == 'MO_2_FACTOR_PLUGIN_SETTINGS'){
+			}else if($user_registration_status == 'MO_2_FACTOR_PLUGIN_SETTINGS'){
 				$mo2f_second_factor = mo2f_get_activated_second_factor($current_user);
 				mo2f_show_instruction_to_allusers($current_user,$mo2f_second_factor);
 			}else{
@@ -179,40 +181,47 @@ class Miniorange_User_Register{
 		global $wpdb;
 		global $current_user;
 		$current_user = wp_get_current_user();
+		global $dbQueries;
 	
 		if(!current_user_can('manage_options')){
 		if(isset($_POST['option']) and $_POST['option'] == "mo_2factor_validate_user_otp"){ //validate OTP
 			//validation and sanitization
 			$otp_token = '';
 			if( MO2f_Utility::mo2f_check_empty_or_null( $_POST['otp_token'] ) ) {
-				update_site_option( 'mo2f_message', 'All the fields are required. Please enter valid entries.');
+				update_site_option( 'mo2f_message', Mo2fConstants::langTranslate("INVALID_ENTRY"));
 				$this->mo_auth_show_error_message();
 				return;
 			} else{
 				$otp_token = sanitize_text_field( $_POST['otp_token'] );
 			}
-			
-			if(!MO2f_Utility::check_if_email_is_already_registered($current_user->ID, get_user_meta($current_user->ID,'mo_2factor_user_email',true))){
+			$email=$dbQueries->get_user_detail( 'mo_2factor_user_email',$current_user->ID);
+			// // var_dump($email);exit;
+			if(!MO2f_Utility::check_if_email_is_already_registered($current_user->ID, $email)){
 				$customer = new Customer_Setup();
 				$transactionId = get_user_meta($current_user->ID,'mo_2fa_verify_otp_create_account',true);
 				$content = json_decode($customer->validate_otp_token( 'EMAIL', null, $transactionId, $otp_token, get_site_option('mo2f_customerKey'), get_site_option('mo2f_api_key') ),true);
 				if($content['status'] == 'ERROR'){
-					update_site_option( 'mo2f_message', $content['message']);
+					update_site_option( 'mo2f_message', Mo2fConstants :: langTranslate($content['message']));
 					delete_user_meta($current_user->ID,'mo_2fa_verify_otp_create_account');
 				}else{
 					if(strcasecmp($content['status'], 'SUCCESS') == 0) { //OTP validated and generate QRCode
-						$this->mo2f_create_user($current_user,get_user_meta($current_user->ID,'mo_2factor_user_email',true));
+						$this->mo2f_create_user($current_user,$email);
 						delete_user_meta($current_user->ID,'mo_2fa_verify_otp_create_account');
 					}else{  // OTP Validation failed.
 						
-						update_site_option( 'mo2f_message','Invalid OTP. Please try again.');
-						update_user_meta($current_user->ID,'mo_2factor_user_registration_status','MO_2_FACTOR_OTP_DELIVERED_FAILURE');
+						update_site_option( 'mo2f_message',Mo2fConstants::langTranslate("INVALID_OTP"));
+						
+						$dbQueries->update_user_details( $current_user->ID, array(
+								'mo_2factor_user_registration_status' =>'MO_2_FACTOR_OTP_DELIVERED_FAILURE'
+											) );
+						
+						// update_user_meta($current_user->ID,'mo_2factor_user_registration_status','MO_2_FACTOR_OTP_DELIVERED_FAILURE');
 						$this->mo_auth_show_error_message();
 					}
 				}
 
 			}else{
-				update_site_option('mo2f_message','The email is already used by other user. Please register with other email by clicking on Back button.');	
+				update_site_option('mo2f_message',Mo2fConstants::langTranslate("EMAIL_IN_USE"));	
 				$this->mo_auth_show_error_message();
 			}
 		} 
@@ -223,19 +232,36 @@ class Miniorange_User_Register{
 	function mo2f_create_user($current_user,$email){  //creating user in miniOrange of wordpress non-admin
 		$email = strtolower($email);
 		$enduser = new Two_Factor_Setup();
+		global $dbQueries;
 		$check_user = json_decode($enduser->mo_check_user_already_exist($email),true);
 		if(json_last_error() == JSON_ERROR_NONE){
 			if($check_user['status'] == 'ERROR'){
-				update_site_option( 'mo2f_message', $check_user['message']);
+				update_site_option( 'mo2f_message', Mo2fConstants::langTranslate($check_user['message']));
 				$this->mo_auth_show_error_message();
 			}else{
 				if(strcasecmp($check_user['status'], 'USER_FOUND') == 0){
-					delete_user_meta($current_user->ID,'mo_2factor_user_email');
-					update_user_meta($current_user->ID,'mo_2factor_user_registration_with_miniorange','SUCCESS');
-					update_user_meta($current_user->ID,'mo_2factor_map_id_with_email',$email);
-					update_user_meta($current_user->ID,'mo_2factor_user_registration_status','MO_2_FACTOR_INITIALIZE_TWO_FACTOR');
-					$enduser->mo2f_update_userinfo(get_user_meta($current_user->ID,'mo_2factor_map_id_with_email',true), 'OUT OF BAND EMAIL',null,null,null);
-					$message = 'You are registered successfully. <a href=\"admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mobile_configure\" >Click Here </a>to configure 2nd factor authentication method.';
+					// delete_user_meta($current_user->ID,'mo_2factor_user_email');
+					// $dbQueries->update_user_details( $currentUserId, array( "mo_2factor_user_email" => '' ) );
+					
+					$dbQueries->update_user_details($current_user->ID, array(
+									'mo_2factor_user_registration_with_miniorange' =>'SUCCESS',
+									'mo_2factor_user_registration_status' =>'MO_2_FACTOR_INITIALIZE_TWO_FACTOR',
+									'mo2f_user_email' =>$email,
+									"mo_2factor_user_email" => ''
+												) );
+					
+					// update_user_meta($current_user->ID,'mo_2factor_user_registration_with_miniorange','SUCCESS');
+					// update_user_meta($current_user->ID,'mo_2factor_map_id_with_email',$email);
+					// update_user_meta($current_user->ID,'mo_2factor_user_registration_status','MO_2_FACTOR_INITIALIZE_TWO_FACTOR');
+					$email=$dbQueries->get_user_detail( 'mo2f_user_email',$current_user->ID);
+					$enduser = new Two_Factor_Setup();	
+					$enduser_info = json_decode($enduser->mo2f_get_userinfo($email), true);
+					 $authType=$enduser_info['authType'];
+					$this->mo2f_set_status($authType,$current_user,$email);
+				    // if($enduser_info['authType'] == "NONE")
+						// $enduser->mo2f_update_userinfo($email, 'OUT OF BAND EMAIL',null,'API_2FA',true);	
+					// $enduser->mo2f_update_userinfo($email, 'OUT OF BAND EMAIL',null,null,null);
+					$message = Mo2fConstants::langTranslate("REGISTRATION_SUCCESS") . ' <a href=\"admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mobile_configure\" >' . Mo2fConstants::langTranslate("CLICK_HERE") . '</a> '. Mo2fConstants::langTranslate("CONFIG_2FA") ;
 					update_site_option( 'mo2f_message', $message);
 					$this->mo_auth_show_success_message();
 					
@@ -243,35 +269,64 @@ class Miniorange_User_Register{
 					$content = json_decode($enduser->mo_create_user($current_user,$email), true);
 						if(json_last_error() == JSON_ERROR_NONE) {
 							if($content['status'] == 'ERROR'){
-								update_site_option( 'mo2f_message', $content['message']);
+								update_site_option( 'mo2f_message', Mo2fConstants::langTranslate($content['message']));
+								$this->mo_auth_show_error_message();
 							}else{
 								if(strcasecmp($content['status'], 'SUCCESS') == 0) {
-									delete_user_meta($current_user->ID,'mo_2factor_user_email');
-									update_user_meta($current_user->ID,'mo_2factor_user_registration_with_miniorange','SUCCESS');
-									update_user_meta($current_user->ID,'mo_2factor_map_id_with_email',$email);
-									update_user_meta($current_user->ID,'mo_2factor_user_registration_status','MO_2_FACTOR_INITIALIZE_TWO_FACTOR');
-									$enduser->mo2f_update_userinfo(get_user_meta($current_user->ID,'mo_2factor_map_id_with_email',true), 'OUT OF BAND EMAIL',null,null,null);	
-									$message = 'You are registered successfully. <a href=\"admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mobile_configure\" >Click Here </a>to configure 2nd factor authentication method.';
+									// delete_user_meta($current_user->ID,'mo_2factor_user_email');
+									$dbQueries->update_user_details( $current_user->ID, array(
+									'mo_2factor_user_registration_with_miniorange' =>'SUCCESS',
+									'mo_2factor_user_registration_status' =>'MO_2_FACTOR_INITIALIZE_TWO_FACTOR',
+									'mo2f_user_email' =>$email,
+									'mo_2factor_user_email' =>''
+												) );
+									// update_user_meta($current_user->ID,'mo_2factor_user_registration_with_miniorange','SUCCESS');
+									// update_user_meta($current_user->ID,'mo_2factor_map_id_with_email',$email);
+									// update_user_meta($current_user->ID,'mo_2factor_user_registration_status','MO_2_FACTOR_INITIALIZE_TWO_FACTOR');
+									$email=$dbQueries->get_user_detail( 'mo2f_user_email',$current_user->ID);
+									$enduser->mo2f_update_userinfo($email, 'OUT OF BAND EMAIL',null,null,null);	
+									$message = Mo2fConstants::langTranslate("REGISTRATION_SUCCESS") . ' <a href=\"admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mobile_configure\" > ' . Mo2fConstants::langTranslate("CLICK_HERE") . '</a> ' . Mo2fConstants::langTranslate("CONFIG_2FA");
 									update_site_option( 'mo2f_message', $message);
 									$this->mo_auth_show_success_message();
 								}else{
-									update_site_option( 'mo2f_message','Error occurred while registering the user. Please try again.');
+									update_site_option( 'mo2f_message', Mo2fConstants::langTranslate("ERROR_DURING_USER_REGISTRATION"));
 									$this->mo_auth_show_error_message();
 								}
 							}
 						}else{
-								update_site_option( 'mo2f_message','Error occurred while registering the user. Please try again or contact your admin.');
+								update_site_option( 'mo2f_message',Mo2fConstants::langTranslate("ERROR_REG_USER_ADMIN"));
 								$this->mo_auth_show_error_message();
 						}
 				}else{
-					update_site_option( 'mo2f_message','Error occurred while registering the user. Please try again.');
+					update_site_option( 'mo2f_message',Mo2fConstants::langTranslate("ERROR_DURING_USER_REGISTRATION"));
 					$this->mo_auth_show_error_message();
 				}
 			}
 		}else{
-			update_site_option( 'mo2f_message','Error occurred while registering the user. Please try again.');
+			update_site_option( 'mo2f_message', Mo2fConstants::langTranslate("ERROR_DURING_USER_REGISTRATION"));
 			$this->mo_auth_show_error_message();
 		}
 	}
 	
+	function mo2f_set_status($authType,$current_user,$email){
+		global $dbQueries;
+		$enduser = new Two_Factor_Setup();
+				if($authType == "KBA"){
+			$dbQueries->update_user_details( $current_user->ID, array('mo2f_SecurityQuestions_config_status'=>true) );
+			}else if($authType == "MOBILE AUTHENTICATION" ||$authType == "SOFT TOKEN"||$authType == "PUSH NOTIFICATIONS"){
+			$dbQueries->update_user_details( $current_user->ID, array('mo2f_mobile_registration_status'=>true) );
+			}else if($authType == "GOOGLE AUTHENTICATOR"){
+			$dbQueries->update_user_details( $current_user->ID, array('mo2f_GoogleAuthenticator_config_status'=>true) );
+			}else if($authType == "SMS AND EMAIL" || $authType == "SMS"){
+			$dbQueries->update_user_details( $current_user->ID, array('mo2f_otp_registration_status'=>true) );
+			}else if($authType == "EMAIL"){
+			$dbQueries->update_user_details( $current_user->ID, array('mo2f_email_verification_status'=>true) );
+			}else{
+				$enduser->mo2f_update_userinfo($email, 'OUT OF BAND EMAIL',null,'API_2FA',true);
+			$dbQueries->update_user_details( $current_user->ID, array( 'mo2f_email_verification_status' => true ) );
+			}
+			
+	}
+	
 }
+?>

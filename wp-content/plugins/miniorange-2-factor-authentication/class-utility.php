@@ -74,7 +74,7 @@ class MO2f_Utility{
 	public static function check_if_email_is_already_registered($current_user_id, $email){
 	
 		global $wpdb;
-		$query_string = "SELECT meta_value FROM {$wpdb->base_prefix}usermeta where meta_key='mo_2factor_map_id_with_email' and LOWER(meta_value)='" . strtolower($email) . "' and user_id != " . $current_user_id;
+		$query_string = "SELECT meta_value FROM {$wpdb->base_prefix}usermeta where meta_key='mo2f_user_email' and LOWER(meta_value)='" . strtolower($email) . "' and user_id != " . $current_user_id;
 		$resultObject = $wpdb->get_results($query_string);
 		if(isset($resultObject) && !empty($resultObject)){
 			return true;
@@ -96,9 +96,9 @@ class MO2f_Utility{
 	public static function get_miniorange_login_url($mo_type){
 		$miniorange_host = get_site_option('mo2f_host_name');
 		if($mo_type == 'EMAIL'){
-			return $miniorange_host . '/moas/showoutofbandemailtemplate';
+			return $miniorange_host . '/moas/admin/customer/showoutofbandemailtemplate';
 		}else if($mo_type == 'SMS'){
-			return $miniorange_host . '/moas/showsmstemplate';
+			return $miniorange_host . '/moas/admin/customer/showsmstemplate';
 		}else if($mo_type == 'RBA'){
 			return $miniorange_host . '/moas/viewrbaprofile';
 		}else{
@@ -116,6 +116,65 @@ class MO2f_Utility{
 			$ip = $_SERVER['REMOTE_ADDR'];
 		}
 		return $ip;
+	}
+	
+	/**
+	 * The function decodes the twofactor methods
+	 *
+	 * @param array $variables - the selected 2-factor method and the decode type.
+	 *
+	 * @return NA
+	 */
+	public static function mo2f_decode_2_factor( $selected_2_factor_method, $decode_type ) {
+
+		if ( $selected_2_factor_method == 'NONE' ) {
+			return $selected_2_factor_method;
+		}
+
+		$wpdb_2fa_methods = array(
+			"miniOrangeQRCodeAuthentication" => "miniOrange QR Code Authentication",
+			"miniOrangeSoftToken"            => "miniOrange Soft Token",
+			"miniOrangePushNotification"     => "miniOrange Push Notification",
+			"GoogleAuthenticator"            => "Google Authenticator",
+			"AuthyAuthenticator"             => "Authy Authenticator",
+			"SecurityQuestions"              => "Security Questions",
+			"EmailVerification"              => "Email Verification",
+			"OTPOverSMS"                     => "OTP Over SMS"
+		);
+
+		$server_2fa_methods = array(
+			"miniOrange QR Code Authentication" => "MOBILE AUTHENTICATION",
+			"miniOrange Soft Token"             => "SOFT TOKEN",
+			"miniOrange Push Notification"      => "PUSH NOTIFICATIONS",
+			"GOOGLE AUTHENTICATOR"              => "GOOGLE AUTHENTICATOR",
+			"Authy Authenticator"               => "GOOGLE AUTHENTICATOR",
+			"Security Questions"                => "KBA",
+			"Email Verification"                => "OUT OF BAND EMAIL",
+			"OTP Over SMS"                      => "SMS",
+			"OTP Over Email"                    => "EMAIL",
+			"OTP Over SMS And Email"			=> "SMS AND EMAIL"
+		);
+
+		$server_to_wpdb_2fa_methods = array(
+			"MOBILE AUTHENTICATION" => "miniOrange QR Code Authentication",
+			"SOFT TOKEN"            => "miniOrange Soft Token",
+			"PUSH NOTIFICATIONS"    => "miniOrange Push Notification",
+			"GOOGLE AUTHENTICATOR"  => "Google Authenticator",
+			"KBA"                   => "Security Questions",
+			"OUT OF BAND EMAIL"     => "Email Verification",
+			"SMS"                   => "OTP Over SMS",
+			"EMAIL"                 => "OTP Over Email",
+			"SMS AND EMAIL"         => "OTP Over SMS And Email"
+		);
+
+		if ( $decode_type == "wpdb" ) {
+			return $wpdb_2fa_methods[ $selected_2_factor_method ];
+		} else if ( $decode_type == "server" ) {
+			return $server_2fa_methods[ $selected_2_factor_method ];
+		} else {
+			return $server_to_wpdb_2fa_methods[ $selected_2_factor_method ];
+		}
+
 	}
 }
 ?>

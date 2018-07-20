@@ -62,6 +62,14 @@ class Miniorange_Rba_Attributes{
 		curl_setopt( $ch, CURLOPT_POSTFIELDS, $field_string);
 		curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt( $ch, CURLOPT_TIMEOUT, 20);
+		$proxy_host = get_option( 'mo2f_proxy_host' );
+		if (! empty(  $proxy_host ) ){
+			curl_setopt( $ch, CURLOPT_PROXY, get_option( 'mo2f_proxy_host' ) );
+			curl_setopt( $ch, CURLOPT_PROXYPORT, get_option( 'mo2f_port_number' ) );
+			curl_setopt( $ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC );
+			curl_setopt( $ch, CURLOPT_PROXYUSERPWD, get_option( "mo2f_proxy_username" ) . ':' . get_option( "mo2f_proxy_password" ) );
+
+		}
 		$content = curl_exec($ch);
 
 		if(curl_errno($ch)){
@@ -115,6 +123,14 @@ class Miniorange_Rba_Attributes{
 		curl_setopt( $ch, CURLOPT_POSTFIELDS, $field_string);
 		curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt( $ch, CURLOPT_TIMEOUT, 20);
+		$proxy_host = get_option( 'mo2f_proxy_host' );
+		if (! empty(  $proxy_host ) ){
+			curl_setopt( $ch, CURLOPT_PROXY, get_option( 'mo2f_proxy_host' ) );
+			curl_setopt( $ch, CURLOPT_PROXYPORT, get_option( 'mo2f_port_number' ) );
+			curl_setopt( $ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC );
+			curl_setopt( $ch, CURLOPT_PROXYUSERPWD, get_option( "mo2f_proxy_username" ) . ':' . get_option( "mo2f_proxy_password" ) );
+
+		}
 		$content = curl_exec($ch);
 
 		if(curl_errno($ch)){
@@ -167,6 +183,14 @@ class Miniorange_Rba_Attributes{
 		curl_setopt( $ch, CURLOPT_POSTFIELDS, $field_string);
 		curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt( $ch, CURLOPT_TIMEOUT, 20);
+		$proxy_host = get_option( 'mo2f_proxy_host' );
+		if (! empty(  $proxy_host ) ){
+			curl_setopt( $ch, CURLOPT_PROXY, get_option( 'mo2f_proxy_host' ) );
+			curl_setopt( $ch, CURLOPT_PROXYPORT, get_option( 'mo2f_port_number' ) );
+			curl_setopt( $ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC );
+			curl_setopt( $ch, CURLOPT_PROXYUSERPWD, get_option( "mo2f_proxy_username" ) . ':' . get_option( "mo2f_proxy_password" ) );
+
+		}
 		$content = curl_exec($ch);
 
 		if(curl_errno($ch)){
@@ -217,6 +241,14 @@ class Miniorange_Rba_Attributes{
 		curl_setopt( $ch, CURLOPT_POSTFIELDS, $field_string);
 		curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt( $ch, CURLOPT_TIMEOUT, 20);
+		$proxy_host = get_option( 'mo2f_proxy_host' );
+		if (! empty(  $proxy_host ) ){
+			curl_setopt( $ch, CURLOPT_PROXY, get_option( 'mo2f_proxy_host' ) );
+			curl_setopt( $ch, CURLOPT_PROXYPORT, get_option( 'mo2f_port_number' ) );
+			curl_setopt( $ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC );
+			curl_setopt( $ch, CURLOPT_PROXYUSERPWD, get_option( "mo2f_proxy_username" ) . ':' . get_option( "mo2f_proxy_password" ) );
+
+		}
 		$content = curl_exec($ch);
 
 		if(curl_errno($ch)){
@@ -226,7 +258,7 @@ class Miniorange_Rba_Attributes{
 		return $content;
 	}
 	
-	function mo2f_google_auth_service($useremail){
+	function mo2f_google_auth_service($useremail,  $googleAuthenticatorName="" ){
 		
 		$url = get_site_option('mo2f_host_name') . '/moas/api/auth/google-auth-secret';
 		$ch = curl_init($url);
@@ -250,7 +282,8 @@ class Miniorange_Rba_Attributes{
 		
 		$fields = array(
 			'customerKey' => $customerKey,		
-			'username' => $useremail		
+			'username' => $useremail,
+			'googleAuthenticatorName'    => $googleAuthenticatorName
 		);
 		$field_string = json_encode( $fields );
 
@@ -268,6 +301,14 @@ class Miniorange_Rba_Attributes{
 		curl_setopt( $ch, CURLOPT_POSTFIELDS, $field_string);
 		curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt( $ch, CURLOPT_TIMEOUT, 20);
+		$proxy_host = get_option( 'mo2f_proxy_host' );
+		if (! empty(  $proxy_host ) ){
+			curl_setopt( $ch, CURLOPT_PROXY, get_option( 'mo2f_proxy_host' ) );
+			curl_setopt( $ch, CURLOPT_PROXYPORT, get_option( 'mo2f_port_number' ) );
+			curl_setopt( $ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC );
+			curl_setopt( $ch, CURLOPT_PROXYUSERPWD, get_option( "mo2f_proxy_username" ) . ':' . get_option( "mo2f_proxy_password" ) );
+
+		}
 		$content = curl_exec($ch);
 
 		if(curl_errno($ch)){
@@ -321,6 +362,14 @@ class Miniorange_Rba_Attributes{
 		curl_setopt( $ch, CURLOPT_POSTFIELDS, $field_string);
 		curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt( $ch, CURLOPT_TIMEOUT, 20);
+		$proxy_host = get_option( 'mo2f_proxy_host' );
+		if (! empty(  $proxy_host ) ){
+			curl_setopt( $ch, CURLOPT_PROXY, get_option( 'mo2f_proxy_host' ) );
+			curl_setopt( $ch, CURLOPT_PROXYPORT, get_option( 'mo2f_port_number' ) );
+			curl_setopt( $ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC );
+			curl_setopt( $ch, CURLOPT_PROXYUSERPWD, get_option( "mo2f_proxy_username" ) . ':' . get_option( "mo2f_proxy_password" ) );
+
+		}
 		$content = curl_exec($ch);
 
 		if(curl_errno($ch)){

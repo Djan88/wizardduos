@@ -13,11 +13,11 @@
    <body>
       <div style="text-align:center;">
          <form id="morba_loginform" method="post" >
-            <h1>Please wait...</h1>
+            <h1><?php echo __('Please wait','miniorange-2-factor-authentication'); ?>...</h1>
             <img src="<?php echo plugins_url( 'includes/images/ajax-loader-login.gif' , __FILE__ );?>" />
             <?php 
                //if(get_site_option('mo2f_deviceid_enabled') || get_site_option('mo2f_enable_inline_rba')){
-               if(get_site_option('mo2f_enable_rba') && get_site_option('mo2f_login_policy')){	
+               if(get_site_option('mo2f_remember_device') && get_site_option('mo2f_login_policy')){	
                ?>
             <p><input type="hidden" id="miniorange_rba_attribures" name="miniorange_rba_attribures" value="" /></p>
             <?php
@@ -66,10 +66,10 @@
    
    
    function miniorange_check_if_2fa_enabled_for_roles($current_roles){
+   	// var_dump($current_roles);exit;
    	if(empty($current_roles)){
    	    return 0;	
    	}
-   	
    	foreach( $current_roles as $value )
    	{	
    		if(get_site_option('mo2fa_'.$value))
@@ -79,6 +79,8 @@
    	}
    	return 0;
    }
+   
+   
    
    function redirect_user_to($user, $redirect_to){	
    	$temp_url = '';
@@ -100,7 +102,15 @@
    		$current_role = array_shift($roles);
    		$temp_url = get_option('mo2fa_' . $current_role . '_login_url');
    	}
-   	$redirect_url = $temp_url ? $temp_url : $redirect_to;
+	$current_roles = miniorange_get_user_role($user);
+	$enabled = miniorange_check_if_2fa_enabled_for_roles($current_roles);
+		
+	if($enabled){
+		$redirect_url = $temp_url ? $temp_url : $redirect_to;
+	}else{
+		$redirect_url = $redirect_to ? $redirect_to : $temp_url;
+	}
+	
    	$mo2f_redirect_url = empty($current_role) ? $redirect_to : $redirect_url;
    	$mo2f_redirect_url = isset($mo2f_redirect_url) ? $mo2f_redirect_url : site_url();
    
@@ -127,10 +137,10 @@
    }
    
    function mo2f_collect_attributes($email,$attributes){
-   	if(get_site_option('mo2f_enable_rba')&& get_site_option('mo2f_login_policy')){	
+   	if(get_site_option('mo2f_remember_device')&& get_site_option('mo2f_login_policy')){	
    		$rba_attributes = new Miniorange_Rba_Attributes();
    		$rba_response = json_decode($rba_attributes->mo2f_collect_attributes($email,$attributes),true); //collect rba attributes
-   		
+   		// var_dump($rba_response);exit;
    		if(json_last_error() == JSON_ERROR_NONE){
    			if($rba_response['status'] == 'SUCCESS'){ //attribute are collected successfully
    				$sessionUuid = $rba_response['sessionUuid'];
@@ -181,12 +191,89 @@
    	}
    }
    
+   // function send_email_alert($email,$content){
+		
+		// // $hostname = Utilities::getHostname();
+		// $hostname 	= get_site_option('mo2f_host_name') ;
+		// $url = $hostname . '/moas/api/notify/send';
+		// $ch = curl_init($url);
+		
+		// // $customer_details = Utilities::getCustomerDetails();
+		// $customerKey = get_site_option('mo2f_customerKey');
+		// $apiKey =  get_site_option('mo2f_api_key');
+		// // $email = "mittal@miniorange.com";
+
+		// $currentTimeInMillis= round(microtime(true) * 1000);
+		// $stringToHash 		= $customerKey .  number_format($currentTimeInMillis, 0, '', '') . $apiKey;
+		// $hashValue 			= hash("sha512", $stringToHash);
+		// $customerKeyHeader 	= "Customer-Key: " . $customerKey;
+		// $timestampHeader 	= "Timestamp: " .  number_format($currentTimeInMillis, 0, '', '');
+		// $authorizationHeader= "Authorization: " . $hashValue;
+		// $toEmail 			= $email;
+		// $subject            = get_site_option('mo2f_users_notify_subject');
+		// $site_url=site_url();
+			
+			// $content='<table cellpadding="25" style="margin:0px auto"><tbody><tr><td><table cellpadding="24" width="584px" style="margin:0 auto;max-width:584px;background-color:#f6f4f4;border:1px solid #a8adad">
+						// <tbody><tr><td><img src="'.get_site_option('mo2f_users_notify_image').'" style="color:#5fb336;text-decoration:none;display:block;width:auto;height:auto;max-height:35px" ></td>
+						// </tr></tbody></table><table cellpadding="24" style="background:#fff;border:1px solid #a8adad;width:584px;border-top:none;color:#4d4b48;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px">
+						// <tbody><tr><td>
+						// <p style="margin-top:0;margin-bottom:20px">Dear User,</p><p style="margin-top:0;margin-bottom:10px"><p style="margin-top:0;margin-bottom:10px">'.get_site_option('mo2f_users_notify_msg1').'</p></p>
+						// <p style="margin-top:0;margin-bottom:10px"><p style="margin-top:0;margin-bottom:10px">'. get_site_option('mo2f_users_notify_msg2').' <a href="'.get_site_option('mo2f_users_notify_site_url').'" target="_blank">'.get_site_option('mo2f_users_notify_site_url').'</a>
+						// <p style="margin-top:0;margin-bottom:15px">Thank you,<br>'. get_site_option('mo2f_users_notify_msg3').'</p><p style="margin-top:0;margin-bottom:0px;font-size:11px">Disclaimer: This email and any files transmitted with it are confidential and intended solely for the use of the individual or entity to whom they are addressed.</p>
+						// </span></td></tr></tbody></table></td></tr></tbody></table>';
+			
+			// $fromEmail  = get_site_option('mo2f_email');
+			
+		// $fields = array(
+			// 'customerKey'	=> $customerKey,
+			// 'sendEmail' 	=> true,
+			// 'email' 		=> array(
+				// 'customerKey' 	=> $customerKey,
+				// 'fromEmail' 	=> $fromEmail,
+				// 'bccEmail' 		=> $fromEmail,
+				// 'fromName' 		=> 'miniOrange',
+				// 'toEmail' 		=> $toEmail,
+				// 'toName' 		=> $toEmail,
+				// 'subject' 		=> $subject,
+				// 'content' 		=> $content
+			// ),
+		// );
+		// $field_string = json_encode($fields);
+		
+		// curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
+		// curl_setopt( $ch, CURLOPT_ENCODING, "" );
+		// curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		// curl_setopt( $ch, CURLOPT_AUTOREFERER, true );
+		// curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );    # required for https urls
+
+		// curl_setopt( $ch, CURLOPT_MAXREDIRS, 10 );
+		// curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json", $customerKeyHeader,
+			// $timestampHeader, $authorizationHeader));
+		// curl_setopt( $ch, CURLOPT_POST, true);
+		// curl_setopt( $ch, CURLOPT_POSTFIELDS, $field_string);
+		// $content = curl_exec($ch);
+        // // var_dump($field_string);
+        // // var_dump($content);exit;
+		// if(curl_errno($ch)){
+			// return json_encode(array("status"=>'ERROR','statusMessage'=>curl_error($ch)));
+		// }
+		// curl_close($ch);
+		// return $content;
+
+	// }
+   
    function mo2f_get_user_2ndfactor($current_user){
-   	if(get_user_meta($current_user->ID,'mo_2factor_mobile_registration_status',true) == 'MO_2_FACTOR_SUCCESS'){
+	   
+	   global $dbQueries;
+		$mobile_registration_status = $dbQueries->get_user_detail( 'mo_2factor_mobile_registration_status',$current_user->ID);
+	   
+   	if($mobile_registration_status == 'MO_2_FACTOR_SUCCESS'){
    		$mo2f_second_factor = 'MOBILE AUTHENTICATION';
    	}else{
    		$enduser = new Two_Factor_Setup();
-   		$userinfo = json_decode($enduser->mo2f_get_userinfo(get_user_meta($current_user->ID,'mo_2factor_map_id_with_email',true)),true);
+		$email = $dbQueries->get_user_detail( 'mo2f_user_email',$current_user->ID);
+   		$userinfo = json_decode($enduser->mo2f_get_userinfo($email),true);
+		
    		if(json_last_error() == JSON_ERROR_NONE){
    			if($userinfo['status'] == 'ERROR'){
    				$mo2f_second_factor = 'NONE';
@@ -230,6 +317,9 @@
          echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/front_end_login.css', __FILE__) . '" />';
          echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/style_settings.css', __FILE__) . '" />';
          echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/hide-login.css', __FILE__) . '" />';
+		 if ( get_option( 'mo2f_personalization_ui' ) ) {
+		echo '<link rel="stylesheet" type="text/css" href="' . plugins_url( 'includes/css/mo2f_login_popup_ui.css', __FILE__ ) . '" />';
+	}
          ?>
    </head>
    <body>
@@ -238,8 +328,8 @@
          <div class="mo_customer_validation-modal-dialog mo_customer_validation-modal-md">
             <div class="login mo_customer_validation-modal-content">
                <div class="mo2f_modal-header">
-                  <h4 class="mo2f_modal-title"><button type="button" class="mo2f_close" data-dismiss="modal" aria-label="Close" title="Back to login" onclick="mologinback();"><span aria-hidden="true">&times;</span></button>
-                     How would you like to authenticate yourself?
+                  <h4 class="mo2f_modal-title"><button type="button" class="mo2f_close" data-dismiss="modal" aria-label="Close" title="<?php echo __('Back to login','miniorange-2-factor-authentication');?>" onclick="mologinback();"><span aria-hidden="true">&times;</span></button>
+                    <?php echo __('How would you like to authenticate yourself?','miniorange-2-factor-authentication'); ?>
                   </h4>
                </div>
                <div class="mo2f_modal-body">
@@ -249,17 +339,17 @@
                      <p class="mo2fa_display_message_frontend" ><?php echo $login_message; ?></p>
                   </div>
                   <?php } ?>
-                  <p style="padding-left:10px;padding-right:10px;"><?php echo 'Please choose the options from below:'; ?></p>
+                  <p style="padding-left:10px;padding-right:10px;"><?php echo __('Please choose the options from below:','miniorange-2-factor-authentication'); ?></p>
                   <div style="padding-left:10px;padding-right:40px;">
                      <?php if(get_site_option( 'mo2f_enable_forgotphone_email' )) {?>
-                     <input type="radio"  name="mo2f_selected_forgotphone_option"  value="OTP OVER EMAIL"  checked="ckecked" />Send a one time passcode to my registered email<br /><br />
+                     <input type="radio"  name="mo2f_selected_forgotphone_option"  value="OTP OVER EMAIL"  checked="checked" /><?php echo __('Send a one time passcode to my registered email', 'miniorange-2-factor-authentication');?><br /><br />
                      <?php } 
                         if(get_site_option( 'mo2f_enable_forgotphone_kba' )) {
                         ?>
-                     <input type="radio"  name="mo2f_selected_forgotphone_option"  value="KBA"  />Answer your Security Questions (KBA)
+                     <input type="radio"  name="mo2f_selected_forgotphone_option"  value="KBA"  /><?php echo __('Answer your Security Questions (KBA)', 'miniorange-2-factor-authentication'); ?>
                      <?php } ?>
                      <br /><br />
-                     <input type="button" name="miniorange_validtae_otp" value="Continue" class="miniorange_validate_otp" onclick="mo2fselectforgotphoneoption();" />
+                     <input type="button" name="miniorange_validtae_otp" value="<?php echo __('Continue', 'miniorange-2-factor-authentication'); ?>" class="miniorange_validate_otp" onclick="mo2fselectforgotphoneoption();" />
                   </div>
                   <?php mo2f_customize_logo(); 
                      }
@@ -302,6 +392,9 @@
          echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/front_end_login.css', __FILE__) . '" />';
          echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/style_settings.css', __FILE__) . '" />';
          echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/hide-login.css', __FILE__) . '" />';
+		 if ( get_option( 'mo2f_personalization_ui' ) ) {
+		echo '<link rel="stylesheet" type="text/css" href="' . plugins_url( 'includes/css/mo2f_login_popup_ui.css', __FILE__ ) . '" />';
+	}
          ?>
    </head>
    <body>
@@ -310,40 +403,120 @@
          <div class="mo_customer_validation-modal-dialog mo_customer_validation-modal-md">
             <div class="login mo_customer_validation-modal-content">
                <div class="mo2f_modal-header">
-                  <h4 class="mo2f_modal-title"><button type="button" class="mo2f_close" data-dismiss="modal" aria-label="Close" title="Back to login" onclick="mologinback();"><span aria-hidden="true">&times;</span></button>
-                     Validate Security Questions
+                  <h4 class="mo2f_modal-title"><button type="button" class="mo2f_close" data-dismiss="modal" aria-label="Close" title="<?php echo __('Back to login','miniorange-2-factor-authentication');?>" onclick="mologinback();"><span aria-hidden="true">&times;</span></button>
+                     <?php echo __('Validate Security Questions', 'miniorange-2-factor-authentication'); ?>
                   </h4>
                </div>
                <div class="mo2f_modal-body">
                   <div id="kbaSection" style="padding-left:10px;padding-right:10px;">
                      <div  id="otpMessage" 
 						<?php if(get_option('mo2f_is_error', true)) { ?>style="background-color:#FADBD8; color:#E74C3C;?>"<?php update_option('mo2f_is_error', false);} ?>>
-                        <p style="font-size:13px;"><?php echo (isset($login_message) && !empty($login_message)) ? $login_message : 'Please answer the following questions:'; ?></p>
+                        <p style="font-size:15px;"><?php echo (isset($login_message) && !empty($login_message)) ? $login_message :  __('Please answer the following questions:', 'miniorange-2-factor-authentication'); ?></p>
                      </div>
                      <form name="f" id="mo2f_submitkba_loginform" method="post" action="">
                         <div id="mo2f_kba_content">
                            <p style="font-size:15px;">
                               <?php if(isset($_SESSION['mo_2_factor_kba_questions'])){
-                                 echo $_SESSION['mo_2_factor_kba_questions'][0];
+                                 echo Mo2fConstants::langTranslate($_SESSION['mo_2_factor_kba_questions'][0]);
                                  ?><br />
-                              <input class="mo2f-textbox" type="text" name="mo2f_answer_1" id="mo2f_answer_1" required="true" autofocus="true" pattern="(?=\S)[A-Za-z0-9_@.$#&amp;+-\s]{1,100}" title="Only alphanumeric letters with special characters(_@.$#&amp;+-) are allowed." autocomplete="off" ><br />
+                              <input class="mo2f-textbox" type="text" name="mo2f_answer_1" id="mo2f_answer_1" required="true" autofocus="true" pattern="(?=\S)[A-Za-z0-9_@.$#&amp;+-\s]{1,100}" title="<?php echo __('Only alphanumeric letters with special characters(_@.$#&amp;+-) are allowed.','miniorange-2-factor-authentication'); ?>" autocomplete="off" ><br />
                               <?php
-                                 echo $_SESSION['mo_2_factor_kba_questions'][1];
+                                 echo Mo2fConstants::langTranslate($_SESSION['mo_2_factor_kba_questions'][1]);
                                  ?><br />
-                              <input class="mo2f-textbox" type="text" name="mo2f_answer_2" id="mo2f_answer_2" required="true" pattern="(?=\S)[A-Za-z0-9_@.$#&amp;+-\s]{1,100}" title="Only alphanumeric letters with special characters(_@.$#&amp;+-) are allowed." autocomplete="off">
+                              <input class="mo2f-textbox" type="text" name="mo2f_answer_2" id="mo2f_answer_2" required="true" pattern="(?=\S)[A-Za-z0-9_@.$#&amp;+-\s]{1,100}" title="<?php echo __('Only alphanumeric letters with special characters(_@.$#&amp;+-) are allowed.','miniorange-2-factor-authentication'); ?>" autocomplete="off">
                               <?php 
                                  }
                                  ?>
                            </p>
                         </div>
                         <?php 
-                           if(get_site_option('mo2f_enable_rba') && get_site_option('mo2f_login_policy')&& get_site_option('mo2f_enable_rba_types')==1){ 	
-                           ?>
-                        <span style="float:left; font-size:15px;"><input style="vertical-align:text-top;" type="checkbox" name="mo2f_trust_device" id="mo2f_trust_device" />Remember this device.</span><br/>
 						
+						
+                           if(get_site_option('mo2f_remember_device') && get_site_option('mo2f_login_policy')&& get_site_option('mo2f_enable_rba_types')==1){ 	
+                           ?>
+                        <span style="float:left; font-size:15px;"><input style="vertical-align:text-top;" type="checkbox" name="mo2f_trust_device" id="mo2f_trust_device" /><?php echo __('Remember this device.', 'miniorange-2-factor-authentication'); ?></span>
+						<br><br>
 						<?php } ?>
-                        <input type="submit" name="miniorange_kba_validate" id="miniorange_kba_validate" class="miniorange_kba_validate"  style="float:left;" value="Validate" />
+						<a href="#mo2f_backup_option">
+                               <p style="font-size:14px; font-weight:bold; color:#2980B9; "><?php echo __('Use Backup Codes', 'miniorange-2-factor-authentication');?></p>
+                           </a>
+                        <input type="submit" name="miniorange_kba_validate" id="miniorange_kba_validate" class="miniorange_kba_validate"  style="float:left;" value="<?php echo mo2f_lt('Validate' ); ?>" />
                         <input type="hidden" name="miniorange_kba_nonce" value="<?php echo wp_create_nonce('miniorange-2-factor-kba-nonce'); ?>" />
+                        <input type="hidden" name="redirect_to" value="<?php echo $redirect_to; ?>" />
+                     </form>
+					 </br>
+                  </div>
+                  <br /><br /><br />
+                  <?php mo2f_customize_logo() ?>
+               </div>
+            </div>
+         </div>
+      </div>
+      <form name="f" id="mo2f_backto_mo_loginform" method="post" action="<?php echo wp_login_url(); ?>" style="display:none;">
+         <input type="hidden" name="miniorange_mobile_validation_failed_nonce" value="<?php echo wp_create_nonce('miniorange-2-factor-mobile-validation-failed-nonce'); ?>" />
+      </form>
+	   <form name="f" id="mo2f_backup" method="post" action="" style="display:none;">
+         <input type="hidden" name="miniorange_backup_nonce" value="<?php echo wp_create_nonce('miniorange-2-factor-backup-nonce'); ?>" />
+         <input type="hidden" name="redirect_to" value="<?php echo $redirect_to; ?>" />
+      </form>
+   </body>
+   <script>
+      function mologinback(){
+      	jQuery('#mo2f_backto_mo_loginform').submit();
+      }
+	   jQuery('a[href="#mo2f_backup_option"]').click(function() {
+      	jQuery('#mo2f_backup').submit();
+      });
+   </script>
+</html>
+<?php
+   }
+   
+   function mo2f_backup_form($login_status, $login_message, $redirect_to){
+   ?>
+<html>
+   <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <?php
+         echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>';
+         echo '<script src="' . plugins_url('includes/js/bootstrap.min.js', __FILE__) . '" ></script>';
+         echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/bootstrap.min.css', __FILE__) . '" />';
+         echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/front_end_login.css', __FILE__) . '" />';
+         echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/style_settings.css', __FILE__) . '" />';
+         echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/hide-login.css', __FILE__) . '" />';
+		 if ( get_option( 'mo2f_personalization_ui' ) ) {
+		echo '<link rel="stylesheet" type="text/css" href="' . plugins_url( 'includes/css/mo2f_login_popup_ui.css', __FILE__ ) . '" />';
+	}
+         ?>
+   </head>
+   <body>
+      <div class="mo2f_modal" tabindex="-1" role="dialog" id="myModal5">
+         <div class="mo2f-modal-backdrop"></div>
+         <div class="mo_customer_validation-modal-dialog mo_customer_validation-modal-md">
+            <div class="login mo_customer_validation-modal-content">
+               <div class="mo2f_modal-header">
+                  <h4 class="mo2f_modal-title"><button type="button" class="mo2f_close" data-dismiss="modal" aria-label="Close" title="<?php echo __('Back to login','miniorange-2-factor-authentication');?>" onclick="mologinback();"><span aria-hidden="true">&times;</span></button>
+                     <?php echo __('Validate Backup Code', 'miniorange-2-factor-authentication'); ?>
+                  </h4>
+               </div>
+               <div class="mo2f_modal-body">
+                  <div id="kbaSection" style="padding-left:10px;padding-right:10px;">
+                     <div  id="otpMessage" 
+						<?php if(get_option('mo2f_is_error', true)) { ?>style="background-color:#FADBD8; color:#E74C3C;?>"<?php update_option('mo2f_is_error', false);} ?>>
+                        <p style="font-size:15px;"><?php echo (isset($login_message) && !empty($login_message)) ? $login_message :  __('Please answer the following questions:', 'miniorange-2-factor-authentication'); ?></p>
+                     </div>
+                     <form name="f" id="mo2f_submitbackup_loginform" method="post" action="">
+                        <div id="mo2f_kba_content">
+                           <p style="font-size:15px;">
+                            
+                              <input class="mo2f-textbox" type="text" name="mo2f_backup_code" id="mo2f_backup_code" required="true" autofocus="true"  title="<?php echo __('Only alphanumeric letters with special characters(_@.$#&amp;+-) are allowed.','miniorange-2-factor-authentication'); ?>" autocomplete="off" ><br />
+                              
+                           </p>
+                        </div>
+                        
+                        <input type="submit" name="miniorange_backup_validate" id="miniorange_backup_validate" class="miniorange_kba_validate"  style="float:left;" value="<?php echo mo2f_lt('Validate' ); ?>" />
+                        <input type="hidden" name="miniorange_validate_backup_nonce" value="<?php echo wp_create_nonce('miniorange-2-factor-validate-backup-nonce'); ?>" />
                         <input type="hidden" name="redirect_to" value="<?php echo $redirect_to; ?>" />
                      </form>
 					 </br>
@@ -368,8 +541,9 @@
    }
    
    function mo2f_getpush_oobemail_response($id, $login_status, $login_message, $redirect_to){
-   
-   ?>
+   global $dbQueries;
+   $kba_registration_status = $dbQueries->get_user_detail( 'mo2f_SecurityQuestions_config_status',$id);
+  ?>
 <html>
    <head>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -381,6 +555,9 @@
          echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/front_end_login.css', __FILE__) . '" />';
          echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/style_settings.css', __FILE__) . '" />';
          echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/hide-login.css', __FILE__) . '" />';
+		 if ( get_option( 'mo2f_personalization_ui' ) ) {
+		echo '<link rel="stylesheet" type="text/css" href="' . plugins_url( 'includes/css/mo2f_login_popup_ui.css', __FILE__ ) . '" />';
+	}
          ?>
    </head>
    <body>
@@ -389,8 +566,8 @@
          <div class="mo_customer_validation-modal-dialog mo_customer_validation-modal-md">
             <div class="login mo_customer_validation-modal-content">
                <div class="mo2f_modal-header">
-                  <h4 class="mo2f_modal-title"><button type="button" class="mo2f_close" data-dismiss="modal" aria-label="Close" title="Back to login" onclick="mologinback();"><span aria-hidden="true">&times;</span></button>
-                     Accept Your Transaction
+                  <h4 class="mo2f_modal-title"><button type="button" class="mo2f_close" data-dismiss="modal" aria-label="Close" title="<?php echo __('Back to login','miniorange-2-factor-authentication');?>" onclick="mologinback();"><span aria-hidden="true">&times;</span></button>
+                     <?php echo __('Accept Your Transaction', 'miniorange-2-factor-authentication'); ?>
                   </h4>
                </div>
                <div class="mo2f_modal-body">
@@ -402,7 +579,7 @@
                   <div id="pushSection">
                      <div>
                         <center>
-                           <p style="font-size:16px; font-weight:bold; color:#34495E; ">Waiting for your approval...</p>
+                           <p style="font-size:16px; font-weight:bold; color:#34495E; "><?php echo __('Waiting for your approval...', 'miniorange-2-factor-authentication'); ?></p>
                         </center>
                      </div>
                      <div id="showPushImage">
@@ -412,25 +589,30 @@
                      </div>
 					 <center>
                         <a href="#showPushHelp" id="pushHelpLink">
-                           <p style="font-size:16px; font-weight:bold; color:#5DADE2; ">See How It Works ?</p>
+                           <p style="font-size:16px; font-weight:bold; color:#5DADE2; "><?php echo mo2f_lt( 'See How It Works ?' ); ?></p>
                         </a>
                      </center>
                      <span style="padding-right:2%;">
                         <?php if(isset($login_status) && $login_status == 'MO_2_FACTOR_CHALLENGE_PUSH_NOTIFICATIONS'){ ?>
                         <center>
                            <?php if(get_site_option('mo2f_enable_forgotphone')){ ?>
-                           <input type="button" name="miniorange_login_forgotphone" onclick="mologinforgotphone();" id="miniorange_login_forgotphone" class="miniorange_login_forgotphone" value="Forgot Phone?" />
+                           <input type="button" name="miniorange_login_forgotphone" onclick="mologinforgotphone();" id="miniorange_login_forgotphone" class="miniorange_login_forgotphone" value="<?php echo __('Forgot Phone?','miniorange-2-factor-authentication'); ?>" />
                            <?php } ?>
 						   &emsp;&emsp;
-                           <input type="button" name="miniorange_login_offline" onclick="mologinoffline();" id="miniorange_login_offline" class="miniorange_login_offline" value="Phone is Offline?" />
+                           <input type="button" name="miniorange_login_offline" onclick="mologinoffline();" id="miniorange_login_offline" class="miniorange_login_offline" value="<?php echo __('Phone is Offline?','miniorange-2-factor-authentication'); ?>" />
                         </center>
-                        <?php }else if(isset($login_status) && $login_status == 'MO_2_FACTOR_CHALLENGE_OOB_EMAIL' && get_site_option('mo2f_enable_forgotphone') && get_site_option('mo2f_enable_forgotphone_kba') && get_user_meta($id,'mo2f_kba_registration_status',true)){ ?>
+                        <?php }else if(isset($login_status) && $login_status == 'MO_2_FACTOR_CHALLENGE_OOB_EMAIL' && get_site_option('mo2f_enable_forgotphone') && get_site_option('mo2f_enable_forgotphone_kba') && $kba_registration_status){ ?>
                         <center>
-                           <a href="#mo2f_alternate_login_kba" >
-                               <p style="font-size:14px; font-weight:bold; color:#2980B9; ">Didn't receive mail?</p>
+                           <a href="#mo2f_alternate_login_kba"  style="text-align:center;">
+                               <p style="font-size:14px; font-weight:bold; color:#2980B9; "><?php echo __('Didn\'t receive mail?', 'miniorange-2-factor-authentication');?></p>
                            </a>
                         </center>
                         <?php }?>
+
+						    <a style="text-align:center;" href="#mo2f_backup_option" >
+                               <p style="font-size:14px; font-weight:bold; color:#2980B9; "><?php echo __('Use Backup Codes', 'miniorange-2-factor-authentication');?></p>
+                           </a>
+
                      </span>
                   </div>
                   <div id="showPushHelp" class="showPushHelp" hidden>
@@ -444,45 +626,42 @@
                               <div class="mo2f_carousel-inner" role="listbox">
                                  <?php  if($login_status == 'MO_2_FACTOR_CHALLENGE_OOB_EMAIL') { ?>
                                  <div class="item active">
-									<p>A verification email has been sent to your registered email id.</p>
+                                 <p><b><?php echo __('A verification email has been sent to your registered email id.', 'miniorange-2-factor-authentication'); ?> </b> </p>
                                     <br>
 									<img class="first-slide" src="https://auth.miniorange.com/moas/images/help/email-with-link-login-flow-1.png" alt="First slide" style="width:80%">
                                  </div>
                                  <div class="item">
-                                    <p>Click on <b style="color:red">Accept Transaction</b> link to verify your email .</p>
-                                    <br>
-                                    <img class="first-slide" src="https://auth.miniorange.com/moas/images/help/email-with-link-login-flow-2.png" alt="First slide"style="width:100%">
-                                 </div>
-                                 <div class="item">
-								    <p>You have been validated. You will be logged in to your website now.</p>
-                                    <br>
-									<img class="first-slide" src="https://auth.miniorange.com/moas/images/help/email-with-link-login-flow-3.png" alt="First slide" style="width:100%">
-                                 </div>
-                                 <?php } else {	?>
-                                 <!-- Indicators -->
-                                 <div class="item active">
-                                    <p>You will receive a notification on your phone.</p>
-                                    <br>
-                                    <img class="first-slide" src="https://auth.miniorange.com/moas/images/help/push-login-flow.png" alt="First slide"style="width:80%">
-                                 </div>
-                                 <div class="item">
-                                    <p>Click on <b style="color:red">Approve</b> button.</p>
-                                    <br>
-                                    <img class="first-slide" src="https://auth.miniorange.com/moas/images/help/push-login-flow-1.jpg" alt="First slide"style="width:100%">
-                                 </div>
-                                 <div class="item">
-								    <p>You are successfully authenticated.</p>
-                                    <br>
-									<img class="first-slide" src="https://auth.miniorange.com/moas/images/help/mo2f_softtoken_5.jpg" alt="First slide"style="width:100%">
-                                 </div>
-                                 <?php } ?>
+                                 <p><b><?php echo __('Click on','miniorange-2-factor-authentication'); ?> <b style="color:red"><?php echo __('Accept Transaction', 'miniorange-2-factor-authentication');?></b> <?php echo __('link to verify your email.', 'miniorange-2-factor-authentication');?> </b> </p>
+                                 <br>
+                                    <img class="first-slide" src="https://auth.miniorange.com/moas/images/help/email-with-link-login-flow-2.png" alt="First slide"style=" width:100%">
                               </div>
+                              <div class="item">
+                                 <p><b><?php echo __('You have been validated. You will be logged in to your website now.', 'miniorange-2-factor-authentication'); ?> </b> </p>
+                                    <br>
+									<img class="first-slide" src="https://auth.miniorange.com/moas/images/help/email-with-link-login-flow-3.png" alt="First slide" style=" width:100%">
+                              </div>
+                              <?php } else {	?>
+                              <!-- Indicators -->
+                              <div class="item active">
+                                 <p><b><?php echo __('You will receive a notification on your phone.', 'miniorange-2-factor-authentication'); ?> </b> </p>
+                                 <br>
+                                    <img class="first-slide" src="https://auth.miniorange.com/moas/images/help/push-login-flow.png" alt="First slide" style="width:80%">
+                              </div>
+                              <div class="item">
+                                 <p><b><?php echo __('Click on', 'miniorange-2-factor-authentication'); ?> <b style="color:red"><?php echo __('Approve', 'miniorange-2-factor-authentication')?></b> <?php echo __('button.', 'miniorange-2-factor-authentication'); ?> </b> </p>
+                                 <br>
+                                    <img class="first-slide" src="https://auth.miniorange.com/moas/images/help/push-login-flow-1.jpg" alt="First slide" style="width:100%">
+                              </div>
+                              <div class="item">
+                                 <p><b><?php echo __('You are successfully authenticated.', 'miniorange-2-factor-authentication'); ?> </b> </p>
+                                    <br>
+									<img class="first-slide" src="https://auth.miniorange.com/moas/images/help/mo2f_softtoken_5.jpg" alt="First slide" style="width:100%">
+                              </div>
+                              <?php } ?>
                            </div>
-						   <a href="#showPushHelp" id="pushLink">
-							   <p>Go Back.</p>
-						   </a>
-                        </center>
-                     </div>
+                        </div>
+                     </center>
+                  </div>
                   <?php mo2f_customize_logo() ?>
                </div>
             </div>
@@ -506,6 +685,10 @@
       </form>
       <form name="f" id="mo2f_alternate_login_kbaform" method="post" action="" style="display:none;">
          <input type="hidden" name="miniorange_alternate_login_kba_nonce" value="<?php echo wp_create_nonce('miniorange-2-factor-alternate-login-kba-nonce'); ?>" />
+         <input type="hidden" name="redirect_to" value="<?php echo $redirect_to; ?>" />
+      </form> 
+	  <form name="f" id="mo2f_backup" method="post" action="" style="display:none;">
+         <input type="hidden" name="miniorange_backup_nonce" value="<?php echo wp_create_nonce('miniorange-2-factor-backup-nonce'); ?>" />
          <input type="hidden" name="redirect_to" value="<?php echo $redirect_to; ?>" />
       </form>
    </body>
@@ -562,11 +745,19 @@
       jQuery('a[href="#mo2f_alternate_login_kba"]').click(function() {
       	jQuery('#mo2f_alternate_login_kbaform').submit();
       });
+	  jQuery('a[href="#mo2f_backup_option"]').click(function() {
+      	jQuery('#mo2f_backup').submit();
+      });
       
    </script>
 </html>
 <?php 
    }
+
+function mo2f_lt( $string ) {
+    return __($string ,'miniorange-2-factor-authentication' );
+
+}
    	
    function mo2f_getqrcode($login_status, $login_message, $redirect_to){
    ?>
@@ -581,6 +772,9 @@
          echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/front_end_login.css', __FILE__) . '" />';
          echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/style_settings.css', __FILE__) . '" />';
          echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/hide-login.css', __FILE__) . '" />';
+		 if ( get_option( 'mo2f_personalization_ui' ) ) {
+		echo '<link rel="stylesheet" type="text/css" href="' . plugins_url( 'includes/css/mo2f_login_popup_ui.css', __FILE__ ) . '" />';
+	}
          ?>
    </head>
    <body>
@@ -589,8 +783,8 @@
          <div class="mo_customer_validation-modal-dialog mo_customer_validation-modal-md">
             <div class="login mo_customer_validation-modal-content">
                <div class="mo2f_modal-header">
-                  <h4 class="mo2f_modal-title"><button type="button" class="mo2f_close" data-dismiss="modal" aria-label="Close" title="Back to login" onclick="mologinback();"><span aria-hidden="true">&times;</span></button>
-                     Scan QR Code
+                  <h4 class="mo2f_modal-title"><button type="button" class="mo2f_close" data-dismiss="modal" aria-label="Close" title="<?php echo __('Back to login','miniorange-2-factor-authentication');?>" onclick="mologinback();"><span aria-hidden="true">&times;</span></button>
+                     <?php echo __('Scan QR Code', 'miniorange-2-factor-authentication'); ?>
                   </h4>
                </div>
                <div class="mo2f_modal-body center">
@@ -603,12 +797,12 @@
                   <div id="scanQRSection">
                         <center>
                            <a href="#showQRHelp" id="helpLink">
-                              <p style="font-size:16px; font-weight:bold; color:#2980B9; ">See how it works ?</p>
+                              <p style="font-size:16px; font-weight:bold; color:#2980B9; "><?php echo __('See How It Works ?', 'miniorange-2-factor-authentication'); ?></p>
                            </a>
                         </center>
                         <div style="margin-bottom:10%;">
                            <center>
-                              <p style="font-size:16px; font-weight:bold; font-color:#2980B9">Identify yourself by scanning the QR code with miniOrange Authenticator app.</p>
+                              <p style="font-size:16px; font-weight:bold; font-color:#2980B9"><?php echo __('Identify yourself by scanning the QR code with miniOrange Authenticator app.', 'miniorange-2-factor-authentication'); ?></p>
                            </center>
                         </div>
                         <div id="showQrCode" style="margin-bottom:10%;">
@@ -617,13 +811,16 @@
                         <span style="padding-right:2%;">
                            <center>
                               <?php if(get_option('mo2f_enable_forgotphone')){ ?>
-                              <input type="button" name="miniorange_login_forgotphone" onclick="mologinforgotphone();" id="miniorange_login_forgotphone" class="miniorange_login_forgotphone" style="margin-right:5%;" value="Forgot Phone?" />
+                              <input type="button" name="miniorange_login_forgotphone" onclick="mologinforgotphone();" id="miniorange_login_forgotphone" class="miniorange_login_forgotphone" style="margin-right:5%;" value="<?php echo mo2f_lt('Forgot Phone?' ); ?>" />
                               <?php } ?>
 							  &emsp;&emsp;
-                              <input type="button" name="miniorange_login_offline" onclick="mologinoffline();" id="miniorange_login_offline" class="miniorange_login_offline" value="Phone is Offline?" />
+                              <input type="button" name="miniorange_login_offline" onclick="mologinoffline();" id="miniorange_login_offline" class="miniorange_login_offline" value="<?php echo mo2f_lt('Phone is Offline?' ); ?>" />
                            </center>
                         </span>
                      </div>
+                   <a href="#mo2f_backup_option" style="text-align:center;">
+                       <p style="font-size:14px; font-weight:bold; color:#2980B9; "><?php echo __('Use Backup Codes', 'miniorange-2-factor-authentication');?></p>
+                   </a>
                      <div id="showQRHelp" class="showQRHelp" hidden>
                         <center>
                            <div id="myCarousel" class="mo2f_carousel slide" data-ride="carousel"  data-interval="15000" >
@@ -638,12 +835,12 @@
                                     <img class="first-slide" src="https://auth.miniorange.com/moas/images/help/qr-how-to-setup-1.png" alt="First slide"style="width:80%; height:100%;">
                                  </div>
                                  <div class="item">
-                                    <p>Open miniOrange <b style="color:red">Authenticator</b> app and click on SCAN QR CODE.</p>
+                                 <p><b><?php echo __('Open miniOrange', 'miniorange-2-factor-authentication'); ?> <b style="color:red"><?php echo __('Authenticator', 'miniorange-2-factor-authentication'); ?></b> <?php echo __('app and click on SCAN QR CODE.', 'miniorange-2-factor-authentication'); ?> </b> </p>
                                     <br>
                                     <img class="first-slide" src="https://auth.miniorange.com/moas/images/help/mo2f_softtoken_5.jpg" alt="First slide"style="width:100%">
                                  </div>
                                  <div class="item">
-								    <p>Scan the QR code from the app.</p>
+                                 <p><b><?php echo __('Scan the QR code from the app.', 'miniorange-2-factor-authentication'); ?> </b> </p>
                                     <br>
                                     <img class="first-slide" src="https://auth.miniorange.com/moas/images/help/qr-help-3.jpg" alt="First slide"
 									style="width:100%">
@@ -652,7 +849,7 @@
                               </div>
                            </div>
 						   <a href="#showQRHelp" id="qrLink">
-                              <p style="font-size:14px; font-weight:bold; color:#2980B9; ">Back to Scan QR Code.</p>
+                              <p style="font-size:14px; font-weight:bold; color:#2980B9; "><?php echo mo2f_lt('Back to Scan QR Code.' ); ?></p>
                            </a>
                         </center>
                      </div>
@@ -664,6 +861,10 @@
       </div>
       <form name="f" id="mo2f_backto_mo_loginform" method="post" action="<?php echo wp_login_url(); ?>" style="display:none;">
          <input type="hidden" name="miniorange_mobile_validation_failed_nonce" value="<?php echo wp_create_nonce('miniorange-2-factor-mobile-validation-failed-nonce'); ?>" />
+      </form>
+      <form name="f" id="mo2f_backup" method="post" action="" style="display:none;">
+          <input type="hidden" name="miniorange_backup_nonce" value="<?php echo wp_create_nonce('miniorange-2-factor-backup-nonce'); ?>" />
+          <input type="hidden" name="redirect_to" value="<?php echo $redirect_to; ?>" />
       </form>
       <form name="f" id="mo2f_mobile_validation_form" method="post" action="" style="display:none;">
          <input type="hidden" name="miniorange_mobile_validation_nonce" value="<?php echo wp_create_nonce('miniorange-2-factor-mobile-validation-nonce'); ?>" />
@@ -723,6 +924,10 @@
       	jQuery('#scanQRSection').show();
       	jQuery('#myCarousel').carousel('pause');
       });
+      jQuery('a[href="#mo2f_backup_option"]').click(function() {
+          // alert("here");
+          jQuery('#mo2f_backup').submit();
+      });
       function mologinback(){
       	jQuery('#mo2f_backto_mo_loginform').submit();
        }
@@ -737,7 +942,9 @@
 <?php 
    }
    
-   function mo2f_getotp_form($login_status, $login_message, $redirect_to){
+   function mo2f_getotp_form($id,$login_status, $login_message, $redirect_to){
+	 global $dbQueries;
+	     $kba_registration_status = $dbQueries->get_user_detail( 'mo2f_SecurityQuestions_config_status',$id);
    	?>
 <html>
    <head>
@@ -750,6 +957,9 @@
          echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/front_end_login.css', __FILE__) . '" />';
          echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/style_settings.css', __FILE__) . '" />';
          echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/hide-login.css', __FILE__) . '" />';
+		 if ( get_option( 'mo2f_personalization_ui' ) ) {
+		echo '<link rel="stylesheet" type="text/css" href="' . plugins_url( 'includes/css/mo2f_login_popup_ui.css', __FILE__ ) . '" />';
+	}
          ?>
    </head>
    <body>
@@ -758,8 +968,8 @@
          <div class="mo_customer_validation-modal-dialog mo_customer_validation-modal-md">
             <div class="login mo_customer_validation-modal-content">
                <div class="mo2f_modal-header">
-                  <h4 class="mo2f_modal-title"><button type="button" class="mo2f_close" data-dismiss="modal" aria-label="Close" title="Back to login" onclick="mologinback();"><span aria-hidden="true">&times;</span></button>
-                     Validate OTP
+                  <h4 class="mo2f_modal-title"><button type="button" class="mo2f_close" data-dismiss="modal" aria-label="Close" title="<?php echo __('Back to login','miniorange-2-factor-authentication');?>" onclick="mologinback();"><span aria-hidden="true">&times;</span></button>
+                     <?php echo __('Validate OTP', 'miniorange-2-factor-authentication'); ?>
                   </h4>
                </div>
                <div class="mo2f_modal-body center">
@@ -776,23 +986,33 @@
                      <div class="mo2f-login-container">
                         <form name="f" id="mo2f_submitotp_loginform" method="post" action=""> 
 							  <center> 
-								 <input type="text" name="mo2fa_softtoken" style="height:28px !important;" placeholder="Enter the code" id="mo2fa_softtoken" required="true" class="mo_otp_token" autofocus="true" pattern="[0-9]{4,8}" title="Only digits within range 4-8 are allowed."/>
+								 <input type="text" name="mo2fa_softtoken" style="height:28px !important;" placeholder="<?php echo __('Enter one time passcode','miniorange-2-factor-authentication'); ?>" id="mo2fa_softtoken" required="true" class="mo_otp_token" autofocus="true" pattern="[0-9]{4,8}" title="Only digits within range 4-8 are allowed."/>
 						   	  </center>
 							  
                               <br />
-                              <input type="submit" name="miniorange_otp_token_submit" id="miniorange_otp_token_submit" class="miniorange_otp_token_submit"  value="Validate" />
+                              <input type="submit" name="miniorange_otp_token_submit" id="miniorange_otp_token_submit" class="miniorange_otp_token_submit"  value="<?php echo __('Validate','miniorange-2-factor-authentication'); ?>" />
                               <input type="hidden" name="request_origin_method" value="<?php echo $login_status; ?>" />
                            <input type="hidden" name="miniorange_soft_token_nonce" value="<?php echo wp_create_nonce('miniorange-2-factor-soft-token-nonce'); ?>" />
                            <input type="hidden" name="redirect_to" value="<?php echo $redirect_to; ?>" />
                            </form><br/>
 						<br/>
                         <?php if(get_option('mo2f_enable_forgotphone') && isset($login_status ) && $login_status != 'MO_2_FACTOR_CHALLENGE_OTP_OVER_EMAIL'){ ?>
-                        <a name="miniorange_login_forgotphone"  onclick="mologinforgotphone();" id="miniorange_login_forgotphone" class="mo2f-link"   >Forgot Phone ?</a>
-                        <?php } ?>
+                        <a name="miniorange_login_forgotphone"  onclick="mologinforgotphone();" id="miniorange_login_forgotphone" class="mo2f-link"   ><?php echo __('Forgot Phone ?', 'miniorange-2-factor-authentication'); ?></a>
+                        <?php }?>
+
+						<a href="#mo2f_backup_option" style="text-align:center;">
+                               <p style="font-size:14px; font-weight:bold; color:#2980B9; "><?php echo __('Use Backup Codes', 'miniorange-2-factor-authentication');?></p>
+                           </a>	<?php		
+						if(isset($login_status) && $login_status == 'MO_2_FACTOR_CHALLENGE_OTP_OVER_EMAIL' && get_site_option('mo2f_enable_forgotphone') && get_site_option('mo2f_enable_forgotphone_kba') && $kba_registration_status){ ?>
+                        <center>
+                           <a href="#mo2f_alternate_login_kba" >
+                               <p style="font-size:14px; font-weight:bold; color:#2980B9; "><?php echo mo2f_lt('Didn\'t receive mail?');?></p>
+                            </a>
+						<?php } ?>
 						&emsp;&emsp;
 						  
 						<?php if($login_status != 'MO_2_FACTOR_CHALLENGE_GOOGLE_AUTHENTICATION'){  ?>
-                            <a href="#showOTPHelp" id="otpHelpLink" class="mo2f-link">See how it works ?</a>
+                            <a href="#showOTPHelp" id="otpHelpLink" class="mo2f-link"><?php echo mo2f_lt('See how it works ?');?></a>
                         <?php } ?>
 						<br><br>
                      </div>
@@ -810,24 +1030,24 @@
                            </ol>
                            <div class="mo2f_carousel-inner" role="listbox">
                               <div class="item active">
-                                 <p>Open miniOrange <b style="color:red">Authenticator</b> app and click on Sync time from the top left menu option.</p>
+                              <p><b><?php echo __('Open miniOrange', 'miniorange-2-factor-authentication'); ?> <b style="color:red"><?php echo __('Authenticator', 'miniorange-2-factor-authentication'); ?></b> <?php echo __('app and click on Sync time from the top left menu option.', 'miniorange-2-factor-authentication'); ?> </b> </p>
                                  <br>
                                  <img class="first-slide" src="https://auth.miniorange.com/moas/images/help/qr-help-2.jpg" alt="First slide" style="width:100%">
                               </div>
                               <div class="item">
-                                 <p>Click on <b style="color:red">Sync Time now</b> to sync your time with miniOrange Servers. This is a one time sync to avoid otp validation failure.</p>
+                              <p><b><?php echo __('Click on','miniorange-2-factor-authentication'); ?> <b style="color:red"><?php echo __('Sync Time now','miniorange-2-factor-authentication');?></b> <?php echo __('to sync your time with miniOrange Servers. This is a one time sync to avoid otp validation failure.', 'miniorange-2-factor-authentication'); ?> </b> </p>
                                  <br>
                                  <img class="first-slide" src="https://auth.miniorange.com/moas/images/help/token-help-3.jpg" alt="First slide"
 								 style="width:100%">
                               </div>
                               <div class="item">
-                                 <p>Go to Home</p>
+                              <p><?php echo __('Go to Home', 'miniorange-2-factor-authentication'); ?></p>
                                  <br>
                                  <img class="first-slide" src="https://auth.miniorange.com/moas/images/help/token-help-2.jpg" alt="First slide"
 								 style="width:100%">
                               </div>
                               <div class="item">
-                                 <p>Enter the one time passcode shown in miniOrange <b style="color:red">Authenticator</b> app here.</p>
+                              <p><b><?php echo __('Enter the one time passcode shown in miniOrange', 'miniorange-2-factor-authentication'); ?> <b style="color:red"><?php echo __('Authenticator', 'miniorange-2-factor-authentication'); ?></b> <?php echo __('app here.', 'miniorange-2-factor-authentication'); ?> </b> </p>
                                  <br>
                                  <img class="first-slide" src="https://auth.miniorange.com/moas/images/help/soft-token-test-5.png" alt="First slide"style="width:100%">
                               </div>
@@ -840,19 +1060,19 @@
                            </ol>
                            <div class="mo2f_carousel-inner" role="listbox">
                               <div class="item active">
-							     <p>An One Time Passcode has been sent to your registered email address.</p>
+							     <p><?php echo mo2f_lt('An One Time Passcode has been sent to your registered email address.');?></p>
                                  <br>
                                  <img class="first-slide" src="https://auth.miniorange.com/moas/images/help/otp-help-1.png" alt="First slide"
 								 style="width:100%">
                               </div>
                               <div class="item">
-                                 <p>Check your email with which you registered and copy the one time passcode.</p>
+                              <p><?php echo __('Check your email with which you registered and copy the one time passcode.', 'miniorange-2-factor-authentication'); ?></p>
                                  <br>
                                  <img class="first-slide" src="https://auth.miniorange.com/moas/images/help/otp-help-2.png" alt="First slide"
 								 style="width:100%">
                               </div>
                               <div class="item">
-							     <p>Enter the One Time Passcode to validate yourself.</p>
+							     <p><?php echo mo2f_lt('Enter the One Time Passcode to validate yourself.');?></p>
                                  <br>
                                  <img class="first-slide" src="https://auth.miniorange.com/moas/images/help/otp-help-3.png" alt="First slide"
 								 style="width:100%">
@@ -865,12 +1085,13 @@
                            </ol>
                            <div class="mo2f_carousel-inner" role="listbox">
                               <div class="item active">
-								<p>An OTP has been sent to your registered mobile number.</p>
+			
+                              <p><b><?php echo __('An OTP has been sent to your registered mobile number.', 'miniorange-2-factor-authentication'); ?> </b> </p>
                                  <br>
                                  <img class="first-slide" src="https://auth.miniorange.com/moas/images/help/otp-over-sms-login-flow-1.png" alt="First slide"style="width:100%">
                               </div>
                               <div class="item">
-							     <p>Enter the OTP received on your mobile phone to validate yourself.</p>
+							     <p><?php echo mo2f_lt('Enter the OTP received on your mobile phone to validate yourself.');?></p>
 								 <br>
                                  <img class="first-slide" src="https://auth.miniorange.com/moas/images/help/otp-over-sms-login-flow-2.jpg" alt="First slide" style="width:100%">
                               </div>
@@ -878,7 +1099,7 @@
                            <?php } ?>
                         </div>
 						<br>
-						<a href="#showOTP" id="otpLink" class="mo2f-link">Go Back.</a>
+						<a href="#showOTP" id="otpLink" class="mo2f-link"><?php echo mo2f_lt('Go Back.');?></a>
 						<br>
                      </div>
 					 </center>
@@ -891,6 +1112,10 @@
       <form name="f" id="mo2f_backto_mo_loginform" method="post" action="<?php echo wp_login_url(); ?>" style="display:none;">
          <input type="hidden" name="miniorange_mobile_validation_failed_nonce" value="<?php echo wp_create_nonce('miniorange-2-factor-mobile-validation-failed-nonce'); ?>" />
       </form>
+	  <form name="f" id="mo2f_alternate_login_kbaform" method="post" action="" style="display:none;">
+         <input type="hidden" name="miniorange_alternate_login_kba_nonce" value="<?php echo wp_create_nonce('miniorange-2-factor-alternate-login-kba-nonce'); ?>" />
+         <input type="hidden" name="redirect_to" value="<?php echo $redirect_to; ?>" />
+      </form>
       <?php if(get_site_option('mo2f_enable_forgotphone') && isset($login_status ) && $login_status != 'MO_2_FACTOR_CHALLENGE_OTP_OVER_EMAIL'){ ?>
       <form name="f" id="mo2f_show_forgotphone_loginform" method="post" action="" style="display:none;">
          <input type="hidden" name="request_origin_method" value="<?php echo $login_status; ?>" />
@@ -898,6 +1123,10 @@
          <input type="hidden" name="redirect_to" value="<?php echo $redirect_to; ?>" />
       </form>
       <?php } ?>
+      <form name="f" id="mo2f_backup" method="post" action="" style="display:none;">
+          <input type="hidden" name="miniorange_backup_nonce" value="<?php echo wp_create_nonce('miniorange-2-factor-backup-nonce'); ?>" />
+          <input type="hidden" name="redirect_to" value="<?php echo $redirect_to; ?>" />
+      </form>
    </body>
    <script>
       jQuery('#otpHelpLink').click(function() {
@@ -909,6 +1138,14 @@
       	jQuery('#showOTPHelp').hide();
       	jQuery('#showOTP').show();
       	jQuery('#otpMessage').show();
+      });
+	  jQuery('a[href="#mo2f_alternate_login_kba"]').click(function() {
+			 //alert('here');
+      	jQuery('#mo2f_alternate_login_kbaform').submit();
+      });
+	  jQuery('a[href="#mo2f_backup_option"]').click(function() {
+	      // alert("here");
+      	jQuery('#mo2f_backup').submit();
       });
       
       function mologinback(){
@@ -942,13 +1179,13 @@
       <div class="mo_customer_validation-modal-dialog mo_customer_validation-modal-md">
          <div class="login mo_customer_validation-modal-content">
             <div class="mo2f_modal-header">
-               <h4 class="mo2f_modal-title" ><button type="button"  class="mo2f_close" data-dismiss="modal" aria-label="Close" title="Cancel" onclick="mologinback();" ><span aria-hidden="true">&times;</span></button>
-                  Devices Exceeded
+               <h4 class="mo2f_modal-title" ><button type="button"  class="mo2f_close" data-dismiss="modal" aria-label="Close" title="<?php echo __('Cancel','miniorange-2-factor-authentication');?>" onclick="mologinback();" ><span aria-hidden="true">&times;</span></button>
+                  <?php echo __('Devices Exceeded', 'miniorange-2-factor-authentication'); ?>
                </h4>
             </div>
             <div class="mo2f_modal-body center">
                <center>
-                  <h2 style="margin-bottom:0px !important;"> Sorry, you are not allowed to log in from this device. You have exceeded the number of device registration allowed.</h2>
+                  <h2 style="margin-bottom:0px !important;"> <?php echo __('Sorry, you are not allowed to log in from this device. You have exceeded the number of device registration allowed.', 'miniorange-2-factor-authentication');?></h2>
                   <br>
                </center>
                <?php mo2f_customize_logo() ?>
@@ -982,6 +1219,9 @@
          echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/front_end_login.css', __FILE__) . '" />';
          echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/style_settings.css', __FILE__) . '" />';
          echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/hide-login.css', __FILE__) . '" />';
+		 if ( get_option( 'mo2f_personalization_ui' ) ) {
+		echo '<link rel="stylesheet" type="text/css" href="' . plugins_url( 'includes/css/mo2f_login_popup_ui.css', __FILE__ ) . '" />';
+	}
          ?>
    </head>
    <body>
@@ -990,8 +1230,8 @@
       <div class="mo_customer_validation-modal-dialog mo_customer_validation-modal-md">
          <div class="login mo_customer_validation-modal-content">
             <div class="mo2f_modal-header">
-               <h4 class="mo2f_modal-title" ><button type="button"  class="mo2f_close" data-dismiss="modal" aria-label="Close" title="Cancel" onclick="mologinback();" ><span aria-hidden="true">&times;</span></button>
-                  Email already registered
+               <h4 class="mo2f_modal-title" ><button type="button"  class="mo2f_close" data-dismiss="modal" aria-label="Close" title="<?php echo __('Cancel','miniorange-2-factor-authentication');?>" onclick="mologinback();" ><span aria-hidden="true">&times;</span></button>
+                  <?php echo __('Email already registered','miniorange-2-factor-authentication'); ?>
                </h4>
             </div>
             <div class="mo2f_modal-body center">
@@ -1019,10 +1259,11 @@
    
    function mo2f_get_device_form($id, $login_status, $login_message, $redirect_to)
    {
-   	
+   	 global $dbQueries;
+   // $selected_2factor_method = $dbQueries->get_user_detail( $id,'mo2f_selected_2factor_method');
    if(get_site_option('mo2f_enable_rba_types')==0)
    { 
-   	$mo2f_second_factor = get_user_meta($id,'mo2f_selected_2factor_method',true);
+   	$mo2f_second_factor = $dbQueries->get_user_detail( 'mo2f_configured_2FA_method',$id);
    	
    	if($mo2f_second_factor == 'OUT OF BAND EMAIL'){
    		$mo2f_second_factor = 'Email Verification';
@@ -1030,6 +1271,8 @@
    		$mo2f_second_factor = 'OTP over SMS';
       	}else if($mo2f_second_factor == 'SMS AND EMAIL'){
       		$mo2f_second_factor = 'OTP over SMS And Email';
+   	}else if($mo2f_second_factor == 'OTP_OVER_EMAIL'){
+      		$mo2f_second_factor = 'OTP_OVER_EMAIL';
    	}else if($mo2f_second_factor == 'PHONE VERIFICATION'){
    		$mo2f_second_factor = 'Phone Call Verification';
    	}else if($mo2f_second_factor == 'SOFT TOKEN'){
@@ -1067,19 +1310,19 @@
       <div class="mo2f_modal-dialog mo2f_modal-lg">
       <div class="login mo_customer_validation-modal-content">
       <div class="mo2f_modal-header">
-         <h4 class="mo2f_modal-title"><button type="button" class="mo2f_close" data-dismiss="modal" aria-label="Close" title="Back to login" onclick="mologinback();"><span aria-hidden="true">&times;</span></button>
-            Two Factor Setup Complete
+         <h4 class="mo2f_modal-title"><button type="button" class="mo2f_close" data-dismiss="modal" aria-label="Close" title="<?php echo __('Back to login','miniorange-2-factor-authentication');?>" onclick="mologinback();"><span aria-hidden="true">&times;</span></button>
+            <?php echo __('Two Factor Setup Complete', 'miniorange-2-factor-authentication'); ?>
          </h4>
       </div>
       <div class="mo2f_modal-body center">
       <center>
-         <h3><b style="color:#7EAFB7;"><?php echo $mo2f_second_factor; ?> </b>has been set your Two Factor method for login.<br>
-            Next time when you will login, you will be prompted for <?php echo $mo2f_second_factor; ?> as your 2nd factor.
+         <h3><b style="color:#7EAFB7;"><?php echo $mo2f_second_factor; ?> </b><?php echo __('has been set your Two Factor method for login.', 'miniorange-2-factor-authentication'); ?><br>
+            <?php echo __('Next time when you will login, you will be prompted for', 'miniorange-2-factor-authentication'); ?> <?php echo $mo2f_second_factor; ?> <?php echo __('as your 2nd factor.', 'miniorange-2-factor-authentication');?>
          </h3>
       </center>
       <center>
-         <h2 style="margin-bottom:0px !important;"><a href="#" onclick="mologinback();">Click Here</a></h2>
-         to login to your account.
+         <h2 style="margin-bottom:0px !important;"><a href="#" onclick="mologinback();"><?php echo __('Click Here', 'miniorange-2-factor-authentication'); ?></a> </h2>
+         <?php echo __('to login to your account.', 'miniorange-2-factor-authentication'); ?>
          <br>
       </center>
       <form name="f" id="mo2f_trust_device_confirm_form" method="post" action="" style="display:none;">
@@ -1116,24 +1359,24 @@
          <div class="mo_customer_validation-modal-dialog mo_customer_validation-modal-md">
             <div class="login mo_customer_validation-modal-content">
                <div class="mo2f_modal-header">
-                  <h4 class="mo2f_modal-title"><button type="button" class="mo2f_close" data-dismiss="modal" aria-label="Close" title="Back to login" onclick="mologinback();"><span aria-hidden="true">&times;</span></button>
-                     Remember Device
+                  <h4 class="mo2f_modal-title"><button type="button" class="mo2f_close" data-dismiss="modal" aria-label="Close" title="<?php echo __('Back to login','miniorange-2-factor-authentication');?>" onclick="mologinback();"><span aria-hidden="true">&times;</span></button>
+                     <?php echo __('Remember Device', 'miniorange-2-factor-authentication'); ?>
                   </h4>
                </div>
                <div class="mo2f_modal-body center">
                   <div id="mo2f_device_content">
-                     <p style="font-size:16px; font-weight:bold; color:#2980B9; ">Do you want to remember this device?</p>
-                     <input type="button" name="miniorange_trust_device_yes" onclick="mo_check_device_confirm();" id="miniorange_trust_device_yes" class="mo_green" style="margin-right:5%;" value="Yes" />
-                     <input type="button" name="miniorange_trust_device_no" onclick="mo_check_device_cancel();" id="miniorange_trust_device_no" class="mo_red" value="No" />
+                     <h3><?php echo __('Do you want to remember this device?', 'miniorange-2-factor-authentication'); ?></h3>
+                     <input type="button" name="miniorange_trust_device_yes" onclick="mo_check_device_confirm();" id="miniorange_trust_device_yes" class="mo_green" style="margin-right:5%;" value="<?php echo __('Yes','miniorange-2-factor-authentication'); ?>" />
+                     <input type="button" name="miniorange_trust_device_no" onclick="mo_check_device_cancel();" id="miniorange_trust_device_no" class="mo_red" value="<?php echo __('No','miniorange-2-factor-authentication'); ?>" />
                   </div>
                   <div id="showLoadingBar"  hidden>
-                     <p style="font-size:16px; font-weight:bold; color:#2980B9; ">Please wait...We are taking you into your account.</p>
+                     <p style="font-size:16px; font-weight:bold; color:#2980B9; "><?php echo __('Please wait...We are taking you into your account.', 'miniorange-2-factor-authentication'); ?></p>
                      <img src="<?php echo plugins_url( 'includes/images/ajax-loader-login.gif' , __FILE__ );?>" />
                   </div>
                   <br /><br />
                   <span>
-                  Click on <i><b>Yes</b></i> if this is your personal device.<br />
-                  Click on <i><b>No</b></i> if this is a public device.
+                  <?php  echo __('Click on ', 'miniorange-2-factor-authentication'); ?> <i><b><?php echo __('Yes', 'miniorange-2-factor-authentication'); ?> </b> </i><?php echo __('if this is your personal device.', 'miniorange-2-factor-authentication'); ?><br />
+                  <?php echo __('Click on ', 'miniorange-2-factor-authentication'); ?> <i><b><?php echo __('No ', 'miniorange-2-factor-authentication'); ?> </b> </i> <?php echo __('if this is a public device.', 'miniorange-2-factor-authentication'); ?>
                   </span><br /><br />
                   <?php mo2f_customize_logo() ?>
                </div>

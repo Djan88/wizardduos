@@ -28,7 +28,7 @@ class Two_Factor_Setup{
 	
 	function check_mobile_status($tId){
 		if(!MO2f_Utility::is_curl_installed()) {
-			$message = 'Please enable curl extension. <a href="admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mo2f_help">Click here</a> for the steps to enable curl or check Help & Troubleshooting.';
+			$message = __('Please enable curl extension ','miniorange-2-factor-authentication') . ' <a href="admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mo2f_help">'.__('Click here ','miniorange-2-factor-authentication') .'</a> '. __(' for the steps to enable curl or check Help & Troubleshooting. ','miniorange-2-factor-authentication') ;
 			return json_encode(array("status"=>'ERROR',"message"=>$message));
 		}
 		
@@ -72,6 +72,14 @@ class Two_Factor_Setup{
 		curl_setopt( $ch, CURLOPT_POSTFIELDS, $field_string);
 		curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt( $ch, CURLOPT_TIMEOUT, 20);
+		$proxy_host = get_option( 'mo2f_proxy_host' );
+		if (! empty(  $proxy_host ) ){
+			curl_setopt( $ch, CURLOPT_PROXY, get_option( 'mo2f_proxy_host' ) );
+			curl_setopt( $ch, CURLOPT_PROXYPORT, get_option( 'mo2f_port_number' ) );
+			curl_setopt( $ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC );
+			curl_setopt( $ch, CURLOPT_PROXYUSERPWD, get_option( "mo2f_proxy_username" ) . ':' . get_option( "mo2f_proxy_password" ) );
+
+		}
 		$content = curl_exec($ch);
 
 		if(curl_errno($ch)){
@@ -85,7 +93,10 @@ class Two_Factor_Setup{
 	
 	function register_mobile($useremail){
 		if(!MO2f_Utility::is_curl_installed()) {
-			$message = 'Please enable curl extension. <a href="admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mo2f_help">Click here</a> for the steps to enable curl or check Help & Troubleshooting.';
+			$message =__('Please enable curl extension.', 'miniorange-2-factor-authentication').' <a href="admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mo2f_help">' .
+					  __('Click here', 'miniorange-2-factor-authentication').
+					  '</a> ' .
+					  __('for the steps to enable curl or check Help & Troubleshooting.', 'miniorange-2-factor-authentication') ;
 			return json_encode(array("status"=>'ERROR',"message"=>$message));
 		}
 		
@@ -132,6 +143,14 @@ class Two_Factor_Setup{
 		curl_setopt( $ch, CURLOPT_POSTFIELDS, $field_string);
 		curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt( $ch, CURLOPT_TIMEOUT, 20);
+		$proxy_host = get_option( 'mo2f_proxy_host' );
+		if (! empty(  $proxy_host ) ){
+			curl_setopt( $ch, CURLOPT_PROXY, get_option( 'mo2f_proxy_host' ) );
+			curl_setopt( $ch, CURLOPT_PROXYPORT, get_option( 'mo2f_port_number' ) );
+			curl_setopt( $ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC );
+			curl_setopt( $ch, CURLOPT_PROXYUSERPWD, get_option( "mo2f_proxy_username" ) . ':' . get_option( "mo2f_proxy_password" ) );
+
+		}
 		$content = curl_exec($ch);
 
 		if(curl_errno($ch)){
@@ -145,7 +164,11 @@ class Two_Factor_Setup{
 	
 	function mo_check_user_already_exist($email){
 		if(!MO2f_Utility::is_curl_installed()) {
-			$message = 'Please enable curl extension. <a href="admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mo2f_help">Click here</a> for the steps to enable curl or check Help & Troubleshooting.';
+			$message = __('Please enable curl extension.', 'miniorange-2-factor-authentication').
+						' <a href="admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mo2f_help">'.
+						__('Click here', 'miniorange-2-factor-authentication').
+						'</a> '.
+						__('for the steps to enable curl or check Help & Troubleshooting.', 'miniorange-2-factor-authentication');
 			return json_encode(array("status"=>'ERROR',"message"=>$message));
 		}
 		
@@ -191,6 +214,14 @@ class Two_Factor_Setup{
 		curl_setopt( $ch, CURLOPT_POSTFIELDS, $field_string);
 		curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt( $ch, CURLOPT_TIMEOUT, 20);
+		$proxy_host = get_option( 'mo2f_proxy_host' );
+		if (! empty(  $proxy_host ) ){
+			curl_setopt( $ch, CURLOPT_PROXY, get_option( 'mo2f_proxy_host' ) );
+			curl_setopt( $ch, CURLOPT_PROXYPORT, get_option( 'mo2f_port_number' ) );
+			curl_setopt( $ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC );
+			curl_setopt( $ch, CURLOPT_PROXYUSERPWD, get_option( "mo2f_proxy_username" ) . ':' . get_option( "mo2f_proxy_password" ) );
+
+		}
 		$content = curl_exec($ch);
 
 		if(curl_errno($ch)){
@@ -204,7 +235,11 @@ class Two_Factor_Setup{
 	
 	function mo_create_user($currentuser,$email){
 		if(!MO2f_Utility::is_curl_installed()) {
-			$message = 'Please enable curl extension. <a href="admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mo2f_help">Click here</a> for the steps to enable curl or check Help & Troubleshooting.';
+			$message = __('Please enable curl extension.', 'miniorange-2-factor-authentication').
+						' <a href="admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mo2f_help">'.
+						__('Click here', 'miniorange-2-factor-authentication').
+						'</a> '.
+						__('for the steps to enable curl or check Help & Troubleshooting.', 'miniorange-2-factor-authentication');
 			return json_encode(array("status"=>'ERROR',"message"=>$message));
 		}
 		
@@ -251,6 +286,14 @@ class Two_Factor_Setup{
 		curl_setopt( $ch, CURLOPT_POSTFIELDS, $field_string);
 		curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt( $ch, CURLOPT_TIMEOUT, 20);
+		$proxy_host = get_option( 'mo2f_proxy_host' );
+		if (! empty(  $proxy_host ) ){
+			curl_setopt( $ch, CURLOPT_PROXY, get_option( 'mo2f_proxy_host' ) );
+			curl_setopt( $ch, CURLOPT_PROXYPORT, get_option( 'mo2f_port_number' ) );
+			curl_setopt( $ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC );
+			curl_setopt( $ch, CURLOPT_PROXYUSERPWD, get_option( "mo2f_proxy_username" ) . ':' . get_option( "mo2f_proxy_password" ) );
+
+		}
 		$content = curl_exec($ch);
 
 		if(curl_errno($ch)){
@@ -264,7 +307,11 @@ class Two_Factor_Setup{
 	
 	function mo2f_get_userinfo($email){
 		if(!MO2f_Utility::is_curl_installed()) {
-			$message = 'Please enable curl extension. <a href="admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mo2f_help">Click here</a> for the steps to enable curl or check Help & Troubleshooting.';
+			$message = __('Please enable curl extension.', 'miniorange-2-factor-authentication').
+						' <a href="admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mo2f_help">'.
+						__('Click here', 'miniorange-2-factor-authentication').
+						'</a> '.
+						__('or the steps to enable curl or check Help & Troubleshooting.', 'miniorange-2-factor-authentication');
 			return json_encode(array("status"=>'ERROR',"message"=>$message));
 		}
 		
@@ -309,6 +356,14 @@ class Two_Factor_Setup{
 		curl_setopt( $ch, CURLOPT_POSTFIELDS, $field_string);
 		curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt( $ch, CURLOPT_TIMEOUT, 20);
+		$proxy_host = get_option( 'mo2f_proxy_host' );
+		if (! empty(  $proxy_host ) ){
+			curl_setopt( $ch, CURLOPT_PROXY, get_option( 'mo2f_proxy_host' ) );
+			curl_setopt( $ch, CURLOPT_PROXYPORT, get_option( 'mo2f_port_number' ) );
+			curl_setopt( $ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC );
+			curl_setopt( $ch, CURLOPT_PROXYUSERPWD, get_option( "mo2f_proxy_username" ) . ':' . get_option( "mo2f_proxy_password" ) );
+
+		}
 		$content = curl_exec($ch);
 
 		if(curl_errno($ch)){
@@ -320,7 +375,11 @@ class Two_Factor_Setup{
 	
 	function mo2f_update_userinfo($email,$authType,$phone,$tname,$enableAdminSecondFactor){
 		if(!MO2f_Utility::is_curl_installed()) {
-			$message = 'Please enable curl extension. <a href="admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mo2f_help">Click here</a> for the steps to enable curl or check Help & Troubleshooting.';
+			$message = __('Please enable curl extension.', 'miniorange-2-factor-authentication').
+						' <a href="admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mo2f_help">'.
+						__('Click here','miniorange-2-factor-authentication', 'miniorange-2-factor-authentication').
+						'</a> ' .
+						__('for the steps to enable curl or check Help & Troubleshooting.', 'miniorange-2-factor-authentication');
 			return json_encode(array("status"=>'ERROR',"message"=>$message));
 		}
 		
@@ -372,6 +431,14 @@ class Two_Factor_Setup{
 		curl_setopt( $ch, CURLOPT_POSTFIELDS, $field_string);
 		curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt( $ch, CURLOPT_TIMEOUT, 20);
+		$proxy_host = get_option( 'mo2f_proxy_host' );
+		if (! empty(  $proxy_host ) ){
+			curl_setopt( $ch, CURLOPT_PROXY, get_option( 'mo2f_proxy_host' ) );
+			curl_setopt( $ch, CURLOPT_PROXYPORT, get_option( 'mo2f_port_number' ) );
+			curl_setopt( $ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC );
+			curl_setopt( $ch, CURLOPT_PROXYUSERPWD, get_option( "mo2f_proxy_username" ) . ':' . get_option( "mo2f_proxy_password" ) );
+
+		}
 		$content = curl_exec($ch);
 
 		if(curl_errno($ch)){
@@ -383,7 +450,11 @@ class Two_Factor_Setup{
 	
 	function register_kba_details($email,$kba_q_a_list){
 		if(!MO2f_Utility::is_curl_installed()) {
-			$message = 'Please enable curl extension. <a href="admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mo2f_help">Click here</a> for the steps to enable curl or check Help & Troubleshooting.';
+			$message = __('Please enable curl extension.', 'miniorange-2-factor-authentication').
+						' <a href="admin.php?page=miniOrange_2_factor_settings&amp;mo2f_tab=mo2f_help">'.
+						__('Click here', 'miniorange-2-factor-authentication').
+						'</a> '.
+						__('for the steps to enable curl or check Help & Troubleshooting.', 'miniorange-2-factor-authentication');
 			return json_encode(array("status"=>'ERROR',"message"=>$message));
 		}
 		
@@ -431,6 +502,14 @@ class Two_Factor_Setup{
 		curl_setopt( $ch, CURLOPT_POSTFIELDS, $field_string);
 		curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt( $ch, CURLOPT_TIMEOUT, 20);
+		$proxy_host = get_option( 'mo2f_proxy_host' );
+		if (! empty(  $proxy_host ) ){
+			curl_setopt( $ch, CURLOPT_PROXY, get_option( 'mo2f_proxy_host' ) );
+			curl_setopt( $ch, CURLOPT_PROXYPORT, get_option( 'mo2f_port_number' ) );
+			curl_setopt( $ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC );
+			curl_setopt( $ch, CURLOPT_PROXYUSERPWD, get_option( "mo2f_proxy_username" ) . ':' . get_option( "mo2f_proxy_password" ) );
+
+		}
 		$content = curl_exec($ch);
 
 		if(curl_errno($ch)){

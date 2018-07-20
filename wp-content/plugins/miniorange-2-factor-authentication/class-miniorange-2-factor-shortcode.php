@@ -37,6 +37,7 @@ function mo2f_is_customer_registered() {
 function miniorange_auth_user_settings(){
 	global $current_user;
 	$current_user = wp_get_current_user();
+		global $dbQueries;
 	$mo2f_pass2fa = new Miniorange_Password_2Factor_Login();
 		
 	if(is_user_logged_in()){
@@ -58,18 +59,21 @@ function miniorange_auth_user_settings(){
 				
 				
 				if(MO2f_Utility::mo2f_check_number_length($otpToken)){
-					$email = get_user_meta($current_user->ID,'mo_2factor_map_id_with_email',true);
+                        $email = $dbQueries->get_user_detail( 'mo2f_user_email', $current_user->ID );
+						// get_user_meta($current_user->ID,'mo2f_user_email',true);
 					$google_auth = new Miniorange_Rba_Attributes();
 					$google_response = json_decode($google_auth->mo2f_validate_google_auth($email,$otpToken,$ga_secret),true);
 					if(json_last_error() == JSON_ERROR_NONE) {
 						if($google_response['status'] == 'SUCCESS'){
 							$enduser = new Two_Factor_Setup();
-							update_user_meta($current_user->ID, 'mo2f_selected_2factor_method', 'GOOGLE AUTHENTICATOR');
+                                // update_user_meta($current_user->ID, 'mo2f_selected_2factor_method', 'GOOGLE AUTHENTICATOR');
+                          $dbQueries->update_user_details( $current_user->ID, array( 'mo2f_configured_2FA_method'=> 'GOOGLE AUTHENTICATOR'));
 							$response = json_decode($enduser->mo2f_update_userinfo($email,'GOOGLE AUTHENTICATOR',null,null,null),true);
 							if(json_last_error() == JSON_ERROR_NONE) { 
 								if($response['status'] == 'SUCCESS'){
-									update_user_meta($current_user->ID,'mo2f_google_authentication_status',true);
-									update_user_meta($current_user->ID,'mo2f_authy_authentication_status',false);
+										 $dbQueries->update_user_details( $current_user->ID, array( 'mo2f_GoogleAuthenticator_config_status'=>true, 'mo2f_AuthyAuthenticator_config_status'=>false));
+                                        // update_user_meta($current_user->ID,'mo2f_GoogleAuthenticator_config_status',true);
+                                        // update_user_meta($current_user->ID,'mo2f_AuthyAuthenticator_config_status',false);
 									update_user_meta($current_user->ID,'mo2f_external_app_type','GOOGLE AUTHENTICATOR');
 									$mo2fa_login_status = 'MO2F_RECONFIGURE_SUCCESS_GOOGLE';
 								}else{
@@ -146,12 +150,14 @@ function miniorange_auth_user_settings(){
 					array_push($kba_q_a_list, $kba_answers[$c]);
 				}
 				
-				$email = get_user_meta($current_user->ID,'mo_2factor_map_id_with_email',true);
+                    $email = $dbQueries->get_user_detail( 'mo2f_user_email', $current_user->ID );
+					// get_user_meta($current_user->ID,'mo2f_user_email',true);
 				$kba_registration = new Two_Factor_Setup();
 				$kba_reg_reponse = json_decode($kba_registration->register_kba_details($email, $kba_q_a_list),true);
 				if(json_last_error() == JSON_ERROR_NONE) { 
 					if($kba_reg_reponse['status'] == 'SUCCESS'){
-						update_user_meta($current_user->ID,'mo2f_kba_registration_status',true);
+							 $dbQueries->update_user_details( $current_user->ID, array( 'mo2f_SecurityQuestions_config_status'=>true));
+                            // update_user_meta($current_user->ID,'mo2f_KBA-SecurityQuestions_config_status',true);
 						$mo2fa_login_message = 'Security Questions are configured successfully.';
 						$mo2fa_login_status = 'MO2F_RECONFIGURE_SUCCESS_KBA';
 					}else{
@@ -177,7 +183,7 @@ function miniorange_auth_user_settings(){
 				$mo2fa_login_message = '';
 				$mo2fa_login_status = 'MO_2_FACTOR_RECONFIG_GOOGLE';
 				$google_auth = new Miniorange_Rba_Attributes();
-				$google_response = json_decode($google_auth->mo2f_google_auth_service(get_user_meta($current_user->ID,'mo_2factor_map_id_with_email',true)),true);
+				$google_response = json_decode($google_auth->mo2f_google_auth_service(get_user_meta($current_user->ID,'mo2f_user_email',true)),true);
 				
 				if(json_last_error() == JSON_ERROR_NONE) {
 					if($google_response['status'] == 'SUCCESS'){
@@ -208,7 +214,9 @@ function miniorange_auth_user_settings(){
 			$this-> mo2f_reconfig_2fa($current_user, $current_selected_method);
 		}
 		if(isset($_POST['option']) && $_POST['option'] == 'mo2f_2factor_enable_2fa'){
+				$mo2f_2factor_enable_2fa_byusers=isset( $_POST['mo2f_2factor_enable_2fa_byusers']) ? 1 : 0;
 			update_user_meta($current_user->ID, 'mo2f_2factor_enable_2fa_byusers', isset( $_POST['mo2f_2factor_enable_2fa_byusers']) ? 1 : 0);
+				$dbQueries->update_user_details( $current_user->ID, array( 'mo2f_2factor_enable_2fa_byusers'=>$mo2f_2factor_enable_2fa_byusers));
 			
 		}
 	}
@@ -249,14 +257,14 @@ function prompt_user_for_reconfigure_google($current_user, $login_status, $login
 				<div class="mo2f_modal-dialog mo2f_modal-lg" style="width:999px !important;margin:0px auto !important;">
 					<div class="login mo_customer_validation-modal-content">
 						<div class="mo2f_modal-header">
-							<h4>Reconfiguration successful</h4>
+							<h4><?php echo mo2f_lt('Reconfiguration successful');?></h4>
 						</div>
 						<div class="mo2f_modal-body center">
 							<center>
-								<h3><b style="color:#7EAFB7;">Google Authenticator </b>has been reconfigured successfully..<br></h3>
+								<h3><b style="color:#7EAFB7;"><?php echo mo2f_lt('Google Authenticator </b>has been reconfigured successfully..<br>');?></h3>
 							</center>
 							</br>
-							<input type="button" name="back" id="back_btn" class="miniorange-button" onclick= "mologinback();" value="Back" />
+							<input type="button" name="back" id="back_btn" class="miniorange-button" onclick= "mologinback();" value="<?php echo mo2f_lt('Back');?>" />
 						</div>
 					</div>
 				</div>
@@ -292,7 +300,7 @@ function prompt_user_for_reconfigure_google($current_user, $login_status, $login
 				<div class="mo2f_modal-dialog mo2f_modal-lg" style="width:999px !important;margin:0px auto !important;">
 					<div class="login mo_customer_validation-modal-content">
 						<div class="mo2f_modal-header">
-							<h4>Reconfigure Google Authenticator</h4>
+							<h4><?php echo mo2f_lt('Reconfigure Google Authenticator');?></h4>
 							<?php if(isset($login_message) && !empty($login_message)) {  ?>
 								<div  id="otpMessage">
 									<p class="mo2fa_display_message_frontend" style="text-align: left !important;"><?php echo $login_message; ?></p>
@@ -315,119 +323,119 @@ function prompt_user_for_reconfigure_google($current_user, $login_status, $login
 										<input type="radio" name="mo2f_reconfig_app_type_radio" value="blackberry" <?php checked( $mo2f_google_auth['ga_phone'] == 'blackberry' ); ?> /> <b>BlackBerry / Windows</b><br /><br />
 									</form>
 									
-										<input type="button" name="back" id="back_btn" class="miniorange-button" style="width:45%;" onclick= "mologinback();" value="Back" />
+										<input type="button" name="back" id="back_btn" class="miniorange-button" style="width:45%;" onclick= "mologinback();" value="<?php echo mo2f_lt('Back');?>" />
 									
 									</td>
 				
 				
 				<td style="vertical-align:top;width:28%;padding-right:15px">
-					<h3>Step-2: Set up Google Authenticator</h3><hr>
+					<h3><?php echo mo2f_lt('Step-2: Set up Google Authenticator');?></h3><hr>
 					<div id="mo2f_android_div" style="<?php echo $mo2f_google_auth['ga_phone'] == 'android' ? 'display:block' : 'display:none'; ?>" >
-					<h4>Install the Google Authenticator App for Android.</h4>
+					<h4><?php echo mo2f_lt('Install the Google Authenticator App for Android.');?></h4>
 					<ol>
-						<li>On your phone,Go to Google Play Store.</li>
-						<li>Search for <b>Google Authenticator.</b>
-						<a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank">Download from the Google Play Store and install the application.</a>
+						<li><?php echo mo2f_lt('On your phone,Go to Google Play Store.');?></li>
+						<li><?php echo mo2f_lt('Search for <b>Google Authenticator.</b>');?>
+						<a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank"><?php echo mo2f_lt('Download from the Google Play Store and install the application.');?></a>
 						</li>
 					
 					</ol>
-					<h4>Now open and configure Google Authenticator.</h4>
+					<h4><?php echo mo2f_lt('Now open and configure Google Authenticator.');?></h4>
 					<ol>
-						<li>In Google Authenticator, touch Menu and select "Set up account."</li>
-						<li>Select "Scan a barcode". Use your phone's camera to scan this barcode.</li>
+						<li><?php echo mo2f_lt('In Google Authenticator, touch Menu and select "Set up account."');?></li>
+						<li><?php echo mo2f_lt('Select "Scan a barcode". Use your phone\'s camera to scan this barcode.');?></li>
 					<center><br><div id="displayQrCode" ><?php echo '<img src="data:image/jpg;base64,' . $data . '" />'; ?></div></center>
 						
 					</ol>
-					<div><a  data-toggle="mo2f_collapse" href="#mo2f_scanbarcode_a" aria-expanded="false" ><b>Can't scan the barcode? </b></a></div>
+					<div><a  data-toggle="mo2f_collapse" href="#mo2f_scanbarcode_a" aria-expanded="false" ><b><?php echo mo2f_lt('Can\'t scan the barcode? ');?></b></a></div>
 					<div class="mo2f_collapse" id="mo2f_scanbarcode_a">
 						<ol>
-							<li>In Google Authenticator, touch Menu and select "Set up account."</li>
-							<li>Select "Enter provided key"</li>
-							<li>In "Enter account name" type your full email address.</li>
-							<li>In "Enter your key" type your secret key:</li>
+							<li><?php echo mo2f_lt('In Google Authenticator, touch Menu and select "Set up account."');?></li>
+							<li><?php echo mo2f_lt('Select "Enter provided key"');?></li>
+							<li><?php echo mo2f_lt('In "Enter account name" type your full email address.');?></li>
+							<li><?php echo mo2f_lt('In "Enter your key" type your secret key:');?></li>
 								<div style="padding: 10px; background-color: #f9edbe;width: 20em;text-align: center;" >
 									<div style="font-size: 14px; font-weight: bold;line-height: 1.5;" >
 									<?php echo $ga_secret; ?>
 									</div>
 									<div style="font-size: 80%;color: #666666;">
-									Spaces don't matter.
+									<?php echo mo2f_lt('Spaces don\'t matter.');?>
 									</div>
 								</div>
-							<li>Key type: make sure "Time-based" is selected.</li>
-							<li>Tap Add.</li>
+							<li><?php echo mo2f_lt('Key type: make sure "Time-based" is selected.');?></li>
+							<li><?php echo mo2f_lt('Tap Add.');?></li>
 						</ol>
 					</div>
 					</div>
 					
 					<div id="mo2f_iphone_div" style="<?php echo $mo2f_google_auth['ga_phone'] == 'iphone' ? 'display:block' : 'display:none'; ?>" >
-					<h4>Install the Google Authenticator app for iPhone.</h4>
+					<h4><?php echo mo2f_lt('Install the Google Authenticator app for iPhone.');?></h4>
 					<ol>
-						<li>On your iPhone, tap the App Store icon.</li>
-						<li>Search for <b>Google Authenticator.</b>
-						<a href="http://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8" target="_blank">Download from the App Store and install it</a>
+						<li><?php echo mo2f_lt('On your iPhone, tap the App Store icon.');?></li>
+						<li><?php echo mo2f_lt('Search for <b>Google Authenticator.</b>');?>
+						<a href="http://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8" target="_blank"><?php echo mo2f_lt('Download from the App Store and install it');?></a>
 						</li>
 					</ol>
-					<h4>Now open and configure Google Authenticator.</h4>
+					<h4><?php echo mo2f_lt('Now open and configure Google Authenticator.');?></h4>
 					<ol>
-						<li>In Google Authenticator, tap "+", and then "Scan Barcode."</li>
-						<li>Use your phone's camera to scan this barcode.
+						<li><?php echo mo2f_lt('In Google Authenticator, tap "+", and then "Scan Barcode."');?></li>
+						<li><?php echo mo2f_lt('Use your phone\'s camera to scan this barcode.');?>
 							<center><br><div id="displayQrCode" ><?php echo '<img src="data:image/jpg;base64,' . $data . '" />'; ?></div></center>
 						</li>
 					</ol>
-					<div><a  data-toggle="mo2f_collapse" href="#mo2f_scanbarcode_i" aria-expanded="false" ><b>Can't scan the barcode? </b></a></div>
+					<div><a  data-toggle="mo2f_collapse" href="#mo2f_scanbarcode_i" aria-expanded="false" ><b><?php echo mo2f_lt('Can\'t scan the barcode?');?> </b></a></div>
 					<div class="mo2f_collapse" id="mo2f_scanbarcode_i"  >
 						<ol>
-							<li>In Google Authenticator, tap +.</li>
-							<li>Key type: make sure "Time-based" is selected.</li>
-							<li>In "Account" type your full email address.</li>
-							<li>In "Key" type your secret key:</li>
+							<li><?php echo mo2f_lt('In Google Authenticator, tap +.');?></li>
+							<li><?php echo mo2f_lt('Key type: make sure "Time-based" is selected.');?></li>
+							<li><?php echo mo2f_lt('In "Account" type your full email address.');?></li>
+							<li><?php echo mo2f_lt('In "Key" type your secret key:');?></li>
 								<div style="padding: 10px; background-color: #f9edbe;width: 20em;text-align: center;" >
 									<div style="font-size: 14px; font-weight: bold;line-height: 1.5;" >
 									<?php echo $ga_secret; ?>
 									</div>
 									<div style="font-size: 80%;color: #666666;">
-									Spaces don't matter.
+									<?php echo mo2f_lt('Spaces don\'t matter.');?>
 									</div>
 								</div>
-							<li>Tap Add.</li>
+							<li><?php echo mo2f_lt('Tap Add.');?></li>
 						</ol>
 					</div>
 					</div>
 					
 					<div id="mo2f_blackberry_div" style="<?php echo $mo2f_google_auth['ga_phone'] == 'blackberry' ? 'display:block' : 'display:none'; ?>" >
-					<h4>Install the Google Authenticator app for BlackBerry</h4>
+					<h4><?php echo mo2f_lt('Install the Google Authenticator app for BlackBerry');?></h4>
 					<ol>
-						<li>On your phone, open a web browser.Go to <b>m.google.com/authenticator.</b></li>
-						<li>Download and install the Google Authenticator application.</li>
+						<li><?php echo mo2f_lt('On your phone, open a web browser.Go to <b>m.google.com/authenticator.</b>');?></li>
+						<li><?php echo mo2f_lt('Download and install the Google Authenticator application.');?></li>
 					</ol>
-					<h4>Now open and configure Google Authenticator.</h4>
+					<h4><?php echo mo2f_lt('Now open and configure Google Authenticator.');?></h4>
 					<ol>
-						<li>In Google Authenticator, select Manual key entry.</li>
-						<li>In "Enter account name" type your full email address.</li>
-						<li>In "Enter key" type your secret key:</li>
+						<li><?php echo mo2f_lt('In Google Authenticator, select Manual key entry.');?></li>
+						<li><?php echo mo2f_lt('In "Enter account name" type your full email address.');?></li>
+						<li><?php echo mo2f_lt('In "Enter key" type your secret key:');?></li>
 							<div style="padding: 10px; background-color: #f9edbe;width: 20em;text-align: center;" >
 								<div style="font-size: 14px; font-weight: bold;line-height: 1.5;" >
 								<?php echo $ga_secret; ?>
 								</div>
 								<div style="font-size: 80%;color: #666666;">
-								Spaces don't matter.
+								<?php echo mo2f_lt('Spaces don\'t matter.');?>
 								</div>
 							</div>
-						<li>Choose Time-based type of key.</li>
-						<li>Tap Save.</li>
+						<li><?php echo mo2f_lt('Choose Time-based type of key.');?></li>
+						<li><?php echo mo2f_lt('Tap Save.');?></li>
 					</ol>
 					</div>
 					
 				
 				<td style="vertical-align:top;width:15%;padding-right:15px">
-					<h3>Step-3: Verify and Save</h3><hr>
+					<h3><?php echo mo2f_lt('Step-3: Verify and Save');?></h3><hr>
 					<div style="<?php echo isset($_SESSION['mo2f_google_auth']) ? 'display:block' : 'display:none'; ?>">
-					<div>Once you have scanned the barcode, enter the 6-digit verification code generated by the Authenticator app</div><br/>
+					<div><?php echo mo2f_lt('Once you have scanned the barcode, enter the 6-digit verification code generated by the Authenticator app');?></div><br/>
 					<form name="" method="post" id="mo2f_reconfig_verify_ga_code_form" >
-						<span><b>Code: </b>
-						<input class="mo2f_table_textbox"  autofocus="true" required="true" pattern="[0-9]{4,8}" type="text" id="google_auth_code" name="google_auth_code" placeholder="Enter OTP" /></span><br /><br/>
+						<span><b><?php echo mo2f_lt('Code:');?> </b>
+						<input class="mo2f_table_textbox"  autofocus="true" required="true" pattern="[0-9]{4,8}" type="text" id="google_auth_code" name="google_auth_code" placeholder="<?php echo mo2f_lt('Enter OTP');?>" /></span><br /><br/>
 									
-						<input type="submit" name="validate" id="validate" class="miniorange-button" value="Verify and Save" />
+						<input type="submit" name="validate" id="validate" class="miniorange-button" value="<?php echo mo2f_lt('Verify and Save');?>" />
 						<input type="hidden" name="mo2f_reconfig_validate_ga_nonce" value="<?php echo wp_create_nonce('miniorange-2-factor-reconfig-google-auth-nonce'); ?>" />
 					</form>
 					</div>
@@ -487,14 +495,14 @@ function prompt_user_for_reconfigure_kba($current_user, $login_status, $login_me
 				<div class="mo2f_modal-dialog mo2f_modal-lg" style="width:999px !important;margin:0px auto !important;">
 					<div class="login mo_customer_validation-modal-content">
 						<div class="mo2f_modal-header">
-							<h4>Reconfiguration successful</h4>
+							<h4><?php echo mo2f_lt('Reconfiguration successful');?></h4>
 						</div>
 						<div class="mo2f_modal-body center">
 							<center>
-								<h3><b style="color:#7EAFB7;">Security Questions </b>have been reconfigured successfully..<br></h3>
+								<h3><b style="color:#7EAFB7;"><?php echo mo2f_lt('Security Questions');?> </b><?php echo mo2f_lt('have been reconfigured successfully..<br>');?></h3>
 							</center>
 							</br>
-							<input type="button" name="back" id="back_btn" class="miniorange-button" onclick= "mologinback();" value="Back" />
+							<input type="button" name="back" id="back_btn" class="miniorange_button" onclick= "mologinback();" value="<?php echo mo2f_lt('Back');?>" />
 						</div>
 					</div>
 				</div>
@@ -542,7 +550,7 @@ function prompt_user_for_reconfigure_kba($current_user, $login_status, $login_me
 				<div class="mo2f_modal-dialog mo2f_modal-lg">
 					<div class="login mo_customer_validation-modal-content">
 						<div class="mo2f_modal-header">
-							<h4>Reconfigure Security Questions</h4>
+							<h4><?php echo mo2f_lt('Reconfigure Security Questions');?></h4>
 						</div>
 						<div class="mo2f_modal-body">
 						<form name="f" method="post" action="" >
@@ -550,7 +558,7 @@ function prompt_user_for_reconfigure_kba($current_user, $login_status, $login_me
 								<br />
 								<div class ="row">
 									<div class="col-md-12" style="margin: 0 auto;width: 100px;">
-										<center><input type="submit" name="validate" class="miniorange-button" value="Save" /></center>
+										<center><input type="submit" name="validate" class="miniorange_button" value="<?php echo mo2f_lt('Save');?>" /></center>
 									</div>
 								</div>
 								
@@ -559,7 +567,7 @@ function prompt_user_for_reconfigure_kba($current_user, $login_status, $login_me
 						</form>
 						<form name="f" method="post" action="" id="mo2f_cancel_form">
 										<input type="hidden" name="option" value="mo2f_cancel_configuration" />
-										<center><input type="submit" name="back" id="back_btn" class="miniorange-button" style="width:10%;" value="Back" /></center>
+										<center><input type="submit" name="back" id="back_btn" class="miniorange_button" style="width:10%;" value="<?php echo mo2f_lt('Back');?>" /></center>
 						</form>
 							<br>
 							<?php mo2f_customize_logo() ?>
@@ -587,6 +595,7 @@ function prompt_user_for_reconfigure_kba($current_user, $login_status, $login_me
 public function mo2fa_reconfigform_ShortCode($atts= null){
 	global $current_user;
 	$currentuser = wp_get_current_user();
+		global $dbQueries;
 	$current_roles = miniorange_get_user_role($currentuser);
 	$enabled = miniorange_check_if_2fa_enabled_for_roles($current_roles);
 	if(is_user_logged_in() && mo2f_is_customer_registered() && $enabled){ 
@@ -595,7 +604,7 @@ public function mo2fa_reconfigform_ShortCode($atts= null){
 		$html = '';
 		$registered = mo2f_is_customer_registered();
 		$disabled    = !$registered ? 'disabled' : '';
-		$email = get_user_meta($currentuser->ID,'mo_2factor_map_id_with_email',true);
+            $email = $dbQueries->get_user_detail( 'mo2f_user_email', $current_user->ID );
 		if($email){
 		
 		$html .= '
@@ -629,16 +638,18 @@ public function mo2fa_reconfigform_ShortCode($atts= null){
 public function mo2fa_enable2faform_ShortCode($atts= null){
 	global $current_user;
 	$currentuser = wp_get_current_user();
+		global $dbQueries;
 	$current_roles = miniorange_get_user_role($current_user);
 	$enabled = miniorange_check_if_2fa_enabled_for_roles($current_roles);
-	$is_user_registered = get_user_meta($currentuser->ID,'mo_2factor_map_id_with_email', true);
+        $is_user_registered = $dbQueries->get_user_detail( 'mo2f_user_email', $current_user->ID );
 	if(is_user_logged_in() && mo2f_is_customer_registered() && $enabled){ 
 		global $current_user;
 		$current_user = wp_get_current_user();
 		$html = '';
-		$enable_2fa_byusers = get_user_meta($current_user->ID, 'mo2f_2factor_enable_2fa_byusers');
-		$checked = isset($enable_2fa_byusers) ? (get_user_meta($current_user->ID, 'mo2f_2factor_enable_2fa_byusers', true) ? 'checked' : ' ') : 'checked';
+            $enable_2fa_byusers = $dbQueries->get_user_detail( 'mo2f_2factor_enable_2fa_byusers', $current_user->ID );
+			// get_user_meta($current_user->ID, 'mo2f_2factor_enable_2fa_byusers');
 		
+            $checked = isset($enable_2fa_byusers) ? ($dbQueries->get_user_detail( 'mo2f_2factor_enable_2fa_byusers', $current_user->ID )) ? 'checked' : ' ' : 'checked';
 		$message = $is_user_registered ? "" : "<p style='font-size:12px'> Enable this checkbox to setup 2-Factor. You will be asked to set up your 2nd Factor during login after selecting above checkbox.</p>";
 		
 		$html = "
