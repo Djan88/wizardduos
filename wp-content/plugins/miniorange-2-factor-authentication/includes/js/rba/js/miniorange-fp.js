@@ -13,7 +13,7 @@ function initializeJS() {
 	fontCollectionObjectDiv.style.width = "0px";
 	fontCollectionObjectDiv.style.height = "0px";
 	
-	fontCollectionObjectDiv.innerHTML = "<object id='FontList' width='1' height='1' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab'> <param name='movie' value='wp-content/plugins/miniorange-2-factor-authentication/includes/js/rba/js/fonts.swf' /> <param name='quality' value='high' /> <param name='bgcolor' value='#869ca7' /> <param name='allowScriptAccess' value='always' /> <embed src='wp-content/plugins/miniorange-2-factor-authentication/includes/js/rba/js/fonts.swf' quality='high' bgcolor='#869ca7' width='1' height='1' name='fonts' align='middle' play='true' loop='false' quality='high' allowScriptAccess='always' type='application/x-shockwave-flash' pluginspage='http://www.macromedia.com/go/getflashplayer'> </embed> </object>";
+	fontCollectionObjectDiv.innerHTML = "<object id='FontList' width='1' height='1' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab'> <param name='movie' value='/wp-content/plugins/miniorange-2-factor-authentication/includes/js/rba/js/fonts.swf' /> <param name='quality' value='high' /> <param name='bgcolor' value='#869ca7' /> <param name='allowScriptAccess' value='always' /> <embed src='/wp-content/plugins/miniorange-2-factor-authentication/includes/js/rba/js/fonts.swf' quality='high' bgcolor='#869ca7' width='1' height='1' name='fonts' align='middle' play='true' loop='false' quality='high' allowScriptAccess='always' type='application/x-shockwave-flash' pluginspage='http://www.macromedia.com/go/getflashplayer'> </embed> </object>";
 	
 	document.body.appendChild(fontCollectionObjectDiv);
 	
