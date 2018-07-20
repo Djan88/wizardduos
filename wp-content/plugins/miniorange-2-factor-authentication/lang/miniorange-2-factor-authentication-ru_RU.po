@@ -2,12 +2,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniOrange 2 Factor Authentication\n"
 "POT-Creation-Date: 2018-07-19 22:39+0530\n"
-"PO-Revision-Date: 2018-07-19 22:45+0530\n"
+"PO-Revision-Date: 2018-07-20 13:21+0300\n"
 "Language-Team: miniOrange\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.8\n"
+"X-Generator: Poedit 1.6.9\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
@@ -190,8 +190,8 @@ msgid ""
 "administrator."
 msgstr ""
 
-#: class-miniorange-2-factor-pass2fa-login.php:434 class-mo2f-constants.php:337
-#: miniorange_lang_constants.php:339
+#: class-miniorange-2-factor-pass2fa-login.php:434
+#: class-mo2f-constants.php:337 miniorange_lang_constants.php:339
 msgid "Please enter email-id to register."
 msgstr ""
 
@@ -219,15 +219,15 @@ msgstr ""
 msgid "folder."
 msgstr ""
 
-#: class-miniorange-2-factor-pass2fa-login.php:475 class-mo2f-constants.php:250
-#: miniorange_lang_constants.php:250
+#: class-miniorange-2-factor-pass2fa-login.php:475
+#: class-mo2f-constants.php:250 miniorange_lang_constants.php:250
 msgid ""
 "There was an error in sending OTP over email. Please click on Resend OTP to "
 "try again."
 msgstr ""
 
-#: class-miniorange-2-factor-pass2fa-login.php:484 class-mo2f-constants.php:304
-#: miniorange_lang_constants.php:306
+#: class-miniorange-2-factor-pass2fa-login.php:484
+#: class-mo2f-constants.php:304 miniorange_lang_constants.php:306
 msgid ""
 "The email is already used by other user. Please register with other email."
 msgstr ""
@@ -285,8 +285,8 @@ msgstr ""
 msgid "Please enter the OTP below to verify your email."
 msgstr ""
 
-#: class-miniorange-2-factor-pass2fa-login.php:581 class-mo2f-constants.php:349
-#: miniorange_lang_constants.php:351
+#: class-miniorange-2-factor-pass2fa-login.php:581
+#: class-mo2f-constants.php:349 miniorange_lang_constants.php:351
 msgid ""
 "There was an error in sending one time passcode. Please click on Resend OTP "
 "to try again."
@@ -327,8 +327,8 @@ msgid "An error occured while validating the user. Please Try again."
 msgstr ""
 
 #: class-miniorange-2-factor-pass2fa-login.php:694
-#: class-miniorange-2-factor-pass2fa-login.php:789 class-mo2f-constants.php:370
-#: miniorange_lang_constants.php:373
+#: class-miniorange-2-factor-pass2fa-login.php:789
+#: class-mo2f-constants.php:370 miniorange_lang_constants.php:373
 msgid "Only digits are allowed. Please enter again."
 msgstr ""
 
@@ -347,14 +347,14 @@ msgstr ""
 msgid "You have entered an invalid OTP"
 msgstr ""
 
-#: class-miniorange-2-factor-pass2fa-login.php:782 class-mo2f-constants.php:364
-#: miniorange_lang_constants.php:367
+#: class-miniorange-2-factor-pass2fa-login.php:782
+#: class-mo2f-constants.php:364 miniorange_lang_constants.php:367
 msgid ""
 "Your App Time is not in sync.Go to settings and tap on tap on Sync Time now ."
 msgstr ""
 
-#: class-miniorange-2-factor-pass2fa-login.php:785 class-mo2f-constants.php:367
-#: miniorange_lang_constants.php:370
+#: class-miniorange-2-factor-pass2fa-login.php:785
+#: class-mo2f-constants.php:367 miniorange_lang_constants.php:370
 msgid "Error occurred while validating the user. Please try again."
 msgstr ""
 
@@ -530,8 +530,9 @@ msgstr ""
 msgid "Authy 2-Factor Authentication"
 msgstr ""
 
-#: class-miniorange-2-factor-pass2fa-login.php:2092 class-mo2f-constants.php:28
-#: class-mo2f-constants.php:121 miniorange_2_factor_configuration.php:469
+#: class-miniorange-2-factor-pass2fa-login.php:2092
+#: class-mo2f-constants.php:28 class-mo2f-constants.php:121
+#: miniorange_2_factor_configuration.php:469
 #: miniorange_2_factor_configuration.php:656
 #: miniorange_2_factor_user_inline_registration.php:304
 #: miniorange_lang_constants.php:108 miniorange_lang_constants.php:114
@@ -1084,22 +1085,26 @@ msgstr ""
 msgid "There was an error processing the challenge user request."
 msgstr ""
 
-#: class-mo2f-constants.php:88 miniorange_2_factor_mobile_configuration.php:140
+#: class-mo2f-constants.php:88
+#: miniorange_2_factor_mobile_configuration.php:140
 #: miniorange_lang_constants.php:77
 msgid "What is your first company name?"
 msgstr ""
 
-#: class-mo2f-constants.php:91 miniorange_2_factor_mobile_configuration.php:141
+#: class-mo2f-constants.php:91
+#: miniorange_2_factor_mobile_configuration.php:141
 #: miniorange_lang_constants.php:80
 msgid "What was your childhood nickname?"
 msgstr ""
 
-#: class-mo2f-constants.php:94 miniorange_2_factor_mobile_configuration.php:142
+#: class-mo2f-constants.php:94
+#: miniorange_2_factor_mobile_configuration.php:142
 #: miniorange_lang_constants.php:83
 msgid "In what city did you meet your spouse/significant other?"
 msgstr ""
 
-#: class-mo2f-constants.php:97 miniorange_2_factor_mobile_configuration.php:143
+#: class-mo2f-constants.php:97
+#: miniorange_2_factor_mobile_configuration.php:143
 #: miniorange_lang_constants.php:86
 msgid "What is the name of your favorite childhood friend?"
 msgstr ""
@@ -2163,7 +2168,7 @@ msgstr ""
 
 #: miniorange_2_factor_configuration.php:618
 msgid " Select Roles to enable 2-Factor"
-msgstr ""
+msgstr "Выберите Роли для которых будет включен 2 фактор"
 
 #: miniorange_2_factor_configuration.php:619
 #: miniorange_2_factor_configuration.php:827
