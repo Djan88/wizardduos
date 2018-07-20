@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniOrange 2 Factor Authentication\n"
 "POT-Creation-Date: 2018-07-19 22:39+0530\n"
-"PO-Revision-Date: 2018-07-20 13:50+0300\n"
+"PO-Revision-Date: 2018-07-20 14:08+0300\n"
 "Language-Team: miniOrange\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2053,7 +2053,7 @@ msgstr ""
 #: miniorange_2_factor_configuration.php:286
 #: miniorange_2_factor_user_inline_registration.php:814
 msgid "Send OTP"
-msgstr ""
+msgstr "Выслать пароль"
 
 #: miniorange_2_factor_configuration.php:290
 msgid "What is an OTP ?"
@@ -4224,12 +4224,12 @@ msgstr ""
 #: miniorange_2_factor_user_inline_registration.php:108
 #: miniorange_2_factor_user_inline_registration.php:830
 msgid "Enter the code"
-msgstr ""
+msgstr "Введите пароль"
 
 #: miniorange_2_factor_user_inline_registration.php:112
 #: miniorange_2_factor_user_inline_registration.php:832
 msgid "Didn't get code?"
-msgstr ""
+msgstr "Не получили код?"
 
 #: miniorange_2_factor_user_inline_registration.php:112
 #: miniorange_2_factor_user_inline_registration.php:836
@@ -4391,7 +4391,7 @@ msgstr ""
 
 #: miniorange_2_factor_user_inline_registration.php:827
 msgid "Please enter the One Time Passcode sent to your phone."
-msgstr ""
+msgstr "Пожалуйста введите пароль отправленный на ваш телефон"
 
 #: miniorange_2_factor_user_inline_registration.php:834
 msgid "CALL AGAIN"
