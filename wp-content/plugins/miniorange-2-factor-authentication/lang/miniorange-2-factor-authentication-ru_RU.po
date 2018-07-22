@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniOrange 2 Factor Authentication\n"
 "POT-Creation-Date: 2018-07-19 22:39+0530\n"
-"PO-Revision-Date: 2018-07-22 14:15+0300\n"
+"PO-Revision-Date: 2018-07-22 16:37+0300\n"
 "Language-Team: miniOrange\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -861,7 +861,7 @@ msgstr "Пространства не имеют значения."
 #: miniorange_2_factor_user_inline_registration.php:607
 #: miniorange_2_factor_user_inline_registration.php:638
 msgid "Key type: make sure \"Time-based\" is selected."
-msgstr ""
+msgstr "Тип ключа: убедитесь, что выбрано \"Время.\""
 
 #: class-miniorange-2-factor-shortcode.php:365
 #: class-miniorange-2-factor-shortcode.php:400
@@ -870,107 +870,110 @@ msgstr ""
 #: miniorange_2_factor_user_inline_registration.php:608
 #: miniorange_2_factor_user_inline_registration.php:649
 msgid "Tap Add."
-msgstr ""
+msgstr "Нажмите «Добавить»."
 
 #: class-miniorange-2-factor-shortcode.php:371
 #: miniorange_2_factor_mobile_configuration.php:1743
 #: miniorange_2_factor_user_inline_registration.php:615
 msgid "Install the Google Authenticator app for iPhone."
-msgstr ""
+msgstr "Установите приложение Google Authenticator для iPhone."
 
 #: class-miniorange-2-factor-shortcode.php:373
 #: miniorange_2_factor_mobile_configuration.php:1745
 #: miniorange_2_factor_user_inline_registration.php:617
 msgid "On your iPhone, tap the App Store icon."
-msgstr ""
+msgstr "На вашем iPhone нажмите значок «App Store»."
 
 #: class-miniorange-2-factor-shortcode.php:375
 #: miniorange_2_factor_mobile_configuration.php:1747
 msgid "Download from the App Store and install it"
-msgstr ""
+msgstr "Загрузите из App Store и установите его"
 
 #: class-miniorange-2-factor-shortcode.php:380
 #: miniorange_2_factor_user_inline_registration.php:624
 msgid "In Google Authenticator, tap \"+\", and then \"Scan Barcode.\""
 msgstr ""
+"В Google Authenticator коснитесь \"+\", а затем \"Сканировать штрих-код.\""
 
 #: class-miniorange-2-factor-shortcode.php:381
 #: miniorange_2_factor_mobile_configuration.php:1753
 #: miniorange_2_factor_user_inline_registration.php:625
 msgid "Use your phone's camera to scan this barcode."
-msgstr ""
+msgstr "Используйте камеру своего телефона для сканирования этого штрих-кода."
 
 #: class-miniorange-2-factor-shortcode.php:385
 #: miniorange_2_factor_mobile_configuration.php:1721
 #: miniorange_2_factor_user_inline_registration.php:589
 #: miniorange_2_factor_user_inline_registration.php:631
 msgid "Can't scan the barcode?"
-msgstr ""
+msgstr "Не удается отсканировать штрих-код?"
 
 #: class-miniorange-2-factor-shortcode.php:388
 #: miniorange_2_factor_mobile_configuration.php:1760
 #: miniorange_2_factor_user_inline_registration.php:637
 msgid "In Google Authenticator, tap +."
-msgstr ""
+msgstr "В Google Authenticator нажмите +."
 
 #: class-miniorange-2-factor-shortcode.php:390
 #: miniorange_2_factor_mobile_configuration.php:1762
 #: miniorange_2_factor_user_inline_registration.php:639
 msgid "In \"Account\" type your full email address."
-msgstr ""
+msgstr "В \"Учетной записи\" введите полный адрес электронной почты."
 
 #: class-miniorange-2-factor-shortcode.php:391
 #: miniorange_2_factor_mobile_configuration.php:1763
 #: miniorange_2_factor_user_inline_registration.php:640
 msgid "In \"Key\" type your secret key:"
-msgstr ""
+msgstr "В «Ключ» введите секретный ключ:"
 
 #: class-miniorange-2-factor-shortcode.php:406
 #: miniorange_2_factor_mobile_configuration.php:1778
 #: miniorange_2_factor_user_inline_registration.php:658
 msgid "Install the Google Authenticator app for BlackBerry"
-msgstr ""
+msgstr "Установите приложение Google Authenticator для BlackBerry"
 
 #: class-miniorange-2-factor-shortcode.php:408
 msgid ""
 "On your phone, open a web browser.Go to <b>m.google.com/authenticator.</b>"
 msgstr ""
+"На вашем телефоне откройте в веб-браузере. <b> m.google.com/authenticator. </"
+"b>"
 
 #: class-miniorange-2-factor-shortcode.php:409
 #: miniorange_2_factor_mobile_configuration.php:1781
 #: miniorange_2_factor_user_inline_registration.php:662
 msgid "Download and install the Google Authenticator application."
-msgstr ""
+msgstr "Загрузите и установите приложение Google Authenticator."
 
 #: class-miniorange-2-factor-shortcode.php:413
 #: miniorange_2_factor_mobile_configuration.php:1785
 #: miniorange_2_factor_user_inline_registration.php:666
 msgid "In Google Authenticator, select Manual key entry."
-msgstr ""
+msgstr "В Google Authenticator выберите Ручную ввод ключа."
 
 #: class-miniorange-2-factor-shortcode.php:415
 #: miniorange_2_factor_user_inline_registration.php:668
 msgid "In \"Enter key\" type your secret key:"
-msgstr ""
+msgstr "В поле \"Введите ключ\" введите секретный ключ:"
 
 #: class-miniorange-2-factor-shortcode.php:424
 #: miniorange_2_factor_mobile_configuration.php:1797
 #: miniorange_2_factor_user_inline_registration.php:677
 msgid "Choose Time-based type of key."
-msgstr ""
+msgstr "Выберите тип ключа, основанный на времени."
 
 #: class-miniorange-2-factor-shortcode.php:425
 #: miniorange_2_factor_mobile_configuration.php:1798
 #: miniorange_2_factor_user_inline_registration.php:678
 msgid "Tap Save."
-msgstr ""
+msgstr "Нажмите «Сохранить»."
 
 #: class-miniorange-2-factor-shortcode.php:431
 #: miniorange_2_factor_mobile_configuration.php:1643
 #: miniorange_2_factor_mobile_configuration.php:1805
 #: miniorange_2_factor_user_inline_registration.php:476
 msgid "Step-3: Verify and Save"
-msgstr ""
+msgstr "Шаг-3. Проверка и сохранение."
 
 #: class-miniorange-2-factor-shortcode.php:433
 #: miniorange_2_factor_mobile_configuration.php:1807
@@ -979,13 +982,15 @@ msgid ""
 "Once you have scanned the barcode, enter the 6-digit verification code "
 "generated by the Authenticator app"
 msgstr ""
+"После сканирования штрих-кода введите 6-значный код подтверждения, созданный "
+"приложением Authenticator"
 
 #: class-miniorange-2-factor-shortcode.php:435
 #: miniorange_2_factor_mobile_configuration.php:1647
 #: miniorange_2_factor_mobile_configuration.php:1809
 #: miniorange_2_factor_user_inline_registration.php:689
 msgid "Code:"
-msgstr ""
+msgstr "Код:"
 
 #: class-miniorange-2-factor-shortcode.php:436
 #: miniorange_2_factor_configuration.php:244
@@ -4301,7 +4306,7 @@ msgstr ""
 #: miniorange_2_factor_user_inline_registration.php:108
 #: miniorange_2_factor_user_inline_registration.php:830
 msgid "Enter the code"
-msgstr "Введите пароль"
+msgstr "Введите код"
 
 #: miniorange_2_factor_user_inline_registration.php:112
 #: miniorange_2_factor_user_inline_registration.php:832
@@ -4316,7 +4321,7 @@ msgstr ""
 #: miniorange_2_factor_user_inline_registration.php:115
 #: miniorange_2_factor_user_inline_registration.php:839
 msgid "Verify Code"
-msgstr ""
+msgstr "Проверить код"
 
 #: miniorange_2_factor_user_inline_registration.php:235
 msgid "Select Two Factor Method"
@@ -4464,7 +4469,7 @@ msgstr ""
 
 #: miniorange_2_factor_user_inline_registration.php:799
 msgid "Enter your phone number"
-msgstr ""
+msgstr "Введите номер вашего телефона"
 
 #: miniorange_2_factor_user_inline_registration.php:827
 msgid "Please enter the One Time Passcode sent to your phone."
