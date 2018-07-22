@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniOrange 2 Factor Authentication\n"
 "POT-Creation-Date: 2018-07-19 22:39+0530\n"
-"PO-Revision-Date: 2018-07-22 16:47+0300\n"
+"PO-Revision-Date: 2018-07-22 16:48+0300\n"
 "Language-Team: miniOrange\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1609,7 +1609,7 @@ msgstr ""
 #: miniorange_2_factor_user_inline_registration.php:1243
 #: miniorange_lang_constants.php:431
 msgid "Click Here"
-msgstr ""
+msgstr "Нажмите тут"
 
 #: class-mo2f-constants.php:438 miniorange_lang_constants.php:434
 msgid "OUT OF BAND EMAIL"
@@ -4544,7 +4544,7 @@ msgstr "как ваш двухфакторный метод аутентифик
 
 #: miniorange_2_factor_user_inline_registration.php:1243
 msgid "to sign-in to your account."
-msgstr ""
+msgstr "для входа в свою учетную запись."
 
 #: miniorange_lang_constants.php:47
 msgid ""
