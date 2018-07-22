@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniOrange 2 Factor Authentication\n"
 "POT-Creation-Date: 2018-07-19 22:39+0530\n"
-"PO-Revision-Date: 2018-07-22 16:37+0300\n"
+"PO-Revision-Date: 2018-07-22 16:47+0300\n"
 "Language-Team: miniOrange\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1090,7 +1090,7 @@ msgstr ""
 #: miniorange_2_factor_user_inline_registration.php:259
 #: miniorange_lang_constants.php:26
 msgid "OTP Over SMS"
-msgstr ""
+msgstr "одноразовый пароль через смс"
 
 #: class-mo2f-constants.php:40 miniorange_2_factor_configuration.php:481
 #: miniorange_2_factor_configuration.php:668 miniorange_lang_constants.php:29
@@ -1942,7 +1942,7 @@ msgstr ""
 #: miniorange_2_factor_common_login.php:1314
 #: miniorange_2_factor_user_inline_registration.php:1159
 msgid "Two Factor Setup Complete"
-msgstr ""
+msgstr "Настройка двухфакторной аутентификации завершена"
 
 #: miniorange_2_factor_common_login.php:1319
 msgid "has been set your Two Factor method for login."
@@ -4473,7 +4473,7 @@ msgstr "Введите номер вашего телефона"
 
 #: miniorange_2_factor_user_inline_registration.php:827
 msgid "Please enter the One Time Passcode sent to your phone."
-msgstr "Пожалуйста введите пароль отправленный на ваш телефон"
+msgstr "Пожалуйста введите код отправленный на ваш телефон"
 
 #: miniorange_2_factor_user_inline_registration.php:834
 msgid "CALL AGAIN"
@@ -4528,19 +4528,19 @@ msgstr ""
 
 #: miniorange_2_factor_user_inline_registration.php:1235
 msgid "You have successfully set up "
-msgstr ""
+msgstr "Вы успешно настроили"
 
 #: miniorange_2_factor_user_inline_registration.php:1235
 msgid "as your Two Factor method."
-msgstr ""
+msgstr "как свой двухфакторный метод входа"
 
 #: miniorange_2_factor_user_inline_registration.php:1237
 msgid "From now, when you login, you will be prompted for"
-msgstr ""
+msgstr "Теперь, когда вы входите в систему, вам будет предложено ввести"
 
 #: miniorange_2_factor_user_inline_registration.php:1237
 msgid "as your 2nd factor method of authentication."
-msgstr ""
+msgstr "как ваш двухфакторный метод аутентификации."
 
 #: miniorange_2_factor_user_inline_registration.php:1243
 msgid "to sign-in to your account."
