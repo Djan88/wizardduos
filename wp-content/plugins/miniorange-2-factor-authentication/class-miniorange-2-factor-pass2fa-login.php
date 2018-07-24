@@ -1807,9 +1807,7 @@ $mo2fa_login_message = __('An error occured while validating the user. Please Tr
 				      $opt=(array)get_option( 'mo2f_auth_methods_for_'.$current_roles[0]);
 		// var_dump($opt);exit;
 				 }
-			// var_dump($opt); 
-			// var_dump(sizeof($opt));exit; 
-			
+					 
 			if (sizeof($opt) > 1) {
 				prompt_user_to_select_2factor_mthod_inline($current_user_id, $login_status, $login_message);
 				exit;

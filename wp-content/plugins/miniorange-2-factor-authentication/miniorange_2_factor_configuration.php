@@ -362,6 +362,15 @@
 				<input type='checkbox' name='mo2f_authmethods[]'  value='KBA' <?php echo (in_array("KBA", $opt)) ? 'checked="checked"' : ''; if(mo2f_is_customer_registered()){}else{ echo 'disabled';} ?> />Security Questions (KBA)&nbsp;&nbsp;
 				</td>
 				</tr>
+
+                <tr>
+                    <td>
+                        <input type='checkbox' name='mo2f_authmethods[]'  value='SMS AND EMAIL' <?php echo (in_array("SMS AND EMAIL", $opt)) ? 'checked="checked"' : '';  if(mo2f_is_customer_registered()){}else{ echo 'disabled';} ?> /><?php echo __('OTP Over SMS And Email','miniorange-2-factor-authentication');?>&nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <input type='checkbox'  name='mo2f_authmethods[]'  value='OTP_OVER_EMAIL' <?php echo (in_array("OTP_OVER_EMAIL", $opt)) ? 'checked="checked"' : '';  if(mo2f_is_customer_registered()){}else{ echo 'disabled';} ?> /><?php echo __('OTP Over Email','miniorange-2-factor-authentication');?>&nbsp;&nbsp;
+                    </td>
+                </tr>
 				</tbody>
 				</div>
 				</table>
@@ -372,7 +381,6 @@
 		$opt = (array) get_site_option('mo2f_auth_methods_for_users');
 		$copt=array();
 		$newcopt=array();
-		// var_dump(get_site_option('mo2f_all_users_method'));
 		 
 		global $wp_roles;
 		if (!isset($wp_roles))
@@ -380,8 +388,7 @@
 		foreach($wp_roles->role_names as $id => $name)
 		{
 			$copt[$id]=get_site_option('mo2f_auth_methods_for_'.$id);
-			// var_dump($id);
-			// var_dump(empty($copt[$id]));
+
 			if(empty($copt[$id])){
 				$copt[$id]=array("No Two Factor Selected");
 		}?>
@@ -416,27 +423,14 @@
 			 
 			 <?php
 		}
-		?> <br> <br><?php 
-		// var_dump($copt);		
+		?> <br> <br><?php
 		global $wp_roles;
 		if (!isset($wp_roles))
 			$wp_roles = new WP_Roles();
-		// var_dump(count($wp_roles->roles));
-		// var_dump($copt[$id]);
 		print '<div> ';
 		foreach($wp_roles->role_names as $id => $name) {	
 				$setting = get_option('mo2fa_'.$id);
-				// var_dump($name);
-				// var_dump(in_array("OUT OF BAND EMAIL", $copt[$id]));
 				$newcopt=$copt[$id];
-				// var_dump($newcopt);
-				// if(get_option('mo2f_all_users_method'))
-				// {
-					// $newcopt=$opt;
-				// }
-				// else{
-					// $newcopt=$copt[$id];
-				// }
 				?>
 				
 				<table class="mo2f_for_all_roles" id="mo2f_for_all_<?php echo $id ?>" hidden><tbody>

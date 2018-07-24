@@ -748,7 +748,7 @@ $current_user = get_userdata($current_user_id);
 		<head>  <meta charset="utf-8"/>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
-            <meta charset="utf-8"/>
+            
 			<?php
 				echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>';
 				echo '<script src="' . plugins_url('includes/js/bootstrap.min.js', __FILE__) . '" ></script>';
@@ -1135,9 +1135,6 @@ function prompt_user_for_kba_setup($current_user_id, $login_status, $login_messa
 	
 function prompt_user_for_setup_success($id, $login_status, $login_message){
 	global $dbQueries;
-	// $redirect_to = isset($_POST[ 'redirect_to' ]) ? $_POST[ 'redirect_to' ] : null;
-	// var_dump($redirect_to);exit;
-	// var_dump(site_url());exit;
 ?>
 	<html>
 		<head>  <meta charset="utf-8"/>

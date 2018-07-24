@@ -76,8 +76,9 @@ class Mo2fDB {
 	function get_user_detail($column_name , $user_id) {
 		global $wpdb;
 		$user_column_detail = $wpdb->get_results( "SELECT " . $column_name . " FROM " . $this->userDetailsTable . " WHERE user_id = " . $user_id . ";" );
-        // var_dump($user_column_detail);
-		return empty( $user_column_detail ) ? '' : get_object_vars( $user_column_detail[0] )[ $column_name ];
+		$value              = empty( $user_column_detail ) ? '' : get_object_vars( $user_column_detail[0] );
+
+		return $value == '' ? '' : $value[ $column_name ];
 	}
 
 	function delete_user_details( $user_id ) {

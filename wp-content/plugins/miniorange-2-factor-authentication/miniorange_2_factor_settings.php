@@ -358,7 +358,6 @@ function remove_2fa_my_bulk_actions($bulk_actions) {
   return $bulk_actions;
 }
 function my_bulk_action_handler( $redirect_to, $doaction, $post_ids ) {
-	// 	var_dump($doaction !== 'Select_for_2FA'); var_dump($doaction !== 'Remove_2FA');exit;
   if ( $doaction !== 'Select_for_2FA' && $doaction !== 'Remove_2FA') {
     return $redirect_to;
   }
