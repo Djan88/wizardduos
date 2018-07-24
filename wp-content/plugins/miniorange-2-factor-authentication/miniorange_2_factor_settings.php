@@ -243,15 +243,16 @@ class Miniorange_Authentication {
 		$dbQueries = new Mo2fDB();
 	}
 
-	function random_str($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
-					{
-						$pieces = [];
-						$max = mb_strlen($keyspace, '8bit') - 1;
-						for ($i = 0; $i < $length; ++$i) {
-							$pieces []= $keyspace[random_int(0, $max)];
-						}
-						return implode('', $pieces);
-					}
+    function random_str($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+    {
+        $randomString = '';
+        $charactersLength = strlen($keyspace);
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $keyspace[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+
+    }
 	
 	function mo2f_update_db_check() {
 
