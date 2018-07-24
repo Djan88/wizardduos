@@ -239,7 +239,7 @@ function prompt_user_for_reconfigure_google($current_user, $login_status, $login
 	if($login_status == 'MO2F_RECONFIGURE_SUCCESS_GOOGLE'){
 	?>
 		<html>
-		<head>
+		<head>  <meta charset="utf-8"/>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<?php
@@ -282,7 +282,7 @@ function prompt_user_for_reconfigure_google($current_user, $login_status, $login
 	}else{
 	?>
 		<html>
-		<head>
+		<head>  <meta charset="utf-8"/>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<?php
@@ -477,7 +477,7 @@ function prompt_user_for_reconfigure_kba($current_user, $login_status, $login_me
 	if($login_status == 'MO2F_RECONFIGURE_SUCCESS_KBA'){
 		?>
 		<html>
-		<head>
+		<head>  <meta charset="utf-8"/>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<?php
@@ -520,7 +520,7 @@ function prompt_user_for_reconfigure_kba($current_user, $login_status, $login_me
 	}else{
 	?>
 	<html>
-		<head>
+		<head>  <meta charset="utf-8"/>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<?php

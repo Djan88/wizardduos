@@ -9,6 +9,7 @@ function prompt_user_to_register($current_user, $login_status, $login_message){
 	?>
 	<html>
 		<head>
+            <meta charset="utf-8"/>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<?php
@@ -74,6 +75,7 @@ function prompt_user_to_register($current_user, $login_status, $login_message){
 function prompt_user_for_validate_otp($login_status, $login_message){ ?>
 	<html>
 		<head>
+            <meta charset="utf-8"/>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<?php
@@ -214,6 +216,7 @@ function prompt_user_to_select_2factor_mthod_inline($current_user_id, $login_sta
 	?>	
 		<html>
 			<head>
+                <meta charset="utf-8"/>
 				<meta http-equiv="X-UA-Compatible" content="IE=edge">
 				<meta name="viewport" content="width=device-width, initial-scale=1">
 				<?php
@@ -399,7 +402,8 @@ function prompt_user_for_authy_authenticator_setup($current_user_id, $login_stat
 ?>
 	<html>
 		<head>
-			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta charset="utf-8"/>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<?php
 				echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>';
@@ -517,7 +521,7 @@ function prompt_user_for_google_authenticator_setup($current_user_id, $login_sta
 	
 ?>
 	<html>
-		<head>
+		<head>  <meta charset="utf-8"/>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<?php
@@ -741,9 +745,10 @@ $current_user = get_userdata($current_user_id);
 	$current_selected_method = $dbQueries->get_user_detail( 'mo2f_configured_2FA_method',$current_user_id);
 ?>
 	<html>
-		<head>
+		<head>  <meta charset="utf-8"/>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta charset="utf-8"/>
 			<?php
 				echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>';
 				echo '<script src="' . plugins_url('includes/js/bootstrap.min.js', __FILE__) . '" ></script>';
@@ -885,7 +890,7 @@ function prompt_user_for_miniorange_app_setup($current_user_id, $login_status, $
 	$mobile_registration_status = $dbQueries->get_user_detail( 'mo_2factor_mobile_registration_status',$current_user_id);
 	?>
 	<html>
-		<head>
+		<head>  <meta charset="utf-8"/>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<?php
@@ -1052,7 +1057,7 @@ function prompt_user_for_kba_setup($current_user_id, $login_status, $login_messa
     $opt=fetch_methods($current_user);
 ?>
 	<html>
-		<head>
+		<head>  <meta charset="utf-8"/>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<?php
@@ -1130,9 +1135,12 @@ function prompt_user_for_kba_setup($current_user_id, $login_status, $login_messa
 	
 function prompt_user_for_setup_success($id, $login_status, $login_message){
 	global $dbQueries;
+	// $redirect_to = isset($_POST[ 'redirect_to' ]) ? $_POST[ 'redirect_to' ] : null;
+	// var_dump($redirect_to);exit;
+	// var_dump(site_url());exit;
 ?>
 	<html>
-		<head>
+		<head>  <meta charset="utf-8"/>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<?php
@@ -1230,6 +1238,9 @@ function prompt_user_for_setup_success($id, $login_status, $login_message){
 					if($status == 'MO_2_FACTOR_PLUGIN_SETTINGS'){
 						if(get_site_option('mo2f_remember_device')!=1)
 						{
+							$pass2fa= new Miniorange_Password_2Factor_Login();
+							$pass2fa->mo2fa_pass2login(site_url());
+							
 							?>
 								<center>
 								<p style="font-size:17px;"><?php echo __('You have successfully set up ', 'miniorange-2-factor-authentication'); ?><b style="color:#28B463;"><?php echo $mo2f_second_factor; ?> </b><?php echo __('as your Two Factor method.', 'miniorange-2-factor-authentication'); ?><br><br>

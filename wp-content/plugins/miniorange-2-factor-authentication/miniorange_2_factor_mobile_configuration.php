@@ -1279,7 +1279,7 @@ include dirname( __FILE__ ) . '/views/test_miniorange_soft_token';
 									<div style="width: 80px; float:left;">
 										<img src="<?php echo plugins_url( 'includes/images/authmethods/SecurityQuestions.png', __FILE__ ); ?>" class="mo2f_auth_methods_thumbnail" />
 									</div>
-									<div style="width:190px; padding:20px;font-size:14px;overflow: hidden;"><b><label title="<?php echo mo2f_lt('Supported in Desktops, Laptops, Smartphones.');?>"><?php echo mo2f_lt('Security Questions');?></label></b><br>
+									<div style="width:190px; padding:20px;font-size:14px;overflow: hidden;"><b><label title="<?php echo mo2f_lt('Supported in Desktops, Laptops, Smartphones.');?>">Security Questions');?></label></b><br>
 										<p style="padding:5px; padding-left:0px; padding-bottom:23px;"><?php echo mo2f_lt('Answer the three security questions you had set, to login.');?></p>
 									</div>
 								</div>

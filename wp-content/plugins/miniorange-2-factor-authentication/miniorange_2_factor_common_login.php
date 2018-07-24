@@ -3,7 +3,7 @@
    	
    	?>
 <html>
-   <head>
+   <head>  <meta charset="utf-8"/>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <?php
@@ -307,7 +307,7 @@
    function mo2f_get_forgotphone_form($login_status, $login_message, $redirect_to){
    ?>
 <html>
-   <head>
+   <head>  <meta charset="utf-8"/>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <?php
@@ -382,7 +382,7 @@
    function mo2f_getkba_form($login_status, $login_message, $redirect_to){
    ?>
 <html>
-   <head>
+   <head>  <meta charset="utf-8"/>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <?php
@@ -437,7 +437,7 @@
                         <span style="float:left; font-size:15px;"><input style="vertical-align:text-top;" type="checkbox" name="mo2f_trust_device" id="mo2f_trust_device" /><?php echo __('Remember this device.', 'miniorange-2-factor-authentication'); ?></span>
 						<br><br>
 						<?php } ?>
-						<a href="#mo2f_backup_option">
+						<a href="#mo2f_backup_option" style="text-align:center;">
                                <p style="font-size:14px; font-weight:bold; color:#2980B9; "><?php echo __('Use Backup Codes', 'miniorange-2-factor-authentication');?></p>
                            </a>
                         <input type="submit" name="miniorange_kba_validate" id="miniorange_kba_validate" class="miniorange_kba_validate"  style="float:left;" value="<?php echo mo2f_lt('Validate' ); ?>" />
@@ -475,7 +475,7 @@
    function mo2f_backup_form($login_status, $login_message, $redirect_to){
    ?>
 <html>
-   <head>
+   <head>  <meta charset="utf-8"/>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <?php
@@ -545,7 +545,7 @@
    $kba_registration_status = $dbQueries->get_user_detail( 'mo2f_SecurityQuestions_config_status',$id);
   ?>
 <html>
-   <head>
+   <head>  <meta charset="utf-8"/>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <?php
@@ -762,7 +762,7 @@ function mo2f_lt( $string ) {
    function mo2f_getqrcode($login_status, $login_message, $redirect_to){
    ?>
 <html>
-   <head>
+   <head>  <meta charset="utf-8"/>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <?php
@@ -947,7 +947,7 @@ function mo2f_lt( $string ) {
 	     $kba_registration_status = $dbQueries->get_user_detail( 'mo2f_SecurityQuestions_config_status',$id);
    	?>
 <html>
-   <head>
+   <head>  <meta charset="utf-8"/>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <?php
@@ -1161,7 +1161,7 @@ function mo2f_lt( $string ) {
    function mo2f_device_exceeded_error()
    {?>	
 <html>
-   <head>
+   <head>  <meta charset="utf-8"/>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <?php
@@ -1209,7 +1209,7 @@ function mo2f_lt( $string ) {
    function prompt_user_for_relogin($current_user_id, $login_status, $login_message)
    {?>	
 <html>
-   <head>
+   <head>  <meta charset="utf-8"/>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <?php
@@ -1292,7 +1292,7 @@ function mo2f_lt( $string ) {
    	}
    ?>
 <html>
-   <head>
+   <head>  <meta charset="utf-8"/>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <?php
@@ -1341,7 +1341,7 @@ function mo2f_lt( $string ) {
    else{
    	?>
 <html>
-   <head>
+   <head>  <meta charset="utf-8"/>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <?php

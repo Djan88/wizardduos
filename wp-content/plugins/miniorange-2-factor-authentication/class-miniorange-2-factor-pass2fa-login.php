@@ -220,7 +220,7 @@ class Miniorange_Password_2Factor_Login{
 							}
 							//var_dump($key,$value);
 							}
-								var_dump($backup_codes);
+								// var_dump($backup_codes);
 								
 							
 						$this->mo2fa_pass2login($redirect_to);
@@ -1793,6 +1793,7 @@ $mo2fa_login_message = __('An error occured while validating the user. Please Tr
 			prompt_user_for_validate_otp($login_status, $login_message);
 			exit;
 		}else if($this->miniorange_pass2login_inline_setup_success($login_status)){ //MO_2_FACTOR_SETUP_SUCCESS
+		// var_dump($redirect_to);exit;
 			prompt_user_for_setup_success($current_user_id,$login_status, $login_message);
 			exit;
 		}else if($this->miniorange_pass2login_check_inline_user_2fa_methods($login_status)){ // two-factor methods
@@ -1803,10 +1804,12 @@ $mo2fa_login_message = __('An error occured while validating the user. Please Tr
 						$opt = (array) get_site_option('mo2f_auth_methods_for_users');
 					 }
 				 else{
-				      $opt=get_option( 'mo2f_auth_methods_for_'.$current_roles[0]);
+				      $opt=(array)get_option( 'mo2f_auth_methods_for_'.$current_roles[0]);
 		// var_dump($opt);exit;
 				 }
-					 
+			// var_dump($opt); 
+			// var_dump(sizeof($opt));exit; 
+			
 			if (sizeof($opt) > 1) {
 				prompt_user_to_select_2factor_mthod_inline($current_user_id, $login_status, $login_message);
 				exit;

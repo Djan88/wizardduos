@@ -245,13 +245,12 @@ class Miniorange_Authentication {
 
 	function random_str($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
 					{
-						$randomString = '';
-						$charactersLength = strlen($keyspace);
-						for ($i = 0; $i < $length; $i++) {
-							$randomString .= $keyspace[rand(0, $charactersLength - 1)];
+						$pieces = [];
+						$max = mb_strlen($keyspace, '8bit') - 1;
+						for ($i = 0; $i < $length; ++$i) {
+							$pieces []= $keyspace[random_int(0, $max)];
 						}
-						return $randomString;
-
+						return implode('', $pieces);
 					}
 	
 	function mo2f_update_db_check() {
@@ -358,6 +357,7 @@ function remove_2fa_my_bulk_actions($bulk_actions) {
   return $bulk_actions;
 }
 function my_bulk_action_handler( $redirect_to, $doaction, $post_ids ) {
+	// 	var_dump($doaction !== 'Select_for_2FA'); var_dump($doaction !== 'Remove_2FA');exit;
   if ( $doaction !== 'Select_for_2FA' && $doaction !== 'Remove_2FA') {
     return $redirect_to;
   }
@@ -398,8 +398,8 @@ function my_bulk_action_handler( $redirect_to, $doaction, $post_ids ) {
 		 }
 		 
 	}
-	$mo2f_select_user_for_2fa = get_site_option('mo2f_select_user_for_2fa');
-	 if(empty($mo2f_select_user_for_2fa))
+	$is_select_user=get_site_option('mo2f_select_user_for_2fa');
+	if(empty($is_select_user))
 	   {
 		   $list_rd = array("No User Selected");
 			  update_site_option('mo2f_select_user_for_2fa',$list_rd);
