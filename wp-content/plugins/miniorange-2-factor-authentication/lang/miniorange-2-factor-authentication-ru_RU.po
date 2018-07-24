@@ -2,12 +2,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniOrange 2 Factor Authentication\n"
 "POT-Creation-Date: 2018-07-19 22:39+0530\n"
-"PO-Revision-Date: 2018-07-22 16:48+0300\n"
+"PO-Revision-Date: 2018-07-24 10:32+0300\n"
 "Language-Team: miniOrange\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.9\n"
+"X-Generator: Poedit 2.0.9\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
@@ -44,7 +44,7 @@ msgstr "Кликните сюда"
 #: class-two-factor-setup.php:171 class-two-factor-setup.php:242
 #: class-two-factor-setup.php:382 class-two-factor-setup.php:457
 msgid "for the steps to enable curl or check Help & Troubleshooting."
-msgstr "для шагов включения url или Помощь и Решение проблем"
+msgstr "для шагов включения url или Помощь и Решение проблем."
 
 #: class-miniorange-2-factor-pass2fa-login.php:80
 #: class-miniorange-2-factor-pass2fa-login.php:102
@@ -132,7 +132,7 @@ msgstr "Одноразовый пароль был отправлен на"
 #: class-miniorange-2-factor-pass2fa-login.php:139
 msgid "Please enter the OTP to verify your identity. "
 msgstr ""
-"Пожалуйста, введите одноразовый пароль, чтобы подтвердить свою личность."
+"Пожалуйста, введите одноразовый пароль, чтобы подтвердить свою личность "
 
 #: class-miniorange-2-factor-pass2fa-login.php:142
 msgid ""
@@ -140,7 +140,7 @@ msgid ""
 "again. "
 msgstr ""
 "Произошла ошибка при отправке одноразового пароля по указанной Вами "
-"электронной почте. Пожалуйста, попробуйте еще раз."
+"электронной почте. Пожалуйста, попробуйте еще раз "
 
 #: class-miniorange-2-factor-pass2fa-login.php:150
 msgid ""
@@ -198,10 +198,10 @@ msgid ""
 "administrator."
 msgstr "Обратитесь к своему администратору."
 
-#: class-miniorange-2-factor-pass2fa-login.php:434
-#: class-mo2f-constants.php:337 miniorange_lang_constants.php:339
+#: class-miniorange-2-factor-pass2fa-login.php:434 class-mo2f-constants.php:337
+#: miniorange_lang_constants.php:339
 msgid "Please enter email-id to register."
-msgstr "Пожалуйста, введите идентификатор электронной почты для регистрации"
+msgstr "Пожалуйста, введите идентификатор электронной почты для регистрации."
 
 #: class-miniorange-2-factor-pass2fa-login.php:456
 msgid ""
@@ -212,7 +212,7 @@ msgstr ""
 
 #: class-miniorange-2-factor-pass2fa-login.php:469
 msgid "An OTP has been sent to"
-msgstr "одноразовый пароль был отправлен на"
+msgstr "Одноразовый пароль был отправлен на"
 
 #: class-miniorange-2-factor-pass2fa-login.php:469
 msgid ""
@@ -230,8 +230,8 @@ msgstr "СПАМ"
 msgid "folder."
 msgstr "папка."
 
-#: class-miniorange-2-factor-pass2fa-login.php:475
-#: class-mo2f-constants.php:250 miniorange_lang_constants.php:250
+#: class-miniorange-2-factor-pass2fa-login.php:475 class-mo2f-constants.php:250
+#: miniorange_lang_constants.php:250
 msgid ""
 "There was an error in sending OTP over email. Please click on Resend OTP to "
 "try again."
@@ -239,8 +239,8 @@ msgstr ""
 "При отправке одноразового пароля по email произошла ошибка. Нажмите "
 "\"Отправить повторно\", чтобы повторить попытку."
 
-#: class-miniorange-2-factor-pass2fa-login.php:484
-#: class-mo2f-constants.php:304 miniorange_lang_constants.php:306
+#: class-miniorange-2-factor-pass2fa-login.php:484 class-mo2f-constants.php:304
+#: miniorange_lang_constants.php:306
 msgid ""
 "The email is already used by other user. Please register with other email."
 msgstr ""
@@ -255,7 +255,7 @@ msgstr "Пожалуйста примите условия и ограничен
 #: class-miniorange-2-factor-pass2fa-login.php:543
 #: class-miniorange-2-factor-pass2fa-login.php:960
 msgid "The One Time Passcode has been sent to "
-msgstr "Одноразовый пароль был отправлен на"
+msgstr "Одноразовый пароль был отправлен на "
 
 #: class-miniorange-2-factor-pass2fa-login.php:534
 #: class-miniorange-2-factor-pass2fa-login.php:558
@@ -272,7 +272,7 @@ msgstr ""
 
 #: class-miniorange-2-factor-pass2fa-login.php:543
 msgid " and "
-msgstr "и"
+msgstr " и "
 
 #: class-miniorange-2-factor-pass2fa-login.php:543
 msgid ""
@@ -292,7 +292,7 @@ msgstr ""
 #: class-miniorange-2-factor-pass2fa-login.php:558
 #: class-miniorange-2-factor-pass2fa-login.php:963
 msgid "You will receive a phone call on this number "
-msgstr "Вы получите телефонный звонок по этому номеру"
+msgstr "Вы получите телефонный звонок по этому номеру "
 
 #: class-miniorange-2-factor-pass2fa-login.php:558
 msgid "Please click on Verify button to receive the phone call."
@@ -300,15 +300,15 @@ msgstr "Чтобы получить телефонный звонок, нажм�
 
 #: class-miniorange-2-factor-pass2fa-login.php:563
 msgid "An OTP has been sent to "
-msgstr "Одноразовый пароль отправлен на"
+msgstr "Одноразовый пароль отправлен на "
 
 #: class-miniorange-2-factor-pass2fa-login.php:563
 msgid "Please enter the OTP below to verify your email."
 msgstr ""
 "Пожалуйста, введите одноразовый пароль ниже, чтобы подтвердить свой email."
 
-#: class-miniorange-2-factor-pass2fa-login.php:581
-#: class-mo2f-constants.php:349 miniorange_lang_constants.php:351
+#: class-miniorange-2-factor-pass2fa-login.php:581 class-mo2f-constants.php:349
+#: miniorange_lang_constants.php:351
 msgid ""
 "There was an error in sending one time passcode. Please click on Resend OTP "
 "to try again."
@@ -356,8 +356,8 @@ msgstr ""
 "При проверке пользователя произошла ошибка. Пожалуйста, попробуйте снова."
 
 #: class-miniorange-2-factor-pass2fa-login.php:694
-#: class-miniorange-2-factor-pass2fa-login.php:789
-#: class-mo2f-constants.php:370 miniorange_lang_constants.php:373
+#: class-miniorange-2-factor-pass2fa-login.php:789 class-mo2f-constants.php:370
+#: miniorange_lang_constants.php:373
 msgid "Only digits are allowed. Please enter again."
 msgstr "Разрешены только цифры. Введите еще раз."
 
@@ -380,16 +380,16 @@ msgstr ""
 msgid "You have entered an invalid OTP"
 msgstr "Вы ввели неверный одноразовый пароль"
 
-#: class-miniorange-2-factor-pass2fa-login.php:782
-#: class-mo2f-constants.php:364 miniorange_lang_constants.php:367
+#: class-miniorange-2-factor-pass2fa-login.php:782 class-mo2f-constants.php:364
+#: miniorange_lang_constants.php:367
 msgid ""
 "Your App Time is not in sync.Go to settings and tap on tap on Sync Time now ."
 msgstr ""
 "Время вашего приложения не синхронизировано. Войдите в настройки и нажмите "
 "«Применить синхронизацию времени»."
 
-#: class-miniorange-2-factor-pass2fa-login.php:785
-#: class-mo2f-constants.php:367 miniorange_lang_constants.php:370
+#: class-miniorange-2-factor-pass2fa-login.php:785 class-mo2f-constants.php:367
+#: miniorange_lang_constants.php:370
 msgid "Error occurred while validating the user. Please try again."
 msgstr ""
 "При проверке пользователя произошла ошибка. Пожалуйста, попробуйте еще раз."
@@ -397,14 +397,14 @@ msgstr ""
 #: class-miniorange-2-factor-pass2fa-login.php:809
 msgid "OTP can not be empty. Please enter OTP to verify."
 msgstr ""
-"одноразовый пароль не может быть пустым. Пожалуйста, введите одноразовый "
+"Одноразовый пароль не может быть пустым. Пожалуйста, введите одноразовый "
 "пароль для проверки."
 
 #: class-miniorange-2-factor-pass2fa-login.php:833
 #: class-miniorange-2-factor-pass2fa-login.php:1052
 #: class-mo2f-constants.php:235 miniorange_lang_constants.php:234
 msgid "Invalid OTP. Please try again."
-msgstr "Неверный одноразовый пароль. Пожалуйста попробуйте снова"
+msgstr "Неверный одноразовый пароль. Пожалуйста попробуйте снова."
 
 #: class-miniorange-2-factor-pass2fa-login.php:840
 msgid ""
@@ -483,7 +483,7 @@ msgstr "Введите однократный код доступа, показ�
 #: class-miniorange-2-factor-pass2fa-login.php:1237
 #: class-miniorange-2-factor-pass2fa-login.php:2092
 msgid " app."
-msgstr "приложение."
+msgstr " приложение."
 
 #: class-miniorange-2-factor-pass2fa-login.php:1255
 msgid "Please enter OTP to proceed."
@@ -502,7 +502,7 @@ msgstr "Неверный запрос. Пожалуйста, попробуйт�
 
 #: class-miniorange-2-factor-pass2fa-login.php:1313
 msgid "Invalid OTP ...Possible causes "
-msgstr "Недопустимый одноразовый пароль ...Возможные причины"
+msgstr "Недопустимый одноразовый пароль ...Возможные причины "
 
 #: class-miniorange-2-factor-pass2fa-login.php:1313
 msgid "You mis-typed the OTP, find the OTP again and type it."
@@ -572,7 +572,7 @@ msgstr "Вход со вторым фактором"
 #: class-miniorange-2-factor-pass2fa-login.php:2088
 #: class-miniorange-2-factor-pass2fa-login.php:2092
 msgid "Please enter the one time passcode shown in the "
-msgstr "Введите однократный код доступа, показанный в"
+msgstr "Введите однократный код доступа, показанный в "
 
 #: class-miniorange-2-factor-pass2fa-login.php:2088
 #: class-miniorange-2-factor-pass2fa-login.php:2092
@@ -584,11 +584,10 @@ msgstr "приложение."
 #: miniorange_2_factor_user_inline_registration.php:313
 #: miniorange_lang_constants.php:117 miniorange_lang_constants.php:120
 msgid "Authy 2-Factor Authentication"
-msgstr "Аутентификация через приложение \"Authy 2-Factor\""
+msgstr "Аутентификация через приложение Authy 2-Factor"
 
-#: class-miniorange-2-factor-pass2fa-login.php:2092
-#: class-mo2f-constants.php:28 class-mo2f-constants.php:121
-#: miniorange_2_factor_configuration.php:469
+#: class-miniorange-2-factor-pass2fa-login.php:2092 class-mo2f-constants.php:28
+#: class-mo2f-constants.php:121 miniorange_2_factor_configuration.php:469
 #: miniorange_2_factor_configuration.php:656
 #: miniorange_2_factor_user_inline_registration.php:304
 #: miniorange_lang_constants.php:108 miniorange_lang_constants.php:114
@@ -611,7 +610,7 @@ msgstr ""
 
 #: class-miniorange-2-factor-pass2fa-login.php:2144
 msgid "You will receive phone call on "
-msgstr "Вы получите телефонный звонок на"
+msgstr "Вы получите телефонный звонок на "
 
 #: class-miniorange-2-factor-pass2fa-login.php:2144
 msgid "with OTP. Please enter the OTP to Validate."
@@ -654,7 +653,7 @@ msgstr ""
 
 #: class-miniorange-2-factor-pass2fa-login.php:2186
 msgid "An email has been sent to "
-msgstr "E-mail был отправлен на"
+msgstr "E-mail был отправлен на "
 
 #: class-miniorange-2-factor-pass2fa-login.php:2186
 msgid "We are waiting for your approval."
@@ -674,7 +673,7 @@ msgstr "Телефон не в сети"
 
 #: class-miniorange-2-factor-pass2fa-login.php:2196
 msgid "button to enter soft token from app or "
-msgstr "кнопка ввода токена из приложения или"
+msgstr "кнопка ввода токена из приложения или "
 
 #: class-miniorange-2-factor-pass2fa-login.php:2196
 msgid "button to receive OTP to your registered email."
@@ -819,7 +818,7 @@ msgstr ""
 #: class-miniorange-2-factor-shortcode.php:349
 #: miniorange_2_factor_mobile_configuration.php:1757
 msgid "Can't scan the barcode? "
-msgstr "Не удается отсканировать штрих-код?"
+msgstr "Не удается отсканировать штрих-код? "
 
 #: class-miniorange-2-factor-shortcode.php:353
 #: miniorange_2_factor_mobile_configuration.php:1725
@@ -973,7 +972,7 @@ msgstr "Нажмите «Сохранить»."
 #: miniorange_2_factor_mobile_configuration.php:1805
 #: miniorange_2_factor_user_inline_registration.php:476
 msgid "Step-3: Verify and Save"
-msgstr "Шаг-3. Проверка и сохранение."
+msgstr "Шаг-3. Проверка и сохранение"
 
 #: class-miniorange-2-factor-shortcode.php:433
 #: miniorange_2_factor_mobile_configuration.php:1807
@@ -1003,7 +1002,7 @@ msgstr "Код:"
 #: miniorange_2_factor_user_inline_registration.php:481
 #: miniorange_2_factor_user_inline_registration.php:691
 msgid "Enter OTP"
-msgstr ""
+msgstr "Введите одноразовый пароль"
 
 #: class-miniorange-2-factor-shortcode.php:438
 #: miniorange_2_factor_mobile_configuration.php:1651
@@ -1012,19 +1011,19 @@ msgstr ""
 #: miniorange_2_factor_user_inline_registration.php:686
 #: miniorange_2_factor_user_inline_registration.php:693
 msgid "Verify and Save"
-msgstr ""
+msgstr "Проверка и сохранение"
 
 #: class-miniorange-2-factor-shortcode.php:502 class-mo2f-constants.php:25
 msgid "Security Questions"
-msgstr ""
+msgstr "Секретные вопросы"
 
 #: class-miniorange-2-factor-shortcode.php:502
 msgid "have been reconfigured successfully..<br>"
-msgstr ""
+msgstr "перенастроен успешно..<br>"
 
 #: class-miniorange-2-factor-shortcode.php:553
 msgid "Reconfigure Security Questions"
-msgstr ""
+msgstr "Перенастроить секретные вопросы"
 
 #: class-miniorange-2-factor-shortcode.php:561
 #: miniorange_2_factor_mobile_configuration.php:246
@@ -1032,50 +1031,50 @@ msgstr ""
 #: miniorange_2_factor_user_inline_registration.php:1093
 #: miniorange_2_factor_user_inline_registration.php:1213
 msgid "Save"
-msgstr ""
+msgstr "Сохранить"
 
 #: class-miniorange-2-factor-user-registration.php:98
 msgid "Warning: "
-msgstr ""
+msgstr "Предупреждение: "
 
 #: class-miniorange-2-factor-user-registration.php:98
 #: miniorange_2_factor_configuration.php:4
 msgid "PHP CURL extension"
-msgstr ""
+msgstr "Расширение PHP CURL"
 
 #: class-miniorange-2-factor-user-registration.php:98
 #: miniorange_2_factor_configuration.php:4
 msgid "is not installed or disabled"
-msgstr ""
+msgstr "не установлено или отключено"
 
 #: class-miniorange-2-factor-user-registration.php:110
 #: miniorange_2_factor_configuration.php:31
 msgid "Setup Two-Factor"
-msgstr ""
+msgstr "Настройка второго фактора"
 
 #: class-mo2f-constants.php:10 miniorange_lang_constants.php:14
 msgid "Successfully validated."
-msgstr ""
+msgstr "Успешно проверено."
 
 #: class-mo2f-constants.php:13 miniorange_lang_constants.php:17
 msgid "Please scan the QR Code now."
-msgstr ""
+msgstr "Пожалуйста считайте QR код."
 
 #: class-mo2f-constants.php:16
 msgid "miniOrange QR Code Authentication"
-msgstr ""
+msgstr "аутентификация по QR-коду miniOrange"
 
 #: class-mo2f-constants.php:19
 msgid "miniOrange Push Notification"
-msgstr ""
+msgstr "miniOrange Push-уведомление"
 
 #: class-mo2f-constants.php:22
 msgid "miniOrange Soft Token"
-msgstr ""
+msgstr "miniOrange токен"
 
 #: class-mo2f-constants.php:31
 msgid "Authy Authenticator"
-msgstr ""
+msgstr "Authy Authenticator"
 
 #: class-mo2f-constants.php:34 miniorange_2_factor_configuration.php:445
 #: miniorange_2_factor_configuration.php:632
@@ -1083,110 +1082,114 @@ msgstr ""
 #: miniorange_2_factor_user_inline_registration.php:250
 #: miniorange_lang_constants.php:23 miniorange_lang_constants.php:291
 msgid "Email Verification"
-msgstr ""
+msgstr "Проверка через Email"
 
 #: class-mo2f-constants.php:37 miniorange_2_factor_configuration.php:448
 #: miniorange_2_factor_configuration.php:635
 #: miniorange_2_factor_user_inline_registration.php:259
 #: miniorange_lang_constants.php:26
 msgid "OTP Over SMS"
-msgstr "одноразовый пароль через смс"
+msgstr "Одноразовый пароль через смс"
 
 #: class-mo2f-constants.php:40 miniorange_2_factor_configuration.php:481
 #: miniorange_2_factor_configuration.php:668 miniorange_lang_constants.php:29
 msgid "OTP Over SMS And Email"
-msgstr ""
+msgstr "Одноразовый пароль по SMS и Email"
 
 #: class-mo2f-constants.php:43 miniorange_lang_constants.php:32
 msgid ""
 "Your license has expired. Please renew your license to continue using our "
 "service."
 msgstr ""
+"Срок действия вашей лицензии истек. Пожалуйста, обновите лицензию, чтобы "
+"продолжить использовать наш сервис."
 
 #: class-mo2f-constants.php:46 miniorange_lang_constants.php:35
 msgid ""
 "The total transaction limit has been exceeded. Please upgrade your premium "
 "plan."
-msgstr ""
+msgstr "Превышен общий предел транзакции. Обновите план премиум-класса."
 
 #: class-mo2f-constants.php:49 miniorange_lang_constants.php:38
 msgid "The transaction limit has exceeded."
-msgstr ""
+msgstr "Превышен лимит транзакции."
 
 #: class-mo2f-constants.php:52 miniorange_lang_constants.php:41
 msgid "GenerateOtpRequest is null"
-msgstr ""
+msgstr "Создать запрос одноразового пароля - null"
 
 #: class-mo2f-constants.php:55
 msgid ""
 "The sms transaction limit has been exceeded. Please refer to the Licensing "
 "Plans tab for purchasing your SMS transactions."
 msgstr ""
+"Превышен предел транзакций sms. См. Вкладку «Тарифные планы» для покупки "
+"транзакций SMS."
 
 #: class-mo2f-constants.php:58
 msgid ""
 "The email transaction limit has been exceeded. Please refer to the Licensing "
 "Plans tab for purchasing your SMS transactions."
 msgstr ""
+"Превышен лимит транзакций электронной почты. См. Вкладку «Тарифные планы» "
+"для покупки транзакций SMS."
 
 #: class-mo2f-constants.php:61 miniorange_lang_constants.php:50
 msgid "Transaction limit exceeded. Please contact your administrator"
-msgstr ""
+msgstr "Превышен предел транзакции. Обратитесь к администратору"
 
 #: class-mo2f-constants.php:64 miniorange_lang_constants.php:53
 msgid ""
 "Free Trial has already been taken or expired for this plugin. Please upgrade "
 "to a premium plan."
 msgstr ""
+"Для этого плагина уже был взят или истек срок действия пробной версии. "
+"Обновите план премиум-класса."
 
 #: class-mo2f-constants.php:67 miniorange_lang_constants.php:56
 msgid "Invalid format."
-msgstr ""
+msgstr "Неверный формат."
 
 #: class-mo2f-constants.php:70 miniorange_lang_constants.php:59
 msgid "Mobile registration failed."
-msgstr ""
+msgstr "Ошибка в мобильной регистрации."
 
 #: class-mo2f-constants.php:73 miniorange_lang_constants.php:62
 msgid "Invalid mobile authentication request."
-msgstr ""
+msgstr "Недействительный запрос на мобильную проверку подлинности."
 
 #: class-mo2f-constants.php:76 miniorange_lang_constants.php:65
 msgid "Exception during SMS sending"
-msgstr ""
+msgstr "Исключение во время отправки SMS"
 
 #: class-mo2f-constants.php:79 miniorange_lang_constants.php:68
 msgid "There was an error during sending an SMS."
-msgstr ""
+msgstr "При отправке SMS произошла ошибка."
 
 #: class-mo2f-constants.php:82 miniorange_lang_constants.php:71
 msgid "Exception during logUserTransaction"
-msgstr ""
+msgstr "Исключение во время транзакции пользователя"
 
 #: class-mo2f-constants.php:85 miniorange_lang_constants.php:74
 msgid "There was an error processing the challenge user request."
-msgstr ""
+msgstr "Произошла ошибка при обработке запроса пользователя вызов."
 
-#: class-mo2f-constants.php:88
-#: miniorange_2_factor_mobile_configuration.php:140
+#: class-mo2f-constants.php:88 miniorange_2_factor_mobile_configuration.php:140
 #: miniorange_lang_constants.php:77
 msgid "What is your first company name?"
-msgstr ""
+msgstr "Как Вас зовут?"
 
-#: class-mo2f-constants.php:91
-#: miniorange_2_factor_mobile_configuration.php:141
+#: class-mo2f-constants.php:91 miniorange_2_factor_mobile_configuration.php:141
 #: miniorange_lang_constants.php:80
 msgid "What was your childhood nickname?"
 msgstr ""
 
-#: class-mo2f-constants.php:94
-#: miniorange_2_factor_mobile_configuration.php:142
+#: class-mo2f-constants.php:94 miniorange_2_factor_mobile_configuration.php:142
 #: miniorange_lang_constants.php:83
 msgid "In what city did you meet your spouse/significant other?"
 msgstr ""
 
-#: class-mo2f-constants.php:97
-#: miniorange_2_factor_mobile_configuration.php:143
+#: class-mo2f-constants.php:97 miniorange_2_factor_mobile_configuration.php:143
 #: miniorange_lang_constants.php:86
 msgid "What is the name of your favorite childhood friend?"
 msgstr ""
@@ -2250,7 +2253,7 @@ msgstr ""
 
 #: miniorange_2_factor_configuration.php:618
 msgid " Select Roles to enable 2-Factor"
-msgstr "Выберите Роли для которых будет включен 2 фактор"
+msgstr " Выберите Роли для которых будет включен 2 фактор"
 
 #: miniorange_2_factor_configuration.php:619
 #: miniorange_2_factor_configuration.php:827
@@ -4316,7 +4319,7 @@ msgstr "Не получили код?"
 #: miniorange_2_factor_user_inline_registration.php:112
 #: miniorange_2_factor_user_inline_registration.php:836
 msgid "RESEND IT"
-msgstr ""
+msgstr "Отправить повторно"
 
 #: miniorange_2_factor_user_inline_registration.php:115
 #: miniorange_2_factor_user_inline_registration.php:839
@@ -4473,7 +4476,7 @@ msgstr "Введите номер вашего телефона"
 
 #: miniorange_2_factor_user_inline_registration.php:827
 msgid "Please enter the One Time Passcode sent to your phone."
-msgstr "Пожалуйста введите код отправленный на ваш телефон"
+msgstr "Пожалуйста введите код отправленный на ваш телефон."
 
 #: miniorange_2_factor_user_inline_registration.php:834
 msgid "CALL AGAIN"
@@ -4528,11 +4531,11 @@ msgstr ""
 
 #: miniorange_2_factor_user_inline_registration.php:1235
 msgid "You have successfully set up "
-msgstr "Вы успешно настроили"
+msgstr "Вы успешно настроили "
 
 #: miniorange_2_factor_user_inline_registration.php:1235
 msgid "as your Two Factor method."
-msgstr "как свой двухфакторный метод входа"
+msgstr "как свой двухфакторный метод входа."
 
 #: miniorange_2_factor_user_inline_registration.php:1237
 msgid "From now, when you login, you will be prompted for"
