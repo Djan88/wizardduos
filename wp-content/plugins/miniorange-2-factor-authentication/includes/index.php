@@ -1,5 +1,5 @@
-<?php
-
-if ( ! defined( 'WPINC' ) ) {
-	die();
+<?php
+
+if ( ! defined( 'WPINC' ) ) {
+	die();
 }
