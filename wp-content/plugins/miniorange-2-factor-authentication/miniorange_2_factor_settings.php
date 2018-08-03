@@ -1226,8 +1226,9 @@ function mo2f_selected_user_column_content($value, $column_name, $user_id) {
 			if(isset($_POST['miniorange_reset_2fa_option']) && $_POST['miniorange_reset_2fa_option'] == 'mo_reset_2fa'){
 				$user_id = isset($_POST['userid']) && !empty($_POST['userid']) ? $_POST['userid'] : '';
 				if(!empty($user_id)){
-					$this->delete_mo2fa_users_data($user_id);			
-					header("location: https://wizardduos.ru/wp-admin/users.php"); exit;
+					$this->delete_mo2fa_users_data($user_id);	
+					$url=admin_url().'users.php';
+					header("location:".$url." "); exit;
 				}
 			}
 		if ( isset( $_POST['option'] ) && $_POST['option'] == 'mo_license' ) {
