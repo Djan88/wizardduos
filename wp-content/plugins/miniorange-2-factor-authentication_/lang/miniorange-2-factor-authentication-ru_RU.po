@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniOrange 2 Factor Authentication\n"
 "POT-Creation-Date: 2018-07-19 22:39+0530\n"
-"PO-Revision-Date: 2018-07-25 10:55+0300\n"
+"PO-Revision-Date: 2018-08-05 14:26+0300\n"
 "Language-Team: miniOrange\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -260,8 +260,7 @@ msgstr "Одноразовый код был отправлен на "
 #: class-miniorange-2-factor-pass2fa-login.php:956
 #: class-miniorange-2-factor-pass2fa-login.php:963
 msgid "Please enter the one time passcode below to verify your number."
-msgstr ""
-"Пожалуйста, введите одноразовый код ниже, чтобы подтвердить свой номер."
+msgstr "Пожалуйста, введите код ниже."
 
 #: class-miniorange-2-factor-pass2fa-login.php:534
 msgid "Please click on Verify button to receive OTP over your phone number."
@@ -602,8 +601,7 @@ msgstr "Одноразовый код был отправлен на"
 #: class-miniorange-2-factor-pass2fa-login.php:2134
 #: class-miniorange-2-factor-pass2fa-login.php:2139
 msgid "Please enter the OTP you received to Validate."
-msgstr ""
-"Пожалуйста, введите одноразовый код, который вы получили для подтверждения."
+msgstr "Пожалуйста, введите его в поле."
 
 #: class-miniorange-2-factor-pass2fa-login.php:2144
 msgid "You will receive phone call on "
