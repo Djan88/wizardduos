@@ -113,6 +113,17 @@
                 </div>
             </div>
         <?php } ?>
+        <!-- Modal Wizardtyerapy -->
+        <div class="modal fade modal_link" id="wizardtherapy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal_menu">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <a href="https://school-bc.ru/" target="_blank"><img src="<?php bloginfo('template_url'); ?>/library/images/wizardtherapy.png" alt="wizardtherapy"></a> 
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </body>
 

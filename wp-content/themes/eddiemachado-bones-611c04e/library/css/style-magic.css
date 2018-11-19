@@ -861,3 +861,25 @@ footer.footer.vitrin a
     color: #fff!important;
     text-decoration: none;
 }
+.modal_link .modal-body
+{
+    padding: 0;
+}
+.modal_link .modal-body a
+{
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.modal_link .modal-body a img
+{
+    width: 100%;
+}
+.modal_link .modal-body .close
+{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 20px;
+}

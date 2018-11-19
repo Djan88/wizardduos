@@ -13,6 +13,8 @@ jQuery(function() {
         main_heading,
         set_prot,
         pointsStatus = true,
+        cur_time,
+        popupStatus1,
         supportsStorage = function(){
             try {
                 return 'localStorage' in window && window['localStorage'] !== null;
@@ -67,6 +69,30 @@ jQuery(function() {
             .removeClass('hidden')
             .addClass('animated zoomIn');
     });
+
+
+    // Рекланые баннеры
+    function openPopupOne(){
+      jQuery('#wizardtherapy').modal('show');
+    }
+    //Получение данных из локального хранилища
+    if(supportsStorage && localStorage.getItem('popupStatus1')){
+      popupStatus1 = parseFloat(localStorage.getItem('popupStatus1'))+2592000000;
+    }
+    cur_time = new Date().getTime();
+    console.log(popupStatus1);
+    console.log(cur_time);
+    console.log(cur_time - popupStatus1);
+    if (popupStatus1 && popupStatus1 < cur_time) {
+      setTimeout(openPopupOne, 5000);
+      // jQuery('#book_down').on('hidden.bs.modal', function (e) {
+      //   setTimeout(openPopupTwo, 25000);
+      // })
+      localStorage.setItem('popupStatus1', cur_time);
+    } else if (!popupStatus1) {
+      setTimeout(openPopupOne, 5000);
+      localStorage.setItem('popupStatus1', cur_time);
+    }
 
     nextScreen = function(){
         jQuery('.machine_screen')
