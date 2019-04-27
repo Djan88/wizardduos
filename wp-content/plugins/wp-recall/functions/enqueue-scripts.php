@@ -36,7 +36,7 @@ function rcl_image_slider_scripts(){
     rcl_enqueue_script( 'jssor-slider', RCL_URL.'assets/js/jssor.slider/js/jssor.slider.min.js' );
 }
 
-function rcl_dialog_scripts(){  
+function rcl_dialog_scripts(){
     rcl_enqueue_style( 'ssi-modal', RCL_URL.'assets/js/ssi-modal/ssi-modal.min.css' );
     rcl_enqueue_script( 'ssi-modal', RCL_URL.'assets/js/ssi-modal/ssi-modal.min.js' );
 }
@@ -67,15 +67,20 @@ function rcl_rangyinputs_scripts(){
     rcl_enqueue_script( 'rangyinputs', RCL_URL.'assets/js/rangyinputs.js' );
 }
 
-function rcl_font_awesome_style(){
-    
-    if( wp_style_is( 'font-awesome' ) ) 
-        wp_deregister_style('font-awesome');
-    
-    wp_enqueue_style( 'font-awesome', RCL_URL.'assets/css/font-awesome/css/font-awesome.min.css' );
+function rcl_font_awesome_style($fontAwesome = true){
+
+    //if( wp_style_is( 'font-awesome' ) )
+        //wp_deregister_style('font-awesome');
+
+    //load fonawesome 4 cdn
+    if($fontAwesome && rcl_get_option('font-awesome',1))
+        wp_enqueue_style( 'font-awesome', 'https://use.fontawesome.com/5ca1160808.css' );
+
+    wp_enqueue_style( 'rcl-awesome', RCL_URL.'assets/rcl-awesome/rcl-awesome.min.css' );
+
 }
 
-function rcl_animate_css(){   
+function rcl_animate_css(){
     rcl_enqueue_style( 'animate-css', RCL_URL.'assets/css/animate-css/animate.min.css' );
 }
 
@@ -84,21 +89,26 @@ function rcl_enqueue_wp_form_scripts(){
     wp_enqueue_script( 'jquery' );
     wp_enqueue_script( 'rcl-core-scripts', RCL_URL.'assets/js/core.js', array('jquery') );
     wp_enqueue_script( 'rcl-primary-scripts', RCL_URL.'assets/js/scripts.js', array('jquery') );
-    wp_enqueue_style( 'rcl-regform-style', RCL_URL.'assets/css/regform.css' );
-    
+
+    if( !is_user_logged_in() ){
+        wp_enqueue_style( 'rcl-regform-style', RCL_URL.'assets/css/regform.css' );
+    }
     wp_localize_script( 'jquery', 'Rcl', rcl_get_localize_data());
 }
 
 function rcl_frontend_scripts(){
     global $user_ID,$user_LK,$post;
-    
+
     rcl_font_awesome_style();
     rcl_animate_css();
 
-    rcl_enqueue_style( 'rcl-primary', RCL_URL.'assets/css/style.css' );
+    rcl_enqueue_style( 'rcl-core', RCL_URL.'assets/css/core.css' );
     rcl_enqueue_style( 'rcl-users-list', RCL_URL.'assets/css/users.css' );
-    rcl_enqueue_style( 'rcl-register-form', RCL_URL.'assets/css/regform.css' );
-    
+
+    if( !is_user_logged_in() ){
+        rcl_enqueue_style( 'rcl-register-form', RCL_URL.'assets/css/regform.css' );
+    }
+
     //если используем recallbar, то подключаем его стили
     if(rcl_get_option('view_recallbar')){
         rcl_enqueue_style( 'rcl-bar', RCL_URL.'assets/css/recallbar.css' );
@@ -115,9 +125,9 @@ function rcl_frontend_scripts(){
 
     rcl_enqueue_script( 'rcl-core-scripts', RCL_URL.'assets/js/core.js' );
     rcl_enqueue_script( 'rcl-primary-scripts', RCL_URL.'assets/js/scripts.js' );
-    
+
     $locData = rcl_get_localize_data();
-    
+
     if(rcl_get_option('difficulty_parole')){
         if(!$user_ID || rcl_is_office($user_ID)){
             $locData['local']['pass0'] = __('Very weak','wp-recall');
@@ -138,9 +148,9 @@ function rcl_frontend_scripts(){
 
 function rcl_get_localize_data(){
     global $user_ID;
-    
+
     if(!doing_action('wp_head') && !doing_action('admin_init')) return false;
-    
+
     $local = array(
         'save' => __('Save','wp-recall'),
         'close' =>__('Close','wp-recall'),
@@ -155,7 +165,7 @@ function rcl_get_localize_data(){
         'ajaxurl' => admin_url('admin-ajax.php'),
         'wpurl' => get_bloginfo('wpurl'),
         'rcl_url' => RCL_URL,
-        'user_ID' => (int)$user_ID,       
+        'user_ID' => (int)$user_ID,
         'nonce' => wp_create_nonce( 'rcl-post-nonce' ),
         'local' => apply_filters('rcl_js_localize',$local)
     );
@@ -163,18 +173,23 @@ function rcl_get_localize_data(){
     $data['mobile'] = (wp_is_mobile())? (int)1: (int)0;
     $data['https'] = @( !isset($_SERVER["HTTPS"])||$_SERVER["HTTPS"] != 'on' ) ? (int)0:  (int)1;
     $data['slider'] = rcl_get_option('slide-pause')? "{auto:true,pause:".(rcl_get_option('slide-pause') * 1000)."}": "''";
-    $data['local']['requared_fields_empty'] = __('Fill in all required fields','wp-recall');
-    
+
+    $data['errors']['required'] = __('Fill in all required fields','wp-recall');
+    $data['errors']['pattern'] = __('Specify the data in the required format','wp-recall');
+    $data['errors']['number_range'] = __('Specify a number within the allowed range','wp-recall');
+    $data['errors']['file_max_size'] = __('File size is exceeded','wp-recall');
+    $data['errors']['file_accept'] = __('Invalid file type','wp-recall');
+
     return apply_filters('rcl_init_js_variables',$data);
- 
+
 }
 
 function rcl_admin_scrips(){
-    
+
     wp_localize_script( 'jquery', 'Rcl', rcl_get_localize_data());
-    
+
     wp_enqueue_style( 'rcl-admin-style', RCL_URL.'admin/assets/style.css' );
-    wp_enqueue_style( 'wp-color-picker' ); 
+    wp_enqueue_style( 'wp-color-picker' );
     wp_enqueue_script( 'jquery' );
     wp_enqueue_script( 'rcl-core-scripts', RCL_URL.'assets/js/core.js', array('jquery') );
     wp_enqueue_script( 'rcl-admin-scripts', RCL_URL.'admin/assets/scripts.js', array('wp-color-picker'), VER_RCL );

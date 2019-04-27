@@ -32,7 +32,7 @@ class Health_Check_Troubleshoot {
 
 		update_option( 'health-check-allowed-plugins', $allowed_plugins );
 
-		update_option( 'health-check-disable-plugin-hash', $loopback_hash );
+		update_option( 'health-check-disable-plugin-hash', $loopback_hash . md5( $_SERVER['REMOTE_ADDR'] ) );
 
 		setcookie( 'health-check-disable-plugins', $loopback_hash, 0, COOKIEPATH, COOKIE_DOMAIN );
 	}
@@ -68,6 +68,23 @@ class Health_Check_Troubleshoot {
 	 * @return bool
 	 */
 	static function has_seen_warning() {
+		/**
+		 * Filter who may see the backup warning from the plugin.
+		 *
+		 * The plugin displays a warning reminding users to keep backups when active.
+		 * This filter allows anyone to declare what capability is needed to view the warning, it is set to
+		 * the `manage_options` capability by default. This means the feature is available to any site admin,
+		 * even in a multisite environment.
+		 *
+		 * @param string $capability Default manage_options. The capability required to see the warning.
+		 */
+		$capability_to_see = apply_filters( 'health_check_backup_warning_required_capability', 'manage_options' );
+
+		// If the current user lacks the capabilities to use the plugin, pretend they've seen the warning so it isn't displayed.
+		if ( ! current_user_can( $capability_to_see ) ) {
+			return true;
+		}
+
 		$meta = get_user_meta( get_current_user_id(), 'health-check', true );
 		if ( empty( $meta ) ) {
 			return false;
@@ -90,6 +107,12 @@ class Health_Check_Troubleshoot {
 	 * @return void
 	 */
 	static function confirm_warning() {
+		check_ajax_referer( 'health-check-confirm-warning' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error();
+		}
+
 		$user_meta = get_user_meta( get_current_user_id(), 'health-check', true );
 		if ( empty( $user_meta ) ) {
 			$user_meta = array(
@@ -275,7 +298,7 @@ class Health_Check_Troubleshoot {
 			$troubleshooting = new Health_Check_Troubleshooting_MU();
 		}
 
-		if ( null !== $troubleshooting && $troubleshooting->is_troubleshooting() ) :
+		if ( null !== $troubleshooting && is_callable( array( $troubleshooting, 'is_troubleshooting' ) ) && $troubleshooting->is_troubleshooting() ) :
 			?>
 			<p style="text-align: center;">
 				<a class="button button-primary" href="<?php echo esc_url( add_query_arg( array( 'health-check-disable-troubleshooting' => true ) ) ); ?>">
@@ -286,6 +309,7 @@ class Health_Check_Troubleshoot {
 		<?php else : ?>
 
 			<form action="" method="post" class="form" style="text-align: center;">
+				<?php wp_nonce_field( 'health-check-enable-troubleshooting' ); ?>
 				<input type="hidden" name="health-check-troubleshoot-mode" value="true">
 				<p>
 					<button type="submit" class="button button-primary">

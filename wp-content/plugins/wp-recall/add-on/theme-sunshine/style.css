@@ -34,7 +34,7 @@
 .cab_bttn_lite .recall-button {
     padding: 0;
 }
-.cab_bttn_lite .fa {
+.cab_bttn_lite .rcli {
     display: none;
 }
 .cab_bttn_lite .rcl-tab-button a > span {
@@ -141,8 +141,8 @@
 }
 .cab_content {
     display: inline-block;
-    min-height: 230px;
     margin: 90px 0 0;
+    min-height: 230px;
     position: relative;
     width: 100%;
     z-index: 2;
@@ -218,10 +218,10 @@
 }
 .cab_sidebar {
     border-left: 1px solid #e5e5e5;
+    flex-shrink: 0;
     margin: 0;
     max-width: 280px;
     padding: 5px;
-    flex-shrink: 0;
 }
 .cab_sidebar .panel_lk_recall .rcl-widget-buttons {
     overflow: hidden;
@@ -231,14 +231,13 @@
 }
 /* END для сайдбара-виджета */
 
-
 /* START стили кнопок для скрипта */
 #lk-menu a {
     margin: 0 3px 0 0;
     opacity: 1;
     padding: 0;
 }
-#lk-menu a .fa {
+#lk-menu a .rcli {
     background: rgba(0, 0, 0, 0.1);
     font-size: 16px;
     padding: 7px;
@@ -264,9 +263,9 @@
     max-height: 30px;
     padding: 4px 7px;
 }
-#lk-menu a.bars .fa {
-    font-size: 23px;
+#lk-menu a.bars .rcli {
     background: transparent;
+    font-size: 23px;
     padding: 0;
 }
 #sunshine_ext_menu {
@@ -297,7 +296,7 @@
     white-space: normal;
     width: 100%;
 }
-#sunshine_ext_menu a .fa {
+#sunshine_ext_menu a .rcli {
     background: rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
@@ -313,10 +312,10 @@
 /* END стили кнопок для скрипта */
 
 /* START left buttons */
-.vertical-menu #lk-menu a .fa {
+.vertical-menu #lk-menu a .rcli {
+    box-sizing: border-box;
     display: table-cell;
     width: 35px;
-    box-sizing: border-box;
 }
 .vertical-menu #lk-menu a span {
     display: table-cell;
@@ -434,7 +433,7 @@
     .cab_content .cab_footer {
         text-align: center;
     }
-    .cab_bttn .fa {
+    .cab_bttn .rcli {
         display: none;
     }
     .cab_bttn i + span {

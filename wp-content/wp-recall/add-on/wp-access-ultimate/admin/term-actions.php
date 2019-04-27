@@ -49,12 +49,14 @@ function wau_term_access_update($term_id){
 
     $data = (object) $_POST['wau-termdata'];
 
-    foreach($data->access as $k => $accessData){
-        
-        if(!isset($accessData['account_id'])) continue;
-        
-        $data->access[$k] = (object) $accessData;
-        
+    if($data->access){
+        foreach($data->access as $k => $accessData){
+
+            if(!isset($accessData['account_id'])) continue;
+
+            $data->access[$k] = (object) $accessData;
+
+        }
     }
     
     if($data->access){

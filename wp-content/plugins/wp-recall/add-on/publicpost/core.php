@@ -75,7 +75,7 @@ function rcl_add_thumbnail_post($post_id,$filepath){
 function rcl_edit_post_button_html($post_id){
     return '<p class="post-edit-button">'
         . '<a title="'.__('Edit','wp-recall').'" object-id="none" href="'. get_edit_post_link($post_id) .'">'
-            . '<i class="fa fa-pencil-square-o"></i>'
+            . '<i class="rcli fa-pencil-square-o"></i>'
         . '</a>'
     . '</p>';
 }
@@ -312,10 +312,10 @@ function rcl_get_html_attachment($attach_id, $mime_type, $addToClick = true){
 }
 
 function rcl_button_fast_edit_post($post_id){
-    return '<a class="rcl-edit-post rcl-service-button" data-post="'.$post_id.'" onclick="rcl_edit_post(this); return false;"><i class="fa fa-pencil-square-o"></i></a>';
+    return '<a class="rcl-edit-post rcl-service-button" data-post="'.$post_id.'" onclick="rcl_edit_post(this); return false;"><i class="rcli fa-pencil-square-o"></i></a>';
 }
 
 function rcl_button_fast_delete_post($post_id){
-    return '<a class="rcl-delete-post rcl-service-button" data-post="'.$post_id.'" onclick="return confirm(\''.__('Are you sure?','wp-recall').'\')? rcl_delete_post(this): false;"><i class="fa fa-trash"></i></a>';
+    return '<a class="rcl-delete-post rcl-service-button" data-post="'.$post_id.'" onclick="return confirm(\''.__('Are you sure?','wp-recall').'\')? rcl_delete_post(this): false;"><i class="rcli fa-trash"></i></a>';
 }
 

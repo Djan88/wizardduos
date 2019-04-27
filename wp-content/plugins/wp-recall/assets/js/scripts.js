@@ -28,7 +28,7 @@ jQuery(function($){
             })
         }
     });
-
+    
     rcl_do_action('rcl_init');
 });
 
@@ -239,9 +239,9 @@ function rcl_manage_user_black_list(e,user_id){
     
     var class_i = jQuery(e).children('i').attr('class');
     
-    if(class_i=='fa fa-refresh fa-spin') return false;
+    if(class_i=='rcli fa-refresh fa-spin') return false;
     
-    jQuery(e).children('i').attr('class','fa fa-refresh fa-spin');
+    jQuery(e).children('i').attr('class','rcli fa-refresh fa-spin');
     
     rcl_ajax({
         data: {

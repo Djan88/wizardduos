@@ -3,7 +3,7 @@
 /*Данный шаблон можно разместить в папке используемого шаблона /wp-content/wp-recall/templates/ и он будет подключаться оттуда*/
 ?>
 
-<?php global $post; $Cart = new Rcl_Cart(); ?>
+<?php global $post; ?>
 
 <?php do_action('rcl_cart_before'); ?>
 
@@ -26,29 +26,32 @@
         <tr id="product-<?php the_ID(); ?>-<?php echo $k; ?>" class="product-box">
             <td class="column-product-name">
                 <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                <p><?php rcl_product_excerpt($post->ID); ?></p>
+                <?php rcl_product_excerpt($post->ID); ?>
                 <?php rcl_product_variation_list($product->variations); ?>
             </td>
             <td class="column-product-price">
-                <?php echo $product->product_price; ?> <?php echo rcl_get_primary_currency(1); ?>
+                <div class="rcl-cart-subtitle"><?php _e('Price','wp-recall'); ?>:</div>
+                <span><?php echo $product->product_price; ?></span><?php echo rcl_get_primary_currency(1); ?>
             </td>
             <td class="column-product-amount">
+                <div class="rcl-cart-subtitle"><?php _e('Amount','wp-recall'); ?>:</div>
                 <div class="quantity-selector">
                     <a class="edit-amount add-product" onclick="rcl_cart_add_product(<?php echo $product->product_id; ?>,<?php echo $k; ?>);return false;" href="#">
-                        <i class="fa fa-plus"></i>
+                        <i class="rcli fa-plus"></i>
                     </a>
                     <span class="product-amount">
                         <?php echo $product->product_amount; ?>
                     </span>
                     <a class="edit-amount remove-product" onclick="rcl_cart_remove_product(<?php echo $product->product_id; ?>,<?php echo $k; ?>);return false;" href="#">
-                        <i class="fa fa-minus"></i>
+                        <i class="rcli fa-minus"></i>
                     </a>
                 </div>
             </td>
             <td class="column-product-sumprice">
+                <div class="rcl-cart-subtitle"><?php _e('Sum','wp-recall'); ?>:</div>
                 <span class="product-sumprice">
                     <?php echo $product->product_price * $product->product_amount; ?>
-                </span> 
+                </span>
                 <?php echo rcl_get_primary_currency(1); ?>
             </td>
         </tr>
@@ -63,7 +66,7 @@
         <th class="column-product-sumprice total-sumprice">
             <span class="rcl-order-price">
                 <?php echo $Cart->order_price; ?>
-            </span> 
+            </span>
             <?php echo rcl_get_primary_currency(1); ?>
         </th>
     </tr>

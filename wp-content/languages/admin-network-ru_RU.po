@@ -1,5 +1,5 @@
-# Translation of WordPress - 4.9.x - Development - Administration - Network Admin in Russian
-# This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration - Network Admin package.
+# Translation of WordPress - 5.0.x - Development - Administration - Network Admin in Russian
+# This file is distributed under the same license as the WordPress - 5.0.x - Development - Administration - Network Admin package.
 msgid ""
 msgstr ""
 "PO-Revision-Date: 2017-10-23 13:40:06+0000\n"
@@ -9,7 +9,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: ru\n"
-"Project-Id-Version: WordPress - 4.9.x - Development - Administration - Network Admin\n"
+"Project-Id-Version: WordPress - 5.0.x - Development - Administration - Network Admin\n"
 
 #. translators: %s: DO_NOT_UPGRADE_GLOBAL_TABLES
 #: wp-admin/includes/network.php:107
@@ -89,8 +89,8 @@ msgstr "Извините, вам не разрешено управлять те
 msgid "Sorry, you are not allowed to add sites to this network."
 msgstr "Извините, вам не разрешено добавлять сайты в эту сеть."
 
-#: wp-admin/network/site-info.php:14 wp-admin/network/site-settings.php:14
-#: wp-admin/network/site-users.php:14
+#: wp-admin/network/site-info.php:14 wp-admin/network/site-users.php:14
+#: wp-admin/network/site-settings.php:14
 msgid "Sorry, you are not allowed to edit this site."
 msgstr "Извините, вам не разрешено редактировать этот сайт."
 
@@ -102,10 +102,6 @@ msgstr "Адрес e-mail автора первого комментария н�
 msgid "First Comment Email"
 msgstr "E-mail первого комментария"
 
-#. translators: This string should only be translated if wp-config-sample.php
-#. is localized. You can check the localized release package or
-#. https://i18n.svn.wordpress.org/<locale code>/branches/<wp
-#. version>/dist/wp-config-sample.php
 #: wp-admin/includes/network.php:436
 msgid "That&#8217;s all, stop editing! Happy blogging."
 msgstr "Это всё, дальше не редактируем. Успехов!"
@@ -378,7 +374,7 @@ msgstr "Спам"
 msgid "Archived"
 msgstr "Заархивирован"
 
-#: wp-admin/network/site-users.php:346 wp-admin/network/user-new.php:117
+#: wp-admin/network/user-new.php:117 wp-admin/network/site-users.php:346
 msgid "A password reset link will be sent to the user via email."
 msgstr "Ссылка для сброса пароля будет отправлена пользователю по e-mail."
 
@@ -472,8 +468,8 @@ msgstr "Вы собираетесь деактивировать сайт &laquo
 msgid "You are about to activate the site %s."
 msgstr "Вы собираетесь активировать сайт &laquo;%s&raquo;."
 
-#: wp-admin/network/site-info.php:28 wp-admin/network/site-settings.php:26
-#: wp-admin/network/site-themes.php:49 wp-admin/network/site-users.php:42
+#: wp-admin/network/site-info.php:28 wp-admin/network/site-users.php:42
+#: wp-admin/network/site-themes.php:49 wp-admin/network/site-settings.php:26
 msgid "The requested site does not exist."
 msgstr "Запрошенный сайт не существует."
 
@@ -522,14 +518,14 @@ msgstr "Эти темы могут быть активными на других
 msgid "Are you sure you wish to delete this theme?"
 msgstr "Вы уверены, что хотите удалить эту тему?"
 
-#: wp-admin/network/site-themes.php:183 wp-admin/network/themes.php:279
+#: wp-admin/network/themes.php:279 wp-admin/network/site-themes.php:183
 msgid "%s theme disabled."
 msgid_plural "%s themes disabled."
 msgstr[0] "%s тема запрещена."
 msgstr[1] "%s темы запрещены."
 msgstr[2] "%s тем запрещены."
 
-#: wp-admin/network/site-themes.php:175 wp-admin/network/themes.php:271
+#: wp-admin/network/themes.php:271 wp-admin/network/site-themes.php:175
 msgid "%s theme enabled."
 msgid_plural "%s themes enabled."
 msgstr[0] "%s тема разрешена."
@@ -644,8 +640,8 @@ msgstr "WordPress был обновлён! Прежде чем продолжи�
 msgid "Only use this screen once you have updated to a new version of WordPress through Updates/Available Updates (via the Network Administration navigation menu or the Toolbar). Clicking the Upgrade Network button will step through each site in the network, five at a time, and make sure any database updates are applied."
 msgstr "Используйте этот экран только после обновления до новой версии WordPress со страницы &laquo;Обновления > Все обновления&raquo; (через меню раздела &laquo;Администрирование сети&raquo; или через верхнюю панель). При нажатии на кнопку &laquo;Обновить сеть&raquo; для каждого сайта сети (по пять за один раз) будет запущена процедура обновления базы данных."
 
-#: wp-admin/network/menu.php:34 wp-admin/network/upgrade.php:15
-#: wp-admin/network/upgrade.php:40 wp-admin/network/upgrade.php:131
+#: wp-admin/network/upgrade.php:15 wp-admin/network/upgrade.php:40
+#: wp-admin/network/upgrade.php:131 wp-admin/network/menu.php:34
 msgid "Upgrade Network"
 msgstr "Обновить сеть"
 
@@ -699,7 +695,7 @@ msgstr "&laquo;Удалить&raquo; &#8212; необратимое действ
 msgid "Clicking on bold headings can re-sort this table."
 msgstr "Можно сортировать таблицу по столбцам, нажимая на их заголовки."
 
-#: wp-admin/network/menu.php:53 wp-admin/network/themes.php:253
+#: wp-admin/network/themes.php:253 wp-admin/network/menu.php:53
 msgctxt "theme"
 msgid "Add New"
 msgstr "Добавить новую"
@@ -746,25 +742,25 @@ msgid "No, return me to the theme list"
 msgstr "Нет, вернуться к списку тем"
 
 #. translators: %s: site name
-#: wp-admin/network/site-info.php:117 wp-admin/network/site-settings.php:70
-#: wp-admin/network/site-themes.php:153 wp-admin/network/site-users.php:196
+#: wp-admin/network/site-info.php:117 wp-admin/network/site-users.php:196
+#: wp-admin/network/site-themes.php:153 wp-admin/network/site-settings.php:70
 msgid "Edit Site: %s"
 msgstr "Редактировать сайт: %s"
 
-#: wp-admin/network/site-themes.php:187 wp-admin/network/themes.php:291
+#: wp-admin/network/themes.php:291 wp-admin/network/site-themes.php:187
 msgid "No theme selected."
 msgstr "Тема не выбрана."
 
-#: wp-admin/network/site-themes.php:173 wp-admin/network/themes.php:269
+#: wp-admin/network/themes.php:269 wp-admin/network/site-themes.php:173
 msgid "Theme enabled."
 msgstr "Тема разрешена."
 
-#: wp-admin/network/site-info.php:23 wp-admin/network/site-settings.php:22
-#: wp-admin/network/site-themes.php:43 wp-admin/network/site-users.php:38
+#: wp-admin/network/site-info.php:23 wp-admin/network/site-users.php:38
+#: wp-admin/network/site-themes.php:43 wp-admin/network/site-settings.php:22
 msgid "Invalid site ID."
 msgstr "Неверный ID сайта."
 
-#: wp-admin/network/site-themes.php:181 wp-admin/network/themes.php:277
+#: wp-admin/network/themes.php:277 wp-admin/network/site-themes.php:181
 msgid "Theme disabled."
 msgstr "Тема запрещена."
 
@@ -776,7 +772,7 @@ msgstr "На этом экране можно создать новую учёт
 msgid "Network enabled themes are not shown on this screen."
 msgstr "Темы, активированные для сети, на этом экране не показаны."
 
-#: wp-admin/network/menu.php:67 wp-admin/network/settings.php:19
+#: wp-admin/network/settings.php:19 wp-admin/network/menu.php:67
 msgid "Network Settings"
 msgstr "Параметры сети"
 
@@ -828,7 +824,7 @@ msgstr "Извините, вам не разрешено удалить сайт
 msgid "Cannot add user."
 msgstr "Не удалось добавить пользователя."
 
-#: wp-admin/network/site-users.php:310 wp-admin/network/user-new.php:129
+#: wp-admin/network/user-new.php:129 wp-admin/network/site-users.php:310
 msgid "Add User"
 msgstr "Добавить пользователя"
 

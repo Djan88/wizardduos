@@ -47,13 +47,14 @@ function wau_post_access_update($post_id){
 
     $data = (object) $_POST['wau-postdata'];
 
-    $updAccounts = array();
-    foreach($data->access as $k => $accessData){
-        
-        if(!isset($accessData['account_id'])) continue;
-        
-        $data->access[$k] = (object) $accessData;
-        
+    if($data->access){
+        foreach($data->access as $k => $accessData){
+
+            if(!isset($accessData['account_id'])) continue;
+
+            $data->access[$k] = (object) $accessData;
+
+        }
     }
     //print_r($data);exit;
     if($data->access){

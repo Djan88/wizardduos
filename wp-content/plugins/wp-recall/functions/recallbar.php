@@ -61,7 +61,7 @@ function rcl_print_bar_icons(){
                 
             endif;
             
-                echo '<i class="fa '.$icon['icon'].'" aria-hidden="true"></i>';
+                echo '<i class="rcli '.$icon['icon'].'" aria-hidden="true"></i>';
                 echo '<div class="rcb_hiden"><span>';
                 
                 if(isset($icon['label'])):
@@ -99,7 +99,7 @@ function rcl_print_bar_right_menu(){
             echo '<a href="'.$icon['url'].'">';
             
             if(isset($icon['icon'])):
-                echo '<i class="fa '.$icon['icon'].'" aria-hidden="true"></i>';
+                echo '<i class="rcli '.$icon['icon'].'" aria-hidden="true"></i>';
             endif;
 
             echo '<span>'.$icon['label'].'</span>';

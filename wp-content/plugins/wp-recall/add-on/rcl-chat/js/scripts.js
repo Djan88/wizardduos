@@ -27,8 +27,9 @@ function rcl_chat_init_sound(){
     };
     
     rcl_chat_sound = rcl_apply_filters('rcl_chat_sound_options',options);
-    
-    jQuery.ionSound(rcl_chat_sound);
+    if (typeof jQuery.ionSound !== 'undefined') {
+        jQuery.ionSound(rcl_chat_sound);
+    }
 }
 
 function rcl_chat_inactivity_cancel(){
@@ -72,6 +73,8 @@ function rcl_chat_clear_beat(token){
         if(chat_token != token) return;
             delete rcl_chat_beat[index];
     });
+    
+    console.log('chat beat '+ token +' clear');
 
 }
 
@@ -179,7 +182,9 @@ function rcl_chat_add_new_message(form){
                 rcl_chat_counter_reset(form);
                 
                 if(data.new_messages){
-                    jQuery.ionSound.play(rcl_chat_sound.sounds[0]);
+                    if (typeof jQuery.ionSound !== 'undefined') {
+                        jQuery.ionSound.play(rcl_chat_sound.sounds[0]);
+                    }
                 }
                 
                 rcl_chat_last_activity[token] = data.last_activity;
@@ -446,7 +451,7 @@ function rcl_chat_uploader(token){
             }
             
             if(result['success']){
-                preloader.html('<a href="#" class="chat-delete-attachment" onclick="rcl_chat_delete_attachment(this,'+result['attachment_id']+');return false;"><i class="fa fa-times" aria-hidden="true"></i></a>'+result['icon_html']+result['input_html']);
+                preloader.html('<a href="#" class="chat-delete-attachment" onclick="rcl_chat_delete_attachment(this,'+result['attachment_id']+');return false;"><i class="rcli fa-times" aria-hidden="true"></i></a>'+result['icon_html']+result['input_html']);
                 uploader.hide();
                 
                 rcl_do_action('rcl_chat_upload',data);
@@ -537,7 +542,9 @@ function rcl_chat_beat_success(data){
         }
 
         if(data['content']){
-            jQuery.ionSound.play(rcl_chat_sound.sounds[0]);
+            if (typeof jQuery.ionSound !== 'undefined') {
+                jQuery.ionSound.play(rcl_chat_sound.sounds[0]);
+            }
             chat.find('.chat-messages').append(data['content']);
             rcl_chat_scroll_bottom(data.token);
         }else{

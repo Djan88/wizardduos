@@ -3,6 +3,7 @@
     padding: 0;
     list-style: none;
     text-align: center;
+    background: #fff;
 }
 
 #pricePlans:after {
@@ -66,7 +67,7 @@
 	font-size: 1.2em;
 	font-weight: 700;
 	height: 2.6em;
-	line-height: 2.6em;
+	line-height: 2.6em!important;
 	margin: 0 0 1em;
 }
 .planContainer .price p s{
@@ -99,7 +100,7 @@
 	color: #979797;
 }
 
-.planContainer .button a {
+#pricePlans .planContainer .button a {
 	text-transform: uppercase;
 	text-decoration: none;
 	color: #3e4f6a;
@@ -108,14 +109,15 @@
 	line-height: 2.8em;
 	border: 2px solid #3e4f6a;
 	display: inline-block;
-	width: 80%;
+	/*width: 80%;*/
 	height: 2.8em;
 	border-radius: 4px;
 	margin: 1.5em 0 1.8em;
         font-size: 14px;
+        padding: 0 5px;
 }
 
-.planContainer .button a.bestPlanButton {
+#pricePlans .planContainer .button a.bestPlanButton {
 	color: #fff;
 	background: #f7814d;
 	border: 2px solid #f7814d;
@@ -200,7 +202,7 @@
 
     .planContainer .button a:hover {
             background: #3e4f6a;
-            color: #fff;
+            color: #fff!important;
     }
 
     .planContainer .button a.bestPlanButton:hover {

@@ -13,7 +13,7 @@
 #ui-datepicker-div .ui-datepicker-header > a {
     color: #fff;
     cursor: pointer;
-    font: 25px/5px FontAwesome;
+    font: 25px/5px rcl-awesome;
     padding: 0 5px;
     position: absolute;
     top: 16px;

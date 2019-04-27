@@ -1,46 +1,47 @@
 /* Group Start */
-
+#tab-groups h3 {
+    padding: 5px 10px 0;
+}
 div p.post-group-meta {
     margin: 0 0 5px;
 }
-.post-group-meta .fa {
+.post-group-meta .rcli {
     width: auto;
 }
-
 /* умная секция для скрипта. Каркас группы Start */
 
-	/* Start сумма 2х блоков 2x0.5 + 30% + 2x0.5% + 68% = 100% */
+    /* Start сумма 2х блоков 2x0.5 + 30% + 2x0.5% + 68% = 100% */
 #rcl-group .group-sidebar {
-	float: right;
-	padding: 0 0.5%;
-	width: 30%;
+    box-sizing: border-box;
+    float: right;
+    padding: 0 0.5%;
+    width: 30%;
 }
 .group-wrapper {
-	box-shadow: none;
-	margin: 0 0.5% 5px;
-	overflow: hidden;
-	-webkit-transition: box-shadow 0.7s linear 0s;
-	transition: box-shadow 0.7s linear 0s;
-	width: 68%;
+    box-shadow: none;
+    margin: 0 0.5% 5px;
+    overflow: hidden;
+    -webkit-transition: box-shadow 0.7s linear 0s;
+            transition: box-shadow 0.7s linear 0s;
+    width: 68%;
 }
-	/* End сумма */
+    /* End сумма */
 
 #rcl-group .hideexxx h3 {
-	word-wrap: unset;
+    word-wrap: unset;
 }
 .group-wrapper.collapsexxx {
-	box-shadow: 0 0 1px 2px rgba(219, 219, 219, 0.8);
-	-webkit-transition: width linear 0.2s, box-shadow linear 0.5s;
-	transition: width linear 0.2s, box-shadow linear 0.5s;
-	width: 98%;
+    box-shadow: 0 0 1px 2px rgba(219, 219, 219, 0.8);
+    -webkit-transition: width linear 0.2s, box-shadow linear 0.5s;
+            transition: width linear 0.2s, box-shadow linear 0.5s;
+    width: 98%;
 }
 .group-wrapper.collapsexxx .group-content {
-	margin: 120px 0 0; /* отступ сверху - убираем погрешность при раскрытии */
+    margin: 120px 0 0; /* отступ сверху - убираем погрешность при раскрытии */
 }
 /* умная секция для скрипта. Каркас группы End */
 
-
-#rcl-group{
+#rcl-group {
     background: #fff;
     clear: both;
     color: #000;
@@ -52,39 +53,39 @@ div p.post-group-meta {
     text-decoration:none;
 }
 
-#group-posts-widget .post-meta span .fa,
-#group-link-content .close-content .fa,
+#group-posts-widget .post-meta span .rcli,
+#group-link-content .close-content .rcli,
 #group-admin-panel .title-panel .fa-cogs,
-#widgets-options .widgets-zone .widget-box .widget-name .fa {
-	margin: 0 5px 0 0;
+#widgets-options .widgets-zone .widget-box .widget-name .rcli {
+    margin: 0 5px 0 0;
 }
 #rcl-group ul {
     list-style: none;
 }
 #rcl-group h3 {
-	clear: none;
-	color: #333;
+    clear: none;
+    color: #333;
     font-size: 16px;
     font-weight: bold;
+    -webkit-hyphens: auto;
+            hyphens: auto;
     line-height: 1;
     margin: 0;
     text-transform: none;
-	-webkit-hyphens: auto;
-	hyphens: auto;
     word-wrap: break-word;
 }
 #rcl-group h3 a {
-	color: rgb(76, 140, 189);
+    color: rgb(76, 140, 189);
 }
 #rcl-group h3 a:hover {
-	text-decoration:underline;
+    text-decoration: underline;
 }
 #group-admin-panel {
-    background: rgba(219, 219, 219, 0.3);
-    box-shadow: 0 0 1px 1px rgba(219, 219, 219, 0.6);
-    display: inline-block;
-    margin: 0 0 10px;
-    width: 100%;
+    background-color: #f5f5f5;
+    border: 1px solid #e5e5e5;
+    box-sizing: border-box;
+    margin: 0 0 15px;
+    overflow: hidden;
 }
 #group-admin-panel ul {
     display: inline-block;
@@ -93,31 +94,31 @@ div p.post-group-meta {
 }
 #group-admin-panel .title-panel {
     display: inline-block;
-    margin: 9px 0 8px 5px;
+    margin: 9px 0 8px 8px;
 }
 #group-admin-panel .admin-button {
     display: inline-block;
     margin: 5px 5px 5px 0;
 }
-#rcl-group .group-sidebar .group-avatar{   
+#rcl-group .group-sidebar .group-avatar {
     margin: 0 0 5px;
     position: relative;
 }
 #rcl-group  .group-avatar img {
-	display: block;
-	height: auto;
+    display: block;
+    height: auto;
     max-width: 100%;
     width: 100%;
 }
-#group-avatar-upload{
-    left: 5px;
+#group-avatar-upload {
     bottom: 0;
     color: rgb(229, 57, 53);
     font-size: 16px;
+    left: 5px;
     overflow: hidden;
     position: absolute;
 }
-#group-avatar-upload span{
+#group-avatar-upload span {
     background: rgb(216, 231, 238);
     cursor: pointer;
     float: left;
@@ -128,22 +129,22 @@ div p.post-group-meta {
     position: relative;
     text-align: center;
 }
-#group-avatar-upload span:hover{
+#group-avatar-upload span:hover {
     opacity: 1;
 }
-#group-avatar-upload .fa input{
-	border: none;
+#group-avatar-upload .rcli input {
+    border: none;
     cursor: pointer;
+    max-width: none;
     opacity: 0;
-	max-width: none;
-	padding:0;
+    padding:0;
     position: absolute;
     right: 0;
     top: 0;
     z-index: 99;
 }
 #rcl-group .sidebar-widget,
-#rcl-group .group-sidebar .sidebar-content{
+#rcl-group .group-sidebar .sidebar-content {
     margin: 0 0 4px;
     padding: 2px 0;
 }
@@ -153,20 +154,20 @@ div p.post-group-meta {
     margin: 5px 0;
     padding: 7px;
 }
-#rcl-group .group-sidebar .title-widget{     
-    text-align: center;   
+#rcl-group .group-sidebar .title-widget {
+    text-align: center;
 }
-#rcl-group .widget-content{
+#rcl-group .widget-content {
     overflow: hidden;
 }
 .widget-content .error p {
-	text-align: center;
-	background: rgb(255, 207, 207);
+    background: rgb(255, 207, 207);
     color: red;
     font: bold 14px Arial;
     padding: 8px 0;
+    text-align: center;
 }
-#rcl-group .widget-content .userlist{
+#rcl-group .widget-content .userlist {
     margin: 0 0 5px;
 }
 #rcl-group .widget-content .mini-list .user-single {
@@ -176,46 +177,32 @@ div p.post-group-meta {
     width: 29%;
 }
 .group-sidebar .rating-rcl span {
-	padding: 4px 0;
+    padding: 4px 0;
 }
 #group-primary-widget .widget-content input,
 #group-users-widget .rcl-group-link {
-	float: right;
-    text-align: center;
+    float: right;
     padding: 8px 6px;
+    text-align: center;
+}
+#group-users-widget .rcl-group-link {
+    margin: 0 4px 4px;
 }
 .group-sidebar .widget-content input,
 .group-sidebar .rcl-group-link.recall-button {
-    display: block;								/*++Twenty16++*/
-    margin: 0 auto;								/*++Twenty16++*/
+    display: block;                                     /*++Twenty16++*/
+    margin: 0 auto;                                     /*++Twenty16++*/
     width: 100%;
 }
-#rcl-group .widget-content p{
+#rcl-group .widget-content p {
     margin: 5px 0;
-}
-#rcl-group input[type="text"],
-#rcl-group input[type="number"],
-#rcl-group input[type="url"],
-#rcl-group input[type="email"],
-#rcl-group select,
-#rcl-group textarea{
-    border: 1px solid #ccc;
-    border-radius: 0;
-    box-shadow: none;
-    box-sizing: border-box;
-    color: #000;
-    font-size: 14px;
-    height: auto;
-    line-height: 1.4;
-    outline: none;
-    padding: 5px;
 }
 .group-wrapper p {
     margin: 5px 0;
     padding: 2px 4px;
 }
-#rcl-group .group-content .group-metadata{
-    overflow:hidden;
+#rcl-group .group-content .group-metadata {
+    overflow: hidden;
     margin-bottom: 8px;
 }
 #rcl-group .group-content .group-name {
@@ -223,7 +210,7 @@ div p.post-group-meta {
     font-size: 20px;
     line-height: 1;
     margin: 0 6px 8px;
-    padding-bottom: 8px;
+    padding: 8px 0;
     text-transform: none;
 }
 #rcl-group .group-content .sidebar-widget {
@@ -234,10 +221,28 @@ div p.post-group-meta {
     padding: 0;
 }
 #group-category-list-widget .search-form-rcl {
-	padding: 0 5px 4px;
+    padding: 0 5px 4px;
     text-align:right;
 }
+#rcl-group .search-form-rcl select {
+    margin: 0 4px;
+}
+#rcl-group .taxonomy-groups select,
+#rcl-group .search-form-rcl select {
+    background-color: #fff;
+    border-radius: 0;
+    border: 1px solid #ddd;
+    box-shadow: none;
+    box-sizing: border-box;
+    float: none;
+    height: auto;
+    line-height: normal;
+    outline: 0;
+    padding: 5px 3px;
+    width: auto;
+}
 #rcl-group .hidden-widget .manage-hidden-widget {
+    box-shadow: none;
     display: block;
     font-size: 18px;
     font-weight: bold;
@@ -249,32 +254,35 @@ div p.post-group-meta {
 #group-public-form-widget .fa-minus-square-o {
     display: inline-block;
     font-size: 19px;
-	margin: 0 5px 0 0;
+    margin: 0 5px 0 0;
     vertical-align: middle;
 }
 #rcl-group .group-content .public_block  select {
-	width:auto;
+    width:auto;
 }
-#rcl-group .hidden-widget .widget-content{
+#rcl-group .hidden-widget .widget-content {
     display: none;
+}
+#rcl-group .rcl-wiget-spoiler-txt {
+    vertical-align: middle;
 }
 .group-content {
     padding: 0 0.5%;
 }
 #rcl-group #group-posts-widget {
-	background: unset;
+    background: unset;
     box-shadow: none;
 }
-#group-posts-widget .post-group{
+#group-posts-widget .post-group {
     clear: both;
     margin: 15px 0;
     overflow: hidden;
 }
-#group-posts-widget .post-group .postdata-header{    
-	background: rgba(219, 219, 219, 0.3);
-	box-shadow: 0 0 1px 1px rgba(219, 219, 219, 0.6);
+#group-posts-widget .post-group .postdata-header {
+    background: rgba(219, 219, 219, 0.3);
+    box-shadow: 0 0 1px 1px rgba(219, 219, 219, 0.6);
     margin: 5px 0;
-	overflow: hidden;
+    overflow: hidden;
     padding: 7px;
 }
 #group-posts-widget .post-group .post-meta {
@@ -285,11 +293,11 @@ div p.post-group-meta {
     text-transform: none;
 }
 #group-posts-widget .post-meta span {
-	margin: 0 5px 0 3px;
+    margin: 0 5px 0 3px;
 }
 .group-wrapper .widget-content .post-group-thumb {
     float: left;
-	max-width: 215px;										/*++Twenty16++*/
+    max-width: 215px;                                   /*++Twenty16++*/
     padding: 10px 10px 10px 0;
 }
 .group-wrapper .widget-content .post-group-thumb img {
@@ -299,43 +307,43 @@ div p.post-group-meta {
     max-width: 100%;
 }
 .group-wrapper .post-group-content .fa-folder {
-	color: #777;
-	margin: 0 5px 0 0;
+    color: #777;
+    margin: 0 5px 0 0;
 }
-.rcl-grouplist{
-	line-height: 1;											/*++hueman++*/
+.rcl-grouplist {
+    line-height: 1;                                     /*++hueman++*/
     overflow: hidden;
     padding: 10px 0;
 }
-.rcl-grouplist .single-group{
+.rcl-grouplist .single-group {
     clear: both;
     font-size: 14px;
     line-height: 1.2;
     margin-bottom: 10px;
     overflow: hidden;
 }
-.rcl-grouplist .single-group .group-avatar{
+.rcl-grouplist .single-group .group-avatar {
     float: left;
     margin-right: 15px;
 }
 .rcl-grouplist .single-group .group-avatar img {
     max-width: 100px;
 }
-.rcl-grouplist .single-group .group-row .group-meta{
+.rcl-grouplist .single-group .group-row .group-meta {
     display: block;
-	margin: 3px 0;											/*++hueman++*/
+    margin: 3px 0;                                      /*++hueman++*/
 }
-.rcl-grouplist .single-group .group-row .group-name{
+.rcl-grouplist .single-group .group-row .group-name {
     font-size: 18px;
     font-weight: bold;
 }
-#rcl-group.admin-view #group-link-content{
-    top:45px;
+#rcl-group.admin-view #group-link-content {
+    top: 45px;
 }
-#group-link-content{
+#group-link-content {
     background: #fff;
     box-sizing: border-box;
-    padding: 10px 5px 50px;
+    padding: 30px 5px 10px;
     width: 100%;
 }
 #group-link-content .close-content {
@@ -351,14 +359,14 @@ div p.post-group-meta {
 #group-link-content .close-content:hover {
     opacity: 0.8;
 }
-#group-link-content h3{
-    font-size:20px;
-    margin:5px 0;
+#group-link-content h3 {
+    font-size: 20px;
+    margin: 5px 0;
 }
 .group-request {
-	text-align: right;
     overflow: hidden;
     padding: 5px 0;
+    text-align: right;
 }
 .group-request .group-user-option {
     display: inline-block;
@@ -370,28 +378,28 @@ div p.post-group-meta {
 #group-userlist .group-user-option > select {
     margin: 0 5px 5px;
 }
-.group-request .group-user-option select{
+.group-request .group-user-option select {
     width: 100px;
 }
 .group-dialog .group-request .apply-request,
-.group-dialog .group-request .success{
+.group-dialog .group-request .success {
+    display: inline-block;
     float: right;
     margin: 1px 2px;
     padding: 7px;
-    display:inline-block;
     width: initial;
 }
 #widgets-options,
 #group-options {
-    background: rgba(243, 243, 243, 0.3);
-    box-shadow: 0 0 1px 1px rgb(243, 243, 243);
+    background-color: #f5f5f5;
+    border: 1px solid #e5e5e5;
     padding: 5px 10px;
 }
-#group-options .group-option{
-    padding:5px 0;
+#group-options .group-option {
     overflow: hidden;
+    padding: 5px 0;
 }
-#group-link-content label{
+#group-link-content label {
     display: block;
     font-weight: bold;
     margin: 0 0 5px 5px;
@@ -400,53 +408,74 @@ div p.post-group-meta {
 #group-link-content input[type="number"],
 #group-link-content input[type="url"],
 #group-link-content input[type="email"],
-#group-link-content textarea{
-    width: 98%;
+#group-link-content select,
+#group-link-content textarea {
+    background-color: #fff;
+    border: 1px solid #d5d5d5;
+    box-sizing: border-box;
+    height: auto;
+    line-height: 1.4;
+    margin: 0;
+    outline: none;
+    padding: 5px 8px;
 }
-#group-link-content textarea{
+#group-link-content input[type="text"],
+#group-link-content input[type="number"],
+#group-link-content input[type="url"],
+#group-link-content input[type="email"],
+#group-link-content textarea {
+    max-width: none;
+    width: 100%;
+}
+#group-link-content textarea {
     height: 100px;
 }
-#group-link-content input[type="submit"]{
-    float: right;
+#group-link-content input[type="submit"] {
     clear: both;
-    margin: 15px 0;
+    float: right;
+    margin: 5px 0;
 }
 #create-group {
     background: rgba(219, 219, 219, 0.6);
     padding: 10px 0;
     text-align: right;
 }
-#create-group input[type="text"] {	
-    border: none;				/*++Twenty16++*/
+#create-group input[type="text"] {
+    background-color: #f5f5f5;
+    border: none;                           /*++Twenty16++*/
     max-width: 300px;
     min-width: 170px;
-    padding: 5px 10px;			/*++Twenty16++*/
+    padding: 5px 10px;                      /*++Twenty16++*/
     width: 58%;
 }
-#create-group input[type="submit"]{
-    margin: 0 10px;
-	text-transform: none;		/*++Twenty16++*/
+#rcl-office #create-group input[type="text"]:focus {
+    background-color: #fff;
+    border-color: #ccc;
 }
-#widgets-options{
+#create-group input[type="submit"] {
+    margin: 0 10px;
+    text-transform: none;                   /*++Twenty16++*/
+}
+#widgets-options {
     overflow: hidden;
 }
-#widgets-options .widgets-zone{
-    background: rgba(243, 243, 243, 0.5);
-    box-shadow: 0 0 1px 1px rgb(219, 219, 219);
+#widgets-options .widgets-zone {
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    box-shadow: 4px 4px 8px -4px rgb(219, 219, 219);
     box-sizing: border-box;
+    display: inline-block;
     margin: 1%;
     padding: 5px;
-    width: 48%;
-    display: inline-block;
     vertical-align: top;
+    width: 48%;
 }
-#widgets-options #unuses-zone{
-    box-sizing: border-box;
+#widgets-options #unuses-zone {
     clear: both;
     margin: 0 0 15px;
     width: 100%;
 }
-#widgets-options .widgets-zone .zone-name{
+#widgets-options .widgets-zone .zone-name {
     background: rgba(219, 219, 219, 0.6);
     display: block;
     font-size: 20px;
@@ -454,120 +483,130 @@ div p.post-group-meta {
     text-align: center;
 }
 #widgets-options .widgets-zone ul {
+    background-color: transparent;
+    border: none;
+    float: none;
+    list-style: none;
     margin: 0;
     padding: 10px 0;
-    list-style: none;
 }
-#widgets-options .widgets-zone .widget-box{
+#widgets-options .widgets-zone .widget-box {
     background: rgba(219, 219, 219, 0.3);
     margin: 5px;
     padding: 5px;
+    transition: background-color .2s ease, box-shadow .2s ease;
+}
+#widgets-options .widgets-zone .widget-box:hover {
+    background-color: rgba(219, 219, 219, 0.1);
+    box-shadow: 3px 3px 6px -3px rgba(0, 0, 0, .5);
 }
 #widgets-options .widgets-zone .widget-box .widget-name {
+    align-items: center;
+    background: #ccc;
+    cursor: move;
+    display: flex;
     font-size: 14px;
     font-weight: bold;
-    display: block;
-    background: #ccc;
+    line-height: 1.4;
     padding: 5px;
-    cursor: move;
 }
-#widgets-options .widget-name i{
-    cursor:pointer;
+#widgets-options .widget-name i {
+    cursor: pointer;
 }
-#widgets-options .widget-options{
-    padding: 5px;
+#widgets-options .widget-options {
     border: 1px solid #ccc;
+    padding: 5px;
 }
 #widgets-options .widgets-zone input,
-#widgets-options .widgets-zone select{
-    width: 100%;
+#widgets-options .widgets-zone select {
     box-sizing: border-box;
+    width: 100%;
 }
-#widgets-options #unuses-zone li{
-    float:left;
+#widgets-options #unuses-zone li {
+    float: left;
 }
 #widgets-options .ui-state-highlight {
-    background: rgba(219, 219, 219, 0.6);
-    margin: 5px;
+    background: #f5f5f5;
+    border: 2px dashed #ddd;
     height: 40px;
+    margin: 5px;
     width: 240px;
 }
-
-
+.rcl-search-form form input[type="text"] {
+    background-color: #f5f5f5;
+}
 @media screen and (max-width:480px) {
     #group-admin-panel .title-panel {
-            margin: 5px 0 0 5px;
+        margin: 5px 0 0 5px;
     }
     #rcl-group h3 {
-            font-size: 15px;
+        font-size: 15px;
     }
     #rcl-group.admin-view #group-link-content {
-            top: 35px;
+        top: 35px;
     }
     .group-request .group-user-option {
-            font-size: 12px;
-            margin: 5px 2px;
+        font-size: 12px;
+        margin: 5px 2px;
     }
 }
-
-
 @media screen and (max-width:360px) {
     #rcl-group .rcl-data-filters,
     #tab-groups .rcl-data-filters {
-            border-spacing: 2px;
+        border-spacing: 2px;
     }
     #rcl-group .rcl-data-filters a,
     #tab-groups .rcl-data-filters a {
-            display: table-cell;
-            padding: 10px 5px;
+        display: table-cell;
+        padding: 10px 5px;
     }
     .rcl-grouplist .single-group .group-avatar img {
-            max-width: 70px;
+        max-width: 70px;
     }
     #widgets-options .widgets-zone .zone-name,
     .rcl-grouplist .single-group .group-row .group-name {
-            font-size: 16px;
+        font-size: 16px;
     }
     #rcl-group h3.title-widget {
-            font-size: 12px;
-            padding: 7px 1px;
+        font-size: 12px;
+        padding: 7px 1px;
     }
     #rcl-group .group-content h3.title-widget {
-            font-size: 15px;
-            padding: 7px;
+        font-size: 15px;
+        padding: 7px;
     }
     #rcl-group .widget-content .mini-list .user-single {
-            width: 48%;
+        width: 48%;
     }
     .group-sidebar .widget-content .avatars-list .user-single {
-            width: 46%;
+        width: 46%;
     }
     #rcl-group .group-sidebar .rcl-group-link.recall-button {
-            font-size: 11px;
-            padding: 8px 0;
+        font-size: 11px;
+        padding: 8px 0;
     }
     #group-primary-widget .widget-content input {
-            padding: 8px 2px;
-            font-size: 11px;
+        padding: 8px 2px;
+        font-size: 11px;
     }
     #group-posts-widget .post-group .postdata-header {
-            margin: 0;
-            padding: 5px;
+        margin: 0;
+        padding: 5px;
     }
     #group-posts-widget .post-group .post-meta {
-            max-width: 100px;
+        max-width: 100px;
     }
     #group-posts-widget .post-meta span {
-            float: right;
-            margin: 0 5px 0 0;
+        float: right;
+        margin: 0 5px 0 0;
     }
     #widgets-options .widgets-zone .widget-box .widget-name {
-            font-size: 13px;
+        font-size: 13px;
     }
     #widgets-options .widgets-zone .widget-box {
-            margin: 3px;
-            padding: 2px;
-            text-align: center;
+        margin: 3px;
+        padding: 2px;
+        text-align: center;
     }
 }
 /* Group End */

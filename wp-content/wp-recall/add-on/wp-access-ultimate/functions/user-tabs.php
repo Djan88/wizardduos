@@ -2,7 +2,7 @@
 
 add_action('init','wau_init_tab');
 function wau_init_tab(){
-    
+
     $tab_data = array(
         'id'        =>'wau-tab',
         'name'      =>__('Доступ'),
@@ -20,7 +20,7 @@ function wau_init_tab(){
             ),
             array(
                 'id' => 'payments',
-                'icon' => 'fa-clock-o',
+                'icon' => 'fa-clock-o fa-clock',
                 'name' => __('История оплат'),
                 'callback' => array(
                     'name' => 'wau_payments_tab'
@@ -30,17 +30,17 @@ function wau_init_tab(){
     );
 
     rcl_tab($tab_data);
-    
+
 }
 
 function wau_access_tab($master_id){
     global $WAU_User;
-    
+
     $content = '<h3>'.__('Текущие доступы').'</h3>';
 
-    if(!$WAU_User->access) 
+    if(!$WAU_User->access)
         return $content . '<p>'.__('В данный момент, текущего доступа нет.').'</p>';
-    
+
     foreach($WAU_User->access as $access){
         $content .= wau_get_account_box($access->account_id);
     }
@@ -50,18 +50,18 @@ function wau_access_tab($master_id){
 
 function wau_payments_tab($master_id){
     global $WAU_User;
-    
+
     $paysAmount = wau_count_payments(array(
         'user_id' => $master_id
     ));
-    
+
     $content = '<h3>'.__('История оплат доступа').'</h3>';
 
-    if(!$paysAmount) 
+    if(!$paysAmount)
         return $content . '<p>'.__('Пока ни одной оплаты доступа не было.').'</p>';
-    
+
     $pagenavi = new Rcl_PageNavi('pays',$paysAmount);
-    
+
     $payments = wau_get_payments(array(
         'user_id' => $master_id,
         'offset' => $pagenavi->offset
@@ -70,7 +70,7 @@ function wau_payments_tab($master_id){
     $content .= $pagenavi->pagenavi();
 
     $content .= '<table class="rcl-form">';
-    
+
     $content .= '<tr>';
         $content .= '<th>'.__('ID платежа').'</th>';
         $content .= '<th>'.__('Наименование доступа').'</th>';
@@ -78,7 +78,7 @@ function wau_payments_tab($master_id){
         $content .= '<th>'.__('Размер оплаты').'</th>';
         $content .= '<th>'.__('Дата оплаты').'</th>';
     $content .= '</tr>';
-    
+
     foreach($payments as $payment){
 
         $content .= '<tr>';
@@ -89,9 +89,9 @@ function wau_payments_tab($master_id){
             $content .= '<td>'.$payment->payment_date.'</td>';
         $content .= '</tr>';
     }
-    
+
     $content .= '</table>';
-    
+
     $content .= $pagenavi->pagenavi();
 
     return $content;

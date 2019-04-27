@@ -201,7 +201,7 @@ function rcl_notice(text,type,time_close){
 
     var notice_id = rcl_rand(1, 1000);
 
-    var html = '<div id="notice-'+notice_id+'" class="notice-window type-'+options.type+'"><a href="#" class="close-notice"><i class="fa fa-times"></i></a>'+options.text+'</div>';	
+    var html = '<div id="notice-'+notice_id+'" class="notice-window type-'+options.type+'"><a href="#" class="close-notice"><i class="rcli fa-times"></i></a>'+options.text+'</div>';	
     if(!jQuery('#rcl-notice').size()){
             jQuery('body > div').last().after('<div id="rcl-notice">'+html+'</div>');
     }else{
@@ -240,7 +240,7 @@ function rcl_preloader_show(e,size){
     
     var style = 'style="font-size:'+options.size+'px;margin: -'+options.margin+'px 0 0 -'+options.margin+'px;"';
     
-    var html = '<div class="'+options.class+'"><i class="fa '+options.icon+' fa-spin" '+style+'></i></div>';
+    var html = '<div class="'+options.class+'"><i class="rcli '+options.icon+' fa-spin" '+style+'></i></div>';
     
     if(typeof( e ) === 'string')
         jQuery(e).after(html);
@@ -282,83 +282,7 @@ function rcl_remove_datepicker_box(){
 }
 
 function rcl_init_field_file(field_id){
-    
-    var field = jQuery("#"+field_id);
-    var form = field.parents('form');
-    
-    form.attr("enctype","multipart/form-data");
-    
-    form.submit(function(event){
-        
-        var error = false;
-        
-        field.each(function(){
-            
-            var maxsize = jQuery(this).data("size");
-            var fileInput = jQuery(this)[0];
-            var file = fileInput.files[0];
-            var accept = fileInput.accept.split(',');
-            
-            if(!file) return;
-            
-            if(accept){
-
-                var fileType = false;
-                
-                if(file.type){
-                
-                    for(var i in accept){
-                        if(accept[i] == file.type){
-                            fileType = true;
-                            return;
-                        }
-                    }
-                
-                }
-                
-                if(!fileType){
-                    
-                    var exts = jQuery(this).data("ext").split(',');
-                    var filename = file.name;
-                    
-                    for(var i in exts){
-                        if(filename.indexOf('.'+exts[i]) + 1) {
-                            fileType = true;
-                            return;
-                        }
-                    }
-                    
-                }
-                
-                if(!fileType){
-                    rcl_preloader_hide();
-                    rcl_notice("Некорректный тип файла!",'error',5000);
-                    error = true;
-                    return;
-                }
-                
-            }
-            
-            var filesize = file.size/1024/1024;
-            
-            if(filesize > maxsize){
-                jQuery(this).parent().css("border","1px solid red").css("padding","2px");
-                rcl_preloader_hide();
-                rcl_notice("Размер файла превышен!",'error',5000);
-                error = true;
-                return;
-            }else{
-                jQuery(this).parent().removeAttr("style");
-            }
-            
-        });
-        
-        if(error){
-            return false;
-        }
-        
-    });
-    
+    jQuery("#"+field_id).parents('form').attr("enctype","multipart/form-data");
 }
 
 function rcl_init_runner(props){
@@ -561,10 +485,16 @@ function rcl_proccess_ajax_return(result){
                     });
                     
                 }
-
+                
+                if ('onClose' in dialog) {
+                    ssiOptions.onClose = function(m){
+                        window[dialog.onClose[0]].apply(this, dialog.onClose[1]);
+                    };
+                }
+                
                 if(dialog.title)
                     ssiOptions.title = dialog.title;
-
+                
                 ssi_modal.show(ssiOptions);
             
             }
@@ -601,12 +531,25 @@ function rcl_ajax(prop){
         }
     }
     
+    var action = false;
+    if(typeof prop.data === 'string'){
+        var propData = prop.data.split('&');
+        var propObj={};
+        for(var key in propData)
+        {
+            propObj[propData[key].split("=")[0]] = propData[key].split("=")[1];
+        }
+        action = propObj.action;
+    }else if(typeof prop.data === 'object'){
+        action = prop.data.action;
+    }
+    
     jQuery.ajax({
         type: 'POST', 
         data: prop.data, 
         dataType: 'json', 
         url: (typeof ajaxurl !== 'undefined')? ajaxurl: Rcl.ajaxurl,
-        success: function(result){
+        success: function(result, post){
             
             if(!result){
                 rcl_notice(Rcl.local.error, 'error', 5000);
@@ -655,8 +598,8 @@ function rcl_ajax(prop){
                 rcl_proccess_ajax_return(result);
                 
             }
-            
-            rcl_do_action(prop.data.action, result);
+
+            rcl_do_action(action, result);
             
         }
     });
@@ -667,6 +610,8 @@ function rcl_send_form_data(action,e){
     
     var form = jQuery(e).parents('form');
     
+    if(!rcl_check_form(form)) return false;
+    
     if(e && jQuery(e).parents('.preloader-parent')){
         rcl_preloader_show(jQuery(e).parents('.preloader-parent'));
     }
@@ -675,6 +620,14 @@ function rcl_send_form_data(action,e){
         data: form.serialize() + '&action=' + action
     });
   
+}
+
+function rcl_check_form(form){
+
+    var rclFormFactory = new RclForm(form);
+    
+    return rclFormFactory.validate();
+    
 }
 
 function rcl_add_beat(beat_name,delay,data){
@@ -723,4 +676,354 @@ function rcl_exist_beat(beat_name){
     
     return exist;
     
+}
+
+function rcl_init_table(table_id){
+    
+    jQuery('#' + table_id).on('click','.rcl-table__cell-must-sort',function(){
+        
+        jQuery('#' + table_id).find('.rcl-table__cell-must-sort, .rcl-table__cell-sort').removeClass('rcl-table__cell-current-sort');
+        
+        var sortCell = jQuery(this);
+        
+        var sortby = sortCell.data('sort');
+        var route = sortCell.attr('data-route');
+        
+        sortCell.addClass('rcl-table__cell-current-sort');
+        jQuery('#' + table_id).find('[data-'+sortby+'-value]').addClass('rcl-table__cell-current-sort');
+        
+        var list = jQuery('#' + table_id + ' .rcl-table__row-must-sort');
+        
+        list.sort(function(a, b){
+            var aVal = jQuery(a).find('[data-'+sortby+'-value]').data(sortby+'-value');
+            var bVal = jQuery(b).find('[data-'+sortby+'-value]').data(sortby+'-value');
+            //if(isNaN(aVal)) 
+            if(route == 'asc')
+                return (aVal < bVal) - (aVal > bVal); //по возрастанию
+            else 
+                return (aVal > bVal) - (aVal < bVal); //по убыванию
+        });
+        
+        sortCell.attr('data-route', (route == 'desc'? 'asc': 'desc'));
+        
+        jQuery('#' + table_id + ' .rcl-table__row-must-sort').remove();
+
+        list.each(function(i,e){
+            jQuery('#' + table_id + ' .rcl-table__row-header').after(jQuery(this));
+        });
+
+    });
+    
+}
+
+function RclForm(form){
+    
+    this.form = form;
+    this.errors = {};
+    
+    this.validate = function(){
+        
+        var valid = true;
+
+        for(var objKey in this.checkForm){
+
+            var chekObject = this.checkForm[objKey];
+
+            if(!chekObject.isValid.call(this)){
+                
+                valid = false;
+
+                break;
+
+            }
+            
+        };
+        
+        if(this.errors){
+            for(var k in this.errors){
+                this.showError(this.errors[k]);
+            };
+        }
+        
+        return valid;
+        
+    };
+    
+    this.addChekForm = function(id, data){
+        this.checkForm[id] = data;
+    };
+    
+    this.addChekFields = function(id, data){
+        this.checkFields[id] = data;
+    };
+    
+    this.addError = function(id, error){
+        this.errors[id] = error;
+    };
+    
+    this.shake = function(shakeBox){
+        shakeBox.css('box-shadow','red 0px 0px 5px 1px inset').animateCss('shake');
+    };
+    
+    this.noShake = function(shakeBox){
+        shakeBox.css('box-shadow','none');
+    };
+    
+    this.showError = function(error){
+        rcl_notice(error, 'error', 10000);
+    };
+    
+    this.checkForm = {
+        
+        checkFields: {
+
+            isValid: function(){
+                
+                var valid = true;
+                var parent = this;
+
+                this.form.find('input,select,textarea').each(function(){
+
+                    var field = jQuery(this);
+                    var typeField = field.attr('type');
+
+                    if(field.tagName && field.tagName.toLowerCase() == 'textarea') {
+                        typeField = 'textarea';
+                    }
+
+                    for(var objKey in parent.checkFields){
+
+                        var chekObject = parent.checkFields[objKey];
+
+                        if(chekObject.types.length && jQuery.inArray( typeField, chekObject.types ) < 0){
+                            continue;
+                        }
+
+                        var shakeBox = (typeField == 'checkbox')? field.next('label'): field;
+
+                        if(!chekObject.isValid(field)){
+
+                            parent.shake(shakeBox);
+                            parent.addError(objKey, chekObject.errorText());
+                            valid = false;
+                            return;
+
+                        }else{
+                            parent.noShake(shakeBox);
+                        }
+
+                    };
+
+                });
+
+                return valid;
+                
+            }
+
+        }
+        
+    };
+    
+    this.checkFields = {
+        
+        required: {
+            
+            types: [],
+
+            isValid: function(field){
+                
+                var required = true;
+
+                if(!field.is(":required")) return required;
+
+                var value = false;
+
+                if(field.attr('type') == 'checkbox'){
+                    if(field.is(":checked")){
+                        value = true;
+                    }
+                }else{
+                    if(field.val()) value = true;
+                }
+
+                if(!value){
+                    required = false;
+                }
+
+                return required;
+                
+            },
+            
+            errorText: function(){
+                return Rcl.errors.required;
+            }
+
+
+        },
+        numberRange: {
+            
+            types: ['number'],
+            
+            isValid: function(field){
+                var range = true;
+
+                var val = field.val();
+                
+                if(val === '') return true;
+                
+                val = parseInt(val);
+                var min = parseInt(field.attr('min'));
+                var max = parseInt(field.attr('max'));
+                
+                if(min != 'undefined' && min > val || max != 'undefined' && max < val){
+                    range = false;
+                }
+
+                return range;
+            },
+            
+            errorText: function(){
+                return Rcl.errors.number_range;
+            }
+
+        },
+        pattern: {
+            
+            types: ['text', 'tel'],
+            
+            isValid: function(field){
+                
+                var val = field.val();
+                
+                if(!val) return true;
+
+                var pattern = field.attr('pattern');
+                
+                if(!pattern) return true;
+
+                var re = new RegExp(pattern);
+                
+                return re.test(val);
+            },
+            
+            errorText: function(){
+                return Rcl.errors.pattern;
+            }
+
+        },
+        fileMaxSize: {
+            
+            types: ['file'],
+            
+            isValid: function(field){
+                
+                var valid = true;
+                
+                field.each(function(){
+            
+                    var maxsize = jQuery(this).data("size");
+                    var fileInput = jQuery(this)[0];
+                    var file = fileInput.files[0];
+
+                    if(!file) return;
+
+                    var filesize = file.size/1024/1024;
+
+                    if(filesize > maxsize){
+                        valid = false;
+                        return;
+                    }
+
+                });
+                
+                return valid;
+            },
+            
+            errorText: function(){
+                return Rcl.errors.file_max_size;
+            }
+
+        },
+        fileAccept: {
+            
+            types: ['file'],
+            
+            isValid: function(field){
+                
+                var valid = true;
+                
+                field.each(function(){
+
+                    var fileInput = jQuery(this)[0];
+                    var file = fileInput.files[0];
+                    var accept = fileInput.accept.split(',');
+
+                    if(!file) return;
+
+                    if(accept){
+
+                        var fileType = false;
+
+                        if(file.type){
+
+                            for(var i in accept){
+                                if(accept[i] == file.type){
+                                    fileType = true;
+                                    return;
+                                }
+                            }
+
+                        }
+
+                        if(!fileType){
+
+                            var exts = jQuery(this).data("ext").split(',');
+                            var filename = file.name;
+
+                            for(var i in exts){
+                                if(filename.indexOf('.'+exts[i]) + 1) {
+                                    fileType = true;
+                                    return;
+                                }
+                            }
+
+                        }
+
+                        if(!fileType){
+                            valid = false;
+                            return;
+                        }
+
+                    }
+
+                });
+                
+                return valid;
+            },
+            
+            errorText: function(){
+                return Rcl.errors.file_accept;
+            }
+
+        }
+    };
+    
+    this.send = function(action, success){
+
+        if(!this.validate()) return false;
+
+        rcl_preloader_show(form);
+        
+        var sendData = {
+            data: form.serialize() + '&action=' + action
+        };
+        
+        if(success){
+            sendData.success = success;
+        }
+
+        rcl_ajax(sendData);
+
+    };
+
 }
