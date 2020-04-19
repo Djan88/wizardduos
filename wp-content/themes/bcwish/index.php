@@ -409,33 +409,6 @@
                   
                 </div>
               </div>
-              <div class="row wizard_main_screen hidden">
-                <div class="col-sm-6 wizard_zones">
-                  <img src="<?php bloginfo('template_url'); ?>/img/template.png" class="wizard_template" alt="wizard_template">
-
-                </div>
-                <div class="col-sm-6">
-                  <img src="" class="wizard_returned draggable" alt="wizard_returned">
-                </div>
-                <div class="col-sm-12">
-                  <button type="button" class="wizard_starter_alt btn btn-success">
-                    START <i class="fa fa-play-circle wizard_start_icon"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="row wizard_diag hidden">
-                <div class="col-sm-6 wizard_grafic">
-                  <div class="row">
-                    <img src="<?php bloginfo('template_url'); ?>/img/knife_alt.png" class="marakata" alt="">
-                  </div>
-                </div>
-                <div class="col-sm-6 wizard_grafic_photo">
-                  <img src="" class="wizard_returned" alt="wizard_returned">
-                </div>
-                <div class="col-sm-12" style="text-align: center;">
-                  <div class="btn btn-success btn_prot_choice_fromDiag back-to-top_2">Выбрать протокол</div>
-                </div>
-              </div>
             </div>
           </div>
 
