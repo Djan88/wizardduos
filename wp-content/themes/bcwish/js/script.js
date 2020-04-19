@@ -37,7 +37,9 @@ jQuery(function() {
   jQuery('.btn-get-started').on('click', function(event) {
     localStorage.removeItem('paused');
     localStorage.removeItem('pausedPhoto'); 
-    localStorage.removeItem('pausedPhoto2'); 
+    localStorage.removeItem('pausedPhoto2');
+    localStorage.removeItem('croppedImg');
+    localStorage.removeItem('croppedImgTwo');
     pausedStatus = false;
   });
 
