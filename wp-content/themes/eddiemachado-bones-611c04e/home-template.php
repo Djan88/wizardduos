@@ -125,6 +125,7 @@
                 <?php } else { ?>
                     <div class="home-content" style="text-align: center;">
                         <?php //the_content(); ?>
+                        <?php echo do_shortcode( '[theme_switcha_select text="Выберите версию"]' ); ?>
                         <button class="btn btn_warning btn_lg login_btn" data-toggle="modal" data-target="#myModal_login">ВХОД</button>
                         
                     </div>
