@@ -138,7 +138,7 @@
   <!--==========================
     Intro Section
   ============================-->
-  <?php if(is_page(183)) { ?>
+  <?php if(is_page(133)) { ?>
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
       <main id="main" class="kabinet">
         <div class="container container_main">
