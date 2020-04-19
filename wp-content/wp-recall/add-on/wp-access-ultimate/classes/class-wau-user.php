@@ -8,13 +8,16 @@ class WAU_User extends WAU_Accounts_Walker {
 
 	function __construct( $args ) {
 
+		$this->init_properties( $args );
+
 		parent::__construct( array(
 			'number' => -1
 		) );
 
-		$this->init_properties( $args );
+		if ( ! $this->user_id )
+			return;
 
-		if ( !$this->access ) {
+		if ( ! $this->access ) {
 
 			$query = new WAU_Access();
 
@@ -28,7 +31,7 @@ class WAU_User extends WAU_Accounts_Walker {
 
 			$branch_accounts = array();
 			foreach ( $this->access as $access ) {
-				if ( !$this->get_branch( $access->account_id ) )
+				if ( ! $this->get_branch( $access->account_id ) )
 					continue;
 				$branch_accounts = array_merge( $branch_accounts, $this->get_branch( $access->account_id ) );
 			}
@@ -56,7 +59,7 @@ class WAU_User extends WAU_Accounts_Walker {
 
 	function get_account_ids() {
 
-		if ( !$this->access )
+		if ( ! $this->access )
 			return false;
 
 		$accoint_ids = array();
@@ -69,13 +72,13 @@ class WAU_User extends WAU_Accounts_Walker {
 
 	function is_access( $account_ids ) {
 
-		if ( !$this->access )
+		if ( ! $this->access )
 			return false;
 
 		if ( is_array( $account_ids ) ) {
 
 			foreach ( $this->access as $access ) {
-				if ( !in_array( $access->account_id, $account_ids ) )
+				if ( ! in_array( $access->account_id, $account_ids ) )
 					continue;
 				return true;
 			}
@@ -93,7 +96,7 @@ class WAU_User extends WAU_Accounts_Walker {
 
 	function is_branch_access( $account_id, $important = false ) {
 
-		if ( !$this->branch_accounts )
+		if ( ! $this->branch_accounts )
 			return false;
 
 		if ( is_array( $account_id ) ) {
@@ -122,7 +125,7 @@ class WAU_User extends WAU_Accounts_Walker {
 
 	function get_access_by_account( $account_id ) {
 
-		if ( !$this->access )
+		if ( ! $this->access )
 			return false;
 
 		foreach ( $this->access as $access ) {
@@ -138,7 +141,7 @@ class WAU_User extends WAU_Accounts_Walker {
 
 		$access = $this->get_access_by_account( $account_id );
 
-		if ( !$access )
+		if ( ! $access )
 			return 0;
 
 		$timeValues = wau_parse_time( $access->access_time );
@@ -150,7 +153,7 @@ class WAU_User extends WAU_Accounts_Walker {
 
 		$access = $this->get_access_by_account( $account_id );
 
-		if ( !$access )
+		if ( ! $access )
 			return 0;
 
 		$time = $access->access_time - (strtotime( current_time( 'mysql' ) ) - strtotime( $access->access_date ));
@@ -172,7 +175,7 @@ class WAU_User extends WAU_Accounts_Walker {
 			$hidden_posts = array_merge( $hidden_posts, $post_ids );
 		}
 
-		if ( !$hidden_posts )
+		if ( ! $hidden_posts )
 			return array();
 
 		$hidden_posts = array_unique( $hidden_posts );
@@ -197,7 +200,7 @@ class WAU_User extends WAU_Accounts_Walker {
 				. "WHERE meta_key='wau-access'" );
 		}
 
-		if ( !$dataClosedPosts )
+		if ( ! $dataClosedPosts )
 			return false;
 
 		$hidden_posts = array();
@@ -210,14 +213,14 @@ class WAU_User extends WAU_Accounts_Walker {
 
 			$hidden = isset( $value->options['hidden'] ) ? $value->options['hidden'] : 0;
 
-			if ( !$hidden )
+			if ( ! $hidden )
 				continue;
 
 			foreach ( $value->access as $accessData ) {
 				$access_ids[] = $accessData->account_id;
 			}
 
-			if ( !$this->is_branch_access( $access_ids, $value->options['important'] ) ) {
+			if ( ! $this->is_branch_access( $access_ids, $value->options['important'] ) ) {
 				$hidden_posts[] = $data->post_id;
 			}
 		}
@@ -234,7 +237,7 @@ class WAU_User extends WAU_Accounts_Walker {
 			. "INNER JOIN $wpdb->term_taxonomy AS tt ON tm.term_id=tt.term_id "
 			. "WHERE tm.meta_key='wau-access'" );
 
-		if ( !$dataClosedTerms )
+		if ( ! $dataClosedTerms )
 			return false;
 
 		$hidden_terms = array();
@@ -247,14 +250,14 @@ class WAU_User extends WAU_Accounts_Walker {
 
 			$hidden = isset( $value->options['hidden'] ) ? $value->options['hidden'] : 0;
 
-			if ( !$hidden )
+			if ( ! $hidden )
 				continue;
 
 			foreach ( $value->access as $accessData ) {
 				$access_ids[] = $accessData->account_id;
 			}
 
-			if ( !$this->is_branch_access( $access_ids, $value->options['important'] ) ) {
+			if ( ! $this->is_branch_access( $access_ids, $value->options['important'] ) ) {
 				$hidden_terms[$data->taxonomy][] = $data->term_id;
 			}
 		}
@@ -267,7 +270,7 @@ class WAU_User extends WAU_Accounts_Walker {
 
 		$hiddenTrems = $this->get_hidden_terms();
 
-		if ( !$hiddenTrems )
+		if ( ! $hiddenTrems )
 			return false;
 
 		$term_ids = array();
@@ -277,7 +280,7 @@ class WAU_User extends WAU_Accounts_Walker {
 
 		$term_ids = array_unique( $term_ids );
 
-		if ( !$term_ids )
+		if ( ! $term_ids )
 			return false;
 
 		if ( wau_get_option( 'author-show' ) && $this->user_id ) {

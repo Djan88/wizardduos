@@ -96,7 +96,7 @@ function wau_get_accounts_shortcode( $atts ) {
 			'fields' => array(
 				'account_id'
 			)
-		) );
+			) );
 
 		if ( ! $account_ids )
 			return false;
@@ -111,6 +111,54 @@ function wau_get_accounts_shortcode( $atts ) {
 	);
 
 	$content = wau_get_accounts_box( $account_ids, $args );
+
+	return $content;
+}
+
+add_shortcode( 'wau-tariffs', 'wau_get_tariffs_shortcode' );
+function wau_get_tariffs_shortcode( $atts ) {
+	global $user_ID;
+
+	extract( shortcode_atts( array(
+		'tariff_id'		 => 0,
+		'title'			 => false,
+		'description'	 => false
+			), $atts ) );
+
+	$tariff_id = array_map( 'trim', explode( ',', $tariff_id ) );
+
+	if ( ! $tariff_id ) {
+		return rcl_get_notice( array(
+			'text' => __( 'Не указаны тарифные планы!' )
+			) );
+	}
+
+	$tariffs = wau_get_tariffs( array(
+		'tariff_id__in' => $tariff_id
+		) );
+
+	if ( ! $tariffs )
+		return rcl_get_notice( array(
+			'text' => __( 'Не найдены тарифные планы!' )
+			) );
+
+	$content = '<div class="wau-account-box">';
+
+	if ( $title ) {
+		$content .= '<div class="wau-account-box-title">'
+			. '<span>' . $title . '</span>'
+			. '</div>';
+	}
+
+	if ( $description ) {
+		$content .= '<div class="wau-account-description">' . $description . '</div>';
+	}
+
+	$content .= rcl_get_include_template( 'wau-tariff-list.php', __FILE__, array(
+		'tariffs' => $tariffs
+		) );
+
+	$content .= '</div>';
 
 	return $content;
 }

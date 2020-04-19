@@ -40,7 +40,7 @@ class Rcl_Public_Form extends Rcl_Public_Form_Fields {
 			}
 		}
 
-		if ( !$this->form_id )
+		if ( ! $this->form_id )
 			$this->form_id = 1;
 
 		parent::__construct( array(
@@ -62,7 +62,7 @@ class Rcl_Public_Form extends Rcl_Public_Form_Fields {
 			add_action( 'wp_footer', array( $this, 'init_form_scripts' ), 100 );
 		}
 
-		if ( $this->user_can['publish'] && !$user_ID )
+		if ( $this->user_can['publish'] && ! $user_ID )
 			add_filter( 'rcl_public_form_fields', array( $this, 'add_guest_fields' ), 10 );
 
 		$this->fields = $this->get_public_fields();
@@ -184,7 +184,7 @@ class Rcl_Public_Form extends Rcl_Public_Form_Fields {
 
 			$this->user_can['edit'] = (current_user_can( 'edit_post', $this->post_id )) ? true : false;
 
-			if ( !$this->user_can['edit'] && $this->post_type == 'post-group' ) {
+			if ( ! $this->user_can['edit'] && $this->post_type == 'post-group' ) {
 
 				$this->user_can['edit'] = (rcl_can_user_edit_post_group( $this->post_id )) ? true : false;
 			}
@@ -200,16 +200,16 @@ class Rcl_Public_Form extends Rcl_Public_Form_Fields {
 
 		$errors = array();
 
-		if ( !$this->user_can['publish'] ) {
+		if ( ! $this->user_can['publish'] ) {
 
-			if ( !$user_ID )
+			if ( ! $user_ID )
 				$errors[] = __( 'You must be logged in to post. Login or register', 'wp-recall' );
 			else if ( $this->post_type == 'post-group' ) {
 				$errors[] = __( 'Sorry, but you have no rights to publish in this group :(', 'wp-recall' );
 			} else {
 				$errors[] = __( 'Sorry, but you have no right to post on this site :(', 'wp-recall' );
 			}
-		} else if ( $this->post_id && !$this->user_can['edit'] ) {
+		} else if ( $this->post_id && ! $this->user_can['edit'] ) {
 			$errors[] = __( 'You can not edit this publication :(', 'wp-recall' );
 		}
 
@@ -310,7 +310,7 @@ class Rcl_Public_Form extends Rcl_Public_Form_Fields {
 							$contentField = $this->get_editor( array(
 								'post_content'	 => $dataPost->post_content,
 								'options'		 => $this->current_field['post-editor']
-							) );
+								) );
 
 							$contentField .= $CF->get_notice( $this->current_field );
 						}
@@ -334,11 +334,11 @@ class Rcl_Public_Form extends Rcl_Public_Form_Fields {
 
 						if ( $this->current_field['slug'] == 'post_uploader' ) {
 
-							if ( !isset( $this->current_field['add-to-click'] ) ) {
+							if ( ! isset( $this->current_field['add-to-click'] ) ) {
 								$this->current_field['add-to-click'] = 1;
 							}
 
-							if ( !isset( $this->current_field['gallery'] ) ) {
+							if ( ! isset( $this->current_field['gallery'] ) ) {
 								$this->current_field['gallery'] = 1;
 							}
 
@@ -347,7 +347,7 @@ class Rcl_Public_Form extends Rcl_Public_Form_Fields {
 								'post_type'	 => $this->post_type,
 								'ext_types'	 => $this->form_object->ext_types,
 								'options'	 => $this->current_field,
-							) );
+								) );
 
 							$contentField = $postUploder->get_uploader();
 
@@ -361,7 +361,7 @@ class Rcl_Public_Form extends Rcl_Public_Form_Fields {
 					}
 				}
 
-				if ( !$contentField )
+				if ( ! $contentField )
 					continue;
 
 				$content .= '<div id="form-field-' . $this->current_field['slug'] . '" class="rcl-form-field field-' . $this->current_field['type'] . '">';
@@ -445,14 +445,14 @@ class Rcl_Public_Form extends Rcl_Public_Form_Fields {
 			'post_id'	 => $this->post_id,
 			'post_type'	 => $this->post_type,
 			'ext_types'	 => 'jpg,png,jpeg'
-		) );
+			) );
 
 		$content .= $postUploder->get_upload_button( array(
 			'multiple'	 => false,
 			'id'		 => 'rcl-thumbnail-uploader',
 			'title'		 => __( 'Upload thumbnail', 'wp-recall' ),
 			'onclick'	 => 'rcl_init_thumbnail_uploader(this,{size:\'' . $sizeFile . '\'});'
-		) );
+			) );
 
 		$content .= '</div>';
 
@@ -481,7 +481,7 @@ class Rcl_Public_Form extends Rcl_Public_Form_Fields {
 
 				$termList = rcl_get_tags_list_group( $options_gr['tags'], $this->post_id );
 
-				if ( !$termList )
+				if ( ! $termList )
 					return false;
 
 				$content .= $termList;
@@ -555,7 +555,7 @@ class Rcl_Public_Form extends Rcl_Public_Form_Fields {
 
 	function get_tags_checklist( $taxonomy, $t_args = array() ) {
 
-		if ( !is_array( $t_args ) || $t_args === false )
+		if ( ! is_array( $t_args ) || $t_args === false )
 			return false;
 
 		$post_tags = ($this->post_id) ? $this->get_tags( $this->post_id, $taxonomy ) : array();
@@ -580,7 +580,7 @@ class Rcl_Public_Form extends Rcl_Public_Form_Fields {
 					}
 				} else {
 
-					if ( !$this->post_id && $type == 'radio' && !$k ) {
+					if ( ! $this->post_id && $type == 'radio' && ! $k ) {
 						$checked = true;
 					}
 				}
@@ -648,7 +648,7 @@ class Rcl_Public_Form extends Rcl_Public_Form_Fields {
 
 	function tags_field( $taxonomy, $terms ) {
 
-		if ( !$this->taxonomies || !isset( $this->taxonomies[$taxonomy] ) )
+		if ( ! $this->taxonomies || ! isset( $this->taxonomies[$taxonomy] ) )
 			return false;
 
 		$args = array(
@@ -669,7 +669,7 @@ class Rcl_Public_Form extends Rcl_Public_Form_Fields {
 		if ( $args['input_field'] )
 			$content .= $this->get_tags_input( $taxonomy );
 
-		if ( !$content )
+		if ( ! $content )
 			return false;
 
 		$content = '<div class="rcl-tags-list">' . $content . '</div>';
@@ -736,10 +736,10 @@ class Rcl_Public_Form extends Rcl_Public_Form_Fields {
 
 	function get_post_terms( $taxonomy ) {
 
-		if ( !isset( $this->taxonomies[$taxonomy] ) )
+		if ( ! isset( $this->taxonomies[$taxonomy] ) )
 			return false;
 
-		if ( $this->post_type == 'post' ) {
+		if ( $this->post_type == 'post' && $taxonomy == 'category' ) {
 
 			$post_terms = get_the_category( $this->post_id );
 		} else {
@@ -814,7 +814,7 @@ class Rcl_Public_Form extends Rcl_Public_Form_Fields {
 
 		$reasons = apply_filters( 'rcl_public_form_delete_reasons', $reasons, $this->get_object_form() );
 
-		if ( !$reasons )
+		if ( ! $reasons )
 			return false;
 
 		$content = '<label>' . __( 'Use blank notice', 'wp-recall' ) . ':</label>';

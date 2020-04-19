@@ -47,6 +47,9 @@ add_action( 'init', 'wau_init_user', 10 );
 function wau_init_user() {
 	global $WAU_User, $user_ID;
 
+	if ( $WAU_User )
+		return;
+
 	$WAU_User = new WAU_User( array(
 		'user_id' => $user_ID
 		) );
@@ -84,13 +87,16 @@ add_action( 'wau_init_user', 'wau_check_current_user_access' );
 function wau_check_current_user_access() {
 	global $WAU_User;
 
-	if ( ! $WAU_User->access )
+	if ( ! $WAU_User || ! $WAU_User->access )
 		return false;
 
 	foreach ( $WAU_User->access as $access ) {
 		$time = $access->access_time - (strtotime( current_time( 'mysql' ) ) - strtotime( $access->access_date ));
 		if ( $time <= 0 ) {
+
 			wau_delete_access( $access->access_id );
+
+			do_action( 'wau_delete_access_of_time_end', $access->access_id, $access );
 		}
 	}
 }
@@ -115,6 +121,8 @@ function wau_daily_cron_actions() {
 		if ( $time < 0 ) {
 
 			wau_delete_access( $acc->access_id );
+
+			do_action( 'wau_delete_access_of_time_end', $acc->access_id, $acc );
 		} else if ( $time < $daySeconds && $time > ($daySeconds - 86400) ) {
 
 			$timeData = wau_parse_time( $time );
@@ -149,6 +157,8 @@ function wau_payment( $payData ) {
 	if ( $tariff_price != $payData->pay_summ )
 		return false;
 
+	do_action( 'wau_pre_payment_access', $payData, $tariff );
+
 	$payment_id = wau_add_payment( array(
 		'user_id'		 => $payData->user_id,
 		'account_name'	 => wau_get_account_field( $tariff->account_id, 'account_name' ),
@@ -158,7 +168,7 @@ function wau_payment( $payData ) {
 
 	$access_id = wau_update_user_access( $payData->user_id, $tariff->account_id, $tariff->access_time );
 
-	do_action( 'wau_payment_access', $payment_id, $access_id );
+	do_action( 'wau_payment_access', $payment_id, $access_id, $baggage->tariff_id );
 }
 
 add_action( 'wau_payment_access', 'wau_send_email_about_payment_access', 10 );

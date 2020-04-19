@@ -6,23 +6,25 @@
  */
 
 /**
- * Helps with creating shortlinks in the plugin
+ * Helps with creating shortlinks in the plugin.
  */
 class WPSEO_Shortlinker {
+
 	/**
 	 * Collects the additional data necessary for the shortlink.
 	 *
 	 * @return array The shortlink data.
 	 */
 	protected function collect_additional_shortlink_data() {
-		return array(
+		return [
 			'php_version'      => $this->get_php_version(),
 			'platform'         => 'wordpress',
 			'platform_version' => $GLOBALS['wp_version'],
 			'software'         => $this->get_software(),
 			'software_version' => WPSEO_VERSION,
 			'days_active'      => $this->get_days_active(),
-		);
+			'user_language'    => $this->get_user_language(),
+		];
 	}
 
 	/**
@@ -114,8 +116,21 @@ class WPSEO_Shortlinker {
 				$cohort = '6-30';
 				break;
 			default:
-				$cohort = '>30';
+				$cohort = '30plus';
 		}
 		return $cohort;
+	}
+
+	/**
+	 * Gets the user's language.
+	 *
+	 * @return string The user's language.
+	 */
+	private function get_user_language() {
+		if ( function_exists( 'get_user_locale' ) ) {
+			return get_user_locale();
+		}
+
+		return false;
 	}
 }

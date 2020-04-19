@@ -26,10 +26,10 @@
     font-size:12px;
 }
 #wau-manager{
-    
+
 }
 #wau-manager .manager-box{
-    
+
 }
 #wau-manager .manage-accounts{
     float: left;
@@ -48,7 +48,7 @@
     border: 1px solid #ccc;
 }
 #wau-manager .manager-form .form-field{
-    
+
 }
 #wau-manager .manager-box .form-buttons{
     text-align:right;
@@ -57,7 +57,7 @@
     width:auto;
 }
 #wau-manager .rcl-custom-fields-box .field-controls{
-    
+
 }
 #wau-manager .rcl-custom-fields-box .field-controls a{
     border: 1px solid #ccc;
@@ -68,7 +68,7 @@
     color:rgba(229, 57, 53, 0.7);
 }
 #wau-manager .rcl-custom-fields-box .field-controls a:before{
-    
+
 }
 #wau-manager .rcl-custom-fields-box .field-controls .field-edit:before{
     content: "\f107";
@@ -92,7 +92,7 @@
     /*margin-bottom: 0px;*/
 }
 #wau-manager .rcl-custom-fields-box .active-account{
-    
+
 }
 #wau-manager .rcl-custom-fields-box .active-account > .field-header:before{
     border-style: solid;
@@ -137,7 +137,7 @@
     /*position:absolute;
     top:0;
     width:100%;*/
-    
+
 }
 #wau-manager .tariffs-list .list-receive .rcl-custom-field .field-header{
     /*padding:0;*/
@@ -184,7 +184,7 @@
     vertical-align: text-bottom;
 }
 .wau-accounts-list .wau-account .account-check{
-    
+
 }
 .wau-accounts-list .wau-account .account-name{
     font-size: 15px;
@@ -194,11 +194,15 @@
 .wau-accounts-list .wau-account .account-time{
     display: none;
 }
+.wau-accounts-list .wau-account .account-time input{
+    display: inline!important;
+    width: auto!important;
+}
 .wau-accounts-list .wau-account .account-check:checked ~ .account-time {
     display: inline-block;
 }
 .wau-accounts-list .wau-childrens-list{
-    
+
 }
 .wau-accounts-list .wau-childrens-list .wau-account{
     padding-left: 15px;

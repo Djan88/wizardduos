@@ -85,19 +85,19 @@ function rcl_variations_loop( loopData ) {
 	varValues.forEach( function( varVal, i, varValues ) {
 
 		if ( !varVal || currentVal != varVal.name )
-		 return;
+			return;
 
 		var varPrice = parseInt( varVal.price );
 
 		if ( !varPrice )
-		 varPrice = 0;
+			varPrice = 0;
 
 		var variations = Rcl.Variations[product_id];
 
 		variations.forEach( function( val, i, variations ) {
 
 			if ( varSlug != val.slug )
-			 return;
+				return;
 
 			if ( type == 'checkbox' ) {
 				if ( input.attr( 'checked' ) == 'checked' ) {
@@ -154,7 +154,7 @@ function rcl_cart_setup_data( products ) {
 	products.forEach( function( product, i, products ) {
 
 		if ( !product )
-		 return;
+			return;
 
 		Rcl.Cart.products_amount += product.product_amount;
 		Rcl.Cart.order_price += product.product_amount * product.product_price;
@@ -203,7 +203,7 @@ function rcl_search_product( product_id ) {
 	products.forEach( function( product, i, products ) {
 
 		if ( !product )
-		 return;
+			return;
 
 		if ( product.product_id == product_id ) {
 			key = i;
@@ -244,7 +244,7 @@ function rcl_cart_add_product( product_id, key ) {
 		var key = rcl_search_product( product_id );
 
 	if ( key === false )
-	 return false;
+		return false;
 
 	var product = Rcl.Cart.products[key];
 
@@ -257,9 +257,9 @@ function rcl_cart_add_product( product_id, key ) {
 	rcl_cart_update_data( Rcl.Cart.products );
 
 	productBox.find( '.product-amount' ).text( product.product_amount );
-	productBox.find( '.product-sumprice' ).text( product_sum );
+	productBox.find( '.product-sumprice' ).text( product_sum.toFixed( 2 ) );
 
-	jQuery( '.rcl-order-price' ).html( Rcl.Cart.order_price );
+	jQuery( '.rcl-order-price' ).html( Rcl.Cart.order_price.toFixed( 2 ) );
 	jQuery( '.rcl-order-amount' ).html( Rcl.Cart.products_amount );
 
 	return false;
@@ -273,7 +273,7 @@ function rcl_cart_remove_product( product_id, key ) {
 		var key = rcl_search_product( product_id );
 
 	if ( key === false )
-	 return false;
+		return false;
 
 	var product = Rcl.Cart.products[key];
 
@@ -300,9 +300,9 @@ function rcl_cart_remove_product( product_id, key ) {
 	rcl_cart_update_data( Rcl.Cart.products );
 
 	productBox.find( '.product-amount' ).text( product.product_amount );
-	productBox.find( '.product-sumprice' ).text( product_sum );
+	productBox.find( '.product-sumprice' ).text( product_sum.toFixed( 2 ) );
 
-	jQuery( '.rcl-order-price' ).html( Rcl.Cart.order_price );
+	jQuery( '.rcl-order-price' ).html( Rcl.Cart.order_price.toFixed( 2 ) );
 	jQuery( '.rcl-order-amount' ).html( Rcl.Cart.products_amount );
 
 	return false;
@@ -333,7 +333,7 @@ function rcl_add_to_cart( e ) {
 			if ( data.modal ) {
 
 				if ( jQuery( '#ssi-modalContent' ).size() )
-				 ssi_modal.close();
+					ssi_modal.close();
 
 				ssi_modal.show( {
 					className: 'rcl-dialog-tab product-dialog',
@@ -366,6 +366,8 @@ function rcl_add_to_cart( e ) {
 					path: '/'
 				} );
 
+			} else {
+				rcl_proccess_ajax_return( data );
 			}
 		}
 	} );
@@ -392,7 +394,7 @@ function rcl_remove_product_quantity( e ) {
 	var value = parseInt( input.val() ) - 1;
 
 	if ( !value )
-	 return false;
+		return false;
 
 	input.val( value );
 }

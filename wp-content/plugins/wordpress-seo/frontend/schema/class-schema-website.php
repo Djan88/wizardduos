@@ -11,6 +11,7 @@
  * @since 10.2
  */
 class WPSEO_Schema_Website implements WPSEO_Graph_Piece {
+
 	/**
 	 * A value object with context variables.
 	 *
@@ -19,7 +20,7 @@ class WPSEO_Schema_Website implements WPSEO_Graph_Piece {
 	private $context;
 
 	/**
-	 * WPSEO_Schema_Breadcrumb constructor.
+	 * WPSEO_Schema_Website constructor.
 	 *
 	 * @param WPSEO_Schema_Context $context A value object with context variables.
 	 */
@@ -46,33 +47,27 @@ class WPSEO_Schema_Website implements WPSEO_Graph_Piece {
 	 * @return array Website data blob.
 	 */
 	public function generate() {
-		$data = array(
-			'@type'     => 'WebSite',
-			'@id'       => $this->context->site_url . WPSEO_Schema_IDs::WEBSITE_HASH,
-			'url'       => $this->context->site_url,
-			'name'      => $this->context->site_name,
-			'publisher' => array(
-				'@id' => $this->get_publisher(),
-			),
-		);
+		$data = [
+			'@type' => 'WebSite',
+			'@id'   => $this->context->site_url . WPSEO_Schema_IDs::WEBSITE_HASH,
+			'url'   => $this->context->site_url,
+			'name'  => $this->context->site_name,
+		];
+
+		$data = WPSEO_Schema_Utils::add_piece_language( $data );
+
+		if ( $this->context->site_description ) {
+			$data['description'] = $this->context->site_description;
+		}
+
+		if ( $this->context->site_represents_reference ) {
+			$data['publisher'] = $this->context->site_represents_reference;
+		}
 
 		$data = $this->add_alternate_name( $data );
 		$data = $this->internal_search_section( $data );
 
 		return $data;
-	}
-
-	/**
-	 * Determine the ID based on Company Or Person settings.
-	 *
-	 * @return string
-	 */
-	private function get_publisher() {
-		if ( $this->context->site_represents === 'person' ) {
-			return $this->context->site_url . WPSEO_Schema_IDs::PERSON_HASH;
-		}
-
-		return $this->context->site_url . WPSEO_Schema_IDs::ORGANIZATION_HASH;
 	}
 
 	/**
@@ -83,7 +78,7 @@ class WPSEO_Schema_Website implements WPSEO_Graph_Piece {
 	 * @return array $data
 	 */
 	private function add_alternate_name( $data ) {
-		if ( '' !== WPSEO_Options::get( 'alternate_website_name', '' ) ) {
+		if ( WPSEO_Options::get( 'alternate_website_name', '' ) !== '' ) {
 			$data['alternateName'] = WPSEO_Options::get( 'alternate_website_name' );
 		}
 
@@ -113,11 +108,11 @@ class WPSEO_Schema_Website implements WPSEO_Graph_Piece {
 			 */
 			$search_url = apply_filters( 'wpseo_json_ld_search_url', $this->context->site_url . '?s={search_term_string}' );
 
-			$data['potentialAction'] = array(
+			$data['potentialAction'] = [
 				'@type'       => 'SearchAction',
 				'target'      => $search_url,
 				'query-input' => 'required name=search_term_string',
-			);
+			];
 		}
 
 		return $data;

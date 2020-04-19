@@ -1,8 +1,7 @@
 Name: Robokassa Gateway;
-Version: 1.5.2;
+Version: 1.5.4;
 ItemID:11423;
 Support Core: 15.9.0;
 Description: Подключение сайта к платежному агрегатору Robokassa https://Robokassa.ru (ФЗ-54);
 Author: Плечев Андрей;
 Author URI: http://codeseller.ru/;
-Add-on URI: http://codeseller.ru/products/robokassa-gateway-podklyuchenie-wp-recall-k-platezhnomu-agregatoru-robokassa/;

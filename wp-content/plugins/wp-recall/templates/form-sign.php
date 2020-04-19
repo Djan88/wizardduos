@@ -1,6 +1,6 @@
 <?php
 global $typeform;
-if ( !$typeform || $typeform == 'sign' )
+if ( ! $typeform || $typeform == 'sign' )
 	$f_sign = 'style="display:block;"';
 ?>
 
@@ -8,14 +8,14 @@ if ( !$typeform || $typeform == 'sign' )
     <div class="form_head">
         <div class="form_auth form_active"><?php _e( 'Authorization', 'wp-recall' ); ?></div>
 		<?php if ( rcl_is_register_open() ): ?>
-			<div class="form_reg"><?php if ( !$typeform ) { ?><a href="#" class="link-register-rcl link-tab-rcl "><?php _e( 'Registration', 'wp-recall' ); ?></a><?php } ?></div>
-<?php endif; ?>
+			<div class="form_reg"><?php if ( ! $typeform ) { ?><a href="#" class="link-register-rcl link-tab-rcl "><?php _e( 'Registration', 'wp-recall' ); ?></a><?php } ?></div>
+		<?php endif; ?>
     </div>
 
     <div class="form-block-rcl"><?php rcl_notice_form( 'login' ); ?></div>
 
-<?php $user_login	 = (isset( $_REQUEST['user_login'] )) ? wp_strip_all_tags( $_REQUEST['user_login'], 0 ) : ''; ?>
-<?php $user_pass	 = (isset( $_REQUEST['user_pass'] )) ? wp_strip_all_tags( $_REQUEST['user_pass'], 0 ) : ''; ?>
+	<?php $user_login	 = (isset( $_REQUEST['user_login'] )) ? wp_strip_all_tags( $_REQUEST['user_login'], 0 ) : ''; ?>
+	<?php $user_pass	 = (isset( $_REQUEST['user_pass'] )) ? wp_strip_all_tags( $_REQUEST['user_pass'], 0 ) : ''; ?>
 
     <form action="<?php rcl_form_action( 'login' ); ?>" method="post">
         <div class="form-block-rcl default-field">
@@ -29,7 +29,7 @@ if ( !$typeform || $typeform == 'sign' )
             <span class="required">*</span>
         </div>
         <div class="form-block-rcl">
-<?php do_action( 'login_form' ); ?>
+			<?php do_action( 'login_form' ); ?>
 
             <div class="default-field rcl-field-input type-checkbox-input">
                 <div class="rcl-checkbox-box">
@@ -40,8 +40,8 @@ if ( !$typeform || $typeform == 'sign' )
         </div>
         <div class="form-block-rcl">
             <input type="submit" class="recall-button link-tab-form" name="submit-login" value="<?php _e( 'Entry', 'wp-recall' ); ?>">
-            <a href="#" class="link-remember-rcl link-tab-rcl "><?php _e( 'Lost your Password', 'wp-recall' ); // Забыли пароль  ?>?</a>
-<?php echo wp_nonce_field( 'login-key-rcl', 'login_wpnonce', true, false ); ?>
+            <a href="#" class="link-remember-rcl link-tab-rcl "><?php _e( 'Lost your Password', 'wp-recall' ); // Забыли пароль   ?>?</a>
+			<?php echo wp_nonce_field( 'login-key-rcl', 'login_wpnonce', true, false ); ?>
             <input type="hidden" name="redirect_to" value="<?php rcl_referer_url( 'login' ); ?>">
         </div>
     </form>

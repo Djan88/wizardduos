@@ -1665,3 +1665,97 @@ body .ssi-modalOuter .ssi-modalTitle {
     z-index: -99;
 }
 /*end*/
+
+/*
+    32. New RCL Notice
+*/
+.rcl-notice {
+    box-sizing: border-box;
+    clear: both;
+    font-size: 16px;
+    line-height: normal;
+    margin: 12px 0 !important;
+    overflow: hidden;
+    padding: 12px 36px !important;
+    position: relative;
+}
+.rcl-notice__border {
+    border-width: 1px;
+    border-style: solid;
+}
+/* AAA accebillity color > 7 contrast*/
+.rcl-notice__type-info {
+    background-color: #fff7da;
+    color: #56562a;
+}
+/* border is background-color down to 20 point in firefox */
+.rcl-notice__type-info.rcl-notice__border {
+    border-color: #ebe3c6;
+}
+.rcl-notice__type-success {
+    background-color: #e6f4cd;
+    color: #2e582e;
+}
+.rcl-notice__type-success.rcl-notice__border {
+    border-color: #d2e0b9;
+}
+.rcl-notice__type-warning {
+    background-color: #ffe0b1;
+    color: #594628;
+}
+.rcl-notice__type-warning.rcl-notice__border {
+    border-color: #ebcc9d;
+}
+.rcl-notice__type-error {
+    background-color: #f9dcdc;
+    color: #71363e;
+}
+.rcl-notice__type-error.rcl-notice__border {
+    border-color: #e5c8c8;
+}
+.rcl-notice__type-simple {
+    background-color: #eee;
+    color: #4e4e4e;
+}
+.rcl-notice__type-simple.rcl-notice__border {
+    border-color: #dadada;
+}
+.rcl-notice > .rcli {
+    color: rgba(0, 0, 0, 0.08);
+    font-size: 52px;
+    left: -10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.rcl-notice .rcl-notice__text {
+    text-align: center;
+}
+.rcl-notice__text > p {
+    margin: 0;
+    padding: 0;
+}
+.rcl-notice__title {
+    color: currentColor;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 0 0 6px 6px;
+}
+.rcl-notice__close {
+    cursor: pointer;
+    font-size: 15px;
+    line-height: 15px;
+    position: absolute;
+    right: 2px;
+    top: 0;
+}
+.rcl-notice__close:hover {
+    opacity: .7;
+}
+.rcl-notice__close::before {
+    color: currentColor;
+    content: "\f00d";
+    font-family: rcl-awesome;
+}
+
+/**/

@@ -2,7 +2,7 @@
 /*
 	Plugin Name: Health Check Troubleshooting Mode
 	Description: Conditionally disabled themes or plugins on your site for a given session, used to rule out conflicts during troubleshooting.
-	Version: 1.5.1
+	Version: 1.7.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Set the MU plugin version.
-define( 'HEALTH_CHECK_TROUBLESHOOTING_MODE_PLUGIN_VERSION', '1.5.1' );
+define( 'HEALTH_CHECK_TROUBLESHOOTING_MODE_PLUGIN_VERSION', '1.7.0' );
 
 class Health_Check_Troubleshooting_MU {
 	private $disable_hash    = null;
@@ -23,7 +23,7 @@ class Health_Check_Troubleshooting_MU {
 	private $self_fetching_theme = false;
 
 	private $available_query_args = array(
-		'health-check-disable-plugins',
+		'wp-health-check-disable-plugins',
 		'health-check-disable-plugins-hash',
 		'health-check-disable-troubleshooting',
 		'health-check-change-active-theme',
@@ -64,6 +64,11 @@ class Health_Check_Troubleshooting_MU {
 		add_filter( 'pre_option_template', array( $this, 'health_check_troubleshoot_theme_template' ) );
 		add_filter( 'pre_option_stylesheet', array( $this, 'health_check_troubleshoot_theme_stylesheet' ) );
 
+		add_filter( 'wp_fatal_error_handler_enabled', array( $this, 'wp_fatal_error_handler_enabled' ) );
+
+		add_filter( 'bulk_actions-plugins', array( $this, 'remove_plugin_bulk_actions' ) );
+		add_filter( 'handle_bulk_actions-plugins', array( $this, 'handle_plugin_bulk_actions' ), 10, 3 );
+
 		add_action( 'admin_notices', array( $this, 'prompt_install_default_theme' ) );
 		add_filter( 'user_has_cap', array( $this, 'remove_plugin_theme_install' ) );
 
@@ -75,7 +80,7 @@ class Health_Check_Troubleshooting_MU {
 		add_action( 'wp_logout', array( $this, 'health_check_troubleshooter_mode_logout' ) );
 		add_action( 'init', array( $this, 'health_check_troubleshoot_get_captures' ) );
 
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 
 		/*
 		 * Plugin activations can be forced by other tools in things like themes, so let's
@@ -102,16 +107,35 @@ class Health_Check_Troubleshooting_MU {
 	}
 
 	/**
-	 * Enqueue styles used by the MU plugin if applicable.
+	 * Enqueue styles and scripts used by the MU plugin if applicable.
 	 *
 	 * @return void
 	 */
-	public function enqueue_styles() {
+	public function enqueue_assets() {
 		if ( ! $this->is_troubleshooting() || ! is_admin() ) {
 			return;
 		}
 
 		wp_enqueue_style( 'health-check-troubleshooting-mode', plugins_url( '/health-check/assets/css/health-check-troubleshooting-mode.css' ), array(), HEALTH_CHECK_TROUBLESHOOTING_MODE_PLUGIN_VERSION );
+		wp_enqueue_script( 'health-check', plugins_url( '/health-check/assets/javascript/health-check.js' ), array( 'jquery', 'wp-a11y', 'clipboard', 'wp-util' ), HEALTH_CHECK_TROUBLESHOOTING_MODE_PLUGIN_VERSION, true );
+	}
+
+	/**
+	 * Allow troubleshooting Mode to override the WSOD protection introduced in WordPress 5.2.0
+	 *
+	 * This will prevent incorrect reporting of errors while testing sites, without touching the
+	 * settings put in by site admins in regular scenarios.
+	 *
+	 * @param bool $enabled
+	 *
+	 * @return bool
+	 */
+	public function wp_fatal_error_handler_enabled( $enabled ) {
+		if ( ! $this->is_troubleshooting() ) {
+			return $enabled;
+		}
+
+		return false;
 	}
 
 	/**
@@ -131,10 +155,14 @@ class Health_Check_Troubleshooting_MU {
 		printf(
 			'<div class="notice notice-warning dismissable"><p>%s</p><p><a href="%s" class="button button-primary">%s</a></p></div>',
 			esc_html__( 'You don\'t have any of the default themes installed. A default theme helps you determine if your current theme is causing conflicts.', 'health-check' ),
-			esc_url( admin_url( sprintf(
-				'theme-install.php?theme=%s',
-				$this->default_themes[0]
-			) ) ),
+			esc_url(
+				admin_url(
+					sprintf(
+						'theme-install.php?theme=%s',
+						$this->default_themes[0]
+					)
+				)
+			),
 			esc_html__( 'Install a default theme', 'health-check' )
 		);
 	}
@@ -188,6 +216,104 @@ class Health_Check_Troubleshooting_MU {
 		update_option( 'active_plugins', $this->active_plugins );
 	}
 
+	public function handle_plugin_bulk_actions( $sendback, $action, $plugins ) {
+		if ( ! $this->is_troubleshooting() && 'health-check-troubleshoot' !== $action ) {
+			return $sendback;
+		}
+
+		$sendback = self_admin_url( 'plugins.php' );
+
+		if ( 'health-check-troubleshoot' === $action ) {
+			foreach ( $plugins as $single_plugin ) {
+				$plugin_slug = explode( '/', $single_plugin );
+				$plugin_slug = $plugin_slug[0];
+
+				if ( in_array( $single_plugin, $this->active_plugins ) ) {
+					$this->allowed_plugins[ $plugin_slug ] = $plugin_slug;
+				}
+			}
+
+			Health_Check_Troubleshoot::initiate_troubleshooting_mode( $this->allowed_plugins );
+
+			if ( ! $this->test_site_state() ) {
+				$this->allowed_plugins = array();
+				update_option( 'health-check-allowed-plugins', $this->allowed_plugins );
+
+				$this->add_dashboard_notice(
+					__( 'When enabling troubleshooting on the selected plugins, a site failure occurred. Because of this the selected plugins were kept disabled while troubleshooting mode started.', 'health-check' ),
+					'warning'
+				);
+			}
+		}
+
+		if ( 'health-check-enable' === $action ) {
+			$old_allowed_plugins = $this->allowed_plugins;
+
+			foreach ( $plugins as $single_plugin ) {
+				$plugin_slug = explode( '/', $single_plugin );
+				$plugin_slug = $plugin_slug[0];
+
+				if ( in_array( $single_plugin, $this->active_plugins ) ) {
+					$this->allowed_plugins[ $plugin_slug ] = $plugin_slug;
+				}
+			}
+
+			update_option( 'health-check-allowed-plugins', $this->allowed_plugins );
+
+			if ( ! $this->test_site_state() ) {
+				$this->allowed_plugins = $old_allowed_plugins;
+				update_option( 'health-check-allowed-plugins', $old_allowed_plugins );
+
+				$this->add_dashboard_notice(
+					__( 'When bulk-enabling plugins, a site failure occurred. Because of this the change was automatically reverted.', 'health-check' ),
+					'warning'
+				);
+			}
+		}
+
+		if ( 'health-check-disable' === $action ) {
+			$old_allowed_plugins = $this->allowed_plugins;
+
+			foreach ( $plugins as $single_plugin ) {
+				$plugin_slug = explode( '/', $single_plugin );
+				$plugin_slug = $plugin_slug[0];
+
+				if ( in_array( $single_plugin, $this->active_plugins ) ) {
+					unset( $this->allowed_plugins[ $plugin_slug ] );
+				}
+			}
+
+			update_option( 'health-check-allowed-plugins', $this->allowed_plugins );
+
+			if ( ! $this->test_site_state() ) {
+				$this->allowed_plugins = $old_allowed_plugins;
+				update_option( 'health-check-allowed-plugins', $old_allowed_plugins );
+
+				$this->add_dashboard_notice(
+					__( 'When bulk-disabling plugins, a site failure occurred. Because of this the change was automatically reverted.', 'health-check' ),
+					'warning'
+				);
+			}
+		}
+
+		return $sendback;
+	}
+
+	public function remove_plugin_bulk_actions( $actions ) {
+		if ( ! $this->is_troubleshooting() ) {
+			$actions['health-check-troubleshoot'] = __( 'Troubleshoot', 'health-check' );
+
+			return $actions;
+		}
+
+		$actions = array(
+			'health-check-enable'  => __( 'Enable while troubleshooting', 'health-check' ),
+			'health-check-disable' => __( 'Disable while troubleshooting', 'health-check' ),
+		);
+
+		return $actions;
+	}
+
 	/**
 	 * Modify plugin actions.
 	 *
@@ -227,25 +353,36 @@ class Health_Check_Troubleshooting_MU {
 
 		// Set a slug if the plugin lives in the plugins directory root.
 		if ( ! stristr( $plugin_file, '/' ) ) {
-			$plugin_data['slug'] = $plugin_file;
+			$plugin_slug = $plugin_file;
+		} else { // Set the slug for plugin inside a folder.
+			$plugin_slug = explode( '/', $plugin_file );
+			$plugin_slug = $plugin_slug[0];
 		}
-
-		$plugin_slug = ( isset( $plugin_data['slug'] ) ? $plugin_data['slug'] : sanitize_title( $plugin_data['Name'] ) );
 
 		if ( in_array( $plugin_slug, $this->allowed_plugins ) ) {
 			$actions['troubleshoot-disable'] = sprintf(
 				'<a href="%s">%s</a>',
-				esc_url( add_query_arg( array(
-					'health-check-troubleshoot-disable-plugin' => $plugin_slug,
-				), admin_url( 'plugins.php' ) ) ),
+				esc_url(
+					add_query_arg(
+						array(
+							'health-check-troubleshoot-disable-plugin' => $plugin_slug,
+						),
+						admin_url( 'plugins.php' )
+					)
+				),
 				esc_html__( 'Disable while troubleshooting', 'health-check' )
 			);
 		} else {
 			$actions['troubleshoot-disable'] = sprintf(
 				'<a href="%s">%s</a>',
-				esc_url( add_query_arg( array(
-					'health-check-troubleshoot-enable-plugin' => $plugin_slug,
-				), admin_url( 'plugins.php' ) ) ),
+				esc_url(
+					add_query_arg(
+						array(
+							'health-check-troubleshoot-enable-plugin' => $plugin_slug,
+						),
+						admin_url( 'plugins.php' )
+					)
+				),
 				esc_html__( 'Enable while troubleshooting', 'health-check' )
 			);
 		}
@@ -277,8 +414,8 @@ class Health_Check_Troubleshooting_MU {
 	 */
 	public function is_troubleshooting() {
 		// Check if a session cookie to disable plugins has been set.
-		if ( isset( $_COOKIE['health-check-disable-plugins'] ) ) {
-			$_GET['health-check-disable-plugin-hash'] = $_COOKIE['health-check-disable-plugins'] . md5( $_SERVER['REMOTE_ADDR'] );
+		if ( isset( $_COOKIE['wp-health-check-disable-plugins'] ) ) {
+			$_GET['health-check-disable-plugin-hash'] = $_COOKIE['wp-health-check-disable-plugins'] . md5( $_SERVER['REMOTE_ADDR'] );
 		}
 
 		// If the disable hash isn't set, no need to interact with things.
@@ -462,14 +599,14 @@ class Health_Check_Troubleshooting_MU {
 			return;
 		}
 
-		if ( isset( $_COOKIE['health-check-disable-plugins'] ) ) {
+		if ( isset( $_COOKIE['wp-health-check-disable-plugins'] ) ) {
 			$this->disable_troubleshooting_mode();
 		}
 	}
 
 	function disable_troubleshooting_mode() {
-		unset( $_COOKIE['health-check-disable-plugins'] );
-		setcookie( 'health-check-disable-plugins', null, 0, COOKIEPATH, COOKIE_DOMAIN );
+		unset( $_COOKIE['wp-health-check-disable-plugins'] );
+		setcookie( 'wp-health-check-disable-plugins', null, 0, COOKIEPATH, COOKIE_DOMAIN );
 		delete_option( 'health-check-allowed-plugins' );
 		delete_option( 'health-check-default-theme' );
 		delete_option( 'health-check-current-theme' );
@@ -619,34 +756,46 @@ class Health_Check_Troubleshooting_MU {
 		include_once( trailingslashit( ABSPATH ) . 'wp-admin/includes/theme.php' );
 
 		// Add top-level menu item.
-		$wp_menu->add_menu( array(
-			'id'    => 'health-check',
-			'title' => esc_html__( 'Troubleshooting Mode', 'health-check' ),
-		) );
+		$wp_menu->add_menu(
+			array(
+				'id'    => 'health-check',
+				'title' => esc_html__( 'Troubleshooting Mode', 'health-check' ),
+				'href'  => admin_url( '/' ),
+			)
+		);
 
 		// Add a link to manage plugins if there are more than 20 set to be active.
 		if ( count( $this->active_plugins ) > 20 ) {
-			$wp_menu->add_node( array(
-				'id'     => 'health-check-plugins',
-				'title'  => esc_html__( 'Manage active plugins', 'health-check' ),
-				'parent' => 'health-check',
-				'href'   => admin_url( 'plugins.php' ),
-			) );
+			$wp_menu->add_node(
+				array(
+					'id'     => 'health-check-plugins',
+					'title'  => esc_html__( 'Manage active plugins', 'health-check' ),
+					'parent' => 'health-check',
+					'href'   => admin_url( 'plugins.php' ),
+				)
+			);
 		} else {
-			$wp_menu->add_node( array(
-				'id'     => 'health-check-plugins',
-				'title'  => esc_html__( 'Plugins', 'health-check' ),
-				'parent' => 'health-check',
-			) );
+			$wp_menu->add_node(
+				array(
+					'id'     => 'health-check-plugins',
+					'title'  => esc_html__( 'Plugins', 'health-check' ),
+					'parent' => 'health-check',
+					'href'   => admin_url( 'plugins.php' ),
+				)
+			);
 
-			$wp_menu->add_group( array(
-				'id'     => 'health-check-plugins-enabled',
-				'parent' => 'health-check-plugins',
-			) );
-			$wp_menu->add_group( array(
-				'id'     => 'health-check-plugins-disabled',
-				'parent' => 'health-check-plugins',
-			) );
+			$wp_menu->add_group(
+				array(
+					'id'     => 'health-check-plugins-enabled',
+					'parent' => 'health-check-plugins',
+				)
+			);
+			$wp_menu->add_group(
+				array(
+					'id'     => 'health-check-plugins-disabled',
+					'parent' => 'health-check-plugins',
+				)
+			);
 
 			foreach ( $this->active_plugins as $single_plugin ) {
 				$plugin_slug = explode( '/', $single_plugin );
@@ -665,9 +814,11 @@ class Health_Check_Troubleshooting_MU {
 							$plugin_data['Name']
 						)
 					);
-					$url = add_query_arg( array(
-						'health-check-troubleshoot-disable-plugin' => $plugin_slug,
-					) );
+					$url = add_query_arg(
+						array(
+							'health-check-troubleshoot-disable-plugin' => $plugin_slug,
+						)
+					);
 				} else {
 					$enabled = false;
 					$label   = sprintf(
@@ -678,28 +829,35 @@ class Health_Check_Troubleshooting_MU {
 							$plugin_data['Name']
 						)
 					);
-					$url = add_query_arg( array(
-						'health-check-troubleshoot-enable-plugin' => $plugin_slug,
-					) );
+					$url = add_query_arg(
+						array(
+							'health-check-troubleshoot-enable-plugin' => $plugin_slug,
+						)
+					);
 				}
 
-				$wp_menu->add_node( array(
-					'id'     => sprintf(
-						'health-check-plugin-%s',
-						$plugin_slug
-					),
-					'title'  => $label,
-					'parent' => ( $enabled ? 'health-check-plugins-enabled' : 'health-check-plugins-disabled' ),
-					'href'   => $url,
-				) );
+				$wp_menu->add_node(
+					array(
+						'id'     => sprintf(
+							'health-check-plugin-%s',
+							$plugin_slug
+						),
+						'title'  => $label,
+						'parent' => ( $enabled ? 'health-check-plugins-enabled' : 'health-check-plugins-disabled' ),
+						'href'   => $url,
+					)
+				);
 			}
 		}
 
-		$wp_menu->add_node( array(
-			'id'     => 'health-check-theme',
-			'title'  => esc_html__( 'Themes', 'health-check' ),
-			'parent' => 'health-check',
-		) );
+		$wp_menu->add_node(
+			array(
+				'id'     => 'health-check-theme',
+				'title'  => esc_html__( 'Themes', 'health-check' ),
+				'parent' => 'health-check',
+				'href'   => admin_url( 'themes.php' ),
+			)
+		);
 
 		$themes = wp_prepare_themes_for_js();
 
@@ -711,31 +869,36 @@ class Health_Check_Troubleshooting_MU {
 				),
 				'title'  => sprintf(
 					'%s %s',
-					// translators: Prefix for the active theme in a listing.
-					( $theme['active'] ? esc_html__( 'Active:', 'health-check' ) : '' ),
+					( $theme['active'] ? esc_html_x( 'Active:', 'Prefix for the active theme in troubleshooting mode', 'health-check' ) : esc_html_x( 'Switch to', 'Prefix for inactive themes in troubleshooting mode', 'health-check' ) ),
 					$theme['name']
 				),
 				'parent' => 'health-check-theme',
 			);
 
 			if ( ! $theme['active'] ) {
-				$node['href'] = add_query_arg( array(
-					'health-check-change-active-theme' => $theme['id'],
-				) );
+				$node['href'] = add_query_arg(
+					array(
+						'health-check-change-active-theme' => $theme['id'],
+					)
+				);
 			}
 
 			$wp_menu->add_node( $node );
 		}
 
 		// Add a link to disable Troubleshooting Mode.
-		$wp_menu->add_node( array(
-			'id'     => 'health-check-disable',
-			'title'  => esc_html__( 'Disable Troubleshooting Mode', 'health-check' ),
-			'parent' => 'health-check',
-			'href'   => add_query_arg( array(
-				'health-check-disable-troubleshooting' => true,
-			) ),
-		) );
+		$wp_menu->add_node(
+			array(
+				'id'     => 'health-check-disable',
+				'title'  => esc_html__( 'Disable Troubleshooting Mode', 'health-check' ),
+				'parent' => 'health-check',
+				'href'   => add_query_arg(
+					array(
+						'health-check-disable-troubleshooting' => true,
+					)
+				),
+			)
+		);
 	}
 
 	public function test_site_state() {
@@ -773,21 +936,6 @@ class Health_Check_Troubleshooting_MU {
 		if ( 'dashboard' !== $screen->id && 'plugins' !== $screen->id ) {
 			return;
 		}
-		?>
-<script type="text/javascript">
-	jQuery( document ).ready(function( $ ) {
-		$( '.health-check-toggle-visibility' ).click(function() {
-			var $elements = $( '.toggle-visibility', $( '#' + $ ( this ).data( 'element' ) ).closest( '.welcome-panel-column' ) );
-
-			if ( $elements.is( ':visible' ) ) {
-				$elements.attr( 'aria-hidden', 'false' ).toggle();
-			} else {
-				$elements.attr( 'aria-hidden', 'true' ).toggle();
-			}
-		});
-	});
-</script>
-		<?php
 	}
 
 	public function display_dashboard_widget() {
@@ -802,231 +950,287 @@ class Health_Check_Troubleshooting_MU {
 		}
 
 		$notices = get_option( 'health-check-dashboard-notices', array() );
+
+		$active_plugins   = array();
+		$inactive_plugins = array();
+
+		$themes = wp_prepare_themes_for_js();
 		?>
 		<div class="wrap">
-			<div id="health-check-dashboard-widget" class="welcome-panel">
-				<div class="welcome-panel-content">
+			<div id="health-check-dashboard-widget">
+				<div class="welcome-panel-content health-check-column">
 					<h2>
-						<?php esc_html_e( 'Health Check &mdash; Troubleshooting Mode', 'health-check' ); ?>
+						<?php
+							printf(
+								// translators: %s: The running status of Troubleshooting Mode.
+								esc_html__( 'Troubleshooting Mode - %s', 'health-check' ),
+								sprintf(
+									'<span class="green">%s</span>',
+									esc_html__( 'enabled', 'health-check' )
+								)
+							);
+						?>
 					</h2>
 
-					<p class="about-description">
-						<?php _e( 'Your site is currently in Troubleshooting Mode. This has <strong>no effect on your site visitors</strong>, they will continue to view your site as usual, but for you it will look as if you had just installed WordPress for the first time.', 'health-check' ); ?>
-					</p>
+					<?php
+					printf(
+						'<a href="%s" class="button button-primary">%s</a>',
+						esc_url(
+							add_query_arg(
+								array(
+									'health-check-disable-troubleshooting' => true,
+								)
+							)
+						),
+						esc_html__( 'Disable Troubleshooting Mode', 'health-check' )
+					);
+					?>
 
-					<p class="about-description">
-						<?php _e( 'Here you can enable individual plugins or themes, helping you to find out what might be causing strange behaviors on your site. Do note that <strong>any changes you make to settings will be kept</strong> when you disable Troubleshooting Mode.', 'health-check' ); ?>
-					</p>
+					<div class="about-description">
+						<p>
+							<?php _e( 'Your site is currently in Troubleshooting Mode. This has <strong>no effect on your site visitors</strong>, they will continue to view your site as usual, but for you it will look as if you had just installed WordPress for the first time.', 'health-check' ); ?>
+						</p>
 
-					<div class="notices">
-						<h3>
-							<span class="dashicons dashicons-flag"></span>
-							<?php esc_html_e( 'Notices', 'health-check' ); ?>
-						</h3>
-
-						<?php if ( empty( $notices ) && 'plugins' !== $screen->id ) : ?>
-							<div class="no-notices">
-								<p>
-									<?php esc_html_e( 'There are no notices to show.', 'health-check' ); ?>
-								</p>
-							</div>
-						<?php endif; ?>
-
-						<?php if ( 'plugins' === $screen->id ) : ?>
-							<div class="notice notice-warning inline">
-								<p>
-									<?php esc_html_e( 'Plugin actions, such as activating and deactivating, are not available while in Troubleshooting Mode.', 'health-check' ); ?>
-								</p>
-							</div>
-						<?php endif; ?>
-
-						<?php
-						foreach ( $notices as $notice ) {
-							printf(
-								'<div class="notice notice-%s inline"><p>%s</p></div>',
-								esc_attr( $notice['severity'] ),
-								esc_html( $notice['message'] )
-							);
-						}
-						?>
-
-						<?php
-						if ( ! empty( $notices ) ) {
-							printf(
-								'<a href="%s" class="dismiss-notices">%s</a>',
-								esc_url( add_query_arg( array(
-									'health-check-dismiss-notices' => true,
-								) ) ),
-								esc_html__( 'Dismiss notices', 'health-check' )
-							);
-						}
-						?>
+						<p>
+							<?php _e( 'Here you can enable individual plugins or themes, helping you to find out what might be causing strange behaviors on your site. Do note that <strong>any changes you make to settings will be kept</strong> when you disable Troubleshooting Mode.', 'health-check' ); ?>
+						</p>
 					</div>
+				</div>
 
-					<div class="welcome-panel-column-container">
-						<div class="welcome-panel-column">
-							<?php if ( 'plugins' !== $screen->id ) : ?>
-								<h3>
-									<span class="dashicons dashicons-admin-plugins"></span>
-									<?php esc_html_e( 'Available Plugins', 'health-check' ); ?>
-								</h3>
-
-								<ul id="health-check-plugins">
+				<div class="health-check-column">
+					<dl role="presentation" class="health-check-accordion">
+						<dt role="heading" aria-level="3">
+							<button aria-expanded="false" class="health-check-accordion-trigger" aria-controls="health-check-accordion-block-plugins" id="health-check-accordion-heading-plugins" type="button">
+								<span class="title">
 									<?php
-									$active_plugins   = array();
-									$inactive_plugins = array();
-
-									foreach ( $this->active_plugins as $count => $single_plugin ) {
-										$plugin_slug = explode( '/', $single_plugin );
-										$plugin_slug = $plugin_slug[0];
-
-										$plugin_is_visible = true;
-										if ( $count >= 5 ) {
-											$plugin_is_visible = false;
-										}
-
-										$plugin_data = get_plugin_data( trailingslashit( WP_PLUGIN_DIR ) . $single_plugin );
-
-										$actions = array();
-
-										if ( in_array( $plugin_slug, $this->allowed_plugins ) ) {
-											$actions[] = sprintf(
-												'<a href="%s" aria-label="%s">%s</a>',
-												esc_url( add_query_arg( array(
-													'health-check-troubleshoot-disable-plugin' => $plugin_slug,
-												) ) ),
-												esc_attr(
-													sprintf(
-														// translators: %s: Plugin name.
-														__( 'Disable the plugin, %s, while troubleshooting.', 'health-check' ),
-														$plugin_data['Name']
-													)
-												),
-												esc_html__( 'Disable', 'health-check' )
-											);
-										} else {
-											$actions[] = sprintf(
-												'<a href="%s" aria-label="%s">%s</a>',
-												esc_url( add_query_arg( array(
-													'health-check-troubleshoot-enable-plugin' => $plugin_slug,
-												) ) ),
-												esc_attr(
-													sprintf(
-														// translators: %s: Plugin name.
-														__( 'Enable the plugin, %s, while troubleshooting.', 'health-check' ),
-														$plugin_data['Name']
-													)
-												),
-												esc_html__( 'Enable', 'health-check' )
-											);
-										}
-
-										printf(
-											'<li class="%s" aria-hidden="%s">%s - %s</li>',
-											( ! $plugin_is_visible ? 'toggle-visibility' : '' ),
-											( ! $plugin_is_visible ? 'true' : 'false' ),
-											esc_html( $plugin_data['Name'] ),
-											implode( ' | ', $actions )
-										);
-									}
+									printf(
+										// translators: %d: The amount of available plugins.
+										esc_html__( 'Available plugins (%d)', 'health-check' ),
+										esc_html( is_countable( $this->active_plugins ) ? count( $this->active_plugins ) : 0 )
+									);
 									?>
-								</ul>
+								</span>
+								<span class="icon"></span>
+							</button>
+						</dt>
+						<dd id="health-check-accordion-block-plugins" role="region" aria-labelledby="health-check-accordion-heading-plugins" class="health-check-accordion-panel" hidden="hidden">
+							<ul id="health-check-plugins" role="list">
+								<?php
+								$has_toggle = false;
 
-								<?php if ( count( $this->active_plugins ) > 5 ) : ?>
-								<p>
-									<button type="button" class="button button-link health-check-toggle-visibility toggle-visibility visible" aria-hidden="false" data-element="health-check-plugins">
-										<?php esc_html_e( 'Show all plugins', 'health-check' ); ?> <span class="icon"></span>
-									</button>
+								foreach ( $this->active_plugins as $count => $single_plugin ) {
+									$plugin_slug = explode( '/', $single_plugin );
+									$plugin_slug = $plugin_slug[0];
 
-									<button type="button" class="button button-link health-check-toggle-visibility toggle-visibility" aria-hidden="true" data-element="health-check-plugins">
-										<?php esc_html_e( 'Show fewer plugins', 'health-check' ); ?> <span class="icon icon-up"></span>
-									</button>
-								</p>
-								<?php endif; ?>
-							<?php endif; ?>
-						</div>
+									$plugin_is_visible = true;
+									if ( $count >= 5 ) {
+										$plugin_is_visible = false;
+									}
 
-						<div class="welcome-panel-column">
-							<?php if ( 'plugins' !== $screen->id ) : ?>
-								<h3>
-									<span class="dashicons dashicons-admin-appearance"></span>
-									<?php esc_html_e( 'Available Themes', 'health-check' ); ?>
-								</h3>
+									$plugin_data = get_plugin_data( trailingslashit( WP_PLUGIN_DIR ) . $single_plugin );
 
-								<ul id="health-check-themes">
-									<?php
-									$themes = wp_prepare_themes_for_js();
+									$actions = array();
 
-									foreach ( $themes as $count => $theme ) {
-										$active = $theme['active'];
-
-										$theme_is_visible = true;
-										if ( $count >= 5 ) {
-											$theme_is_visible = false;
-										}
-
-										$actions = sprintf(
+									if ( in_array( $plugin_slug, $this->allowed_plugins ) ) {
+										$actions[] = sprintf(
 											'<a href="%s" aria-label="%s">%s</a>',
-											esc_url( add_query_arg( array(
-												'health-check-change-active-theme' => $theme['id'],
-											) ) ),
-											esc_attr(
-												sprintf(
-													// translators: %s: Theme name.
-													__( 'Switch the active theme to %s', 'health-check' ),
-													$theme['name']
+											esc_url(
+												add_query_arg(
+													array(
+														'health-check-troubleshoot-disable-plugin' => $plugin_slug,
+													)
 												)
 											),
-											esc_html__( 'Switch to this theme', 'health-check' )
+											esc_attr(
+												sprintf(
+													// translators: %s: Plugin name.
+													__( 'Disable the plugin, %s, while troubleshooting.', 'health-check' ),
+													$plugin_data['Name']
+												)
+											),
+											esc_html__( 'Disable', 'health-check' )
 										);
-
-										$plugin_label = sprintf(
-											'%s %s',
-											// translators: Prefix for the active theme in a listing.
-											( $theme['active'] ? esc_html__( 'Active:', 'health-check' ) : '' ),
-											$theme['name']
-										);
-
-										if ( ! $theme['active'] ) {
-											$plugin_label .= ' - ' . $actions;
-										}
-
-										printf(
-											'<li class="%s" aria-hidden="%s">%s</li>',
-											( $theme_is_visible ? '' : 'toggle-visibility' ),
-											( $theme_is_visible ? 'false' : 'true' ),
-											$plugin_label
+									} else {
+										$actions[] = sprintf(
+											'<a href="%s" aria-label="%s">%s</a>',
+											esc_url(
+												add_query_arg(
+													array(
+														'health-check-troubleshoot-enable-plugin' => $plugin_slug,
+													)
+												)
+											),
+											esc_attr(
+												sprintf(
+													// translators: %s: Plugin name.
+													__( 'Enable the plugin, %s, while troubleshooting.', 'health-check' ),
+													$plugin_data['Name']
+												)
+											),
+											esc_html__( 'Enable', 'health-check' )
 										);
 									}
+
+									if ( ! $plugin_is_visible && ! $has_toggle ) {
+										$has_toggle = true;
+
+										printf(
+											'<li><button type="button" class="show-remaining button button-link">%s</button></li>',
+											sprintf(
+												// translators: %d: Amount of hidden plugins.
+												__( 'Show %d remaining plugins', 'health-check' ),
+												( is_countable( $this->active_plugins ) ? ( count( $this->active_plugins ) - 5 ) : 0 )
+											)
+										);
+									}
+
+									printf(
+										'<li class="%s">%s - %s</li>',
+										( ! $plugin_is_visible ? 'toggle-visibility hidden' : '' ),
+										esc_html( $plugin_data['Name'] ),
+										implode( ' | ', $actions )
+									);
+								}
+								?>
+							</ul>
+						</dd>
+
+						<dt role="heading" aria-level="3">
+							<button aria-expanded="false" class="health-check-accordion-trigger" aria-controls="health-check-accordion-block-themes" id="health-check-accordion-heading-themes" type="button">
+								<span class="title">
+									<?php
+									printf(
+										// translators: %d: The amount of available themes.
+										esc_html__( 'Available themes (%d)', 'health-check' ),
+										esc_html( is_countable( $themes ) ? count( $themes ) : 0 )
+									);
 									?>
-								</ul>
+								</span>
+								<span class="icon"></span>
+							</button>
+						</dt>
+						<dd id="health-check-accordion-block-themes" role="region" aria-labelledby="health-check-accordion-heading-themes" class="health-check-accordion-panel" hidden="hidden">
+							<ul id="health-check-themes" role="list">
+								<?php
+								$has_toggle = false;
 
-								<?php if ( count( $themes ) > 5 ) : ?>
+								foreach ( $themes as $count => $theme ) {
+									$theme_is_visible = true;
+									if ( $count >= 5 ) {
+										$theme_is_visible = false;
+									}
+
+									$actions = sprintf(
+										'<a href="%s" aria-label="%s">%s</a>',
+										esc_url(
+											add_query_arg(
+												array(
+													'health-check-change-active-theme' => $theme['id'],
+												)
+											)
+										),
+										esc_attr(
+											sprintf(
+												// translators: %s: Theme name.
+												__( 'Switch the active theme to %s', 'health-check' ),
+												$theme['name']
+											)
+										),
+										esc_html__( 'Switch to this theme', 'health-check' )
+									);
+
+									$plugin_label = sprintf(
+										'%s %s',
+										// translators: Prefix for the active theme in a listing.
+										( $theme['active'] ? esc_html__( 'Active:', 'health-check' ) : '' ),
+										$theme['name']
+									);
+
+									if ( ! $theme['active'] ) {
+										$plugin_label .= ' - ' . $actions;
+									}
+
+									if ( ! $theme_is_visible && ! $has_toggle ) {
+										$has_toggle = true;
+
+										printf(
+											'<li><button type="button" class="show-remaining button button-link">%s</button></li>',
+											sprintf(
+												// translators: %d: Amount of hidden themes.
+												__( 'Show %d remaining themes', 'health-check' ),
+												( is_countable( $themes ) ? ( count( $themes ) - 5 ) : 0 )
+											)
+										);
+									}
+
+									printf(
+										'<li class="%s">%s</li>',
+										( ! $theme_is_visible ? 'toggle-visibility hidden' : '' ),
+										$plugin_label
+									);
+								}
+								?>
+							</ul>
+						</dd>
+
+						<dt role="heading" aria-level="3">
+							<button aria-expanded="true" class="health-check-accordion-trigger" aria-controls="health-check-accordion-block-notices" id="health-check-accordion-heading-notices" type="button">
+								<span class="title">
+									<?php
+									printf(
+										// translators: %d: The amount of notices that are visible.
+										esc_html__( 'Notices (%d)', 'health-check' ),
+										esc_html( is_countable( $notices ) ? count( $notices ) : 0 )
+									);
+									?>
+								</span>
+								<span class="icon"></span>
+							</button>
+						</dt>
+						<dd id="health-check-accordion-block-notices" role="region" aria-labelledby="health-check-accordion-heading-notices" class="health-check-accordion-panel">
+							<?php if ( empty( $notices ) && 'plugins' !== $screen->id ) : ?>
+								<div class="no-notices">
 									<p>
-										<button type="button" class="button button-link health-check-toggle-visibility toggle-visibility visible" aria-hidden="false" data-element="health-check-themes">
-											<?php esc_html_e( 'Show all themes', 'health-check' ); ?> <span class="icon"></span>
-										</button>
-
-										<button type="button" class="button button-link health-check-toggle-visibility toggle-visibility" aria-hidden="true"  data-element="health-check-themes">
-											<?php esc_html_e( 'Show fewer themes', 'health-check' ); ?> <span class="icon icon-up"></span>
-										</button>
+										<?php esc_html_e( 'There are no notices to show.', 'health-check' ); ?>
 									</p>
-								<?php endif; ?>
+								</div>
 							<?php endif; ?>
-						</div>
 
-						<div class="welcome-panel-column <?php echo ( 'plugins' === $screen->id ? 'is-standalone-button' : '' ); ?>">
+							<?php if ( 'plugins' === $screen->id ) : ?>
+								<div class="notice notice-warning inline">
+									<p>
+										<?php esc_html_e( 'Plugin actions, such as activating and deactivating, are not available while in Troubleshooting Mode.', 'health-check' ); ?>
+									</p>
+								</div>
+							<?php endif; ?>
+
 							<?php
-							printf(
-								'<a href="%s" class="button button-primary button-hero disable-troubleshooting-mode">%s</a>',
-								esc_url( add_query_arg( array(
-									'health-check-disable-troubleshooting' => true,
-								) ) ),
-								esc_html__( 'Disable Troubleshooting Mode', 'health-check' )
-							);
+							foreach ( $notices as $notice ) {
+								printf(
+									'<div class="notice notice-%s inline"><p>%s</p></div>',
+									esc_attr( $notice['severity'] ),
+									esc_html( $notice['message'] )
+								);
+							}
 							?>
-						</div>
-					</div>
+
+							<?php
+							if ( ! empty( $notices ) ) {
+								printf(
+									'<div class="dismiss-notices"><a href="%s" class="">%s</a></div>',
+									esc_url(
+										add_query_arg(
+											array(
+												'health-check-dismiss-notices' => true,
+											)
+										)
+									),
+									esc_html__( 'Dismiss notices', 'health-check' )
+								);
+							}
+							?>
+						</dd>
+					</dl>
 				</div>
 			</div>
 		</div>

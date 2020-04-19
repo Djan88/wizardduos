@@ -11,6 +11,7 @@
  * @since 10.2
  */
 class WPSEO_Schema_Organization implements WPSEO_Graph_Piece {
+
 	/**
 	 * A value object with context variables.
 	 *
@@ -19,7 +20,7 @@ class WPSEO_Schema_Organization implements WPSEO_Graph_Piece {
 	private $context;
 
 	/**
-	 * WPSEO_Schema_Breadcrumb constructor.
+	 * WPSEO_Schema_Organization constructor.
 	 *
 	 * @param WPSEO_Schema_Context $context A value object with context variables.
 	 */
@@ -42,13 +43,13 @@ class WPSEO_Schema_Organization implements WPSEO_Graph_Piece {
 	 * @return array $data The Organization schema.
 	 */
 	public function generate() {
-		$data = array(
+		$data = [
 			'@type'  => 'Organization',
 			'@id'    => $this->context->site_url . WPSEO_Schema_IDs::ORGANIZATION_HASH,
 			'name'   => $this->context->company_name,
 			'url'    => $this->context->site_url,
 			'sameAs' => $this->fetch_social_profiles(),
-		);
+		];
 		$data = $this->add_logo( $data );
 
 		return $data;
@@ -62,18 +63,10 @@ class WPSEO_Schema_Organization implements WPSEO_Graph_Piece {
 	 * @return array $data The Organization schema.
 	 */
 	private function add_logo( $data ) {
-		$logo = WPSEO_Options::get( 'company_logo', '' );
-		if ( empty( $logo ) ) {
-			return $data;
-		}
-		$id            = $this->context->site_url . WPSEO_Schema_IDs::ORGANIZATION_LOGO_HASH;
-		$data['logo']  = array(
-			'@type'   => 'ImageObject',
-			'@id'     => $id,
-			'url'     => $logo,
-			'caption' => $this->context->company_name,
-		);
-		$data['image'] = array( '@id' => $id );
+		$schema_id     = $this->context->site_url . WPSEO_Schema_IDs::ORGANIZATION_LOGO_HASH;
+		$schema_image  = new WPSEO_Schema_Image( $schema_id );
+		$data['logo']  = $schema_image->generate_from_attachment_id( $this->context->company_logo_id, $this->context->company_name );
+		$data['image'] = [ '@id' => $schema_id ];
 
 		return $data;
 	}
@@ -88,8 +81,8 @@ class WPSEO_Schema_Organization implements WPSEO_Graph_Piece {
 	 * @return array $profiles An array of social profiles.
 	 */
 	private function fetch_social_profiles() {
-		$profiles        = array();
-		$social_profiles = array(
+		$profiles        = [];
+		$social_profiles = [
 			'facebook_site',
 			'instagram_url',
 			'linkedin_url',
@@ -97,7 +90,7 @@ class WPSEO_Schema_Organization implements WPSEO_Graph_Piece {
 			'youtube_url',
 			'pinterest_url',
 			'wikipedia_url',
-		);
+		];
 		foreach ( $social_profiles as $profile ) {
 			if ( WPSEO_Options::get( $profile, '' ) !== '' ) {
 				$profiles[] = WPSEO_Options::get( $profile );
@@ -107,6 +100,14 @@ class WPSEO_Schema_Organization implements WPSEO_Graph_Piece {
 		if ( WPSEO_Options::get( 'twitter_site', '' ) !== '' ) {
 			$profiles[] = 'https://twitter.com/' . WPSEO_Options::get( 'twitter_site' );
 		}
+
+		/**
+		 * Filter: 'wpseo_schema_organization_social_profiles' - Allows filtering social profiles for the
+		 * represented organization.
+		 *
+		 * @api string[] $profiles
+		 */
+		$profiles = apply_filters( 'wpseo_schema_organization_social_profiles', $profiles );
 
 		return $profiles;
 	}

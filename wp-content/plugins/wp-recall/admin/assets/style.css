@@ -910,6 +910,21 @@ div.rcl_preloader i.rcli::before {
 #custom_fields_editor_post .dynamic-values .dynamic-value input {
     width: calc(100% - 35px);
 }
+
+.wrap-recall-options .rcl-radio-box {
+	display: inline-flex;
+	align-items: center;
+	margin: 3px 6px 0 0;
+}
+.wrap-recall-options div.rcl-option .rcl-radio-box .block-label {
+	margin: 0;
+	padding: 0 0 0 5px;
+	line-height: 10px;
+}
+.wrap-recall-options .rcl-custom-field i.fa-info:not(.mce-ico) {
+	vertical-align: bottom;
+	font-size: 18px;
+}
 /* END backend publications */
 
 

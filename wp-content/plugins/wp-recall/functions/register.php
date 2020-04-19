@@ -19,7 +19,7 @@ function rcl_insert_user( $data ) {
 		, 'nickname'		 => $data['user_email']
 		, 'first_name'	 => $data['display_name']
 		, 'rich_editing'	 => 'true'  // false - выключить визуальный редактор для пользователя.
-	) );
+		) );
 
 	$user_id = wp_insert_user( $userdata );
 
@@ -85,7 +85,9 @@ function rcl_confirm_user_registration() {
 			if ( rcl_get_option( 'login_form_recall' ) == 2 ) {
 				wp_safe_redirect( wp_login_url() . '?success=checkemail' );
 			} else {
-				wp_redirect( get_bloginfo( 'wpurl' ) . '?action-rcl=login&success=checkemail' );
+				wp_redirect( add_query_arg( array(
+					'action-rcl' => 'login', 'success'	 => 'checkemail'
+						), home_url() ) );
 			}
 			exit;
 		}
@@ -94,7 +96,9 @@ function rcl_confirm_user_registration() {
 	if ( rcl_get_option( 'login_form_recall' ) == 2 ) {
 		wp_safe_redirect( wp_login_url() . '?checkemail=confirm' );
 	} else {
-		wp_redirect( get_bloginfo( 'wpurl' ) . '?action-rcl=login&login=checkemail' );
+		wp_redirect( add_query_arg( array(
+			'action-rcl' => 'login', 'login'		 => 'checkemail'
+				), home_url() ) );
 	}
 	exit;
 }
@@ -119,7 +123,7 @@ function rcl_add_shake_error_codes( $codes ) {
 		'rcl_register_email',
 		'rcl_register_login_us',
 		'rcl_register_email_us'
-	) );
+		) );
 }
 
 //регистрация пользователя на сайте
@@ -138,7 +142,7 @@ function rcl_get_register_user( $errors ) {
 	$email	 = $_POST['user_email'];
 	$login	 = sanitize_user( $_POST['user_login'] );
 
-	$ref = ($_POST['redirect_to']) ? apply_filters( 'url_after_register_rcl', esc_url( $_POST['redirect_to'] ) ) : wp_registration_url();
+	$ref = ($_POST['redirect_to']) ? apply_filters( 'url_after_register_rcl', $_POST['redirect_to'] ) : wp_registration_url();
 
 	$get_fields	 = rcl_get_profile_fields();
 	$required	 = true;
@@ -159,7 +163,7 @@ function rcl_get_register_user( $errors ) {
 
 					$count_field = count( $field['values'] );
 
-					for ( $a = 0; $a < $count_field; $a ++  ) {
+					for ( $a = 0; $a < $count_field; $a ++ ) {
 						if ( ! isset( $_POST[$slug][$a] ) ) {
 							$required = false;
 						} else {
@@ -260,7 +264,9 @@ function rcl_register_mail( $userdata ) {
 			)
 		);
 
-		$url = get_bloginfo( 'wpurl' ) . '/?rcl-confirmdata=' . urlencode( $confirmstr );
+		$url = add_query_arg( array(
+			'rcl-confirmdata' => urlencode( $confirmstr )
+			), home_url() );
 
 		$textmail .= '<p>' . __( 'If it was you, then confirm your registration by clicking on the link below', 'wp-recall' ) . ':</p>
         <p><a href="' . $url . '">' . $url . '</a></p>
@@ -387,37 +393,31 @@ function rcl_checkemail_success( $errors ) {
 	return $errors;
 }
 
+function rcl_get_current_url( $typeform = false, $unset = false ) {
+
+	$args = array(
+		'register'			 => false,
+		'login'				 => false,
+		'remember'			 => false,
+		'success'			 => false,
+		'rcl-confirmdata'	 => false
+	);
+
+	$args['action-rcl'] = $typeform;
+
+	if ( $typeform == 'remember' ) {
+		$args['remember'] = 'success';
+	}
+
+	return add_query_arg( $args );
+}
+
 function rcl_referer_url( $typeform = false ) {
 	echo rcl_get_current_url( $typeform );
 }
 
-function rcl_get_current_url( $typeform = false, $urlform = 0 ) {
-	$protocol	 = is_ssl() ? 'https://' : 'http://';
-	$url		 = $protocol . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-
-	if ( false !== strpos( $url, '?action-rcl' ) ) {
-		$matches = '';
-		preg_match_all( '/(?<=http\:\/\/)[A-zА-я0-9\/\.\-\s\ё]*(?=\?action\-rcl)/iu', $url, $matches );
-		$host	 = $matches[0][0];
-	}
-	if ( false !== strpos( $url, '&action-rcl' ) ) {
-		preg_match_all( '/(?<=http\:\/\/)[A-zА-я0-9\/\.\_\-\s\ё]*(&=\&action\-rcl)/iu', $url, $matches );
-		$host = $matches[0][0];
-	}
-	if ( ! isset( $host ) || ! $host )
-		$host	 = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-	$host	 = $protocol . $host;
-
-	if ( $urlform )
-		$host = rcl_format_url( $host ) . 'action-rcl=' . $typeform;
-
-	if ( $typeform == 'remember' )
-		$host = rcl_format_url( $host ) . 'action-rcl=remember&remember=success';
-	return $host;
-}
-
 function rcl_form_action( $typeform ) {
-	echo rcl_get_current_url( $typeform, 1 );
+	echo rcl_get_current_url( $typeform, true );
 }
 
 //Добавляем фильтр для формы авторизации
@@ -533,11 +533,13 @@ function rcl_custom_fields_regform( $content ) {
 		$attr	 = (isset( $field['attr'] )) ? '' . $field['attr'] : '';
 
 		$content .= '<div class="form-block-rcl ' . $class . '" ' . $id . ' ' . $attr . '>';
-		$star = ($field['required'] == 1) ? ' <span class="required">*</span> ' : '';
-		$content .= '<label>' . $CF->get_title( $field ) . $star;
-		if ( $field['type'] )
-			$content .= '<span class="colon">:</span>';
-		$content .= '</label>';
+		$star	 = ($field['required'] == 1) ? ' <span class="required">*</span> ' : '';
+		if ( $title	 = $CF->get_title( $field ) ) {
+			$content .= '<label>' . $title . $star;
+			if ( $field['type'] )
+				$content .= '<span class="colon">:</span>';
+			$content .= '</label>';
+		}
 
 		$value = (isset( $_POST[$field['slug']] )) ? $_POST[$field['slug']] : false;
 
@@ -546,7 +548,7 @@ function rcl_custom_fields_regform( $content ) {
 	}
 
 	foreach ( $hiddens as $field ) {
-		$content .= $CF->get_input( $field, (isset( $_POST[$field['slug']] )) ? $_POST[$field['slug']] : false );
+		$content .= $CF->get_input( $field, (isset( $_POST[$field['slug']] )) ? $_POST[$field['slug']] : false  );
 	}
 
 	return $content;

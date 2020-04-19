@@ -11,6 +11,14 @@
  * @since 10.2
  */
 class WPSEO_Schema_WebPage implements WPSEO_Graph_Piece {
+
+	/**
+	 * The date helper.
+	 *
+	 * @var WPSEO_Date_Helper
+	 */
+	protected $date;
+
 	/**
 	 * A value object with context variables.
 	 *
@@ -19,12 +27,13 @@ class WPSEO_Schema_WebPage implements WPSEO_Graph_Piece {
 	private $context;
 
 	/**
-	 * WPSEO_Schema_Breadcrumb constructor.
+	 * WPSEO_Schema_WebPage constructor.
 	 *
 	 * @param WPSEO_Schema_Context $context A value object with context variables.
 	 */
 	public function __construct( WPSEO_Schema_Context $context ) {
 		$this->context = $context;
+		$this->date    = new WPSEO_Date_Helper();
 	}
 
 	/**
@@ -46,46 +55,73 @@ class WPSEO_Schema_WebPage implements WPSEO_Graph_Piece {
 	 * @return array WebPage schema data.
 	 */
 	public function generate() {
-		$data      = array(
-			'@type'      => $this->determine_page_type(),
-			'@id'        => $this->context->canonical . WPSEO_Schema_IDs::WEBPAGE_HASH,
-			'url'        => $this->context->canonical,
-			'inLanguage' => get_bloginfo( 'language' ),
-			'name'       => $this->context->title,
-			'isPartOf'   => array(
+		$data = [
+			'@type'    => $this->determine_page_type(),
+			'@id'      => $this->context->canonical . WPSEO_Schema_IDs::WEBPAGE_HASH,
+			'url'      => $this->context->canonical,
+			'name'     => $this->context->title,
+			'isPartOf' => [
 				'@id' => $this->context->site_url . WPSEO_Schema_IDs::WEBSITE_HASH,
-			),
-		);
+			],
+		];
+
+		$data = WPSEO_Schema_Utils::add_piece_language( $data );
 
 		if ( is_front_page() ) {
-			$about_id = WPSEO_Schema_IDs::ORGANIZATION_HASH;
-			if ( $this->context->site_represents === 'person' ) {
-				$about_id = WPSEO_Schema_IDs::PERSON_HASH;
+			if ( $this->context->site_represents_reference ) {
+				$data['about'] = $this->context->site_represents_reference;
 			}
-			$data['about'] = array(
-				'@id' => $this->context->site_url . $about_id,
-			);
 		}
 
 		if ( is_singular() ) {
-			$data = $this->add_featured_image( $data );
+			$this->add_image( $data );
 
 			$post                  = get_post( $this->context->id );
-			$data['datePublished'] = mysql2date( DATE_W3C, $post->post_date_gmt, false );
-			$data['dateModified']  = mysql2date( DATE_W3C, $post->post_modified_gmt, false );
+			$data['datePublished'] = $this->date->format( $post->post_date_gmt );
+			$data['dateModified']  = $this->date->format( $post->post_modified_gmt );
+
+			if ( get_post_type( $post ) === 'post' ) {
+				$data = $this->add_author( $data, $post );
+			}
 		}
 
 		if ( ! empty( $this->context->description ) ) {
-			$data['description'] = $this->context->description;
+			$data['description'] = strip_tags( $this->context->description, '<h1><h2><h3><h4><h5><h6><br><ol><ul><li><a><p><b><strong><i><em>' );
 		}
 
 		if ( $this->add_breadcrumbs() ) {
-			$data['breadcrumb'] = array(
+			$data['breadcrumb'] = [
 				'@id' => $this->context->canonical . WPSEO_Schema_IDs::BREADCRUMB_HASH,
-			);
+			];
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Adds an author property to the $data if the WebPage is not represented.
+	 *
+	 * @param array   $data The WebPage schema.
+	 * @param WP_Post $post The post the context is representing.
+	 *
+	 * @return array The WebPage schema.
+	 */
+	public function add_author( $data, $post ) {
+		if ( $this->context->site_represents === false ) {
+			$data['author'] = [ '@id' => WPSEO_Schema_Utils::get_user_schema_id( $post->post_author, $this->context ) ];
+		}
+		return $data;
+	}
+
+	/**
+	 * If we have an image, make it the primary image of the page.
+	 *
+	 * @param array $data WebPage schema data.
+	 */
+	public function add_image( &$data ) {
+		if ( $this->context->has_image ) {
+			$data['primaryImageOfPage'] = [ '@id' => $this->context->canonical . WPSEO_Schema_IDs::PRIMARY_IMAGE_HASH ];
+		}
 	}
 
 	/**
@@ -118,6 +154,8 @@ class WPSEO_Schema_WebPage implements WPSEO_Graph_Piece {
 			case is_author():
 				$type = 'ProfilePage';
 				break;
+			case WPSEO_Frontend_Page_Type::is_posts_page():
+			case WPSEO_Frontend_Page_Type::is_home_posts_page():
 			case is_archive():
 				$type = 'CollectionPage';
 				break;
@@ -131,31 +169,5 @@ class WPSEO_Schema_WebPage implements WPSEO_Graph_Piece {
 		 * @api string $type The WebPage type.
 		 */
 		return apply_filters( 'wpseo_schema_webpage_type', $type );
-	}
-
-	/**
-	 * Adds a featured image to the schema if there is one.
-	 *
-	 * @param array $data WebPage Schema.
-	 *
-	 * @return array $data WebPage Schema.
-	 */
-	private function add_featured_image( $data ) {
-		if ( ! has_post_thumbnail( $this->context->id ) ) {
-			return $data;
-		}
-
-		$id                         = $this->context->canonical . WPSEO_Schema_IDs::PRIMARY_IMAGE_HASH;
-		$data['image']              = array(
-			'@type'   => 'ImageObject',
-			'@id'     => $id,
-			'url'     => get_the_post_thumbnail_url(),
-			'caption' => get_the_post_thumbnail_caption(),
-		);
-		$data['primaryImageOfPage'] = array(
-			'@id' => $id,
-		);
-
-		return $data;
 	}
 }

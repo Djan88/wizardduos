@@ -28,11 +28,11 @@ class WPSEO_Endpoint_MyYoast_Connect implements WPSEO_Endpoint {
 		register_rest_route(
 			self::REST_NAMESPACE,
 			'connect',
-			array(
+			[
 				'methods'             => 'POST',
-				'callback'            => array( $this, 'handle_request' ),
-				'permission_callback' => array( $this, 'can_retrieve_data' ),
-			)
+				'callback'            => [ $this, 'handle_request' ],
+				'permission_callback' => [ $this, 'can_retrieve_data' ],
+			]
 		);
 	}
 
@@ -91,18 +91,18 @@ class WPSEO_Endpoint_MyYoast_Connect implements WPSEO_Endpoint {
 	 */
 	protected function save_secret( $client_secret ) {
 		$this->get_client()->save_configuration(
-			array(
+			[
 				'secret' => $client_secret,
-			)
+			]
 		);
 	}
 
 	/**
-	 * Retrieves the current client id.
+	 * Retrieves the current client ID.
 	 *
 	 * @codeCoverageIgnore
 	 *
-	 * @return array The client id.
+	 * @return array The client ID.
 	 */
 	protected function get_client_id() {
 		$config = $this->get_client()->get_configuration();
@@ -128,11 +128,11 @@ class WPSEO_Endpoint_MyYoast_Connect implements WPSEO_Endpoint {
 	}
 
 	/**
-	 * Wraps the method for retrieving the home url.
+	 * Wraps the method for retrieving the home URL.
 	 *
 	 * @codeCoverageIgnore
 	 *
-	 * @return string Home url.
+	 * @return string Home URL.
 	 */
 	protected function get_home_url() {
 		return WPSEO_Utils::get_home_url();

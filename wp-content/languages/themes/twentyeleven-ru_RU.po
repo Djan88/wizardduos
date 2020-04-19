@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Themes - Twenty Eleven package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2015-08-31 20:58:49+0000\n"
+"PO-Revision-Date: 2019-05-19 18:12:57+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,31 +11,60 @@ msgstr ""
 "Language: ru\n"
 "Project-Id-Version: Themes - Twenty Eleven\n"
 
-#. Description of the plugin/theme
+#. Description of the theme
 msgid "The 2011 theme for WordPress is sophisticated, lightweight, and adaptable. Make it yours with a custom menu, header image, and background -- then go further with available theme options for light or dark color scheme, custom link colors, and three layout choices. Twenty Eleven comes equipped with a Showcase page template that transforms your front page into a showcase to show off your best content, widget support galore (sidebar, three footer areas, and a Showcase page widget area), and a custom \"Ephemera\" widget to display your Aside, Link, Quote, or Status posts. Included are styles for print and for the admin editor, support for featured images (as custom header images on posts and pages and as large images on featured \"sticky\" posts), and special styles for six different post formats."
 msgstr "Тема 2011 для WordPress &#8212; утончённая, лёгкая и гибкая. Сделайте её своей, создав произвольное меню, изображение заголовка и фон. Затем выберите в настройках светлую или тёмную цветовую схему, произвольный цвет ссылок и один из трёх вариантов разметки. Twenty Eleven включает в себя шаблон страницы &laquo;Избранное&raquo;, который позволяет показать на главной странице ваши лучшие материалы, достаточно областей для виджетов (помимо боковой колонки, есть три области в подвале и ещё одна на странице избранного), а также специальный виджет &laquo;Мимолётное&raquo; для отображения ваших заметок, ссылок, цитат и статусов. Тема содержит таблицы стилей для печати и для визуального редактора, поддержку миниатюр для записей (как изображений в заголовке для обычных записей и страниц и как больших изображений для прилепленных записей), а также особые стили для шести различных форматов записей."
 
-#. Theme Name of the plugin/theme
+#. Theme Name of the theme
 msgid "Twenty Eleven"
 msgstr "Twenty Eleven"
 
-#. Template Name of the plugin/theme
+#. translators: %s: The post title.
+#: comments.php:37
+msgid "One thought on &ldquo;%1$s&rdquo;"
+msgstr "Один комментарий к &ldquo;%1$s&rdquo;"
+
+#: functions.php:127
+msgid "White"
+msgstr "Белая"
+
+#: functions.php:122
+msgid "Light Gray"
+msgstr "Светло-серая"
+
+#: functions.php:117
+msgid "Medium Gray"
+msgstr "Средне-серая"
+
+#: functions.php:112
+msgid "Dark Gray"
+msgstr "Темно-серая"
+
+#: functions.php:107
+msgid "Black"
+msgstr "Черная"
+
+#: functions.php:102
+msgid "Blue"
+msgstr "Синяя"
+
+#. Template Name of the theme
 msgid "Sidebar Template"
 msgstr "Шаблон с боковой колонкой"
 
-#. Template Name of the plugin/theme
+#. Template Name of the theme
 msgid "Showcase Template"
 msgstr "Шаблон избранного"
 
-#: tag.php:19
+#: tag.php:20
 msgid "Tag Archives: %s"
 msgstr "Архив метки: %s"
 
-#: single.php:20
+#: single.php:23
 msgid "Next <span class=\"meta-nav\">&rarr;</span>"
 msgstr "Следующая <span class=\"meta-nav\">&rarr;</span>"
 
-#: single.php:19
+#: single.php:22
 msgid "<span class=\"meta-nav\">&larr;</span> Previous"
 msgstr "<span class=\"meta-nav\">&larr;</span> Предыдущая"
 
@@ -47,15 +76,15 @@ msgstr "Мета"
 msgid "Archives"
 msgstr "Архивы"
 
-#: showcase.php:161
+#: showcase.php:170
 msgid "Recent Posts"
 msgstr "Свежие записи"
 
-#: showcase.php:151
+#: showcase.php:160
 msgid "Featuring: %s"
 msgstr "Избранное: %s"
 
-#: showcase.php:78
+#: showcase.php:83
 msgid "Featured Post"
 msgstr "Избранная запись"
 
@@ -63,7 +92,7 @@ msgstr "Избранная запись"
 msgid "Search"
 msgstr "Поиск"
 
-#: search.php:48
+#: search.php:51
 msgid "Sorry, but nothing matched your search criteria. Please try again with some different keywords."
 msgstr "Извините, по вашему запросу ничего не найдено. Попробуйте другие ключевые слова."
 
@@ -71,107 +100,107 @@ msgstr "Извините, по вашему запросу ничего не н�
 msgid "Search Results for: %s"
 msgstr "Результаты поиска: %s"
 
-#: inc/widgets.php:185
+#: inc/widgets.php:196
 msgid "Number of posts to show:"
 msgstr "Количество записей:"
 
-#: inc/widgets.php:182
+#: inc/widgets.php:193
 msgid "Title:"
 msgstr "Заголовок:"
 
-#: inc/widgets.php:107 inc/widgets.php:116
+#: inc/widgets.php:117 inc/widgets.php:126
 msgid "% <span class=\"reply\">comments &rarr;</span>"
 msgstr "<span class=\"reply\">Комментарии (%) &rarr;</span>"
 
-#: inc/widgets.php:107 inc/widgets.php:116
+#: inc/widgets.php:117 inc/widgets.php:126
 msgid "1 <span class=\"reply\">comment &rarr;</span>"
 msgstr "<span class=\"reply\">1 комментарий &rarr;</span>"
 
-#: inc/widgets.php:107 inc/widgets.php:116
+#: inc/widgets.php:117 inc/widgets.php:126
 msgid "0 <span class=\"reply\">comments &rarr;</span>"
 msgstr "<span class=\"reply\">0 комментариев &rarr;</span>"
 
-#: inc/widgets.php:68
+#: inc/widgets.php:73
 msgid "Ephemera"
 msgstr "Мимолётное"
 
-#: inc/widgets.php:21
+#: inc/widgets.php:23
 msgid "Twenty Eleven Ephemera"
 msgstr "Мимолётное (Twenty Eleven)"
 
-#: inc/widgets.php:23
+#: inc/widgets.php:26
 msgid "Use this widget to list your recent Aside, Status, Quote, and Link posts"
 msgstr "Используйте этот виджет для вывода свежих заметок, статусов, цитат и ссылок."
 
-#: inc/theme-options.php:566
+#: inc/theme-options.php:600
 msgid "Layout"
 msgstr "Разметка"
 
-#: inc/theme-options.php:337
+#: inc/theme-options.php:341
 msgid "%s Theme Options"
 msgstr "Настройки темы %s"
 
-#: inc/theme-options.php:301
+#: inc/theme-options.php:305
 msgid "Default color: %s"
 msgstr "Цвет по умолчанию: %s"
 
-#: inc/theme-options.php:298
+#: inc/theme-options.php:302
 msgid "Select a Color"
 msgstr "Выбрать цвет"
 
-#: inc/theme-options.php:191
+#: inc/theme-options.php:193
 msgid "One-column, no sidebar"
 msgstr "Одна колонка"
 
-#: inc/theme-options.php:186
+#: inc/theme-options.php:188
 msgid "Content on right"
 msgstr "Содержимое справа"
 
-#: inc/theme-options.php:181
+#: inc/theme-options.php:183
 msgid "Content on left"
 msgstr "Содержимое слева"
 
-#: inc/theme-options.php:156
+#: inc/theme-options.php:158
 msgid "Dark"
 msgstr "Тёмный"
 
-#: inc/theme-options.php:150
+#: inc/theme-options.php:152
 msgid "Light"
 msgstr "Светлая"
 
-#: inc/theme-options.php:128
+#: inc/theme-options.php:130
 msgid "Overview"
 msgstr "Обзор"
 
-#: inc/theme-options.php:121
-msgid "<a href=\"https://wordpress.org/support/\" target=\"_blank\">Support Forums</a>"
-msgstr "<a href=\"https://wordpress.org/support/\" target=\"_blank\">Форумы поддержки</a>"
+#: inc/theme-options.php:122
+msgid "<a href=\"https://wordpress.org/support/\" target=\"_blank\">Support</a>"
+msgstr "<a href=\"https://wordpress.org/support/\" target=\"_blank\">Поддержка</a>"
 
-#: inc/theme-options.php:120
+#: inc/theme-options.php:121
 msgid "<a href=\"https://codex.wordpress.org/Appearance_Theme_Options_Screen\" target=\"_blank\">Documentation on Theme Options</a>"
 msgstr "<a href=\"https://codex.wordpress.org/Appearance_Theme_Options_Screen\" target=\"_blank\">Документация по настройкам темы</a>"
 
-#: inc/theme-options.php:119
+#: inc/theme-options.php:120
 msgid "For more information:"
 msgstr "Дополнительная информация:"
 
-#: inc/theme-options.php:117
+#: inc/theme-options.php:118
 msgid "Remember to click \"Save Changes\" to save any changes you have made to the theme options."
 msgstr "Не забудьте нажать кнопку &laquo;Сохранить изменения&raquo, чтобы сохранить сделанные вами изменения в настройках темы."
 
-#: inc/theme-options.php:115
+#: inc/theme-options.php:116
 msgid "<strong>Default Layout</strong>: You can choose if you want your site&#8217;s default layout to have a sidebar on the left, the right, or not at all."
 msgstr "<strong>Разметка по умолчанию</strong>: Можно выбрать, будет ли боковая колонка на вашем сайте располагаться слева, справа или вообще отсутствовать."
 
-#: inc/theme-options.php:114
+#: inc/theme-options.php:115
 msgid "<strong>Link Color</strong>: You can choose the color used for text links on your site. You can enter the HTML color or hex code, or you can choose visually by clicking the \"Select a Color\" button to pick from a color wheel."
 msgstr "<strong>Цвет ссылок</strong>: Можно выбрать цвет текстовых ссылок на вашем сайте. Вы можете ввести HTML-название цвета, шестнадцатеричный код или выбрать цвет визуально, нажав на кнопку &laquo;Выбрать цвет&raquo;."
 
-#: inc/theme-options.php:113
+#: inc/theme-options.php:114
 msgid "<strong>Color Scheme</strong>: You can choose a color palette of \"Light\" (light background with dark text) or \"Dark\" (dark background with light text) for your site."
 msgstr "<strong>Цветовая схема</strong>: Можно выбрать &laquo;светлую&raquo; (тёмный текст на светлом фоне) или &laquo;тёмную&raquo; (светлый текст на тёмном фоне) палитру для вашего сайта."
 
-#: inc/theme-options.php:111
+#: inc/theme-options.php:112
 msgid "Some themes provide customization options that are grouped together on a Theme Options screen. If you change themes, options may change or disappear, as they are theme-specific. Your current theme, Twenty Eleven, provides the following Theme Options:"
 msgstr "Некоторые темы содержат настройки, сгруппированные на экране &laquo;Настройки темы&raquo;. При смене темы эти настройки могут измениться или исчезнуть, поскольку они привязаны к ней. В вашей текущей теме, Twenty Eleven, доступны следующие настройки:"
 
@@ -183,161 +212,160 @@ msgstr "Настройки темы"
 msgid "Default Layout"
 msgstr "Разметка по умолчанию"
 
-#: inc/theme-options.php:62 inc/theme-options.php:559
+#: inc/theme-options.php:62 inc/theme-options.php:589
 msgid "Link Color"
 msgstr "Цвет ссылок"
 
-#: inc/theme-options.php:56 inc/theme-options.php:542
+#: inc/theme-options.php:56 inc/theme-options.php:564
 msgid "Color Scheme"
 msgstr "Цветовая схема"
 
-#: image.php:30
+#: image.php:34
 msgid "<span class=\"meta-prep meta-prep-entry-date\">Published </span> <span class=\"entry-date\"><abbr class=\"published\" title=\"%1$s\">%2$s</abbr></span> at <a href=\"%3$s\" title=\"Link to full-size image\">%4$s &times; %5$s</a> in <a href=\"%6$s\" title=\"Return to %7$s\" rel=\"gallery\">%8$s</a>"
 msgstr "<span class=\"meta-prep meta-prep-entry-date\">Опубликовано </span> <span class=\"entry-date\"><abbr class=\"published\" title=\"%1$s\">%2$s</abbr></span> с разрешением <a href=\"%3$s\" title=\"Ссылка на полноразмерное изображение\">%4$s &times; %5$s</a> в галерее <a href=\"%6$s\" title=\"Вернуться: %7$s\" rel=\"gallery\">%8$s</a>"
 
-#: image.php:20
+#: image.php:23
 msgid "Next &rarr;"
 msgstr "Следующее &rarr;"
 
-#: image.php:19
+#: image.php:22
 msgid "&larr; Previous"
 msgstr "&larr; Предыдущее"
 
-#: image.php:18
+#: image.php:21
 msgid "Image navigation"
 msgstr "Навигация по изображениям"
 
-#: header.php:137
+#: header.php:147
 msgid "Skip to secondary content"
 msgstr "Перейти к дополнительному содержимому"
 
-#: header.php:135
+#: header.php:145
 msgid "Skip to primary content"
 msgstr "Перейти к основному содержимому"
 
-#: header.php:133
+#: header.php:143
 msgid "Main menu"
 msgstr "Главное меню"
 
-#: header.php:43
+#: header.php:45
 msgid "Page %s"
 msgstr "Страница %s"
 
-#: functions.php:672
+#: functions.php:787
 msgid "<span class=\"sep\">Posted on </span><a href=\"%1$s\" title=\"%2$s\" rel=\"bookmark\"><time class=\"entry-date\" datetime=\"%3$s\">%4$s</time></a><span class=\"by-author\"> <span class=\"sep\"> by </span> <span class=\"author vcard\"><a class=\"url fn n\" href=\"%5$s\" title=\"%6$s\" rel=\"author\">%7$s</a></span></span>"
 msgstr "<span class=\"sep\">Опубликовано </span><a href=\"%1$s\" title=\"%2$s\" rel=\"bookmark\"><time class=\"entry-date\" datetime=\"%3$s\">%4$s</time></a><span class=\"by-author\"> <span class=\"sep\"> автором </span> <span class=\"author vcard\"><a class=\"url fn n\" href=\"%5$s\" title=\"%6$s\" rel=\"author\">%7$s</a></span></span>"
 
-#: functions.php:653
+#: functions.php:761
 msgid "Reply <span>&darr;</span>"
 msgstr "Ответить <span>&darr;</span>"
 
-#: functions.php:644
+#: functions.php:747
 msgid "Your comment is awaiting moderation."
 msgstr "Ваш комментарий ожидает проверки."
 
 #. translators: 1: date, 2: time
-#: functions.php:635
+#: functions.php:738
 msgid "%1$s at %2$s"
 msgstr "%1$s в %2$s"
 
-#. translators: 1: comment author, 2: date and time
-#: functions.php:629
+#: functions.php:731
 msgid "%1$s on %2$s <span class=\"says\">said:</span>"
 msgstr "%1$s <span class=\"says\">говорит</span> %2$s:"
 
-#: functions.php:612
+#: functions.php:712
 msgid "Pingback:"
 msgstr "Уведомление:"
 
-#: functions.php:514
+#: functions.php:607
 msgid "Newer posts <span class=\"meta-nav\">&rarr;</span>"
 msgstr "Следующие записи <span class=\"meta-nav\">&rarr;</span>"
 
-#: functions.php:513
+#: functions.php:606
 msgid "<span class=\"meta-nav\">&larr;</span> Older posts"
 msgstr "<span class=\"meta-nav\">&larr;</span> Предыдущие записи"
 
-#: functions.php:512 single.php:18
+#: single.php:21 functions.php:605
 msgid "Post navigation"
 msgstr "Навигация по записям"
 
-#: functions.php:488
+#: functions.php:579
 msgid "Footer Area Three"
 msgstr "Область подвала 3"
 
-#: functions.php:478
+#: functions.php:567
 msgid "Footer Area Two"
 msgstr "Область подвала 2"
 
-#: functions.php:470 functions.php:480 functions.php:490
+#: functions.php:557 functions.php:569 functions.php:581
 msgid "An optional widget area for your site footer"
 msgstr "Дополнительная область виджетов для нижней части сайта"
 
-#: functions.php:468
+#: functions.php:555
 msgid "Footer Area One"
 msgstr "Область подвала 1"
 
-#: functions.php:460
+#: functions.php:545
 msgid "The sidebar for the optional Showcase Template"
 msgstr "Боковая колонка для дополнительного шаблона &laquo;Избранное&raquo;"
 
-#: functions.php:458
+#: functions.php:543
 msgid "Showcase Sidebar"
 msgstr "Боковая колонка избранного"
 
-#: functions.php:449
+#: functions.php:532
 msgid "Main Sidebar"
 msgstr "Главная боковая колонка"
 
 #. translators: header image description
-#: functions.php:226
+#: functions.php:280
 msgid "Hanoi Plant"
 msgstr "Ханойское растение"
 
 #. translators: header image description
-#: functions.php:220
+#: functions.php:274
 msgid "Willow"
 msgstr "Ива"
 
 #. translators: header image description
-#: functions.php:214
+#: functions.php:268
 msgid "Lanterns"
 msgstr "Фонари"
 
 #. translators: header image description
-#: functions.php:208
+#: functions.php:262
 msgid "Chessboard"
 msgstr "Шахматная доска"
 
 #. translators: header image description
-#: functions.php:202
+#: functions.php:256
 msgid "Pine Cone"
 msgstr "Сосновая шишка"
 
 #. translators: header image description
-#: functions.php:196
+#: functions.php:250
 msgid "Trolley"
 msgstr "Трамвай"
 
 #. translators: header image description
-#: functions.php:190
+#: functions.php:244
 msgid "Shore"
 msgstr "Берег"
 
 #. translators: header image description
-#: functions.php:184
+#: functions.php:238
 msgid "Wheel"
 msgstr "Колесо"
 
-#: functions.php:95
+#: functions.php:144
 msgid "Primary Menu"
 msgstr "Основное меню"
 
-#: footer.php:28
+#: footer.php:35
 msgid "Proudly powered by %s"
 msgstr "Сайт работает на %s"
 
-#: footer.php:28
+#: footer.php:34
 msgid "Semantic Personal Publishing Platform"
 msgstr "Современная персональная платформа для публикаций"
 
@@ -349,19 +377,19 @@ msgstr "Избранное"
 msgid "Status"
 msgstr "Статус"
 
-#: content-single.php:67
+#: content-single.php:74
 msgid "View all posts by %s <span class=\"meta-nav\">&rarr;</span>"
 msgstr "Посмотреть все записи автора %s <span class=\"meta-nav\">&rarr;</span>"
 
-#: content-single.php:39
+#: content-single.php:46
 msgid "This entry was posted by <a href=\"%6$s\">%5$s</a>. Bookmark the <a href=\"%3$s\" title=\"Permalink to %4$s\" rel=\"bookmark\">permalink</a>."
 msgstr "Запись опубликована автором <a href=\"%6$s\">%5$s</a>. Добавьте в закладки <a href=\"%3$s\" title=\"Постоянная ссылка: %4$s\" rel=\"bookmark\">постоянную ссылку</a>."
 
-#: content-single.php:37
+#: content-single.php:44
 msgid "This entry was posted in %1$s by <a href=\"%6$s\">%5$s</a>. Bookmark the <a href=\"%3$s\" title=\"Permalink to %4$s\" rel=\"bookmark\">permalink</a>."
 msgstr "Запись опубликована автором <a href=\"%6$s\">%5$s</a> в рубрике %1$s. Добавьте в закладки <a href=\"%3$s\" title=\"Постоянная ссылка: %4$s\" rel=\"bookmark\">постоянную ссылку</a>."
 
-#: content-single.php:35
+#: content-single.php:42
 msgid "This entry was posted in %1$s and tagged %2$s by <a href=\"%6$s\">%5$s</a>. Bookmark the <a href=\"%3$s\" title=\"Permalink to %4$s\" rel=\"bookmark\">permalink</a>."
 msgstr "Запись опубликована автором <a href=\"%6$s\">%5$s</a> в рубрике %1$s с метками %2$s. Добавьте в закладки <a href=\"%3$s\" title=\"Постоянная ссылка: %4$s\" rel=\"bookmark\">постоянную ссылку</a>."
 
@@ -373,11 +401,11 @@ msgstr "Цитата"
 msgid "Link"
 msgstr "Ссылка"
 
-#: content-image.php:41 functions.php:678
+#: content-image.php:49 functions.php:793
 msgid "View all posts by %s"
 msgstr "Посмотреть все записи автора %s"
 
-#: content-image.php:36
+#: content-image.php:44
 msgid "<a href=\"%1$s\" rel=\"bookmark\"><time class=\"entry-date\" datetime=\"%2$s\">%3$s</time></a><span class=\"by-author\"> <span class=\"sep\"> by </span> <span class=\"author vcard\"><a class=\"url fn n\" href=\"%4$s\" title=\"%5$s\" rel=\"author\">%6$s</a></span></span>"
 msgstr "<a href=\"%1$s\" rel=\"bookmark\"><time class=\"entry-date\" datetime=\"%2$s\">%3$s</time></a><span class=\"by-author\">, <span class=\"author vcard\"><a class=\"url fn n\" href=\"%4$s\" title=\"%5$s\" rel=\"author\">%6$s</a></span></span>"
 
@@ -385,21 +413,21 @@ msgstr "<a href=\"%1$s\" rel=\"bookmark\"><time class=\"entry-date\" datetime=\"
 msgid "Image"
 msgstr "Изображение"
 
-#: content-gallery.php:76 content-image.php:61 content-quote.php:60
-#: content.php:69
+#: content-gallery.php:93 content-image.php:70 content-quote.php:71
+#: content.php:80
 msgid "<span class=\"%1$s\">Tagged</span> %2$s"
 msgstr "<span class=\"%1$s\">Метки:</span> %2$s"
 
-#: content-gallery.php:64 content-image.php:53 content-quote.php:48
-#: content.php:55
+#: content-gallery.php:78 content-image.php:61 content-quote.php:56
+#: content.php:63
 msgid "<span class=\"%1$s\">Posted in</span> %2$s"
 msgstr "<span class=\"%1$s\">Рубрика:</span> %2$s"
 
-#: content-gallery.php:46 showcase.php:121
+#: content-gallery.php:50 showcase.php:128
 msgid "Permalink to %s"
 msgstr "Постоянная ссылка: %s"
 
-#: content-gallery.php:45
+#: content-gallery.php:49
 msgid "This gallery contains <a %1$s>%2$s photo</a>."
 msgid_plural "This gallery contains <a %1$s>%2$s photos</a>."
 msgstr[0] "Эта галерея содержит <a %1$s>%2$s фотографию</a>."
@@ -410,75 +438,74 @@ msgstr[2] "Эта галерея содержит <a %1$s>%2$s фотограф�
 msgid "Gallery"
 msgstr "Галерея"
 
-#: content-featured.php:33
+#: content-featured.php:40
 msgid "This entry was posted in %1$s. Bookmark the <a href=\"%3$s\" title=\"Permalink to %4$s\" rel=\"bookmark\">permalink</a>."
 msgstr "Запись опубликована в рубрике %1$s. Добавьте в закладки <a href=\"%3$s\" title=\"Постоянная ссылка: %4$s\" rel=\"bookmark\">постоянную ссылку</a>."
 
-#: content-featured.php:31
+#: content-featured.php:38
 msgid "This entry was posted in %1$s and tagged %2$s. Bookmark the <a href=\"%3$s\" title=\"Permalink to %4$s\" rel=\"bookmark\">permalink</a>."
 msgstr "Запись опубликована в рубрике %1$s с метками %2$s. Добавьте в закладки <a href=\"%3$s\" title=\"Постоянная ссылка: %4$s\" rel=\"bookmark\">постоянную ссылку</a>."
 
 #. translators: used between list items, there is a space after the comma
-#: content-featured.php:29 content-featured.php:38 content-gallery.php:60
-#: content-gallery.php:70 content-image.php:49 content-image.php:58
-#: content-quote.php:44 content-quote.php:54 content-single.php:30
-#: content-single.php:33 content.php:51 content.php:63
+#: content-gallery.php:73 content-gallery.php:85 content-image.php:57
+#: content-image.php:66 content-single.php:37 content-single.php:40
+#: content-quote.php:51 content-quote.php:63 content-featured.php:36
+#: content-featured.php:45 content.php:58 content.php:72
 msgid ", "
 msgstr ", "
 
-#: content-aside.php:46 content-featured.php:45 content-gallery.php:88
-#: content-image.php:70 content-intro.php:19 content-link.php:46
-#: content-page.php:21 content-quote.php:72 content-single.php:52
-#: content-status.php:59 content.php:82 functions.php:612 functions.php:640
-#: image.php:41
+#: content-gallery.php:106 content-aside.php:53 content-status.php:66
+#: content-image.php:79 content-single.php:59 content-link.php:53
+#: content-intro.php:26 content-page.php:28 content-quote.php:84 image.php:45
+#: functions.php:712 functions.php:743 content-featured.php:52 content.php:94
 msgid "Edit"
 msgstr "Изменить"
 
-#: content-aside.php:44 content-gallery.php:85 content-image.php:66
-#: content-link.php:44 content-quote.php:69 content-status.php:57
-#: content.php:79 showcase.php:202
+#: content-gallery.php:103 content-aside.php:51 content-status.php:64
+#: content-image.php:75 content-link.php:51 content-quote.php:81
+#: showcase.php:214 content.php:91
 msgid "<b>%</b> Replies"
 msgstr "Комментарии (<b>%</b>)"
 
-#: content-aside.php:44 content-gallery.php:85 content-image.php:66
-#: content-link.php:44 content-quote.php:69 content-status.php:57
-#: content.php:79 showcase.php:202
+#: content-gallery.php:103 content-aside.php:51 content-status.php:64
+#: content-image.php:75 content-link.php:51 content-quote.php:81
+#: showcase.php:214 content.php:91
 msgid "<b>1</b> Reply"
 msgstr "<b>1</b> комментарий"
 
-#: content-aside.php:44 content-gallery.php:85 content-image.php:66
-#: content-link.php:44 content-quote.php:69 content-status.php:57
-#: content.php:79 showcase.php:202
+#: content-gallery.php:103 content-aside.php:51 content-status.php:64
+#: content-image.php:75 content-link.php:51 content-quote.php:81
+#: showcase.php:214 content.php:91
 msgid "Leave a reply"
 msgstr "Добавить комментарий"
 
-#: content-aside.php:36 content-featured.php:23 content-gallery.php:52
-#: content-image.php:30 content-intro.php:18 content-link.php:36
-#: content-page.php:18 content-quote.php:36 content-single.php:24
-#: content-status.php:49 content.php:42 image.php:98
+#: content-gallery.php:61 content-aside.php:39 content-status.php:52
+#: content-image.php:33 content-single.php:27 content-link.php:39
+#: content-intro.php:21 content-page.php:21 content-quote.php:39 image.php:119
+#: content-featured.php:26 content.php:45
 msgid "Pages:"
 msgstr "Страниц:"
 
-#: content-aside.php:35 content-gallery.php:34 content-image.php:29
-#: content-link.php:35 content-quote.php:35 content-status.php:48
-#: content.php:41 functions.php:378
+#: content-gallery.php:34 content-aside.php:35 content-status.php:48
+#: content-image.php:29 content-link.php:35 content-quote.php:35
+#: functions.php:459 content.php:41
 msgid "Continue reading <span class=\"meta-nav\">&rarr;</span>"
 msgstr "Читать далее <span class=\"meta-nav\">&rarr;</span>"
 
-#: content-aside.php:24 content-image.php:23 content-link.php:24
-#: content-quote.php:24 content-status.php:24 content.php:30
+#: content-aside.php:24 content-status.php:24 content-image.php:23
+#: content-link.php:24 content-quote.php:24 content.php:30
 msgctxt "comments number"
 msgid "%"
 msgstr "%"
 
-#: content-aside.php:24 content-image.php:23 content-link.php:24
-#: content-quote.php:24 content-status.php:24 content.php:30
+#: content-aside.php:24 content-status.php:24 content-image.php:23
+#: content-link.php:24 content-quote.php:24 content.php:30
 msgctxt "comments number"
 msgid "1"
 msgstr "1"
 
-#: content-aside.php:24 content-image.php:23 content-link.php:24
-#: content-quote.php:24 content-status.php:24 content.php:30
+#: content-aside.php:24 content-status.php:24 content-image.php:23
+#: content-link.php:24 content-quote.php:24 content.php:30
 msgid "Reply"
 msgstr "Ответить"
 
@@ -486,24 +513,25 @@ msgstr "Ответить"
 msgid "Aside"
 msgstr "Заметка"
 
-#: comments.php:74
+#: comments.php:87
 msgid "Comments are closed."
 msgstr "Обсуждение закрыто."
 
-#: comments.php:43 comments.php:64
+#: comments.php:55 comments.php:76
 msgid "Newer Comments &rarr;"
 msgstr "Следующие комментарии &rarr;"
 
-#: comments.php:42 comments.php:63
+#: comments.php:54 comments.php:75
 msgid "&larr; Older Comments"
 msgstr "&larr; Предыдущие комментарии"
 
-#: comments.php:41 comments.php:62
+#: comments.php:53 comments.php:74
 msgid "Comment navigation"
 msgstr "Навигация по комментариям"
 
-#: comments.php:34
-msgid "One thought on &ldquo;%2$s&rdquo;"
+#. translators: %1$s: The number of comments. %2$s: The post title.
+#: comments.php:43
+msgid "%1$s thought on &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
 msgstr[0] "%2$s: %1$s комментарий"
 msgstr[1] "%2$s: %1$s комментария"
@@ -513,11 +541,11 @@ msgstr[2] "%2$s: %1$s комментариев"
 msgid "This post is password protected. Enter the password to view any comments."
 msgstr "Эта запись защищена паролем. Введите пароль, чтобы посмотреть комментарии."
 
-#: category.php:19
+#: category.php:20
 msgid "Category Archives: %s"
 msgstr "Архив рубрики: %s"
 
-#: author.php:60 content-single.php:63
+#: content-single.php:70 author.php:61
 msgid "About %s"
 msgstr "Об авторе %s"
 
@@ -525,12 +553,12 @@ msgstr "Об авторе %s"
 msgid "Author Archives: %s"
 msgstr "Архив автора: %s"
 
-#: archive.php:61 author.php:90 category.php:63 index.php:41 tag.php:64
+#: archive.php:64 index.php:44 tag.php:69 category.php:68 author.php:94
 msgid "Apologies, but no results were found for the requested archive. Perhaps searching will help find a related post."
 msgstr "Извините, запрошенный вами архив не найден. Попробуйте найти нужную запись с помощью поиска."
 
-#: archive.php:57 author.php:86 category.php:59 index.php:37 search.php:44
-#: tag.php:60
+#: archive.php:60 index.php:40 tag.php:65 search.php:47 category.php:64
+#: author.php:90
 msgid "Nothing Found"
 msgstr "Ничего не найдено"
 
@@ -561,7 +589,7 @@ msgid "Daily Archives: %s"
 msgstr "Архив за день: %s"
 
 #. translators: %1$s: smilie
-#: 404.php:36
+#: 404.php:46
 msgid "Try looking in the monthly archives. %1$s"
 msgstr "Загляните в архивы по месяцам %1$s"
 
@@ -577,16 +605,15 @@ msgstr "Запрошенную информацию найти не удалос
 msgid "This is somewhat embarrassing, isn&rsquo;t it?"
 msgstr "Неприятная новость"
 
-#. #-#-#-#-#  twentyeleven.pot (Twenty Eleven 2.7)  #-#-#-#-#
-#. Author URI of the plugin/theme
-#: footer.php:28
+#. Author URI of the theme
+#: footer.php:34
 msgid "https://wordpress.org/"
 msgstr "https://ru.wordpress.org/"
 
-#. Author of the plugin/theme
+#. Author of the theme
 msgid "the WordPress team"
 msgstr "Команда WordPress"
 
-#. Theme URI of the plugin/theme
+#. Theme URI of the theme
 msgid "https://wordpress.org/themes/twentyeleven/"
 msgstr "https://wordpress.org/themes/twentyeleven/"

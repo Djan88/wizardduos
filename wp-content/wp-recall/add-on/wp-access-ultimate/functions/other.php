@@ -99,11 +99,13 @@ function wau_time_to_strdate( $time ) {
 
 function wau_get_accounts_box( $account_ids, $args = false ) {
 
-	$content = '';
+	$content = '<div class="wau-accounts-box">';
 
 	foreach ( $account_ids as $account_id ) {
 		$content .= wau_get_account_box( $account_id, $args );
 	}
+
+	$content .= '</div>';
 
 	return $content;
 }
@@ -164,6 +166,10 @@ function wau_get_account_box( $account_id, $args = false ) {
 	$content = '<div class="wau-account-box">';
 	$content .= $box;
 	$content .= '</div>';
+
+	if ( wau_get_option( 'show-branch-cards' ) && $account->parent_id ) {
+		$content .= wau_get_account_box( $account->parent_id, $args );
+	}
 
 	return $content;
 }

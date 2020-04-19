@@ -11,19 +11,25 @@
 class Yoast_Input_Select {
 
 	/**
+	 * The id attribute value.
+	 *
 	 * @var string
 	 */
 	private $select_id;
 
 	/**
+	 * The name attribute value.
+	 *
 	 * @var string
 	 */
 	private $select_name;
 
 	/**
+	 * Additional select attributes.
+	 *
 	 * @var array
 	 */
-	private $select_attributes = array();
+	private $select_attributes = [];
 
 	/**
 	 * Array with the options to parse.
@@ -65,7 +71,7 @@ class Yoast_Input_Select {
 	}
 
 	/**
-	 * Return the rendered view
+	 * Return the rendered view.
 	 *
 	 * @return string
 	 */
@@ -81,7 +87,7 @@ class Yoast_Input_Select {
 	}
 
 	/**
-	 * Add an attribute to the attributes property
+	 * Add an attribute to the attributes property.
 	 *
 	 * @param string $attribute The name of the attribute to add.
 	 * @param string $value     The value of the attribute.
@@ -91,18 +97,18 @@ class Yoast_Input_Select {
 	}
 
 	/**
-	 * Return the set fields for the select
+	 * Return the set fields for the select.
 	 *
 	 * @return array
 	 */
 	private function get_select_values() {
-		return array(
+		return [
 			'id'         => $this->select_id,
 			'name'       => $this->select_name,
 			'attributes' => $this->get_attributes(),
 			'options'    => $this->select_options,
 			'selected'   => $this->selected_option,
-		);
+		];
 	}
 
 	/**
@@ -114,7 +120,7 @@ class Yoast_Input_Select {
 		$attributes = $this->select_attributes;
 
 		if ( ! empty( $attributes ) ) {
-			array_walk( $attributes, array( $this, 'parse_attribute' ) );
+			array_walk( $attributes, [ $this, 'parse_attribute' ] );
 
 			return implode( ' ', $attributes ) . ' ';
 		}
@@ -128,7 +134,7 @@ class Yoast_Input_Select {
 	 * @param string $value     The value of the attribute.
 	 * @param string $attribute The attribute to look for.
 	 */
-	private function parse_attribute( & $value, $attribute ) {
-		$value = sprintf( '%s="%s"', esc_html( $attribute ), esc_attr( $value ) );
+	private function parse_attribute( &$value, $attribute ) {
+		$value = sprintf( '%s="%s"', sanitize_key( $attribute ), esc_attr( $value ) );
 	}
 }

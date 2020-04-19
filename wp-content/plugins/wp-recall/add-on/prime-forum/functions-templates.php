@@ -3,7 +3,7 @@ function pfm_get_template_content() {
 
 	$theme = pfm_get_current_theme();
 
-	if ( !$theme )
+	if ( ! $theme )
 		return false;
 
 	global $PrimeQuery, $PrimeUser;
@@ -134,7 +134,7 @@ function pfm_the_notices() {
 			echo pfm_get_notice( __( 'Groups were not found', 'wp-recall' ) );
 		} else if ( $PrimeQuery->is_group ) {
 
-			if ( !$PrimeQuery->object ) {
+			if ( ! $PrimeQuery->object ) {
 				echo pfm_get_notice( __( 'Group not found', 'wp-recall' ) );
 				return;
 			}
@@ -142,7 +142,7 @@ function pfm_the_notices() {
 			echo pfm_get_notice( __( 'Forums were not found', 'wp-recall' ) );
 		} else if ( $PrimeQuery->is_forum ) {
 
-			if ( !$PrimeQuery->object ) {
+			if ( ! $PrimeQuery->object ) {
 				echo pfm_get_notice( __( 'Forum not found', 'wp-recall' ) );
 				return;
 			}
@@ -150,7 +150,7 @@ function pfm_the_notices() {
 			echo pfm_get_notice( __( 'No topics were created yet', 'wp-recall' ) );
 		} else if ( $PrimeQuery->is_topic ) {
 
-			if ( !$PrimeQuery->object ) {
+			if ( ! $PrimeQuery->object ) {
 				echo pfm_get_notice( __( 'Topic not found', 'wp-recall' ) );
 				return;
 			}
@@ -256,21 +256,23 @@ function pfm_the_search_form() {
 function pfm_the_breadcrumbs() {
 	global $PrimeQuery;
 
-	$object = $PrimeQuery->object;
+	$object	 = $PrimeQuery->object;
 	?>
 
 	<div class="prime-breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">
+
+		<?php $homeUrl = pfm_get_home_url(); ?>
 
 		<?php if ( pfm_is_home() ): ?>
 
 			<span property="itemListElement" typeof="ListItem">
 				<span property="position" content="1"></span>
-				<span property="name"><?php _e( 'Home', 'wp-recall' ); ?></span>
+				<span property="item" typeof="WebPage" resource="<?php echo $homeUrl; ?>">
+					<span property="name"><?php _e( 'Home', 'wp-recall' ); ?></span>
+				</span>
 			</span>
 
 		<?php else: ?>
-
-			<?php $homeUrl = pfm_get_home_url(); ?>
 
 			<span property="itemListElement" typeof="ListItem">
 				<span property="position" content="1"></span>
@@ -286,9 +288,7 @@ function pfm_the_breadcrumbs() {
 					<span property="itemListElement" typeof="ListItem">
 						<span property="position" content="2"></span>
 						<a href="<?php echo pfm_get_group_permalink( $PrimeQuery->vars['pfm-group'] ); ?>" property="item" typeof="WebPage">
-							<span property="name">
-								<?php echo pfm_get_group_field( $PrimeQuery->vars['pfm-group'], 'group_name' ); ?>
-							</span>
+							<span property="name"><?php echo pfm_get_group_field( $PrimeQuery->vars['pfm-group'], 'group_name' ); ?></span>
 						</a>
 					</span>
 
@@ -297,9 +297,7 @@ function pfm_the_breadcrumbs() {
 					<span property="itemListElement" typeof="ListItem">
 						<span property="position" content="2"></span>
 						<a href="<?php echo pfm_get_forum_permalink( $PrimeQuery->vars['pfm-forum'] ); ?>" property="item" typeof="WebPage">
-							<span property="name">
-								<?php echo pfm_get_forum_field( $PrimeQuery->vars['pfm-forum'], 'forum_name' ); ?>
-							</span>
+							<span property="name"><?php echo pfm_get_forum_field( $PrimeQuery->vars['pfm-forum'], 'forum_name' ); ?></span>
 						</a>
 					</span>
 
@@ -317,8 +315,8 @@ function pfm_the_breadcrumbs() {
 
 						<span property="itemListElement" typeof="ListItem">
 							<span property="position" content="2"></span>
-							<span property="name">
-								<?php echo $object->group_name; ?>
+							<span property="item" typeof="WebPage" resource="<?php echo pfm_get_group_permalink( $object->group_id ); ?>">
+								<span property="name"><?php echo $object->group_name; ?></span>
 							</span>
 						</span>
 
@@ -327,9 +325,7 @@ function pfm_the_breadcrumbs() {
 						<span property="itemListElement" typeof="ListItem">
 							<span property="position" content="2"></span>
 							<a href="<?php echo pfm_get_group_permalink( $object->group_id ); ?>" property="item" typeof="WebPage">
-								<span property="name">
-									<?php echo $object->group_name; ?>
-								</span>
+								<span property="name"><?php echo $object->group_name; ?></span>
 							</a>
 						</span>
 
@@ -350,8 +346,8 @@ function pfm_the_breadcrumbs() {
 
 							<span property="itemListElement" typeof="ListItem">
 								<span property="position" content="3"></span>
-								<span property="name">
-									<?php echo $object->forum_name; ?>
+								<span property="item" typeof="WebPage" resource="<?php echo pfm_get_topic_permalink( $object->parent_id ); ?>">
+									<span property="name"><?php echo $object->forum_name; ?></span>
 								</span>
 							</span>
 
@@ -373,9 +369,7 @@ function pfm_the_breadcrumbs() {
 							<span property="itemListElement" typeof="ListItem">
 								<span property="position" content="3"></span>
 								<a href="<?php echo pfm_get_forum_permalink( $object->forum_id ); ?>" property="item" typeof="WebPage">
-									<span property="name">
-										<?php echo $object->forum_name; ?>
-									</span>
+									<span property="name"><?php echo $object->forum_name; ?></span>
 								</a>
 							</span>
 
@@ -383,8 +377,8 @@ function pfm_the_breadcrumbs() {
 
 								<span property="itemListElement" typeof="ListItem">
 									<span property="position" content="4"></span>
-									<span property="name">
-										<?php echo $object->topic_name; ?>
+									<span property="item" typeof="WebPage" resource="<?php echo pfm_get_topic_permalink( $object->topic_id ); ?>">
+										<span property="name"><?php echo $object->topic_name; ?></span>
 									</span>
 								</span>
 
@@ -393,9 +387,7 @@ function pfm_the_breadcrumbs() {
 								<span property="itemListElement" typeof="ListItem">
 									<span property="position" content="4"></span>
 									<a href="<?php echo pfm_get_topic_permalink( $object->topic_id ); ?>" property="item" typeof="WebPage">
-										<span property="name">
-											<?php echo $object->topic_name; ?>
-										</span>
+										<span property="name"><?php echo $object->topic_name; ?></span>
 									</a>
 								</span>
 
@@ -421,7 +413,7 @@ function pfm_get_icon( $icon_class = 'fa-folder' ) {
 
 	$defaultIcon = '<i class="rcli ' . $icon_class . '" aria-hidden="true"></i>';
 
-	if ( $PrimeGroup && !$PrimeForum ) {
+	if ( $PrimeGroup && ! $PrimeForum ) {
 		return apply_filters( 'pfm_group_icon', $defaultIcon );
 	}
 

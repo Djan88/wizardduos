@@ -4,7 +4,7 @@
 function rcl_tab( $tab_data, $deprecated_callback = false, $deprecated_name = '', $deprecated_args = false ) {
 	global $rcl_tabs;
 
-	if ( !is_array( $tab_data ) ) { //поддержка старого варианта регистрации вкладки
+	if ( ! is_array( $tab_data ) ) { //поддержка старого варианта регистрации вкладки
 		if ( $deprecated_callback )
 			_deprecated_argument( __FUNCTION__, '15.2.0' );
 
@@ -39,9 +39,12 @@ function rcl_tab( $tab_data, $deprecated_callback = false, $deprecated_name = ''
 		$tab_data = $args_tab;
 	}
 
+	if ( ! isset( $tab_data['icon'] ) || ! $tab_data['icon'] )
+		$tab_data['icon'] = 'fa-cog';
+
 	$tab_data = apply_filters( 'rcl_tab', $tab_data );
 
-	if ( !$tab_data )
+	if ( ! $tab_data )
 		return false;
 
 	$rcl_tabs[$tab_data['id']] = $tab_data;
@@ -55,7 +58,7 @@ function rcl_init_custom_tabs() {
 
 	foreach ( $areas as $area_id => $tabs ) {
 
-		if ( !$tabs )
+		if ( ! $tabs )
 			continue;
 
 		foreach ( $tabs as $tab ) {
@@ -105,7 +108,7 @@ function rcl_init_custom_tabs() {
 //регистрация дочерней вкладки
 function rcl_add_sub_tab( $tab_id, $subtab ) {
 	global $rcl_tabs;
-	if ( !isset( $rcl_tabs[$tab_id] ) )
+	if ( ! isset( $rcl_tabs[$tab_id] ) )
 		return false;
 	$rcl_tabs[$tab_id]['content'][] = $subtab;
 }
@@ -122,7 +125,7 @@ function rcl_get_tab( $tab_id ) {
 
 function rcl_get_subtab( $tab_id, $subtab_id ) {
 	$tab = rcl_get_tab( $tab_id );
-	if ( !$tab )
+	if ( ! $tab )
 		return false;
 	foreach ( $tab['content'] as $subtab )
 		if ( $subtab['id'] == $subtab_id )
@@ -134,7 +137,7 @@ function rcl_get_tab_button( $tab_id, $master_id ) {
 
 	$tab = rcl_get_tab( $tab_id );
 
-	if ( !class_exists( 'Rcl_Tab' ) )
+	if ( ! class_exists( 'Rcl_Tab' ) )
 		require_once RCL_PATH . 'classes/class-rcl-tab.php';
 
 	$Rcl_Tab = new Rcl_Tab( $tab );
@@ -144,12 +147,12 @@ function rcl_get_tab_button( $tab_id, $master_id ) {
 
 function rcl_get_tab_content( $tab_id, $master_id, $subtab_id = '' ) {
 
-	if ( !class_exists( 'Rcl_Tab' ) )
+	if ( ! class_exists( 'Rcl_Tab' ) )
 		require_once RCL_PATH . 'classes/class-rcl-tab.php';
 
 	$tab = rcl_get_tab( $tab_id );
 
-	if ( !$tab )
+	if ( ! $tab )
 		return false;
 
 	$tab['first'] = 1;
@@ -172,13 +175,17 @@ function rcl_setup_tabs() {
 	if ( $rcl_tabs ) {
 
 		foreach ( $rcl_tabs as $k => $rcl_tab ) {
-			if ( !isset( $rcl_tab['content'][0]['id'] ) )
+
+			if ( ! isset( $rcl_tab['icon'] ) )
+				$rcl_tab['icon'] = 'fa-cog';
+
+			if ( ! isset( $rcl_tab['content'][0]['id'] ) )
 				$rcl_tabs[$k]['content'][0]['id'] = $rcl_tab['id'];
 
-			if ( !isset( $rcl_tab['content'][0]['name'] ) )
+			if ( ! isset( $rcl_tab['content'][0]['name'] ) )
 				$rcl_tabs[$k]['content'][0]['name'] = $rcl_tab['name'];
 
-			if ( !isset( $rcl_tab['content'][0]['icon'] ) )
+			if ( ! isset( $rcl_tab['content'][0]['icon'] ) )
 				$rcl_tabs[$k]['content'][0]['icon'] = $rcl_tab['icon'];
 		}
 	}
@@ -190,15 +197,15 @@ function rcl_setup_tabs() {
 add_action( 'wp', 'rcl_register_tabs', 10 );
 function rcl_register_tabs() {
 
-	if ( is_admin() || !rcl_is_office() )
+	if ( is_admin() || ! rcl_is_office() )
 		return false;
 
 	$rcl_tabs = rcl_get_tabs();
 
-	if ( !$rcl_tabs )
+	if ( ! $rcl_tabs )
 		return false;
 
-	if ( !class_exists( 'Rcl_Tab' ) )
+	if ( ! class_exists( 'Rcl_Tab' ) )
 		require_once RCL_PATH . 'classes/class-rcl-tab.php';
 
 	foreach ( $rcl_tabs as $tab ) {
@@ -213,7 +220,7 @@ function rcl_add_custom_tabs( $tabs ) {
 
 	$areas = rcl_get_area_options();
 
-	if ( !$areas )
+	if ( ! $areas )
 		return $tabs;
 
 	if ( $tabs ) {
@@ -222,7 +229,7 @@ function rcl_add_custom_tabs( $tabs ) {
 
 			$tabArea = (isset( $tab['output'] )) ? $tab['output'] : 'menu';
 
-			if ( !isset( $areas[$tabArea] ) || !$areas[$tabArea] )
+			if ( ! isset( $areas[$tabArea] ) || ! $areas[$tabArea] )
 				continue;
 
 			foreach ( $areas[$tabArea] as $k => $field ) {
@@ -233,7 +240,7 @@ function rcl_add_custom_tabs( $tabs ) {
 				$tabs[$tab_id]['icon']	 = $field['icon'];
 				$tabs[$tab_id]['hidden'] = isset( $field['hidden'] ) ? $field['hidden'] : 0;
 				$tabs[$tab_id]['name']	 = $field['title'];
-				$tabs[$tab_id]['order']	 = ++$k;
+				$tabs[$tab_id]['order']	 = ++ $k;
 			}
 		}
 	}
@@ -247,7 +254,7 @@ add_filter( 'rcl_tabs', 'rcl_get_order_tabs', 10 );
 function rcl_get_order_tabs( $rcl_tabs ) {
 	global $user_ID, $user_LK;
 
-	if ( isset( $_GET['tab'] ) || !$rcl_tabs )
+	if ( isset( $_GET['tab'] ) || ! $rcl_tabs )
 		return $rcl_tabs;
 
 	$counter = array();
@@ -260,9 +267,9 @@ function rcl_get_order_tabs( $rcl_tabs ) {
 		if ( isset( $data['hidden'] ) && $data['hidden'] )
 			continue;
 
-		if ( !isset( $data['public'] ) || $data['public'] != 1 ) {
+		if ( ! isset( $data['public'] ) || $data['public'] != 1 ) {
 
-			if ( !$user_ID )
+			if ( ! $user_ID )
 				continue;
 
 			if ( $data['public'] < 0 && $user_ID == $user_LK )
@@ -272,13 +279,30 @@ function rcl_get_order_tabs( $rcl_tabs ) {
 				continue;
 		}
 
-		$order					 = (isset( $data['order'] )) ? $data['order'] : ++$a;
+		$order					 = (isset( $data['order'] )) ? $data['order'] : ++ $a;
 		$rcl_tabs[$id]['order']	 = $order;
 		$counter[$order]		 = $id;
 	}
 
-	if ( count( $counter ) < 2 )
+	if ( count( $counter ) == 1 ) {
+
+		foreach ( $counter as $order => $id_tab ) {
+			$rcl_tabs[$id_tab]['first'] = 1;
+			break;
+		}
+
 		return $rcl_tabs;
+	}
+
+	if ( count( $rcl_tabs ) == 1 ) {
+
+		foreach ( $rcl_tabs as $id_tab => $data ) {
+			$rcl_tabs[$id_tab]['first'] = 1;
+			break;
+		}
+
+		return $rcl_tabs;
+	}
 
 	ksort( $counter );
 	$id_first						 = array_shift( $counter );
@@ -295,7 +319,7 @@ function rcl_block( $place, $callback, $args = false ) {
 		'place'		 => $place,
 		'callback'	 => $callback,
 		'args'		 => $args
-	) );
+		) );
 
 	$rcl_blocks = apply_filters( 'rcl_blocks', $rcl_blocks );
 }
@@ -305,17 +329,17 @@ add_action( 'wp', 'rcl_setup_blocks' );
 function rcl_setup_blocks() {
 	global $rcl_blocks, $user_LK;
 
-	if ( is_admin() || !$user_LK )
+	if ( is_admin() || ! $user_LK )
 		return false;
 
-	if ( !$rcl_blocks )
+	if ( ! $rcl_blocks )
 		return false;
 
-	if ( !class_exists( 'Rcl_Blocks' ) )
+	if ( ! class_exists( 'Rcl_Blocks' ) )
 		require_once RCL_PATH . 'classes/class-rcl-blocks.php';
 
 	foreach ( $rcl_blocks as $place_id => $blocks ) {
-		if ( !$blocks )
+		if ( ! $blocks )
 			continue;
 		foreach ( $blocks as $data ) {
 			$Rcl_Blocks = new Rcl_Blocks( $data );
@@ -354,7 +378,7 @@ function rcl_is_office( $user_id = null ) {
 function rcl_postlist( $id, $post_type, $name = '', $args = false ) {
 	global $rcl_postlist;
 
-	if ( !rcl_get_option( 'publics_block_rcl' ) )
+	if ( ! rcl_get_option( 'publics_block_rcl' ) )
 		return false;
 
 	$rcl_postlist[$post_type] = array( 'id' => $id, 'post_type' => $post_type, 'name' => $name, 'args' => $args );
@@ -364,14 +388,14 @@ function rcl_postlist( $id, $post_type, $name = '', $args = false ) {
 add_action( 'after_setup_theme', 'rcl_register_recallbar' );
 function rcl_register_recallbar() {
 
-	if ( !rcl_get_option( 'view_recallbar' ) )
+	if ( ! rcl_get_option( 'view_recallbar' ) )
 		return false;
 
 	register_nav_menus( array( 'recallbar' => __( 'Recallbar', 'wp-recall' ) ) );
 }
 
 function rcl_key_addon( $path_parts ) {
-	if ( !isset( $path_parts['dirname'] ) )
+	if ( ! isset( $path_parts['dirname'] ) )
 		return false;
 	return rcl_get_addon_dir( $path_parts['dirname'] );
 }
@@ -398,7 +422,7 @@ function rcl_cache_get( $string, $force = false ) {
 
 		$file = $cache->get_file( $string );
 
-		if ( !$file->need_update ) {
+		if ( ! $file->need_update ) {
 
 			return $cache->get_cache();
 		}
@@ -429,7 +453,7 @@ function rcl_crop( $filesource, $width, $height, $file ) {
 
 	$image = wp_get_image_editor( $filesource );
 
-	if ( !is_wp_error( $image ) ) {
+	if ( ! is_wp_error( $image ) ) {
 		$image->resize( $width, $height, true );
 		$image->save( $file );
 	}
@@ -437,12 +461,12 @@ function rcl_crop( $filesource, $width, $height, $file ) {
 	return $image;
 }
 
-if ( !function_exists( 'get_called_class' ) ) :
+if ( ! function_exists( 'get_called_class' ) ) :
 	function get_called_class() {
 		$arr		 = array();
 		$arrTraces	 = debug_backtrace();
 		foreach ( $arrTraces as $arrTrace ) {
-			if ( !array_key_exists( "class", $arrTrace ) )
+			if ( ! array_key_exists( "class", $arrTrace ) )
 				continue;
 			if ( count( $arr ) == 0 )
 				$arr[]	 = $arrTrace['class'];
@@ -500,7 +524,7 @@ function rcl_admin_access() {
 			return true;
 		} else {
 
-			if ( !$user_ID )
+			if ( ! $user_ID )
 				return true;
 
 			wp_redirect( '/' );
@@ -588,7 +612,7 @@ function rcl_avatar_data_replacement( $args, $id_or_email ) {
 
 	if ( $user_id ) {
 
-		if ( !$avatar_data )
+		if ( ! $avatar_data )
 			$avatar_data = get_user_meta( $user_id, 'rcl_avatar', 1 );
 
 		if ( $avatar_data ) {
@@ -615,7 +639,7 @@ function rcl_avatar_data_replacement( $args, $id_or_email ) {
 function rcl_get_url_avatar( $url_image, $user_id, $size ) {
 	global $rcl_avatar_sizes;
 
-	if ( !$rcl_avatar_sizes )
+	if ( ! $rcl_avatar_sizes )
 		return $url_image;
 
 	$optimal_size	 = 150;
@@ -662,7 +686,7 @@ function rcl_sanitize_string( $title, $sanitize = true ) {
 				"ц"	 => "c", "ч"	 => "ch", "ш"	 => "sh", "щ"	 => "shh", "ъ"	 => "",
 				"ы"	 => "y", "ь"	 => "", "э"	 => "eh", "ю"	 => "yu", "я"	 => "ya",
 				"—"	 => "-", "«"	 => "", "»"	 => "", "…"	 => ""
-			) ) );
+				) ) );
 			break;
 		default:
 			$title	 = strtr( $title, apply_filters( 'rcl_sanitize_iso', array(
@@ -682,7 +706,7 @@ function rcl_sanitize_string( $title, $sanitize = true ) {
 				"ц"	 => "c", "ч"	 => "ch", "ш"	 => "sh", "щ"	 => "shh", "ъ"	 => "",
 				"ы"	 => "y", "ь"	 => "", "э"	 => "e", "ю"	 => "yu", "я"	 => "ya",
 				"—"	 => "-", "«"	 => "", "»"	 => "", "…"	 => ""
-			) ) );
+				) ) );
 	}
 
 	return $sanitize ? sanitize_title_with_dashes( $title, '', 'save' ) : $title;
@@ -716,7 +740,7 @@ function rcl_get_postmeta_array( $post_id ) {
 
 	$mts	 = array();
 	$metas	 = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "postmeta WHERE post_id='%d'", $post_id ) );
-	if ( !$metas )
+	if ( ! $metas )
 		return false;
 	foreach ( $metas as $meta ) {
 		$mts[$meta->meta_key] = $meta->meta_value;
@@ -744,7 +768,7 @@ function rcl_setup_chartdata( $mysqltime, $data ) {
 function rcl_get_chart( $arr = false ) {
 	global $chartData;
 
-	if ( !$arr )
+	if ( ! $arr )
 		return false;
 
 	foreach ( $arr as $month => $data ) {
@@ -753,7 +777,7 @@ function rcl_get_chart( $arr = false ) {
 		$chartData['data'][] = array( '"' . $month . '"', $cnt, $summ );
 	}
 
-	if ( !$chartData )
+	if ( ! $chartData )
 		return false;
 
 	krsort( $chartData['data'] );
@@ -766,7 +790,7 @@ function rcl_get_chart( $arr = false ) {
 function rcl_notice_text( $text, $type = 'warning' ) {
 	if ( is_admin() )
 		return false;
-	if ( !class_exists( 'Rcl_Notify' ) )
+	if ( ! class_exists( 'Rcl_Notify' ) )
 		include_once RCL_PATH . 'functions/notify.php';
 	$block = new Rcl_Notify( $text, $type );
 }
@@ -797,7 +821,8 @@ function rcl_mail( $email, $title, $text, $from = false, $attach = false ) {
 	$text .= '<p><small>-----------------------------------------------------<br/>
     ' . __( 'This letter was created automatically, no need to answer it.', 'wp-recall' ) . '<br/>
     "' . get_bloginfo( 'name' ) . '"</small></p>';
-	wp_mail( $email, $title, $text, $headers, $attach );
+
+	return wp_mail( $email, $title, $text, $headers, $attach );
 }
 
 function rcl_multisort_array( $array, $key, $type = SORT_ASC, $cmp_func = 'strcmp' ) {
@@ -815,12 +840,12 @@ function rcl_a_active( $param1, $param2 ) {
 function rcl_get_useraction( $user_action = false ) {
 	global $rcl_userlk_action;
 
-	if ( !$user_action )
+	if ( ! $user_action )
 		$user_action = $rcl_userlk_action;
 
 	$unix_time_user = strtotime( $user_action );
 
-	if ( !$unix_time_user || $user_action == '0000-00-00 00:00:00' )
+	if ( ! $unix_time_user || $user_action == '0000-00-00 00:00:00' )
 		return __( 'long ago', 'wp-recall' );
 
 	$timeout			 = ($time				 = rcl_get_option( 'timeout' )) ? $time * 60 : 600;
@@ -842,7 +867,7 @@ function rcl_get_useraction_html( $user_id, $type = 1 ) {
 
 			$last_action = rcl_get_useraction( $action );
 
-			if ( !$last_action )
+			if ( ! $last_action )
 				return '<span class="status_user online"><i class="rcli fa-circle"></i></span>';
 			else
 				return '<span class="status_user offline" title="' . __( 'offline', 'wp-recall' ) . ' ' . $last_action . '"><i class="rcli fa-circle"></i></span>';
@@ -865,7 +890,7 @@ function rcl_human_time_diff( $time_action ) {
 function rcl_update_timeaction_user() {
 	global $user_ID, $wpdb;
 
-	if ( !$user_ID )
+	if ( ! $user_ID )
 		return false;
 
 	$rcl_current_action = rcl_get_time_user_action( $user_ID );
@@ -880,7 +905,7 @@ function rcl_update_timeaction_user() {
 			RCL_PREF . 'user_action', array( 'time_action' => $time ), array( 'user' => $user_ID )
 		);
 
-		if ( !isset( $res ) || $res == 0 ) {
+		if ( ! isset( $res ) || $res == 0 ) {
 			$act_user = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(time_action) FROM " . RCL_PREF . "user_action WHERE user ='%d'", $user_ID ) );
 			if ( $act_user == 0 ) {
 				$wpdb->insert(
@@ -923,9 +948,9 @@ function rcl_add_balloon_menu( $data, $args ) {
 
 /* 14.0.0 */
 function rcl_verify_ajax_nonce() {
-	if ( !defined( 'DOING_AJAX' ) || !DOING_AJAX )
+	if ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX )
 		return false;
-	if ( !wp_verify_nonce( $_POST['ajax_nonce'], 'rcl-post-nonce' ) ) {
+	if ( ! wp_verify_nonce( $_POST['ajax_nonce'], 'rcl-post-nonce' ) ) {
 		wp_send_json( array( 'error' => __( 'Signature verification failed', 'wp-recall' ) . '!' ) );
 	}
 }
@@ -977,7 +1002,7 @@ function rcl_template_support( $support ) {
 function rcl_is_user_role( $user_id, $role ) {
 	$user_data = get_userdata( $user_id );
 
-	if ( !isset( $user_data->roles ) || !$user_data->roles )
+	if ( ! isset( $user_data->roles ) || ! $user_data->roles )
 		return false;
 
 	$roles = $user_data->roles;
@@ -1007,7 +1032,7 @@ function rcl_update_profile_fields( $user_id, $profileFields = false ) {
 	require_once(ABSPATH . "wp-admin" . '/includes/file.php');
 	require_once(ABSPATH . "wp-admin" . '/includes/media.php');
 
-	if ( !$profileFields )
+	if ( ! $profileFields )
 		$profileFields = rcl_get_profile_fields();
 
 	if ( $profileFields ) {
@@ -1030,7 +1055,7 @@ function rcl_update_profile_fields( $user_id, $profileFields = false ) {
 
 			$field = apply_filters( 'rcl_pre_update_profile_field', $field, $user_id );
 
-			if ( !$field || !$field['slug'] )
+			if ( ! $field || ! $field['slug'] )
 				continue;
 
 			$slug = $field['slug'];
@@ -1046,7 +1071,7 @@ function rcl_update_profile_fields( $user_id, $profileFields = false ) {
 				}
 			}
 
-			if ( isset( $field['admin'] ) && $field['admin'] == 1 && !is_admin() ) {
+			if ( isset( $field['admin'] ) && $field['admin'] == 1 && ! is_admin() ) {
 
 				if ( in_array( $slug, array( 'display_name', 'user_url' ) ) ) {
 
@@ -1074,7 +1099,7 @@ function rcl_update_profile_fields( $user_id, $profileFields = false ) {
 
 				if ( $slug == 'user_email' ) {
 
-					if ( !$value )
+					if ( ! $value )
 						continue;
 
 					$currentEmail = get_the_author_meta( 'user_email', $user_id );
@@ -1143,7 +1168,7 @@ function rcl_get_profile_fields( $args = false ) {
 
 		foreach ( $fields as $k => $field ) {
 
-			if ( isset( $args['include'] ) && !in_array( $field['slug'], $args['include'] ) ) {
+			if ( isset( $args['include'] ) && ! in_array( $field['slug'], $args['include'] ) ) {
 
 				continue;
 			}
@@ -1185,7 +1210,7 @@ function rcl_get_area_options() {
 
 function rcl_add_log( $title, $data = false, $force = false ) {
 
-	if ( !$force && !rcl_get_option( 'rcl-log' ) )
+	if ( ! $force && ! rcl_get_option( 'rcl-log' ) )
 		return false;
 
 	$RclLog = new Rcl_Log();
@@ -1220,7 +1245,7 @@ function rcl_get_option( $option, $default = false ) {
 	if ( false !== $pre )
 		return $pre;
 
-	if ( !$rcl_options )
+	if ( ! $rcl_options )
 		$rcl_options = get_option( 'rcl_global_options' );
 
 	if ( isset( $rcl_options[$option] ) ) {
@@ -1235,7 +1260,7 @@ function rcl_get_option( $option, $default = false ) {
 function rcl_update_option( $name, $value ) {
 	global $rcl_options;
 
-	if ( !$rcl_options )
+	if ( ! $rcl_options )
 		$rcl_options = get_option( 'rcl_global_options' );
 
 	$rcl_options[$name] = $value;
@@ -1246,7 +1271,7 @@ function rcl_update_option( $name, $value ) {
 function rcl_delete_option( $name ) {
 	global $rcl_options;
 
-	if ( !$rcl_options )
+	if ( ! $rcl_options )
 		$rcl_options = get_option( 'rcl_global_options' );
 
 	unset( $rcl_options[$name] );
@@ -1272,7 +1297,7 @@ function rcl_filter_custom_tab_vars( $content ) {
 
 	$matchs = apply_filters( 'rcl_custom_tab_vars', $matchs );
 
-	if ( !$matchs )
+	if ( ! $matchs )
 		return $content;
 
 	$vars		 = array();
@@ -1292,7 +1317,7 @@ function rcl_filter_custom_tab_usermetas( $content ) {
 
 	preg_match_all( '/{RCL-UM:([^}]+)}/', $content, $metas );
 
-	if ( !$metas[1] )
+	if ( ! $metas[1] )
 		return $content;
 
 	$vars		 = array();
@@ -1341,11 +1366,11 @@ function rcl_get_image_gallery( $args ) {
 function rcl_is_gutenberg() {
 	global $post;
 
-	if ( !is_admin() ) {
+	if ( ! is_admin() ) {
 		return false;
 	}
 
-	if ( !function_exists( 'get_current_screen' ) ) {
+	if ( ! function_exists( 'get_current_screen' ) ) {
 		return false;
 	}
 
@@ -1362,12 +1387,12 @@ function rcl_is_gutenberg() {
 	  } */
 
 	// Gutenberg plugin is installed and activated.
-	$gutenberg = !( false === has_filter( 'replace_editor', 'gutenberg_init' ) );
+	$gutenberg = ! ( false === has_filter( 'replace_editor', 'gutenberg_init' ) );
 
 	// Block editor since 5.0.
 	$block_editor = version_compare( $GLOBALS['wp_version'], '5.0-beta', '>' );
 
-	if ( !$gutenberg && !$block_editor ) {
+	if ( ! $gutenberg && ! $block_editor ) {
 		return false;
 	}
 
@@ -1379,4 +1404,10 @@ function rcl_is_gutenberg() {
 	  } */
 
 	return true;
+}
+
+function rcl_get_notice( $args ) {
+	require_once 'classes/class-rcl-notice.php';
+	$Notice = new Rcl_Notice( $args );
+	return $Notice->get_notice();
 }
