@@ -111,6 +111,7 @@
                           <a href="/wizard" class="btn btn-default btn-large before_start">Начать</a>
                           <a href="/kabinet" class="btn btn-default btn-large">Личный кабинет</a>
                           <a href="https://cloud.mail.ru/public/65BR/F9yAr4XiK" target="_blank" class="btn btn-warning btn-large">Руководство пользователя</a>
+                          <?php echo do_shortcode( '[theme_switcha_select text="Выберите версию"]' ); ?>
                           <a class="btn btn-default btn-large" href="<?php echo home_url(); ?>/wp-login.php?action=logout&amp;_wpnonce=a6cad512ba">Выйти</a>
                         </div>
 
