@@ -38,6 +38,7 @@ jQuery(function() {
     localStorage.removeItem('paused');
     localStorage.removeItem('pausedPhoto'); 
     localStorage.removeItem('pausedPhoto2');
+    localStorage.removeItem('croppedImg');
     pausedStatus = false;
   });
 
