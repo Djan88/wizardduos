@@ -117,6 +117,7 @@
           <li><a class="mobile-nav-toggle mobile-nav-toggle_open" href="" data-toggle="modal" data-target="#mail">Обратная связь</a></li>
           <li><a target="_blank" href="https://www.youtube.com/watch?v=9XI9Z7kHmmY&t=95s">Обучающее видео</a></li>
           <?php if(is_user_logged_in()){ ?>
+            <?php echo do_shortcode( '[theme_switcha_select text="Выберите версию"]' ); ?>
             <li><a href="/wp-login.php?action=logout&_wpnonce=0d90a53269">Выход</a></li>
           <?php } ?>
           <li>
