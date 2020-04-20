@@ -259,8 +259,8 @@
                       <p class="note_small">У Вас уже есть учетная запись? <span class="toLogin">Войдите</span> в "WizardDuos" используя свои логин и пароль</p>
                   </form>
                 </div>
-                <a href="<?php bloginfo('template_url'); ?>/img/manual.pdf" target="_blank" class="manual manual_non_login">Руководство пользователя</a>
               </div>
+              <a href="<?php bloginfo('template_url'); ?>/img/manual.pdf" target="_blank" class="manual manual_non_login">Руководство пользователя</a>
             <?php } ?>
             
             <div>
