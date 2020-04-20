@@ -2338,6 +2338,10 @@ button.wizard_starter_alt.btn.btn-success
   position: relative;
   z-index: 999;
 }
+.manual.manual_non_login
+{
+  margin-top: 20px;
+}
 /*--------------------------------------------------------------
 # Responsive Media Queries
 --------------------------------------------------------------*/
