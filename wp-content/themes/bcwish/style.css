@@ -2329,12 +2329,14 @@ button.wizard_starter_alt.btn.btn-success
 }
 .manual
 {
-  display: block;
+  display: inline-block;
   color: #0cb1ff;
   margin-top: 150px;
   text-decoration: underline;
   font-style: italic;
   font-size: 18px;
+  position: relative;
+  z-index: 999;
 }
 /*--------------------------------------------------------------
 # Responsive Media Queries
