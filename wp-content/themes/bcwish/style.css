@@ -2327,6 +2327,15 @@ button.wizard_starter_alt.btn.btn-success
   border-color: red;
   opacity: 0.3;
 }
+.manual
+{
+  display: block;
+  color: #0cb1ff;
+  margin-top: 150px;
+  text-decoration: underline;
+  font-style: italic;
+  font-size: 18px;
+}
 /*--------------------------------------------------------------
 # Responsive Media Queries
 --------------------------------------------------------------*/
