@@ -117,7 +117,7 @@ jQuery(function() {
   });
 
 
-  jQuery('.mobile-nav-toggle, .mobile-nav a, .photo_upload, .crop_photo, .btn_diag, .btn_prot_choice, .btn_reset, .wizard_clean_graf, .btn_prot_choice_fromDiag, #faq-list li a, .wizard_protocol, .wizard_play, .wizard_starter_alt, .wizard_stop, body .cancel, body .confirm, .wizard_continue, .mobile-nav select, .wpcf7-submit, .btn-get-started').on('click', function(event) {
+  jQuery('.mobile-nav-toggle, .mobile-nav a, .photo_upload, .crop_photo, .btn_diag, .btn_prot_choice, .btn_reset, .wizard_clean_graf, .btn_prot_choice_fromDiag, #faq-list li a, .wizard_protocol, .wizard_play, .wizard_starter_alt, .wizard_stop, body .cancel, body .confirm, .wizard_continue, .wizard_continue_back, .mobile-nav select, .wpcf7-submit, .btn-get-started').on('click', function(event) {
     nextSound.play();
   });
   jQuery('.wizard_to_protList, .wizard_to_what_way, .wizard_to_start').on('click', function(event) {
