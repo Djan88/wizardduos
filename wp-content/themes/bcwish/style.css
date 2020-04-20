@@ -1801,6 +1801,7 @@ h3.wizard_heading
 .wizard_way 
 {
   text-align: center;
+  z-index: 1;
   /*transition: all linear 0.4s;*/
 }
 .wizard_prots
@@ -2341,6 +2342,10 @@ button.wizard_starter_alt.btn.btn-success
 .manual.manual_non_login
 {
   margin-top: 20px;
+}
+.wizard_templates
+{
+  z-index: 9
 }
 /*--------------------------------------------------------------
 # Responsive Media Queries
