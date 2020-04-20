@@ -478,12 +478,12 @@
                 <div class="steps_item steps_item_3 wow bounceInUp" data-wow-duration="1.4s">
                   <!-- <div class="icon"></div> -->
                   <h4 class="title">Если это не первая сессия</h4>
-                  <p class="description">После работы по протоколу "Инверсный" вторым этапом идет более глубокая проработка. Выбор протокола зависит от пола</p>
+                  <p class="description">Выберите протокол с учетом пола клиентов на фото. "Классический", "Женский", "Мужской"</p>
                 </div>
                 <div class="steps_item steps_item_4 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
                   <!-- <div class="icon"></div> -->
                   <h4 class="title">Если это первая сессия</h4>
-                  <p class="description">Начните работу с протокола "Инверсный". Это важно при проработке взаимоотношений. В дальнейшем можно будет работать по другим протоколам</p>
+                  <p class="description">Начните работу с протокола "Инверсный". Это важно, так как часто встречаются атипичные варианты кармических отношений.</p>
                 </div>
                 <div class="steps_item steps_item_5 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
                   <!-- <div class="icon"></div> -->
