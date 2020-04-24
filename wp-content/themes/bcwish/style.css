@@ -2347,6 +2347,10 @@ button.wizard_starter_alt.btn.btn-success
 {
   z-index: 9
 }
+.cab_sidebar
+{
+  display: none;
+}
 /*--------------------------------------------------------------
 # Responsive Media Queries
 --------------------------------------------------------------*/
