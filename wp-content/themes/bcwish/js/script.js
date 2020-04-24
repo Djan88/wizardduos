@@ -42,7 +42,7 @@ jQuery(function() {
     pausedStatus = false;
   });
 
-  jQuery('.to_home, .wizard_to_start, .btn-get-started').on('click', function(event) {
+  jQuery('.to_home, .wizard_to_start').on('click', function(event) {
     localStorage.removeItem('croppedImg');
     localStorage.removeItem('croppedImgTwo');
   });
