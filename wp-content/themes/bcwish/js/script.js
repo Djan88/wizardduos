@@ -126,7 +126,7 @@ jQuery(function() {
   });
 
   jQuery('.btn_reset').on('click', function(event) {
-    jQuery('html, body').animate({scrollTop: jQuery('#services').offset().top - 200}, 300);
+    jQuery('html, body').animate({scrollTop: jQuery('#services').offset().top}, 300);
     jQuery('.uploaded_pics_wrapper').attr('style', 'position: relative; visibility: visible; animation-duration: 1.4s; animation-delay: 0.4s; animation-name: bounceInUp;');
   });
 
