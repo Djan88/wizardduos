@@ -115,7 +115,7 @@
             <?php //echo do_shortcode( '[theme_switcha_select text="Выберите версию"]' ); ?>
           </li>
           <li><a class="mobile-nav-toggle mobile-nav-toggle_open" href="" data-toggle="modal" data-target="#mail">Обратная связь</a></li>
-          <li><a target="_blank" href="https://www.youtube.com/watch?v=9XI9Z7kHmmY&t=95s">Обучающее видео</a></li>
+          <!-- <li><a target="_blank" href="https://www.youtube.com/watch?v=9XI9Z7kHmmY&t=95s">Обучающее видео</a></li> -->
           <?php echo do_shortcode( '[theme_switcha_select text="Выберите версию"]' ); ?>
           <?php if(is_user_logged_in()){ ?>
             <li><a href="/wp-login.php?action=logout&_wpnonce=0d90a53269">Выход</a></li>
@@ -636,7 +636,7 @@
           <h4 class="modal-title" id="myModalLabel">Обратная связь</h4>
         </div>
         <div class="modal-text">
-          <?php echo do_shortcode('[contact-form-7 id="262" title="Обратная связь"]')?>
+          <?php echo do_shortcode('[contact-form-7 id="237" title="Обратная связь"]')?>
         </div>
       </div>
     </div>
