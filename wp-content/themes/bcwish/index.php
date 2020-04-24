@@ -334,10 +334,10 @@
                         <div class="faq_item_closed" data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="Станет доступен после оплаты доступа!">ЖЕНСКИЙ</div>
                         <div class="faq_item_closed" data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="Станет доступен после оплаты доступа!">МУЖСКОЙ</div>
                     <?php } else if(current_user_can('contributor') || current_user_can('administrator')) { ?>
-                      <div class="faq_item faq_item_1">ИНВЕРСНЫЙ<span>Повтор</span></div>
-                      <div class="faq_item faq_item_2">КЛАССИЧЕСКИЙ<span>Повтор</span></div>
-                      <div class="faq_item faq_item_3">ЖЕНСКИЙ<span>Повтор</span></div>
-                      <div class="faq_item faq_item_4">МУЖСКОЙ<span>Повтор</span></div>
+                      <div class="faq_item faq_item_1">ИНВЕРСНЫЙ</div>
+                      <div class="faq_item faq_item_2">КЛАССИЧЕСКИЙ</div>
+                      <div class="faq_item faq_item_3">ЖЕНСКИЙ</div>
+                      <div class="faq_item faq_item_4">МУЖСКОЙ</div>
                     <?php } ?>
                   </div>
                 </div>
