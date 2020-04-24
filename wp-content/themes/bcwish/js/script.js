@@ -114,6 +114,7 @@ jQuery(function() {
   // НАЧАТЬ
   jQuery('.wm_init').on('click', function(event) {
     jQuery('.wm_start').removeClass('unopacity');
+    jQuery('html, body').animate({scrollTop: jQuery('#services').offset().top}, 300);
     nextSound.play();
   });
 
