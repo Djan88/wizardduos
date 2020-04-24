@@ -1,4 +1,4 @@
-// <?php
+<?php
 // function users_redirect(){
 // wp_redirect(site_url('/'));
 // die();
