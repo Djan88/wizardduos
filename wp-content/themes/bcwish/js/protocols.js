@@ -92,6 +92,8 @@ jQuery(function() {
     },
     function(isConfirm) {
       if (isConfirm) {
+        localStorage.removeItem('croppedImg');
+        localStorage.removeItem('croppedImgTwo');
         jQuery(location).attr('href','/');
       } else {
         jQuery('.wizard_stop, .zone_ring').addClass('hidden');
