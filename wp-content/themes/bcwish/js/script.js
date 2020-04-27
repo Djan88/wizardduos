@@ -346,7 +346,7 @@ jQuery(function() {
                       ctx.rotate(rad);
                       ctx.drawImage(oImage, cx, cy);
 
-                      // ort = 1;
+                      ort = 1;
 
                       oImage.src = canvas.toDataURL("image/png");
                   };
