@@ -353,14 +353,14 @@ jQuery(function() {
                   console.log(ort);
                   switch(ort){
                      case 6:
-                         rotateImg(90 * Math.PI / 180, true, 0, oImage.naturalHeight * -1);
-                         break;
+                        rotateImg(-90 * Math.PI / 180, true, oImage.naturalWidth * -1, 0);
+                        break;
                      case 3:
-                         rotateImg(180 * Math.PI / 180, false, oImage.naturalWidth * -1, oImage.naturalHeight * -1);
-                         break;
+                        rotateImg(180 * Math.PI / 180, false, oImage.naturalWidth * -1, oImage.naturalHeight * -1);
+                        break;
                      case 8:
-                         rotateImg(-90 * Math.PI / 180, true, oImage.naturalWidth * -1, 0);
-                         break;
+                        rotateImg(90 * Math.PI / 180, true, 0, oImage.naturalHeight * -1);
+                        break;
                   }
 
 
