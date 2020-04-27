@@ -2098,6 +2098,7 @@ h3.wizard_heading
 main#main
 {
   background: #f5f8fd;
+  overflow: hidden;
 }
 .wm_start
 {
