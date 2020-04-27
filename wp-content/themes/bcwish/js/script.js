@@ -350,10 +350,10 @@ jQuery(function() {
 
                       oImage.src = canvas.toDataURL("image/png");
                   };
-
+                  console.log(ort);
                   switch(ort){
                      case 6:
-                         rotateImg(90 * Math.PI / 90, true, 0, oImage.naturalHeight * -1);
+                         rotateImg(90 * Math.PI / 180, true, 0, oImage.naturalHeight * -1);
                          break;
                      case 3:
                          rotateImg(180 * Math.PI / 180, false, oImage.naturalWidth * -1, oImage.naturalHeight * -1);
