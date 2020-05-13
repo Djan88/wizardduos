@@ -92,8 +92,6 @@ jQuery(function() {
     },
     function(isConfirm) {
       if (isConfirm) {
-        localStorage.removeItem('croppedImg');
-        localStorage.removeItem('croppedImgTwo');
         jQuery(location).attr('href','/');
       } else {
         jQuery('.wizard_stop, .zone_ring').addClass('hidden');
@@ -164,7 +162,7 @@ jQuery(function() {
   });
 
 
-  mw_10 = function(){
+  mw_11 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
     jQuery('.wizard_percent').text('95%');
     reloadTime = 0;
@@ -290,7 +288,7 @@ jQuery(function() {
     }, 250);
   }
 
-  mw_9_4 = function(){
+  mw_10_4 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
     jQuery('.wizard_percent').text('90%');
     reloadTime = 0;
@@ -299,27 +297,33 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 300;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: -320, scale: 1.5}, {duration: 40, ease: "none", rotation: -380, scale: 1.5})
+             .fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: -380, scale: 1.5}, {duration: 17, ease: "none", rotation: -380, scale: 1.5})
+             .fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: -380, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
-          reloadTime += 1;                                                                        //40
-          cur_animation_val += 1.5;
-          jQuery('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
-            transform: 'rotate(-'+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
+          reloadTime += 1;
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -327,22 +331,22 @@ jQuery(function() {
           jQuery('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
-            localStorage.setItem('paused', 'mw_10');
+            localStorage.setItem('paused', 'mw_11');
             endNow();
           } else {
-            mw_10();
+            mw_11();
           } 
         }
     }, 1000);
   }
 
-  mw_9_3 = function(){
+  mw_10_3 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
     jQuery('.wizard_percent').text('85%');
     reloadTime = 0;
@@ -351,27 +355,33 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 270;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: 270, scale: 1.5}, {duration: 40, ease: "none", rotation: 330, scale: 1.5})
+             .fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: 330, scale: 1.5}, {duration: 17, ease: "none", rotation: 330, scale: 1.5})
+             .fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: 330, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){         
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
           reloadTime += 1;
-          cur_animation_val += 1.5;
-          jQuery('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
-            transform: 'rotate('+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -379,22 +389,22 @@ jQuery(function() {
           jQuery('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
-            localStorage.setItem('paused', 'mw_9_4');
+            localStorage.setItem('paused', 'mw_10_4');
             endNow();
           } else {
-            mw_9_4();
+            mw_10_4();
           } 
         }
     }, 1000);
-  }
+  } 
 
-  mw_9_2 = function(){
+  mw_10_2 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
     jQuery('.wizard_percent').text('80%');
     reloadTime = 0;
@@ -405,25 +415,31 @@ jQuery(function() {
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
     cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: 20, scale: 1.5}, {duration: 40, ease: "none", rotation: 80, scale: 1.5})
+             .fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: 80, scale: 1.5}, {duration: 17, ease: "none", rotation: 80, scale: 1.5})
+             .fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: 80, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
           reloadTime += 1;
-          cur_animation_val += 1.5;
-          jQuery('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
-            transform: 'rotate('+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -431,10 +447,241 @@ jQuery(function() {
           jQuery('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
+          });
+          if (pausedStatus == true) {
+            localStorage.setItem('paused', 'mw_10_3');
+            endNow();
+          } else {
+            mw_10_3();
+          } 
+        }
+    }, 1000);
+  } 
+
+  mw_10_1 = function(){
+    jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
+    jQuery('.wizard_percent').text('75%');
+    reloadTime = 0;
+    reloadTime1 = 0;
+    d12Val = 0;
+    rotateVal = 0;
+    jQuery('.ring').addClass('hidden');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
+    cur_animation_val = 10;
+    count_animation = 1;
+    jQuery('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: -10, scale: 1.5}, {duration: 40, ease: "none", rotation: -70, scale: 1.5})
+             .fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: -70, scale: 1.5}, {duration: 17, ease: "none", rotation: -70, scale: 1.5})
+             .fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: -70, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    phaseSeven_one = setInterval(function(){
+        if (count_animation <= 40){
+          if (reloadTime == 0){                                                                       //1
+              sound.stop();
+              reloadSound.play();
+          };
+          reloadTime += 1;
+          count_animation += 1;
+        } else if(count_animation <= 57) {
+            count_animation += 1;
+        } else {
+          clearInterval(phaseSeven_one);
+          count_animation = 1;
+          jQuery('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3').css({
+            background: '#fff',
+            color: '#413e66',
+            borderColor: '#413e66',
+            transform: 'rotate(-'+0+'deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
+          });
+          if (pausedStatus == true) {
+            localStorage.setItem('paused', 'mw_10_2');
+            endNow();
+          } else {
+            mw_10_2();
+            // console.log('continue');
+          } 
+        }
+    }, 1000);
+  }
+
+  mw_9_4 = function(){
+    jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
+    jQuery('.wizard_percent').text('70%');
+    reloadTime = 0;
+    reloadTime1 = 0;
+    d12Val = 0;
+    rotateVal = 0;
+    jQuery('.ring').addClass('hidden');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
+    cur_animation_val = 10;
+    count_animation = 1;
+    jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: -320, scale: 1.5}, {duration: 40, ease: "none", rotation: -380, scale: 1.5})
+             .fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: -380, scale: 1.5}, {duration: 17, ease: "none", rotation: -380, scale: 1.5})
+             .fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: -380, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
+    phaseSeven_one = setInterval(function(){
+        if (count_animation <= 40){
+          if (reloadTime == 0){                                                                       //1
+              sound.stop();
+              reloadSound.play();
+          };
+          reloadTime += 1;
+          count_animation += 1;
+        } else if(count_animation <= 57) {
+            count_animation += 1;
+        } else {
+          clearInterval(phaseSeven_one);
+          count_animation = 1;
+          jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').css({
+            background: '#fff',
+            color: '#413e66',
+            borderColor: '#413e66',
+            transform: 'rotate(-'+0+'deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
+          });
+          if (pausedStatus == true) {
+            localStorage.setItem('paused', 'mw_10_1');
+            endNow();
+          } else {
+            mw_10_1();
+          } 
+        }
+    }, 1000);
+  }
+
+  mw_9_3 = function(){
+    jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
+    jQuery('.wizard_percent').text('65%');
+    reloadTime = 0;
+    reloadTime1 = 0;
+    d12Val = 0;
+    rotateVal = 0;
+    jQuery('.ring').addClass('hidden');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
+    cur_animation_val = 10;
+    count_animation = 1;
+    jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: 270, scale: 1.5}, {duration: 40, ease: "none", rotation: 330, scale: 1.5})
+             .fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: 330, scale: 1.5}, {duration: 17, ease: "none", rotation: 330, scale: 1.5})
+             .fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: 330, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
+    phaseSeven_one = setInterval(function(){
+        if (count_animation <= 40){
+          if (reloadTime == 0){                                                                       //1
+              sound.stop();
+              reloadSound.play();
+          };
+          reloadTime += 1;
+          count_animation += 1;
+        } else if(count_animation <= 57) {
+            count_animation += 1;
+        } else {
+          clearInterval(phaseSeven_one);
+          count_animation = 1;
+          jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').css({
+            background: '#fff',
+            color: '#413e66',
+            borderColor: '#413e66',
+            transform: 'rotate(-'+0+'deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
+          });
+          if (pausedStatus == true) {
+            localStorage.setItem('paused', 'mw_9_4');
+            endNow();
+          } else {
+            mw_9_4();
+          } 
+        }
+    }, 1000);
+  } 
+
+  mw_9_2 = function(){
+    jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
+    jQuery('.wizard_percent').text('60%');
+    reloadTime = 0;
+    reloadTime1 = 0;
+    d12Val = 0;
+    rotateVal = 0;
+    jQuery('.ring').addClass('hidden');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
+    cur_animation_val = 10;
+    count_animation = 1;
+    jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: 20, scale: 1.5}, {duration: 40, ease: "none", rotation: 80, scale: 1.5})
+             .fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: 80, scale: 1.5}, {duration: 17, ease: "none", rotation: 80, scale: 1.5})
+             .fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: 80, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
+    phaseSeven_one = setInterval(function(){
+        if (count_animation <= 40){
+          if (reloadTime == 0){                                                                       //1
+              sound.stop();
+              reloadSound.play();
+          };
+          reloadTime += 1;
+          count_animation += 1;
+        } else if(count_animation <= 57) {
+            count_animation += 1;
+        } else {
+          clearInterval(phaseSeven_one);
+          count_animation = 1;
+          jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').css({
+            background: '#fff',
+            color: '#413e66',
+            borderColor: '#413e66',
+            transform: 'rotate(-'+0+'deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mw_9_3');
@@ -444,55 +691,60 @@ jQuery(function() {
           } 
         }
     }, 1000);
-  }
+  } 
 
   mw_9_1 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
-    jQuery('.wizard_percent').text('75%');
+    jQuery('.wizard_percent').text('55%');
     reloadTime = 0;
     reloadTime1 = 0;
     d12Val = 0;
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 0;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: -10, scale: 1.5}, {duration: 40, ease: "none", rotation: -70, scale: 1.5})
+             .fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: -70, scale: 1.5}, {duration: 17, ease: "none", rotation: -70, scale: 1.5})
+             .fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: -70, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
-          reloadTime += 1;                                                                        //40
-          cur_animation_val += 1.5;
-          jQuery('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
-            transform: 'rotate(-'+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
+          reloadTime += 1;
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
           count_animation = 1;
-          jQuery('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3').css({
+          jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mw_9_2');
             endNow();
           } else {
             mw_9_2();
+            // console.log('continue');
           } 
         }
     }, 1000);
@@ -500,45 +752,51 @@ jQuery(function() {
 
   mw_8_4 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
-    jQuery('.wizard_percent').text('70%');
+    jQuery('.wizard_percent').text('50%');
     reloadTime = 0;
     reloadTime1 = 0;
     d12Val = 0;
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 300;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: -320, scale: 1.5}, {duration: 40, ease: "none", rotation: -380, scale: 1.5})
+             .fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: -380, scale: 1.5}, {duration: 17, ease: "none", rotation: -380, scale: 1.5})
+             .fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: -380, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
-          reloadTime += 1;                                                                        //40
-          cur_animation_val += 1.5;
-          jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
-            transform: 'rotate(-'+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
+          reloadTime += 1;
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
           count_animation = 1;
-          jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').css({
+          jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mw_9_1');
@@ -552,45 +810,51 @@ jQuery(function() {
 
   mw_8_3 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
-    jQuery('.wizard_percent').text('65%');
+    jQuery('.wizard_percent').text('45%');
     reloadTime = 0;
     reloadTime1 = 0;
     d12Val = 0;
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 270;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: 270, scale: 1.5}, {duration: 40, ease: "none", rotation: 330, scale: 1.5})
+             .fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: 330, scale: 1.5}, {duration: 17, ease: "none", rotation: 330, scale: 1.5})
+             .fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: 330, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){         
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
           reloadTime += 1;
-          cur_animation_val += 1.5;
-          jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
-            transform: 'rotate('+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
           count_animation = 1;
-          jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').css({
+          jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mw_8_4');
@@ -600,217 +864,9 @@ jQuery(function() {
           } 
         }
     }, 1000);
-  }
+  } 
 
   mw_8_2 = function(){
-    jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
-    jQuery('.wizard_percent').text('60%');
-    reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
-    rotateVal = 0;
-    jQuery('.ring').addClass('hidden');
-    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 10;
-    count_animation = 1;
-    phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
-          if (reloadTime == 0){                                                                       //1
-              sound.stop();
-              reloadSound.play();
-          };
-          reloadTime += 1;
-          cur_animation_val += 1.5;
-          jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
-            transform: 'rotate('+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
-          count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
-            count_animation += 1;
-        } else {
-          clearInterval(phaseSeven_one);
-          count_animation = 1;
-          jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').css({
-            background: '#fff',
-            color: '#413e66',
-            borderColor: 'green',
-            transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
-          });
-          if (pausedStatus == true) {
-            localStorage.setItem('paused', 'mw_8_3');
-            endNow();
-          } else {
-            mw_8_3();
-          } 
-        }
-    }, 1000);
-  }
-
-  mw_8_1 = function(){
-    jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
-    jQuery('.wizard_percent').text('55%');
-    reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
-    rotateVal = 0;
-    jQuery('.ring').addClass('hidden');
-    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 0;
-    count_animation = 1;
-    phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
-          if (reloadTime == 0){                                                                       //1
-              sound.stop();
-              reloadSound.play();
-          };
-          reloadTime += 1;                                                                        //40
-          cur_animation_val += 1.5;
-          jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
-            transform: 'rotate(-'+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
-          count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
-            count_animation += 1;
-        } else {
-          clearInterval(phaseSeven_one);
-          count_animation = 1;
-          jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').css({
-            background: '#fff',
-            color: '#413e66',
-            borderColor: 'green',
-            transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
-          });
-          if (pausedStatus == true) {
-            localStorage.setItem('paused', 'mw_8_2');
-            endNow();
-          } else {
-            mw_8_2();
-          } 
-        }
-    }, 1000);
-  }
-
-  mw_7_4 = function(){
-    jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
-    jQuery('.wizard_percent').text('50%');
-    reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
-    rotateVal = 0;
-    jQuery('.ring').addClass('hidden');
-    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 300;
-    count_animation = 1;
-    phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
-          if (reloadTime == 0){                                                                       //1
-              sound.stop();
-              reloadSound.play();
-          };
-          reloadTime += 1;                                                                        //40
-          cur_animation_val += 1.5;
-          jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
-            transform: 'rotate(-'+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
-          count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
-            count_animation += 1;
-        } else {
-          clearInterval(phaseSeven_one);
-          count_animation = 1;
-          jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').css({
-            background: '#fff',
-            color: '#413e66',
-            borderColor: 'green',
-            transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
-          });
-          if (pausedStatus == true) {
-            localStorage.setItem('paused', 'mw_8_1');
-            endNow();
-          } else {
-            mw_8_1();
-          } 
-        }
-    }, 1000);
-  }
-
-  mw_7_3 = function(){
-    jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
-    jQuery('.wizard_percent').text('45%');
-    reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
-    rotateVal = 0;
-    jQuery('.ring').addClass('hidden');
-    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 270;
-    count_animation = 1;
-    phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){         
-          if (reloadTime == 0){                                                                       //1
-              sound.stop();
-              reloadSound.play();
-          };
-          reloadTime += 1;
-          cur_animation_val += 1.5;
-          jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
-            transform: 'rotate('+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
-          count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
-            count_animation += 1;
-        } else {
-          clearInterval(phaseSeven_one);
-          count_animation = 1;
-          jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').css({
-            background: '#fff',
-            color: '#413e66',
-            borderColor: 'green',
-            transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
-          });
-          if (pausedStatus == true) {
-            localStorage.setItem('paused', 'mw_7_4');
-            endNow();
-          } else {
-            mw_7_4();
-          } 
-        }
-    }, 1000);
-  }
-
-  mw_7_2 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
     jQuery('.wizard_percent').text('40%');
     reloadTime = 0;
@@ -821,25 +877,31 @@ jQuery(function() {
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
     cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: 20, scale: 1.5}, {duration: 40, ease: "none", rotation: 80, scale: 1.5})
+             .fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: 80, scale: 1.5}, {duration: 17, ease: "none", rotation: 80, scale: 1.5})
+             .fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: 80, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
           reloadTime += 1;
-          cur_animation_val += 1.5;
-          jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
-            transform: 'rotate('+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -847,22 +909,22 @@ jQuery(function() {
           jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
-            localStorage.setItem('paused', 'mw_7_3');
+            localStorage.setItem('paused', 'mw_8_3');
             endNow();
           } else {
-            mw_7_3();
+            mw_8_3();
           } 
         }
     }, 1000);
-  }
+  } 
 
-  mw_7_1 = function(){
+  mw_8_1 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
     jQuery('.wizard_percent').text('35%');
     reloadTime = 0;
@@ -871,27 +933,31 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 0;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: -10, scale: 1.5}, {duration: 40, ease: "none", rotation: -70, scale: 1.5})
+             .fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: -70, scale: 1.5}, {duration: 17, ease: "none", rotation: -70, scale: 1.5})
+             .fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: -70, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
-          reloadTime += 1;                                                                        //40
-          cur_animation_val += 1.5;
-          jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
-            transform: 'rotate(-'+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
+          reloadTime += 1;
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -899,32 +965,57 @@ jQuery(function() {
           jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
-            localStorage.setItem('paused', 'mw_7_2');
+            localStorage.setItem('paused', 'mw_8_2');
             endNow();
           } else {
-            mw_7_2();
+            mw_8_2();
+            // console.log('continue');
           } 
         }
     }, 1000);
   }
 
-  mw_6 = function(){
+  mw_7 = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
     jQuery('.wizard_percent').text('30%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('z.zone_d2, .zone_s3, .zone_s4, .zone_alt_v3').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -932,99 +1023,76 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_d2, .zone_s3, .zone_s4, .zone_alt_v3').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_d2, .zone_s3, .zone_s4, .zone_alt_v3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('z.zone_d2, .zone_s3, .zone_s4, .zone_alt_v3').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_d2, .zone_s3, .zone_s4, .zone_alt_v3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_d2, .zone_s3, .zone_s4, .zone_alt_v3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('z.zone_d2, .zone_s3, .zone_s4, .zone_alt_v3').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('z.zone_d2, .zone_s3, .zone_s4, .zone_alt_v3').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
-        jQuery('.zone_d2, .zone_s3, .zone_s4, .zone_alt_v3').css({
+        jQuery('z.zone_d2, .zone_s3, .zone_s4, .zone_alt_v3').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
         if (pausedStatus == true) {
-          localStorage.setItem('paused', 'mw_7_1');
+          localStorage.setItem('paused', 'mw_8_1');
           endNow()
         } else {
-          mw_7_1();
+          mw_8_1();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
 
-  mw_5 = function(){
+  mw_6 = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
     jQuery('.wizard_percent').text('25%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('zone_v3, .zone_v4, .zone_alt_v3, .zone_alt_v4').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -1032,75 +1100,103 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_v3, .zone_v4, .zone_alt_v3, .zone_alt_v4').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_v3, .zone_v4, .zone_alt_v3, .zone_alt_v4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('zone_v3, .zone_v4, .zone_alt_v3, .zone_alt_v4').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_v3, .zone_v4, .zone_alt_v3, .zone_alt_v4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_v3, .zone_v4, .zone_alt_v3, .zone_alt_v4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('zone_v3, .zone_v4, .zone_alt_v3, .zone_alt_v4').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('zone_v3, .zone_v4, .zone_alt_v3, .zone_alt_v4').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
-        jQuery('.zone_v3, .zone_v4, .zone_alt_v3, .zone_alt_v4').css({
+        jQuery('zone_v3, .zone_v4, .zone_alt_v3, .zone_alt_v4').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
+        });
+        jQuery('.ring').css('transform', 'rotate(0deg)');
+        jQuery('.zone_ring').css('transform', 'rotate(0deg)');
+        sound.stop();
+        if (pausedStatus == true) {
+          localStorage.setItem('paused', 'mw_7');
+          endNow()
+        } else {
+          mw_7();
+          // console.log('continue');
+        } 
+      }
+    }, 250);
+  }
+
+  mw_5 = function() {
+    jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
+    jQuery('.wizard_percent').text('20%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
+    reloadTime = 0;
+    cur_animation_val = 0;
+    count_animation = 1;
+    jQuery('.zone_v2, .zone_v5, .zone_alt_v2, .zone_alt_v5').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
+    phaseOne = setInterval(function(){
+      if (count_animation <= 360){
+        if (reloadTime == 0){                                                                       //1
+            sound.stop();
+            reloadSound.play();
+        } else if (reloadTime == 2) {
+            sound.play();
+        };
+        reloadTime += 1;
+        if (count_animation > 0 && count_animation <= 120) {
+          jQuery('.zone_v2, .zone_v5, .zone_alt_v2, .zone_alt_v5').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
+        } else if (count_animation > 120 && count_animation <= 220) {
+          jQuery('.zone_v2, .zone_v5, .zone_alt_v2, .zone_alt_v5').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_v2, .zone_v5, .zone_alt_v2, .zone_alt_v5').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
+        }
+        count_animation += 1;
+      } else {
+        clearInterval(phaseOne);
+        count_animation = 1;
+        jQuery('.zone_v2, .zone_v5, .zone_alt_v2, .zone_alt_v5').css({
+            background: '#fff',
+            color: '#413e66',
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -1110,22 +1206,47 @@ jQuery(function() {
           endNow()
         } else {
           mw_6();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
 
-  mw_4 = function(){
+  mw_4 = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
-    jQuery('.wizard_percent').text('20%');
+    jQuery('.wizard_percent').text('15%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('.zone_d2_, .zone_s2_, .zone_alt_d2_, .zone_alt_s2_').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -1133,76 +1254,26 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_v2, .zone_v5, .zone_alt_v2, .zone_alt_v5').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_v2, .zone_v5, .zone_alt_v2, .zone_alt_v5').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_d2_, .zone_s2_, .zone_alt_d2_, .zone_alt_s2_').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_v2, .zone_v5, .zone_alt_v2, .zone_alt_v5').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_v2, .zone_v5, .zone_alt_v2, .zone_alt_v5').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_d2_, .zone_s2_, .zone_alt_d2_, .zone_alt_s2_').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_d2_, .zone_s2_, .zone_alt_d2_, .zone_alt_s2_').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
-        jQuery('.zone_v2, .zone_v5, .zone_alt_v2, .zone_alt_v5').css({
+        jQuery('.zone_d2_, .zone_s2_, .zone_alt_d2_, .zone_alt_s2_').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -1212,22 +1283,47 @@ jQuery(function() {
           endNow()
         } else {
           mw_5();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
 
-  mw_3 = function(){
+  mw_3 = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
-    jQuery('.wizard_percent').text('15%');
+    jQuery('.wizard_percent').text('10%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('.zone_d2, .zone_d3, .zone_alt_s2, .zone_alt_s3').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -1235,76 +1331,26 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_d2_, .zone_s2_, .zone_alt_d2_, .zone_alt_s2_').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_d2_, .zone_s2_, .zone_alt_d2_, .zone_alt_s2_').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_d2, .zone_d3, .zone_alt_s2, .zone_alt_s3').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_d2_, .zone_s2_, .zone_alt_d2_, .zone_alt_s2_').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_d2_, .zone_s2_, .zone_alt_d2_, .zone_alt_s2_').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_d2, .zone_d3, .zone_alt_s2, .zone_alt_s3').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_d2, .zone_d3, .zone_alt_s2, .zone_alt_s3').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
-        jQuery('.zone_d2_, .zone_s2_, .zone_alt_d2_, .zone_alt_s2_').css({
+        jQuery('.zone_d2, .zone_d3, .zone_alt_s2, .zone_alt_s3').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -1314,22 +1360,47 @@ jQuery(function() {
           endNow()
         } else {
           mw_4();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
 
-  mw_2 = function(){
+  mw_2 = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
-    jQuery('.wizard_percent').text('10%');
+    jQuery('.wizard_percent').text('5%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('.zone_d6, .zone_alt_s6').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -1337,76 +1408,26 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_d2, .zone_d3, .zone_alt_s2, .zone_alt_s3').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_d2, .zone_d3, .zone_alt_s2, .zone_alt_s3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_d6, .zone_alt_s6').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_d2, .zone_d3, .zone_alt_s2, .zone_alt_s3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_d2, .zone_d3, .zone_alt_s2, .zone_alt_s3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_d6, .zone_alt_s6').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_d6, .zone_alt_s6').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
-        jQuery('.zone_d2, .zone_d3, .zone_alt_s2, .zone_alt_s3').css({
+        jQuery('.zone_d6, .zone_alt_s6').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -1416,23 +1437,47 @@ jQuery(function() {
           endNow()
         } else {
           mw_3();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
 
-
-  mw_dop = function(){
+  mw = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
-    jQuery('.wizard_percent').text('5%');
+    jQuery('.wizard_percent').text('0%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('.zone_d4, .zone_d5, .zone_alt_s4, .zone_alt_s5').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -1440,76 +1485,26 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_d6, .zone_alt_s6').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_d6, .zone_alt_s6').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_d4, .zone_d5, .zone_alt_s4, .zone_alt_s5').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_d6, .zone_alt_s6').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_d6, .zone_alt_s6').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_d4, .zone_d5, .zone_alt_s4, .zone_alt_s5').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_d4, .zone_d5, .zone_alt_s4, .zone_alt_s5').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
-        jQuery('.zone_d6, .zone_alt_s6').css({
+        jQuery('.zone_d4, .zone_d5, .zone_alt_s4, .zone_alt_s5').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -1519,115 +1514,14 @@ jQuery(function() {
           endNow()
         } else {
           mw_2();
-        } 
-      }
-    }, 250);
-  }
-
-  mw = function(){
-    jQuery('.wizard_heading').text('Выполняется протокол "Классический"');
-    jQuery('.wizard_percent').text('0%');
-    reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
-    cur_animation_val = 0;
-    rotateVal = 0;
-    count_animation = 1;
-    phaseOne = setInterval(function(){
-      if (count_animation <= 344){
-        if (reloadTime == 0){                                                                       //1
-            sound.stop();
-            reloadSound.play();
-        } else if (reloadTime == 2) {
-            sound.play();
-        };
-        reloadTime += 1;
-        jQuery('.zone_d4, .zone_d5, .zone_alt_s4, .zone_alt_s5').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
-        if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_d4, .zone_d5, .zone_alt_s4, .zone_alt_s5').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_d4, .zone_d5, .zone_alt_s4, .zone_alt_s5').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_d4, .zone_d5, .zone_alt_s4, .zone_alt_s5').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
-        }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
-        count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
-      } else {
-        clearInterval(phaseOne);
-        count_animation = 1;
-        jQuery('.zone_d4, .zone_d5, .zone_alt_s4, .zone_alt_s5').css({
-            background: '#fff',
-            color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
-        });
-        jQuery('.ring').css('transform', 'rotate(0deg)');
-        jQuery('.zone_ring').css('transform', 'rotate(0deg)');
-        sound.stop();
-        if (pausedStatus == true) {
-          localStorage.setItem('paused', 'mw_dop');
-          endNow()
-        } else {
-          mw_dop();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
 
 
-  ww_10 = function(){
+  ww_12 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Женский"');
     jQuery('.wizard_percent').text('92%');
     reloadTime = 0;
@@ -1667,7 +1561,7 @@ jQuery(function() {
     }, 250);
   }
 
-  ww_9_4 = function(){
+  ww_11_4 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Женский"');
     jQuery('.wizard_percent').text('83%');
     reloadTime = 0;
@@ -1676,27 +1570,33 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 300;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: -320, scale: 1.5}, {duration: 40, ease: "none", rotation: -380, scale: 1.5})
+             .fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: -380, scale: 1.5}, {duration: 17, ease: "none", rotation: -380, scale: 1.5})
+             .fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: -380, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
-          reloadTime += 1;                                                                        //40
-          cur_animation_val += 1.5;
-          jQuery('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
-            transform: 'rotate(-'+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
+          reloadTime += 1;
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -1704,22 +1604,22 @@ jQuery(function() {
           jQuery('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
-            localStorage.setItem('paused', 'ww_10');
+            localStorage.setItem('paused', 'ww_12');
             endNow();
           } else {
-            ww_10();
+            ww_12();
           } 
         }
     }, 1000);
   }
 
-  ww_9_3 = function(){
+  ww_11_3 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Женский"');
     jQuery('.wizard_percent').text('77%');
     reloadTime = 0;
@@ -1728,27 +1628,33 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 270;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: 270, scale: 1.5}, {duration: 40, ease: "none", rotation: 330, scale: 1.5})
+             .fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: 330, scale: 1.5}, {duration: 17, ease: "none", rotation: 330, scale: 1.5})
+             .fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: 330, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){         
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
           reloadTime += 1;
-          cur_animation_val += 1.5;
-          jQuery('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
-            transform: 'rotate('+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -1756,22 +1662,22 @@ jQuery(function() {
           jQuery('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
-            localStorage.setItem('paused', 'ww_9_4');
+            localStorage.setItem('paused', 'ww_11_4');
             endNow();
           } else {
-            ww_9_4();
+            ww_11_4();
           } 
         }
     }, 1000);
-  }
+  } 
 
-  ww_9_2 = function(){
+  ww_11_2 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Женский"');
     jQuery('.wizard_percent').text('72%');
     reloadTime = 0;
@@ -1782,25 +1688,31 @@ jQuery(function() {
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
     cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: 20, scale: 1.5}, {duration: 40, ease: "none", rotation: 80, scale: 1.5})
+             .fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: 80, scale: 1.5}, {duration: 17, ease: "none", rotation: 80, scale: 1.5})
+             .fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: 80, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
           reloadTime += 1;
-          cur_animation_val += 1.5;
-          jQuery('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
-            transform: 'rotate('+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -1808,22 +1720,22 @@ jQuery(function() {
           jQuery('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
-            localStorage.setItem('paused', 'ww_9_3');
+            localStorage.setItem('paused', 'ww_11_3');
             endNow();
           } else {
-            ww_9_3();
+            ww_11_3();
           } 
         }
     }, 1000);
-  }
+  } 
 
-  ww_9_1 = function(){
+  ww_11_1 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Женский"');
     jQuery('.wizard_percent').text('66%');
     reloadTime = 0;
@@ -1832,27 +1744,31 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 0;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: -10, scale: 1.5}, {duration: 40, ease: "none", rotation: -70, scale: 1.5})
+             .fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: -70, scale: 1.5}, {duration: 17, ease: "none", rotation: -70, scale: 1.5})
+             .fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: -70, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
-          reloadTime += 1;                                                                        //40
-          cur_animation_val += 1.5;
-          jQuery('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
-            transform: 'rotate(-'+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
+          reloadTime += 1;
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -1860,32 +1776,57 @@ jQuery(function() {
           jQuery('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
-            localStorage.setItem('paused', 'ww_9_2');
+            localStorage.setItem('paused', 'ww_11_2');
             endNow();
           } else {
-            ww_9_2();
+            ww_11_2();
+            // console.log('continue');
           } 
         }
     }, 1000);
   }
 
-  ww_8 = function(){
+  ww_10 = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Женский"');
     jQuery('.wizard_percent').text('60%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('.zone_v1, .zone_v5, .zone_v-, .zone_alt_v1, .zone_alt_v5, .zone_alt_v-').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -1893,104 +1834,76 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_v1, .zone_v5, .zone_v-, .zone_alt_v1, .zone_alt_v5, .zone_alt_v-').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
-        jQuery('.zone_v-, .zone_alt_v-').css({
-          background: '#fff url(/wp-content/themes/bcwish/img/vig_.png) center center/100% no-repeat'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_v1, .zone_v5, .zone_alt_v1, .zone_alt_v5').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v1, .zone_v5, .zone_v-, .zone_alt_v1, .zone_alt_v5, .zone_alt_v-').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_v1, .zone_v5, .zone_alt_v1, .zone_alt_v5').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_v1, .zone_v5, .zone_alt_v1, .zone_alt_v5').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v1, .zone_v5, .zone_v-, .zone_alt_v1, .zone_alt_v5, .zone_alt_v-').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_v1, .zone_v5, .zone_v-, .zone_alt_v1, .zone_alt_v5, .zone_alt_v-').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
         jQuery('.zone_v1, .zone_v5, .zone_v-, .zone_alt_v1, .zone_alt_v5, .zone_alt_v-').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
         if (pausedStatus == true) {
-          localStorage.setItem('paused', 'ww_9_1');
+          localStorage.setItem('paused', 'ww_11_1');
           endNow()
         } else {
-          ww_9_1();
+          ww_11_1();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
 
-  ww_7 = function(){
+  ww_9 = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Женский"');
     jQuery('.wizard_percent').text('53%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('.zone_d3, .zone_alt_d4').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -1998,76 +1911,180 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_d3, .zone_alt_d4').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_d3, .zone_alt_d4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_d3, .zone_alt_d4').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_d3, .zone_alt_d4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_d3, .zone_alt_d4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_d3, .zone_alt_d4').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_d3, .zone_alt_d4').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
         jQuery('.zone_d3, .zone_alt_d4').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
+        });
+        jQuery('.ring').css('transform', 'rotate(0deg)');
+        jQuery('.zone_ring').css('transform', 'rotate(0deg)');
+        sound.stop();
+        if (pausedStatus == true) {
+          localStorage.setItem('paused', 'ww_10');
+          endNow()
+        } else {
+          ww_10();
+          // console.log('continue');
+        } 
+      }
+    }, 250);
+  }
+
+  ww_8 = function() {
+    jQuery('.wizard_heading').text('Выполняется протокол "Женский"');
+    jQuery('.wizard_percent').text('47%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
+    reloadTime = 0;
+    cur_animation_val = 0;
+    count_animation = 1;
+    jQuery('.zone_d5, .zone_d6, .zone_alt_d2_').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
+    phaseOne = setInterval(function(){
+      if (count_animation <= 360){
+        if (reloadTime == 0){                                                                       //1
+            sound.stop();
+            reloadSound.play();
+        } else if (reloadTime == 2) {
+            sound.play();
+        };
+        reloadTime += 1;
+        if (count_animation > 0 && count_animation <= 120) {
+          jQuery('.zone_d5, .zone_d6, .zone_alt_d2_').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
+        } else if (count_animation > 120 && count_animation <= 220) {
+          jQuery('.zone_d5, .zone_d6, .zone_alt_d2_').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_d5, .zone_d6, .zone_alt_d2_').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
+        }
+        count_animation += 1;
+      } else {
+        clearInterval(phaseOne);
+        count_animation = 1;
+        jQuery('.zone_d5, .zone_d6, .zone_alt_d2_').css({
+            background: '#fff',
+            color: '#413e66',
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
+        });
+        jQuery('.ring').css('transform', 'rotate(0deg)');
+        jQuery('.zone_ring').css('transform', 'rotate(0deg)');
+        sound.stop();
+        if (pausedStatus == true) {
+          localStorage.setItem('paused', 'ww_9');
+          endNow()
+        } else {
+          ww_9();
+          // console.log('continue');
+        } 
+      }
+    }, 250);
+  }
+
+  ww_7 = function() {
+    jQuery('.wizard_heading').text('Выполняется протокол "Женский"');
+    jQuery('.wizard_percent').text('40%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
+    reloadTime = 0;
+    cur_animation_val = 0;
+    count_animation = 1;
+    jQuery('.zone_s6, .zone_alt_s3').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
+    phaseOne = setInterval(function(){
+      if (count_animation <= 360){
+        if (reloadTime == 0){                                                                       //1
+            sound.stop();
+            reloadSound.play();
+        } else if (reloadTime == 2) {
+            sound.play();
+        };
+        reloadTime += 1;
+        if (count_animation > 0 && count_animation <= 120) {
+          jQuery('.zone_s6, .zone_alt_s3').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
+        } else if (count_animation > 120 && count_animation <= 220) {
+          jQuery('.zone_s6, .zone_alt_s3').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_s6, .zone_alt_s3').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
+        }
+        count_animation += 1;
+      } else {
+        clearInterval(phaseOne);
+        count_animation = 1;
+        jQuery('.zone_s6, .zone_alt_s3').css({
+            background: '#fff',
+            color: '#413e66',
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -2077,22 +2094,47 @@ jQuery(function() {
           endNow()
         } else {
           ww_8();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
 
-  ww_6 = function(){
+  ww_6 = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Женский"');
-    jQuery('.wizard_percent').text('47%');
+    jQuery('.wizard_percent').text('34%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('.zone_s5, .zone_alt_s3').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -2100,76 +2142,26 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_d5, .zone_d6, .zone_alt_d2_').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_d5, .zone_d6, .zone_alt_d2_').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_s5, .zone_alt_s3').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_d5, .zone_d6, .zone_alt_d2_').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_d5, .zone_d6, .zone_alt_d2_').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_s5, .zone_alt_s3').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_s5, .zone_alt_s3').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
-        jQuery('.zone_d5, .zone_d6, .zone_alt_d2_').css({
+        jQuery('.zone_s5, .zone_alt_s3').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -2179,22 +2171,47 @@ jQuery(function() {
           endNow()
         } else {
           ww_7();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
 
-  ww_5_dop = function(){
+  ww_5 = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Женский"');
-    jQuery('.wizard_percent').text('40%');
+    jQuery('.wizard_percent').text('26%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('.zone_s6, .zone_alt_s4').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -2202,76 +2219,26 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_s6, .zone_alt_s3').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_s6, .zone_alt_s3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_s6, .zone_alt_s4').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_s6, .zone_alt_s3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_s6, .zone_alt_s3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_s6, .zone_alt_s4').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_s6, .zone_alt_s4').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
-        jQuery('.zone_s6, .zone_alt_s3').css({
+        jQuery('.zone_s6, .zone_alt_s4').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -2281,22 +2248,47 @@ jQuery(function() {
           endNow()
         } else {
           ww_6();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
 
-  ww_5 = function(){
+  ww_4 = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Женский"');
-    jQuery('.wizard_percent').text('34%');
+    jQuery('.wizard_percent').text('19%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('.zone_s5, .zone_alt_s4').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -2304,178 +2296,26 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_s5, .zone_alt_s3').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_s5, .zone_alt_s3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_s5, .zone_alt_s4').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_s5, .zone_alt_s3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_s5, .zone_alt_s3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_s5, .zone_alt_s4').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_s5, .zone_alt_s4').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
-        jQuery('.zone_s5, .zone_alt_s3').css({
+        jQuery('.zone_s5, .zone_alt_s4').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
-        });
-        jQuery('.ring').css('transform', 'rotate(0deg)');
-        jQuery('.zone_ring').css('transform', 'rotate(0deg)');
-        sound.stop();
-        if (pausedStatus == true) {
-          localStorage.setItem('paused', 'ww_5_dop');
-          endNow()
-        } else {
-          ww_5_dop();
-        } 
-      }
-    }, 250);
-  }
-
-  ww_4_dop = function(){
-    jQuery('.wizard_heading').text('Выполняется протокол "Женский"');
-    jQuery('.wizard_percent').text('26%');
-    reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
-    cur_animation_val = 0;
-    rotateVal = 0;
-    count_animation = 1;
-    phaseOne = setInterval(function(){
-      if (count_animation <= 344){
-        if (reloadTime == 0){                                                                       //1
-            sound.stop();
-            reloadSound.play();
-        } else if (reloadTime == 2) {
-            sound.play();
-        };
-        reloadTime += 1;
-        jQuery('.zone_s6, .zone_alt_s4').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
-        if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_s6, .zone_alt_s4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_s6, .zone_alt_s4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_s6, .zone_alt_s4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
-        }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
-        count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
-      } else {
-        clearInterval(phaseOne);
-        count_animation = 1;
-        jQuery('.zone_s6, .zone_alt_s4').css({
-            background: '#fff',
-            color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -2485,124 +2325,47 @@ jQuery(function() {
           endNow()
         } else {
           ww_5();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
 
-  ww_4 = function(){
-    jQuery('.wizard_heading').text('Выполняется протокол "Женский"');
-    jQuery('.wizard_percent').text('19%');
-    reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
-    cur_animation_val = 0;
-    rotateVal = 0;
-    count_animation = 1;
-    phaseOne = setInterval(function(){
-      if (count_animation <= 344){
-        if (reloadTime == 0){                                                                       //1
-            sound.stop();
-            reloadSound.play();
-        } else if (reloadTime == 2) {
-            sound.play();
-        };
-        reloadTime += 1;
-        jQuery('.zone_s5, .zone_alt_s4').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
-        if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_s5, .zone_alt_s4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_s5, .zone_alt_s4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_s5, .zone_alt_s4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
-        }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
-        count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
-      } else {
-        clearInterval(phaseOne);
-        count_animation = 1;
-        jQuery('.zone_s5, .zone_alt_s4').css({
-            background: '#fff',
-            color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
-        });
-        jQuery('.ring').css('transform', 'rotate(0deg)');
-        jQuery('.zone_ring').css('transform', 'rotate(0deg)');
-        sound.stop();
-        if (pausedStatus == true) {
-          localStorage.setItem('paused', 'ww_4_dop');
-          endNow()
-        } else {
-          ww_4_dop();
-        } 
-      }
-    }, 250);
-  }
-
-  ww_3 = function(){
+  ww_3 = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Женский"');
     jQuery('.wizard_percent').text('13%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('.zone_v2, .zone_alt_v2').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -2610,76 +2373,26 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_v3, .zone_alt_v3').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_v3, .zone_alt_v3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v2, .zone_alt_v2').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_v3, .zone_alt_v3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_v3, .zone_alt_v3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v2, .zone_alt_v2').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_v2, .zone_alt_v2').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
-        jQuery('.zone_v3, .zone_alt_v3').css({
+        jQuery('.zone_v2, .zone_alt_v2').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -2689,22 +2402,47 @@ jQuery(function() {
           endNow()
         } else {
           ww_4();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
 
-  ww_2 = function(){
+  ww_2 = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Женский"');
     jQuery('.wizard_percent').text('6%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('.zone_v2, .zone_alt_v2').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -2712,76 +2450,26 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_v2, .zone_alt_v2').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_v2, .zone_alt_v2').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v2, .zone_alt_v2').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_v2, .zone_alt_v2').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_v2, .zone_alt_v2').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v2, .zone_alt_v2').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_v2, .zone_alt_v2').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
         jQuery('.zone_v2, .zone_alt_v2').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -2791,22 +2479,47 @@ jQuery(function() {
           endNow()
         } else {
           ww_3();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
 
-  ww = function(){
+  ww = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Женский"');
     jQuery('.wizard_percent').text('0%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('.zone_v4, .zone_alt_v4').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -2814,76 +2527,26 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_v4, .zone_alt_v4').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_v4, .zone_alt_v4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v4, .zone_alt_v4').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_v4, .zone_alt_v4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_v4, .zone_alt_v4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v4, .zone_alt_v4').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_v4, .zone_alt_v4').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
         jQuery('.zone_v4, .zone_alt_v4').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -2893,12 +2556,11 @@ jQuery(function() {
           endNow()
         } else {
           ww_2();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
-
-
 
 
   mm_10 = function(){
@@ -2976,27 +2638,33 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 300;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: -320, scale: 1.5}, {duration: 40, ease: "none", rotation: -380, scale: 1.5})
+             .fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: -380, scale: 1.5}, {duration: 17, ease: "none", rotation: -380, scale: 1.5})
+             .fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: -380, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
-          reloadTime += 1;                                                                        //40
-          cur_animation_val += 1.5;
-          jQuery('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
-            transform: 'rotate(-'+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
+          reloadTime += 1;
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -3004,10 +2672,10 @@ jQuery(function() {
           jQuery('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mm_10');
@@ -3028,27 +2696,33 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 270;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: 270, scale: 1.5}, {duration: 40, ease: "none", rotation: 330, scale: 1.5})
+             .fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: 330, scale: 1.5}, {duration: 17, ease: "none", rotation: 330, scale: 1.5})
+             .fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: 330, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){         
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
           reloadTime += 1;
-          cur_animation_val += 1.5;
-          jQuery('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
-            transform: 'rotate('+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -3056,10 +2730,10 @@ jQuery(function() {
           jQuery('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mm_9_4');
@@ -3069,7 +2743,7 @@ jQuery(function() {
           } 
         }
     }, 1000);
-  }
+  } 
 
   mm_9_2 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Мужской"');
@@ -3082,25 +2756,31 @@ jQuery(function() {
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
     cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: 20, scale: 1.5}, {duration: 40, ease: "none", rotation: 80, scale: 1.5})
+             .fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: 80, scale: 1.5}, {duration: 17, ease: "none", rotation: 80, scale: 1.5})
+             .fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: 80, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
           reloadTime += 1;
-          cur_animation_val += 1.5;
-          jQuery('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
-            transform: 'rotate('+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -3108,10 +2788,10 @@ jQuery(function() {
           jQuery('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mm_9_3');
@@ -3121,7 +2801,7 @@ jQuery(function() {
           } 
         }
     }, 1000);
-  }
+  } 
 
   mm_9_1 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Мужской"');
@@ -3132,27 +2812,31 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 0;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: -10, scale: 1.5}, {duration: 40, ease: "none", rotation: -70, scale: 1.5})
+             .fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: -70, scale: 1.5}, {duration: 17, ease: "none", rotation: -70, scale: 1.5})
+             .fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: -70, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
-          reloadTime += 1;                                                                        //40
-          cur_animation_val += 1.5;
-          jQuery('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
-            transform: 'rotate(-'+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
+          reloadTime += 1;
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -3160,20 +2844,21 @@ jQuery(function() {
           jQuery('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mm_9_2');
             endNow();
           } else {
             mm_9_2();
+            // console.log('continue');
           } 
         }
     }, 1000);
-  }
+  }  
 
   mm_8_4 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Мужской"');
@@ -3184,27 +2869,33 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 300;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -320, scale: 1.5}, {duration: 40, ease: "none", rotation: -380, scale: 1.5})
+             .fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -380, scale: 1.5}, {duration: 17, ease: "none", rotation: -380, scale: 1.5})
+             .fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -380, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
-          reloadTime += 1;                                                                        //40
-          cur_animation_val += 1.5;
-          jQuery('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
-            transform: 'rotate(-'+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
+          reloadTime += 1;
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -3212,10 +2903,10 @@ jQuery(function() {
           jQuery('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mm_9_1');
@@ -3236,27 +2927,33 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 270;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 270, scale: 1.5}, {duration: 40, ease: "none", rotation: 330, scale: 1.5})
+             .fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 330, scale: 1.5}, {duration: 17, ease: "none", rotation: 330, scale: 1.5})
+             .fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 330, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){         
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
           reloadTime += 1;
-          cur_animation_val += 1.5;
-          jQuery('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
-            transform: 'rotate('+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -3264,10 +2961,10 @@ jQuery(function() {
           jQuery('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mm_8_4');
@@ -3277,7 +2974,7 @@ jQuery(function() {
           } 
         }
     }, 1000);
-  }
+  } 
 
   mm_8_2 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Мужской"');
@@ -3290,25 +2987,31 @@ jQuery(function() {
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
     cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 20, scale: 1.5}, {duration: 40, ease: "none", rotation: 80, scale: 1.5})
+             .fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 80, scale: 1.5}, {duration: 17, ease: "none", rotation: 80, scale: 1.5})
+             .fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 80, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
           reloadTime += 1;
-          cur_animation_val += 1.5;
-          jQuery('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
-            transform: 'rotate('+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -3316,10 +3019,10 @@ jQuery(function() {
           jQuery('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mm_8_3');
@@ -3329,7 +3032,7 @@ jQuery(function() {
           } 
         }
     }, 1000);
-  }
+  } 
 
   mm_8_1 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Мужской"');
@@ -3340,27 +3043,31 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 0;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -10, scale: 1.5}, {duration: 40, ease: "none", rotation: -70, scale: 1.5})
+             .fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -70, scale: 1.5}, {duration: 17, ease: "none", rotation: -70, scale: 1.5})
+             .fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -70, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
-          reloadTime += 1;                                                                        //40
-          cur_animation_val += 1.5;
-          jQuery('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
-            transform: 'rotate(-'+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
+          reloadTime += 1;
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -3368,32 +3075,57 @@ jQuery(function() {
           jQuery('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mm_8_2');
             endNow();
           } else {
             mm_8_2();
+            // console.log('continue');
           } 
         }
     }, 1000);
-  }
+  }  
 
-  mm_7 = function(){
+  mm_7 = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Мужской"');
     jQuery('.wizard_percent').text('37%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('.zone_v3, .zone_alt_s4').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -3401,76 +3133,26 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_v3, .zone_alt_s4').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_v3, .zone_alt_s4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v3, .zone_alt_s4').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_v3, .zone_alt_s4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_v3, .zone_alt_s4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v3, .zone_alt_s4').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_v3, .zone_alt_s4').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
         jQuery('.zone_v3, .zone_alt_s4').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -3480,22 +3162,47 @@ jQuery(function() {
           endNow()
         } else {
           mm_8_1();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
 
-  mm_6 = function(){
+  mm_6 = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Мужской"');
     jQuery('.wizard_percent').text('31%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('.zone_v4, .zone_alt_v4').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -3503,76 +3210,26 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_v4, .zone_alt_v4').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_v4, .zone_alt_v4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v4, .zone_alt_v4').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_v4, .zone_alt_v4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_v4, .zone_alt_v4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v4, .zone_alt_v4').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_v4, .zone_alt_v4').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
         jQuery('.zone_v4, .zone_alt_v4').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -3582,22 +3239,47 @@ jQuery(function() {
           endNow()
         } else {
           mm_7();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
 
-  mm_5 = function(){
+  mm_5 = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Мужской"');
     jQuery('.wizard_percent').text('25%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('.zone_d3, .zone_alt_d3').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -3605,76 +3287,26 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_d3, .zone_alt_d3').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_d3, .zone_alt_d3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_d3, .zone_alt_d3').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_d3, .zone_alt_d3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_d3, .zone_alt_d3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_d3, .zone_alt_d3').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_d3, .zone_alt_d3').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
         jQuery('.zone_d3, .zone_alt_d3').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -3684,22 +3316,47 @@ jQuery(function() {
           endNow()
         } else {
           mm_6();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
 
-  mm_4 = function(){
+  mm_4 = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Мужской"');
     jQuery('.wizard_percent').text('18%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('.zone_d2_, .zone_alt_d4').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -3707,76 +3364,26 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_d2_, .zone_alt_d4').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_d2_, .zone_alt_d4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_d2_, .zone_alt_d4').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_d2_, .zone_alt_d4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_d2_, .zone_alt_d4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_d2_, .zone_alt_d4').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_d2_, .zone_alt_d4').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
         jQuery('.zone_d2_, .zone_alt_d4').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -3786,22 +3393,47 @@ jQuery(function() {
           endNow()
         } else {
           mm_5();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
 
-  mm_3 = function(){
+  mm_3 = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Мужской"');
     jQuery('.wizard_percent').text('12%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('.zone_d2, .zone_alt_d5').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -3809,76 +3441,26 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_d2, .zone_alt_d5').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_d2, .zone_alt_d5').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_d2, .zone_alt_d5').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_d2, .zone_alt_d5').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_d2, .zone_alt_d5').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_d2, .zone_alt_d5').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_d2, .zone_alt_d5').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
         jQuery('.zone_d2, .zone_alt_d5').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -3888,22 +3470,47 @@ jQuery(function() {
           endNow()
         } else {
           mm_4();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
 
-  mm_2 = function(){
+  mm_2 = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Мужской"');
     jQuery('.wizard_percent').text('6%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('.zone_v1, .zone_v-, .zone_alt_v1, .zone_alt_v-').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -3911,79 +3518,27 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_v1, .zone_v-, .zone_alt_v1, .zone_alt_v-').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
-        jQuery('.zone_v-, .zone_alt_v-').css({
-          background: '#fff url(/wp-content/themes/bcwish/img/vig_.png) center center/100% no-repeat'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_v1, .zone_alt_v1').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v1, .zone_alt_v1').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
+          jQuery('.zone_v-, .zone_alt_v-').css({background: '#fff url(/wp-content/themes/bcwish/img/vig_.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_v1, .zone_alt_v1').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_v1, .zone_alt_v1').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v1, .zone_alt_v1').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_v1, .zone_alt_v1').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
         jQuery('.zone_v1, .zone_v-, .zone_alt_v1, .zone_alt_v-').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -3993,22 +3548,47 @@ jQuery(function() {
           endNow()
         } else {
           mm_3();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
 
-  mm = function(){
+  mm = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Мужской"');
     jQuery('.wizard_percent').text('0%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('.zone_v2, .zone_v5, .zone_alt_v2, .zone_alt_v5').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -4016,76 +3596,26 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_v2, .zone_v5, .zone_alt_v2, .zone_alt_v5').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_v2, .zone_v5, .zone_alt_v2, .zone_alt_v5').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v2, .zone_v5, .zone_alt_v2, .zone_alt_v5').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_v2, .zone_v5, .zone_alt_v2, .zone_alt_v5').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_v2, .zone_v5, .zone_alt_v2, .zone_alt_v5').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v2, .zone_v5, .zone_alt_v2, .zone_alt_v5').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_v2, .zone_v5, .zone_alt_v2, .zone_alt_v5').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
         jQuery('.zone_v2, .zone_v5, .zone_alt_v2, .zone_alt_v5').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -4095,13 +3625,11 @@ jQuery(function() {
           endNow()
         } else {
           mm_2();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
-
-
-
 
   un_12 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Инверсный"');
@@ -4156,38 +3684,44 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 300;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -320, scale: 1.5}, {duration: 40, ease: "none", rotation: -380, scale: 1.5})
+             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -380, scale: 1.5}, {duration: 17, ease: "none", rotation: -380, scale: 1.5})
+             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -380, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
-          reloadTime += 1;                                                                        //40
-          cur_animation_val += 1.5;
-          jQuery('.zone_v5, .zone_s4, .zone_s5 , .zone_s6, .zone_s2, .zone_alt_v5, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6, .zone_alt_s2').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
-            transform: 'rotate(-'+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
+          reloadTime += 1;
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
           count_animation = 1;
-          jQuery('.zone_v5, .zone_s4, .zone_s5 , .zone_s6, .zone_s2, .zone_alt_v5, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6, .zone_alt_s2').css({
+          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_12');
@@ -4208,38 +3742,44 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 270;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 270, scale: 1.5}, {duration: 40, ease: "none", rotation: 330, scale: 1.5})
+             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 330, scale: 1.5}, {duration: 17, ease: "none", rotation: 330, scale: 1.5})
+             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 330, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){         
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
           reloadTime += 1;
-          cur_animation_val += 1.5;
-          jQuery('.zone_v5, .zone_s4, .zone_s5 , .zone_s6, .zone_s2, .zone_alt_v5, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6, .zone_alt_s2').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
-            transform: 'rotate('+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
           count_animation = 1;
-          jQuery('.zone_v5, .zone_s4, .zone_s5 , .zone_s6, .zone_s2, .zone_alt_v5, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6, .zone_alt_s2').css({
+          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_11_4');
@@ -4249,7 +3789,7 @@ jQuery(function() {
           } 
         }
     }, 1000);
-  }
+  } 
 
   un_11_2 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Инверсный"');
@@ -4262,36 +3802,42 @@ jQuery(function() {
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
     cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 20, scale: 1.5}, {duration: 40, ease: "none", rotation: 80, scale: 1.5})
+             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 80, scale: 1.5}, {duration: 17, ease: "none", rotation: 80, scale: 1.5})
+             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 80, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
           reloadTime += 1;
-          cur_animation_val += 1.5;
-          jQuery('.zone_v5, .zone_s4, .zone_s5 , .zone_s6, .zone_s2, .zone_alt_v5, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6, .zone_alt_s2').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
-            transform: 'rotate('+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
           count_animation = 1;
-          jQuery('.zone_v5, .zone_s4, .zone_s5 , .zone_s6, .zone_s2, .zone_alt_v5, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6, .zone_alt_s2').css({
+          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_11_3');
@@ -4301,7 +3847,7 @@ jQuery(function() {
           } 
         }
     }, 1000);
-  }
+  } 
 
   un_11_1 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Инверсный"');
@@ -4312,61 +3858,89 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 0;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -10, scale: 1.5}, {duration: 40, ease: "none", rotation: -70, scale: 1.5})
+             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -70, scale: 1.5}, {duration: 17, ease: "none", rotation: -70, scale: 1.5})
+             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -70, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
-          reloadTime += 1;                                                                        //40
-          cur_animation_val += 1.5;
-          jQuery('.zone_v5, .zone_s4, .zone_s5 , .zone_s6, .zone_s2, .zone_alt_v5, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6, .zone_alt_s2').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
-            transform: 'rotate(-'+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
+          reloadTime += 1;
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
           count_animation = 1;
-          jQuery('.zone_v5, .zone_s4, .zone_s5, .zone_s6 , .zone_s6, .zone_s2, .zone_alt_v5, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6, .zone_alt_s2').css({
+          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_11_2');
             endNow();
           } else {
             un_11_2();
+            // console.log('continue');
           } 
         }
     }, 1000);
-  }
+  }  
 
-  un_10 = function(){
+  un_10 = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Инверсный"');
     jQuery('.wizard_percent').text('78%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
-    jQuery('.ring').removeClass('hidden');
+    jQuery('.zone_v5, .zone_s5, .zone_s6, .zone_s4, .zone_s2, .zone_alt_v5, .zone_alt_s5, .zone_alt_s4, .zone_alt_s2').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -4374,76 +3948,26 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_v5, .zone_s5, .zone_s6, .zone_s4, .zone_s2, .zone_alt_v5, .zone_alt_s5, .zone_alt_s4, .zone_alt_s2').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_v5, .zone_s5, .zone_s6, .zone_s4, .zone_s2, .zone_alt_v5, .zone_alt_s5, .zone_alt_s4, .zone_alt_s2').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v5, .zone_s5, .zone_s6, .zone_s4, .zone_s2, .zone_alt_v5, .zone_alt_s5, .zone_alt_s4, .zone_alt_s2').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_v5, .zone_s5, .zone_s6, .zone_s4, .zone_s2, .zone_alt_v5, .zone_alt_s5, .zone_alt_s4, .zone_alt_s2').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_v5, .zone_s5, .zone_s6, .zone_s4, .zone_s2, .zone_alt_v5, .zone_alt_s5, .zone_alt_s4, .zone_alt_s2').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v5, .zone_s5, .zone_s6, .zone_s4, .zone_s2, .zone_alt_v5, .zone_alt_s5, .zone_alt_s4, .zone_alt_s2').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_v5, .zone_s5, .zone_s6, .zone_s4, .zone_s2, .zone_alt_v5, .zone_alt_s5, .zone_alt_s4, .zone_alt_s2').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
         jQuery('.zone_v5, .zone_s5, .zone_s6, .zone_s4, .zone_s2, .zone_alt_v5, .zone_alt_s5, .zone_alt_s4, .zone_alt_s2').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -4453,10 +3977,12 @@ jQuery(function() {
           endNow()
         } else {
           un_11_1();
+          // console.log('continue');
         } 
       }
     }, 250);
   }
+
 
   un_9 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Инверсный"');
@@ -4511,27 +4037,33 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 300;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -320, scale: 1.5}, {duration: 40, ease: "none", rotation: -380, scale: 1.5})
+             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -380, scale: 1.5}, {duration: 17, ease: "none", rotation: -380, scale: 1.5})
+             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -380, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
-          reloadTime += 1;                                                                        //40
-          cur_animation_val += 1.5;
-          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
-            transform: 'rotate(-'+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
+          reloadTime += 1;
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -4539,16 +4071,17 @@ jQuery(function() {
           jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_9');
             endNow();
           } else {
             un_9();
+
           } 
         }
     }, 1000);
@@ -4563,27 +4096,33 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 270;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 270, scale: 1.5}, {duration: 40, ease: "none", rotation: 330, scale: 1.5})
+             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 330, scale: 1.5}, {duration: 17, ease: "none", rotation: 330, scale: 1.5})
+             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 330, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){         
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
           reloadTime += 1;
-          cur_animation_val += 1.5;
-          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
-            transform: 'rotate('+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -4591,10 +4130,10 @@ jQuery(function() {
           jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_8_4');
@@ -4604,7 +4143,7 @@ jQuery(function() {
           } 
         }
     }, 1000);
-  }
+  } 
 
   un_8_2 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Инверсный"');
@@ -4617,25 +4156,31 @@ jQuery(function() {
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
     cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 20, scale: 1.5}, {duration: 40, ease: "none", rotation: 80, scale: 1.5})
+             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 80, scale: 1.5}, {duration: 17, ease: "none", rotation: 80, scale: 1.5})
+             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 80, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
           reloadTime += 1;
-          cur_animation_val += 1.5;
-          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
-            transform: 'rotate('+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -4643,10 +4188,10 @@ jQuery(function() {
           jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_8_3');
@@ -4656,7 +4201,7 @@ jQuery(function() {
           } 
         }
     }, 1000);
-  }
+  } 
 
   un_8_1 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Инверсный"');
@@ -4667,27 +4212,31 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 0;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -10, scale: 1.5}, {duration: 40, ease: "none", rotation: -70, scale: 1.5})
+             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -70, scale: 1.5}, {duration: 17, ease: "none", rotation: -70, scale: 1.5})
+             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -70, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
-          reloadTime += 1;                                                                        //40
-          cur_animation_val += 1.5;
-          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
-            transform: 'rotate(-'+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
+          reloadTime += 1;
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -4695,33 +4244,57 @@ jQuery(function() {
           jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_8_2');
             endNow();
           } else {
             un_8_2();
+            // console.log('continue');
           } 
         }
     }, 1000);
-  }
+  }  
 
-  un_7 = function(){
+  un_7 = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Инверсный"');
     jQuery('.wizard_percent').text('54%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
-    jQuery('.ring').removeClass('hidden');
+    jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -4729,76 +4302,26 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
         jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -4808,6 +4331,7 @@ jQuery(function() {
           endNow()
         } else {
           un_8_1();
+          // console.log('continue');
         } 
       }
     }, 250);
@@ -4866,27 +4390,33 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 300;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: -320, scale: 1.5}, {duration: 40, ease: "none", rotation: -380, scale: 1.5})
+             .fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: -380, scale: 1.5}, {duration: 17, ease: "none", rotation: -380, scale: 1.5})
+             .fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: -380, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
-          reloadTime += 1;                                                                        //40
-          cur_animation_val += 1.5;
-          jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
-            transform: 'rotate(-'+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
+          reloadTime += 1;
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -4894,16 +4424,17 @@ jQuery(function() {
           jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_6');
             endNow();
           } else {
             un_6();
+
           } 
         }
     }, 1000);
@@ -4918,27 +4449,33 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 270;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: 270, scale: 1.5}, {duration: 40, ease: "none", rotation: 330, scale: 1.5})
+             .fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: 330, scale: 1.5}, {duration: 17, ease: "none", rotation: 330, scale: 1.5})
+             .fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: 330, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){         
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
           reloadTime += 1;
-          cur_animation_val += 1.5;
-          jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
-            transform: 'rotate('+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -4946,10 +4483,10 @@ jQuery(function() {
           jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_5_4');
@@ -4959,7 +4496,7 @@ jQuery(function() {
           } 
         }
     }, 1000);
-  }
+  } 
 
   un_5_2 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Инверсный"');
@@ -4972,25 +4509,31 @@ jQuery(function() {
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
     cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: 20, scale: 1.5}, {duration: 40, ease: "none", rotation: 80, scale: 1.5})
+             .fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: 80, scale: 1.5}, {duration: 17, ease: "none", rotation: 80, scale: 1.5})
+             .fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: 80, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
           reloadTime += 1;
-          cur_animation_val += 1.5;
-          jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
-            transform: 'rotate('+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -4998,10 +4541,10 @@ jQuery(function() {
           jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_5_3');
@@ -5011,7 +4554,7 @@ jQuery(function() {
           } 
         }
     }, 1000);
-  }
+  } 
 
   un_5_1 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Инверсный"');
@@ -5022,27 +4565,31 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 0;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: -10, scale: 1.5}, {duration: 40, ease: "none", rotation: -70, scale: 1.5})
+             .fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: -70, scale: 1.5}, {duration: 17, ease: "none", rotation: -70, scale: 1.5})
+             .fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: -70, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
-          reloadTime += 1;                                                                        //40
-          cur_animation_val += 1.5;
-          jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
-            transform: 'rotate(-'+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
+          reloadTime += 1;
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -5050,33 +4597,57 @@ jQuery(function() {
           jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_5_2');
             endNow();
           } else {
             un_5_2();
+            // console.log('continue');
           } 
         }
     }, 1000);
-  }
+  }  
 
-  un_4 = function(){
+  un_4 = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Инверсный"');
     jQuery('.wizard_percent').text('26%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
-    jQuery('.ring').removeClass('hidden');
+    jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4, .zone_alt_s3, .zone_alt_v3').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -5084,76 +4655,26 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4, .zone_alt_s3, .zone_alt_v3').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4, .zone_alt_s3, .zone_alt_v3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4, .zone_alt_s3, .zone_alt_v3').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4, .zone_alt_s3, .zone_alt_v3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4, .zone_alt_s3, .zone_alt_v3').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4, .zone_alt_s3, .zone_alt_v3').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4, .zone_alt_s3, .zone_alt_v3').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
         jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4, .zone_alt_s3, .zone_alt_v3').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -5163,6 +4684,7 @@ jQuery(function() {
           endNow()
         } else {
           un_5_1();
+          // console.log('continue');
         } 
       }
     }, 250);
@@ -5221,27 +4743,33 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 300;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -320, scale: 1.5}, {duration: 40, ease: "none", rotation: -380, scale: 1.5})
+             .fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -380, scale: 1.5}, {duration: 17, ease: "none", rotation: -380, scale: 1.5})
+             .fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -380, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
-          reloadTime += 1;                                                                        //40
-          cur_animation_val += 1.5;
-          jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
-            transform: 'rotate(-'+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
+          reloadTime += 1;
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -5249,16 +4777,17 @@ jQuery(function() {
           jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_3');
             endNow();
           } else {
             un_3();
+
           } 
         }
     }, 1000);
@@ -5273,27 +4802,33 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 270;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 270, scale: 1.5}, {duration: 40, ease: "none", rotation: 330, scale: 1.5})
+             .fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 330, scale: 1.5}, {duration: 17, ease: "none", rotation: 330, scale: 1.5})
+             .fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 330, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){         
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
           reloadTime += 1;
-          cur_animation_val += 1.5;
-          jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
-            transform: 'rotate('+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -5301,10 +4836,10 @@ jQuery(function() {
           jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_2_4');
@@ -5314,7 +4849,7 @@ jQuery(function() {
           } 
         }
     }, 1000);
-  }
+  } 
 
   un_2_2 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Инверсный"');
@@ -5327,25 +4862,31 @@ jQuery(function() {
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
     cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 20, scale: 1.5}, {duration: 40, ease: "none", rotation: 80, scale: 1.5})
+             .fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 80, scale: 1.5}, {duration: 17, ease: "none", rotation: 80, scale: 1.5})
+             .fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 80, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
           reloadTime += 1;
-          cur_animation_val += 1.5;
-          jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_left.png) center center/100% no-repeat',
-            transform: 'rotate('+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -5353,10 +4894,10 @@ jQuery(function() {
           jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_2_3');
@@ -5366,7 +4907,7 @@ jQuery(function() {
           } 
         }
     }, 1000);
-  }
+  } 
 
   un_2_1 = function(){
     jQuery('.wizard_heading').text('Выполняется протокол "Инверсный"');
@@ -5377,27 +4918,31 @@ jQuery(function() {
     rotateVal = 0;
     jQuery('.ring').addClass('hidden');
     jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)');
-    cur_animation_val = 0;
+    cur_animation_val = 10;
     count_animation = 1;
+    jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
+      background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
+      transform: 'rotate(0deg) scale(1.5)',
+      color: 'transparent',
+      borderColor: 'transparent',
+      opacity: 0.8,
+      borderWidth: '1px',
+      paddingTop: '4px',
+      zIndex: '1000'
+    });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -10, scale: 1.5}, {duration: 40, ease: "none", rotation: -70, scale: 1.5})
+             .fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -70, scale: 1.5}, {duration: 17, ease: "none", rotation: -70, scale: 1.5})
+             .fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -70, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
     phaseSeven_one = setInterval(function(){
-        if (count_animation <= 40){ 
+        if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
               sound.stop();
               reloadSound.play();
           };
-          reloadTime += 1;                                                                        //40
-          cur_animation_val += 1.5;
-          jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/mo_right.png) center center/100% no-repeat',
-            transform: 'rotate(-'+cur_animation_val+'deg) scale(1.5)',
-            color: 'transparent',
-            borderColor: 'transparent',
-            borderWidth: '1px',
-            paddingTop: '4px',
-            zIndex: '1000'
-          });
+          reloadTime += 1;
           count_animation += 1;
-        } else if(count_animation <= 57) {                                                         //57
+        } else if(count_animation <= 57) {
             count_animation += 1;
         } else {
           clearInterval(phaseSeven_one);
@@ -5405,32 +4950,57 @@ jQuery(function() {
           jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
+            borderColor: '#413e66',
             transform: 'rotate(-'+0+'deg) scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            paddingTop: '2px',
+            zIndex: '2'
           });
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_2_2');
             endNow();
           } else {
             un_2_2();
+            // console.log('continue');
           } 
         }
     }, 1000);
-  }
+  }  
 
-  un = function(){
+  un = function() {
     jQuery('.wizard_heading').text('Выполняется протокол "Инверсный"');
     jQuery('.wizard_percent').text('0%');
+    jQuery('.ring, .zone_ring').css('transform', 'rotate(0deg)').removeClass('hidden');
     reloadTime = 0;
-    reloadTime1 = 0;
-    d12Val = 0;
     cur_animation_val = 0;
-    rotateVal = 0;
     count_animation = 1;
+    jQuery('.zone_v2, .zone_d2_, .zone_d3, .zone_d4, .zone_alt_v2, .zone_alt_d2_, .zone_alt_d3, .zone_alt_d4').css({
+        color: 'transparent',
+        borderColor: 'transparent',
+        opacity: 0.8,
+        borderWidth: '1px',
+        paddingTop: '4px',
+        transform: 'rotate(0deg) scale(1.5)',
+        zIndex: '1000'
+    });
+    jQuery('.zone_ring')
+      .removeClass('hidden')
+      .css({
+        opacity: 0.8,
+        transform: 'scale(1.5)',
+        background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
+      });
+    var zone_gsap = gsap.timeline();
+    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
+             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
+             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
+             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
+
+    var zone_ring_gsap = gsap.timeline();
+    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
+                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
+
     phaseOne = setInterval(function(){
-      if (count_animation <= 344){
+      if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
             sound.stop();
             reloadSound.play();
@@ -5438,76 +5008,26 @@ jQuery(function() {
             sound.play();
         };
         reloadTime += 1;
-        jQuery('.zone_v2, .zone_d2_, .zone_d3, .zone_d4, .zone_alt_v2, .zone_alt_d2_, .zone_alt_d3, .zone_alt_d4').css({
-            color: 'transparent',
-            borderColor: 'transparent',
-            opacity: 0.8,
-            borderWidth: '1px',
-            paddingTop: '4px',
-            transform: 'scale(1.5)',
-            zIndex: '1000'
-        });
         if (count_animation > 0 && count_animation <= 120) {
-          jQuery('.zone_v2, .zone_d2_, .zone_d3, .zone_d4, .zone_alt_v2, .zone_alt_d2_, .zone_alt_d3, .zone_alt_d4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v2, .zone_d2_, .zone_d3, .zone_d4, .zone_alt_v2, .zone_alt_d2_, .zone_alt_d3, .zone_alt_d4').css({background: '#fff url(/wp-content/themes/bcwish/img/disfunction.png) center center/100% no-repeat'});
         } else if (count_animation > 120 && count_animation <= 220) {
-          jQuery('.zone_v2, .zone_d2_, .zone_d3, .zone_d4, .zone_alt_v2, .zone_alt_d2_, .zone_alt_d3, .zone_alt_d4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'
-          });
-        } else if (count_animation > 220) {
-          jQuery('.zone_v2, .zone_d2_, .zone_d3, .zone_d4, .zone_alt_v2, .zone_alt_d2_, .zone_alt_d3, .zone_alt_d4').css({
-            background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'
-          });
+          jQuery('.zone_v2, .zone_d2_, .zone_d3, .zone_d4, .zone_alt_v2, .zone_alt_d2_, .zone_alt_d3, .zone_alt_d4').css({background: '#fff url(/wp-content/themes/bcwish/img/travma.png) center center/100% no-repeat'});
+        } else if (count_animation > 220 && count_animation <= 240) {
+          jQuery('.zone_v2, .zone_d2_, .zone_d3, .zone_d4, .zone_alt_v2, .zone_alt_d2_, .zone_alt_d3, .zone_alt_d4').css({background: '#fff url(/wp-content/themes/bcwish/img/povregdenie_demona.png) center center/100% no-repeat'});
+        } else if (count_animation > 240) {
+          jQuery('.zone_ring').css({background: '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat'});
         }
-        jQuery('.zone_ring')
-          .removeClass('hidden')
-          .css({
-            opacity: 0.8,
-            transform: 'scale(1.5)',
-            background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-            transform: 'rotate(-'+d12Val+'deg) scale(1.5)'
-          });
         count_animation += 1;
-        rotateVal += 1.5;
-        if(count_animation <= 120){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 120 && count_animation <= 228){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.zone_ring').css('transform', 'rotate(-'+d12Val+'deg) scale(1.5)');
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-        } else if (count_animation >= 228 && count_animation <= 292){
-            cur_animation_val -= 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else if (count_animation >= 292 && count_animation <= 344){
-            cur_animation_val += 1.5;
-            d12Val+= 3;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        } else {
-            d12Val+= 3;
-            cur_animation_val += 1.5;
-            jQuery('.ring').css('transform', 'rotate('+cur_animation_val+'deg)');
-            jQuery('.zone_ring').css('transform', 'rotate('+d12Val+'deg) scale(1.5)');
-            jQuery('.zone_ring').css('background', '#fff url(/wp-content/themes/bcwish/img/daemon.png) center center/100% no-repeat');
-        }
       } else {
         clearInterval(phaseOne);
         count_animation = 1;
         jQuery('.zone_v2, .zone_d2_, .zone_d3, .zone_d4, .zone_alt_v2, .zone_alt_d2_, .zone_alt_d3, .zone_alt_d4').css({
             background: '#fff',
             color: '#413e66',
-            borderColor: 'green',
-            transform: 'scale(1)',
-            paddingTop: '1px',
-            zIndex: '3'
+            borderColor: '#413e66',
+            transform: 'rotate(0deg) scale(1)',
+            paddingTop: '2px',
+            zIndex: '2'
         });
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
@@ -5517,6 +5037,7 @@ jQuery(function() {
           endNow()
         } else {
           un_2_1();
+          // console.log('continue');
         } 
       }
     }, 250);
@@ -5566,18 +5087,18 @@ jQuery(function() {
       jQuery('.wizard_templates').removeClass('wizard_templates_un wizard_templates_mw wizard_templates_ww').addClass('wizard_templates_mm');
       jQuery('.wizard_heading').removeClass('unvisible').text('Протокол "Мужской". Перенесите зоны на фото');
     }
-    jQuery('.wizard_to_start, .wizard_play').fadeIn(500).removeClass('hidden');
+    jQuery('.wizard_to_protList, .wizard_play').fadeIn(500).removeClass('hidden');
     jQuery('.wizard_heading').removeClass('hidden').text('Перенесите зоны на фото и можно будет продолжить работу.');
   });
 
   
   checkPoints = function(){
     jQuery('.zone_movable').each(function() {
-      if(parseFloat(jQuery(this).css('left')) < 350){
+      if(parseFloat(jQuery(this).css('left')) < 600){
         pointsStatus = false;
         // console.log('status '+' '+jQuery(this).text()+' '+jQuery(this).css('top')+' '+pointsStatus);
       }
-      if (parseFloat(jQuery('.ring').css('left')) < 100) {
+      if (parseFloat(jQuery('.ring').css('left')) < 380) {
         pointsStatus = false;
       }
     });
@@ -5585,11 +5106,11 @@ jQuery(function() {
 
   jQuery('.wizard_play, .wizard_starter_alt').on('click', function(event) {
     checkPoints();
-    if(pointsStatus == false){
-      swal("Не все зоны перенесены!", "Перед началом процедуры необходимо перенести на фото калибровочное кольцо и все зоны.", "info");
-      alert_altSound.play();
-      pointsStatus = true;
-    } else {
+    // if(pointsStatus == false){
+    //   swal("Не все зоны перенесены!", "Перед началом процедуры необходимо перенести на фото калибровочное кольцо и все зоны.", "info");
+    //   alert_altSound.play();
+    //   pointsStatus = true;
+    // } else {
       if (pausedStatus == true) {
         // jQuery('.wizard_returned').attr('src', localStorage.getItem('pausedPhoto'));
         // console.log(localStorage.getItem('pausedPhoto'));
@@ -5628,7 +5149,7 @@ jQuery(function() {
       localStorage.removeItem('pausedPhoto');
       localStorage.removeItem('pausedPhoto2');
       jQuery('.wizard_stop').removeClass('wizard_stop_inProgress');
-    }
+    // }
   });
 
 
