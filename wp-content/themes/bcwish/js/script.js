@@ -159,7 +159,7 @@ jQuery(function() {
     jQuery('.wizard_prots, .wizard_diag').addClass('hidden');
     jQuery('.wizard_to_what_way').addClass('hidden');
     jQuery('.wizard_way').fadeIn(500).removeClass('hidden col-sm-6 col-md-6').addClass('col-sm-12 col-md-12');
-    jQuery('.wizard_to_start, .btn_reset').fadeIn(500).removeClass('hidden');
+    jQuery('.wizard_to_start, btn_prot_choice, .btn_reset').fadeIn(500).removeClass('hidden');
     jQuery('.wizard_heading').text('Диагностика').removeClass('unvisible');
   });
   //Назад. К диагностике
