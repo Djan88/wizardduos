@@ -203,7 +203,6 @@ jQuery(function() {
             zIndex: '3'
         });
 // II
-        jQuery('.wizard_percent').text('0%');
         phaseOne = setInterval(function(){
           if (count_animation <= 88){
             jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').css({
@@ -228,7 +227,6 @@ jQuery(function() {
                 zIndex: '3'
             });
 // III
-            jQuery('.wizard_percent').text('0%');
             phaseOne = setInterval(function(){
               if (count_animation <= 88){
                 jQuery('.zone_s3, .zone_v4, .zone_alt_s3, .zone_alt_v4').css({
@@ -253,7 +251,6 @@ jQuery(function() {
                     zIndex: '3'
                 });
 // IV
-                jQuery('.wizard_percent').text('0%');
                 phaseOne = setInterval(function(){
                   if (count_animation <= 88){
                     jQuery('.zone_d4, .zone_d3, .zone_d2_, .zone_v2, .zone_v3, .zone_alt_d4, .zone_alt_d3, .zone_alt_d2_, .zone_alt_v2, .zone_alt_v3').css({
