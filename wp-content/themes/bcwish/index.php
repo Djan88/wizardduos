@@ -260,6 +260,9 @@
                   </form>
                 </div>
               </div>
+              <div class="row">
+                <a href="<?php echo get_template_directory_uri(); ?>/img/duos_manual.pdf" target="_blank" data-wow-duration="2.4s" class="bounceInUp wow btn btn-success pay_info">Как оплатить доступ?</a>
+              </div>
               <a href="<?php bloginfo('template_url'); ?>/img/manual.pdf" target="_blank" class="manual manual_non_login">Руководство пользователя</a>
             <?php } ?>
             

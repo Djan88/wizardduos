@@ -2352,6 +2352,11 @@ button.wizard_starter_alt.btn.btn-success
 {
   display: none;
 }
+.pay_info 
+{
+  font-size: 20px;
+  margin-top: 10px;
+}
 /*--------------------------------------------------------------
 # Responsive Media Queries
 --------------------------------------------------------------*/
@@ -2436,6 +2441,12 @@ button.wizard_starter_alt.btn.btn-success
   #intro .intro-info h2
   {
     text-align: center;
+  }
+  .pay_info 
+  {
+    font-size: 20px;
+    margin: auto;
+    margin-top: 10px;
   }
 }
 
