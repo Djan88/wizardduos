@@ -133,6 +133,8 @@ jQuery(function() {
     },
     function(isConfirm) {
       if (isConfirm) {
+        localStorage.removeItem('croppedImg');
+        localStorage.removeItem('croppedImgTwo');
         jQuery(location).attr('href','/');
       } else {
         jQuery('.wizard_main_screen, .wizard_to_protList').addClass('hidden');
