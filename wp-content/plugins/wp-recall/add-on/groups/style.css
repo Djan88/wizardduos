@@ -10,7 +10,7 @@ div p.post-group-meta {
 }
 /* умная секция для скрипта. Каркас группы Start */
 
-    /* Start сумма 2х блоков 2x0.5 + 30% + 2x0.5% + 68% = 100% */
+/* Start сумма 2х блоков 2x0.5 + 30% + 2x0.5% + 68% = 100% */
 #rcl-group .group-sidebar {
     box-sizing: border-box;
     float: right;
@@ -22,10 +22,10 @@ div p.post-group-meta {
     margin: 0 0.5% 5px;
     overflow: hidden;
     -webkit-transition: box-shadow 0.7s linear 0s;
-            transition: box-shadow 0.7s linear 0s;
+	transition: box-shadow 0.7s linear 0s;
     width: 68%;
 }
-    /* End сумма */
+/* End сумма */
 
 #rcl-group .hideexxx h3 {
     word-wrap: unset;
@@ -33,7 +33,7 @@ div p.post-group-meta {
 .group-wrapper.collapsexxx {
     box-shadow: 0 0 1px 2px rgba(219, 219, 219, 0.8);
     -webkit-transition: width linear 0.2s, box-shadow linear 0.5s;
-            transition: width linear 0.2s, box-shadow linear 0.5s;
+	transition: width linear 0.2s, box-shadow linear 0.5s;
     width: 98%;
 }
 .group-wrapper.collapsexxx .group-content {
@@ -68,7 +68,7 @@ div p.post-group-meta {
     font-size: 16px;
     font-weight: bold;
     -webkit-hyphens: auto;
-            hyphens: auto;
+	hyphens: auto;
     line-height: 1;
     margin: 0;
     text-transform: none;
@@ -321,10 +321,13 @@ div p.post-group-meta {
     line-height: 1.2;
     margin-bottom: 10px;
     overflow: hidden;
+	display: flex;
+}
+.rcl-grouplist .single-group > div{
+    margin-right: 15px;
 }
 .rcl-grouplist .single-group .group-avatar {
-    float: left;
-    margin-right: 15px;
+
 }
 .rcl-grouplist .single-group .group-avatar img {
     max-width: 100px;

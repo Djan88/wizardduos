@@ -42,7 +42,7 @@ function rcl_profile_fields_manager() {
 	$Manager = new Rcl_Profile_Fields( 'profile', array(
 		'custom-slug'	 => 1,
 		'meta_delete'	 => true
-	) );
+		) );
 
 	$Manager->init_profile_manager_filters();
 

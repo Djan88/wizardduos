@@ -23,7 +23,7 @@ class Rcl_Cart_Constructor {
 
 			$rclOrder = rcl_get_order( $this->order_id );
 
-			if ( $rclOrder->user_id != $user_ID || ! $rclOrder || empty( $rclOrder ) ) {
+			if ( ($user_ID && $rclOrder->user_id != $user_ID) || ! $rclOrder || empty( $rclOrder ) ) {
 
 				$content .= '<p>' . __( 'Shopping cart is not available', 'wp-recall' ) . '.</p>';
 			} else {
@@ -41,7 +41,7 @@ class Rcl_Cart_Constructor {
 
 				$content .= rcl_get_include_template( 'cart.php', __FILE__, array(
 					'Cart' => $Cart
-				) );
+					) );
 
 				$content .= $this->get_form_fields();
 			}
@@ -168,7 +168,7 @@ class Rcl_Cart_Constructor {
 
 	function get_cart_fields() {
 
-		$cartFields = get_option( 'rcl_cart_fields' );
+		$cartFields = get_site_option( 'rcl_cart_fields' );
 
 		if ( ! $cartFields )
 			return false;

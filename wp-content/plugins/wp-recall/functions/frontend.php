@@ -46,7 +46,7 @@ function rcl_user_name() {
 
 function rcl_user_url() {
 	global $rcl_user;
-	echo get_author_posts_url( $rcl_user->ID, $rcl_user->user_nicename );
+	echo rcl_get_user_url( $rcl_user->ID );
 }
 
 function rcl_user_avatar( $size = 50 ) {
@@ -413,7 +413,7 @@ function rcl_get_link_author_comment( $url ) {
 	global $comment;
 	if ( ! isset( $comment ) || $comment->user_id == 0 )
 		return $url;
-	return get_author_posts_url( $comment->user_id );
+	return rcl_get_user_url( $comment->user_id );
 }
 
 add_action( 'wp_head', 'rcl_hidden_admin_panel' );

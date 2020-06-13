@@ -30,8 +30,6 @@ function theme_switcha_toolbar_add_menu() {
 
 function theme_switcha_check_cookie() {
 	
-	// if (is_admin()) return;
-	
 	if (isset($_GET['theme-switch']) && !empty($_GET['theme-switch'])) {
 		
 		global $theme_switcha_options;
@@ -43,6 +41,8 @@ function theme_switcha_check_cookie() {
 		$theme = stripslashes($_GET['theme-switch']);
 		
 		$domain = sanitize_text_field($_SERVER['HTTP_HOST']);
+		
+		// setcookie($name, $value, $expires, $path, $domain, $secure, $httponly)
 		
 		setcookie('theme_switcha_theme_'. COOKIEHASH, $theme, $expire, COOKIEPATH, $domain, false, true);
 		
@@ -248,6 +248,8 @@ function theme_switcha_display_themes() {
 	
 	$themes = wp_get_themes(array('errors' => false , 'allowed' => true, 'blog_id' => 0));
 	
+	$themes = apply_filters('theme_switcha_themes', $themes);
+	
 	$default_theme = wp_get_theme();
 	
 	$default_screenshot = THEME_SWITCHA_URL .'img/screenshot.png';
@@ -313,6 +315,8 @@ function theme_switcha_display_thumbs() {
 	$options = $theme_switcha_options;
 	
 	$themes = wp_get_themes(array('errors' => false , 'allowed' => true, 'blog_id' => 0));
+	
+	$themes = apply_filters('theme_switcha_themes', $themes);
 	
 	$default_theme = wp_get_theme();
 	
@@ -412,6 +416,8 @@ function theme_switcha_display_list($display) {
 	
 	$themes = wp_get_themes(array('errors' => false , 'allowed' => true, 'blog_id' => 0));
 	
+	$themes = apply_filters('theme_switcha_themes', $themes);
+	
 	$default_theme = wp_get_theme();
 	
 	$enable_plugin = (isset($options['enable_plugin']) && $options['enable_plugin']) ? ' enable-plugin' : '';
@@ -505,6 +511,8 @@ function theme_switcha_display_dropdown($text, $widget = false) {
 	
 	$themes = wp_get_themes(array('errors' => false , 'allowed' => true, 'blog_id' => 0));
 	
+	$themes = apply_filters('theme_switcha_themes', $themes);
+	
 	$default_theme = wp_get_theme();
 	
 	$enable_plugin = (isset($options['enable_plugin']) && $options['enable_plugin']) ? ' enable-plugin' : '';
@@ -535,7 +543,7 @@ function theme_switcha_display_dropdown($text, $widget = false) {
 	
 	// 
 	
-	$output .= ($text !== 'disable') ? '<option>'. $text .'</option>' : '';
+	$output .= ($text !== 'disable') ? '<option value="'. esc_url($base_url) .'">'. $text .'</option>' : '';
 	
 	foreach($themes as $theme) {
 		
@@ -594,3 +602,30 @@ function theme_switcha_dashboard_widget() {
 	}
 	
 }
+
+function theme_switcha_display_text_link($attr, $content = null) {
+	
+	global $theme_switcha_options;
+	
+	$options = $theme_switcha_options;
+	
+	$passkey = isset($options['passkey']) ? $options['passkey'] : null;
+	
+	$protocol = is_ssl() ? 'https://' : 'http://';
+	
+	$base_url = esc_url_raw($protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+	
+	if (strpos($base_url, '/wp-admin/') !== false) $base_url = get_home_url();
+	
+	extract(shortcode_atts(array('theme' => theme_switcha_active_theme(), 'text' => 'Switch Theme'), $attr));
+	
+	$params = array('theme-switch' => $theme, 'passkey' => $passkey);
+	
+	$href = add_query_arg($params, $base_url);
+	
+	$output = '<a href="'. esc_url($href) .'">'. esc_html($text) .'</a>';
+	
+	return $output;
+	
+}
+add_shortcode('theme_switcha_link', 'theme_switcha_display_text_link');

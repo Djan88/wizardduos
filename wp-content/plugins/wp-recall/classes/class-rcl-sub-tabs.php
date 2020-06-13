@@ -74,7 +74,7 @@ class Rcl_Sub_Tabs {
 					'tab_id'	 => $this->parent_id,
 					'subtab_id'	 => $tab['id'],
 					'master_id'	 => $master_id
-			) );
+				) );
 
 			$content .= rcl_get_button( $tab['name'], $this->url_string( $master_id, $tab['id'] ), $button_args );
 		}
@@ -120,7 +120,7 @@ class Rcl_Sub_Tabs {
 
 	function url_string( $master_id, $subtab_id ) {
 
-		$url = rcl_format_url( get_author_posts_url( $master_id ), $this->parent_id, $subtab_id );
+		$url = rcl_format_url( rcl_get_user_url( $master_id ), $this->parent_id, $subtab_id );
 
 		return $url;
 	}

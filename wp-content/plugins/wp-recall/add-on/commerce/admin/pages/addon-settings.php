@@ -3,7 +3,7 @@
 function rcl_commerce_options() {
 	global $rcl_options;
 
-	$rcl_options = get_option( 'primary-rmag-options' );
+	$rcl_options = get_site_option( 'primary-rmag-options' );
 
 	require_once RCL_PATH . 'classes/class-rcl-options.php';
 

@@ -745,7 +745,7 @@ function rcl_get_custom_fields( $post_id, $post_type = false, $id_form = false )
 		default: $id_field	 = 'rcl_fields_' . $post_type;
 	}
 
-	return apply_filters( 'rcl_custom_fields_post', get_option( $id_field ), $post_id, $post_type );
+	return apply_filters( 'rcl_custom_fields_post', get_site_option( $id_field ), $post_id, $post_type );
 }
 
 add_action( 'wp', 'rcl_download_file' );

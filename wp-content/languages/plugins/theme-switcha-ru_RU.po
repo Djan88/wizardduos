@@ -1,0 +1,193 @@
+# Translation of Plugins - Theme Switcha - Development (trunk) in Russian
+# This file is distributed under the same license as the Plugins - Theme Switcha - Development (trunk) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2016-11-29 19:25:05+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: GlotPress/2.3.0-alpha\n"
+"Language: ru\n"
+"Project-Id-Version: Plugins - Theme Switcha - Development (trunk)\n"
+
+#: inc/settings-register.php:183
+msgid "Help keep Theme Switcha going strong! A huge THANK YOU for your support!"
+msgstr "Поддержите разработку Theme Switcha! Огромное СПАСИБО за вашу поддержку!"
+
+#: inc/settings-register.php:21 inc/settings-register.php:184
+msgid "Show support with a 5-star rating &raquo;"
+msgstr "Поддержите нас пятизвездочным рейтингом &raquo;"
+
+#. Plugin URI of the plugin/theme
+msgid "https://perishablepress.com/theme-switcha/"
+msgstr "https://perishablepress.com/theme-switcha/"
+
+#. Tags of the plugin/theme
+msgid "theme, themes, template, templates, switch, theme development, admin, plugin, widget, widgets, preview, theme preview"
+msgstr "тема, темы, шаблон, шаблоны, переключение, разработка тем, администрирование, плугин, виджет, виджеты, превью, превью темы"
+
+#. Author of the plugin/theme
+msgid "Jeff Starr"
+msgstr "Джефф Старр"
+
+#. Description of the plugin/theme
+msgid "Theme switching done right."
+msgstr "переключение тем правильным способом."
+
+#. Author URI of the plugin/theme
+msgid "https://plugin-planet.com/"
+msgstr "https://plugin-planet.com/"
+
+#. Plugin Name of the plugin/theme
+msgid "Theme Switcha"
+msgstr "Theme Switcha"
+
+#: theme-switcha.php:172 theme-switcha.php:176
+msgid "Cheatin&rsquo; huh?"
+msgstr "Хакер что ли?"
+
+#: theme-switcha.php:159
+msgid "to upgrade WordPress and try again."
+msgstr "обновить WordPress и попробовать еще раз."
+
+#: theme-switcha.php:156
+msgid " or higher, and has been deactivated! "
+msgstr "или выше, и был деактивирован!"
+
+#: theme-switcha.php:155
+msgid "requires WordPress "
+msgstr "требуется WordPress"
+
+#: theme-switcha.php:138
+msgid "and try again."
+msgstr "и попробуйте еще раз."
+
+#: theme-switcha.php:137 theme-switcha.php:158
+msgid "WP Admin Area"
+msgstr "Административный раздел WP"
+
+#: theme-switcha.php:136 theme-switcha.php:157
+msgid "Please return to the"
+msgstr "Пожалуйста вернитесь в"
+
+#: theme-switcha.php:135
+msgid " currently active. Free and Pro versions cannot be activated at the same time. "
+msgstr "активен в настоящее время. Бесплатная и Pro версии не могут быть активированы одновременно. "
+
+#: theme-switcha.php:134
+msgid "Pro version of "
+msgstr "Pro версия"
+
+#: theme-switcha.php:133
+msgid "Warning:"
+msgstr "Предупреждение:"
+
+#: theme-switcha.php:117
+msgid "Go&nbsp;Pro"
+msgstr "Поднимитесь&nbsp;до&nbsp;Pro"
+
+#: theme-switcha.php:116
+msgid "Get Theme Switcha Pro!"
+msgstr "Получите Theme Switcha Pro!"
+
+#: theme-switcha.php:113
+msgid "Rate this plugin"
+msgstr "Оцените этот плугин"
+
+#: theme-switcha.php:112
+msgid "Click here to rate and review this plugin on WordPress.org"
+msgstr "Нажмите здесь чтобы оценить и описать опыт использования этого плугина на WordPress.org"
+
+#: theme-switcha.php:99
+msgid "Settings"
+msgstr "Настройки"
+
+#: inc/settings-reset.php:19
+msgid "No changes made to options."
+msgstr "Опции остались без изменений"
+
+#: inc/settings-reset.php:15
+msgid "Default options restored."
+msgstr "Опции по-умолчанию восстановлены."
+
+#: inc/settings-register.php:73
+msgid "Everyone"
+msgstr "Для каждого"
+
+#: inc/settings-register.php:69
+msgid "Only with Passkey"
+msgstr "Только с Passkey"
+
+#: inc/settings-register.php:65
+msgid "Only Admin"
+msgstr "Только для админа"
+
+#: inc/settings-register.php:54
+msgid "Click any thumbnail to switch themes."
+msgstr "Нажмите любую миниатюру чтобы переключить темы."
+
+#: inc/settings-register.php:48
+msgid "Thanks for using Theme Switcha :)"
+msgstr "Спасибо за работу с Theme Switcha :)"
+
+#: inc/settings-register.php:20 inc/settings-register.php:174
+msgid "Restore default plugin options"
+msgstr "Восстановить настройки плугина по-умолчанию"
+
+#: inc/settings-register.php:19
+msgid "Passkey for theme-switch links (alphanumeric only)"
+msgstr "Passkey для ссылок переключающих тему (только алфавитно-цифровые последовательности символов)"
+
+#: inc/settings-register.php:18
+msgid "Cookie Expiration (in seconds)"
+msgstr "Срок действия куки (в секундах)"
+
+#: inc/settings-register.php:17
+msgid "Allow these users to switch themes"
+msgstr "Разрешить данным пользователям переключать темы"
+
+#: inc/settings-register.php:16
+msgid "Apply switching to Admin Area"
+msgstr "Применить переключение к разделу администрирования"
+
+#: inc/settings-register.php:15
+msgid "Enable theme switching"
+msgstr "Включить переключение темы"
+
+#: inc/resources-enqueue.php:37
+msgid "No, abort mission."
+msgstr "Нет, прервать задачу"
+
+#: inc/resources-enqueue.php:36
+msgid "Yes, make it so."
+msgstr "Да будет так."
+
+#: inc/resources-enqueue.php:35
+msgid "Restore default options?"
+msgstr "Восстановить настройки по-умолчанию?"
+
+#: inc/resources-enqueue.php:34
+msgid "Confirm Reset"
+msgstr "Подтвердить сброс"
+
+#: inc/plugin-core.php:285 inc/plugin-core.php:371 inc/plugin-core.php:456
+msgid "Theme switching currently disabled."
+msgstr "Переключение тем в настоящее время отключено."
+
+#: inc/plugin-core.php:249 inc/plugin-core.php:311
+msgid "Child Theme"
+msgstr "Дочерняя тема"
+
+#: inc/plugin-core.php:247
+msgid "Admin Theme"
+msgstr "Административная тема"
+
+#: inc/plugin-core.php:241 inc/plugin-core.php:305 inc/plugin-core.php:391
+#: inc/plugin-core.php:474
+msgid "Untitled"
+msgstr "Без названия"
+
+#: inc/plugin-core.php:237 inc/plugin-core.php:301 inc/plugin-core.php:387
+msgid "Version "
+msgstr "Версия"

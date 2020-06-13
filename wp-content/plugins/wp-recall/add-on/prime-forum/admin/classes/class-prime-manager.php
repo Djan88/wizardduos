@@ -15,7 +15,7 @@ class PrimeManager extends Rcl_Custom_Fields_Manager {
 			'order'		 => 'ASC',
 			'orderby'	 => 'group_seq',
 			'number'	 => -1
-		) );
+			) );
 
 		$this->group_id = (isset( $_GET['group-id'] )) ? intval( $_GET['group-id'] ) : 0;
 
@@ -30,7 +30,7 @@ class PrimeManager extends Rcl_Custom_Fields_Manager {
 				'orderby'	 => 'forum_seq',
 				'group_id'	 => $this->group_id,
 				'number'	 => -1
-			) );
+				) );
 
 			$this->current_group = pfm_get_group( $this->group_id );
 		}

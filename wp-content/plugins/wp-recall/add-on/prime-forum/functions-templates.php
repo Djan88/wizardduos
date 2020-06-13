@@ -182,7 +182,7 @@ function pfm_the_visitors() {
 
 	if ( $visitors ) {
 		foreach ( $visitors as $visitor ) {
-			$visits[] = '<a href="' . get_author_posts_url( $visitor->user_id ) . '">' . $visitor->display_name . '</a>';
+			$visits[] = '<a href="' . rcl_get_user_url( $visitor->user_id ) . '">' . $visitor->display_name . '</a>';
 		}
 	}
 

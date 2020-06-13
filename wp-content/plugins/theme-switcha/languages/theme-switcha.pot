@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-21 21:00+0000\n"
+"POT-Creation-Date: 2020-03-19 20:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -92,33 +92,33 @@ msgstr ""
 msgid "No changes made to options."
 msgstr ""
 
-#: inc/plugin-core.php:19 inc/plugin-core.php:580
+#: inc/plugin-core.php:19 inc/plugin-core.php:588
 msgid "Choose a theme.."
 msgstr ""
 
 #. Name of the plugin
-#: inc/plugin-core.php:23 inc/plugin-core.php:592
+#: inc/plugin-core.php:23 inc/plugin-core.php:600
 msgid "Theme Switcha"
 msgstr ""
 
-#: inc/plugin-core.php:283 inc/plugin-core.php:349 inc/plugin-core.php:443
+#: inc/plugin-core.php:285 inc/plugin-core.php:353 inc/plugin-core.php:449
 msgid "Version "
 msgstr ""
 
-#: inc/plugin-core.php:287 inc/plugin-core.php:353 inc/plugin-core.php:447 
-#: inc/plugin-core.php:552
+#: inc/plugin-core.php:289 inc/plugin-core.php:357 inc/plugin-core.php:453 
+#: inc/plugin-core.php:560
 msgid "Untitled"
 msgstr ""
 
-#: inc/plugin-core.php:293
+#: inc/plugin-core.php:295
 msgid "Admin Theme"
 msgstr ""
 
-#: inc/plugin-core.php:295 inc/plugin-core.php:359
+#: inc/plugin-core.php:297 inc/plugin-core.php:363
 msgid "Child Theme"
 msgstr ""
 
-#: inc/plugin-core.php:333 inc/plugin-core.php:427 inc/plugin-core.php:524
+#: inc/plugin-core.php:337 inc/plugin-core.php:433 inc/plugin-core.php:532
 msgid "Theme switching currently disabled."
 msgstr ""
 
@@ -146,6 +146,10 @@ msgstr ""
 msgid "Apply switched theme to Admin Area"
 msgstr ""
 
+#: inc/settings-register.php:23
+msgid "Important Note"
+msgstr ""
+
 #: inc/settings-register.php:24
 msgid "Enable Theme Switch menu in Toolbar"
 msgstr ""
@@ -160,6 +164,10 @@ msgstr ""
 
 #: inc/settings-register.php:27
 msgid "Passkey for theme-switch links (alphanumeric only)"
+msgstr ""
+
+#: inc/settings-register.php:27
+msgid "More info &raquo;"
 msgstr ""
 
 #: inc/settings-register.php:28 inc/settings-register.php:225

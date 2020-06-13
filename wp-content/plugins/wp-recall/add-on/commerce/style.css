@@ -700,6 +700,6 @@ body .rcl-product-gallery ul.images-list {
     #tab-orders th:nth-child(3),
     #tab-orders td:nth-child(5) {
         -webkit-hyphens: auto;
-                hyphens: auto;
+		hyphens: auto;
     }
 }

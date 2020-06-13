@@ -593,8 +593,10 @@ function rcl_ajax( prop ) {
 		url: ( typeof ajaxurl !== 'undefined' ) ? ajaxurl : Rcl.ajaxurl,
 		success: function( result, post ) {
 
+			var noticeTime = result.notice_time ? result.notice_time : 5000;
+
 			if ( !result ) {
-				rcl_notice( Rcl.local.error, 'error', 5000 );
+				rcl_notice( Rcl.local.error, 'error', noticeTime );
 				return false;
 			}
 
@@ -604,10 +606,10 @@ function rcl_ajax( prop ) {
 
 				if ( result.errors ) {
 					jQuery.each( result.errors, function( index, error ) {
-						rcl_notice( error, 'error', 5000 );
+						rcl_notice( error, 'error', noticeTime );
 					} );
 				} else {
-					rcl_notice( result.error, 'error', 5000 );
+					rcl_notice( result.error, 'error', noticeTime );
 				}
 
 				if ( prop.error )
@@ -622,11 +624,11 @@ function rcl_ajax( prop ) {
 			}
 
 			if ( result.success ) {
-				rcl_notice( result.success, 'success', 5000 );
+				rcl_notice( result.success, 'success', noticeTime );
 			}
 
 			if ( result.warning ) {
-				rcl_notice( result.warning, 'warning', 5000 );
+				rcl_notice( result.warning, 'warning', noticeTime );
 			}
 
 			rcl_do_action( 'rcl_ajax_success', result );

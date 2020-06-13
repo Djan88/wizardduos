@@ -30,6 +30,23 @@ function rcl_chat_scripts() {
 	}
 }
 
+add_action( 'template_redirect', 'rcl_chat_filter_attachment_pages', 20 );
+function rcl_chat_filter_attachment_pages() {
+	global $post;
+
+	if ( ! is_single() || ! in_array( $post->post_type, array(
+			'attachment'
+		) ) )
+		return;
+
+	if ( stripos( $post->post_excerpt, 'rcl_chat_attachment' ) === false )
+		return;
+
+	status_header( 404 );
+	include( get_query_template( '404' ) );
+	exit;
+}
+
 add_action( 'rcl_bar_setup', 'rcl_bar_add_chat_icon', 10 );
 function rcl_bar_add_chat_icon() {
 	global $user_ID, $rcl_options;

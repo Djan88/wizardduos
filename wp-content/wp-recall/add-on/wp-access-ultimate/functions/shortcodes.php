@@ -120,6 +120,8 @@ function wau_get_tariffs_shortcode( $atts ) {
 	global $user_ID;
 
 	extract( shortcode_atts( array(
+		'orderby'		 => 'tariff_seq',
+		'order'			 => 'DESC',
 		'tariff_id'		 => 0,
 		'title'			 => false,
 		'description'	 => false
@@ -134,13 +136,17 @@ function wau_get_tariffs_shortcode( $atts ) {
 	}
 
 	$tariffs = wau_get_tariffs( array(
-		'tariff_id__in' => $tariff_id
+		'tariff_id__in'	 => $tariff_id,
+		'orderby'		 => $orderby,
+		'order'			 => $order
 		) );
 
 	if ( ! $tariffs )
 		return rcl_get_notice( array(
 			'text' => __( 'Не найдены тарифные планы!' )
 			) );
+
+	rcl_dialog_scripts();
 
 	$content = '<div class="wau-account-box">';
 

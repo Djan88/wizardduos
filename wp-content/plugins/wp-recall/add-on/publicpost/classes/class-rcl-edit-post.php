@@ -39,7 +39,7 @@ class Rcl_EditPost {
 
 		$this->setup_user_can();
 
-		if ( !$this->user_can )
+		if ( ! $this->user_can )
 			$this->error( __( 'Error publishing!', 'wp-recall' ) . ' Error 100' );
 
 		do_action( 'init_update_post_rcl', $this );
@@ -71,7 +71,7 @@ class Rcl_EditPost {
 				if ( current_user_can( 'edit_post', $this->post_id ) )
 					$this->user_can['edit'] = true;
 
-				if ( rcl_is_user_role( $user_ID, array( 'administrator', 'editor' ) ) || !rcl_is_limit_editing( $this->post->post_date ) )
+				if ( rcl_is_user_role( $user_ID, array( 'administrator', 'editor' ) ) || ! rcl_is_limit_editing( $this->post->post_date ) )
 					$this->user_can['edit'] = true;
 			}
 		}else {
@@ -102,7 +102,7 @@ class Rcl_EditPost {
 
 		$thumbnail_id = (isset( $_POST['post-thumbnail'] )) ? $_POST['post-thumbnail'] : 0;
 
-		if ( !$this->update )
+		if ( ! $this->update )
 			return $this->rcl_add_attachments_in_temps( $postdata );
 
 		$currentThID = get_post_meta( $this->post_id, '_thumbnail_id' );
@@ -123,7 +123,7 @@ class Rcl_EditPost {
 	function rcl_add_attachments_in_temps( $postdata ) {
 
 		$user_id	 = $postdata['post_author'];
-		$temps		 = get_option( 'rcl_tempgallery' );
+		$temps		 = get_site_option( 'rcl_tempgallery' );
 		$temp_gal	 = (isset( $temps[$user_id] )) ? $temps[$user_id] : 0;
 
 		if ( $temp_gal ) {
@@ -149,7 +149,7 @@ class Rcl_EditPost {
 
 			unset( $temps[$user_id] );
 
-			update_option( 'rcl_tempgallery', $temps );
+			update_site_option( 'rcl_tempgallery', $temps );
 		}
 
 		return $temp_gal;
@@ -212,7 +212,7 @@ class Rcl_EditPost {
 
 		$postdata = apply_filters( 'pre_update_postdata_rcl', $postdata, $this );
 
-		if ( !$postdata )
+		if ( ! $postdata )
 			return false;
 
 		do_action( 'pre_update_post_rcl', $postdata );
@@ -221,10 +221,10 @@ class Rcl_EditPost {
 			$formID = intval( $_POST['form_id'] );
 		}
 
-		if ( !$this->post_id ) {
+		if ( ! $this->post_id ) {
 			$this->post_id = wp_insert_post( $postdata );
 
-			if ( !$this->post_id )
+			if ( ! $this->post_id )
 				$this->error( __( 'Error publishing!', 'wp-recall' ) . ' Error 101' );
 
 			if ( $formID > 1 )

@@ -3,21 +3,21 @@
 global $wpdb;
 
 require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-    
+
 $collate = '';
 
 if ( $wpdb->has_cap( 'collation' ) ) {
-    if ( ! empty( $wpdb->charset ) ) {
-        $collate .= "DEFAULT CHARACTER SET $wpdb->charset";
-    }
-    if ( ! empty( $wpdb->collate ) ) {
-        $collate .= " COLLATE $wpdb->collate";
-    }
+	if ( ! empty( $wpdb->charset ) ) {
+		$collate .= "DEFAULT CHARACTER SET $wpdb->charset";
+	}
+	if ( ! empty( $wpdb->collate ) ) {
+		$collate .= " COLLATE $wpdb->collate";
+	}
 }
 
-$table = RCL_PREF ."pforums";
+$table = RCL_PREF . "pforums";
 
-$sql = "CREATE TABLE IF NOT EXISTS ". $table . " (
+$sql = "CREATE TABLE IF NOT EXISTS " . $table . " (
         forum_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
         forum_name VARCHAR(250) NOT NULL,
         forum_desc LONGTEXT NOT NULL,
@@ -35,9 +35,9 @@ $sql = "CREATE TABLE IF NOT EXISTS ". $table . " (
 
 dbDelta( $sql );
 
-$table = RCL_PREF ."pforum_groups";
+$table = RCL_PREF . "pforum_groups";
 
-$sql = "CREATE TABLE IF NOT EXISTS ". $table . " (
+$sql = "CREATE TABLE IF NOT EXISTS " . $table . " (
         group_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
         group_name VARCHAR(250) NOT NULL,
         group_slug VARCHAR(250) NOT NULL,
@@ -48,9 +48,9 @@ $sql = "CREATE TABLE IF NOT EXISTS ". $table . " (
 
 dbDelta( $sql );
 
-$table = RCL_PREF ."pforum_topics";
+$table = RCL_PREF . "pforum_topics";
 
-$sql = "CREATE TABLE IF NOT EXISTS ". $table . " (
+$sql = "CREATE TABLE IF NOT EXISTS " . $table . " (
         topic_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
         topic_name VARCHAR(250) NOT NULL,
         topic_slug VARCHAR(250) NOT NULL,
@@ -65,11 +65,11 @@ $sql = "CREATE TABLE IF NOT EXISTS ". $table . " (
         KEY user_id (user_id)
       ) $collate;";
 
-dbDelta( $sql ); 
+dbDelta( $sql );
 
-$table = RCL_PREF ."pforum_posts";
+$table = RCL_PREF . "pforum_posts";
 
-$sql = "CREATE TABLE IF NOT EXISTS ". $table . " (
+$sql = "CREATE TABLE IF NOT EXISTS " . $table . " (
         post_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
         post_content LONGTEXT NOT NULL,
         post_date DATETIME NOT NULL,
@@ -86,11 +86,11 @@ $sql = "CREATE TABLE IF NOT EXISTS ". $table . " (
         KEY topic_id (topic_id)
       ) $collate;";
 
-dbDelta( $sql ); 
+dbDelta( $sql );
 
-$table = RCL_PREF ."pforum_meta";
+$table = RCL_PREF . "pforum_meta";
 
-$sql = "CREATE TABLE IF NOT EXISTS ". $table . " (
+$sql = "CREATE TABLE IF NOT EXISTS " . $table . " (
         meta_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
         object_id BIGINT(20) UNSIGNED NOT NULL,
         object_type VARCHAR(75) NOT NULL,
@@ -102,11 +102,11 @@ $sql = "CREATE TABLE IF NOT EXISTS ". $table . " (
         KEY meta_key (meta_key)
       ) $collate;";
 
-dbDelta( $sql ); 
+dbDelta( $sql );
 
-$table = RCL_PREF ."pforum_visits";
+$table = RCL_PREF . "pforum_visits";
 
-$sql = "CREATE TABLE IF NOT EXISTS ". $table . " (
+$sql = "CREATE TABLE IF NOT EXISTS " . $table . " (
         user_id BIGINT(20) UNSIGNED NOT NULL,
         group_id BIGINT(20) UNSIGNED NOT NULL,
         forum_id BIGINT(20) UNSIGNED NOT NULL,
@@ -119,53 +119,51 @@ $sql = "CREATE TABLE IF NOT EXISTS ". $table . " (
         KEY visitor_date (visit_date)
       ) $collate;";
 
-dbDelta( $sql ); 
+dbDelta( $sql );
 
-add_action('rcl_activate_prime-forum','pfm_activate_theme');
-function pfm_activate_theme($addonData){
-    
-    $defaultTheme = 'prime-first';
-    
-    $forumTheme = ($theme = get_option('rcl_pforum_template'))? $theme: $defaultTheme;
-    
-    rcl_activate_addon($forumTheme, true, dirname(__FILE__).'/themes');
-    
-    if(!rcl_exist_addon($forumTheme)){
-        $forumTheme = $defaultTheme;
-        rcl_activate_addon($forumTheme, true, dirname(__FILE__).'/themes');
-    }
+add_action( 'rcl_activate_prime-forum', 'pfm_activate_theme' );
+function pfm_activate_theme( $addonData ) {
 
-    update_option('rcl_pforum_template',$forumTheme);
-    
-    flush_rewrite_rules();
-    
+	$defaultTheme = 'prime-first';
+
+	$forumTheme	 = ($theme		 = get_site_option( 'rcl_pforum_template' )) ? $theme : $defaultTheme;
+
+	rcl_activate_addon( $forumTheme, true, dirname( __FILE__ ) . '/themes' );
+
+	if ( ! rcl_exist_addon( $forumTheme ) ) {
+		$forumTheme = $defaultTheme;
+		rcl_activate_addon( $forumTheme, true, dirname( __FILE__ ) . '/themes' );
+	}
+
+	update_site_option( 'rcl_pforum_template', $forumTheme );
+
+	flush_rewrite_rules();
 }
 
-$PfmOptions = get_option('rcl_pforum_options');
+$PfmOptions = get_site_option( 'rcl_pforum_options' );
 
-if(!isset($PfmOptions['home-page'])){
-    
-    $PfmOptions['home-page'] = wp_insert_post(array(
-        'post_title'=>__('Forum','wp-recall'),
-        'post_content'=>'[prime-forum]',
-        'post_status'=>'publish',
-        'post_author'=>1,
-        'post_type'=>'page',
-        'post_name'=>'forum'
-    ));
-    
-    update_option('rcl_pforum_options',$PfmOptions);
-    
-    $admins = get_users(array('role'=>'administrator'));
-    
-    foreach($admins as $admin){
-        update_user_meta($admin->ID,'pfm_role','administrator');
-    }
+if ( ! isset( $PfmOptions['home-page'] ) ) {
 
+	$PfmOptions['home-page'] = wp_insert_post( array(
+		'post_title'	 => __( 'Forum', 'wp-recall' ),
+		'post_content'	 => '[prime-forum]',
+		'post_status'	 => 'publish',
+		'post_author'	 => 1,
+		'post_type'		 => 'page',
+		'post_name'		 => 'forum'
+		) );
+
+	update_site_option( 'rcl_pforum_options', $PfmOptions );
+
+	$admins = get_users( array( 'role' => 'administrator' ) );
+
+	foreach ( $admins as $admin ) {
+		update_user_meta( $admin->ID, 'pfm_role', 'administrator' );
+	}
 }
 
-$aioseop_options = get_option( 'aioseop_options' );
-if($aioseop_options){
-    unset($aioseop_options['aiosp_run_shortcodes']);
-    update_option( 'aioseop_options', $aioseop_options );
+$aioseop_options = get_site_option( 'aioseop_options' );
+if ( $aioseop_options ) {
+	unset( $aioseop_options['aiosp_run_shortcodes'] );
+	update_site_option( 'aioseop_options', $aioseop_options );
 }

@@ -174,7 +174,7 @@ function pfm_the_last_topic() {
 		'forum_id'	 => $PrimeForum->forum_id,
 		'forum_slug' => $PrimeForum->forum_slug,
 		'topic_slug' => $lastTopic->topic_slug
-	) );
+		) );
 
 	echo '<a href="' . $permalink . '">'
 	. $lastTopic->topic_name
@@ -203,7 +203,7 @@ function pfm_the_last_post() {
 		'post_count' => $PrimeTopic ? $PrimeTopic->post_count : 0,
 		'post_index' => $lastPost->post_index,
 		'forum_id'	 => $lastPost->forum_id
-	) );
+		) );
 
 	echo __( 'from', 'wp-recall' ) . ' ' . $name . ': <a href="' . $permalink . '">'
 	. human_time_diff( strtotime( $lastPost->post_date ), current_time( 'timestamp' ) ) . ' ' . __( 'ago', 'wp-recall' )

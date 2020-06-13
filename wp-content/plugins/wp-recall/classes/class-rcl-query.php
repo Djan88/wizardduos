@@ -388,20 +388,20 @@ class Rcl_Query {
 		else
 			$data	 = $wpdb->$method( $sql );
 
-		if ( isset( $this->args['unserialise'] ) && $this->args['unserialise'] ) {
+		if ( isset( $this->args['unserialize'] ) && $this->args['unserialize'] ) {
 
-			$unserialise = $this->args['unserialise'];
+			$unserialize = $this->args['unserialize'];
 
 			if ( is_array( $data ) ) {
 				foreach ( $data as $k => $item ) {
 					if ( is_object( $item ) ) {
-						if ( isset( $item->$unserialise ) )
-							$data[$k]->$unserialise = maybe_unserialize( $item->$unserialise );
+						if ( isset( $item->$unserialize ) )
+							$data[$k]->$unserialize = maybe_unserialize( $item->$unserialize );
 					}
 				}
 			}else if ( is_object( $data ) ) {
-				if ( isset( $data->$unserialise ) )
-					$data->$this->args['unserialise'] = maybe_unserialize( $data->$unserialise );
+				if ( isset( $data->$unserialize ) )
+					$data->$this->args['unserialize'] = maybe_unserialize( $data->$unserialize );
 			}
 		}
 

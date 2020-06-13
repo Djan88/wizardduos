@@ -49,7 +49,7 @@ class PrimeForm extends Rcl_Custom_Fields {
 
 	function add_forum_custom_fields( $fields ) {
 
-		$customFields = get_option( 'rcl_fields_pfm_forum_' . $this->forum_id );
+		$customFields = get_site_option( 'rcl_fields_pfm_forum_' . $this->forum_id );
 
 		if ( $customFields ) {
 
@@ -67,7 +67,7 @@ class PrimeForm extends Rcl_Custom_Fields {
 
 		$group_id = pfm_get_forum_field( $this->forum_id, 'group_id' );
 
-		$customFields = get_option( 'rcl_fields_pfm_group_' . $group_id );
+		$customFields = get_site_option( 'rcl_fields_pfm_group_' . $group_id );
 
 		if ( $customFields ) {
 

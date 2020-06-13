@@ -665,7 +665,7 @@ function rcl_sanitize_string( $title, $sanitize = true ) {
 
 	$title = mb_strtolower( $title );
 
-	switch ( get_option( 'rtl_standard' ) ) {
+	switch ( get_site_option( 'rtl_standard' ) ) {
 		case 'off':
 			return $title;
 		case 'gost':
@@ -718,9 +718,17 @@ function rcl_author_link( $link, $author_id ) {
 	if ( rcl_get_option( 'view_user_lk_rcl' ) != 1 )
 		return $link;
 
+	return rcl_get_user_url( $author_id );
+}
+
+function rcl_get_user_url( $user_id ) {
+
+	if ( rcl_get_option( 'view_user_lk_rcl' ) != 1 )
+		return get_author_posts_url( $user_id );
+
 	return add_query_arg(
 		array(
-		rcl_get_option( 'link_user_lk_rcl', 'user' ) => $author_id
+		rcl_get_option( 'link_user_lk_rcl', 'user' ) => $user_id
 		), get_permalink( rcl_get_option( 'lk_page_rcl' ) )
 	);
 }
@@ -815,7 +823,10 @@ function rcl_mail( $email, $title, $text, $from = false, $attach = false ) {
 	$from_name	 = (isset( $from['name'] )) ? $from['name'] : get_bloginfo( 'name' );
 	$from_mail	 = (isset( $from['email'] )) ? $from['email'] : 'noreply@' . $_SERVER['HTTP_HOST'];
 
-	add_filter( 'wp_mail_content_type', create_function( '', 'return "text/html";' ) );
+	add_filter( 'wp_mail_content_type', function() {
+		return "text/html";
+	} );
+
 	$headers = 'From: ' . $from_name . ' <' . $from_mail . '>' . "\r\n";
 
 	$text .= '<p><small>-----------------------------------------------------<br/>
@@ -1021,7 +1032,7 @@ function rcl_is_user_role( $user_id, $role ) {
 }
 
 function rcl_is_register_open() {
-	$users_can = apply_filters( 'rcl_users_can_register', get_option( 'users_can_register' ) );
+	$users_can = apply_filters( 'rcl_users_can_register', get_site_option( 'users_can_register' ) );
 	return $users_can;
 }
 
@@ -1158,7 +1169,7 @@ function rcl_update_profile_fields( $user_id, $profileFields = false ) {
 /* 16.0.0 */
 function rcl_get_profile_fields( $args = false ) {
 
-	$fields = get_option( 'rcl_profile_fields' );
+	$fields = get_site_option( 'rcl_profile_fields' );
 
 	$fields = apply_filters( 'rcl_profile_fields', $fields, $args );
 
@@ -1200,9 +1211,9 @@ function rcl_get_profile_field( $field_id ) {
 function rcl_get_area_options() {
 
 	$areas = array(
-		'menu'		 => get_option( 'rcl_fields_area-menu' ),
-		'counters'	 => get_option( 'rcl_fields_area-counters' ),
-		'actions'	 => get_option( 'rcl_fields_area-actions' ),
+		'menu'		 => get_site_option( 'rcl_fields_area-menu' ),
+		'counters'	 => get_site_option( 'rcl_fields_area-counters' ),
+		'actions'	 => get_site_option( 'rcl_fields_area-actions' ),
 	);
 
 	return $areas;
@@ -1234,7 +1245,7 @@ function rcl_get_addon_paths() {
 }
 
 function rcl_get_tab_permalink( $user_id, $tab_id, $subtab_id = false ) {
-	return rcl_format_url( get_author_posts_url( $user_id ), $tab_id, $subtab_id );
+	return rcl_format_url( rcl_get_user_url( $user_id ), $tab_id, $subtab_id );
 }
 
 function rcl_get_option( $option, $default = false ) {
@@ -1246,7 +1257,7 @@ function rcl_get_option( $option, $default = false ) {
 		return $pre;
 
 	if ( ! $rcl_options )
-		$rcl_options = get_option( 'rcl_global_options' );
+		$rcl_options = get_site_option( 'rcl_global_options' );
 
 	if ( isset( $rcl_options[$option] ) ) {
 		if ( $rcl_options[$option] || is_numeric( $rcl_options[$option] ) ) {
@@ -1261,22 +1272,22 @@ function rcl_update_option( $name, $value ) {
 	global $rcl_options;
 
 	if ( ! $rcl_options )
-		$rcl_options = get_option( 'rcl_global_options' );
+		$rcl_options = get_site_option( 'rcl_global_options' );
 
 	$rcl_options[$name] = $value;
 
-	return update_option( 'rcl_global_options', $rcl_options );
+	return update_site_option( 'rcl_global_options', $rcl_options );
 }
 
 function rcl_delete_option( $name ) {
 	global $rcl_options;
 
 	if ( ! $rcl_options )
-		$rcl_options = get_option( 'rcl_global_options' );
+		$rcl_options = get_site_option( 'rcl_global_options' );
 
 	unset( $rcl_options[$name] );
 
-	return update_option( 'rcl_global_options', $rcl_options );
+	return update_site_option( 'rcl_global_options', $rcl_options );
 }
 
 //вывод контента произвольной вкладки
@@ -1397,7 +1408,7 @@ function rcl_is_gutenberg() {
 	}
 
 	/* if ( self::is_classic_editor_plugin_active() ) {
-	  $editor_option       = get_option( 'classic-editor-replace' );
+	  $editor_option       = get_site_option( 'classic-editor-replace' );
 	  $block_editor_active = array( 'no-replace', 'block' );
 
 	  return in_array( $editor_option, $block_editor_active, true );

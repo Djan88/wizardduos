@@ -494,7 +494,7 @@ class Rcl_Users_List extends Rcl_Users_Query {
 		$rqst = ($s_array) ? implode( '&', $s_array ) . '&' : '';
 
 		if ( rcl_is_office() ) {
-			$url = (isset( $_POST['tab_url'] )) ? $_POST['tab_url'] : get_author_posts_url( $user_LK );
+			$url = (isset( $_POST['tab_url'] )) ? $_POST['tab_url'] : rcl_get_user_url( $user_LK );
 		} else {
 			$url = get_permalink( $post->ID );
 		}

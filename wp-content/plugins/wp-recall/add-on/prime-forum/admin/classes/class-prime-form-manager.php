@@ -1,144 +1,136 @@
 <?php
 
-class Prime_Form_Manager extends Rcl_Custom_Fields_Manager{
+class Prime_Form_Manager extends Rcl_Custom_Fields_Manager {
 
-    public $group_id;
-    public $forum_id;
+	public $group_id;
+	public $forum_id;
 
-    function __construct($args) {
+	function __construct( $args ) {
 
-        $this->group_id = $args['group_id'];
-        $this->forum_id = $args['forum_id'];
+		$this->group_id	 = $args['group_id'];
+		$this->forum_id	 = $args['forum_id'];
 
-        if($this->forum_id)
-            $form_slug = 'pfm_forum_'.$this->forum_id;
-        else
-            $form_slug = 'pfm_group_'.$this->group_id;
+		if ( $this->forum_id )
+			$form_slug	 = 'pfm_forum_' . $this->forum_id;
+		else
+			$form_slug	 = 'pfm_group_' . $this->group_id;
 
-        parent::__construct($form_slug);
+		parent::__construct( $form_slug );
+	}
 
-    }
+	function active_fields_box() {
 
-    function active_fields_box(){
+		$defaultOptions = array(
+			array(
+				'type'	 => 'textarea',
+				'slug'	 => 'notice',
+				'title'	 => __( 'field description', 'wp-recall' )
+			),
+			array(
+				'type'	 => 'select',
+				'slug'	 => 'required',
+				'title'	 => __( 'required field', 'wp-recall' ),
+				'values' => array(
+					__( 'No', 'wp-recall' ),
+					__( 'Yes', 'wp-recall' )
+				)
+			)
+		);
 
-        $defaultOptions = array(
+		$content = $this->manager_form( $defaultOptions );
 
-            array(
-                'type' => 'textarea',
-                'slug' => 'notice',
-                'title' => __('field description','wp-recall')
-            ),
+		return $content;
+	}
 
-            array(
-                'type' => 'select',
-                'slug' => 'required',
-                'title' =>__('required field','wp-recall'),
-                'values'  => array(
-                    __('No','wp-recall'),
-                    __('Yes','wp-recall')
-                )
-            )
+	function form_navi() {
 
-        );
+		$groups = pfm_get_groups( array(
+			'order'		 => 'ASC',
+			'orderby'	 => 'group_seq',
+			'number'	 => -1,
+			'fields'	 => array(
+				'group_id',
+				'group_name'
+			)
+			) );
 
-        $content = $this->manager_form($defaultOptions);
+		$groupsList = array();
+		foreach ( $groups as $group ) {
+			$groupsList[$group->group_id] = $group->group_name;
+		}
 
-        return $content;
+		$forums = pfm_get_forums( array(
+			'order'		 => 'ASC',
+			'orderby'	 => 'forum_name',
+			'group_id'	 => $this->group_id,
+			'number'	 => -1,
+			'fields'	 => array(
+				'forum_id',
+				'forum_name'
+			)
+			) );
 
-    }
+		$forumsList = array();
+		foreach ( $forums as $forum ) {
+			$forumsList[$forum->forum_id] = $forum->forum_name;
+		}
 
-    function form_navi(){
+		$content = '<div class="rcl-custom-fields-navi">';
 
-        $groups = pfm_get_groups(array(
-            'order' => 'ASC',
-            'orderby' => 'group_seq',
-            'number' => -1,
-            'fields' => array(
-                'group_id',
-                'group_name'
-            )
-        ));
+		$content .= '<ul class="rcl-types-list">';
 
-        $groupsList = array();
-        foreach ($groups  as $group ) {
-            $groupsList[$group->group_id] = $group->group_name;
-        }
+		foreach ( $groupsList as $group_id => $name ) {
 
-        $forums = pfm_get_forums(array(
-            'order' => 'ASC',
-            'orderby' => 'forum_name',
-            'group_id' => $this->group_id,
-            'number' => -1,
-            'fields' => array(
-                'forum_id',
-                'forum_name'
-            )
-        ));
+			$class = ($this->group_id == $group_id) ? 'class="current-item"' : '';
 
-        $forumsList = array();
-        foreach ($forums  as $forum ) {
-            $forumsList[$forum->forum_id] = $forum->forum_name;
-        }
+			$content .= '<li ' . $class . '><a href="' . admin_url( 'admin.php?page=manage-topic-form&group-id=' . $group_id ) . '">' . $name . '</a></li>';
+		}
 
-        $content = '<div class="rcl-custom-fields-navi">';
+		$content .= '</ul>';
 
-            $content .= '<ul class="rcl-types-list">';
+		$content .= '</div>';
 
-            foreach ($groupsList  as $group_id => $name ) {
+		$content .= '<div class="rcl-custom-fields-navi">';
 
-                $class = ($this->group_id == $group_id)? 'class="current-item"': '';
+		$content .= '<form method="get" action="' . admin_url( 'admin.php' ) . '">';
 
-                $content .= '<li '.$class.'><a href="'.admin_url('admin.php?page=manage-topic-form&group-id='.$group_id).'">'.$name.'</a></li>';
-            }
+		$content .= '<input type="hidden" name="page" value="manage-topic-form">';
+		$content .= '<input type="hidden" name="group-id" value="' . $this->group_id . '">';
 
-            $content .= '</ul>';
+		$content .= '<select name="forum-id">';
 
-        $content .= '</div>';
+		$content .= '<option value="">' . __( 'All the group`s forums', 'wp-recall' ) . '</option>';
 
-        $content .= '<div class="rcl-custom-fields-navi">';
+		foreach ( $forumsList as $forum_id => $name ) {
+			$content .= '<option value="' . $forum_id . '" ' . selected( $forum_id, $this->forum_id, false ) . '>' . __( 'Forum', 'wp-recall' ) . ': ' . $name . '</option>';
+		}
 
-            $content .= '<form method="get" action="'.admin_url('admin.php').'">';
+		$content .= '</select>';
 
-            $content .= '<input type="hidden" name="page" value="manage-topic-form">';
-            $content .= '<input type="hidden" name="group-id" value="'.$this->group_id.'">';
+		$content .= ' <input type="submit" class="button" value="' . __( 'Go to the form`s settings', 'wp-recall' ) . '">';
 
-            $content .= '<select name="forum-id">';
+		$content .= '</form>';
 
-            $content .= '<option value="">'.__('All the group`s forums', 'wp-recall').'</option>';
+		$content .= '</div>';
 
-            foreach ($forumsList  as $forum_id => $name ) {
-                $content .= '<option value="'.$forum_id.'" '.selected($forum_id, $this->forum_id, false).'>'.__('Forum', 'wp-recall').': '.$name.'</option>';
-            }
+		$title = __( 'Setup topic`s form for', 'wp-recall' ) . ' ';
 
-            $content .= '</select>';
+		$title .= $this->forum_id ? __( 'forum', 'wp-recall' ) . ' "' . pfm_get_forum_field( $this->forum_id, 'forum_name' ) . '"' : __( 'group', 'wp-recall' ) . ' "' . pfm_get_group_field( $this->group_id, 'group_name' ) . '"';
 
-            $content .= ' <input type="submit" class="button" value="'.__('Go to the form`s settings', 'wp-recall').'">';
+		$content .= '<div class="rcl-custom-fields-navi">';
 
-            $content .= '</form>';
+		$content .= '<h3>' . $title . '</h3>';
 
-        $content .= '</div>';
+		$content .= '</div>';
 
-        $title = __('Setup topic`s form for', 'wp-recall').' ';
+		return $content;
+	}
 
-        $title .= $this->forum_id? __('forum', 'wp-recall').' "'.pfm_get_forum_field($this->forum_id, 'forum_name').'"': __('group', 'wp-recall').' "'.pfm_get_group_field($this->group_id, 'group_name').'"';
+	function add_content_form( $content ) {
 
-        $content .= '<div class="rcl-custom-fields-navi">';
+		$content .= '<input type="hidden" name="options[user-edit]" value="1">';
 
-            $content .= '<h3>'.$title.'</h3>';
-
-        $content .= '</div>';
-
-        return $content;
-
-    }
-
-    function add_content_form($content){
-
-        $content .= '<input type="hidden" name="options[user-edit]" value="1">';
-
-        return $content;
-
-    }
+		return $content;
+	}
 
 }
-

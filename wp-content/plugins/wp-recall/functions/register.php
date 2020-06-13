@@ -69,9 +69,9 @@ function rcl_confirm_user_registration() {
 			if ( ! rcl_is_user_role( $user->ID, 'need-confirm' ) )
 				return false;
 
-			$defaultRole = get_option( 'default_role' );
+			$defaultRole = get_site_option( 'default_role' );
 			if ( $defaultRole == 'need-confirm' ) {
-				update_option( 'default_role', 'author' );
+				update_site_option( 'default_role', 'author' );
 				$defaultRole = 'author';
 			}
 
@@ -85,9 +85,14 @@ function rcl_confirm_user_registration() {
 			if ( rcl_get_option( 'login_form_recall' ) == 2 ) {
 				wp_safe_redirect( wp_login_url() . '?success=checkemail' );
 			} else {
+
+				$place = home_url();
+				if ( rcl_get_option( 'login_form_recall', 0 ) == 1 ) {
+					$place = rcl_format_url( get_permalink( rcl_get_option( 'page_login_form_recall' ) ) );
+				}
 				wp_redirect( add_query_arg( array(
 					'action-rcl' => 'login', 'success'	 => 'checkemail'
-						), home_url() ) );
+						), $place ) );
 			}
 			exit;
 		}
@@ -154,7 +159,7 @@ function rcl_get_register_user( $errors ) {
 				continue;
 
 			$slug = $field['slug'];
-			if ( $field['required'] == 1 && $field['register'] == 1 ) {
+			if ( $field['required'] == 1 && isset( $field['register'] ) && $field['register'] == 1 ) {
 
 				if ( $field['type'] == 'checkbox' ) {
 
@@ -200,7 +205,7 @@ function rcl_get_register_user( $errors ) {
 		'user_pass'		 => $pass,
 		'user_login'	 => $login,
 		'user_email'	 => $email,
-		'display_name'	 => $fio
+		'display_name'	 => isset( $_POST['display_name'] ) && $_POST['display_name'] ? $_POST['display_name'] : ''
 	);
 
 	$user_id = rcl_insert_user( $userdata );

@@ -397,7 +397,7 @@ span i.rcli.fa-circle {
     padding: 6px 8px;
     position: relative;
     -webkit-hyphens: auto;
-            hyphens: auto;
+	hyphens: auto;
     word-wrap: break-word;
 }
 .status-user-rcl::before {
@@ -930,7 +930,7 @@ div.rcl-custom-fields .rcl-field-value .fa-upload {
     background: rgba(255, 255, 255, 0.8);
     border-radius: 5px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2) inset,
-                0 0 1px 1px rgba(0, 0, 0, 0.2) inset;
+		0 0 1px 1px rgba(0, 0, 0, 0.2) inset;
     display: inline-block;
     height: 10px;
     margin: 0;
@@ -946,14 +946,14 @@ div.rcl-custom-fields .rcl-field-value .fa-upload {
     background: linear-gradient(to bottom, #fff, #ddd);
     border-radius: 50%;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.4),
-                0 8px 6px rgba(0, 0, 0, 0.1);
+		0 8px 6px rgba(0, 0, 0, 0.1);
     cursor: ew-resize;
     height: 18px;
     margin-left: -.6em;
     position: absolute;
     top: -4px;
     -ms-touch-action: none;
-        touch-action: none;
+	touch-action: none;
     width: 18px;
     z-index: 1;
 }
@@ -1106,7 +1106,7 @@ body .ssi-modalOuter .ssi-modalTitle {
     position: absolute;
     top: 10%;
     -webkit-transform: translateX(-50%);
-            transform: translateX(-50%);
+	transform: translateX(-50%);
     z-index: 999;
 }
 #rcl-popup h2 {
@@ -1165,7 +1165,7 @@ body .ssi-modalOuter .ssi-modalTitle {
     position: absolute;
     top: 200px;
     -webkit-transform: translateX(-50%);
-            transform: translateX(-50%);
+	transform: translateX(-50%);
     width: auto;
 }
 #rcl-popup .navi-gallery:hover {
@@ -1472,7 +1472,7 @@ body .ssi-modalOuter .ssi-modalTitle {
 @media screen and (max-width:375px) {
     .rcl-form tr th {
         -webkit-hyphens: auto;
-                hyphens: auto;
+		hyphens: auto;
         word-wrap: break-word;
     }
     .rcl-form td a {
@@ -1500,8 +1500,8 @@ body .ssi-modalOuter .ssi-modalTitle {
     word-wrap: break-word;
     margin: 1.15em 0;
     -webkit-hyphens: auto;
-        -ms-hyphens: auto;
-            hyphens: auto;
+	-ms-hyphens: auto;
+	hyphens: auto;
 }
 .rcl-table__border {
     border: 1px solid #e5e5e5;
@@ -1600,7 +1600,7 @@ body .ssi-modalOuter .ssi-modalTitle {
         display: none;
     }
     .rcl-table .rcl-table__row-header ~ .rcl-table__row:not(.rcl-table__row-header) {
-	display: block;
+		display: block;
         background-color: transparent;
         border-radius: 3px;
         border: none;

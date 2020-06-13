@@ -236,7 +236,7 @@ body .prime-last-posts ul.last-post-list {
 }
 #prime-forum .prime-post.new-post {
     -webkit-animation: rcl-blink 2s linear both;
-            animation: rcl-blink 2s linear both;
+	animation: rcl-blink 2s linear both;
 }
 /*post edit list*/
 .post-edit-list {

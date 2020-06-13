@@ -54,7 +54,7 @@ body.wp-admin[class*="rcl-commerce_page_manage-"] h2 { /* h2 title on wp-recall 
 }
 .rcl_preloader i {
     -webkit-animation: adm_rotation 2s infinite linear;
-            animation: adm_rotation 2s infinite linear;
+	animation: adm_rotation 2s infinite linear;
     color: rgb(76, 140, 189);
     left: 50%;
     line-height: 1;
@@ -72,24 +72,24 @@ div.rcl_preloader i.rcli::before {
     padding: 0;
 }
 @-webkit-keyframes adm_rotation {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
-  }
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(359deg);
+		transform: rotate(359deg);
+	}
 }
 @keyframes adm_rotation {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
-  }
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(359deg);
+		transform: rotate(359deg);
+	}
 }
 #recall {
     position: relative;
@@ -974,7 +974,7 @@ span.ruble-symbol {
     background: rgba(255, 255, 255, 0.8);
     border-radius: 5px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2) inset,
-                0 0 1px 1px rgba(0, 0, 0, 0.2) inset;
+		0 0 1px 1px rgba(0, 0, 0, 0.2) inset;
     display: inline-block;
     height: 10px;
     margin: 0;
@@ -990,7 +990,7 @@ span.ruble-symbol {
     background: linear-gradient(to bottom, #fff, #ddd);
     border-radius: 50%;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.4),
-                0 8px 6px rgba(0, 0, 0, 0.1);
+		0 8px 6px rgba(0, 0, 0, 0.1);
     cursor: ew-resize;
     height: 18px;
     margin-left: -.6em;

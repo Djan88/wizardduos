@@ -351,7 +351,7 @@ function rcl_get_list_votes( $args, $votes ) {
 			$user_name = (isset( $names[$vote->user_id] )) ? $names[$vote->user_id] : '';
 
 			$reps = array(
-				'<a class="" target="_blank" href="' . get_author_posts_url( $vote->user_id ) . '">' . $user_name . '</a>',
+				'<a class="" target="_blank" href="' . rcl_get_user_url( $vote->user_id ) . '">' . $user_name . '</a>',
 				rcl_format_rating( $vote->rating_value )
 			);
 

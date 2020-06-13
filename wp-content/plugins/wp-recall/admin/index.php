@@ -1,7 +1,5 @@
 <?php
 require_once "admin-menu.php";
-require_once "add-on-manager.php";
-require_once "templates-manager.php";
 require_once "metaboxes.php";
 
 add_action( 'admin_init', 'rcl_admin_scripts', 10 );
@@ -56,11 +54,11 @@ function rmag_update_options() {
 			$options[$key] = $value;
 		}
 
-		update_option( 'primary-rmag-options', $options );
+		update_site_option( 'primary-rmag-options', $options );
 
 		if ( isset( $_POST['local'] ) ) {
 			foreach ( ( array ) $_POST['local'] as $key => $value ) {
-				update_option( $key, $value );
+				update_site_option( $key, $value );
 			}
 		}
 
@@ -165,15 +163,15 @@ function rcl_update_options() {
 
 	$options = apply_filters( 'rcl_pre_update_options', $options );
 
-	update_option( 'rcl_global_options', $options );
+	update_site_option( 'rcl_global_options', $options );
 
 	if ( isset( $POST['local'] ) ) {
 		foreach ( ( array ) $POST['local'] as $key => $value ) {
 			$value = apply_filters( 'rcl_local_option_value', $value, $key );
 			if ( $value == '' )
-				delete_option( $key );
+				delete_site_option( $key );
 			else
-				update_option( $key, $value );
+				update_site_option( $key, $value );
 		}
 	}
 
@@ -285,7 +283,7 @@ function rcl_update_custom_fields() {
 		$fields['options'] = $POSTDATA['options'];
 	}
 
-	update_option( $_POST['rcl-fields-options']['name-option'], $fields );
+	update_site_option( $_POST['rcl-fields-options']['name-option'], $fields );
 
 	do_action( 'rcl_update_custom_fields', $fields, $POSTDATA );
 
@@ -411,7 +409,7 @@ function rcl_admin_footer_text( $footer_text ) {
 
 function rcl_send_addon_activation_notice( $addon_id, $addon_headers ) {
 	wp_remote_post( RCL_SERVICE_HOST . '/products-files/api/add-ons.php?rcl-addon-info=add-notice', array( 'body' => array(
-			'rcl-key'	 => get_option( 'rcl-key' ),
+			'rcl-key'	 => get_site_option( 'rcl-key' ),
 			'addon-id'	 => $addon_id,
 			'headers'	 => array(
 				'version'	 => $addon_headers['version'],

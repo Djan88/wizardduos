@@ -13,13 +13,13 @@ function pfm_set_rewrite_rules( $rules ) {
 		$slugmatch	 = 'index.php/' . $slugmatch;
 
 	$rules[$slugmatch . '/forum-group/([^/]+)/?$']				 = 'index.php?pagename=' . $page->post_name . '&pfm-group=$matches[1]';
-	$rules[$slugmatch . '/forum-group/([^/]+)/page/([0-9]+)/?$']	 = 'index.php?pagename=' . $page->post_name . '&pfm-group=$matches[1]&pfm-page=$matches[2]';
+	$rules[$slugmatch . '/forum-group/([^/]+)/page/([0-9]+)/?$'] = 'index.php?pagename=' . $page->post_name . '&pfm-group=$matches[1]&pfm-page=$matches[2]';
 
-	$rules[$slugmatch . '/([^/]+)/?$']		 = 'index.php?pagename=' . $page->post_name . '&pfm-forum=$matches[1]';
-	$rules[$slugmatch . '/([^/]+)/([^/]+)/?$'] = 'index.php?pagename=' . $page->post_name . '&pfm-forum=$matches[1]&pfm-topic=$matches[2]';
+	$rules[$slugmatch . '/([^/]+)/?$']			 = 'index.php?pagename=' . $page->post_name . '&pfm-forum=$matches[1]';
+	$rules[$slugmatch . '/([^/]+)/([^/]+)/?$']	 = 'index.php?pagename=' . $page->post_name . '&pfm-forum=$matches[1]&pfm-topic=$matches[2]';
 
-	$rules[$slugmatch . '/([^/]+)/page/([0-9]+)/?$']			 = 'index.php?pagename=' . $page->post_name . '&pfm-forum=$matches[1]&pfm-page=$matches[2]';
-	$rules[$slugmatch . '/([^/]+)/([^/]+)/page/([0-9]+)/?$']	 = 'index.php?pagename=' . $page->post_name . '&pfm-forum=$matches[1]&pfm-topic=$matches[2]&pfm-page=$matches[3]';
+	$rules[$slugmatch . '/([^/]+)/page/([0-9]+)/?$']		 = 'index.php?pagename=' . $page->post_name . '&pfm-forum=$matches[1]&pfm-page=$matches[2]';
+	$rules[$slugmatch . '/([^/]+)/([^/]+)/page/([0-9]+)/?$'] = 'index.php?pagename=' . $page->post_name . '&pfm-forum=$matches[1]&pfm-topic=$matches[2]&pfm-page=$matches[3]';
 
 	return $rules;
 }
@@ -102,8 +102,6 @@ function pfm_setup_page_title( $title, $post_id ) {
 
 function pfm_replace_shortlink( $url ) {
 	global $PrimeQuery;
-
-	return false;
 
 	if ( $PrimeQuery->is_frontpage )
 		return $url;

@@ -106,7 +106,7 @@
     color: #888;
 }
 .userlist.rows-list .user-content-rcl::before { /* обманка на месте аватарки */
-/*     background: #000; */ /* Посмотреть позицию */
+	/*     background: #000; */ /* Посмотреть позицию */
     content: "";
     float: left;
     height: 70px;

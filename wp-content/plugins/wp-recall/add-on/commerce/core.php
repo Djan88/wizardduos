@@ -141,7 +141,7 @@ function rcl_get_orders( $args = array() ) {
 
 	$ordersQuery = new Rcl_Orders_Query();
 
-	$args['unserialise'] = 'order_details';
+	$args['unserialize'] = 'order_details';
 
 	$orders = $ordersQuery->get_results( $args );
 
@@ -175,7 +175,7 @@ function rcl_get_orders( $args = array() ) {
 
 			unset( $product->order_id );
 
-			$product->variations = maybe_unserialize( $product->variations );
+			$product->variations = ! isset( $product->variations ) ? false : maybe_unserialize( $product->variations );
 
 			$Products[] = $product;
 		}
@@ -197,7 +197,7 @@ function rcl_get_order( $order_id ) {
 
 	$orders = rcl_get_orders( array(
 		'order_id' => $order_id
-	) );
+		) );
 
 	if ( ! $orders )
 		return array();
@@ -271,7 +271,7 @@ function rcl_create_order_send_mail( $order_id, $register_data ) {
     <p>' . __( 'Link to managing your order', 'wp-recall' ) . ':</p>
     <p>' . admin_url( 'admin.php?page=manage-rmag&order-id=' . $rclOrder->order_id ) . '</p>';
 
-	$admin_email = (isset( $rmag_options['admin_email_magazin_recall'] ) && $rmag_options['admin_email_magazin_recall']) ? $rmag_options['admin_email_magazin_recall'] : get_option( 'admin_email' );
+	$admin_email = (isset( $rmag_options['admin_email_magazin_recall'] ) && $rmag_options['admin_email_magazin_recall']) ? $rmag_options['admin_email_magazin_recall'] : get_site_option( 'admin_email' );
 
 	rcl_mail( $admin_email, $subject, $textmail );
 
@@ -350,7 +350,7 @@ function rcl_payment_order_send_mail( $order_id ) {
     <p>' . __( 'Link for managing the order', 'wp-recall' ) . ':</p>
     <p>' . admin_url( 'admin.php?page=manage-rmag&order-id=' . $order_id ) . '</p>';
 
-	$admin_email = (isset( $rmag_options['admin_email_magazin_recall'] ) && $rmag_options['admin_email_magazin_recall']) ? $rmag_options['admin_email_magazin_recall'] : get_option( 'admin_email' );
+	$admin_email = (isset( $rmag_options['admin_email_magazin_recall'] ) && $rmag_options['admin_email_magazin_recall']) ? $rmag_options['admin_email_magazin_recall'] : get_site_option( 'admin_email' );
 
 	rcl_mail( $admin_email, $subject, $textmail );
 

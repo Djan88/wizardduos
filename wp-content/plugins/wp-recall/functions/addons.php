@@ -13,7 +13,7 @@ function rcl_get_addon( $addon_id ) {
 function rcl_get_addons() {
 	global $active_addons;
 
-	$need_update = get_option( 'rcl_addons_need_update' );
+	$need_update = get_site_option( 'rcl_addons_need_update' );
 
 	$paths = array( RCL_PATH . 'add-on', RCL_TAKEPATH . 'add-on' );
 
@@ -239,7 +239,7 @@ function rcl_check_active_template() {
 
 				rcl_activate_addon( $addon_id );
 
-				update_option( 'rcl_active_template', $addon_id );
+				update_site_option( 'rcl_active_template', $addon_id );
 
 				$rcl_template				 = $addon_id;
 				$active_addons[$addon_id]	 = $data;
@@ -273,7 +273,7 @@ function rcl_check_active_template() {
 
 			rcl_activate_addon( $addon_id );
 
-			update_option( 'rcl_active_template', $addon_id );
+			update_site_option( 'rcl_active_template', $addon_id );
 			$rcl_template				 = $addon_id;
 			$active_addons[$addon_id]	 = $data;
 

@@ -1,6 +1,6 @@
 Name: WP Access Ultimate;
-Version: 1.10.0;
-Support Core: 16.16.0;
+Version: 1.10.4;
+Support Core: 16.18.0;
 Item ID: 17342;
 Key ID: wau;
 Description: Платный временный многоуровневый доступ к контенту сайта;

@@ -212,7 +212,7 @@ body audio {
     z-index: 101;
 }
 #rcl-chat-noread-box a {
-   vertical-align: bottom;
+	vertical-align: bottom;
 }
 #rcl-chat-noread-box .rcl-noread-users {
     box-sizing: border-box;

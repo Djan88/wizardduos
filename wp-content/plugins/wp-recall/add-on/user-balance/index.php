@@ -41,7 +41,7 @@ function rmag_get_global_unit_wallet() {
 
 	global $wpdb;
 	global $rmag_options;
-	$rmag_options = get_option( 'primary-rmag-options' );
+	$rmag_options = get_site_option( 'primary-rmag-options' );
 	define( 'RMAG_PREF', $wpdb->prefix . "rmag_" );
 }
 
@@ -295,7 +295,7 @@ function rcl_mail_payment_error( $hash = false, $other = false ) {
 	$textmail .= 'RESULT - ' . $rmag_options['page_result_pay'] . '<br>';
 	$textmail .= 'SUCCESS - ' . $rmag_options['page_success_pay'] . '<br>';
 
-	$email = get_option( 'admin_email' );
+	$email = get_site_option( 'admin_email' );
 
 	rcl_mail( $email, $title, $textmail );
 }

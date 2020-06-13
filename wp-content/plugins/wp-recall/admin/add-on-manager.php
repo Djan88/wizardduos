@@ -4,12 +4,13 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 	require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
 }
 
-add_action( 'admin_init', 'rcl_update_status_addon' );
-add_action( 'admin_init', 'rcl_update_status_group_addon' );
-add_action( 'admin_init', 'rcl_init_upload_addon' );
+add_action( 'rcl_init_addons_manager', 'rcl_update_status_addon' );
+add_action( 'rcl_init_addons_manager', 'rcl_update_status_group_addon' );
+add_action( 'rcl_init_addons_manager', 'rcl_init_upload_addon' );
 
 class Rcl_Addons_Manager extends WP_List_Table {
 
+	var $per_page	 = 50;
 	var $addon		 = array();
 	var $addons_data	 = array();
 	var $need_update	 = array();
@@ -24,7 +25,8 @@ class Rcl_Addons_Manager extends WP_List_Table {
 			'ajax'		 => false
 		) );
 
-		$this->need_update	 = get_option( 'rcl_addons_need_update' );
+		$this->per_page		 = $this->get_items_per_page( 'addons_per_page', 50 );
+		$this->need_update	 = get_site_option( 'rcl_addons_need_update' );
 		$this->column_info	 = $this->get_column_info();
 
 		add_action( 'admin_head', array( &$this, 'admin_header' ) );
@@ -238,7 +240,7 @@ class Rcl_Addons_Manager extends WP_List_Table {
 		$this->_column_headers = $this->get_column_info();
 		usort( $addons, array( &$this, 'usort_reorder' ) );
 
-		$per_page		 = $this->get_items_per_page( 'addons_per_page', 20 );
+		$per_page		 = $this->per_page;
 		$current_page	 = $this->get_pagenum();
 		$total_items	 = count( $addons );
 
@@ -254,6 +256,10 @@ class Rcl_Addons_Manager extends WP_List_Table {
 
 //class
 function rcl_init_upload_addon() {
+
+	if ( ! current_user_can( 'manage_options' ) )
+		return false;
+
 	if ( isset( $_POST['install-addon-submit'] ) ) {
 		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'install-addons-rcl' ) )
 			return false;
@@ -263,6 +269,9 @@ function rcl_init_upload_addon() {
 
 function rcl_update_status_addon() {
 
+	if ( ! current_user_can( 'manage_options' ) )
+		return false;
+
 	$page = ( isset( $_GET['page'] ) ) ? esc_attr( $_GET['page'] ) : false;
 	if ( 'manage-addon-recall' != $page )
 		return;
@@ -270,6 +279,7 @@ function rcl_update_status_addon() {
 	if ( isset( $_GET['addon'] ) && isset( $_GET['action'] ) ) {
 
 		global $wpdb, $user_ID, $active_addons;
+
 		if ( ! current_user_can( 'activate_plugins' ) )
 			wp_die( __( 'Insufficient rights to install plugins on this site.', 'wp-recall' ) );
 
@@ -280,13 +290,11 @@ function rcl_update_status_addon() {
 			rcl_activate_addon( $addon );
 			wp_redirect( admin_url( 'admin.php?page=manage-addon-recall&update-addon=activate' ) );
 			exit;
-		}
-		if ( $action == 'deactivate' ) {
+		} else if ( $action == 'deactivate' ) {
 			rcl_deactivate_addon( $addon );
 			wp_redirect( admin_url( 'admin.php?page=manage-addon-recall&update-addon=deactivate' ) );
 			exit;
-		}
-		if ( $action == 'delete' ) {
+		} else if ( $action == 'delete' ) {
 			rcl_delete_addon( $addon );
 			wp_redirect( admin_url( 'admin.php?page=manage-addon-recall&update-addon=delete' ) );
 			exit;
@@ -295,6 +303,9 @@ function rcl_update_status_addon() {
 }
 
 function rcl_update_status_group_addon() {
+
+	if ( ! current_user_can( 'manage_options' ) )
+		return false;
 
 	$page = ( isset( $_GET['page'] ) ) ? esc_attr( $_GET['page'] ) : false;
 	if ( 'manage-addon-recall' != $page )
@@ -363,6 +374,10 @@ function rcl_update_status_group_addon() {
 
 function rcl_upload_addon() {
 
+	if ( ! class_exists( 'ZipArchive' ) ) {
+		wp_die( __( 'ZipArchive class is not defined.', 'wp-recall' ) );
+	}
+
 	$paths = rcl_get_addon_paths();
 
 	$filename	 = $_FILES['addonzip']['tmp_name'];
@@ -417,18 +432,4 @@ function rcl_upload_addon() {
 add_filter( 'set-screen-option', 'rcl_manager_set_option', 10, 3 );
 function rcl_manager_set_option( $status, $option, $value ) {
 	return $value;
-}
-
-function rcl_add_options_addons_manager() {
-	global $Rcl_Addons_Manager;
-
-	$option	 = 'per_page';
-	$args	 = array(
-		'label'		 => __( 'Add-ons', 'wp-recall' ),
-		'default'	 => 100,
-		'option'	 => 'addons_per_page'
-	);
-
-	add_screen_option( $option, $args );
-	$Rcl_Addons_Manager = new Rcl_Addons_Manager();
 }

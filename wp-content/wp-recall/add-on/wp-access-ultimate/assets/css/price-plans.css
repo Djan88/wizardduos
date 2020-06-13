@@ -1,4 +1,4 @@
-#plans,#plans ul,#plans ul li {
+#plans{
     margin: 0;
     padding: 0;
     list-style: none;
@@ -35,7 +35,7 @@
 }
 
 .planContainer .title span {
-	font-size: 1.3em;
+	font-size: 1.5em;
 	font-weight: 300;
 	color: #3e4f6a;
 	margin: 0;
@@ -68,7 +68,7 @@
 	font-weight: 700;
 	height: 2.6em;
 	line-height: 2.6em!important;
-	margin: 0 0 1em;
+	margin: 0;
 }
 .planContainer .price p s{
     font-size: 0.8em;
@@ -76,7 +76,7 @@
 
 .planContainer .price p.bestPlanPrice {
 	background: #f7814d;
-        font-size: 1.5em;
+	font-size: 1.5em;
 }
 
 .planContainer .price p.bestPlanPrice span{
@@ -88,19 +88,19 @@
 }
 
 .planContainer .options {
-	margin-top: 10em;
+	margin-top: 1.5em;
 }
 
-.planContainer .options li {
+.planContainer .options > span {
 	color: #364762;
 }
 
-.planContainer .options li span {
+.planContainer .options > span > span {
 	font-weight: 400;
 	color: #979797;
 }
 
-#pricePlans .planContainer .button a {
+#pricePlans .planContainer .wau-button a {
 	text-transform: uppercase;
 	text-decoration: none;
 	color: #3e4f6a;
@@ -117,7 +117,7 @@
         padding: 0 5px;
 }
 
-#pricePlans .planContainer .button a.bestPlanButton {
+#pricePlans .planContainer .wau-button a.bestPlanButton {
 	color: #fff;
 	background: #f7814d;
 	border: 2px solid #f7814d;
@@ -180,7 +180,7 @@
             transition: all .25s;
     }
 
-    #pricePlans #plans > li:last-child {
+    #pricePlans #plans > .plan:last-child {
             margin-right: 0;
 			padding: 0;
     }
@@ -193,7 +193,7 @@
                     transform: scale(1.04);
     }
 
-    .planContainer .button a {
+    .planContainer .wau-button a {
             -webkit-transition: all .25s;
                -moz-transition: all .25s;
                 -ms-transition: all .25s;
@@ -201,15 +201,14 @@
                     transition: all .25s;
     }
 
-    .planContainer .button a:hover {
+    .planContainer .wau-button a:hover {
             background: #3e4f6a;
             color: #fff!important;
     }
 
-    .planContainer .button a.bestPlanButton:hover {
+    .planContainer .wau-button a.bestPlanButton:hover {
             background: #ff9c70;
             border: 2px solid #ff9c70;
     }
 
 }
-
