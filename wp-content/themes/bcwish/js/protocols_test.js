@@ -309,11 +309,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: -320, scale: 1.5}, {duration: 40, ease: "none", rotation: -380, scale: 1.5})
-             .fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: -380, scale: 1.5}, {duration: 17, ease: "none", rotation: -380, scale: 1.5})
-             .fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: -380, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3').addClass('rot_mo_4');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -335,6 +331,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3').removeClass('rot_mo_4');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mw_11');
             endNow();
@@ -367,11 +364,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: 270, scale: 1.5}, {duration: 40, ease: "none", rotation: 330, scale: 1.5})
-             .fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: 330, scale: 1.5}, {duration: 17, ease: "none", rotation: 330, scale: 1.5})
-             .fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: 330, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3').addClass('rot_mo_3');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -393,6 +386,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3').removeClass('rot_mo_3');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mw_10_4');
             endNow();
@@ -425,11 +419,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: 20, scale: 1.5}, {duration: 40, ease: "none", rotation: 80, scale: 1.5})
-             .fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: 80, scale: 1.5}, {duration: 17, ease: "none", rotation: 80, scale: 1.5})
-             .fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: 80, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3').addClass('rot_mo_2');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -451,6 +441,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3').removeClass('rot_mo_2');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mw_10_3');
             endNow();
@@ -482,10 +473,7 @@ jQuery(function() {
       paddingTop: '4px',
       zIndex: '1000'
     });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: -10, scale: 1.5}, {duration: 40, ease: "none", rotation: -70, scale: 1.5})
-             .fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: -70, scale: 1.5}, {duration: 17, ease: "none", rotation: -70, scale: 1.5})
-             .fromTo('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3',{rotation: -70, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    jQuery('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3').addClass('rot_mo_1');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -507,6 +495,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v4, .zone_v5, .zone_alt_v2, .zone_alt_v3').removeClass('rot_mo_1');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mw_10_2');
             endNow();
@@ -540,11 +529,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: -320, scale: 1.5}, {duration: 40, ease: "none", rotation: -380, scale: 1.5})
-             .fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: -380, scale: 1.5}, {duration: 17, ease: "none", rotation: -380, scale: 1.5})
-             .fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: -380, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').addClass('rot_mo_4');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -566,6 +551,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').removeClass('rot_mo_4');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mw_10_1');
             endNow();
@@ -598,11 +584,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: 270, scale: 1.5}, {duration: 40, ease: "none", rotation: 330, scale: 1.5})
-             .fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: 330, scale: 1.5}, {duration: 17, ease: "none", rotation: 330, scale: 1.5})
-             .fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: 330, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').addClass('rot_mo_3');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -624,6 +606,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').removeClass('rot_mo_3');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mw_9_4');
             endNow();
@@ -656,11 +639,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: 20, scale: 1.5}, {duration: 40, ease: "none", rotation: 80, scale: 1.5})
-             .fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: 80, scale: 1.5}, {duration: 17, ease: "none", rotation: 80, scale: 1.5})
-             .fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: 80, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').addClass('rot_mo_2');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -682,6 +661,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').removeClass('rot_mo_2');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mw_9_3');
             endNow();
@@ -713,10 +693,7 @@ jQuery(function() {
       paddingTop: '4px',
       zIndex: '1000'
     });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: -10, scale: 1.5}, {duration: 40, ease: "none", rotation: -70, scale: 1.5})
-             .fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: -70, scale: 1.5}, {duration: 17, ease: "none", rotation: -70, scale: 1.5})
-             .fromTo('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5',{rotation: -70, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').addClass('rot_mo_1');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -738,6 +715,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v2, .zone_v3, .zone_alt_v4, .zone_alt_v5').removeClass('rot_mo_1');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mw_9_2');
             endNow();
@@ -771,11 +749,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: -320, scale: 1.5}, {duration: 40, ease: "none", rotation: -380, scale: 1.5})
-             .fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: -380, scale: 1.5}, {duration: 17, ease: "none", rotation: -380, scale: 1.5})
-             .fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: -380, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').addClass('rot_mo_4');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -797,6 +771,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').removeClass('rot_mo_4');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mw_9_1');
             endNow();
@@ -829,11 +804,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: 270, scale: 1.5}, {duration: 40, ease: "none", rotation: 330, scale: 1.5})
-             .fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: 330, scale: 1.5}, {duration: 17, ease: "none", rotation: 330, scale: 1.5})
-             .fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: 330, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').addClass('rot_mo_3');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -855,6 +826,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').removeClass('rot_mo_3');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mw_8_4');
             endNow();
@@ -887,11 +859,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: 20, scale: 1.5}, {duration: 40, ease: "none", rotation: 80, scale: 1.5})
-             .fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: 80, scale: 1.5}, {duration: 17, ease: "none", rotation: 80, scale: 1.5})
-             .fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: 80, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').addClass('rot_mo_2');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -913,6 +881,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').removeClass('rot_mo_2');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mw_8_3');
             endNow();
@@ -944,10 +913,7 @@ jQuery(function() {
       paddingTop: '4px',
       zIndex: '1000'
     });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: -10, scale: 1.5}, {duration: 40, ease: "none", rotation: -70, scale: 1.5})
-             .fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: -70, scale: 1.5}, {duration: 17, ease: "none", rotation: -70, scale: 1.5})
-             .fromTo('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6',{rotation: -70, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').addClass('rot_mo_1');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -969,6 +935,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_d2, .zone_d3, .zone_d4, .zone_d5, .zone_d6, .zone_alt_s2, .zone_alt_s3, .zone_alt_s4, .zone_alt_s5, .zone_alt_s6').removeClass('rot_mo_1');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mw_8_2');
             endNow();
@@ -998,21 +965,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -1043,6 +1002,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -1075,21 +1036,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -1120,6 +1073,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -1152,21 +1107,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -1197,6 +1144,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -1229,21 +1178,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -1274,6 +1215,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -1306,21 +1249,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -1351,6 +1286,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -1383,21 +1320,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -1428,6 +1357,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -1460,21 +1391,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -1505,6 +1428,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -1582,11 +1507,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: -320, scale: 1.5}, {duration: 40, ease: "none", rotation: -380, scale: 1.5})
-             .fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: -380, scale: 1.5}, {duration: 17, ease: "none", rotation: -380, scale: 1.5})
-             .fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: -380, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3').addClass('rot_mo_4');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -1608,6 +1529,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3').removeClass('rot_mo_4');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'ww_12');
             endNow();
@@ -1640,11 +1562,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: 270, scale: 1.5}, {duration: 40, ease: "none", rotation: 330, scale: 1.5})
-             .fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: 330, scale: 1.5}, {duration: 17, ease: "none", rotation: 330, scale: 1.5})
-             .fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: 330, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3').addClass('rot_mo_3');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -1666,6 +1584,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3').removeClass('rot_mo_3');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'ww_11_4');
             endNow();
@@ -1698,11 +1617,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: 20, scale: 1.5}, {duration: 40, ease: "none", rotation: 80, scale: 1.5})
-             .fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: 80, scale: 1.5}, {duration: 17, ease: "none", rotation: 80, scale: 1.5})
-             .fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: 80, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3').addClass('rot_mo_2');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -1724,6 +1639,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3').removeClass('rot_mo_2');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'ww_11_3');
             endNow();
@@ -1755,10 +1671,7 @@ jQuery(function() {
       paddingTop: '4px',
       zIndex: '1000'
     });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: -10, scale: 1.5}, {duration: 40, ease: "none", rotation: -70, scale: 1.5})
-             .fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: -70, scale: 1.5}, {duration: 17, ease: "none", rotation: -70, scale: 1.5})
-             .fromTo('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3',{rotation: -70, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    jQuery('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3').addClass('rot_mo_1');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -1780,6 +1693,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v3, .zone_v4, .zone_alt_v4, .zone_alt_v3').removeClass('rot_mo_1');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'ww_11_2');
             endNow();
@@ -1809,21 +1723,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -1854,6 +1760,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -1886,21 +1794,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -1931,6 +1831,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -1963,21 +1865,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -2008,6 +1902,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -2040,21 +1936,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -2085,6 +1973,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -2117,21 +2007,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -2162,6 +2044,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -2194,21 +2078,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -2239,6 +2115,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -2271,21 +2149,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -2316,6 +2186,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -2348,21 +2220,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -2393,6 +2257,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -2425,21 +2291,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -2470,6 +2328,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -2502,21 +2362,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -2547,6 +2399,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -2650,11 +2504,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: -320, scale: 1.5}, {duration: 40, ease: "none", rotation: -380, scale: 1.5})
-             .fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: -380, scale: 1.5}, {duration: 17, ease: "none", rotation: -380, scale: 1.5})
-             .fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: -380, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6').addClass('rot_mo_4');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -2676,6 +2526,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6').removeClass('rot_mo_4');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mm_10');
             endNow();
@@ -2708,11 +2559,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: 270, scale: 1.5}, {duration: 40, ease: "none", rotation: 330, scale: 1.5})
-             .fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: 330, scale: 1.5}, {duration: 17, ease: "none", rotation: 330, scale: 1.5})
-             .fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: 330, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6').addClass('rot_mo_3');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -2734,6 +2581,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6').removeClass('rot_mo_3');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mm_9_4');
             endNow();
@@ -2766,11 +2614,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: 20, scale: 1.5}, {duration: 40, ease: "none", rotation: 80, scale: 1.5})
-             .fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: 80, scale: 1.5}, {duration: 17, ease: "none", rotation: 80, scale: 1.5})
-             .fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: 80, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6').addClass('rot_mo_2');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -2792,6 +2636,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6').removeClass('rot_mo_2');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mm_9_3');
             endNow();
@@ -2823,10 +2668,7 @@ jQuery(function() {
       paddingTop: '4px',
       zIndex: '1000'
     });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: -10, scale: 1.5}, {duration: 40, ease: "none", rotation: -70, scale: 1.5})
-             .fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: -70, scale: 1.5}, {duration: 17, ease: "none", rotation: -70, scale: 1.5})
-             .fromTo('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6',{rotation: -70, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    jQuery('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6').addClass('rot_mo_1');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -2848,6 +2690,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_d2, .zone_d5, .zone_d6, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6').removeClass('rot_mo_1');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mm_9_2');
             endNow();
@@ -2881,11 +2724,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -320, scale: 1.5}, {duration: 40, ease: "none", rotation: -380, scale: 1.5})
-             .fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -380, scale: 1.5}, {duration: 17, ease: "none", rotation: -380, scale: 1.5})
-             .fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -380, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').addClass('rot_mo_4');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -2907,6 +2746,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').removeClass('rot_mo_4');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mm_9_1');
             endNow();
@@ -2939,11 +2779,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 270, scale: 1.5}, {duration: 40, ease: "none", rotation: 330, scale: 1.5})
-             .fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 330, scale: 1.5}, {duration: 17, ease: "none", rotation: 330, scale: 1.5})
-             .fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 330, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').addClass('rot_mo_3');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -2965,6 +2801,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').removeClass('rot_mo_3');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mm_8_4');
             endNow();
@@ -2997,11 +2834,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 20, scale: 1.5}, {duration: 40, ease: "none", rotation: 80, scale: 1.5})
-             .fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 80, scale: 1.5}, {duration: 17, ease: "none", rotation: 80, scale: 1.5})
-             .fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 80, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').addClass('rot_mo_2');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -3023,6 +2856,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').removeClass('rot_mo_2');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mm_8_3');
             endNow();
@@ -3054,10 +2888,7 @@ jQuery(function() {
       paddingTop: '4px',
       zIndex: '1000'
     });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -10, scale: 1.5}, {duration: 40, ease: "none", rotation: -70, scale: 1.5})
-             .fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -70, scale: 1.5}, {duration: 17, ease: "none", rotation: -70, scale: 1.5})
-             .fromTo('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -70, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    jQuery('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').addClass('rot_mo_1');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -3079,6 +2910,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_d3, .zone_d4, .zone_d2_, .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').removeClass('rot_mo_1');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'mm_8_2');
             endNow();
@@ -3108,21 +2940,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -3153,6 +2977,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -3185,21 +3011,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -3230,6 +3048,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -3262,21 +3082,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -3307,6 +3119,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -3339,21 +3153,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -3384,6 +3190,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -3416,21 +3224,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -3461,6 +3261,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -3493,21 +3295,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -3539,6 +3333,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -3571,21 +3367,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -3616,6 +3404,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -3696,11 +3486,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -320, scale: 1.5}, {duration: 40, ease: "none", rotation: -380, scale: 1.5})
-             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -380, scale: 1.5}, {duration: 17, ease: "none", rotation: -380, scale: 1.5})
-             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -380, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').addClass('rot_mo_4');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -3722,6 +3508,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').removeClass('rot_mo_4');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_12');
             endNow();
@@ -3754,11 +3541,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 270, scale: 1.5}, {duration: 40, ease: "none", rotation: 330, scale: 1.5})
-             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 330, scale: 1.5}, {duration: 17, ease: "none", rotation: 330, scale: 1.5})
-             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 330, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').addClass('rot_mo_3');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -3780,6 +3563,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').removeClass('rot_mo_3');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_11_4');
             endNow();
@@ -3812,11 +3596,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 20, scale: 1.5}, {duration: 40, ease: "none", rotation: 80, scale: 1.5})
-             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 80, scale: 1.5}, {duration: 17, ease: "none", rotation: 80, scale: 1.5})
-             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 80, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').addClass('rot_mo_2');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -3838,6 +3618,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').removeClass('rot_mo_2');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_11_3');
             endNow();
@@ -3869,10 +3650,7 @@ jQuery(function() {
       paddingTop: '4px',
       zIndex: '1000'
     });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -10, scale: 1.5}, {duration: 40, ease: "none", rotation: -70, scale: 1.5})
-             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -70, scale: 1.5}, {duration: 17, ease: "none", rotation: -70, scale: 1.5})
-             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -70, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').addClass('rot_mo_1');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -3894,6 +3672,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').removeClass('rot_mo_1');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_11_2');
             endNow();
@@ -3923,21 +3702,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -3968,6 +3739,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -4049,11 +3822,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -320, scale: 1.5}, {duration: 40, ease: "none", rotation: -380, scale: 1.5})
-             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -380, scale: 1.5}, {duration: 17, ease: "none", rotation: -380, scale: 1.5})
-             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -380, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').addClass('rot_mo_4');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -4075,6 +3844,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').removeClass('rot_mo_4');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_9');
             endNow();
@@ -4108,11 +3878,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 270, scale: 1.5}, {duration: 40, ease: "none", rotation: 330, scale: 1.5})
-             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 330, scale: 1.5}, {duration: 17, ease: "none", rotation: 330, scale: 1.5})
-             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 330, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').addClass('rot_mo_3');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -4134,6 +3900,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').removeClass('rot_mo_3');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_8_4');
             endNow();
@@ -4166,11 +3933,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 20, scale: 1.5}, {duration: 40, ease: "none", rotation: 80, scale: 1.5})
-             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 80, scale: 1.5}, {duration: 17, ease: "none", rotation: 80, scale: 1.5})
-             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: 80, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').addClass('rot_mo_2');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -4192,6 +3955,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').removeClass('rot_mo_2');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_8_3');
             endNow();
@@ -4223,10 +3987,7 @@ jQuery(function() {
       paddingTop: '4px',
       zIndex: '1000'
     });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -10, scale: 1.5}, {duration: 40, ease: "none", rotation: -70, scale: 1.5})
-             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -70, scale: 1.5}, {duration: 17, ease: "none", rotation: -70, scale: 1.5})
-             .fromTo('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_',{rotation: -70, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').addClass('rot_mo_1');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -4248,6 +4009,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v5, .zone_d2, .zone_d5, .zone_d6, .zone_s2_, .zone_alt_v5, .zone_alt_d2, .zone_alt_d5, .zone_alt_d6, .zone_alt_s2_').removeClass('rot_mo_1');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_8_2');
             endNow();
@@ -4277,21 +4039,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -4322,6 +4076,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -4402,11 +4158,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: -320, scale: 1.5}, {duration: 40, ease: "none", rotation: -380, scale: 1.5})
-             .fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: -380, scale: 1.5}, {duration: 17, ease: "none", rotation: -380, scale: 1.5})
-             .fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: -380, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3').addClass('rot_mo_4');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -4428,6 +4180,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3').removeClass('rot_mo_4');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_6');
             endNow();
@@ -4461,11 +4214,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: 270, scale: 1.5}, {duration: 40, ease: "none", rotation: 330, scale: 1.5})
-             .fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: 330, scale: 1.5}, {duration: 17, ease: "none", rotation: 330, scale: 1.5})
-             .fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: 330, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3').addClass('rot_mo_3');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -4487,6 +4236,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3').removeClass('rot_mo_3');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_5_4');
             endNow();
@@ -4519,11 +4269,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: 20, scale: 1.5}, {duration: 40, ease: "none", rotation: 80, scale: 1.5})
-             .fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: 80, scale: 1.5}, {duration: 17, ease: "none", rotation: 80, scale: 1.5})
-             .fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: 80, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3').addClass('rot_mo_2');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -4545,6 +4291,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3').removeClass('rot_mo_2');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_5_3');
             endNow();
@@ -4576,10 +4323,7 @@ jQuery(function() {
       paddingTop: '4px',
       zIndex: '1000'
     });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: -10, scale: 1.5}, {duration: 40, ease: "none", rotation: -70, scale: 1.5})
-             .fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: -70, scale: 1.5}, {duration: 17, ease: "none", rotation: -70, scale: 1.5})
-             .fromTo('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3',{rotation: -70, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3').addClass('rot_mo_1');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -4601,6 +4345,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v4, .zone_s3, .zone_v3, .zone_alt_v4,  .zone_alt_s3, .zone_alt_v3').removeClass('rot_mo_1');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_5_2');
             endNow();
@@ -4630,21 +4375,13 @@ jQuery(function() {
     });
     jQuery('.zone_ring')
       .removeClass('hidden')
+      .removeAttr('style')
       .css({
         opacity: 0.8,
-        transform: 'scale(1.5)',
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.ring',{rotation: 0}, {duration: 30, ease: "none", rotation: 180})
-             .fromTo('.ring',{rotation: 180}, {duration: 30, ease: "none", rotation: 0})
-             .fromTo('.ring',{rotation: 0}, {duration: 15, ease: "none", rotation: -90})
-             .fromTo('.ring',{rotation: -90}, {duration: 15, ease: "none", rotation: 0})
-
-    var zone_ring_gsap = gsap.timeline();
-    zone_ring_gsap.fromTo('.zone_ring',{rotation: 0}, {duration: 60, ease: "none", rotation: -480})
-                  .fromTo('.zone_ring',{rotation: -480}, {duration: 30, ease: "none", rotation: -240})
-
+    jQuery('.ring').addClass('rot_ring');
+    jQuery('.zone_ring').addClass('rot_zone_ring');
     phaseOne = setInterval(function(){
       if (count_animation <= 360){
         if (reloadTime == 0){                                                                       //1
@@ -4675,6 +4412,8 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
+        jQuery('.ring').removeClass('rot_ring');
+        jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');
         jQuery('.zone_ring').css('transform', 'rotate(0deg)');
         sound.stop();
@@ -4755,11 +4494,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -320, scale: 1.5}, {duration: 40, ease: "none", rotation: -380, scale: 1.5})
-             .fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -380, scale: 1.5}, {duration: 17, ease: "none", rotation: -380, scale: 1.5})
-             .fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -380, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').addClass('rot_mo_4');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -4781,6 +4516,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').removeClass('rot_mo_4');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_3');
             endNow();
@@ -4814,11 +4550,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 270, scale: 1.5}, {duration: 40, ease: "none", rotation: 330, scale: 1.5})
-             .fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 330, scale: 1.5}, {duration: 17, ease: "none", rotation: 330, scale: 1.5})
-             .fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 330, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').addClass('rot_mo_3');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -4840,6 +4572,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').removeClass('rot_mo_2');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_2_4');
             endNow();
@@ -4872,11 +4605,7 @@ jQuery(function() {
       zIndex: '1000'
     });
 
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 20, scale: 1.5}, {duration: 40, ease: "none", rotation: 80, scale: 1.5})
-             .fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 80, scale: 1.5}, {duration: 17, ease: "none", rotation: 80, scale: 1.5})
-             .fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: 80, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
-    
+    jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').addClass('rot_mo_2');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -4898,6 +4627,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').removeClass('rot_mo_2');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_2_3');
             endNow();
@@ -4929,10 +4659,7 @@ jQuery(function() {
       paddingTop: '4px',
       zIndex: '1000'
     });
-    var zone_gsap = gsap.timeline();
-    zone_gsap.fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -10, scale: 1.5}, {duration: 40, ease: "none", rotation: -70, scale: 1.5})
-             .fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -70, scale: 1.5}, {duration: 17, ease: "none", rotation: -70, scale: 1.5})
-             .fromTo('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_',{rotation: -70, scale: 1.5}, {duration: 1, ease: "none", rotation: 0, scale: 1})
+    jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').addClass('rot_mo_1');
     phaseSeven_one = setInterval(function(){
         if (count_animation <= 40){
           if (reloadTime == 0){                                                                       //1
@@ -4954,6 +4681,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
+          jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').removeClass('rot_mo_1');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_2_2');
             endNow();
@@ -4988,9 +4716,6 @@ jQuery(function() {
         opacity: 0.8,
         background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat'
       });
-    // jQuery('.zone_cl').addClass('rot_90_one').css({
-    //   background: '#fff url(/wp-content/themes/bcwish/img/lovushka.png) center center/100% no-repeat',
-    // });
     jQuery('.ring').addClass('rot_ring');
     jQuery('.zone_ring').addClass('rot_zone_ring');
 
@@ -5024,7 +4749,6 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
         });
-        // jQuery('.zone_cl').removeClass('rot_90_one');
         jQuery('.ring').removeClass('rot_ring');
         jQuery('.zone_ring').removeClass('rot_zone_ring');
         jQuery('.ring').css('transform', 'rotate(0deg)');

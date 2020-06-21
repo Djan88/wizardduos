@@ -1931,6 +1931,7 @@ h3.wizard_heading
   left: 50%;
   top: 10px;
   color: transparent;
+  transform: scale(1.5);
   border: none;
   transition: transform 0.250s linear;
 }
