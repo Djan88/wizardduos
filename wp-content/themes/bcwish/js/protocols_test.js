@@ -4572,7 +4572,7 @@ jQuery(function() {
             paddingTop: '2px',
             zIndex: '2'
           });
-          jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').removeClass('rot_mo_2');
+          jQuery('.zone_v2, .zone_d3, .zone_d4, .zone_d2_, .zone_alt_v2,  .zone_alt_d3, .zone_alt_d4, .zone_alt_d2_').removeClass('rot_mo_3');
           if (pausedStatus == true) {
             localStorage.setItem('paused', 'un_2_4');
             endNow();
