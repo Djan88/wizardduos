@@ -4816,7 +4816,7 @@ jQuery(function() {
   
   checkPoints = function(){
     jQuery('.zone_movable').each(function() {
-      if(parseFloat(jQuery(this).css('left')) < 600){
+      if(parseFloat(jQuery(this).css('left')) < 380){
         pointsStatus = false;
         // console.log('status '+' '+jQuery(this).text()+' '+jQuery(this).css('top')+' '+pointsStatus);
       }
