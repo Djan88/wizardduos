@@ -4,6 +4,7 @@ jQuery(function() {
       photo_left,
       photo_right,
       cur_protocol,
+      device_w = screen.width,
       returned_img,
       nextSound = new Howl({
           urls: ['/sounds/Cancel_2.mp3'],
@@ -46,6 +47,16 @@ jQuery(function() {
     localStorage.removeItem('croppedImg');
     localStorage.removeItem('croppedImgTwo');
   });
+
+
+// Контроль ширины экрана
+  console.log(device_w);
+  jQuery('.w_width').text(device_w);
+  if (device_w < 600) {
+    jQuery('#w_error').modal('show');
+  }
+  w_block_wrap = jQuery('.arrow_in_popup').css('height');
+  jQuery('.screen_value').css('lineHeight', w_block_wrap);
 
 //Скрываем возможно загруженное изображение
   jQuery('.wizard_returned').find('img:first-child').addClass('returned hidden');

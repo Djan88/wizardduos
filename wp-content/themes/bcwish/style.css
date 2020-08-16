@@ -2358,6 +2358,38 @@ button.wizard_starter_alt.btn.btn-success
   font-size: 20px;
   margin-top: 10px;
 }
+.arrow_in_popup 
+{
+  text-align: center;
+}
+.arrow_in_popup svg
+{
+  width: 50%;
+}
+.arrow_in_popup svg path
+{
+  stroke: #1bb1dc;
+  fill: #1bb1dc;
+}
+.screen_value 
+{
+  padding: 0;
+  font-size: 30px;
+  padding-top: 55px;
+}
+.arrow_w_wrap
+{
+  height: 50px;
+}
+.arrow_w_wrap .row
+{
+  margin-top: -50px;
+}
+#w_error #theme-switcha
+{
+  padding: 5px;
+  padding-bottom: 7px;
+}
 
 /*Animation*/
 
@@ -3014,5 +3046,10 @@ button.wizard_starter_alt.btn.btn-success
 @media (max-width: 574px) {
   #footer .footer-top .social-links a {
     margin-bottom: 25px;
+  }
+  .arrow_in_popup, .screen_value
+  {
+    display: inline-block;
+    width: 33.3%;
   }
 }
