@@ -2358,6 +2358,11 @@ button.wizard_starter_alt.btn.btn-success
   font-size: 20px;
   margin-top: 10px;
 }
+#w_error .modal-header 
+{
+  background: #5cb85c;
+  color: #fff;
+}
 .arrow_in_popup 
 {
   text-align: center;
@@ -2368,8 +2373,8 @@ button.wizard_starter_alt.btn.btn-success
 }
 .arrow_in_popup svg path
 {
-  stroke: #1bb1dc;
-  fill: #1bb1dc;
+  stroke: #5cb85c;
+  fill: #5cb85c;
 }
 .screen_value 
 {
