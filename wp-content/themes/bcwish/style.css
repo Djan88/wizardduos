@@ -2955,6 +2955,10 @@ button.wizard_starter_alt.btn.btn-success
     margin: auto;
     margin-top: 10px;
   }
+  .arrow_in_popup svg 
+  {
+    width: 90%;
+  }
 }
 
 @media (max-width: 768px) {
