@@ -56,7 +56,7 @@ class Rcl_Sub_Tabs {
 			if ( ! isset( $tab['name'] ) || ! $tab['name'] )
 				continue;
 
-			$classes = ($this->active_tab == $tab['id']) ? array( 'active', 'rcl-subtab-button' ) : array( 'rcl-subtab-button' );
+			$classes = array( 'rcl-subtab-button' );
 
 			if ( isset( $this->parent_tab['supports'] ) ) {
 				if ( in_array( 'ajax', $this->parent_tab['supports'] ) ) {
@@ -64,19 +64,27 @@ class Rcl_Sub_Tabs {
 				}
 			}
 
-			$button_args = array( 'class' => implode( ' ', $classes ) );
+			$button_args = array(
+				'class'	 => implode( ' ', $classes ),
+				'label'	 => $tab['name'],
+				'href'	 => $this->url_string( $master_id, $tab['id'] ),
+				'status' => $this->active_tab == $tab['id'] ? 'active' : false
+			);
 
 			if ( isset( $tab['icon'] ) ) {
 				$button_args['icon'] = $tab['icon'];
 			}
 
-			$button_args['attr'] = 'data-post=' . rcl_encode_post( array(
+			$button_args['data'] = [
+				'post' => rcl_encode_post( [
 					'tab_id'	 => $this->parent_id,
 					'subtab_id'	 => $tab['id'],
 					'master_id'	 => $master_id
-				) );
+					]
+				)
+			];
 
-			$content .= rcl_get_button( $tab['name'], $this->url_string( $master_id, $tab['id'] ), $button_args );
+			$content .= rcl_get_button( $button_args );
 		}
 
 		$content .= '</div>';

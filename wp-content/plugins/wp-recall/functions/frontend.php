@@ -1,4 +1,13 @@
 <?php
+add_action( 'wp_head', 'rcl_register_avatar_sizes', 10 );
+function rcl_register_avatar_sizes() {
+
+	$sizes = [70, 150, 300 ];
+	foreach ( $sizes as $k => $size ) {
+		add_image_size( 'rcl-avatar-' . $size, $size, $size, 1 );
+	}
+}
+
 add_action( 'rcl_area_tabs', 'rcl_apply_filters_area_tabs', 10 );
 function rcl_apply_filters_area_tabs() {
 
@@ -68,15 +77,15 @@ function rcl_user_rayting() {
 add_action( 'rcl_user_description', 'rcl_user_meta', 30 );
 function rcl_user_meta() {
 	global $rcl_user, $rcl_users_set;
+
 	if ( false !== array_search( 'profile_fields', $rcl_users_set->data ) || isset( $rcl_user->profile_fields ) ) {
 		if ( ! isset( $rcl_user->profile_fields ) )
 			$rcl_user->profile_fields = array();
 
 		if ( $rcl_user->profile_fields ) {
-			$cf = new Rcl_Custom_Fields();
 			echo '<div class="user-profile-fields">';
 			foreach ( $rcl_user->profile_fields as $k => $field ) {
-				echo $cf->get_field_value( $field, $field['value'], $field['title'] );
+				echo Rcl_Field::setup( $field )->get_field_value( 'title' );
 			}
 			echo '</div>';
 		}
@@ -163,9 +172,12 @@ function rcl_default_search_form( $form ) {
                 <select name="search_field">
                     <option ' . selected( $search_field, 'display_name', false ) . ' value="display_name">' . __( 'by name', 'wp-recall' ) . '</option>
                     <option ' . selected( $search_field, 'user_login', false ) . ' value="user_login">' . __( 'by login', 'wp-recall' ) . '</option>
-                </select>
-                <input type="submit" class="recall-button" name="search-user" value="' . __( 'Search', 'wp-recall' ) . '">
-                <input type="hidden" name="default-search" value="1">';
+                </select>'
+		. rcl_get_button( array(
+			'label'	 => __( 'Search', 'wp-recall' ),
+			'submit' => true
+		) )
+		. '<input type="hidden" name="default-search" value="1">';
 
 	if ( $user_LK && $rcl_tab ) {
 
@@ -261,10 +273,8 @@ function rcl_username() {
 }
 
 function rcl_notice() {
-	$notify	 = '';
-	$notify	 = apply_filters( 'notify_lk', $notify );
-	if ( $notify )
-		echo '<div class="notify-lk">' . $notify . '</div>';
+	if ( $notify = apply_filters( 'notify_lk', '' ) )
+		echo rcl_get_notice( ['text' => $notify ] );
 }
 
 //добавляем стили колорпикера и другие в хеадер
@@ -333,6 +343,120 @@ function rcl_default_inline_styles( $styles, $rgb ) {
 	return $styles;
 }
 
+// background color button api
+add_filter( 'rcl_inline_styles', 'rcl_api_button_inline_background', 10, 2 );
+function rcl_api_button_inline_background( $styles, $rgb ) {
+	list($r, $g, $b) = $rgb;
+	$background_color = $r . ',' . $g . ',' . $b;
+
+	$styles .= '
+		body .rcl-bttn.rcl-bttn__type-primary {
+			background-color: rgb(' . $background_color . ');
+		}
+		.rcl-bttn.rcl-bttn__type-primary.rcl-bttn__active {
+			background-color: rgba(' . $r . ', ' . $g . ', ' . $b . ', 0.4);
+		}
+		.rcl-bttn.rcl-bttn__type-simple.rcl-bttn__active {
+			box-shadow: 0 -5px 0 -3px rgb(' . $r . ', ' . $g . ', ' . $b . ') inset;
+		}
+	';
+
+	return $styles;
+}
+
+// color button api
+add_filter( 'rcl_inline_styles', 'rcl_api_button_inline_color', 10 );
+function rcl_api_button_inline_color( $styles ) {
+	$color_button = rcl_get_option( 'rcl-button-text-color', '#fff' );
+
+	$styles .= '
+		body .rcl-bttn.rcl-bttn__type-primary {
+			color: ' . $color_button . ';
+		}
+	';
+
+	return $styles;
+}
+
+// size button api
+add_filter( 'rcl_inline_styles', 'rcl_api_button_inline_size', 10 );
+function rcl_api_button_inline_size( $styles ) {
+	$size = rcl_get_option( 'rcl-button-font-size', '14' );
+
+	$styles .= '
+		body .rcl-bttn,
+		.rcl-bttn.rcl-bttn__size-small {
+			font-size: ' . 0.86 * $size . 'px;
+		}
+		.rcl-bttn.rcl-bttn__size-standart {
+			font-size: ' . $size . 'px;
+		}
+		.rcl-bttn.rcl-bttn__size-medium {
+			font-size: ' . 1.16 * $size . 'px;
+		}
+		.rcl-bttn__type-clear.rcl-bttn__mod-only-icon.rcl-bttn__size-medium,
+		.rcl-bttn.rcl-bttn__size-large {
+			font-size: ' . 1.33 * $size . 'px;
+		}
+		.rcl-bttn.rcl-bttn__size-big {
+			font-size: ' . 1.5 * $size . 'px;
+		}
+		.rcl-bttn__type-clear.rcl-bttn__mod-only-icon.rcl-bttn__size-large {
+			font-size: ' . 1.66 * $size . 'px;
+		}
+		.rcl-bttn__type-clear.rcl-bttn__mod-only-icon.rcl-bttn__size-big {
+			font-size: ' . 2 * $size . 'px;
+		}
+	';
+
+	return $styles;
+}
+
+// css variable
+// Основные цвета WP-Recall переведем в css переменные
+// для удобства: hex и rgb значения - чтобы потом самим css генерировать как прозрачность текста (rgba)
+add_filter( 'rcl_inline_styles', 'rcl_css_variable', 10, 2 );
+function rcl_css_variable( $styles, $rgb ) {
+	$rcl_color = rcl_get_option( 'primary-color', '#4c8cbd' );
+
+	list($r, $g, $b) = $rgb;
+
+	// темнее rgb
+	$rd	 = round( $r * 0.45 );
+	$gd	 = round( $g * 0.45 );
+	$bd	 = round( $b * 0.45 );
+
+	// ярче rgb
+	$rl	 = round( $r * 1.4 );
+	$gl	 = round( $g * 1.4 );
+	$bl	 = round( $b * 1.4 );
+
+	// инверт rgb
+	$rf	 = round( 0.75 * (255 - $r) );
+	$gf	 = round( 0.75 * (255 - $g) );
+	$bf	 = round( 0.75 * (255 - $b) );
+
+	// https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+	$text_color	 = '#fff';
+	$threshold	 = apply_filters( 'rcl_text_color_threshold', 150 );
+	if ( ($r * 0.299 + $g * 0.587 + $b * 0.114) > $threshold ) {
+		$text_color = '#000';
+	}
+
+	$styles .= '
+:root{
+--rclText: ' . $text_color . ';
+--rclHex:' . $rcl_color . ';
+--rclRgb:' . $r . ',' . $g . ',' . $b . ';
+--rclRgbDark:' . $rd . ',' . $gd . ',' . $bd . ';
+--rclRgbLight:' . $rl . ',' . $gl . ',' . $bl . ';
+--rclRgbFlip:' . $rf . ',' . $gf . ',' . $bf . ';
+}
+';
+
+	return $styles;
+}
+
 add_action( 'wp_footer', 'rcl_init_footer_action', 100 );
 function rcl_init_footer_action() {
 	echo '<script>rcl_do_action("rcl_footer")</script>';
@@ -370,20 +494,19 @@ function rcl_get_author_block() {
 }
 
 function rcl_get_time_user_action( $user_id ) {
-	global $wpdb;
 
-	$expire = (isset( $rcl_options['timeout'] ) && $rcl_options['timeout']) ? $rcl_options['timeout'] : 10;
-
-	$expire *= 60;
-
-	$cachekey	 = json_encode( array( 'rcl_get_time_user_action', $user_id ) );
+	$cachekey	 = json_encode( array( 'rcl_get_time_user_action', ( int ) $user_id ) );
 	$cache		 = wp_cache_get( $cachekey );
 	if ( $cache )
 		return $cache;
 
-	$action = $wpdb->get_var( $wpdb->prepare( "SELECT time_action FROM " . RCL_PREF . "user_action WHERE user='%d'", $user_id ) );
+	$action = RQ::tbl( new Rcl_User_Action() )->select( ['time_action' ] )->where( ['user' => $user_id ] )->get_var();
 
-	wp_cache_add( $cachekey, $action, 'default', $expire );
+	if ( ! $action ) {
+		$action = '0000-00-00 00:00:00';
+	}
+
+	wp_cache_add( $cachekey, $action, 'default', rcl_get_option( 'timeout', 10 ) * 60 );
 
 	return $action;
 }
@@ -445,12 +568,15 @@ add_filter( 'the_content', 'rcl_message_post_moderation' );
 function rcl_message_post_moderation( $content ) {
 	global $post;
 
+	if ( ! isset( $post ) || ! $post )
+		return $content;
+
 	if ( $post->post_status == 'pending' ) {
-		$content = '<h3 class="pending-message">' . __( 'Publication pending approval!', 'wp-recall' ) . '</h3>' . $content;
+		$content = rcl_get_notice( ['text' => __( 'Publication pending approval!', 'wp-recall' ), 'type' => 'error' ] ) . $content;
 	}
 
 	if ( $post->post_status == 'draft' ) {
-		$content = '<h3 class="pending-message">' . __( 'Draft of a post', 'wp-recall' ) . '</h3>' . $content;
+		$content = rcl_get_notice( ['text' => __( 'Draft of a post!', 'wp-recall' ), 'type' => 'error' ] ) . $content;
 	}
 
 	return $content;
@@ -513,13 +639,18 @@ function rcl_add_block_black_list_button() {
 }
 
 function rcl_user_black_list_button( $office_id ) {
-	global $user_ID, $wpdb;
+	global $user_ID;
 
 	$user_block = get_user_meta( $user_ID, 'rcl_black_list:' . $office_id );
 
 	$title = ($user_block) ? __( 'Unblock', 'wp-recall' ) : __( 'Blacklist', 'wp-recall' );
 
-	$button = rcl_get_button( $title, '#', array( 'class' => 'rcl-manage-blacklist', 'icon' => 'fa-bug', 'attr' => 'onclick="rcl_manage_user_black_list(this,' . $office_id . ');return false;"' ) );
+	$button = rcl_get_button( [
+		'label'		 => $title,
+		'class'		 => 'rcl-manage-blacklist',
+		'icon'		 => 'fa-bug',
+		'onclick'	 => 'rcl_manage_user_black_list(this,' . $office_id . ',"' . __( 'Are you sure?', 'wp-recall' ) . '");return false;'
+		] );
 
 	return $button;
 }
@@ -538,7 +669,7 @@ function rcl_check_user_blocked( $rcl_tabs ) {
 }
 
 function rcl_add_user_blocked_notice() {
-	echo '<div class="notify-lk"><div class="warning">' . __( 'The user has restricted access to their page', 'wp-recall' ) . '</div></div>';
+	echo rcl_get_notice( ['text' => __( 'The user has restricted access to their page', 'wp-recall' ), 'type' => 'error' ] );
 }
 
 add_action( 'wp', 'rcl_post_bar_setup', 10 );
@@ -548,7 +679,12 @@ function rcl_post_bar_setup() {
 
 function rcl_post_bar_add_item( $id_item, $args ) {
 	global $rcl_post_bar;
+
+	if ( isset( $args['url'] ) )
+		$args['href'] = $args['url'];
+
 	$rcl_post_bar['items'][$id_item] = $args;
+
 	return true;
 }
 
@@ -559,67 +695,27 @@ function rcl_post_bar( $content ) {
 	if ( doing_filter( 'get_the_excerpt' ) || ! is_single() || is_front_page() )
 		return $content;
 
-	if ( ! isset( $rcl_post_bar['items'] ) || ! $rcl_post_bar['items'] )
+	$rcl_bar_items = apply_filters( 'rcl_post_bar_items', $rcl_post_bar['items'] );
+
+	if ( ! isset( $rcl_bar_items ) || ! $rcl_bar_items )
 		return $content;
 
-	if ( is_array( $rcl_post_bar['items'] ) ) {
 
-		$rcl_bar_items = apply_filters( 'rcl_post_bar_items', $rcl_post_bar['items'] );
+	$bar = '<div id="rcl-post-bar">';
 
-		if ( ! $rcl_bar_items )
-			return $content;
+	foreach ( $rcl_bar_items as $id_item => $item ) {
 
-		$bar = '<div id="rcl-post-bar">';
+		$bar .= '<div id="bar-item-' . $id_item . '" class="post-bar-item">';
 
-		foreach ( $rcl_bar_items as $id_item => $item ) {
-
-			$class				 = (isset( $item['class'] )) ? $item['class'] : '';
-			$link				 = (isset( $item['url'] )) ? $item['url'] : '#';
-			$attrs['title']		 = (isset( $item['title'] )) ? $item['title'] : $item['label'];
-			$attrs['onclick']	 = (isset( $item['onclick'] )) ? $item['onclick'] : false;
-			$datas				 = array();
-			$attributs			 = array();
-
-			if ( isset( $item['data'] ) ) {
-
-				foreach ( $item['data'] as $k => $value ) {
-					if ( ! $value )
-						continue;
-					$datas[] = 'data-' . $k . '="' . $value . '"';
-				}
-			}
-
-			foreach ( $attrs as $attr => $value ) {
-				if ( ! $value )
-					continue;
-				$attributs[] = $attr . '="' . $value . '"';
-			}
-
-			$bar .= '<div id="bar-item-' . $id_item . '" class="post-bar-item ' . $class . '">';
-
-			$bar .= '<a href="' . $link . '" class="recall-button" ' . implode( ' ', $attributs ) . ' ' . implode( ' ', $datas ) . '>';
-
-			if ( isset( $item['icon'] ) ):
-				$bar .= '<i class="rcli ' . $item['icon'] . '" aria-hidden="true"></i>';
-			endif;
-
-			if ( isset( $item['label'] ) ):
-				$bar .= '<span class="item-label">' . $item['label'] . '</span>';
-			endif;
-
-			if ( isset( $item['counter'] ) ):
-				$bar .= '<span class="item-counter">' . $item['counter'] . '</span>';
-			endif;
-
-			$bar .= '</a>';
-
-			$bar .= '</div>';
-		}
+		$bar .= rcl_get_button( $item );
 
 		$bar .= '</div>';
-
-		$content = $bar . $content;
 	}
+
+	$bar .= '</div>';
+
+	$content = $bar . $content;
+
 
 	return $content;
 }

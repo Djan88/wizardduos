@@ -52,6 +52,13 @@ function pfm_getSelectedText() {
 
 function pfm_ajax_action( object, e ) {
 
+	var form = jQuery( e ).parents( 'form' );
+
+	if ( form ) {
+		if ( !rcl_check_form( form ) )
+			return false;
+	}
+
 	if ( object['confirm'] ) {
 		if ( !confirm( object['confirm'] ) )
 			return false;
@@ -87,13 +94,13 @@ function pfm_ajax_action( object, e ) {
 
 		if ( typeof tinyMCE != 'undefined' ) {
 
-			var formAction = form.find( 'input[name="pfm-data[action]"]' ).val();
+			var formAction = form.find( 'input[name="pfm-action"]' ).val();
 
 			var iframe = jQuery( "#editor-action_" + formAction + "_ifr" ).contents().find( "#tinymce" ).html();
 
 			if ( iframe ) {
 				tinyMCE.triggerSave();
-				form.find( 'textarea[name="pfm-data[post_content]"]' ).html( iframe );
+				form.find( 'textarea[name="post_content"]' ).html( iframe );
 			}
 
 		}
@@ -161,7 +168,7 @@ function pfm_ajax_action( object, e ) {
 
 							jQuery( '#prime-forum .prime-posts .new-post' ).removeClass( 'new-post' );
 							jQuery( '#editor-action_post_create' ).val( '' );
-							jQuery( '#prime-topic-form-box input[name="pfm-data[form_load]"]' ).val( data['form_load'] );
+							jQuery( '#prime-topic-form-box input[name="form_load"]' ).val( data['form_load'] );
 
 							rcl_do_action( 'pfm_new_post' );
 
@@ -272,7 +279,7 @@ function pfm_topic_beat_success( result ) {
 
 	PFM.last_beat = result.last_beat;
 
-	jQuery( '#prime-topic-form-box input[name="pfm-data[form_load]"]' ).val( result.last_beat );
+	jQuery( '#prime-topic-form-box input[name="form_load"]' ).val( result.last_beat );
 
 	jQuery( '#prime-forum .prime-visitors .visitors-list' ).html( result.visitors );
 

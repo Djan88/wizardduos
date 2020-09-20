@@ -393,7 +393,7 @@ if ( ! is_admin() ):
 endif;
 function rcl_post_content_rating( $content ) {
 	global $post;
-	if ( doing_filter( 'get_the_excerpt' ) || (is_front_page() && is_singular()) )
+	if ( ! isset( $post ) || doing_filter( 'get_the_excerpt' ) || (is_front_page() && is_singular()) )
 		return $content;
 	$content .= rcl_get_html_post_rating( $post->ID, $post->post_type );
 	return $content;
@@ -498,11 +498,12 @@ function rcl_edit_rating_post() {
 
 	do_action( 'rcl_pre_edit_rating_post', $args );
 
-	if ( $rcl_options['rating_' . $args['rating_status'] . '_limit_' . $args['rating_type']] ) {
+	$rslrt = isset( $rcl_options['rating_' . $args['rating_status'] . '_limit_' . $args['rating_type']] ) ? $rcl_options['rating_' . $args['rating_status'] . '_limit_' . $args['rating_type']] : false;
+
+	if ( $rslrt ) {
 		$timelimit	 = ($rcl_options['rating_' . $args['rating_status'] . '_time_' . $args['rating_type']]) ? $rcl_options['rating_' . $args['rating_status'] . '_time_' . $args['rating_type']] : 3600;
 		$votes		 = rcl_count_votes_time( $args, $timelimit );
-		if ( $votes >= $rcl_options['rating_' . $args['rating_status'] . '_limit_' . $args['rating_type']] ) {
-
+		if ( $votes >= $rslrt ) {
 			wp_send_json( array( 'error' => sprintf( __( 'exceeded the limit of votes for the period - %d seconds', 'wp-recall' ), $timelimit ) ) );
 		}
 	}

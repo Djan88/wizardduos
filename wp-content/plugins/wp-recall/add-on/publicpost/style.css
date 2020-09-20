@@ -187,18 +187,7 @@
     padding-bottom: 0;
     text-align: right;
 }
-.rcl-public-box .public-form-button {
-    display: inline-block;
-    font-size: 14px;
-    line-height: normal;
-    margin: 0 0 10px;
-    padding: 8px 12px;
-    width: auto;
-}
 .rcl-public-box .public-form-button:not(:last-child) {
-    margin-right: 10px;
-}
-.rcl-public-box .public-form-button > i {
     margin-right: 10px;
 }
 .rcl-public-form .category-list .child-list-category {
@@ -334,8 +323,7 @@ h3.pending-message {
     margin: 5px 10px;
 }
 #rcl-delete-post .reason-delete {
-    margin: 0 0 8px 10px;
-    padding: 7px;
+
 }
 #rcl-delete-post textarea {
     background-color: #fff;

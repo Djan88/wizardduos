@@ -19,7 +19,7 @@ class Rcl_Cache {
 		if ( ! $this->only_guest )
 			$this->only_guest = rcl_get_option( 'cache_output' );
 
-		$this->is_cache		 = ($this->inc_cache && ( ! $this->only_guest || $this->only_guest && ! $user_ID)) ? 1 : 0;
+		$this->is_cache		 = $this->inc_cache && ( ! $this->only_guest || $this->only_guest && ! $user_ID) ? 1 : 0;
 		$this->time_cache	 = rcl_get_option( 'cache_time', 3600 );
 
 		if ( $timecache )

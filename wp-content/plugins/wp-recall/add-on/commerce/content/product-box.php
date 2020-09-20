@@ -9,35 +9,17 @@ function rcl_add_product_box( $content ) {
 
 	$content = apply_filters( 'rcl_product_content', $content );
 
-	$productCart = (isset( $rmag_options['cart_button_single_page'] )) ? $rmag_options['cart_button_single_page'] : array( 'top', 'bottom' );
+	if ( doing_filter( 'the_content' ) ) {
 
-	$productBox = '<div id="rcl-product-box">';
+		$productCart = (isset( $rmag_options['cart_button_single_page'] )) ? $rmag_options['cart_button_single_page'] : array( 'top', 'bottom' );
 
-	if ( get_post_meta( $post->ID, 'recall_slider', 1 ) ) {
-
-		$productBox .= '<div class="product-gallery">';
-
-		$productBox .= rcl_get_product_gallery( $post->ID );
-
-		$productBox .= '</div>';
+		if ( ! in_array( 'top', $productCart ) )
+			return $content;
 	}
 
-	if ( doing_filter( 'the_content' ) && $productCart && in_array( 'top', $productCart ) ) {
+	$content = rcl_get_product_box( $post->ID ) . $content;
 
-		$cartBox = new Rcl_Cart_Button_Form( array(
-			'product_id' => $post->ID
-			) );
-
-		$productBox .= '<div class="product-metabox">';
-
-		$productBox .= $cartBox->cart_form();
-
-		$productBox .= '</div>';
-	}
-
-	$productBox .= '</div>';
-
-	return $productBox . $content;
+	return $content;
 }
 
 function rcl_get_product_box( $product_id ) {
@@ -46,9 +28,12 @@ function rcl_get_product_box( $product_id ) {
 		'product_id' => $product_id
 		) );
 
+	$oldSlider	 = get_post_meta( $product_id, 'recall_slider', 1 );
+	$gallery	 = get_post_meta( $product_id, 'rcl_post_gallery', 1 );
+
 	$content = '<div id="rcl-product-box">';
 
-	if ( get_post_meta( $product_id, 'recall_slider', 1 ) ) {
+	if ( $gallery || $oldSlider ) {
 
 		$content .= '<div class="product-gallery">';
 

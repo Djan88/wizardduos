@@ -69,7 +69,7 @@ function rcl_get_chat_page() {
 
 rcl_ajax_action( 'rcl_chat_add_message', false );
 function rcl_chat_add_message() {
-	global $user_ID;
+	global $user_ID, $rcl_options;
 
 	rcl_verify_ajax_nonce();
 
@@ -79,6 +79,32 @@ function rcl_chat_add_message() {
 
 	if ( ! rcl_get_chat_by_room( $chat_room ) )
 		return false;
+
+	$antispam = isset( $rcl_options['chat']['antispam'] ) ? $rcl_options['chat']['antispam'] : 5;
+
+	if ( $antispam = apply_filters( 'rcl_chat_antispam_option', $antispam ) ) {
+
+		$query = new Rcl_Chat_Messages_Query();
+
+		$cntLastMess = $query->count( [
+			'user_id'				 => $user_ID,
+			'private_key__not_in'	 => [0 ],
+			'message_status__not_in' => [1 ],
+			'date_query'			 => [
+				[
+					'column'	 => 'message_time',
+					'compare'	 => '=',
+					'last'		 => '24 HOUR'
+				]
+			],
+			'groupby'				 => 'private_key'
+			] );
+
+		if ( $cntLastMess > $antispam )
+			wp_send_json( [
+				'error' => __( 'Your activity has sings of spam!', 'wp-recall' )
+			] );
+	}
 
 	$attach = (isset( $POST['attachment'] )) ? $POST['attachment'] : false;
 
@@ -101,10 +127,13 @@ function rcl_chat_add_message() {
 
 	$result = $chat->add_message( $POST['message'], $attach );
 
-	if ( $result->errors ) {
+	if ( isset( $result->errors ) && $result->errors ) {
 		$res['errors'] = $result->errors;
 		wp_send_json( $res );
 	}
+
+	if ( $attach )
+		rcl_delete_temp_media( $attach );
 
 	if ( isset( $result['errors'] ) ) {
 		wp_send_json( $result );
@@ -217,62 +246,6 @@ function rcl_chat_ajax_delete_message() {
 	}
 
 	$result['remove'] = true;
-
-	wp_send_json( $result );
-}
-
-rcl_ajax_action( 'rcl_chat_upload', false );
-function rcl_chat_upload() {
-	global $rcl_options;
-
-	rcl_verify_ajax_nonce();
-
-	#допустимое расширение
-	$valid_types = (isset( $rcl_options['chat']['file_types'] ) && $rcl_options['chat']['file_types']) ? $rcl_options['chat']['file_types'] : 'jpeg, jpg, png, zip, mp3';
-
-	$valid_types = array_map( 'trim', explode( ',', $valid_types ) );
-
-	$timestamp = current_time( 'timestamp' );
-
-	$file = $_FILES['chat-upload'];
-
-	$filetype = wp_check_filetype_and_ext( $file['tmp_name'], $file['name'] );
-
-	$type = $filetype['ext'];
-
-	if ( ! in_array( $type, $valid_types ) ) {
-		wp_send_json( array( 'error' => __( 'Forbidden file extension. Allowed:', 'wp-recall' ) . ' ' . implode( ', ', $valid_types ) ) );
-	}
-
-	if ( $upload = wp_handle_upload( $file, array( 'test_form' => FALSE ) ) ) {
-
-		require_once(ABSPATH . "wp-admin" . '/includes/image.php');
-		require_once(ABSPATH . "wp-admin" . '/includes/file.php');
-		require_once(ABSPATH . "wp-admin" . '/includes/media.php');
-
-		$attachment = array(
-			'post_mime_type' => $filetype['type'],
-			'post_title'	 => preg_replace( '/\.[^.]+$/', '', basename( $upload['file'] ) ),
-			'post_content'	 => '',
-			'post_excerpt'	 => 'rcl_chat_attachment:unattached',
-			'guid'			 => $upload['url'],
-			'post_parent'	 => 0,
-			'post_content'	 => '',
-			'post_status'	 => 'inherit'
-		);
-
-		$attach_id	 = wp_insert_attachment( $attachment, $upload['file'] );
-		$attach_data = wp_generate_attachment_metadata( $attach_id, $upload['file'] );
-		wp_update_attachment_metadata( $attach_id, $attach_data );
-
-		$result['success']		 = true;
-		$result['attachment_id'] = $attach_id;
-		$result['input_html']	 = '<input type="hidden" name="chat[attachment]" value="' . $attach_id . '">';
-		$result['icon_html']	 = wp_get_attachment_image( $attach_id, array( 100, 100 ), true );
-	} else {
-
-		$result['error'] = true;
-	}
 
 	wp_send_json( $result );
 }

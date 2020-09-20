@@ -68,6 +68,19 @@ function rcl_insert_order( $args, $products ) {
 		rcl_insert_order_item( $order_id, $product );
 	}
 
+	if ( $order_details = maybe_unserialize( $args['order_details'] ) ) {
+		foreach ( $order_details as $field ) {
+			if ( $field['type'] == 'uploader' ) {
+				foreach ( $field['value'] as $val ) {
+					rcl_delete_temp_media( $val );
+				}
+			}
+			if ( $field['type'] == 'file' ) {
+				rcl_delete_temp_media( $field['value'] );
+			}
+		}
+	}
+
 	do_action( 'rcl_insert_order', $order_id, $products );
 
 	return $order_id;
@@ -139,11 +152,7 @@ function rcl_get_orders( $args = array() ) {
 			$args['fields'][] = 'order_id';
 	}
 
-	$ordersQuery = new Rcl_Orders_Query();
-
-	$args['unserialize'] = 'order_details';
-
-	$orders = $ordersQuery->get_results( $args );
+	$orders = RQ::tbl( new Rcl_Orders_Query() )->parse( $args )->get_results();
 
 	if ( ! $orders )
 		return array();
@@ -157,9 +166,7 @@ function rcl_get_orders( $args = array() ) {
 	$args['order_id__in']	 = array_unique( $args['order_id__in'] );
 	$args['number']			 = -1; //снимаем ограничение выборки товаров
 
-	$productsQuery = new Rcl_Order_Items_Query();
-
-	$products = $productsQuery->get_results( $args );
+	$products = RQ::tbl( new Rcl_Order_Items_Query() )->parse( $args )->get_results();
 
 	$Orders = array();
 	foreach ( $orders as $order ) {
@@ -189,8 +196,7 @@ function rcl_get_orders( $args = array() ) {
 }
 
 function rcl_count_orders( $args = false ) {
-	$ordersQuery = new Rcl_Orders_Query();
-	return $ordersQuery->count( $args );
+	return RQ::tbl( new Rcl_Orders_Query() )->parse( $args )->get_count();
 }
 
 function rcl_get_order( $order_id ) {

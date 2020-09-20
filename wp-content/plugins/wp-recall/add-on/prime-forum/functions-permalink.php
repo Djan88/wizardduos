@@ -155,23 +155,17 @@ function pfm_get_topic_permalink( $topic_id, $args = false ) {
 
 		if ( ! $topic_slug && ! $forum_slug ) {
 
-			$TopicQuery	 = new PrimeTopics();
-			$ForumQuery	 = new PrimeForums();
+			$slugs = RQ::tbl( new PrimeTopics() )
+					->select( ['topic_slug' ] )
+					->where( ['topic_id' => $topic_id ] )
+					->join( 'forum_id', RQ::tbl( new PrimeForums() )
+						->select( ['forum_slug' ] )
+					)->get_results();
 
-			$slugs = $TopicQuery->get_results( array(
-				'topic_id'	 => $topic_id,
-				'fields'	 => array( 'topic_slug' ),
-				'join_query' => array(
-					array(
-						'table'			 => $ForumQuery->query['table'],
-						'on_forum_id'	 => 'forum_id',
-						'fields'		 => array( 'forum_slug' )
-					)
-				)
-				) );
-
-			$topic_slug	 = $slugs[0]->topic_slug;
-			$forum_slug	 = $slugs[0]->forum_slug;
+			if ( $slugs && isset( $slugs[0] ) ) {
+				$topic_slug	 = $slugs[0]->topic_slug;
+				$forum_slug	 = $slugs[0]->forum_slug;
+			}
 		} else if ( ! $topic_slug ) {
 			$topic_slug = pfm_get_topic_field( $topic_id, 'topic_slug' );
 		} else if ( ! $forum_slug ) {
@@ -191,19 +185,16 @@ function pfm_get_topic_permalink( $topic_id, $args = false ) {
 			$forum_id = $args['forum_id'];
 		} else {
 
-			$TopicQuery = new PrimeTopics();
-
-			$forum_id = $TopicQuery->get_var( array(
-				'topic_id'	 => $topic_id,
-				'fields'	 => array( 'forum_id' )
-				) );
+			$forum_id = RQ::tbl( new PrimeTopics() )->select( ['forum_id' ] )->where( array(
+					'topic_id' => $topic_id
+				) )->get_var();
 		}
 
-		$url = home_url( add_query_arg( array(
+		$url = add_query_arg( array(
 			'pfm-forum'	 => $forum_id,
 			'pfm-topic'	 => $topic_id,
 			'pfm-page'	 => false
-			) ) );
+			), pfm_get_home_url() );
 	}
 
 	wp_cache_add( $cachekey, $url );
@@ -231,43 +222,23 @@ function pfm_get_post_page_number( $post_id, $args = false ) {
 
 	if ( ! $post_count && ! $post_index ) {
 
-		$TopicQuery = new PrimeTopics();
-
-		$data = $PostsQuery->get_results( array(
-			'post_id'	 => $post_id,
-			'fields'	 => array( 'post_index' ),
-			'join_query' => array(
-				array(
-					'table'			 => $TopicQuery->query['table'],
-					'on_topic_id'	 => 'topic_id',
-					'fields'		 => array( 'post_count' )
-				)
-			)
-			) );
+		$data = $PostsQuery->select( ['post_index' ] )
+			->where( ['post_id' => $post_id ] )
+			->join( 'topic_id', RQ::tbl( new PrimeTopics() )->select( ['post_count' ] ) )
+			->get_results();
 
 		$post_count	 = $data[0]->post_count;
 		$post_index	 = $data[0]->post_index;
 	} else if ( ! $post_count ) {
 
-		$TopicQuery = new PrimeTopics();
-
-		$post_count = $PostsQuery->get_var( array(
-			'post_id'	 => $post_id,
-			'fields'	 => false,
-			'join_query' => array(
-				array(
-					'table'			 => $TopicQuery->query['table'],
-					'on_topic_id'	 => 'topic_id',
-					'fields'		 => array( 'post_count' )
-				)
-			)
-			) );
+		$post_count = $PostsQuery->select( false )
+			->where( ['post_id' => $post_id ] )
+			->join( 'topic_id', RQ::tbl( new PrimeTopics() )->select( ['post_count' ] ) )
+			->get_var();
 	} else {
 
-		$post_index = $PostsQuery->get_var( array(
-			'post_id'	 => $post_id,
-			'fields'	 => array( 'post_index' )
-			) );
+		$post_index = $PostsQuery->select( ['post_index' ] )
+				->where( ['post_id' => $post_id ] )->get_var();
 	}
 
 	$lastPage = ceil( $post_count / $PostsQuery->number );

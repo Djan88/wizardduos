@@ -167,10 +167,9 @@ function rcl_get_tab_content( $tab_id, $master_id, $subtab_id = '' ) {
 //приводим структуру вкладки к окончательному виду
 add_action( 'wp_loaded', 'rcl_setup_tabs', 10 );
 function rcl_setup_tabs() {
+	global $rcl_tabs;
 
 	do_action( 'rcl_setup_tabs' );
-
-	global $rcl_tabs;
 
 	if ( $rcl_tabs ) {
 
@@ -179,14 +178,20 @@ function rcl_setup_tabs() {
 			if ( ! isset( $rcl_tab['icon'] ) )
 				$rcl_tab['icon'] = 'fa-cog';
 
-			if ( ! isset( $rcl_tab['content'][0]['id'] ) )
-				$rcl_tabs[$k]['content'][0]['id'] = $rcl_tab['id'];
+			if ( isset( $rcl_tab['content'] ) && $rcl_tab['content'] ) {
+				foreach ( $rcl_tab['content'] as $s => $subtab ) {
+					if ( ! isset( $rcl_tab['content'][$s]['id'] ) )
+						$rcl_tabs[$k]['content'][$s]['id'] = $rcl_tab['id'];
 
-			if ( ! isset( $rcl_tab['content'][0]['name'] ) )
-				$rcl_tabs[$k]['content'][0]['name'] = $rcl_tab['name'];
+					if ( ! isset( $rcl_tab['content'][$s]['name'] ) )
+						$rcl_tabs[$k]['content'][$s]['name'] = $rcl_tab['name'];
 
-			if ( ! isset( $rcl_tab['content'][0]['icon'] ) )
-				$rcl_tabs[$k]['content'][0]['icon'] = $rcl_tab['icon'];
+					if ( ! isset( $rcl_tab['content'][$s]['icon'] ) )
+						$rcl_tabs[$k]['content'][$s]['icon'] = $rcl_tab['icon'];
+
+					break;
+				}
+			}
 		}
 	}
 
@@ -448,19 +453,6 @@ function rcl_cache_add( $string, $content, $force = false ) {
 	return false;
 }
 
-//кроп изображений
-function rcl_crop( $filesource, $width, $height, $file ) {
-
-	$image = wp_get_image_editor( $filesource );
-
-	if ( ! is_wp_error( $image ) ) {
-		$image->resize( $width, $height, true );
-		$image->save( $file );
-	}
-
-	return $image;
-}
-
 if ( ! function_exists( 'get_called_class' ) ) :
 	function get_called_class() {
 		$arr		 = array();
@@ -615,12 +607,16 @@ function rcl_avatar_data_replacement( $args, $id_or_email ) {
 		if ( ! $avatar_data )
 			$avatar_data = get_user_meta( $user_id, 'rcl_avatar', 1 );
 
+		if ( ! $avatar_data ) {
+			$avatar_data = rcl_get_option( 'default_avatar', false );
+		}
+
 		if ( $avatar_data ) {
 
 			$url = false;
 
 			if ( is_numeric( $avatar_data ) ) {
-				$image_attributes	 = wp_get_attachment_image_src( $avatar_data );
+				$image_attributes	 = wp_get_attachment_image_src( $avatar_data, array( $size, $size ) );
 				if ( $image_attributes )
 					$url				 = $image_attributes[0];
 			}else if ( is_string( $avatar_data ) ) {
@@ -933,19 +929,27 @@ function rcl_update_timeaction_user() {
 	do_action( 'rcl_update_timeaction_user' );
 }
 
-function rcl_get_button( $ancor, $url, $args = false ) {
-	$button = '<a href="' . $url . '" ';
-	if ( isset( $args['attr'] ) && $args['attr'] )
-		$button .= $args['attr'] . ' ';
-	if ( isset( $args['id'] ) && $args['id'] )
-		$button .= 'id="' . $args['id'] . '" ';
+function rcl_get_button( $args, $depr_url = false, $depr_args = false ) {
+
+	if ( is_array( $args ) ) {
+		$bttn = new Rcl_Button( $args );
+		return $bttn->get_button();
+	}
+
+	_deprecated_argument( __FUNCTION__, '16.21.0' );
+
+	$button = '<a href="' . $depr_url . '" ';
+	if ( isset( $depr_args['attr'] ) && $depr_args['attr'] )
+		$button .= $depr_args['attr'] . ' ';
+	if ( isset( $depr_args['id'] ) && $depr_args['id'] )
+		$button .= 'id="' . $depr_args['id'] . '" ';
 	$button .= 'class="recall-button ';
-	if ( isset( $args['class'] ) && $args['class'] )
-		$button .= $args['class'];
+	if ( isset( $depr_args['class'] ) && $depr_args['class'] )
+		$button .= $depr_args['class'];
 	$button .= '">';
-	if ( isset( $args['icon'] ) && $args['icon'] )
-		$button .= '<i class="rcli ' . $args['icon'] . '"></i>';
-	$button .= '<span>' . $ancor . '</span>';
+	if ( isset( $depr_args['icon'] ) && $depr_args['icon'] )
+		$button .= '<i class="rcli ' . $depr_args['icon'] . '"></i>';
+	$button .= '<span>' . $args . '</span>';
 	$button .= '</a>';
 	return $button;
 }
@@ -999,6 +1003,8 @@ function rcl_template_support( $support ) {
 
 			break;
 		case 'cover-uploader':
+
+			add_filter( 'rcl_options', 'rcl_add_cover_options', 10 );
 
 			if ( rcl_get_option( 'cover_weight', 1024 ) > 0 )
 				include_once 'functions/supports/uploader-cover.php';
@@ -1061,9 +1067,6 @@ function rcl_update_profile_fields( $user_id, $profileFields = false ) {
 
 		foreach ( $profileFields as $field ) {
 
-			if ( isset( $field['field_select'] ) )
-				$field['values'] = $field['field_select'];
-
 			$field = apply_filters( 'rcl_pre_update_profile_field', $field, $user_id );
 
 			if ( ! $field || ! $field['slug'] )
@@ -1072,6 +1075,16 @@ function rcl_update_profile_fields( $user_id, $profileFields = false ) {
 			$slug = $field['slug'];
 
 			$value = (isset( $_POST[$slug] )) ? $_POST[$slug] : false;
+
+			if ( $field['type'] == 'file' ) {
+
+				$attach_id = get_user_meta( $user_id, $slug, 1 );
+
+				if ( $attach_id && $value != $attach_id ) {
+					wp_delete_attachment( $attach_id );
+					delete_user_meta( $user_id, $slug );
+				}
+			}
 
 			if ( $field['type'] != 'editor' ) {
 
@@ -1143,13 +1156,7 @@ function rcl_update_profile_fields( $user_id, $profileFields = false ) {
 				} else {
 					delete_user_meta( $user_id, $slug );
 				}
-			} else if ( $field['type'] == 'file' ) {
-
-				$attach_id = rcl_upload_meta_file( $field, $user_id );
-
-				if ( $attach_id )
-					update_user_meta( $user_id, $slug, $attach_id );
-			}else {
+			} else {
 
 				if ( $value ) {
 
@@ -1158,6 +1165,17 @@ function rcl_update_profile_fields( $user_id, $profileFields = false ) {
 
 					if ( get_user_meta( $user_id, $slug, $value ) )
 						delete_user_meta( $user_id, $slug, $value );
+				}
+			}
+
+			if ( $value ) {
+
+				if ( $field['type'] == 'uploader' ) {
+					foreach ( $value as $val ) {
+						rcl_delete_temp_media( $val );
+					}
+				} else if ( $field['type'] == 'file' ) {
+					rcl_delete_temp_media( $value );
 				}
 			}
 		}
@@ -1187,11 +1205,6 @@ function rcl_get_profile_fields( $args = false ) {
 			if ( isset( $args['exclude'] ) && in_array( $field['slug'], $args['exclude'] ) ) {
 
 				continue;
-			}
-
-			if ( isset( $field['field_select'] ) ) {
-
-				$field['field_select'] = rcl_edit_old_option_fields( $field['field_select'] );
 			}
 
 			$profileFields[] = $field;
@@ -1311,15 +1324,7 @@ function rcl_filter_custom_tab_vars( $content ) {
 	if ( ! $matchs )
 		return $content;
 
-	$vars		 = array();
-	$replaces	 = array();
-
-	foreach ( $matchs as $var => $replace ) {
-		$vars[]		 = $var;
-		$replaces[]	 = $replace;
-	}
-
-	return str_replace( $vars, $replaces, $content );
+	return strtr( $content, $matchs );
 }
 
 add_filter( 'rcl_custom_tab_content', 'rcl_filter_custom_tab_usermetas', 5 );
@@ -1331,28 +1336,18 @@ function rcl_filter_custom_tab_usermetas( $content ) {
 	if ( ! $metas[1] )
 		return $content;
 
-	$vars		 = array();
-	$replaces	 = array();
+	$matchs = array();
 
 	foreach ( $metas[1] as $meta ) {
-
-		$vars[] = '{RCL-UM:' . $meta . '}';
-
-		$value	 = ($value	 = get_the_author_meta( $meta, $rcl_office )) ? $value : __( 'not specified', 'wp-recall' );
-
-		if ( is_array( $value ) ) {
-			$value = implode( ', ', $value );
-		}
-
-		$replaces[] = $value;
+		$value								 = get_user_meta( $rcl_office, $meta, 1 ) ? : __( 'not specified', 'wp-recall' );
+		$matchs['{RCL-UM:' . $meta . '}']	 = (is_array( $value )) ? implode( ', ', $value ) : $value;
 	}
 
-	return str_replace( $vars, $replaces, $content );
+	return strtr( $content, $matchs );
 }
 
 /* * * */
 function rcl_get_form( $args ) {
-	require_once 'classes/class-rcl-form.php';
 	$Form = new Rcl_Form( $args );
 	return $Form->get_form();
 }
@@ -1366,12 +1361,6 @@ function rcl_delete_user_action( $user_id ) {
 add_action( 'delete_user', 'rcl_delete_user_avatar', 10 );
 function rcl_delete_user_avatar( $user_id ) {
 	array_map( "unlink", glob( RCL_UPLOAD_URL . 'avatars/' . $user_id . '-*.jpg' ) );
-}
-
-function rcl_get_image_gallery( $args ) {
-	require_once 'classes/class-rcl-image-gallery.php';
-	$gallery = new Rcl_Image_Gallery( $args );
-	return $gallery->get_gallery();
 }
 
 function rcl_is_gutenberg() {
@@ -1421,4 +1410,23 @@ function rcl_get_notice( $args ) {
 	require_once 'classes/class-rcl-notice.php';
 	$Notice = new Rcl_Notice( $args );
 	return $Notice->get_notice();
+}
+
+//getting array of pages IDs and titles
+//for using in settings: ID => post_title
+function rcl_get_pages_ids() {
+	global $wpdb;
+
+	$pages = RQ::tbl( new Rcl_Query( [
+				'name'	 => $wpdb->posts,
+				'cols'	 => ['ID', 'post_type', 'post_title', 'post_status' ]
+			] ) )->select( ['ID', 'post_title' ] )
+			->where( ['post_type' => 'page', 'post_status' => 'publish' ] )
+			->limit( -1 )
+			->orderby( 'post_title', 'ASC' )
+			->get_walker()->get_index_values( 'ID', 'post_title' );
+
+	$pages = array( __( 'Not selected', 'wp-recall' ) ) + $pages;
+
+	return $pages;
 }

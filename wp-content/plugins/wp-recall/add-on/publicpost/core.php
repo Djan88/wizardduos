@@ -8,11 +8,11 @@ function rcl_get_custom_post_meta( $post_id ) {
 		$show_custom_field	 = '';
 		$cf					 = new Rcl_Custom_Fields();
 		foreach ( $get_fields as $custom_field ) {
-			$custom_field	 = apply_filters( 'rcl_custom_post_meta', $custom_field );
+			$custom_field			 = apply_filters( 'rcl_custom_post_meta', $custom_field );
 			if ( ! $custom_field || ! isset( $custom_field['slug'] ) || ! $custom_field['slug'] )
 				continue;
-			$p_meta			 = get_post_meta( $post_id, $custom_field['slug'], true );
-			$show_custom_field .= $cf->get_field_value( $custom_field, $p_meta );
+			$custom_field['value']	 = get_post_meta( $post_id, $custom_field['slug'], true );
+			$show_custom_field .= Rcl_Field::setup( $custom_field )->get_field_value( 'title' );
 		}
 
 		return $show_custom_field;
@@ -121,24 +121,22 @@ function rcl_get_custom_fields_edit_box( $post_id, $post_type = false, $form_id 
 	if ( ! $fields )
 		return false;
 
-	$CF = new Rcl_Custom_Fields();
-
 	$content = '<div class="rcl-custom-fields-box">';
 
-	foreach ( $fields as $key => $field ) {
+	foreach ( $fields as $field_id => $field ) {
 
-		if ( $key === 'options' || ! isset( $field['slug'] ) )
+		if ( ! isset( $field->slug ) )
 			continue;
 
-		$star		 = ($field['required'] == 1) ? '<span class="required">*</span> ' : '';
-		$postmeta	 = ($post_id) ? get_post_meta( $post_id, $field['slug'], 1 ) : '';
+		if ( ! isset( $field->value ) )
+			$field->value = ($post_id) ? get_post_meta( $post_id, $field->slug, 1 ) : '';
 
 		$content .= '<div class="rcl-custom-field">';
 
-		$content .= '<label>' . $CF->get_title( $field ) . $star . '</label>';
+		$content .= '<label>' . $field->get_title() . '</label>';
 
 		$content .= '<div class="field-value">';
-		$content .= $CF->get_input( $field, $postmeta );
+		$content .= $field->get_field_input();
 		$content .= '</div>';
 
 		$content .= '</div>';
@@ -157,9 +155,8 @@ function rcl_update_post_custom_fields( $post_id, $id_form = false ) {
 
 	$post = get_post( $post_id );
 
-	$formFields = new Rcl_Public_Form_Fields( array(
-		'post_type'	 => $post->post_type,
-		'form_id'	 => $id_form
+	$formFields = new Rcl_Public_Form_Fields( $post->post_type, array(
+		'form_id' => $id_form
 		) );
 
 	$fields = $formFields->get_custom_fields();
@@ -168,23 +165,28 @@ function rcl_update_post_custom_fields( $post_id, $id_form = false ) {
 
 		$POST = filter_input_array( INPUT_POST, FILTER_SANITIZE_STRING );
 
-		foreach ( $fields as $field ) {
+		foreach ( $fields as $field_id => $field ) {
 
-			$slug	 = $field['slug'];
-			$value	 = isset( $POST[$slug] ) ? $POST[$slug] : false;
+			$value = isset( $POST[$field_id] ) ? $POST[$field_id] : false;
 
-			if ( $field['type'] == 'checkbox' ) {
+			if ( $field->type == 'file' ) {
+
+				$attach_id = get_post_meta( $post_id, $field_id, 1 );
+
+				if ( $value != $attach_id ) {
+					wp_delete_attachment( $attach_id );
+				}
+			}
+
+			if ( $field->type == 'checkbox' ) {
 				$vals = array();
 
-				if ( isset( $field['field_select'] ) )
-					$field['values'] = rcl_edit_old_option_fields( $field['field_select'], $field['type'] );
-
-				$count_field = count( $field['values'] );
+				$count_field = count( $field->values );
 
 				if ( $value && is_array( $value ) ) {
 					foreach ( $value as $val ) {
 						for ( $a = 0; $a < $count_field; $a ++ ) {
-							if ( $field['values'][$a] == $val ) {
+							if ( $field->values[$a] == $val ) {
 								$vals[] = $val;
 							}
 						}
@@ -192,23 +194,29 @@ function rcl_update_post_custom_fields( $post_id, $id_form = false ) {
 				}
 
 				if ( $vals ) {
-					update_post_meta( $post_id, $slug, $vals );
+					update_post_meta( $post_id, $field_id, $vals );
 				} else {
-					delete_post_meta( $post_id, $slug );
+					delete_post_meta( $post_id, $field_id );
 				}
-			} else if ( $field['type'] == 'file' ) {
+			} else {
 
-				$attach_id = rcl_upload_meta_file( $field, $post->post_author, $post_id );
-
-				if ( $attach_id )
-					update_post_meta( $post_id, $slug, $attach_id );
-			}else {
-
-				if ( $value ) {
-					update_post_meta( $post_id, $slug, $value );
+				if ( $value || $value == 0 ) {
+					update_post_meta( $post_id, $field_id, $value );
 				} else {
-					if ( get_post_meta( $post_id, $slug, 1 ) )
-						delete_post_meta( $post_id, $slug );
+					if ( get_post_meta( $post_id, $field_id, 1 ) )
+						delete_post_meta( $post_id, $field_id );
+				}
+			}
+
+			if ( $value ) {
+
+				if ( $field->type == 'uploader' ) {
+					foreach ( $value as $val ) {
+						rcl_delete_temp_media( $val );
+					}
+					exit;
+				} else if ( $field->type == 'file' ) {
+					rcl_delete_temp_media( $value );
 				}
 			}
 		}

@@ -37,9 +37,12 @@ function pfm_the_post_classes() {
 
 	$classes = array(
 		'prime-post',
-		'prime-post-index-' . $PrimePost->post_index,
 		'author-role-' . $PrimeUser->get_user_role( $PrimePost->user_id )
 	);
+
+	if ( isset( $PrimePost->post_index ) ) {
+		$classes[] = 'prime-post-index-' . $PrimePost->post_index;
+	}
 
 	if ( $PrimeTopic && $PrimePost && $PrimeTopic->user_id == $PrimePost->user_id ) {
 		$classes[] = 'topic-author';
@@ -80,7 +83,7 @@ function pfm_get_forum_post_user_vote( $user_vote, $rating ) {
 	if ( $rating->rating_type == 'forum-post' ) {
 		global $PrimePost;
 		if ( $PrimePost->post_id == $rating->object_id ) {
-			return $PrimePost->user_vote;
+			return isset( $PrimePost->user_vote ) ? $PrimePost->user_vote : false;
 		}
 	}
 
@@ -194,9 +197,9 @@ function pfm_update_post_author_count( $post_id ) {
 	if ( ! $post )
 		return false;
 
-	$Posts = new PrimePosts();
-
-	$postCount = $Posts->count( array( 'user_id' => $post->user_id ) );
+	$postCount = RQ::tbl( new PrimePosts() )
+		->where( array( 'user_id' => $post->user_id ) )
+		->get_count();
 
 	pfm_update_author_meta( $post->user_id, 'post_count', $postCount );
 }
@@ -222,14 +225,14 @@ function pfm_send_mail_topic_author( $post_id ) {
 	if ( $actionData )
 		return false;
 
-	$title	 = 'Новый комментарий к вашей теме';
+	$title	 = __( 'New comment on your topic', 'wp-recall' );
 	$to		 = get_the_author_meta( 'user_email', $topic->user_id );
 	$mess	 = '
-    <p>Добавлен новый ответ к вашей теме "' . $topic->topic_name . '".</p>
+    <p>' . __( 'New reply added on your topic', 'wp-recall' ) . ' "' . $topic->topic_name . '".</p>
     <div style="float:left;margin-right:15px;">' . get_avatar( $post->user_id, 60 ) . '</div>
-    <p><b>ответил:</b></p>
+    <p><b>' . __( 'answered', 'wp-recall' ) . ':</b></p>
     <p>' . $post->post_content . '</p>
-    <p><a href="' . pfm_get_post_permalink( $post->post_id ) . '">Ответить на комментарий</a></p>';
+    <p><a href="' . pfm_get_post_permalink( $post->post_id ) . '">' . __( 'To answer on this comment', 'wp-recall' ) . '</a></p>';
 
 	rcl_mail( $to, $title, $mess );
 }
@@ -241,9 +244,10 @@ function pfm_delete_post_metas( $post_id ) {
 }
 
 function pfm_get_post_box( $post_id ) {
-	global $PrimeShorts, $PrimePost, $PrimeUser;
+	global $PrimeShorts, $PrimePost, $PrimeUser, $PrimeTopic;
 
-	$post = pfm_get_post( $post_id );
+	$post		 = pfm_get_post( $post_id );
+	$PrimeTopic	 = pfm_get_topic( $post->topic_id );
 
 	$PrimeUser	 = new PrimeUser();
 	$PrimeShorts = pfm_get_shortcodes();

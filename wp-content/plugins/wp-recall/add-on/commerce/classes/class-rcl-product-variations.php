@@ -70,7 +70,7 @@ class Rcl_Product_Variations {
 		if ( ! $product_id || $product_id == $this->product_id )
 			return $this->product_variations;
 
-		$productVars = apply_filters( 'rcl_product_variations', get_post_meta( $product_id, 'product-variations', 1 ), $product_id );
+		$productVars = apply_filters( 'rcl_product_variations', get_post_meta( $product_id, 'product-variations', 1 ), $product_id, $this );
 
 		if ( ! $productVars )
 			return false;

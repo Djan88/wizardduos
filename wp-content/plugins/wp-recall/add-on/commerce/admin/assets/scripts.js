@@ -7,7 +7,7 @@ jQuery( function( $ ) {
 			data: {
 				action: 'rcl_edit_admin_price_product',
 				id_post: id_post,
-				price: jQuery( '#price-product-' + id_post ).attr( 'value' )
+				price: jQuery( '#price-product-' + id_post ).val()
 			}
 		} );
 

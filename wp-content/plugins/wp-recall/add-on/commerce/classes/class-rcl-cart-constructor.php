@@ -25,7 +25,7 @@ class Rcl_Cart_Constructor {
 
 			if ( ($user_ID && $rclOrder->user_id != $user_ID) || ! $rclOrder || empty( $rclOrder ) ) {
 
-				$content .= '<p>' . __( 'Shopping cart is not available', 'wp-recall' ) . '.</p>';
+				$content .= rcl_get_notice( ['text' => __( 'Shopping cart is not available', 'wp-recall' ) ] );
 			} else {
 
 				$content .= rcl_get_include_template( 'order.php', __FILE__ );
@@ -36,7 +36,7 @@ class Rcl_Cart_Constructor {
 
 			if ( ! $Cart->products_amount ) {
 
-				$content .= '<p>' . __( 'Your shopping cart is empty', 'wp-recall' ) . '.</p>';
+				$content .= rcl_get_notice( ['text' => __( 'Your shopping cart is empty', 'wp-recall' ) ] );
 			} else {
 
 				$content .= rcl_get_include_template( 'cart.php', __FILE__, array(
@@ -60,8 +60,6 @@ class Rcl_Cart_Constructor {
 
 		if ( $this->fields ) {
 
-			$CF = new Rcl_Custom_Fields();
-
 			$content .= '<div class="cart-fields-title">' . __( 'To place an order fill out the form below', 'wp-recall' ) . '</div>';
 
 			$content .= '<table class="table-fields rcl-form">';
@@ -71,14 +69,14 @@ class Rcl_Cart_Constructor {
 				if ( ! isset( $field['value_in_key'] ) )
 					$field['value_in_key'] = true;
 
-				$required = ($field['required'] == 1) ? '<span class="required">*</span>' : '';
+				$fieldObject = Rcl_Field::setup( $field );
 
 				$content .= '<tr class="cart-field">'
 					. '<td class="field-title">'
-					. '<label>' . $CF->get_title( $field ) . ' ' . $required . '</label>'
+					. '<label>' . $fieldObject->get_title() . '</label>'
 					. '</td>'
 					. '<td class="field-input">'
-					. $CF->get_input( $field )
+					. $fieldObject->get_field_input()
 					. '</td>'
 					. '</tr>';
 			}
@@ -87,7 +85,11 @@ class Rcl_Cart_Constructor {
 		}
 
 		$content .= '<div class="submit-box">'
-			. '<a href="#" class="recall-button" onclick="rcl_cart_submit();return false;"><i class="rcli fa-shopping-bag" aria-hidden="true"></i><span>' . __( 'Checkout', 'wp-recall' ) . '</span></a>'
+			. rcl_get_button( array(
+				'label'		 => __( 'Checkout', 'wp-recall' ),
+				'onclick'	 => 'rcl_cart_submit();return false;',
+				'icon'		 => 'fa-shopping-bag'
+			) )
 			. '<input type="hidden" name="rcl-commerce-action" value="new-order">'
 			. '</div>';
 

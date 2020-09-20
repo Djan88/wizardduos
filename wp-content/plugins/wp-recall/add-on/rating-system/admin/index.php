@@ -5,7 +5,7 @@ require_once 'addon-settings.php';
 add_action( 'admin_head', 'rcl_add_admin_rating_scripts' );
 function rcl_add_admin_rating_scripts() {
 	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'rcl_admin_rating_scripts', plugins_url( 'js/scripts.js', __FILE__ ) );
+	wp_enqueue_script( 'rcl_admin_rating_scripts', plugins_url( 'js/scripts.js', __FILE__ ), false, VER_RCL );
 }
 
 add_filter( 'rcl_post_options', 'rcl_get_post_rating_options', 10, 2 );
@@ -28,7 +28,7 @@ function rcl_get_rating_column_content( $custom_column, $column_name, $user_id )
 	switch ( $column_name ) {
 		case 'user_rating_admin':
 			$custom_column = '<input type="text" class="raytinguser-' . $user_id . '" size="4" value="' . rcl_get_user_rating( $user_id ) . '">
-          <input type="button" class="recall-button edit_rayting" id="user-' . $user_id . '" value="' . __( 'OK', 'wp-recall' ) . '">';
+          <input type="button" class="button edit_rayting" id="user-' . $user_id . '" value="' . __( 'OK', 'wp-recall' ) . '">';
 			break;
 	}
 	return $custom_column;

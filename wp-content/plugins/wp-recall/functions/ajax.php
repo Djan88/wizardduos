@@ -8,6 +8,10 @@ function rcl_ajax_action( $function_name, $guest_access = false ) {
 		add_action( 'wp_ajax_nopriv_' . $function_name, $function_name );
 }
 
+function rcl_is_ajax() {
+	return (defined( 'DOING_AJAX' ) && DOING_AJAX || isset( $GLOBALS['wp']->query_vars['rest_route'] ));
+}
+
 //загрузка вкладки ЛК через AJAX
 rcl_ajax_action( 'rcl_ajax_tab', true );
 function rcl_ajax_tab() {
@@ -140,3 +144,92 @@ function rcl_get_smiles_ajax() {
 		'content' => implode( '', $content )
 	) );
 }
+
+/* new uploader */
+rcl_ajax_action( 'rcl_upload', true );
+function rcl_upload() {
+
+	rcl_verify_ajax_nonce();
+
+	$options = ( array ) json_decode( wp_unslash( $_POST['options'] ) );
+
+	if ( ! isset( $options['class_name'] ) || ! $options['class_name'] )
+		wp_send_json( [
+			'error' => __( 'Error', 'wp-recall' )
+		] );
+
+	$className = $options['class_name'];
+
+	if ( $className == 'Rcl_Uploader' )
+		$uploader	 = new $className( $options['uploader_id'], $options );
+	else
+		$uploader	 = new $className( $options );
+
+	if ( md5( json_encode( $uploader ) . rcl_get_option( 'security-key' ) ) != $_POST['sk'] )
+		wp_send_json( [
+			'error' => __( 'Error of security', 'wp-recall' )
+		] );
+
+	$files = $uploader->upload();
+
+	if ( $files ) {
+		wp_send_json( $files );
+	} else {
+		wp_send_json( array(
+			'error' => __( 'Something has been wrong', 'wp-recall' )
+		) );
+	}
+}
+
+//удаление фото приложенных к публикации через загрузчик плагина
+rcl_ajax_action( 'rcl_ajax_delete_attachment', true, true );
+function rcl_ajax_delete_attachment() {
+	global $user_ID;
+
+	rcl_verify_ajax_nonce();
+
+	$attachment_id	 = intval( $_POST['attach_id'] );
+	$post_id		 = intval( $_POST['post_id'] );
+
+	if ( ! $attachment_id ) {
+		wp_send_json( array(
+			'error' => __( 'The data has been wrong!', 'wp-recall' )
+		) );
+	}
+
+	if ( $post_id ) {
+
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			wp_send_json( array(
+				'error' => __( 'You can`t delete this file!', 'wp-recall' )
+			) );
+		}
+	} else {
+
+		$media = RQ::tbl( new Rcl_Temp_Media() )->where( ['media_id' => $attachment_id ] )->get_row();
+
+		if ( ! $user_ID ) {
+			if ( $media->session_id != $_COOKIE['PHPSESSID'] ) {
+				wp_send_json( array(
+					'error' => __( 'You can`t delete this file!', 'wp-recall' )
+				) );
+			}
+		} else {
+			if ( ! current_user_can( 'edit_post', $attachment_id ) ) {
+				wp_send_json( array(
+					'error' => __( 'You can`t delete this file!', 'wp-recall' )
+				) );
+			}
+		}
+
+		rcl_delete_temp_media( $attachment_id );
+	}
+
+	wp_delete_attachment( $attachment_id, true );
+
+	wp_send_json( array(
+		'success' => __( 'The file has been successfully deleted!', 'wp-recall' )
+	) );
+}
+
+/* new uploader end */

@@ -2,7 +2,7 @@
 
 function pfm_have_subforums() {
 	global $PrimeForum;
-	return ($PrimeForum->subforum_count) ? true : false;
+	return isset( $PrimeForum->subforum_count ) && $PrimeForum->subforum_count ? true : false;
 }
 
 function pfm_the_forum_name() {

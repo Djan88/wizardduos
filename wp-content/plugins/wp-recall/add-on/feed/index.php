@@ -6,13 +6,18 @@ require_once 'addon-core.php';
 require_once 'shortcodes.php';
 
 if ( ! is_admin() ):
-	add_action( 'rcl_enqueue_scripts', 'rcl_feed_scripts', 10 );
+	add_action( 'rcl_enqueue_scripts', 'rcl_feed_scripts_office', 10 );
 endif;
-function rcl_feed_scripts() {
-	if ( is_user_logged_in() ) {
-		rcl_enqueue_style( 'rcl-feed', rcl_addon_url( 'style.css', __FILE__ ) );
-		rcl_enqueue_script( 'rcl-feed', rcl_addon_url( 'js/scripts.js', __FILE__ ) );
+function rcl_feed_scripts_office() {
+	global $user_ID;
+	if ( $user_ID || rcl_is_office() ) {
+		rcl_feed_scripts_init();
 	}
+}
+
+function rcl_feed_scripts_init() {
+	rcl_enqueue_style( 'rcl-feed', rcl_addon_url( 'style.css', __FILE__ ) );
+	rcl_enqueue_script( 'rcl-feed', rcl_addon_url( 'js/scripts.js', __FILE__ ) );
 }
 
 add_action( 'init', 'rcl_add_block_feed_button' );
@@ -99,42 +104,45 @@ function rcl_followers_tab( $user_id ) {
 
 	$cnt = rcl_feed_count_subscribers( $user_id );
 
-	if ( $cnt ) {
-		add_filter( 'rcl_user_description', 'rcl_add_userlist_follow_button', 90 );
-		add_filter( 'rcl_users_query', 'rcl_feed_subsribers_query_userlist', 10 );
-		$content .= rcl_get_userlist( array(
-			'template'		 => 'rows',
-			'per_page'		 => 20,
-			'orderby'		 => 'user_registered',
-			'filters'		 => 1,
-			'search_form'	 => 0,
-			'data'			 => 'rating_total,description,posts_count,comments_count',
-			'add_uri'		 => array( 'tab' => 'followers' )
-			) );
-	} else
-		$content .= '<p>' . __( 'You do not have any subscribers yet', 'wp-recall' ) . '</p>';
+	if ( ! $cnt )
+		return $content . rcl_get_notice( ['text' => __( 'You do not have any subscribers yet', 'wp-recall' ) ] );
+
+	add_filter( 'rcl_user_description', 'rcl_add_userlist_follow_button', 90 );
+	add_filter( 'rcl_users_query', 'rcl_feed_subsribers_query_userlist', 10 );
+	$content .= rcl_get_userlist( array(
+		'template'		 => 'rows',
+		'per_page'		 => 20,
+		'orderby'		 => 'user_registered',
+		'filters'		 => 1,
+		'search_form'	 => 0,
+		'data'			 => 'rating_total,description,posts_count,comments_count',
+		'add_uri'		 => array( 'tab' => 'followers' )
+		) );
 
 	return $content;
 }
 
 function rcl_subscriptions_tab( $user_id ) {
-	$feeds	 = rcl_feed_count_authors( $user_id );
+
 	$content = '<h3>' . __( 'List of subscriptions', 'wp-recall' ) . '</h3>';
-	if ( $feeds ) {
-		add_filter( 'rcl_user_description', 'rcl_add_userlist_follow_button', 90 );
-		add_filter( 'rcl_users_query', 'rcl_feed_authors_query_userlist', 10 );
-		$content .= rcl_get_userlist( array(
-			'template'		 => 'rows',
-			'orderby'		 => 'user_registered',
-			'per_page'		 => 20,
-			'filters'		 => 1,
-			'search_form'	 => 0,
-			'data'			 => 'rating_total,description,posts_count,comments_count',
-			'add_uri'		 => array( 'tab' => 'subscriptions' )
-			) );
-	} else {
-		$content .= '<p>' . __( 'You do not have any subscriptions', 'wp-recall' ) . '</p>';
-	}
+
+	$feeds = rcl_feed_count_authors( $user_id );
+
+	if ( ! $feeds )
+		return $content . rcl_get_notice( ['text' => __( 'You do not have any subscriptions', 'wp-recall' ) ] );
+
+	add_filter( 'rcl_user_description', 'rcl_add_userlist_follow_button', 90 );
+	add_filter( 'rcl_users_query', 'rcl_feed_authors_query_userlist', 10 );
+	$content .= rcl_get_userlist( array(
+		'template'		 => 'rows',
+		'orderby'		 => 'user_registered',
+		'per_page'		 => 20,
+		'filters'		 => 1,
+		'search_form'	 => 0,
+		'data'			 => 'rating_total,description,posts_count,comments_count',
+		'add_uri'		 => array( 'tab' => 'subscriptions' )
+		) );
+
 	return $content;
 }
 
@@ -243,12 +251,10 @@ function rcl_feed_progress() {
 	$content = '';
 
 	if ( ! $feedsdata ) {
-		$content .= '<p align="center">' . __( 'News no more', 'wp-recall' ) . '</p>';
-
-		$result['content']	 = $content;
-		$result['code']		 = 0;
-
-		wp_send_json( $result );
+		wp_send_json( [
+			'content'	 => rcl_get_notice( ['text' => __( 'News no more', 'wp-recall' ) ] ),
+			'code'		 => 0
+		] );
 	}
 
 	foreach ( $feedsdata as $rcl_feed ) {

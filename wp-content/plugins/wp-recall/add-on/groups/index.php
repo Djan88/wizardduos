@@ -12,8 +12,6 @@ require_once 'groups-widgets.php';
 if ( ! is_admin() || defined( 'DOING_AJAX' ) )
 	require_once 'groups-public.php';
 
-require_once 'upload-avatar.php';
-
 if ( ! is_admin() ):
 	add_action( 'rcl_enqueue_scripts', 'rcl_groups_scripts', 10 );
 endif;
@@ -290,8 +288,13 @@ function rcl_tab_groups( $type_account = 'user_id' ) {
 				. '<form method="post">'
 				. '<div class="form-field">'
 				. '<input type="text" required placeholder="' . __( 'Enter the name of the new group', 'wp-recall' ) . '" name="group_name">'
-				. '<input type="submit" class="recall-button" onclick="rcl_send_form_data(\'rcl_ajax_create_group\', this);return false;" value="' . __( 'Create', 'wp-recall' ) . '">'
+				. rcl_get_button( array(
+					'onclick'	 => 'rcl_send_form_data("rcl_ajax_create_group", this);return false;',
+					'label'		 => __( 'Create', 'wp-recall' ),
+					'submit'	 => true
+				) )
 				. '</div>'
+				. wp_nonce_field( 'rcl-group-create', '_wpnonce', true, false )
 				. '</form>'
 				. '</div>';
 		}
@@ -439,7 +442,13 @@ function rcl_ajax_create_group() {
 
 	if ( ! $group_name ) {
 		wp_send_json( array(
-			'error' => __( 'Укажите наименование', 'wp-recall' )
+			'error' => __( 'Enter the name', 'wp-recall' )
+		) );
+	}
+
+	if ( is_numeric( $group_name ) ) {
+		wp_send_json( array(
+			'error' => __( 'Specify the name of new group as string', 'wp-recall' )
 		) );
 	}
 
@@ -459,24 +468,59 @@ function rcl_ajax_create_group() {
 	do_action( 'rcl_ajax_create_group', $group_id );
 
 	wp_send_json( array(
-		'success'	 => __( 'Новая группа успешно создана!', 'wp-recall' ),
+		'success'	 => __( 'New group is successfully created!', 'wp-recall' ),
 		'redirect'	 => rcl_get_group_permalink( $group_id )
 	) );
 }
 
 add_filter( 'rcl_group_thumbnail', 'rcl_group_add_thumb_buttons' );
 function rcl_group_add_thumb_buttons( $content ) {
+	global $rcl_group;
 
 	if ( ! rcl_is_group_can( 'admin' ) || rcl_get_option( 'group_avatar_weight', 1024 ) <= 0 )
 		return $content;
 
+	$uploder = new Rcl_Uploader( 'rcl_group_avatar', array(
+		'multiple'		 => 0,
+		'crop'			 => 1,
+		'filetitle'		 => 'rcl-group-avatar-' . $rcl_group->term_id,
+		'filename'		 => 'rcl-group-avatar-' . $rcl_group->term_id,
+		'group_id'		 => $rcl_group->term_id,
+		'image_sizes'	 => array(
+			array(
+				'height' => 300,
+				'width'	 => 300,
+				'crop'	 => 1
+			)
+		),
+		'resize'		 => array( 300, 300 ),
+		'min_height'	 => 300,
+		'min_width'		 => 300,
+		'max_size'		 => rcl_get_option( 'group_avatar_weight', 1024 )
+		) );
+
 	$content .= '<div id="group-avatar-upload">
             <span id="file-upload" class="rcli fa-download">
-                <input type="file" id="groupavatarupload" accept="image/*" name="uploadfile">
+                ' . $uploder->get_input() . '
             </span>
-	</div>
-	<span id="avatar-upload-progress"></span>';
+	</div>';
+
 	return $content;
+}
+
+add_action( 'rcl_upload', 'rcl_group_avatar_upload', 10, 2 );
+function rcl_group_avatar_upload( $uploads, $class ) {
+	global $user_ID;
+
+	if ( $class->uploader_id != 'rcl_group_avatar' )
+		return;
+
+	if ( $avatar_id = rcl_get_group_option( $class->group_id, 'avatar_id' ) )
+		wp_delete_attachment( $avatar_id );
+
+	rcl_update_group_option( $class->group_id, 'avatar_id', $uploads['id'] );
+
+	do_action( 'rcl_group_avatar_upload', $class->group_id, $uploads['id'] );
 }
 
 add_action( 'wp', 'rcl_group_actions' );
@@ -549,7 +593,7 @@ function rcl_get_group_options( $group_id ) {
 			'values'	 => [
 				1 => __( 'Registration allowed', 'wp-recall' )
 			],
-			'default'	 => rcl_get_group_option( $group_id, 'can_register' )
+			'default'	 => array( 1 => rcl_get_group_option( $group_id, 'can_register' ) )
 		],
 		'default_role'	 => [
 			'type'		 => 'radio',
@@ -587,9 +631,14 @@ function rcl_get_group_options( $group_id ) {
 
 	$content .= apply_filters( 'rcl_group_options', $form->get_fields_list(), $group_id );
 
-	$content .= '<div class="group-option">'
-		. '<input type="submit" class="recall-button" name="group-submit" value="' . __( 'Save settings', 'wp-recall' ) . '">'
-		. '<input type="hidden" name="group-action" value="update">'
+	$content .= '<div class="group-option">';
+	$content .= rcl_get_button( [
+		'icon'	 => 'fa-floppy-o',
+		'label'	 => __( 'Save settings', 'wp-recall' ),
+		'submit' => true
+		] );
+	$content .= '<input type="hidden" name="group-action" value="update">'
+		. '<input type="hidden" name="group-submit" value="1">'
 		. wp_nonce_field( 'group-action-' . $user_ID, '_wpnonce', true, false )
 		. '</div>'
 		. '</form>'
@@ -605,7 +654,7 @@ function rcl_get_group_requests_content( $group_id ) {
 	$content = '<h3>' . __( 'Requests for access to the group', 'wp-recall' ) . '</h3>';
 
 	if ( ! $requests ) {
-		$content .= '<p>' . __( 'No queries', 'wp-recall' ) . '</p>';
+		$content .= rcl_get_notice( ['text' => __( 'No requests', 'wp-recall' ) ] );
 		return $content;
 	}
 
@@ -619,8 +668,22 @@ function rcl_get_group_requests_content( $group_id ) {
 function rcl_add_group_access_button() {
 	global $rcl_user;
 	echo '<div class="group-request" data-user="' . $rcl_user->ID . '">';
-	echo rcl_get_button( __( 'Approve request', 'wp-recall' ), '#', array( 'icon' => 'fa-thumbs-up', 'class' => 'apply-request', 'attr' => 'data-request=1' ) );
-	echo rcl_get_button( __( 'Reject request', 'wp-recall' ), '#', array( 'icon' => 'fa-thumbs-down', 'class' => 'apply-request', 'attr' => 'data-request=0' ) );
+	echo rcl_get_button( array(
+		'label'	 => __( 'Approve request', 'wp-recall' ),
+		'icon'	 => 'fa-thumbs-up',
+		'class'	 => array( 'apply-request' ),
+		'data'	 => array(
+			'request' => 1
+		)
+	) );
+	echo rcl_get_button( array(
+		'label'	 => __( 'Reject request', 'wp-recall' ),
+		'icon'	 => 'fa-thumbs-down',
+		'class'	 => array( 'apply-request' ),
+		'data'	 => array(
+			'request' => 0
+		)
+	) );
 	echo '</div>';
 }
 
@@ -777,7 +840,9 @@ function rcl_add_feed_group_query( $query, $user_id ) {
 		$objects = $wpdb->get_col( "SELECT term_relationships.object_id "
 			. "FROM $wpdb->term_relationships AS term_relationships "
 			. "INNER JOIN $wpdb->term_taxonomy AS term_taxonomy ON term_relationships.term_taxonomy_id=term_taxonomy.term_taxonomy_id "
-			. "WHERE term_taxonomy.term_id IN (" . implode( ',', $groups ) . ")" );
+			. "INNER JOIN $wpdb->posts AS posts ON term_relationships.object_id=posts.ID "
+			. "WHERE term_taxonomy.term_id IN (" . implode( ',', $groups ) . ") "
+			. "AND posts.post_status = 'publish'" );
 
 		if ( $objects )
 			$query['where_or'][] = "(wp_posts.ID IN (" . implode( ',', $objects ) . ") AND wp_posts.post_author NOT IN (" . implode( ',', $authors_ignor ) . "))";

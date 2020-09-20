@@ -184,7 +184,7 @@ function pfm_the_last_topic() {
 function pfm_the_last_post() {
 	global $PrimeForum, $PrimeTopic, $PrimeQuery;
 
-	if ( pfm_is_home() || pfm_is_group() || $PrimeForum->parent_id && ! $PrimeTopic ) {
+	if ( pfm_is_home() || pfm_is_group() || (isset( $PrimeForum->parent_id ) && $PrimeForum->parent_id && ! $PrimeTopic) ) {
 		$lastPost = $PrimeQuery->search_forum_last_post( $PrimeForum->forum_id );
 	} else {
 		$lastPost = $PrimeQuery->search_topic_last_post( $PrimeTopic->topic_id );
@@ -199,10 +199,10 @@ function pfm_the_last_post() {
 
 	$permalink = pfm_get_post_permalink( $lastPost->post_id, array(
 		'topic_id'	 => $lastPost->topic_id,
-		'topic_slug' => $lastPost->topic_slug,
+		'topic_slug' => isset( $lastPost->topic_slug ) ? $lastPost->topic_slug : false,
 		'post_count' => $PrimeTopic ? $PrimeTopic->post_count : 0,
 		'post_index' => $lastPost->post_index,
-		'forum_id'	 => $lastPost->forum_id
+		'forum_id'	 => isset( $lastPost->forum_id ) ? $lastPost->forum_id : 0
 		) );
 
 	echo __( 'from', 'wp-recall' ) . ' ' . $name . ': <a href="' . $permalink . '">'

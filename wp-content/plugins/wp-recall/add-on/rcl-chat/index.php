@@ -167,9 +167,10 @@ function rcl_chat_tab( $office_id ) {
 		$chatdata	 = rcl_get_chat_private( $office_id );
 		$chat		 = $chatdata['content'];
 	} else {
-		$chat = '<div class="chat-notice">'
-			. '<span class="notice-error">' . __( 'Sign in to send a message to the user', 'wp-recall' ) . '</span>'
-			. '</div>';
+		$chat = rcl_get_notice( array(
+			'type'	 => 'error',
+			'text'	 => __( 'Sign in to send a message to the user', 'wp-recall' )
+			) );
 	}
 
 	return $chat;
@@ -264,7 +265,16 @@ function rcl_get_user_contacts_list( $user_id ) {
 	);
 
 	if ( ! $amount ) {
-		return '<p>' . __( 'No contacts yet. Start a chat with another user on his page', 'wp-recall' ) . '</p>';
+
+		$notice = __( 'No contacts yet. Start a chat with another user on his page', 'wp-recall' );
+
+		if ( rcl_get_option( 'users_page_rcl' ) ) {
+			$notice .= '. <a href="' . get_permalink( rcl_get_option( 'users_page_rcl' ) ) . '">' . __( 'Choose from the list of users', 'wp-recall' ) . '</a>.';
+		}
+
+		return rcl_get_notice( [
+			'text' => apply_filters( 'rcl_chat_no_contacts_notice', $notice, $user_id )
+		] );
 	}
 
 	rcl_dialog_scripts();
@@ -325,9 +335,10 @@ function rcl_get_tab_user_important( $user_id ) {
 	$amount_messages = rcl_chat_count_important_messages( $user_id );
 
 	if ( ! $amount_messages ) {
-		return '<div class="chat-notice">'
-			. '<span class="notice-error">' . __( 'No important messages yet', 'wp-recall' ) . '</span>'
-			. '</div>';
+		return rcl_get_notice( array(
+			'type'	 => 'error',
+			'text'	 => __( 'No important messages yet', 'wp-recall' )
+			) );
 	}
 
 	require_once 'class-rcl-chat.php';

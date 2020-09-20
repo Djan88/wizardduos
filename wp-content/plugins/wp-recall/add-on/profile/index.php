@@ -67,37 +67,40 @@ function rcl_show_custom_fields_profile( $master_id ) {
 
 	$get_fields = rcl_get_profile_fields();
 
-	$show_custom_field = '';
+	$content = '';
 
 	if ( $get_fields ) {
 
-		$get_fields = stripslashes_deep( $get_fields );
-
-		$cf = new Rcl_Custom_Fields();
-
-		foreach ( ( array ) $get_fields as $custom_field ) {
-			$custom_field	 = apply_filters( 'custom_field_profile', $custom_field );
-			if ( ! $custom_field )
+		foreach ( ( array ) stripslashes_deep( $get_fields ) as $field ) {
+			$field	 = apply_filters( 'custom_field_profile', $field );
+			if ( ! $field )
 				continue;
-			$slug			 = isset( $custom_field['name'] ) ? $custom_field['name'] : $custom_field['slug'];
-			if ( isset( $custom_field['req'] ) && $custom_field['req'] == 1 ) {
-				$meta = get_the_author_meta( $slug, $master_id );
-				$show_custom_field .= $cf->get_field_value( $custom_field, $meta );
+			$slug	 = isset( $field['name'] ) ? $field['name'] : $field['slug'];
+
+			if ( isset( $field['req'] ) && $field['req'] ) {
+				$field['public_value'] = $field['req'];
+			}
+
+			if ( isset( $field['public_value'] ) && $field['public_value'] == 1 ) {
+				$field['value'] = get_the_author_meta( $slug, $master_id );
+				$content .= Rcl_Field::setup( $field )->get_field_value( true );
 			}
 		}
 	}
 
-	if ( ! $show_custom_field )
+	if ( ! $content )
 		return false;
 
-	return '<div class="show-profile-fields">' . $show_custom_field . '</div>';
+	return '<div class="show-profile-fields">' . $content . '</div>';
 }
 
 if ( ! is_admin() )
 	add_action( 'wp', 'rcl_update_profile_notice' );
 function rcl_update_profile_notice() {
 	if ( isset( $_GET['updated'] ) )
-		rcl_notice_text( __( 'Your profile has been updated', 'wp-recall' ), 'success' );
+		add_action( 'rcl_area_notice', function() {
+			echo rcl_get_notice( ['type' => 'success', 'text' => __( 'Your profile has been updated', 'wp-recall' ) ] );
+		} );
 }
 
 //Обновляем профиль пользователя
@@ -120,6 +123,24 @@ function rcl_edit_profile() {
 	wp_redirect( $redirect_url );
 
 	exit;
+}
+
+add_filter( 'rcl_field_input_html', 'rcl_exchange_admins_profile_fields', 10, 2 );
+function rcl_exchange_admins_profile_fields( $input_html, $field ) {
+	global $user_ID, $user_LK;
+
+	if ( ! rcl_is_office( $user_ID ) )
+		return $input_html;
+
+	if ( isset( $field->admin ) && $field->admin && ! rcl_is_user_role( $user_ID, array( 'administrator' ) ) ) {
+		$value = get_user_meta( $user_LK, $field->slug, 1 );
+		if ( $value ) {
+			$field->set_prop( 'value', $value );
+			return $field->get_field_value();
+		}
+	}
+
+	return $input_html;
 }
 
 add_filter( 'rcl_profile_fields', 'rcl_add_office_profile_fields', 10 );
@@ -187,9 +208,7 @@ function rcl_tab_profile_content( $master_id ) {
 		) );
 
 	$content = '<h3>' . __( 'User profile', 'wp-recall' ) . ' ' . $userdata->display_name . '</h3>
-    <form name="profile" id="your-profile" action="" method="post"  enctype="multipart/form-data">';
-
-	$CF = new Rcl_Custom_Fields();
+	<form name="profile" id="your-profile" action="" method="post"  enctype="multipart/form-data">';
 
 	$profileFields = stripslashes_deep( $profileFields );
 
@@ -208,52 +227,69 @@ function rcl_tab_profile_content( $master_id ) {
 			continue;
 		}
 
-		$value = (isset( $userdata->$slug )) ? $userdata->$slug : false;
+		$fieldObject = Rcl_Field::setup( $field );
+
+		$fieldObject->set_prop( 'value', (isset( $userdata->$slug )) ? $userdata->$slug : false  );
 
 		if ( $slug == 'email' )
-			$value = get_the_author_meta( 'email', $user_ID );
+			$fieldObject->set_prop( 'value', get_the_author_meta( 'email', $user_ID ) );
 
 		if ( $field['slug'] != 'show_admin_bar_front' && ! isset( $field['value_in_key'] ) )
-			$field['value_in_key'] = true;
+			$fieldObject->set_prop( 'value_in_key', true );
 
-		$star = (isset( $field['required'] ) && $field['required'] == 1) ? ' <span class="required">*</span> ' : '';
-
-		$label = sprintf( '<label>%s%s:</label>', $CF->get_title( $field ), $star );
-
-		$Table->add_row( array( $label, $CF->get_input( $field, $value ) ), array( 'id' => array( 'profile-field-' . $slug ) ) );
+		$Table->add_row( array(
+			$fieldObject->get_title(),
+			$fieldObject->get_field_input()
+			), apply_filters( 'rcl_profile_row_attrs', array( 'id' => 'profile-field-' . $slug ), $field ) );
 	}
 
 	$content .= $Table->get_table();
 
 	foreach ( $hiddens as $field ) {
-		$content .= $CF->get_input( $field, $value = (isset( $userdata->$slug )) ? $userdata->$slug : false );
+
+		$fieldObject = Rcl_Field::setup( $field );
+
+		$fieldObject->set_prop( 'value', (isset( $userdata->$slug )) ? $userdata->$slug : false  );
+
+		$content .= $fieldObject->get_field_input();
 	}
 
 	$content .= "<script>
-                jQuery(function(){
-                    jQuery('#your-profile').find('.required-checkbox').each(function(){
-                        var name = jQuery(this).attr('name');
-                        var chekval = jQuery('#your-profile input[name=\"'+name+'\"]:checked').val();
-                        if(chekval) jQuery('#your-profile input[name=\"'+name+'\"]').attr('required',false);
-                        else jQuery('#your-profile input[name=\"'+name+'\"]').attr('required',true);
-                    });"
+				jQuery(function(){
+					jQuery('#your-profile').find('.required-checkbox').each(function(){
+						var name = jQuery(this).attr('name');
+						var chekval = jQuery('#your-profile input[name=\"'+name+'\"]:checked').val();
+						if(chekval) jQuery('#your-profile input[name=\"'+name+'\"]').attr('required',false);
+						else jQuery('#your-profile input[name=\"'+name+'\"]').attr('required',true);
+					});"
 		. "});"
 		. "</script>";
 
 	$content = apply_filters( 'profile_options_rcl', $content, $userdata );
 
 	$content .= wp_nonce_field( 'update-profile_' . $user_ID, '_wpnonce', true, false ) . '
-        <div style="text-align:right;">'
-		. '<input type="submit" id="cpsubmit" class="recall-button" value="' . __( 'Update profile', 'wp-recall' ) . '" onclick="return rcl_check_profile_form();" name="submit_user_profile" />
-        </div>
-    </form>';
+		<div style="text-align:right;">'
+		. rcl_get_button( array(
+			'label'		 => __( 'Update profile', 'wp-recall' ),
+			'id'		 => 'cpsubmit',
+			'icon'		 => 'fa-check-circle',
+			'onclick'	 => 'return rcl_check_profile_form()? rcl_submit_form(this): false;'
+		) )
+		. '<input type="hidden" value="1" name="submit_user_profile" />
+		</div>
+	</form>';
 
 	if ( rcl_get_option( 'delete_user_account' ) ) {
 		$content .= '
-        <form method="post" action="" name="delete_account" onsubmit="return confirm(\'' . __( 'Are you sure? It can’t be restaured!', 'wp-recall' ) . '\');">
-        ' . wp_nonce_field( 'delete-user-' . $user_ID, '_wpnonce', true, false ) . '
-        <input type="submit" id="delete_acc" class="recall-button"  value="' . __( 'Delete your profile', 'wp-recall' ) . '" name="rcl_delete_user_account"/>
-        </form>';
+		<form method="post" action="" name="delete_account">
+		' . wp_nonce_field( 'delete-user-' . $user_ID, '_wpnonce', true, false )
+			. rcl_get_button( array(
+				'label'		 => __( 'Delete your profile', 'wp-recall' ),
+				'id'		 => 'delete_acc',
+				'onclick'	 => 'return confirm(\'' . __( 'Are you sure? It can’t be restaured!', 'wp-recall' ) . '\')? rcl_submit_form(this): false;'
+			) )
+			. '<input type="hidden" value="1" name="rcl_delete_user_account"/>
+		</form>';
 	}
 
 	return $content;

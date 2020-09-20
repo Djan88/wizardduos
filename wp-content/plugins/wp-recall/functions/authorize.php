@@ -66,7 +66,7 @@ function rcl_login_user() {
 //принимаем данные для авторизации пользователя с формы wp-recall
 add_action( 'init', 'rcl_get_login_user_activate' );
 function rcl_get_login_user_activate() {
-	if ( isset( $_POST['submit-login'] ) ) {
+	if ( isset( $_POST['login_wpnonce'] ) ) {
 		if ( ! wp_verify_nonce( $_POST['login_wpnonce'], 'login-key-rcl' ) )
 			return false;
 		add_action( 'wp', 'rcl_login_user', 10 );

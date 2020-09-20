@@ -4,7 +4,7 @@ require_once 'addon-settings.php';
 
 add_action( 'admin_init', 'rcl_public_admin_scripts' );
 function rcl_public_admin_scripts() {
-	wp_enqueue_style( 'rcl_public_admin_style', rcl_addon_url( 'admin/assets/style.css', __FILE__ ) );
+	wp_enqueue_style( 'rcl_public_admin_style', rcl_addon_url( 'admin/assets/style.css', __FILE__ ), false, VER_RCL );
 }
 
 add_action( 'admin_menu', 'rcl_admin_page_publicform', 30 );
@@ -13,44 +13,39 @@ function rcl_admin_page_publicform() {
 }
 
 function rcl_public_form_manager() {
-	global $wpdb;
 
 	$post_type	 = (isset( $_GET['post-type'] )) ? $_GET['post-type'] : 'post';
 	$form_id	 = (isset( $_GET['form-id'] )) ? $_GET['form-id'] : 1;
 
 	$shortCode = 'public-form post_type="' . $post_type . '"';
 
-	if ( $post_type == 'post' && $form_id > 1 ) {
+	if ( $form_id > 1 ) {
 		$shortCode .= ' form_id="' . $form_id . '"';
 	}
 
-	rcl_sortable_scripts();
-
-	$formManager = new Rcl_Public_Form_Manager( array(
-		'post_type'	 => $post_type,
-		'form_id'	 => $form_id
+	$formManager = new Rcl_Public_Form_Manager( $post_type, array(
+		'form_id' => $form_id
 		) );
 
 	$content = '<h2>' . __( 'Manage publication forms', 'wp-recall' ) . '</h2>';
 
 	$content .= '<p>' . __( 'On this page you can manage the creation of publications for registered record types. Create custom fields for the form of publication of various types and manage', 'wp-recall' ) . '</p>';
 
+	$content .= '<div id="rcl-public-form-manager">';
+
 	$content .= $formManager->form_navi();
 
-	$content .= '<div class="rcl-custom-fields-navi">';
-	$content .= '<p>' . __( 'Use shortcode for publication form', 'wp-recall' ) . ' [' . $shortCode . ']</p>';
+	$content .= rcl_get_notice( ['text' => __( 'Use shortcode for publication form', 'wp-recall' ) . ' [' . $shortCode . ']' ] );
+
+	$content .= $formManager->get_manager();
+
 	$content .= '</div>';
-
-	$content .= $formManager->active_fields_box();
-
-	$content .= $formManager->inactive_fields_box();
 
 	echo $content;
 }
 
-add_action( 'dbx_post_advanced', 'custom_fields_editor_post_rcl', 1 );
-function custom_fields_editor_post_rcl() {
-	global $post;
+add_action( 'add_meta_boxes', 'custom_fields_editor_post_rcl', 1, 2 );
+function custom_fields_editor_post_rcl( $post_type, $post ) {
 	add_meta_box( 'custom_fields_editor_post', __( 'Arbitrary fields of  publication', 'wp-recall' ), 'custom_fields_list_posteditor_rcl', $post->post_type, 'normal', 'high' );
 }
 

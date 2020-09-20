@@ -76,15 +76,13 @@ function pfm_get_topic_meta_box( $topic_id ) {
 	if ( ! $fields )
 		return false;
 
-	$CF = new Rcl_Custom_Fields();
-
 	$content = '';
 
 	foreach ( $fields as $field ) {
 
-		$value = pfm_get_topic_meta( $topic_id, $field['slug'] );
+		$field['value'] = pfm_get_topic_meta( $topic_id, $field['slug'] );
 
-		$content .= $CF->get_field_value( $field, $value );
+		$content .= Rcl_Field::setup( $field )->get_field_value( true );
 	}
 
 	if ( ! $content )
@@ -130,6 +128,16 @@ function pfm_update_topic_custom_fields( $topic_id ) {
 			$slug	 = $field['slug'];
 			$value	 = isset( $POST[$slug] ) ? $POST[$slug] : false;
 
+			if ( $field['type'] == 'file' ) {
+
+				$attach_id = pfm_get_topic_meta( $topic_id, $slug, 1 );
+
+				if ( $value != $attach_id ) {
+					wp_delete_attachment( $attach_id );
+					//pfm_delete_topic_meta( $topic_id, $slug );
+				}
+			}
+
 			if ( $field['type'] == 'checkbox' ) {
 				$vals = array();
 
@@ -150,19 +158,24 @@ function pfm_update_topic_custom_fields( $topic_id ) {
 				} else {
 					pfm_delete_topic_meta( $topic_id, $slug );
 				}
-			} else if ( $field['type'] == 'file' ) {
-
-				$attach_id = rcl_upload_meta_file( $field, $topic->user_id, 0 );
-
-				if ( $attach_id )
-					pfm_update_topic_meta( $topic_id, $slug, $attach_id );
-			}else {
+			} else {
 
 				if ( $value ) {
 					pfm_update_topic_meta( $topic_id, $slug, $value );
 				} else {
 					if ( pfm_get_topic_meta( $topic_id, $slug, 1 ) )
 						pfm_delete_topic_meta( $topic_id, $slug );
+				}
+			}
+
+			if ( $value ) {
+
+				if ( $field['type'] == 'uploader' ) {
+					foreach ( $value as $val ) {
+						rcl_delete_temp_media( $val );
+					}
+				} else if ( $field['type'] == 'file' ) {
+					rcl_delete_temp_media( $value );
 				}
 			}
 		}
@@ -200,15 +213,13 @@ function pfm_add_topic_form_custom_meta( $topic_id ) {
 	if ( ! $topic )
 		return false;
 
-	if ( isset( $_REQUEST['pfm-data'] ) ) {
-
-		$pfmData = $_REQUEST['pfm-data'];
+	if ( isset( $_REQUEST['pfm-action'] ) ) {
 
 		$actions = array(
 			'topic_migrate'
 		);
 
-		if ( in_array( $pfmData['action'], $actions ) )
+		if ( in_array( $_REQUEST['pfm-action'], $actions ) )
 			return false;
 	}
 
@@ -265,9 +276,9 @@ function pfm_update_topic_author_count( $topic_id ) {
 	if ( ! $topic )
 		return false;
 
-	$Topics = new PrimeTopics();
-
-	$topicCount = $Topics->count( array( 'user_id' => $topic->user_id ) );
+	$topicCount = RQ::tbl( new PrimeTopics() )
+		->where( array( 'user_id' => $topic->user_id ) )
+		->get_count();
 
 	pfm_update_author_meta( $topic->user_id, 'topic_count', $topicCount );
 }

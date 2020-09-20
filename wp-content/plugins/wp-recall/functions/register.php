@@ -109,14 +109,14 @@ function rcl_confirm_user_registration() {
 }
 
 //принимаем данные для подтверждения регистрации
-add_action( 'init', 'rcl_confirm_user_resistration_activate' );
+add_action( 'init', 'rcl_confirm_user_resistration_activate', 10 );
 function rcl_confirm_user_resistration_activate() {
 
 	if ( ! isset( $_GET['rcl-confirmdata'] ) )
 		return false;
 
 	if ( rcl_get_option( 'confirm_register_recall' ) )
-		add_action( 'wp', 'rcl_confirm_user_registration' );
+		add_action( 'wp', 'rcl_confirm_user_registration', 10 );
 }
 
 //добавляем коды ошибок для тряски формы ВП
@@ -163,9 +163,6 @@ function rcl_get_register_user( $errors ) {
 
 				if ( $field['type'] == 'checkbox' ) {
 
-					if ( isset( $field['field_select'] ) )
-						$field['values'] = rcl_edit_old_option_fields( $field['field_select'], $field['type'] );
-
 					$count_field = count( $field['values'] );
 
 					for ( $a = 0; $a < $count_field; $a ++ ) {
@@ -176,10 +173,7 @@ function rcl_get_register_user( $errors ) {
 							break;
 						}
 					}
-				} else if ( $field['type'] == 'file' ) {
-					if ( ! isset( $_FILES[$slug] ) )
-						$required = false;
-				}else {
+				} else {
 					if ( ! $_POST[$slug] )
 						$required = false;
 				}
@@ -234,7 +228,7 @@ function rcl_get_register_user( $errors ) {
 //принимаем данные с формы регистрации
 add_action( 'wp', 'rcl_get_register_user_activate', 10 );
 function rcl_get_register_user_activate() {
-	if ( isset( $_POST['submit-register'] ) ) { //если данные пришли с формы wp-recall
+	if ( isset( $_POST['register_wpnonce'] ) ) { //если данные пришли с формы wp-recall
 		if ( ! wp_verify_nonce( $_POST['register_wpnonce'], 'register-key-rcl' ) )
 			return false;
 		$email	 = $_POST['user_email'];
@@ -442,15 +436,12 @@ function rcl_filters_regform() {
 add_filter( 'regform_fields_rcl', 'rcl_password_regform', 5 );
 function rcl_password_regform( $content ) {
 
-	$difficulty	 = rcl_get_option( 'difficulty_parole' );
-	$user_pass	 = (isset( $_REQUEST['user_pass'] )) ? $_REQUEST['user_pass'] : '';
+	$difficulty = rcl_get_option( 'difficulty_parole' );
 
 	$content .= '<div class="form-block-rcl default-field">';
-	if ( $difficulty == 1 ) {
-		$content .= '<input placeholder="' . __( 'Password', 'wp-recall' ) . '" required id="primary-pass-user" type="password" onkeyup="passwordStrength(this.value)" value="' . $user_pass . '" name="user_pass">';
-	} else {
-		$content .= '<input placeholder="' . __( 'Password', 'wp-recall' ) . '" required type="password" value="' . $user_pass . '" id="primary-pass-user" name="user_pass">';
-	}
+
+	$content .= '<input placeholder="' . __( 'Password', 'wp-recall' ) . '" required id="primary-pass-user" type="password" ' . ($difficulty == 1 ? 'onkeyup="passwordStrength(this.value)"' : '') . ' name="user_pass">';
+
 	$content .= '<i class="rcli fa-lock"></i>';
 	$content .= '<span class="required">*</span>';
 	$content .= '</div>';
@@ -475,7 +466,7 @@ function rcl_secondary_password( $fields ) {
 		return $fields;
 
 	$fields .= '<div class="form-block-rcl default-field">
-                    <input placeholder="' . __( 'Repeat the password', 'wp-recall' ) . '" required id="secondary-pass-user" type="password" value="' . (isset( $_REQUEST['user_secondary_pass'] ) ? $_REQUEST['user_secondary_pass'] : '') . '" name="user_secondary_pass">
+                    <input placeholder="' . __( 'Repeat the password', 'wp-recall' ) . '" required id="secondary-pass-user" type="password" name="user_secondary_pass">
                     <i class="rcli fa-lock"></i>
                     <span class="required">*</span>
                 <div id="notice-chek-password"></div>
@@ -521,8 +512,6 @@ function rcl_custom_fields_regform( $content ) {
 	if ( ! $regFields )
 		return $content;
 
-	$CF = new Rcl_Custom_Fields();
-
 	$hiddens = array();
 	foreach ( $regFields as $field ) {
 
@@ -533,27 +522,35 @@ function rcl_custom_fields_regform( $content ) {
 			continue;
 		}
 
-		$class	 = (isset( $field['class'] )) ? $field['class'] : '';
-		$id		 = (isset( $field['id'] )) ? 'id=' . $field['id'] : '';
-		$attr	 = (isset( $field['attr'] )) ? '' . $field['attr'] : '';
+		$class			 = (isset( $field['class'] )) ? $field['class'] : '';
+		$id				 = (isset( $field['id'] )) ? 'id=' . $field['id'] : '';
+		$attr			 = (isset( $field['attr'] )) ? '' . $field['attr'] : '';
+		$field['value']	 = isset( $_POST[$field['slug']] ) ? $_POST[$field['slug']] : false;
+
+		unset( $field['class'] );
+		unset( $field['attr'] );
+		unset( $field['id'] );
+
+		$fieldObject = Rcl_Field::setup( $field );
 
 		$content .= '<div class="form-block-rcl ' . $class . '" ' . $id . ' ' . $attr . '>';
-		$star	 = ($field['required'] == 1) ? ' <span class="required">*</span> ' : '';
-		if ( $title	 = $CF->get_title( $field ) ) {
-			$content .= '<label>' . $title . $star;
+
+		if ( $fieldObject->title ) {
+			$content .= '<label>' . $fieldObject->get_title();
 			if ( $field['type'] )
 				$content .= '<span class="colon">:</span>';
 			$content .= '</label>';
 		}
 
-		$value = (isset( $_POST[$field['slug']] )) ? $_POST[$field['slug']] : false;
+		$content .= $fieldObject->get_field_input();
 
-		$content .= $CF->get_input( $field, $value );
 		$content .= '</div>';
 	}
 
 	foreach ( $hiddens as $field ) {
-		$content .= $CF->get_input( $field, (isset( $_POST[$field['slug']] )) ? $_POST[$field['slug']] : false  );
+		$field['value']	 = isset( $_POST[$field['slug']] ) ? $_POST[$field['slug']] : false;
+		$fieldObject	 = Rcl_Field::setup( $field );
+		$content .= $fieldObject->get_field_input();
 	}
 
 	return $content;

@@ -13,34 +13,25 @@ class PrimeForumsList {
 
 	function get_forums() {
 
-		$PrimeForums = new PrimeForums();
-
-		return $PrimeForums->get_results( array(
-				'fields'	 => array(
+		return RQ::tbl( new PrimeForums() )->select( [
 					'forum_id',
 					'group_id',
 					'forum_name',
 					'parent_id'
-				),
-				'number'	 => -1,
-				'order'		 => 'ASC',
-				'orderby'	 => 'forum_name'
-			) );
+				] )->orderby( 'forum_name', 'ASC' )
+				->number( -1 )
+				->get_results();
 	}
 
 	function get_groups() {
 
-		$PrimeGroups = new PrimeGroups();
-
-		return $PrimeGroups->get_results( array(
-				'fields'	 => array(
+		return RQ::tbl( new PrimeGroups() )
+				->select( [
 					'group_id',
 					'group_name'
-				),
-				'order'		 => 'ASC',
-				'number'	 => -1,
-				'orderby'	 => 'group_seq'
-			) );
+				] )->orderby( 'group_seq', 'ASC' )
+				->limit( -1 )
+				->get_results();
 	}
 
 	function get_parent_forums( $group_id ) {
@@ -85,7 +76,7 @@ class PrimeForumsList {
 
 	function get_list() {
 
-		$content = '<select name="pfm-data[forum_id]">';
+		$content = '<select name="forum_id">';
 
 		foreach ( $this->groups as $group ) {
 

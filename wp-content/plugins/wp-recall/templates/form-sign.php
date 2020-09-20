@@ -39,8 +39,17 @@ if ( ! $typeform || $typeform == 'sign' )
             </div>
         </div>
         <div class="form-block-rcl">
-            <input type="submit" class="recall-button link-tab-form" name="submit-login" value="<?php _e( 'Entry', 'wp-recall' ); ?>">
-            <a href="#" class="link-remember-rcl link-tab-rcl "><?php _e( 'Lost your Password', 'wp-recall' ); // Забыли пароль       ?>?</a>
+			<?php
+			echo rcl_get_button( array(
+				'label'		 => __( 'Entry', 'wp-recall' ),
+				'submit'	 => true,
+				'fullwidth'	 => true,
+				'size'		 => 'medium',
+				'icon'		 => 'fa-sign-in',
+				'class'		 => 'link-tab-form'
+			) );
+			?>
+            <a href="#" class="link-remember-rcl link-tab-rcl "><?php _e( 'Lost your Password', 'wp-recall' ); // Забыли пароль            ?>?</a>
 			<?php echo wp_nonce_field( 'login-key-rcl', 'login_wpnonce', true, false ); ?>
             <input type="hidden" name="redirect_to" value="<?php rcl_referer_url( 'login' ); ?>">
         </div>

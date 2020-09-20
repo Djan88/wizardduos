@@ -38,11 +38,13 @@ if ( ! is_admin() ):
 	add_action( 'rcl_enqueue_scripts', 'pfm_scripts', 10 );
 endif;
 function pfm_scripts() {
+	global $user_ID;
 
 	rcl_enqueue_style( 'pfm-style', rcl_addon_url( 'style.css', __FILE__ ) );
 
-	if ( is_prime_forum() )
+	if ( is_prime_forum() || rcl_is_office( $user_ID ) ) {
 		rcl_enqueue_script( 'pfm-scripts', rcl_addon_url( 'js/scripts.js', __FILE__ ) );
+	}
 }
 
 add_action( 'init', 'pfm_init_tab', 10 );
@@ -321,14 +323,14 @@ function pfm_init_js_variables( $data ) {
 
 	if ( ! $PrimeQuery )
 		return $data;
-
+	
 	if ( ! $PrimeQuery->is_forum && ! $PrimeQuery->is_topic )
 		return $data;
 
 	$pfm = array(
 		'group_id'		 => $PrimeQuery->object->group_id,
 		'forum_id'		 => $PrimeQuery->object->forum_id,
-		'topic_id'		 => $PrimeQuery->object->topic_id,
+		'topic_id'		 => isset( $PrimeQuery->object->topic_id ) ? $PrimeQuery->object->topic_id : 0,
 		'current_page'	 => $PrimeQuery->current_page,
 		'beat_time'		 => pfm_get_option( 'beat-time', 30 ),
 		'beat_inactive'	 => pfm_get_option( 'beat-inactive', 100 )
@@ -458,22 +460,15 @@ function pfm_topic_beat( $beat ) {
 		'group_id'	 => $beat->group_id
 	) );
 
-	$posts = new PrimePosts();
-
-	$lastPosts = $posts->get_col( array(
-		'topic_id'			 => $beat->topic_id,
-		'fields'			 => array( 'post_id' ),
-		'orderby'			 => 'post_id',
-		'order'				 => 'ASC',
-		'user_id__not_in'	 => array( $user_ID ),
-		'date_query'		 => array(
-			array(
-				'column'	 => 'post_date',
-				'value'		 => $beat->last_beat,
-				'compare'	 => '>'
-			)
-		)
-		) );
+	$lastPosts = RQ::tbl( new PrimePosts() )
+		->select( ['post_id' ] )
+		->where( [
+			'topic_id'			 => $beat->topic_id,
+			'user_id__not_in'	 => array( $user_ID )
+		] )
+		->date( 'post_date', '>', $beat->last_beat )
+		->orderby( 'post_id', 'ASC' )
+		->get_col();
 
 	$lastPosts = array_unique( $lastPosts );
 

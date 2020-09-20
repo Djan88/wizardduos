@@ -182,7 +182,6 @@ div p.post-group-meta {
 #group-primary-widget .widget-content input,
 #group-users-widget .rcl-group-link {
     float: right;
-    padding: 8px 6px;
     text-align: center;
 }
 #group-users-widget .rcl-group-link {
@@ -227,7 +226,7 @@ div p.post-group-meta {
 #rcl-group .search-form-rcl select {
     margin: 0 4px;
 }
-#rcl-group .taxonomy-groups select,
+.rcl-public-form .taxonomy-groups select,
 #rcl-group .search-form-rcl select {
     background-color: #fff;
     border-radius: 0;
@@ -384,14 +383,6 @@ div p.post-group-meta {
 .group-request .group-user-option select {
     width: 100px;
 }
-.group-dialog .group-request .apply-request,
-.group-dialog .group-request .success {
-    display: inline-block;
-    float: right;
-    margin: 1px 2px;
-    padding: 7px;
-    width: initial;
-}
 #widgets-options,
 #group-options {
     background-color: #f5f5f5;
@@ -448,8 +439,9 @@ div p.post-group-meta {
     border: none;                           /*++Twenty16++*/
     max-width: 300px;
     min-width: 170px;
-    padding: 5px 10px;                      /*++Twenty16++*/
+    padding: 0px 10px;
     width: 58%;
+    margin-right: 5px;             /*++Twenty16++*/
 }
 #rcl-office #create-group input[type="text"]:focus {
     background-color: #fff;

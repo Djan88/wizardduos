@@ -3,7 +3,9 @@ if ( ! defined( 'RCL_PRECISION' ) ) {
 	define( 'RCL_PRECISION', 2 );
 }
 
-require_once "class-rcl-payment.php";
+require_once 'classes/class-rcl-users-balance.php';
+require_once "classes/class-rcl-payments.php";
+require_once "classes/class-rcl-payment.php";
 require_once "shortcodes.php";
 
 if ( is_admin() )
@@ -68,9 +70,8 @@ function rcl_success_pay( $dataPay ) {
 
 //получение данных из таблицы произведенных платежей
 function rcl_get_payments( $args = false ) {
-	require_once 'class-rcl-payments.php';
-	$payments = new Rcl_Payments();
-	return $payments->get_results( $args );
+	require_once 'classes/class-rcl-payments.php';
+	return RQ::tbl( new Rcl_Payments() )->parse( $args )->get_results();
 }
 
 function rcl_payform( $attr ) {

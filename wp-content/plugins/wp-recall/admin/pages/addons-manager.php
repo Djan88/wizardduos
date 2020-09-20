@@ -52,7 +52,7 @@ echo '<h4>' . __( 'RCLKEY', 'wp-recall' ) . '</h4>
         <input class="button" type="submit" value="' . __( 'Save', 'wp-recall' ) . '" name="save-rcl-key">
         ' . wp_nonce_field( 'add-rcl-key', '_wpnonce', true, false ) . '
     </form>
-    <p class="install-help">' . __( 'The key is required to update the add-ons here. You can get it in your personal account online <a href="https://codeseller.ru/" target="_blank">https://codeseller.ru</a>', 'wp-recall' ) . '</p>';
+    <p class="install-help">' . __( 'The key is required to update the add-ons here. You can get it in your personal account of website', 'wp-recall' ) . ' <a href="https://codeseller.ru/" target="_blank">https://codeseller.ru</a></p>';
 
 echo '</div>';
 
@@ -77,11 +77,17 @@ echo '<h4>' . __( 'Install the add-on to WP-Recall format .ZIP', 'wp-recall' ) .
 
 $Rcl_Addons_Manager->prepare_items();
 ?>
+<form method="get" class="rcl-repository-list">
+	<input type="hidden" name="page" value="manage-addon-recall">
+	<?php echo $Rcl_Addons_Manager->search_box( __( 'Search by name', 'wp-recall' ), 'search_id' ); ?>
+</form>
 
 <form method="post" class="rcl-repository-list">
 	<input type="hidden" name="page" value="manage-addon-recall">
 	<?php
-	$Rcl_Addons_Manager->search_box( 'Search by name', 'search_id' );
+	//$Rcl_Addons_Manager->search_box( __( 'Search by name', 'wp-recall' ), 'search_id' );
 	$Rcl_Addons_Manager->display();
-	echo '</form></div>';
+	?>
+</form>
+</div>
 

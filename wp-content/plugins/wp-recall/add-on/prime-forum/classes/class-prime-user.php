@@ -85,15 +85,11 @@ class PrimeUser extends PrimeRoles {
 
 	function is_can_posts( $topic_id ) {
 
-		$posts = new PrimePosts();
-
-		$post_id = $posts->get_var( array(
-			'topic_id'	 => $topic_id,
-			'fields'	 => array( 'post_id' ),
-			'orderby'	 => 'post_id',
-			'order'		 => 'ASC',
-			'user_id'	 => $this->user_id
-			) );
+		$post_id = RQ::tbl( new PrimePosts() )->select( ['post_id' ] )
+				->where( [
+					'topic_id'	 => $topic_id,
+					'user_id'	 => $this->user_id
+				] )->orderby( 'post_id', 'ASC' )->get_var();
 
 		return $post_id ? true : false;
 	}

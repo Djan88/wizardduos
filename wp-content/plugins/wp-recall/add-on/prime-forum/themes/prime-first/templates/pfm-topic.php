@@ -1,3 +1,4 @@
+<?php global $post; ?>
 <div class="prime-forum-content">
 
 	<?php if ( pfm_have_posts() ): ?>

@@ -82,7 +82,10 @@ class Rcl_Postlist {
 
 			wp_reset_postdata();
 		}else {
-			$posts_block = '<p>' . $this->type_name . ' ' . __( 'has not yet been published', 'wp-recall' ) . '</p>';
+			$posts_block = rcl_get_notice( array(
+				'type'	 => 'info',
+				'text'	 => __( 'Here has nothing been published yet', 'wp-recall' )
+				) );
 		}
 
 		return $posts_block;

@@ -1,7 +1,5 @@
 <?php
 
-require_once 'class-rcl-users-query.php';
-
 class Rcl_Users_List extends Rcl_Users_Query {
 
 	public $id;
@@ -18,17 +16,33 @@ class Rcl_Users_List extends Rcl_Users_Query {
 
 	function __construct( $args = array() ) {
 
+		if ( ! $args )
+			$args = array();
+
+		if ( isset( $args['inpage'] ) ) {
+			$args['number'] = $args['inpage'];
+		}
+
+		if ( isset( $args['include'] ) ) {
+			$args['ID__in'] = array_map( 'trim', explode( ',', $args['include'] ) );
+		}
+
+		if ( isset( $args['exclude'] ) ) {
+			$args['ID__not_in'] = array_map( 'trim', explode( ',', $args['exclude'] ) );
+		}
+
 		parent::__construct();
 
-		$this->init_properties( $args );
+		if ( $args )
+			$this->init_properties( $args );
 
-		$args['fields'] = array(
+		$args['select'] = array(
 			'ID',
 			'display_name',
 			'user_nicename'
 		);
 
-		$this->set_query( $args );
+		$this->parse( $args );
 
 		$this->data = ($this->data) ? array_map( 'trim', explode( ',', $this->data ) ) : array();
 
@@ -191,8 +205,6 @@ class Rcl_Users_List extends Rcl_Users_Query {
 
 		$profile_fields = stripslashes_deep( $profile_fields );
 
-		$cf = new Rcl_Custom_Fields();
-
 		$slugs	 = array();
 		$fields	 = array();
 
@@ -200,7 +212,12 @@ class Rcl_Users_List extends Rcl_Users_Query {
 			$custom_field = apply_filters( 'rcl_userslist_custom_field', $custom_field );
 			if ( ! $custom_field )
 				continue;
-			if ( isset( $custom_field['req'] ) && $custom_field['req'] == 1 ) {
+
+			if ( isset( $field['req'] ) && $field['req'] ) {
+				$field['public_value'] = $field['req'];
+			}
+
+			if ( isset( $custom_field['public_value'] ) && $custom_field['public_value'] == 1 ) {
 				$fields[]	 = $custom_field;
 				$slugs[]	 = $custom_field['slug'];
 			}
@@ -298,7 +315,7 @@ class Rcl_Users_List extends Rcl_Users_Query {
 
 		$query['join'][] = "INNER JOIN (SELECT COUNT(post_author) AS posts_count, post_author "
 			. "FROM $wpdb->posts "
-			. "WHERE post_status='publish' AND post_type NOT IN ('page','nav_menu_item') "
+			. "WHERE post_status IN ('publish', 'private') AND post_type NOT IN ('page','nav_menu_item') "
 			. "GROUP BY post_author) posts "
 			. "ON wp_users.ID = posts.post_author";
 
@@ -316,7 +333,7 @@ class Rcl_Users_List extends Rcl_Users_Query {
 
 		$query = "SELECT COUNT(post_author) AS posts_count, post_author AS ID "
 			. "FROM $wpdb->posts "
-			. "WHERE post_status = 'publish' AND post_type NOT IN ('page','nav_menu_item') AND post_author IN (" . implode( ',', $ids ) . ") "
+			. "WHERE post_status IN ('publish', 'private') AND post_type NOT IN ('page','nav_menu_item') AND post_author IN (" . implode( ',', $ids ) . ") "
 			. "GROUP BY post_author";
 
 		$posts = $wpdb->get_results( $query );
@@ -518,7 +535,12 @@ class Rcl_Users_List extends Rcl_Users_Query {
 		$content .= '<div class="rcl-data-filters">' . __( 'Filter by', 'wp-recall' ) . ': ';
 
 		foreach ( $filters as $key => $name ) {
-			$content .= '<a class="data-filter recall-button ' . rcl_a_active( $current_filter, $key ) . '" href="' . $perm . 'users-filter=' . $key . '">' . $name . '</a> ';
+			$content .= rcl_get_button( array(
+				'label'	 => $name,
+				'href'	 => $perm . 'users-filter=' . $key,
+				'class'	 => 'data-filter',
+				'status' => $current_filter == $key ? 'disabled' : null
+				) );
 		}
 
 		$content .= '</div>';

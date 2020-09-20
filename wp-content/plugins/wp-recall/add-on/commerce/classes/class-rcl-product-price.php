@@ -8,7 +8,7 @@
 class Rcl_Product_Price {
 
 	public $product_id;
-	public $product_price;
+	public $product_price = 0;
 
 	function __construct( $product_id ) {
 

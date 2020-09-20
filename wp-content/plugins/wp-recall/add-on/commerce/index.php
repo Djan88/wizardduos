@@ -235,7 +235,7 @@ function rcl_orders_tab( $status_id ) {
 	$count = rcl_count_orders( $args );
 
 	if ( ! $count )
-		return '<p>' . sprintf( __( 'No orders with status "%s" yet', 'wp-recall' ), rcl_get_status_name_order( $status_id ) ) . '.</p>';
+		return rcl_get_notice( ['text' => sprintf( __( 'No orders with status "%s" yet', 'wp-recall' ), rcl_get_status_name_order( $status_id ) ) ] );
 
 	$pagenavi = new Rcl_PageNavi( 'rcl-orders', $count, array( 'in_page' => 30 ) );
 
@@ -311,9 +311,10 @@ function rcl_get_order_manager() {
 
 	foreach ( $args as $data ) {
 		$content .= '<span class="manager-item">';
-		$content .= '<a href="' . $data['href'] . '" class="recall-button">';
-		$content .= $data['title'];
-		$content .='</a>';
+		$content .= rcl_get_button( array(
+			'href'	 => $data['href'],
+			'label'	 => $data['title']
+			) );
 		$content .='</span>';
 	}
 

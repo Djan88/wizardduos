@@ -36,7 +36,7 @@ function wau_ajax_get_payment_form() {
 			'content'	 =>
 			'<h3>' . __( 'Оплата доступа' ) . ' "' . $accountName . '"' . '</h3>'
 			. '<p>' . __( 'оплачиваемый срок доступа' ) . ': ' . wau_time_to_strdate( $tariff->access_time ) . '</p>'
-			. rcl_get_pay_form( array(
+			. rcl_get_pay_form( apply_filters( 'wau_payment_form_args', array(
 				'baggage_data'		 => array(
 					'tariff_id' => $tariff_id
 				),
@@ -46,7 +46,7 @@ function wau_ajax_get_payment_form() {
 				'pay_summ'			 => $tariff_price,
 				'description'		 => __( 'Приобретение аккаунта платного доступа' ) . ' "' . $accountName . '"',
 				'merchant_icon'		 => 1
-				)
+				) )
 			),
 			'title'		 => __( 'Форма оплаты платного доступа' ),
 			'size'		 => 'auto',

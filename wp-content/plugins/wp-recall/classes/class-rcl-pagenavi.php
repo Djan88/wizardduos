@@ -200,6 +200,7 @@ class Rcl_PageNavi {
 
 					$attrs = array(
 						'href'	 => $this->get_url( $data ),
+						'label'	 => $data,
 						'data'	 => array(
 							'page'		 => $data,
 							'pager-id'	 => $this->pager_id
@@ -220,12 +221,19 @@ class Rcl_PageNavi {
 
 					$attrs = apply_filters( 'rcl_page_link_attributes', $attrs );
 
-					$html = '<a ' . $this->get_string_attributes( $attrs ) . '>' . $data . '</a>';
+					$html = rcl_get_button( $attrs );
 				} else if ( $type == 'current' ) {
-					$html = '<span data-page="' . $data . '">' . $data . '</span>';
+					$html = rcl_get_button( [
+						'label'	 => $data,
+						'status' => 'active',
+						'data'	 => array(
+							'page' => $data
+						)
+						] );
 				} else {
 					$html = '<span>' . $data . '</span>';
 				}
+
 				$content .= '<span class="pager-item type-' . $type . '">' . $html . '</span>';
 			}
 		}
@@ -235,20 +243,6 @@ class Rcl_PageNavi {
 		$content .= '</div>';
 
 		return $content;
-	}
-
-	function get_string_attributes( $attrs ) {
-		$str = array();
-		foreach ( $attrs as $name => $val ) {
-			if ( is_array( $val ) ) {
-				foreach ( $val as $k => $v ) {
-					$str[] = $name . '-' . $k . '="' . $v . '"';
-				}
-			} else {
-				$str[] = $name . '="' . $val . '"';
-			}
-		}
-		return implode( ' ', $str );
 	}
 
 }

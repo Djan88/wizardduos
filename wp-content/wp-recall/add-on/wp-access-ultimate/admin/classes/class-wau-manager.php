@@ -294,7 +294,7 @@ class WAU_Manager extends Rcl_Custom_Fields_Manager {
 				'type_id'		 => 'account_id',
 				'slug'			 => $account->account_id,
 				'title'			 => $account->account_name,
-				'account_name'	 => $account->account_name,
+				'account_name'	 => wp_unslash( $account->account_name ),
 				'account_desc'	 => $account->account_desc,
 				'is_prolong'	 => $account->is_prolong,
 				'parent_id'		 => $account->parent_id,

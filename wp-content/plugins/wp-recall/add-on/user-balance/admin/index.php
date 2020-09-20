@@ -5,7 +5,7 @@ require_once 'addon-settings.php';
 add_action( 'admin_head', 'rcl_admin_user_account_scripts' );
 function rcl_admin_user_account_scripts() {
 	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'rcl_admin_user_account_scripts', plugins_url( 'js/scripts.js', __FILE__ ) );
+	wp_enqueue_script( 'rcl_admin_user_account_scripts', plugins_url( 'js/scripts.js', __FILE__ ), false, VER_RCL );
 }
 
 // создаем допколонку для вывода баланса пользователя
@@ -22,7 +22,7 @@ function rcl_balance_user_admin_content( $custom_column, $column_name, $user_id 
 	switch ( $column_name ) {
 		case 'balance_user_recall':
 			$custom_column = '<input type="text" class="balanceuser-' . $user_id . '" size="4" value="' . rcl_get_user_balance( $user_id ) . '">'
-				. '<input type="button" class="recall-button edit_balance" id="user-' . $user_id . '" value="Ok">';
+				. '<input type="button" class="button edit_balance" id="user-' . $user_id . '" value="Ok">';
 			break;
 	}
 	return $custom_column;

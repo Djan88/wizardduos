@@ -27,11 +27,11 @@ function pfm_the_topic_form() {
 		return;
 	}
 
-	echo pfm_get_form( array(
+	echo pfm_get_form( apply_filters( 'pfm_topic_form_args', array(
 		'forum_id'	 => $PrimeForum->forum_id,
 		'action'	 => 'topic_create',
 		'submit'	 => __( 'Create topic', 'wp-recall' )
-	) );
+	) ) );
 }
 
 function pfm_the_post_form() {
@@ -100,20 +100,17 @@ function pfm_add_manager_fields_post_form( $content, $action ) {
 		array(
 			'type'	 => 'checkbox',
 			'slug'	 => 'close-topic',
-			'name'	 => 'pfm-data[close-topic]',
 			'values' => array(
 				1 => __( 'Close topic', 'wp-recall' )
 			)
 		)
 	);
 
-	$CF = new Rcl_Custom_Fields();
-
 	$content .= '<div class="post-form-manager">';
 
 	foreach ( $fields as $field ) {
 
-		$content .= $CF->get_input( $field );
+		$content .= Rcl_Field::setup( $field )->get_field_input();
 	}
 
 	$content .= '</div>';

@@ -40,7 +40,12 @@ class Group_Primary_Widget extends Rcl_Group_Widget {
 			echo $before;
 
 			echo '<form method="post">'
-			. '<input type="submit" class="recall-button" name="group-submit" value="' . __( 'Leave group', 'wp-recall' ) . '">'
+			. rcl_get_button( array(
+				'icon'	 => 'fa-sign-out',
+				'label'	 => __( 'Leave group', 'wp-recall' ),
+				'submit' => true
+			) )
+			. '<input type="hidden" name="group-submit" value="1">'
 			. '<input type="hidden" name="group-action" value="leave">'
 			. wp_nonce_field( 'group-action-' . $user_ID, '_wpnonce', true, false )
 			. '</form>';
@@ -52,11 +57,19 @@ class Group_Primary_Widget extends Rcl_Group_Widget {
 
 				echo $before;
 				if ( $rcl_group->current_user == 'banned' ) {
-					echo '<div class="error"><p>' . __( 'You have been banned from the group', 'wp-recall' ) . '</p></div>';
+					echo rcl_get_notice( [
+						'text'	 => __( 'You have been banned from the group', 'wp-recall' ),
+						'type'	 => 'error'
+					] );
 				} else {
 					if ( $rcl_group->group_status == 'open' ) {
 						echo '<form method="post">'
-						. '<input type="submit" class="recall-button" name="group-submit" value="' . __( 'Join group', 'wp-recall' ) . '">'
+						. rcl_get_button( array(
+							'icon'	 => 'fa-sign-in',
+							'label'	 => __( 'Join group', 'wp-recall' ),
+							'submit' => true
+						) )
+						. '<input type="hidden" name="group-submit" value="1">'
 						. '<input type="hidden" name="group-action" value="join">'
 						. wp_nonce_field( 'group-action-' . $user_ID, '_wpnonce', true, false )
 						. '</form>';
@@ -68,11 +81,16 @@ class Group_Primary_Widget extends Rcl_Group_Widget {
 
 						if ( $requests && false !== array_search( $user_ID, $requests ) ) {
 
-							echo '<h3 class="title-widget">' . __( 'The access request has been sent', 'wp-recall' ) . '</h3>';
+							echo rcl_get_notice( ['text' => __( 'The access request has been sent', 'wp-recall' ) ] );
 						} else {
 
 							echo '<form method="post">'
-							. '<input type="submit" class="recall-button" name="group-submit" value="' . __( 'Apply for membership', 'wp-recall' ) . '">'
+							. rcl_get_button( array(
+								'icon'	 => 'fa-paper-plane',
+								'label'	 => __( 'The request of access', 'wp-recall' ),
+								'submit' => true
+							) )
+							. '<input type="hidden" name="group-submit" value="1">'
 							. '<input type="hidden" name="group-action" value="ask">'
 							. wp_nonce_field( 'group-action-' . $user_ID, '_wpnonce', true, false )
 							. '</form>';
@@ -103,6 +121,9 @@ class Group_Users_Widget extends Rcl_Group_Widget {
 	}
 
 	function widget( $args, $instance ) {
+
+		if ( ! rcl_get_member_group_access_status() )
+			return false;
 
 		global $rcl_group, $user_ID;
 
@@ -206,6 +227,9 @@ class Group_CategoryList_Widget extends Rcl_Group_Widget {
 
 	function widget( $args ) {
 
+		if ( ! rcl_get_member_group_access_status() )
+			return false;
+
 		extract( $args );
 
 		global $rcl_group;
@@ -215,6 +239,7 @@ class Group_CategoryList_Widget extends Rcl_Group_Widget {
 			return false;
 
 		echo $before;
+
 		echo $category;
 		echo $after;
 	}
@@ -316,9 +341,23 @@ class Group_Posts_Widget extends Rcl_Group_Widget {
 
 	function widget( $args, $instance ) {
 
-		global $rcl_group, $post;
+		global $rcl_group, $post, $user_ID;
 
 		extract( $args );
+
+		if ( ! rcl_get_member_group_access_status() ) {
+			echo $before;
+			echo rcl_close_group_post_content();
+
+			if ( ! $user_ID ) {
+				echo rcl_get_notice( [
+					'text' => __( 'Login and send a request to receive an access of the group', 'wp-recall' ),
+				] );
+			}
+
+			echo $after;
+			return;
+		}
 
 		$defaults = array(
 			'title'		 => __( 'Group posts', 'wp-recall' ),
@@ -393,7 +432,7 @@ class Group_Posts_Widget extends Rcl_Group_Widget {
 
 			<?php }else { ?>
 
-				<p><?php _e( "You do not have any publications", "wp-recall" ); ?></p>
+				<?php echo rcl_get_notice( ['text' => __( "You do not have any publications", "wp-recall" ) ] ); ?>
 
 			<?php } ?>
 
@@ -431,7 +470,7 @@ class Group_Posts_Widget extends Rcl_Group_Widget {
 
 			<?php }else { ?>
 
-				<p><?php _e( "You do not have any publications", "wp-recall" ); ?></p>
+				<?php echo rcl_get_notice( ['text' => __( "You do not have any publications", "wp-recall" ) ] ); ?>
 
 			<?php } ?>
 

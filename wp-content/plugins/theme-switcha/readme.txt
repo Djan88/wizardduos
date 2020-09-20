@@ -9,9 +9,9 @@ Contributors: specialk
 Author URI: https://plugin-planet.com/
 Donate link: https://monzillamedia.com/donate.html
 Requires at least: 4.1
-Tested up to: 5.4
-Stable tag: 2.4
-Version: 2.4
+Tested up to: 5.5
+Stable tag: 2.5
+Version: 2.5
 Requires PHP: 5.6.20
 Text Domain: theme-switcha
 Domain Path: /languages
@@ -121,7 +121,7 @@ This plugin does not collect or store any user data. It does not set any user co
 
 **Important:** Please read this [support topic](https://wordpress.org/support/topic/important-please-read-2/)!
 
-More info on [installing WP plugins](https://codex.wordpress.org/Managing_Plugins#Installing_Plugins)
+More info on [installing WP plugins](https://wordpress.org/support/article/managing-plugins/#installing-plugins)
 
 
 **Usage: Switch Themes**
@@ -169,11 +169,11 @@ Alternately you can call the shortcodes in your theme template using [do_shortco
 Theme Switcha also enables you to create theme-switch links that you can share with others. To begin, follow these steps:
 
 1. Determine the slug/name for the theme (should be same as name of theme directory)
-2. Choose any URL from your site, and append `?theme=mytheme`
+2. Choose any URL from your site, and append `?theme-switch=mytheme`
 
 For example, if you have a theme named "My Awesome Theme" that is located in a directory named `/my-awesome-theme/`, you would create a theme-switch URL like so:
 
-`https://example.com/?theme=my-awesome-theme`
+`https://example.com/?theme-switch=my-awesome-theme`
 
 What happens if you enter that URL in a browser? Well, that depends on the plugin setting, "Allowed Users":
 
@@ -183,7 +183,7 @@ What happens if you enter that URL in a browser? Well, that depends on the plugi
 
 We'll look at how to make a Passkey Link in the next section. For the other two options, "Everyone" and "Only Admin", you can either share the URL as-is, or make it a clickable hyperlink such as the following example:
 
-`<a href="https://example.com/?theme=my-awesome-theme">Switch to My Awesome Theme</a>`
+`<a href="https://example.com/?theme-switch=my-awesome-theme">Switch to My Awesome Theme</a>`
 
 
 **Usage: Passkey Links**
@@ -202,11 +202,11 @@ After saving changes, thumbnails will be displayed for each available theme. So 
 
 Done! You now have a Passkey Link ready to paste wherever. It will look similar to this:
 
-`https://example.com/?theme=my-awesome-theme&passkey=1234567890`
+`https://example.com/?theme-switch=my-awesome-theme&passkey=1234567890`
 
 So you can either share the Passkey Link as-is, or make it a clickable hyperlink such as the following example:
 
-`<a href="https://example.com/?theme=my-awesome-theme&passkey=1234567890">Switch to My Awesome Theme</a>`
+`<a href="https://example.com/?theme-switch=my-awesome-theme&passkey=1234567890">Switch to My Awesome Theme</a>`
 
 Here are some notes about Passkey Links:
 
@@ -216,11 +216,11 @@ Here are some notes about Passkey Links:
 
 Here is an example of proper passkey format:
 
-`https://example.com/?theme=THEMESLUG&passkey=PASSKEY`
+`https://example.com/?theme-switch=THEMESLUG&passkey=PASSKEY`
 
 Here you would replace "THEMESLUG" with the slug of the theme you want to preview, and "PASSKEY" with the current passkey (provided via the "Passkey" setting). Here is an example showing how to make a clickable link from the Passkey URL:
 
-`<a href="https://example.com/?theme=THEMESLUG&passkey=PASSKEY">Switch Theme!</a>`
+`<a href="https://example.com/?theme-switch=THEMESLUG&passkey=PASSKEY">Switch Theme!</a>`
 
 
 **Important**
@@ -448,6 +448,12 @@ Links, tweets and likes also appreciated. Thanks! :)
 
 If you like Theme Switcha, please take a moment to [give a 5-star rating](https://wordpress.org/support/plugin/theme-switcha/reviews/?rate=5#new-post). It helps to keep development and support going strong. Thank you!
 
+
+**2.5 (2020/08/09)**
+
+* Fixes incorrect information in readme/docs (Thanks to Marcel Jünemann)
+* Refines readme/documentation
+* Tests on WordPress 5.5
 
 **2.4 (2020/03/17)**
 

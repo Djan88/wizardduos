@@ -32,6 +32,8 @@
   29. RCL Form
   30. RCL Tables API
   31. TODO: old generation
+  32. New Notices API
+  33. New Buttons API
 
 ------------------------*/
 
@@ -89,6 +91,9 @@ img.aligncenter {
     right: 0;
     top: 0;
     z-index: 999;
+}
+body:not(.wp-admin) .rcl-bttn.rcl-bttn__type-primary {
+    color: var(--rclText);
 }
 /*end*/
 
@@ -411,6 +416,70 @@ span i.rcli.fa-circle {
     top: -12px;
     width: 0;
 }
+/*new balloon*/
+.rcl-balloon {
+	position: absolute;
+	background: rgb(255, 255, 255);
+	right: 0;
+	top: calc(100% + 1.5em);
+	z-index: 9;
+	padding: 3px 10px;
+	border: 1px solid rgb(0, 0, 0);
+	display:flex;
+	opacity: 0;
+	transform: translate3d(0px, 0px, 0px);
+	transition: all 0.2s ease-in-out 0s;
+	visibility: hidden;
+	border-radius: 3px;
+	text-align: left;
+}
+.rcl-balloon::before,
+.rcl-balloon::after{
+	border-width: 0px 10px 10px 10px;
+	border-style: solid;
+	content: "";
+	height: 0;
+	right: 5px;
+	position: absolute;
+	width: 0;
+}
+
+.rcl-balloon::before{
+	border-color: transparent transparent rgb(0, 0, 0) transparent;
+	top: -11px;
+}
+
+.rcl-balloon::after{
+	border-color: transparent transparent rgb(255, 255, 255) transparent;
+	top: -10px;
+}
+.rcl-balloon-hover{
+	position:relative;
+}
+.rcl-balloon-hover:hover .rcl-balloon{
+	cursor: default;
+	opacity: 1;
+	transform: translateY(-18px);
+	visibility: visible;
+}
+.rcl-balloon.position-top{
+	top:auto;
+	bottom: calc(100% - 1em);
+}
+.rcl-balloon.position-top::before,
+.rcl-balloon.position-top::after{
+	border-width: 10px 10px 0px 10px;
+}
+.rcl-balloon.position-top::before{
+	border-color: rgb(0, 0, 0) transparent transparent transparent;
+	bottom: -11px;
+	top:auto;
+}
+.rcl-balloon.position-top::after{
+	border-color: rgb(255, 255, 255) transparent transparent transparent;
+	bottom: -10px;
+	top:auto;
+}
 /*end*/
 
 
@@ -524,10 +593,7 @@ a.data-filter.filter-active:hover {
     padding: 10px 10px 5px;
 }
 .rcl-subtab-menu .rcl-subtab-button {
-    display: inline-block;
-    margin-bottom: 5px;
-    margin-right: 5px;
-    padding: 7px;
+
 }
 /*end*/
 
@@ -676,6 +742,24 @@ a.data-filter.filter-active:hover {
 /*---------------------------
   19. RCL Custom fields API
 -----------------------------*/
+.rcl-field{
+	margin: 5px 0;
+	width: 100%;
+}
+.rcl-field .rcl-field-title{
+	font-weight: bold;
+}
+.rcl-field-notice {
+    align-items: center;
+    clear: both;
+    color: #797979;
+    display: flex;
+    font-size: .85em;
+    margin: 5px 0 0;
+}
+.rcl-field-notice .rcli {
+    margin-right: 5px;
+}
 .rcl-cf-title {
     font-weight: bold;
     margin: 0 3px 0 0;
@@ -702,6 +786,9 @@ a.data-filter.filter-active:hover {
     outline: 0;
     padding: 5px 10px;
     width: 100%;
+}
+.rcl-field-input input:invalid {
+	border-color: red !important;
 }
 .rcl-field-input input:focus:not([type="file"]):not([type="checkbox"]):not([type="radio"]),
 .rcl-field-input textarea:focus {
@@ -751,17 +838,6 @@ a.data-filter.filter-active:hover {
     cursor: pointer;
     color: #4c8cbd;
 }
-.rcl-field-input .rcl-field-notice {
-    align-items: center;
-    clear: both;
-    color: #797979;
-    display: flex;
-    font-size: .85em;
-    margin: 5px 0 0;
-}
-.rcl-field-input .rcl-field-notice .rcli {
-    margin-right: 5px;
-}
 .type-multiselect-input .hidden {
     display: none !important;
 }
@@ -806,10 +882,10 @@ a.data-filter.filter-active:hover {
     background-color: #fff;
     text-decoration: none !important;
 }
-.type-dynamic-input a:hover .fa-minus {
+.type-dynamic-input a .fa-minus {
     color: rgb(229, 57, 53);
 }
-.type-dynamic-input a:hover .fa-plus {
+.type-dynamic-input a .fa-plus {
     color: #008000;
 }
 div.rcl-custom-fields .rcl-field-value .fa-upload {
@@ -905,6 +981,17 @@ div.rcl-custom-fields .rcl-field-value .fa-upload {
     line-height: 1;
     padding: 2px;
 }
+.rcl-field-input input[type="checkbox"]:checked + label.block-label::before,
+.rcl-field-input input[type="radio"]:checked + label.block-label::before{
+	background: #4C8CBD;
+}
+.rcl-field-input .checkbox-display-block{
+	display: block;
+}
+.rcl-field-input .checkbox-display-block .block-label{
+	border: none;
+	display: block;
+}
 /*end*/
 
 
@@ -968,40 +1055,18 @@ div.rcl-custom-fields .rcl-field-value .fa-upload {
 /*-----------------------
   22. RCL pagenavi API
 -------------------------*/
-.rcl-navi,
 .rcl-pager {
     box-shadow: 0 0 1px 1px rgba(219, 219, 219, 0.8);
     box-sizing: border-box;
     clear: both;
-    display: inline-block;
-    font-size: 20px;
-    font-weight: bold;
-    line-height: 1.4;
-    margin: 10px 0.5%;
     padding: 6px 5px;
-    width: 99%;
+	margin: 10px 0;
 }
-.rcl-navi a,
-.rcl-navi span,
-.rcl-pager .pager-item span,
-.rcl-pager .pager-item a {
-    display: inline-block;
-    margin: 0 4px;
-    padding: 2px 9px;
+.rcl-pager .rcl-page-navi > span{
+	margin: 0 2px;
 }
-.rcl-navi span {
-    box-shadow: 0 0 1px 1px rgba(219, 219, 219, 0.4);
-}
-.rcl-navi a:link,
-.rcl-pager .pager-item a:link {                         /*++hueman++ добавил :link для перевеса*/
-    background: rgba(243, 243, 243, 0.5);
-    border: none;                                       /*++Twenty15++*/
-    box-shadow: 0 0 1px 1px rgba(219, 219, 219, 0.8);
-    text-decoration: none;
-}
-.rcl-navi a:hover,
-.rcl-pager .pager-item a:hover {
-    box-shadow: 0 0 1px 2px rgb(219, 219, 219);
+.rcl-pager .rcl-page-navi > span a.rcl-bttn{
+	margin: 0;
 }
 /*end*/
 
@@ -1371,118 +1436,116 @@ body .ssi-modalOuter .ssi-modalTitle {
   29. RCL Form
 ---------------------*/
 .rcl-form {
-    border-collapse: collapse;
-    border-spacing: 0;
-    border: none;
-    box-sizing: border-box;
-    font-size: 14px;
-    line-height: normal;
-    margin: 0 0 12px;
-    text-align: left;
-    width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	border: none;
+	box-sizing: border-box;
+	font-size: 14px;
+	line-height: normal;
+	margin: 0 0 12px;
+	text-align: left;
+	width: 100%;
 }
 .rcl-form table {
-    line-height: normal;
-    width: 100%;
+	line-height: normal;
+	width: 100%;
 }
 .rcl-form tr {
-    background: #fff;
+	background: #fff;
 }
 .rcl-form th,
 .rcl-form td {
-    border: 1px solid #eaeaea;
-    box-sizing: border-box;
-    line-height: normal;
-    padding: 8px;
-    text-align: left;
-    text-transform: none;                       /*++Twenty14++*/
-    vertical-align: middle;
+	border: 1px solid #eaeaea;
+	box-sizing: border-box;
+	line-height: normal;
+	padding: 8px;
+	text-align: left;
+	text-transform: none; /* ++Twenty14++ */
+	vertical-align: middle;
 }
 .rcl-form th:first-child,
 .rcl-form td:first-child {
-    padding-left: 8px;                          /*++Twenty17++*/
+	padding-left: 8px; /* ++Twenty17++ */
 }
 .rcl-form tr th {
-    overflow: hidden;
+	overflow: hidden;
 }
 .rcl-form tr:nth-child(1) th {
-    background-color: #f5f5f5;
-    font-size: 14px;
-    font-weight: bold;
+	background-color: #f5f5f5;
+	font-size: 14px;
+	font-weight: bold;
 }
 .rcl-form input[disabled] {
-    background-color: #eee;
-    opacity: 0.6;
+	background-color: #eee;
+	opacity: 0.6;
 }
 .rcl-form .block-label input[type="checkbox"] {
-    margin: 0 6px 0 0;
+	margin: 0 6px 0 0;
 }
 .rcl-form .block-label input[type="radio"] {
-    border: 1px solid #d1d1d1;
-    color: #b1b1b1;
-    float: none;
-    font-size: 13px;
-    padding: 8px 12px;
-    width: auto;
+	border: 1px solid #d1d1d1;
+	color: #b1b1b1;
+	float: none;
+	font-size: 13px;
+	padding: 8px 12px;
+	width: auto;
 }
 .rcl-form label a {
-    color: rgb(76, 140, 189);
-    display: inline;
-    font-weight: bold;
-    margin: 0;
-    padding: 0 1px 0 0;
+	color: rgb(76, 140, 189);
+	display: inline;
+	font-weight: bold;
+	margin: 0;
+	padding: 0 1px 0 0;
 }
 .rcl-form label a:hover,
 .rcl-form td span a:hover {
-    color: #000;
-    text-decoration: underline;
+	color: #000;
+	text-decoration: underline;
 }
 .rcl-form td a:hover {
-    color: #000;
+	color: #000;
 }
 .rcl-form td a:hover i {
-    color: rgb(229, 57, 53);
+	color: rgb(229, 57, 53);
 }
 .rcl-form .aligncenter {
-    text-align: center;
+	text-align: center;
 }
 .rcl-form .form-field {
-    margin: 15px 0;
+	margin: 15px 0;
 }
 .rcl-form .form-field .field-title {
-    display: block;
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 1;
-    margin-bottom: 5px;
+	display: block;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 1;
+	margin-bottom: 5px;
 }
 .rcl-form .submit-box {
-    background: #f2f2f2;
-    overflow: hidden;
-    padding: 5px;
-    text-align: right;
+	background: #f2f2f2;
+	overflow: hidden;
+	padding: 5px;
+	text-align: right;
 }
 .rcl-form .submit-box a,
 .rcl-form .submit-box input[type="submit"] {
-    display: inline-block;
-    font-size: 15px;
-    padding: 7px 10px;
+
 }
 
 @media screen and (max-width:375px) {
-    .rcl-form tr th {
-        -webkit-hyphens: auto;
+	.rcl-form tr th {
+		-webkit-hyphens: auto;
 		hyphens: auto;
-        word-wrap: break-word;
-    }
-    .rcl-form td a {
-        font-size: 13px;
-        margin: 3px 0;
-        width: 83px;
-    }
-    .rcl-form .file-field-upload {
-        width: 205px;
-    }
+		word-wrap: break-word;
+	}
+	.rcl-form td a {
+		font-size: 13px;
+		margin: 3px 0;
+		width: 83px;
+	}
+	.rcl-form .file-field-upload {
+		width: 205px;
+	}
 }
 /*end*/
 
@@ -1758,4 +1821,453 @@ body .ssi-modalOuter .ssi-modalTitle {
     font-family: rcl-awesome;
 }
 
+/**/
+
+/**********************
+*					 *
+*	 33. RCL Buttons API	 *
+*					 *
+***********************
+rcl-bttn__type-clear	- примитивная
+rcl-bttn__type-simple	 - простая
+rcl-bttn__type-primary	- реколл-цвет
+*/
+
+
+/* Общий стиль */
+body .rcl-bttn {
+	align-items: center;
+	border-radius: 0;
+	/*border: 0 !important;*/
+	box-shadow: none;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: inline-flex;
+	/*	font-size: 12px;		 start size for em - идёт инлайном. т.к. задается через кастомайзер */
+	font-weight: normal;
+	letter-spacing: normal;
+	line-height: 1em;
+	outline: 0;
+	padding: 0;
+	position: relative;
+	text-decoration: none !important;
+	text-transform: none;
+	white-space: nowrap;
+
+	-webkit-transition: opacity .1s ease,color .1s ease;
+	transition: opacity .1s ease,color .1s ease;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+body :not(.rcl-wrap__wiget) > .rcl-bttn:not(.rcl-bttn__active):hover {
+	opacity: 0.8;
+}
+/* END общий стиль */
+
+/* пересекающие стили для 2х кнопок: rcl-bttn__type-simple и rcl-bttn__type-primary */
+body .rcl-bttn:not(.rcl-bttn__type-clear):not(.rcl-bttn__fullwidth) {
+	margin: 0 .25em .25em 0;
+}
+body .rcl-wrap.rcl-wrap__vertical .rcl-bttn,
+body .rcl-bttn:not(.rcl-bttn__type-clear):last-child {
+	margin-right: 0;
+}
+.rcl-bttn:not(.rcl-bttn__type-clear) .rcl-bttn__text,
+.rcl-bttn:not(.rcl-bttn__type-clear) .rcl-bttn__ico-left {
+	padding: .5em .7em;
+}
+.rcl-bttn:not(.rcl-bttn__type-clear):not(.rcl-bttn__ico-mask) .rcl-bttn__text + .rcl-bttn__ico,
+.rcl-bttn:not(.rcl-bttn__type-clear):not(.rcl-bttn__ico-mask) .rcl-bttn__ico + .rcl-bttn__text,
+.rcl-bttn:not(.rcl-bttn__type-clear):not(.rcl-bttn__ico-mask) .rcl-bttn__ico + .rcl-bttn__count {
+	padding: 0 .7em 0 0;
+}
+.rcl-bttn:not(.rcl-bttn__type-clear) .rcl-bttn__text + .rcl-bttn__count {
+	align-self: flex-start;
+	font-size: .85em;
+	margin: .5em .5em 0 -.3em;
+}
+.rcl-bttn .rcl-bttn__ava img {
+	border-radius: 0;
+	border: 0;
+	box-shadow: none;
+	display: block;
+	float: none;
+	height: auto;
+	margin: 0;
+	max-width: 100%;
+	padding: 0;
+}
+.rcl-bttn:not(.rcl-bttn__type-clear) .rcl-bttn__ava + .rcl-bttn__count {
+	padding: 0 .7em;
+}
+/* END пересекающие стили для 2х кнопок: rcl-bttn__type-simple и rcl-bttn__type-primary */
+
+
+/* стиль clear */
+:not(.rcl-wrap__wiget) > .rcl-bttn.rcl-bttn__type-clear {
+	margin: 0 1em 0 0;
+}
+.rcl-bttn__type-clear .rcl-bttn__text + .rcl-bttn__count,
+.rcl-bttn__type-clear i + span,
+.rcl-bttn__type-clear span + i {
+	padding: 0 0 0 .45em;
+}
+/* END clear */
+
+/* стиль simple */
+.rcl-bttn.rcl-bttn__type-simple {
+	background-color: #f5f5f5;
+	box-shadow: 0 0 0 1px #e5e5e5 inset;
+}
+.rcl-bttn.rcl-bttn__type-simple:hover {
+	background-color: #fafafa;
+}
+/* END simple */
+
+
+/********************
+	Modificators
+*********************/
+
+/* fullwidth */
+.rcl-bttn.rcl-bttn__fullwidth:not(.rcl-bttn__type-clear) {
+	display: flex;
+	justify-content: center;
+}
+/* END fullwidth */
+
+/* masked icon */
+.rcl-bttn.rcl-bttn__ico-mask .rcli,
+.rcl-bttn__ico-mask.rcl-bttn__mod-text-rico-count .rcl-bttn__count {
+	background-color: rgba(0,0,0,.1);
+}
+.rcl-bttn__ico-mask.rcl-bttn__mod-text-rico .rcl-bttn__ico-right,
+.rcl-bttn__ico-mask.rcl-bttn__mod-text-rico-count .rcl-bttn__count {
+	padding: .5em .7em;
+}
+.rcl-bttn__ico-mask.rcl-bttn__mod-text-rico-count .rcl-bttn__ico.rcl-bttn__ico-right {
+	padding: .5em 0 .5em .7em;
+}
+/* END masked icon */
+
+/* wrappers */
+.rcl-wrap {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	width: 100%;
+}
+.rcl-wrap.rcl-wrap__right {
+	justify-content: flex-end;
+}
+.rcl-wrap.rcl-wrap__vertical {
+	flex-direction: column;
+	align-items: flex-start;
+}
+.rcl-wrap.rcl-wrap__right.rcl-wrap__vertical {
+	align-content: flex-end;
+}
+/* END wrappers */
+
+/* special wiget list style */
+.rcl-wrap__wiget {
+	flex-direction: column;
+}
+.rcl-wrap__wiget .rcl-bttn__type-clear {
+	padding: .45em .6em;
+}
+.rcl-wrap__wiget .rcl-bttn__type-clear:hover {
+	background-color: #e7edf0;
+	box-shadow: none;
+}
+.rcl-wrap__wiget .rcl-bttn__ava {
+	flex-shrink: 0;
+}
+.rcl-wrap__wiget .rcl-bttn__text {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%;
+}
+.rcl-wrap__wiget .rcl-bttn__text {
+	margin-left: .3em;
+}
+.rcl-wrap__wiget .rcl-bttn__ava_circle .rcl-bttn__ava img {
+	border-radius: 50%;
+}
+/* END special wiget list style */
+
+
+/********************
+	conditions
+*********************/
+
+/* loader */
+.rcl-bttn.rcl-bttn__loading {
+	color: transparent !important;
+	cursor: default;
+	opacity: 1;
+	pointer-events: none;
+}
+.rcl-bttn__loading .rcl-bttn__ava img {
+	opacity: 0;
+}
+.rcl-bttn.rcl-bttn__loading::before,
+.rcl-bttn.rcl-bttn__loading::after {
+	border-radius: 50%;
+	border-style: solid;
+	border-width: .2em;
+	box-sizing: border-box;
+	content: "";
+	height: 1.4em;
+	left: 50%;
+	margin: -.7em;
+	position: absolute;
+	top: 50%;
+	width: 1.4em;
+}
+.rcl-bttn.rcl-bttn__loading::before {
+	border-color: rgba(0,0,0,.15);
+}
+.rcl-bttn.rcl-bttn__loading::after {
+	-webkit-animation: rcl-bttn-loader .8s linear;
+	animation: rcl-bttn-loader .8s linear;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+	border-color: #fff transparent transparent;
+	transform: rotate(0deg);
+}
+@-webkit-keyframes rcl-bttn-loader {
+	to {-webkit-transform:rotate(360deg);
+		transform:rotate(360deg);
+	}
+}
+@keyframes rcl-bttn-loader {
+	to {-webkit-transform:rotate(360deg);
+		transform:rotate(360deg);
+	}
+}
+/* END loader */
+
+/* condition */
+.rcl-bttn.rcl-bttn__disabled {
+	opacity: .6;
+	pointer-events: none;
+}
+.rcl-bttn.rcl-bttn__type-simple.rcl-bttn__disabled {
+	background-color: transparent;
+	box-shadow: none;
+}
+.rcl-bttn.rcl-bttn__active {
+	pointer-events: none;
+}
+.rcl-bttn.rcl-bttn__type-primary.rcl-bttn__active {
+	color: #333;
+}
+/* END condition */
+
+/** new uploader styles **/
+
+.rcl-uploader{
+	margin: 10px 0;
+}
+
+.rcl-uploader-progress{
+	background: #ccc;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.rcl-uploader-progress .progress-bar{
+	background: #0080005c;
+    height: 20px;
+    line-height: 1;
+    padding: 5px;
+    font-size: 12px;
+    color: #fff;
+    border-right: 5px solid green;
+}
+
+body .rcl-bttn.rcl-uploader-button{
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+	margin: 0 10px 0 0!important;
+}
+.rcl-uploader-button input{
+	position: absolute;
+	top: 0;
+	right: 0;
+	opacity: 0;
+	cursor: pointer;
+	height: 100%;
+}
+.rcl-uploader .rcl-uploader-button-box{
+	padding: 3px;
+}
+
+.rcl-dropzone{
+	background: #ccc;
+	padding: 15px;
+	text-align: center;
+	font-size: 18px;
+}
+.rcl-dropzone.hover-dropzone{
+	background: #323232;
+}
+.rcl-dropzone .dropzone-upload-area{
+	padding: 20px;
+	border: 3px dashed #fff;
+	border-style: dashed;
+}
+
+.rcl-uploader .notice,
+.rcl-uploader-button{
+	vertical-align: middle;
+}
+
+.rcl-upload-gallery{
+	position: relative;
+}
+.rcl-upload-gallery img{
+	vertical-align: top;
+	max-width: 100%;
+	height: auto;
+}
+.rcl-upload-gallery.simple-manager .attachment-manager{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.rcl-upload-gallery .gallery-attachment{
+	position: relative;
+	margin: 3px;
+	border: 1px solid #eaeaea;
+	width: 110px;
+	height: 110px;
+	display: inline-block;
+	overflow: hidden;
+}
+.rcl-upload-gallery .attachment-title{
+	display:none;
+}
+.rcl-upload-gallery.mode-grid .gallery-attachment.type-file{
+	text-align:center;
+}
+.rcl-upload-gallery .gallery-attachment.type-file img{
+	margin-top: 5px;
+}
+.rcl-upload-gallery.mode-grid .gallery-attachment.type-file .attachment-title{
+	display: block;
+	background: #fff;
+	font-size: 12px;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+.rcl-upload-gallery .gallery-attachment img {
+	margin: 0;
+}
+.rcl-upload-gallery .attachment-manager{
+
+}
+.rcl-upload-gallery .attachment-manager-balloon{
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+.rcl-upload-gallery .attachment-manager-balloon > i{
+	border: 1px solid #ccc;
+	padding: 5px;
+	background: #fff;
+	margin: 3px;
+}
+.rcl-upload-gallery .attachment-manager-balloon .rcl-balloon{
+
+}
+.rcl-upload-gallery .rcl-balloon a{
+	display: inline;
+}
+body .rcl-upload-gallery .attachment-manager > a{
+	margin: 0!important;
+}
+body .rcl-upload-gallery .attachment-manager > .rcl-bttn .rcl-bttn__ico{
+	padding: 5px;
+}
+.rcl-upload-gallery.mode-list{
+
+}
+.rcl-upload-gallery.mode-list .gallery-attachment{
+	display: flex;
+	align-items: center;
+	padding: 5px;
+	width: auto;
+	height: auto;
+}
+.rcl-upload-gallery.mode-list .attachment-manager{
+	width: 165px;
+	text-align: right;
+	position: static;
+}
+.rcl-upload-gallery.mode-list .attachment-title{
+	width: 100%;
+	display: block;
+}
+.rcl-upload-gallery.mode-list img{
+	width: 35px;
+	height: 35px;
+	margin-right: 15px;
+}
+.rcl-upload-gallery .ui-sortable-placeholder{
+	background: #ccc;
+	margin: 3px;
+	border: 3px dotted #eaeaea;
+}
+.rcl-upload-gallery.mode-list .ui-sortable-placeholder{
+
+}
+.rcl-upload-gallery.mode-grid .ui-sortable-placeholder{
+	width: 110px;
+	height: 110px;
+	display: inline-block;
+}
+.rcl-upload-gallery .ui-sortable-helper{
+	z-index: 9999999;
+}
+.rcl-upload-gallery.mode-list .ui-sortable-helper{
+
+}
+.rcl-upload-gallery.mode-grid .ui-sortable-helper{
+
+}
+
+/* new uploader styles end */
+
+/*
+	Manager Content
+*/
+.rcl-content{
+
+}
+.rcl-content .rcl-content-group{
+
+}
+.rcl-content .rcl-content-group .group-title{
+	font-weight:bold;
+	font-size:20px;
+}
+.rcl-content .rcl-content-group .group-areas {
+    display: flex;
+    flex-wrap: wrap;
+    --multiplier: calc( 600px - 100%);
+}
+.rcl-content .rcl-content-area {
+    padding: 5px;
+    box-sizing: border-box;
+    max-width: 100%;
+    flex-grow: 1;
+    flex-basis: calc( var(--multiplier) * 999 );
+}
 /**/

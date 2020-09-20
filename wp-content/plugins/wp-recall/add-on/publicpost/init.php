@@ -3,14 +3,9 @@
 add_action( 'wp', 'rcl_deleted_post_notice' );
 function rcl_deleted_post_notice() {
 	if ( isset( $_GET['public'] ) && $_GET['public'] == 'deleted' )
-		rcl_notice_text( __( 'The publication has been successfully removed!', 'wp-recall' ), 'warning' );
-}
-
-add_action( 'init', 'rcl_delete_post_activate' );
-function rcl_delete_post_activate() {
-	if ( isset( $_POST['delete-post-rcl'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'delete-post-rcl' ) ) {
-		add_action( 'wp', 'rcl_delete_post' );
-	}
+		add_action( 'rcl_area_notice', function() {
+			echo rcl_get_notice( ['text' => __( 'The publication has been successfully removed!', 'wp-recall' ) ] );
+		} );
 }
 
 add_filter( 'rcl_init_js_variables', 'rcl_init_js_public_variables', 10 );

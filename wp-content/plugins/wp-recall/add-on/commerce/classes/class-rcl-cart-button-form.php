@@ -48,11 +48,11 @@ class Rcl_Cart_Button_Form {
 		$this->product_status = (get_post_meta( $this->product_id, 'outsale', 1 )) ? 0 : 1;
 	}
 
-	function price_box() {
+	function price_box( $Product_Variations = false ) {
 
 		$content = '<span class="product-price">';
 
-		if ( $this->product_price )
+		if ( $this->product_price || $Product_Variations && $Product_Variations->get_product_variations( $this->product_id ) )
 			$content .= '<span class="current-price">' . $this->product_price . '</span> ' . rcl_get_primary_currency( 1 );
 		else
 			$content .= '<span class="current-price">' . __( 'Free', 'wp-recall' ) . '</span>';
@@ -120,7 +120,8 @@ class Rcl_Cart_Button_Form {
 		$content = '<div class="rcl-cart-box">';
 
 		$content .= rcl_get_include_template( 'cart-button-form.php', __FILE__, array(
-			'Cart_Button' => apply_filters( 'rcl_cart_button_form', $this )
+			'Cart_Button'		 => apply_filters( 'rcl_cart_button_form', $this ),
+			'Product_Variations' => $PrVars
 			) );
 
 		$content .= '</div>';
@@ -131,9 +132,19 @@ class Rcl_Cart_Button_Form {
 	function cart_button() {
 
 		if ( $this->product_status ) {
-			$content = '<a href="#" onclick="rcl_add_to_cart(this);return false;" class="recall-button"><i class="rcli fa-shopping-cart" aria-hidden="true"></i><span>' . $this->label . '</span></a>';
+			$content = rcl_get_button( array(
+				'label'		 => $this->label,
+				'onclick'	 => 'rcl_add_to_cart(this);return false;',
+				'icon'		 => 'fa-shopping-cart',
+				'class'		 => 'rcl-in-to-cart'
+				) );
 		} else {
-			$content = '<span class="recall-button outsale-product"><i class="rcli fa-refresh" aria-hidden="true"></i>' . __( 'Not available', 'wp-recall' ) . '</a>';
+			$content = rcl_get_button( array(
+				'label'	 => __( 'Not available', 'wp-recall' ),
+				'icon'	 => 'fa-refresh',
+				'class'	 => 'outsale-product',
+				'status' => 'active'
+				) );
 		}
 
 		$content = '<span class="cart-button">' . $content . '</span>';
@@ -168,8 +179,6 @@ class Rcl_Cart_Button_Form {
 
 		$box_id = rand( 0, 100 );
 
-		$CF = new Rcl_Custom_Fields();
-
 		$content = '<div id="cart-box-' . $box_id . '" class="product-variations">';
 
 		$content .= '<input type="hidden" name="cart[isset][variations]" value="1">';
@@ -199,11 +208,13 @@ class Rcl_Cart_Button_Form {
 
 			$variation['slug'] = 'cart[variations][' . $variation['slug'] . ']';
 
+			$fieldObject = Rcl_Field::setup( $variation );
+
 			$content .= '<div class="variation-box">';
 
 			$content .= '<span class="variation-title">' . $variation['title'] . '</span>';
 
-			$content .= $CF->get_input( $variation );
+			$content .= $fieldObject->get_field_input();
 
 			$content .= '</div>';
 		}

@@ -13,11 +13,19 @@ class Rcl_Groups_List extends Rcl_Groups_Query {
 
 	function __construct( $args ) {
 
+		if ( isset( $args['include'] ) ) {
+			$args['ID__in'] = array_map( 'trim', explode( ',', $args['include'] ) );
+		}
+
+		if ( isset( $args['exclude'] ) ) {
+			$args['ID__not_in'] = array_map( 'trim', explode( ',', $args['exclude'] ) );
+		}
+
 		parent::__construct();
 
 		$this->init_properties( $args );
 
-		$this->set_query( $args );
+		$this->parse( $args );
 
 		$this->setup_termdata();
 
@@ -81,12 +89,10 @@ class Rcl_Groups_List extends Rcl_Groups_Query {
 
 		$where = "rcl_groups.admin_id='$this->user_id'";
 
-		$users = new Rcl_Groups_Users_Query();
-
-		$groups_ids = $users->get_col( array(
-			'user_id'	 => $this->user_id,
-			'fields'	 => array( 'group_id' )
-			) );
+		$groups_ids = RQ::tbl( new Rcl_Groups_Users_Query() )->parse( array(
+				'user_id'	 => $this->user_id,
+				'select'	 => array( 'group_id' )
+			) )->get_col();
 
 		if ( $groups_ids )
 			$where = "($where OR rcl_groups.ID IN (" . implode( ',', $groups_ids ) . "))";
@@ -145,12 +151,15 @@ class Rcl_Groups_List extends Rcl_Groups_Query {
 			$search_text = ((isset( $_GET['group-name'] ))) ? $_GET['group-name'] : '';
 
 			$content = '<div class="rcl-search-form">
-                    <form method="get" action="">
-                        <div class="rcl-search-form-title">' . __( 'Search groups', 'wp-recall' ) . '</div>
-                        <input type="text" name="group-name" value="' . $search_text . '">
-                        <input type="submit" class="recall-button" value="' . __( 'Search', 'wp-recall' ) . '">
-                    </form>
-                </div>';
+					<form method="get" action="">
+						<div class="rcl-search-form-title">' . __( 'Search groups', 'wp-recall' ) . '</div>
+						<input type="text" name="group-name" value="' . $search_text . '">'
+				. rcl_get_button( array(
+					'label'	 => __( 'Search', 'wp-recall' ),
+					'submit' => true
+				) )
+				. '</form>
+				</div>';
 
 			$content = apply_filters( 'rcl_groups_search_form', $content );
 		}
@@ -168,22 +177,31 @@ class Rcl_Groups_List extends Rcl_Groups_Query {
 
 		$filters = apply_filters( 'rcl_groups_filter', $filters );
 
+		if ( rcl_is_office() ) {
+			$url = (isset( $_POST['tab_url'] )) ? $_POST['tab_url'] : rcl_get_user_url( $user_LK );
+		} else {
+			$url = get_permalink( $post->ID );
+		}
+
 		if ( $filters ) {
 			$content .= '<div class="rcl-data-filters">' . __( 'Filter by', 'wp-recall' ) . ': ';
 
 			foreach ( $filters as $key => $name ) {
 
 				$args = array(
-					'groups-filter' => $key ? $key : false,
+					'groups-filter' => $key ? $key : false
 				);
 
 				if ( isset( $_GET['tab'] ) ) {
 					$args['tab'] = $_GET['tab'];
 				}
 
-				$url = add_query_arg( $args, isset( $_POST['tab_url'] ) ? $_POST['tab_url'] : null  );
-
-				$content .= '<a class="data-filter recall-button ' . rcl_a_active( $this->orderby, $key ) . '" href="' . $url . '">' . $name . '</a> ';
+				$content .= rcl_get_button( array(
+					'label'	 => $name,
+					'href'	 => add_query_arg( $args, $url ),
+					'class'	 => 'data-filter',
+					'status' => $this->orderby == $key ? 'disabled' : null
+					) );
 			}
 
 			$content .= '</div>';

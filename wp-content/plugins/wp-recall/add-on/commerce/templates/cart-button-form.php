@@ -7,7 +7,7 @@
 
 	<?php
 	if ( $Cart_Button->output['price'] )
-		echo $Cart_Button->price_box();
+		echo $Cart_Button->price_box( $Cart_Button->output['variations'] ? $Product_Variations : false  );
 	?>
 
 	<?php

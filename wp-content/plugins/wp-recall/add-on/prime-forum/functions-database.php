@@ -1,8 +1,7 @@
 <?php
 
 function pfm_get_groups( $args = false ) {
-	$groups = new PrimeGroups();
-	return $groups->get_results( $args );
+	return RQ::tbl( new PrimeGroups() )->parse( $args )->get_results();
 }
 
 function pfm_get_group( $group_id ) {
@@ -11,22 +10,17 @@ function pfm_get_group( $group_id ) {
 }
 
 function pfm_get_group_field( $group_id, $fieldName ) {
-	$groups = new PrimeGroups();
-	return $groups->get_var( array(
-			'group_id'	 => $group_id,
-			'fields'	 => array( $fieldName )
-		) );
+	return RQ::tbl( new PrimeGroups() )
+			->select( [$fieldName ] )
+			->where( ['group_id' => $group_id ] )
+			->get_var();
 }
 
 function pfm_add_group( $args ) {
 	global $wpdb;
 
 	if ( ! isset( $args['group_seq'] ) ) {
-
-		$groups	 = new PrimeGroups();
-		$seq	 = $groups->count() + 1;
-
-		$args['group_seq'] = $seq;
+		$args['group_seq'] = RQ::tbl( new PrimeGroups() )->get_count() + 1;
 	}
 
 	if ( ! isset( $args['group_slug'] ) || ! $args['group_slug'] ) {
@@ -126,21 +120,17 @@ function pfm_update_group( $args ) {
 }
 
 function pfm_get_forums( $args = false ) {
-	$forums = new PrimeForums();
-	return $forums->get_results( $args );
+	return RQ::tbl( new PrimeForums() )->parse( $args )->get_results();
 }
 
 function pfm_get_forum( $forum_id ) {
-	$forums = new PrimeForums();
-	return $forums->get_row( array( 'forum_id' => $forum_id ) );
+	return RQ::tbl( new PrimeForums() )->where( ['forum_id' => $forum_id ] )->get_row();
 }
 
 function pfm_get_forum_field( $forum_id, $fieldName ) {
-	$forums = new PrimeForums();
-	return $forums->get_var( array(
-			'forum_id'	 => $forum_id,
-			'fields'	 => array( $fieldName )
-		) );
+	return RQ::tbl( new PrimeForums() )->select( [$fieldName ] )
+			->where( ['forum_id' => $forum_id ] )
+			->get_var();
 }
 
 function pfm_add_forum( $args ) {
@@ -151,8 +141,9 @@ function pfm_add_forum( $args ) {
 
 	if ( ! isset( $args['forum_seq'] ) ) {
 
-		$forums	 = new PrimeForums();
-		$seq	 = $forums->count( array( 'group_id' => $args['group_id'] ) ) + 1;
+		$seq = RQ::tbl( new PrimeForums() )
+				->where( array( 'group_id' => $args['group_id'] ) )
+				->get_count() + 1;
 
 		$args['forum_seq'] = $seq;
 	}
@@ -311,15 +302,9 @@ function pfm_delete_forum( $forum_id, $forum_new = false ) {
 function pfm_update_forum_counter( $forum_id ) {
 	global $wpdb;
 
-	$TopicQuery = new PrimeTopics();
-
-	$counter = $TopicQuery->count( array(
-		'forum_id' => $forum_id
-		) );
-
 	$wpdb->update(
 		RCL_PREF . 'pforums', array(
-		'topic_count' => $counter
+		'topic_count' => RQ::tbl( new PrimeTopics() )->where( ['forum_id' => $forum_id ] )->get_count()
 		), array(
 		'forum_id' => $forum_id
 		)
@@ -337,31 +322,18 @@ function pfm_subforums_topic_count( $forum_id ) {
 }
 
 function pfm_get_topics( $args = false ) {
-	$topics = new PrimeTopics();
-	return $topics->get_results( $args );
+	return RQ::tbl( new PrimeTopics() )->parse( $args )->get_results();
 }
 
 function pfm_get_topic( $topic_id ) {
 
-	$topics	 = new PrimeTopics();
-	$posts	 = new PrimePosts();
-
-	$topics->set_query( array(
-		'topic_id'	 => $topic_id,
-		'join_query' => array(
-			array(
-				'table'			 => $posts->query['table'],
-				'on_topic_id'	 => 'topic_id',
-				'fields'		 => false
+	return RQ::tbl( new PrimeTopics() )->where( [
+				'topic_id' => $topic_id
+			] )
+			->join(
+				['topic_id', 'topic_id' ], RQ::tbl( new PrimePosts() )->select( ['max' => ['last_post_date' => 'post_date' ] ] )
 			)
-		)
-	) );
-
-	$topics->query['select'][] = "MAX(pfm_posts.post_date) AS last_post_date";
-
-	$topic = $topics->get_data( 'get_row' );
-
-	return $topic;
+			->get_row();
 }
 
 function pfm_add_topic( $args, $postdata = array() ) {
@@ -389,18 +361,15 @@ function pfm_add_topic( $args, $postdata = array() ) {
 		$args['topic_slug'] = str_replace( array( ' ' ), '-', $args['topic_slug'] );
 	}
 
-	$TopicQuery = new PrimeTopics();
-
-	$topic_slug = $TopicQuery->get_var( array(
-		'topic_slug' => $args['topic_slug'],
-		'fields'	 => array( 'topic_slug' )
-		) );
+	$topic_slug = RQ::tbl( new PrimeTopics() )->select( ['topic_slug' ] )->where( array(
+			'topic_slug' => $args['topic_slug']
+		) )->get_var();
 
 	if ( $topic_slug ) {
 
-		$suffix = $TopicQuery->count( array(
-			'topic_slug__like' => $args['topic_slug']
-			) );
+		$suffix = RQ::tbl( new PrimeTopics() )->where( array(
+				'topic_slug__like' => $args['topic_slug']
+			) )->get_count();
 
 		++ $suffix;
 
@@ -408,7 +377,7 @@ function pfm_add_topic( $args, $postdata = array() ) {
 	}
 
 	$topic = array(
-		'topic_name'	 => $args['topic_name'],
+		'topic_name'	 => htmlspecialchars( $args['topic_name'] ),
 		'topic_slug'	 => $args['topic_slug'],
 		'forum_id'		 => $args['forum_id'],
 		'user_id'		 => $args['user_id'],
@@ -505,6 +474,10 @@ function pfm_update_topic( $args ) {
 		}
 	}
 
+	if ( isset( $args['topic_name'] ) && $args['topic_name'] ) {
+		$args['topic_name'] = htmlspecialchars( $args['topic_name'] );
+	}
+
 	$result = $wpdb->update(
 		RCL_PREF . 'pforum_topics', $args, array(
 		'topic_id' => $topic_id
@@ -527,11 +500,7 @@ function pfm_update_topic_data( $topic_id ) {
 function pfm_update_topic_counter( $topic_id ) {
 	global $wpdb;
 
-	$PostQuery = new PrimePosts();
-
-	$counter = $PostQuery->count( array(
-		'topic_id' => $topic_id
-		) );
+	$counter = RQ::tbl( new PrimePosts() )->where( ['topic_id' => $topic_id ] )->get_count();
 
 	$wpdb->update(
 		RCL_PREF . 'pforum_topics', array(
@@ -573,58 +542,42 @@ function pfm_update_topic_indexes( $topic_id ) {
 
 	$wpdb->query(
 		"UPDATE
-            " . RCL_PREF . "pforum_posts
-        SET
-            post_index =(SELECT @a:= @a + 1 FROM (SELECT @a:= 0) s)
-        WHERE
-            topic_id = '$topic_id'
-        ORDER BY
-            post_date ASC"
+			" . RCL_PREF . "pforum_posts
+		SET
+			post_index =(SELECT @a:= @a + 1 FROM (SELECT @a:= 0) s)
+		WHERE
+			topic_id = '$topic_id'
+		ORDER BY
+			post_date ASC"
 	);
 }
 
 function pfm_get_topic_field( $topic_id, $fieldName ) {
-	$topics = new PrimeTopics();
-	return $topics->get_var( array(
-			'topic_id'	 => $topic_id,
-			'fields'	 => array( $fieldName )
-		) );
+	return RQ::tbl( new PrimeTopics() )->select( [$fieldName ] )->where( array(
+			'topic_id' => $topic_id
+		) )->get_var();
 }
 
 function get_topic_last_post( $topic_id ) {
-	$posts = new PrimePosts();
-	return $posts->get_row( array(
-			'topic_id' => $topic_id
-		) );
+	return RQ::tbl( new PrimePosts() )->where( ['topic_id' => $topic_id ] )->get_row();
 }
 
 function pfm_get_posts( $args = false ) {
-	$posts = new PrimePosts();
-	return $posts->get_results( $args );
+	return RQ::tbl( new PrimePosts() )->parse( $args )->get_results();
 }
 
 function pfm_get_post( $post_id ) {
 
-	$cachekey	 = json_encode( array( 'pfm_get_post', $post_id ) );
-	$cache		 = wp_cache_get( $cachekey );
-	if ( $cache )
-		return $cache;
-
-	$posts = new PrimePosts();
-
-	$post = $posts->get_row( array( 'post_id' => $post_id ) );
-
-	wp_cache_add( $cachekey, $post );
-
-	return $post;
+	return RQ::tbl( new PrimePosts() )
+			->where( array( 'post_id' => $post_id ) )
+			->get_row( 'cache' );
 }
 
 function pfm_get_post_field( $post_id, $fieldName ) {
-	$posts = new PrimePosts();
-	return $posts->get_var( array(
-			'post_id'	 => $post_id,
-			'fields'	 => array( $fieldName )
-		) );
+	return RQ::tbl( new PrimePosts() )
+			->select( [$fieldName ] )
+			->where( array( 'post_id' => $post_id ) )
+			->get_var();
 }
 
 function pfm_delete_post( $post_id ) {
@@ -671,11 +624,9 @@ function pfm_add_post( $args ) {
 		$args['user_id'] = $user_ID;
 	}
 
-	$PostQuery = new PrimePosts();
-
-	$postCount = $PostQuery->count( array(
-		'topic_id' => $args['topic_id']
-		) );
+	$postCount = RQ::tbl( new PrimePosts() )->where( array(
+			'topic_id' => $args['topic_id']
+		) )->get_count();
 
 	$postCount ++;
 
@@ -750,9 +701,9 @@ function pfm_update_post( $args ) {
 	if ( ! $result )
 		return false;
 
-	$PostQuery = new PrimePosts();
-
-	$post = $PostQuery->get_row( array( 'post_id' => $post_id ) );
+	$post = RQ::tbl( new PrimePosts() )
+		->where( array( 'post_id' => $post_id ) )
+		->get_row();
 
 	$cache = wp_cache_replace( json_encode( array( 'pfm_get_post', $post_id ) ), $post );
 
@@ -762,8 +713,7 @@ function pfm_update_post( $args ) {
 }
 
 function pfm_get_metas( $args = false ) {
-	$Meta = new PrimeMeta();
-	return $Meta->get_results( $args );
+	return RQ::tbl( new PrimeMeta() )->parse( $args )->get_results();
 }
 
 function pfm_get_meta( $object_id, $object_type, $meta_key ) {
@@ -777,18 +727,11 @@ function pfm_get_meta( $object_id, $object_type, $meta_key ) {
 
 	if ( ! $value ) {
 
-		$Meta = new PrimeMeta();
-
-		$value = maybe_unserialize(
-			$Meta->get_var(
-				array(
-					'object_id'		 => $object_id,
-					'object_type'	 => $object_type,
-					'meta_key'		 => $meta_key,
-					'fields'		 => array( 'meta_value' )
-				)
-			)
-		);
+		$value = RQ::tbl( new PrimeMeta() )->select( ['meta_value' ] )->where( [
+				'object_id'		 => $object_id,
+				'object_type'	 => $object_type,
+				'meta_key'		 => $meta_key,
+			] )->get_var();
 	}
 
 	wp_cache_add( $cachekey, $value );
@@ -851,15 +794,13 @@ function pfm_delete_meta( $object_id, $object_type, $meta_key, $meta_value = fal
 }
 
 function pfm_get_visits( $args = false ) {
-	$Visits = new PrimeVisits();
-	return $Visits->get_results( $args );
+	return RQ::tbl( new PrimeVisits() )->parse( $args )->get_results();
 }
 
 function pfm_get_visit( $user_id ) {
-	$Visits = new PrimeVisits();
-	return $Visits->get_row( array(
+	return RQ::tbl( new PrimeVisits() )->where( array(
 			'user_id' => $user_id
-		) );
+		) )->get_row();
 }
 
 function pfm_add_visit( $args ) {
@@ -919,32 +860,26 @@ function pfm_get_visitors_data( $args, $timeout = false ) {
 		$timeout = rcl_get_option( 'timeout', 10 );
 
 	$args = array_merge( $args, array(
-		'fields'	 => array( 'user_id' ),
-		'join_query' => array(
+		'select' => array( 'user_id' ),
+		'join'	 => array(
 			array(
-				'table'		 => array(
+				['user_id', 'ID' ], RQ::tbl( new Rcl_Query( array(
 					'name'	 => $wpdb->users,
 					'as'	 => 'wp_users',
 					'cols'	 => array(
 						'ID',
 						'display_name'
 					)
-				),
-				'on_user_id' => 'ID',
-				'fields'	 => array( 'display_name' )
+				) ) )->select( ['display_name' ] )
 			)
 		)
 		) );
 
-	$Visits = new PrimeVisits();
+	$visits = RQ::tbl( new PrimeVisits() )->parse( $args );
 
-	$Visits->set_query( $args );
+	$visits->where_string( $visits->table['as'] . ".visit_date > date_sub('" . current_time( 'mysql' ) . "', interval $timeout minute)" );
 
-	$Visits->query['where'][] = $Visits->query['table']['as'] . ".visit_date > date_sub('" . current_time( 'mysql' ) . "', interval $timeout minute)";
-
-	$visitors = $Visits->get_data();
-
-	return $visitors;
+	return $visits->get_results();
 }
 
 function pfm_get_visitors() {

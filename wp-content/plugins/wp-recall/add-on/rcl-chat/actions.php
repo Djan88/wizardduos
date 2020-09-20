@@ -138,25 +138,14 @@ function rcl_chat_delete_message_attachment( $attachment_id ) {
 add_action( 'delete_user', 'rcl_chat_delete_userdata', 10 );
 function rcl_chat_delete_userdata( $user_id ) {
 
-	$Users	 = new Rcl_Chat_Users_Query();
-	$Chats	 = new Rcl_Chats_Query();
-
-	//получаем все чаты пользователя
-	$chats = $Chats->get_results( array(
-		'fields'	 => array(
+	$chats = RQ::tbl( new Rcl_Chats_Query() )
+		->select( [
 			'chat_id',
 			'chat_status'
-		),
-		'number'	 => -1,
-		'join_query' => array(
-			array(
-				'table'		 => $Users->query['table'],
-				'on_chat_id' => 'chat_id',
-				'user_id'	 => $user_id,
-				'fields'	 => false
-			)
-		)
-		) );
+		] )
+		->join( 'chat_id', RQ::tbl( new Rcl_Chat_Users_Query() )->where( ['user_id' => $user_id ] ) )
+		->number( -1 )
+		->get_results();
 
 	if ( $chats ) {
 

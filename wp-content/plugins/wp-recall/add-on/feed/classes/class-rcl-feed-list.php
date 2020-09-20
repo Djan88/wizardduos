@@ -21,7 +21,9 @@ class Rcl_Feed_List extends Rcl_Query {
 		if ( isset( $_GET['feed-filter'] ) )
 			$args['content'] = $_GET['feed-filter'];
 
-		$args = apply_filters( 'rcl_feed_args', $args );
+		$content = isset( $args['content'] ) ? $args['content'] : 'posts';
+
+		$args = apply_filters( 'rcl_feed_' . $args['content'] . '_args', $args );
 
 		$this->init_properties( $args );
 
@@ -53,7 +55,7 @@ class Rcl_Feed_List extends Rcl_Query {
 	}
 
 	function count_feed() {
-		return $this->count();
+		return $this->get_count();
 	}
 
 	function get_feed() {
@@ -171,22 +173,23 @@ class Rcl_Feed_List extends Rcl_Query {
 			$authors_feed = array_unique( array_merge( $usersFeed1, $usersFeed2 ) );
 		}
 
+		parent::__construct( array(
+			'name'	 => $wpdb->posts,
+			'as'	 => 'wp_posts',
+			'cols'	 => array(
+				'ID',
+				'post_author',
+				'post_date',
+				'post_content',
+				'post_title',
+				'post_excerpt',
+				'post_parent',
+				'post_status',
+				'post_type'
+			)
+		) );
+
 		$defaults = array(
-			'table'					 => array(
-				'name'	 => $wpdb->posts,
-				'as'	 => 'wp_posts',
-				'cols'	 => array(
-					'ID',
-					'post_author',
-					'post_date',
-					'post_content',
-					'post_title',
-					'post_excerpt',
-					'post_parent',
-					'post_status',
-					'post_type'
-				)
-			),
 			'post_status'			 => 'publish',
 			'post_parent'			 => 0,
 			'post_author__not_in'	 => $authors_ignor,
@@ -198,7 +201,7 @@ class Rcl_Feed_List extends Rcl_Query {
 				'customize_changeset',
 				'custom_css'
 			),
-			'fields'				 => array(
+			'select'				 => array(
 				'ID',
 				'post_title',
 				'post_author',
@@ -213,7 +216,7 @@ class Rcl_Feed_List extends Rcl_Query {
 
 		$args = apply_filters( 'rcl_feed_posts_args', $args, $this->user_feed );
 
-		$this->set_query( $args );
+		$this->parse( $args );
 
 		return apply_filters( 'rcl_feed_posts_query', $this->query, $this->user_feed );
 	}
@@ -240,11 +243,12 @@ class Rcl_Feed_List extends Rcl_Query {
 	function setup_comments_query( $query, $args ) {
 		global $wpdb;
 
+		parent::__construct( $this->get_comments_table() );
+
 		$defaults = array(
-			'table'				 => $this->get_comments_table(),
 			'comment_approved'	 => 1,
 			'user_id__not_in'	 => $this->user_feed,
-			'fields'			 => array(
+			'select'			 => array(
 				'comment_ID',
 				'comment_post_ID',
 				'comment_author',
@@ -259,7 +263,7 @@ class Rcl_Feed_List extends Rcl_Query {
 
 		$args = apply_filters( 'rcl_feed_comments_args', $args, $this->user_feed );
 
-		$this->set_query( $args );
+		$this->parse( $args );
 
 		$this->query['join'][]	 = "INNER JOIN " . RCL_PREF . "feeds AS rcl_feeds ON wp_comments.user_id=rcl_feeds.object_id";
 		$this->query['where'][]	 = "rcl_feeds.feed_type = 'author'";
@@ -273,12 +277,13 @@ class Rcl_Feed_List extends Rcl_Query {
 	function setup_answers_query( $query, $args ) {
 		global $wpdb;
 
+		parent::__construct( $this->get_comments_table() );
+
 		$defaults = array(
-			'table'					 => $this->get_comments_table(),
 			'comment_approved'		 => 1,
 			'user_id__not_in'		 => $this->user_feed,
 			'comment_parent__not_in' => 0,
-			'fields'				 => array(
+			'select'				 => array(
 				'comment_ID',
 				'comment_post_ID',
 				'comment_author',
@@ -293,7 +298,7 @@ class Rcl_Feed_List extends Rcl_Query {
 
 		$args = apply_filters( 'rcl_feed_answers_args', $args, $this->user_feed );
 
-		$this->set_query( $args );
+		$this->parse( $args );
 
 		$this->query['join'][]	 = "INNER JOIN $wpdb->comments AS wp_comments2 ON wp_comments.comment_parent = wp_comments2.comment_ID";
 		$this->query['where'][]	 = "wp_comments2.user_id='$this->user_feed'";
@@ -360,7 +365,12 @@ class Rcl_Feed_List extends Rcl_Query {
 		$content .= '<div class="rcl-data-filters">';
 
 		foreach ( $filters as $key => $name ) {
-			$content .= '<a class="data-filter recall-button ' . rcl_a_active( $this->content, $key ) . '" href="' . $perm . 'feed-filter=' . $key . '">' . $name . '</a> ';
+			$content .= rcl_get_button( array(
+				'label'	 => $name,
+				'href'	 => $perm . 'feed-filter=' . $key,
+				'class'	 => 'data-filter',
+				'status' => $this->content == $key ? 'disabled' : false
+				) );
 		}
 
 		$content .= '</div>';

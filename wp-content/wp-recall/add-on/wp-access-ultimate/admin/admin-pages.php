@@ -72,6 +72,8 @@ function wau_page_history_options() {
 
 function wau_page_options() {
 
+	require_once RCL_PATH . 'admin/classes/class-rcl-options-manager.php';
+
 	$accounts = wau_get_accounts( array(
 		'number' => -1,
 		'fields' => array(
@@ -103,13 +105,14 @@ function wau_page_options() {
 		$types[$post_type->name] = $post_type->label;
 	}
 
-	require_once RCL_PATH . 'classes/class-rcl-options.php';
+	$Manager = new Rcl_Options_Manager( array(
+		'option_name'	 => 'wau_options',
+		'page_options'	 => 'wau-options',
+		) );
 
-	$opt = new Rcl_Options( __FILE__, 'wau_options' );
-
-	$WAUOptions = get_option( 'wau_options' );
-
-	$options = array(
+	$Manager->add_box( 'wau-general', [
+		'title' => __( 'Общие настройки' )
+	] )->add_options( array(
 		array(
 			'type'	 => 'checkbox',
 			'slug'	 => 'post-types',
@@ -128,53 +131,12 @@ function wau_page_options() {
 		),
 		array(
 			'type'		 => 'custom',
-			'slug'		 => 'reg-time',
 			'content'	 => '<label>' . __( 'Время доступа' ) . '</label> '
 			. '<input type="text" style="width: auto;" size="1" value="' . (isset( $WAUOptions['reg-time']['year'] ) ? $WAUOptions['reg-time']['year'] : 0) . '" name="wau_options[reg-time][year]">г. '
 			. '<input type="text" style="width: auto;" size="1" value="' . (isset( $WAUOptions['reg-time']['month'] ) ? $WAUOptions['reg-time']['month'] : 0) . '" name="wau_options[reg-time][month]">м. '
 			. '<input type="text" style="width: auto;" size="1" value="' . (isset( $WAUOptions['reg-time']['day'] ) ? $WAUOptions['reg-time']['day'] : 0) . '" name="wau_options[reg-time][day]">д. '
 			. '<input type="text" style="width: auto;" size="1" value="' . (isset( $WAUOptions['reg-time']['hour'] ) ? $WAUOptions['reg-time']['hour'] : 0) . '" name="wau_options[reg-time][hour]">ч. '
 			. '<input type="text" style="width: auto;" size="1" value="' . (isset( $WAUOptions['reg-time']['minute'] ) ? $WAUOptions['reg-time']['minute'] : 0) . '" name="wau_options[reg-time][minute]">мин. '
-		),
-		array(
-			'type'		 => 'editor',
-			'slug'		 => 'access-text-archive',
-			'title'		 => __( 'Текст о закрытом доступе на архивных страницах' ),
-			'tinymce'	 => true,
-			'default'	 => '<span style="color:red;font-weight:bold;">Данный контент имеет ограниченный доступ</span>',
-			'notice'	 => __( 'Разрешается использование тегов:<br>'
-				. '{excerpt} - краткое содержание записи установленное в редакторе записи через поле "Отрывок"<br>'
-				. '{accountName} - наименование аккаунта доступа, которым публикация закрыта' )
-		),
-		array(
-			'type'		 => 'editor',
-			'slug'		 => 'access-text-single',
-			'title'		 => __( 'Текст о закрытом доступе на одиночных страницах' ),
-			'tinymce'	 => true,
-			'default'	 => '<span style="color:red;font-weight:bold;">Данный контент имеет ограниченный доступ</span>',
-			'notice'	 => __( 'Разрешается использование тегов:<br>'
-				. '{excerpt} - краткое содержание записи установленное в редакторе записи через поле "Отрывок"<br>'
-				. '{accountName} - наименование аккаунта доступа, которым публикация закрыта' )
-		),
-		array(
-			'type'		 => 'editor',
-			'slug'		 => 'access-member-notice',
-			'title'		 => __( 'Текст о закрытом доступе для зарегистрированных пользователей' ),
-			'tinymce'	 => true,
-			//'default' => '<span style="color:red;font-weight:bold;">Данный контент имеет ограниченный доступ</span>',
-			'notice'	 => __( 'Разрешается использование тегов:<br>'
-				. '{excerpt} - краткое содержание записи установленное в редакторе записи через поле "Отрывок"<br>'
-				. '{accountName} - наименование аккаунта доступа, которым публикация закрыта' )
-		),
-		array(
-			'type'		 => 'editor',
-			'slug'		 => 'access-guest-notice',
-			'title'		 => __( 'Текст о закрытом доступе для гостей' ),
-			'tinymce'	 => true,
-			//'default' => '<span style="color:red;font-weight:bold;">Данный контент имеет ограниченный доступ</span>',
-			'notice'	 => __( 'Разрешается использование тегов:<br>'
-				. '{excerpt} - краткое содержание записи установленное в редакторе записи через поле "Отрывок"<br>'
-				. '{accountName} - наименование аккаунта доступа, которым публикация закрыта' )
 		),
 		array(
 			'type'	 => 'select',
@@ -231,6 +193,56 @@ function wau_page_options() {
 			'notice' => __( 'Укажите показывать ли контент закрытой публикации '
 				. 'ее автору, если у него нет доступа.' )
 		),
+	) );
+
+	$Manager->add_box( 'wau-content', [
+		'title' => __( 'Контент' )
+	] )->add_group( 'general' )->add_options( [
+		array(
+			'type'		 => 'editor',
+			'slug'		 => 'access-text-archive',
+			'title'		 => __( 'Текст о закрытом доступе на архивных страницах' ),
+			'tinymce'	 => true,
+			'default'	 => '<span style="color:red;font-weight:bold;">Данный контент имеет ограниченный доступ</span>',
+			'notice'	 => __( 'Разрешается использование тегов:<br>'
+				. '{excerpt} - краткое содержание записи установленное в редакторе записи через поле "Отрывок"<br>'
+				. '{accountName} - наименование аккаунта доступа, которым публикация закрыта' )
+		),
+		array(
+			'type'		 => 'editor',
+			'slug'		 => 'access-text-single',
+			'title'		 => __( 'Текст о закрытом доступе на одиночных страницах' ),
+			'tinymce'	 => true,
+			'default'	 => '<span style="color:red;font-weight:bold;">Данный контент имеет ограниченный доступ</span>',
+			'notice'	 => __( 'Разрешается использование тегов:<br>'
+				. '{excerpt} - краткое содержание записи установленное в редакторе записи через поле "Отрывок"<br>'
+				. '{accountName} - наименование аккаунта доступа, которым публикация закрыта' )
+		),
+		array(
+			'type'		 => 'editor',
+			'slug'		 => 'access-member-notice',
+			'title'		 => __( 'Текст о закрытом доступе для зарегистрированных пользователей' ),
+			'tinymce'	 => true,
+			//'default' => '<span style="color:red;font-weight:bold;">Данный контент имеет ограниченный доступ</span>',
+			'notice'	 => __( 'Разрешается использование тегов:<br>'
+				. '{excerpt} - краткое содержание записи установленное в редакторе записи через поле "Отрывок"<br>'
+				. '{accountName} - наименование аккаунта доступа, которым публикация закрыта' )
+		),
+		array(
+			'type'		 => 'editor',
+			'slug'		 => 'access-guest-notice',
+			'title'		 => __( 'Текст о закрытом доступе для гостей' ),
+			'tinymce'	 => true,
+			//'default' => '<span style="color:red;font-weight:bold;">Данный контент имеет ограниченный доступ</span>',
+			'notice'	 => __( 'Разрешается использование тегов:<br>'
+				. '{excerpt} - краткое содержание записи установленное в редакторе записи через поле "Отрывок"<br>'
+				. '{accountName} - наименование аккаунта доступа, которым публикация закрыта' )
+		),
+	] );
+
+	$Manager->add_box( 'wau-extra', [
+		'title' => __( 'Продвинутые настройки' )
+	] )->add_group( 'general' )->add_options( [
 		array(
 			'type'	 => 'select',
 			'slug'	 => 'hidden-posts',
@@ -267,16 +279,15 @@ function wau_page_options() {
 				. 'влиять на вывод контента прикрепленного к публикации '
 				. 'через фильтр the_content, также скрывая его или наоборот - показывая' )
 		)
-	);
+	] );
 
-	$options = apply_filters( 'wau_options_array', $options );
+	$Manager = apply_filters( 'wau_options', $Manager );
 
-	if ( $WAUOptions ) {
-		foreach ( $options as $k => $option ) {
-
-			if ( isset( $WAUOptions[$option['slug']] ) )
-				$options[$k]['default'] = $WAUOptions[$option['slug']];
-		}
+	//support old additional options
+	if ( $moreOptions = apply_filters( 'wau_options_array', array() ) ) {
+		$Manager->add_box( 'wau-others', array(
+			'title' => __( 'Прочие настройки' )
+		) )->add_group( 'options' )->add_options( $moreOptions );
 	}
 	?>
 
@@ -284,29 +295,8 @@ function wau_page_options() {
 
 	<div><?php echo reg_form_wpp( 'wau' ); ?></div>
 
-	<div id="prime-options" class="rcl-form wrap-recall-options" style="display:block;">
-
-		<form method="post" action="options.php">
-
-			<?php
-			echo $opt->options(
-				false, array(
-				$opt->options_box( __( 'General settings', 'wp-recall' ), $options )
-				)
-			);
-			?>
-
-			<p align="right">
-				<input type="submit" name="Submit" class="button button-primary button-large" value="<?php _e( 'Save', 'wp-recall' ); ?>" />
-			</p>
-			<input type="hidden" name="action" value="update" />
-			<input type="hidden" name="page_options" value="wau_options" />
-			<?php wp_nonce_field( 'update-options' ); ?>
-
-		</form>
-
-	</div>
 	<?php
+	echo $Manager->get_content();
 }
 
 function wau_page_manager() {

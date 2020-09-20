@@ -199,7 +199,7 @@ class Rcl_Chat extends Rcl_Chat_Messages_Query {
 
 	function is_errors() {
 		global $wp_errors;
-		if ( $wp_errors->errors )
+		if ( isset( $wp_errors->errors ) && $wp_errors->errors )
 			return true;
 		return false;
 	}
@@ -355,14 +355,34 @@ class Rcl_Chat extends Rcl_Chat_Messages_Query {
 		global $user_ID;
 
 		if ( ! $user_ID ) {
-			$content = '<div class="chat-notice">'
-				. '<span class="notice-error">' . __( 'To post messages in the chat you need to login', 'wp-recall' ) . '</span>'
-				. '</div>'
-				. '<form><input type="hidden" name="chat[token]" value="' . $this->chat_token . '"></form>';
+
+			$content = rcl_get_notice( array(
+				'type'	 => 'error',
+				'text'	 => __( 'To post messages in the chat you need to login', 'wp-recall' )
+				) );
+
+			$content .= '<form><input type="hidden" name="chat[token]" value="' . $this->chat_token . '"></form>';
+
 			return $content;
 		}
 
 		$content = apply_filters( 'rcl_chat_before_form', '', $this->chat );
+
+		if ( $this->file_upload ) {
+
+			$chatOptions = rcl_get_option( 'chat', array() );
+
+			$uploader = new Rcl_Uploader( 'rcl_chat_uploader', array(
+				'multiple'		 => 0,
+				'max_files'		 => 1,
+				'crop'			 => 0,
+				'temp_media'	 => 1,
+				'mode_output'	 => 'list',
+				'input_attach'	 => 'chat[attachment]',
+				'file_types'	 => isset( $chatOptions['file_types'] ) ? $chatOptions['file_types'] : 'png, jpeg, gif',
+				'max_size'		 => isset( $chatOptions['file_size'] ) ? $chatOptions['file_size'] * 1024 : 1024
+				) );
+		}
 
 		$content .= '<form action="" method="post">'
 			. '<div class="chat-form-media">'
@@ -371,9 +391,18 @@ class Rcl_Chat extends Rcl_Chat_Messages_Query {
 		if ( $this->file_upload ) {
 			$content .= '<span class="rcl-chat-uploader">'
 				. '<i class="rcli fa-paperclip" aria-hidden="true"></i>'
-				. '<input name="chat-upload" type="file">'
+				. $uploader->get_input()
 				. '</span>';
 		}
+
+		$content .= '</div>';
+
+		$content .= '<textarea maxlength="' . $this->max_words . '" onkeyup="rcl_chat_words_count(event,this);" id="chat-area-' . $this->chat_id . '" name="chat[message]"></textarea>';
+
+		if ( $this->file_upload ) {
+			$content .= $uploader->get_gallery();
+		}
+		$content .= '<span class="words-counter">' . $this->max_words . '</span>';
 
 		$hiddens = apply_filters( 'rcl_chat_hidden_fields', array(
 			'chat[token]'		 => $this->chat_token,
@@ -383,10 +412,6 @@ class Rcl_Chat extends Rcl_Chat_Messages_Query {
 			'chat[file_upload]'	 => $this->file_upload
 			) );
 
-		$content .= '</div>'
-			. '<textarea maxlength="' . $this->max_words . '" onkeyup="rcl_chat_words_count(event,this);" id="chat-area-' . $this->chat_id . '" name="chat[message]"></textarea>'
-			. '<span class="words-counter">' . $this->max_words . '</span>';
-
 		if ( $hiddens ) {
 
 			foreach ( $hiddens as $name => $val ) {
@@ -395,7 +420,12 @@ class Rcl_Chat extends Rcl_Chat_Messages_Query {
 		}
 
 		$content .= '<div class="chat-preloader-file"></div>'
-			. '<a href="#" class="recall-button chat-submit" onclick="rcl_chat_add_message(this);return false;"><i class="rcli fa-reply"></i> ' . __( 'Send', 'wp-recall' ) . '</a>'
+			. rcl_get_button( array(
+				'label'		 => __( 'Send', 'wp-recall' ),
+				'icon'		 => 'fa-reply',
+				'class'		 => 'chat-submit',
+				'onclick'	 => 'rcl_chat_add_message(this);return false;'
+			) )
 			. '</form>';
 
 		$content .= apply_filters( 'rcl_chat_after_form', '', $this->chat );
@@ -456,7 +486,7 @@ class Rcl_Chat extends Rcl_Chat_Messages_Query {
 			else
 				$notice	 = __( 'Chat history will be displayed here', 'wp-recall' );
 
-			$content .= sprintf( '<span class="anons-message">%s</span>', $notice );
+			$content .= rcl_get_notice( ['text' => $notice ] );
 		}
 
 		$content .= '</div>';
@@ -645,9 +675,11 @@ class Rcl_Chat extends Rcl_Chat_Messages_Query {
 		$class	 = ($this->important) ? 'fa-star-half-o' : 'fa-star';
 
 		$content = '<div class="important-manager">'
-			. '<a href="#" class="recall-button important-shift" onclick="rcl_chat_important_manager_shift(this,' . $status . ');return false;">'
-			. '<i class="rcli ' . $class . '" aria-hidden="true"></i>'
-			. '</a>'
+			. rcl_get_button( array(
+				'icon'		 => $class,
+				'class'		 => 'important-shift',
+				'onclick'	 => 'rcl_chat_important_manager_shift(this,' . $status . ');return false;'
+			) )
 			. '</div>';
 
 		return $content;

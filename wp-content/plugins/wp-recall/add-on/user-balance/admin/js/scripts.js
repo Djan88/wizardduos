@@ -10,7 +10,7 @@ jQuery( function() {
 			data: {
 				action: 'rcl_edit_balance_user',
 				user: id_user,
-				balance: jQuery( '.balanceuser-' + id_user ).attr( 'value' )
+				balance: jQuery( '.balanceuser-' + id_user ).val()
 			}
 		} );
 

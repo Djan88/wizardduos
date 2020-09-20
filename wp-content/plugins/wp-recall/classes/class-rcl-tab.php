@@ -50,7 +50,8 @@ class Rcl_Tab {
 	}
 
 	function print_tab( $content ) {
-		global $user_LK;
+		global $user_LK, $rcl_tabs;
+		//print_r( $rcl_tabs );
 		$content .= $this->get_tab( $user_LK );
 		return $content;
 	}
@@ -77,7 +78,7 @@ class Rcl_Tab {
 	}
 
 	function get_tab_content( $master_id, $subtab_id = false ) {
-		global $rcl_tab;
+		global $rcl_tab, $rcl_tabs;
 
 		$subtabs = apply_filters( 'rcl_subtabs', $this->content, $this->id );
 
@@ -176,6 +177,31 @@ class Rcl_Tab {
 			);
 		}
 
+		/* will open this code in the future version of plugin
+		 * if ( $this->onclick ) {
+
+		  $html_button = rcl_get_button( [
+		  'label'		 => $name,
+		  'icon'		 => $icon,
+		  'onclick'	 => $this->onclick
+		  ] );
+		  } else {
+
+		  $html_button = rcl_get_button( [
+		  'label'	 => $name,
+		  'url'	 => rcl_get_tab_permalink( $master_id, $this->id ),
+		  'class'	 => $this->get_class_button(),
+		  'icon'	 => $icon,
+		  'data'	 => [
+		  'post' => rcl_encode_post( array(
+		  'tab_id'	 => $this->id,
+		  'master_id'	 => $master_id
+		  ) )
+		  ]
+		  ] );
+		  }
+		 */
+
 		return sprintf( '<span class="rcl-tab-button" data-tab="%s" id="tab-button-%s">%s</span>', $this->id, $this->id, $html_button );
 	}
 
@@ -192,9 +218,9 @@ class Rcl_Tab {
 
 		$content = '';
 
-		if ( $this->use_cache && in_array( 'cache', $this->supports ) ) {
+		$rcl_cache = new Rcl_Cache();
 
-			$rcl_cache = new Rcl_Cache();
+		if ( $this->use_cache && in_array( 'cache', $this->supports ) && $rcl_cache->is_cache ) {
 
 			$protocol = @( $_SERVER["HTTPS"] != 'on' ) ? 'http://' : 'https://';
 

@@ -7,7 +7,7 @@ jQuery( function() {
 			data: {
 				action: 'rcl_edit_rating_user',
 				user: id_user,
-				rayting: jQuery( '.raytinguser-' + id_user ).attr( 'value' )
+				rayting: jQuery( '.raytinguser-' + id_user ).val()
 			}
 		} );
 

@@ -162,15 +162,12 @@ function pfm_the_notices() {
 	do_action( 'pfm_the_notices' );
 }
 
-function pfm_get_notice( $notice, $type = 'notice' ) {
+function pfm_get_notice( $notice, $type = 'info' ) {
 
-	$content = '<div class="prime-notice">';
-	$content .= '<div class="notice-box type-' . $type . '">';
-	$content .= $notice;
-	$content .= '</div>';
-	$content .= '</div>';
-
-	return $content;
+	return rcl_get_notice( array(
+		'type'	 => $type,
+		'text'	 => $notice
+		) );
 }
 
 function pfm_the_visitors() {
@@ -219,7 +216,7 @@ function pfm_the_search_form() {
 	?>
 
 	<form action="<?php echo pfm_get_home_url() ?>">
-		<input name="fs" value="<?php echo ($PrimeQuery->vars['pfm-search']) ? $PrimeQuery->vars['pfm-search'] : ''; ?>" placeholder="<?php _e( 'Search the forum', 'wp-recall' ); ?>" type="text">
+		<input name="fs" value="<?php echo ($PrimeQuery->vars['pfm-search']) ? htmlspecialchars( $PrimeQuery->vars['pfm-search'] ) : ''; ?>" placeholder="<?php _e( 'Search the forum', 'wp-recall' ); ?>" type="text">
 		<?php if ( pfm_is_search() ): ?>
 
 			<?php if ( $PrimeQuery->vars['pfm-group'] ): ?>
@@ -417,12 +414,12 @@ function pfm_get_icon( $icon_class = 'fa-folder' ) {
 		return apply_filters( 'pfm_group_icon', $defaultIcon );
 	}
 
-	if ( $PrimeGroup && $PrimeForum || $PrimeForum->parent_id ) {
-		return apply_filters( 'pfm_forum_icon', $defaultIcon );
-	}
-
 	if ( $PrimeForum && $PrimeTopic ) {
 		return apply_filters( 'pfm_topic_icon', $defaultIcon );
+	}
+
+	if ( $PrimeGroup && $PrimeForum || (isset( $PrimeForum->parent_id ) && $PrimeForum->parent_id) ) {
+		return apply_filters( 'pfm_forum_icon', $defaultIcon );
 	}
 
 	return apply_filters( 'pfm_icon', $defaultIcon );

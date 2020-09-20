@@ -1,22 +1,19 @@
 <?php
 
 function rcl_get_chats( $args ) {
-	$chats = new Rcl_Chats_Query();
-	return $chats->get_results( $args );
+	return RQ::tbl( new Rcl_Chats_Query() )->parse( $args )->get_results();
 }
 
 function rcl_get_chat( $chat_id ) {
-	$chats = new Rcl_Chats_Query();
-	return $chats->get_row( array(
+	return RQ::tbl( new Rcl_Chats_Query() )->where( array(
 			'chat_id' => $chat_id
-		) );
+		) )->get_row();
 }
 
 function rcl_get_chat_by_room( $chat_room ) {
-	$chats = new Rcl_Chats_Query();
-	return $chats->get_row( array(
+	return RQ::tbl( new Rcl_Chats_Query() )->where( array(
 			'chat_room' => $chat_room
-		) );
+		) )->get_row();
 }
 
 function rcl_insert_chat( $chat_room, $chat_status ) {
@@ -98,24 +95,18 @@ function rcl_chat_delete_user( $chat_id, $user_id ) {
 }
 
 function rcl_chat_get_users( $chat_id ) {
-	$users = new Rcl_Chat_Users_Query();
-	return $users->get_col( array(
-			'chat_id'	 => $chat_id,
-			'fields'	 => array(
-				'user_id'
-			)
-		) );
+	return RQ::tbl( new Rcl_Chat_Users_Query() )->select( [
+			'user_id'
+		] )->where( array(
+			'chat_id' => $chat_id,
+		) )->get_col();
 }
 
 function rcl_chat_get_user_status( $chat_id, $user_id ) {
-	$users = new Rcl_Chat_Users_Query();
-	return $users->get_var( array(
+	return RQ::tbl( new Rcl_Chat_Users_Query() )->select( ['user_status' ] )->where( array(
 			'chat_id'	 => $chat_id,
-			'user_id'	 => $user_id,
-			'fields'	 => array(
-				'user_status'
-			)
-		) );
+			'user_id'	 => $user_id
+		) )->get_var();
 }
 
 function rcl_chat_insert_user( $chat_id, $user_id, $status = 1, $activity = 1 ) {
@@ -156,31 +147,24 @@ function rcl_chat_delete_message( $message_id ) {
 }
 
 function rcl_chat_get_messages( $args ) {
-	$messages = new Rcl_Chat_Messages_Query();
-	return $messages->get_results( $args );
+	return RQ::tbl( new Rcl_Chat_Messages_Query() )->parse( $args )->get_results();
 }
 
 function rcl_chat_count_messages( $args ) {
-	$messages = new Rcl_Chat_Messages_Query();
-	return $messages->count( $args );
+	return RQ::tbl( new Rcl_Chat_Messages_Query() )->parse( $args )->get_count();
 }
 
 function rcl_chat_get_message( $message_id ) {
-	$messages = new Rcl_Chat_Messages_Query();
-	return $messages->get_row( array(
+	return RQ::tbl( new Rcl_Chat_Messages_Query() )->where( array(
 			'message_id' => $message_id
-		) );
+		) )->get_row();
 }
 
 function rcl_chat_get_message_meta( $message_id, $meta_key ) {
-	$messages = new Rcl_Chat_Messagemeta_Query();
-	return $messages->get_var( array(
+	return RQ::tbl( new Rcl_Chat_Messagemeta_Query() )->select( ['meta_value' ] )->where( array(
 			'message_id' => $message_id,
-			'meta_key'	 => $meta_key,
-			'fields'	 => array(
-				'meta_value'
-			)
-		) );
+			'meta_key'	 => $meta_key
+		) )->get_var();
 }
 
 function rcl_chat_add_message_meta( $message_id, $meta_key, $meta_value ) {
@@ -254,56 +238,32 @@ function rcl_chat_excerpt( $string ) {
 }
 
 function rcl_chat_noread_messages_amount( $user_id ) {
-	$messages = new Rcl_Chat_Messages_Query();
-	return $messages->count( array(
+	return RQ::tbl( new Rcl_Chat_Messages_Query() )->where( array(
 			'private_key'	 => $user_id,
 			'message_status' => 0
-		) );
+		) )->get_count();
 }
 
 function rcl_chat_get_important_messages( $user_id, $limit ) {
 
-	$messages	 = new Rcl_Chat_Messages_Query();
-	$meta		 = new Rcl_Chat_Messagemeta_Query();
+	$messagesData = RQ::tbl( new Rcl_Chat_Messages_Query() )
+		->join( 'message_id', RQ::tbl( new Rcl_Chat_Messagemeta_Query() )
+			->where( ['meta_key' => 'important:' . $user_id ] )
+		)
+		->orderby( 'message_time' )
+		->limit( $limit[1], $limit[0] )
+		->get_results( false, ARRAY_A );
 
-	$args = array(
-		'join_query' => array(
-			array(
-				'join'			 => 'INNER',
-				'table'			 => $meta->query['table'],
-				'on_message_id'	 => 'message_id',
-				'meta_key'		 => 'important:' . $user_id,
-				'fields'		 => false
-			)
-		),
-		'orderby'	 => 'message_time',
-		'offset'	 => $limit[0],
-		'number'	 => $limit[1],
-		'return_as'	 => ARRAY_A
-	);
-
-	$messagesData = stripslashes_deep( $messages->get_results( $args ) );
-
-	return $messagesData;
+	return stripslashes_deep( $messagesData );
 }
 
 function rcl_chat_count_important_messages( $user_id ) {
 
-	$messages	 = new Rcl_Chat_Messages_Query();
-	$meta		 = new Rcl_Chat_Messagemeta_Query();
-
-	$args = array(
-		'join_query' => array(
-			array(
-				'join'			 => 'INNER',
-				'table'			 => $meta->query['table'],
-				'on_message_id'	 => 'message_id',
-				'meta_key'		 => 'important:' . $user_id
+	return RQ::tbl( new Rcl_Chat_Messages_Query() )
+			->join( 'message_id', RQ::tbl( new Rcl_Chat_Messagemeta_Query() )
+				->where( ['meta_key' => 'important:' . $user_id ] )
 			)
-		)
-	);
-
-	return $messages->count( $args );
+			->get_count();
 }
 
 function rcl_chat_get_new_messages( $post ) {

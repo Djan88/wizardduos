@@ -30,11 +30,6 @@ class Rcl_Custom_Fields {
 
 		$this->rand = rand( 0, 100 );
 
-		if ( isset( $field['field_select'] ) ) {
-
-			$field['values'] = rcl_edit_old_option_fields( $field['field_select'], $field['type'] );
-		}
-
 		if ( isset( $field['requared'] ) )
 			$field['required'] = $field['requared'];
 
@@ -236,9 +231,6 @@ class Rcl_Custom_Fields {
 
 		rcl_multiselect_scripts();
 
-		if ( isset( $field['field_select'] ) )
-			$field['values'] = rcl_edit_old_option_fields( $field['field_select'], $field['type'] );
-
 		if ( ! $field['values'] )
 			return false;
 
@@ -308,9 +300,6 @@ class Rcl_Custom_Fields {
 	}
 
 	function get_type_radio( $field ) {
-
-		if ( isset( $field['field_select'] ) )
-			$field['values'] = rcl_edit_old_option_fields( $field['field_select'], $field['type'] );
 
 		if ( ! $field['values'] )
 			return false;
@@ -516,7 +505,7 @@ class Rcl_Custom_Fields {
 
 		$pattern = (isset( $field['pattern'] ) && $field['pattern']) ? 'pattern="' . $field['pattern'] . '"' : '';
 
-		return '<input type="text" ' . $pattern . ' ' . $this->maxlength . ' ' . $this->required . ' ' . $this->placeholder . ' ' . $this->get_class( $field ) . ' name="' . $field['name'] . '" id="' . $this->field_id . '" value="' . $this->value . '"/>';
+		return '<input type="text" ' . $pattern . ' ' . $this->maxlength . ' ' . $this->required . ' ' . $this->placeholder . ' ' . $this->get_class( $field ) . ' name="' . $field['name'] . '" id="' . $this->field_id . '" value="' . esc_attr( $this->value ) . '"/>';
 	}
 
 	function get_type_password( $field ) {
@@ -542,7 +531,7 @@ class Rcl_Custom_Fields {
 
 		$field['classes'] = 'rcl-datepicker';
 
-		$content = '<input type="text" ' . $this->get_class( $field ) . ' onclick="rcl_show_datepicker(this);" title="' . __( 'Use the format', 'wp-recall' ) . ': yyyy-mm-dd" pattern="(\d{4}-\d{2}-\d{2})" ' . $this->required . ' ' . $this->placeholder . ' class="rcl-datepicker" name="' . $field['name'] . '" id="' . $this->field_id . '" value="' . $this->value . '"/>';
+		$content = '<input type="text" ' . $this->get_class( $field ) . ' onclick="rcl_show_datepicker(this);" title="' . __( 'Use the format', 'wp-recall' ) . ': yyyy-mm-dd" pattern="(\d{4}-\d{2}-\d{2})" ' . $this->required . ' ' . $this->placeholder . ' class="rcl-datepicker" name="' . $field['name'] . '" id="' . $this->field_id . '" autocomplete="off" value="' . $this->value . '"/>';
 
 		return $content;
 	}
@@ -666,8 +655,11 @@ function rcl_upload_meta_file( $field, $user_id, $post_id = 0 ) {
 	require_once(ABSPATH . "wp-admin" . '/includes/file.php');
 	require_once(ABSPATH . "wp-admin" . '/includes/media.php');
 
-	$slug	 = $field['slug'];
-	$maxsize = ($field['sizefile']) ? $field['sizefile'] : 2;
+	if ( is_array( $field ) )
+		$field = Rcl_Field::setup( $field );
+
+	$slug	 = $field->slug;
+	$maxsize = $field->max_size;
 
 	if ( ! isset( $_FILES[$slug] ) && $post_id ) {
 		delete_post_meta( $post_id, $slug );
@@ -685,10 +677,14 @@ function rcl_upload_meta_file( $field, $user_id, $post_id = 0 ) {
 	$accept		 = array();
 	$attachment	 = array();
 
-	if ( $field['ext-files'] ) {
+	if ( $field->file_types ) {
 
-		$valid_types = array_map( 'trim', explode( ',', $field['ext-files'] ) );
-		$filetype	 = wp_check_filetype_and_ext( $_FILES[$slug]['tmp_name'], $_FILES[$slug]['name'] );
+		if ( ! is_array( $field->file_types ) )
+			$valid_types = array_map( 'trim', explode( ',', $field->file_types ) );
+		else
+			$valid_types = $field->file_types;
+
+		$filetype = wp_check_filetype_and_ext( $_FILES[$slug]['tmp_name'], $_FILES[$slug]['name'] );
 
 		if ( ! in_array( $filetype['ext'], $valid_types ) ) {
 			wp_die( __( 'Prohibited file type!', 'wp-recall' ) );

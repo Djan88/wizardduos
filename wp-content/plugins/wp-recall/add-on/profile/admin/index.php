@@ -7,19 +7,10 @@ function rcl_profile_admin_menu() {
 	add_submenu_page( 'manage-wprecall', __( 'Profile fields', 'wp-recall' ), __( 'Profile fields', 'wp-recall' ), 'manage_options', 'manage-userfield', 'rcl_profile_fields_manager' );
 }
 
-add_action( 'rcl_update_custom_fields', 'rcl_update_page_users', 10 );
-function rcl_update_page_users() {
+add_filter( 'rcl_field_options', 'rcl_edit_profile_field_options', 10, 3 );
+function rcl_edit_profile_field_options( $options, $field, $manager_id ) {
 
-	if ( ! isset( $_POST['users_page_rcl'] ) )
-		return false;
-
-	rcl_update_option( 'users_page_rcl', $_POST['users_page_rcl'] );
-}
-
-add_filter( 'rcl_custom_field_options', 'rcl_edit_profile_field_options', 10, 3 );
-function rcl_edit_profile_field_options( $options, $field, $type ) {
-
-	if ( $type != 'profile' || ! rcl_is_register_open() )
+	if ( $manager_id != 'profile' || ! rcl_is_register_open() )
 		return $options;
 
 	$options[] = array(
@@ -37,22 +28,13 @@ function rcl_edit_profile_field_options( $options, $field, $type ) {
 
 function rcl_profile_fields_manager() {
 
-	rcl_sortable_scripts();
-
-	$Manager = new Rcl_Profile_Fields( 'profile', array(
-		'custom-slug'	 => 1,
-		'meta_delete'	 => true
-		) );
-
-	$Manager->init_profile_manager_filters();
+	$Manager = new Rcl_Profile_Fields_Manager();
 
 	$content = '<h2>' . __( 'Manage profile fields', 'wp-recall' ) . '</h2>';
 
 	$content .= '<p>' . __( 'On this page you can create custom fields of the user profile, as well as to manage already created fields', 'wp-recall' ) . '</p>';
 
-	$content .= $Manager->active_fields_box();
-
-	$content .= $Manager->inactive_fields_box();
+	$content .= $Manager->get_manager();
 
 	echo $content;
 }
@@ -92,8 +74,6 @@ function rcl_get_custom_fields_profile( $user ) {
 
 	$fields = apply_filters( 'rcl_admin_profile_fields', rcl_get_profile_fields( $args ), $user );
 
-	$CF = new Rcl_Custom_Fields();
-
 	if ( $fields ) {
 
 		$content = '<h3>' . __( 'Custom Profile Fields', 'wp-recall' ) . ':</h3>
@@ -110,20 +90,42 @@ function rcl_get_custom_fields_profile( $user ) {
 			if ( ! isset( $field['value_in_key'] ) )
 				$field['value_in_key'] = true;
 
-			$value = get_the_author_meta( $field['slug'], $user->ID );
+			if ( ! isset( $field['value'] ) )
+				$field['value'] = get_the_author_meta( $field['slug'], $user->ID );
+
+			$fieldObject = Rcl_Field::setup( $field );
 
 			$content .= '<tr class="rcl-custom-field">';
-			$content .= '<th><label>' . $CF->get_title( $field ) . ':</label></th>';
-			$content .= '<td>' . $CF->get_input( $field, $value ) . '</td>';
+			$content .= '<th><label>' . $fieldObject->get_title() . ':</label></th>';
+			$content .= '<td>' . $fieldObject->get_field_input() . '</td>';
 			$content .= '</tr>';
 		}
 
 		$content .= '</table>';
 
 		foreach ( $hiddens as $field ) {
-			$content .= $CF->get_input( $field, get_the_author_meta( $field['slug'], $user->ID ) );
+
+			if ( ! isset( $field['value'] ) )
+				$field['value'] = get_the_author_meta( $field['slug'], $user->ID );
+
+			$content .= Rcl_Field::setup( $field )->get_field_input();
 		}
 
 		echo $content;
 	}
+}
+
+//save users page option in global array of options
+add_action( 'rcl_fields_update', 'rcl_update_users_page_option', 10, 2 );
+function rcl_update_users_page_option( $fields, $manager_id ) {
+	if ( $manager_id != 'profile' || ! isset( $_POST['users_page_rcl'] ) )
+		return false;
+	rcl_update_option( 'users_page_rcl', $_POST['users_page_rcl'] );
+}
+
+//add users page value in the time of saving global options of plugin
+add_filter( 'rcl_global_options_pre_update', 'rcl_add_options_users_page_value', 10 );
+function rcl_add_options_users_page_value( $values ) {
+	$values['users_page_rcl'] = rcl_get_option( 'users_page_rcl', 0 );
+	return $values;
 }

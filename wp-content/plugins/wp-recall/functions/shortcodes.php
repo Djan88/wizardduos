@@ -67,7 +67,7 @@ function rcl_get_userlist( $atts ) {
 	$userlist .= '<div class="rcl-userlist">';
 
 	if ( ! $usersdata ) {
-		$userlist .= '<p align="center">' . __( 'Users not found', 'wp-recall' ) . '</p>';
+		$userlist .= rcl_get_notice( ['text' => __( 'Users not found', 'wp-recall' ) ] );
 	} else {
 
 		if ( ! isset( $atts['number'] ) && $pagenavi->in_page ) {
