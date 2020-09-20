@@ -114,6 +114,8 @@ jQuery(function() {
     localStorage.removeItem('paused');
     localStorage.removeItem('pausedPhoto');
     localStorage.removeItem('pausedPhoto2');
+    localStorage.removeItem('croppedImg');
+    localStorage.removeItem('croppedImgTwo');
     pausedStatus = false;
     jQuery('.wizard_to_protList').removeClass('prot_in_progress');
     jQuery('#header').removeClass('.header_transparent');
@@ -133,8 +135,6 @@ jQuery(function() {
     },
     function(isConfirm) {
       if (isConfirm) {
-        localStorage.removeItem('croppedImg');
-        localStorage.removeItem('croppedImgTwo');
         jQuery(location).attr('href','/');
       } else {
         jQuery('.wizard_main_screen, .wizard_to_protList').addClass('hidden');
