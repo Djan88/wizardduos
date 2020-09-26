@@ -519,8 +519,7 @@
           </header>
           <div class="row flex-items-xs-middle flex-items-xs-center">
             <!-- Basic Plan  -->
-            <div class="col-sm-12 col-lg-2"></div>
-            <div class="col-sm-6 col-lg-4">
+            <div class="col-sm-4">
               <div class="card">
                 <div class="card-header">
                   <h3><span class="currency"></span>35 тыс<span class="period">₽/год</span></h3>
@@ -536,7 +535,7 @@
               </div>
             </div>
             <!-- Regular Plan  -->
-            <div class="col-sm-6 col-lg-4">
+            <div class="col-sm-4">
               <div class="card">
                 <div class="card-header">
                   <h3><span class="currency"></span>25 тыс<span class="period">₽/год</span></h3>
@@ -551,7 +550,21 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-12 col-lg-2"></div>
+            <div class="col-sm-4">
+              <div class="card">
+                <div class="card-header">
+                  <h3><span class="currency"></span>2990<span class="period">₽/месяц</span></h3>
+                </div>
+                <div class="card-block">
+                  <h4 class="card-title"> 
+                    Помесячная оплата
+                  </h4>
+                  <ul class="list-group">
+                    <li class="list-group-item">Если Вы тут впервые и хотите попробовать <b>"WizardDuos"</b>, то программу можно оплачивать помесячно. Техническая поддержка так же включена в стоимость доступа</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section><!-- #pricing -->
