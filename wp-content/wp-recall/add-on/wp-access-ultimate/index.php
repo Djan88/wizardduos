@@ -239,7 +239,7 @@ function wau_add_access_field( $fields, $post_type ) {
 		'title'			 => __( 'Платный доступ' ),
 		'type'			 => 'custom',
 		'wau-options'	 => $defaultVals,
-		'options-field'	 => array(
+		'options'		 => array(
 			array(
 				'type'	 => 'checkbox',
 				'slug'	 => 'wau-options',

@@ -323,7 +323,7 @@ function pfm_init_js_variables( $data ) {
 
 	if ( ! $PrimeQuery )
 		return $data;
-	
+
 	if ( ! $PrimeQuery->is_forum && ! $PrimeQuery->is_topic )
 		return $data;
 

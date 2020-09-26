@@ -3,7 +3,7 @@
   Plugin Name: WP-Recall
   Plugin URI: https://codeseller.ru/?p=69
   Description: Фронт-енд профиль, система личных сообщений и рейтинг пользователей на сайте вордпресс.
-  Version: 16.23.20
+  Version: 16.24.7
   Author: Plechev Andrey
   Author URI: https://codeseller.ru/
   Text Domain: wp-recall
@@ -16,7 +16,7 @@
 
 final class WP_Recall {
 
-	public $version				 = '16.23.20';
+	public $version				 = '16.24.7';
 	public $child_addons		 = array();
 	public $need_update			 = false;
 	public $fields				 = array();
@@ -167,6 +167,7 @@ final class WP_Recall {
 		require_once 'classes/fields/types/class-rcl-field-file.php';
 		require_once 'classes/fields/types/class-rcl-field-hidden.php';
 
+		require_once 'classes/class-rcl-user.php';
 		require_once 'classes/class-rcl-form.php';
 		require_once 'classes/class-rcl-walker.php';
 		require_once 'classes/class-rcl-includer.php';
@@ -180,6 +181,7 @@ final class WP_Recall {
 		require_once 'functions/activate.php';
 		require_once 'functions/ajax.php';
 		require_once 'functions/files.php';
+		require_once 'functions/plugin-pages.php';
 		require_once 'functions/addons.php';
 		require_once 'functions/addons-update.php';
 		require_once 'functions/enqueue-scripts.php';
@@ -577,6 +579,10 @@ final class WP_Recall {
 			$upload_dir['baseurl'] = str_replace( 'http://', 'https://', $upload_dir['baseurl'] );
 
 		return apply_filters( 'wp_recall_upload_dir', $upload_dir, $this );
+	}
+
+	public function User() {
+		return Rcl_User::instance();
 	}
 
 }

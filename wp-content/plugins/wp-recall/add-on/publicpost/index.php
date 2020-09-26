@@ -30,6 +30,12 @@ function rcl_autocomplete_scripts() {
 	rcl_enqueue_script( 'magicsuggest', rcl_addon_url( 'js/magicsuggest/magicsuggest-min.js', __FILE__ ) );
 }
 
+add_filter( 'rcl_init_js_variables', 'rcl_public_add_js_locale', 10 );
+function rcl_public_add_js_locale( $data ) {
+	$data['errors']['cats_important'] = __( 'Choose a category', 'wp-recall' );
+	return $data;
+}
+
 //выводим в медиабиблиотеке только медиафайлы текущего автора
 add_action( 'pre_get_posts', 'rcl_restrict_media_library' );
 function rcl_restrict_media_library( $wp_query_obj ) {
@@ -138,12 +144,35 @@ function rcl_concat_post_meta( $content ) {
 			return $content;
 	}
 
-	$pm = rcl_get_custom_post_meta( $post->ID );
+	$pm = rcl_get_post_custom_fields_box( $post->ID );
 
 	if ( rcl_get_option( 'pm_place' ) == 1 )
 		$content .= $pm;
 	else
 		$content = $pm . $content;
+
+	return $content;
+}
+
+function rcl_get_post_custom_fields_box( $post_id ) {
+
+	$formFields = new Rcl_Public_Form_Fields( get_post_type( $post_id ), array(
+		'form_id' => get_post_meta( $post_id, 'publicform-id', 1 )
+		) );
+
+	$customFields = $formFields->get_custom_fields();
+
+	if ( ! $customFields )
+		return false;
+
+	$content = '<div class="rcl-custom-fields">';
+
+	foreach ( $customFields as $field_id => $field ) {
+		$field->set_prop( 'value', get_post_meta( $post_id, $field_id, 1 ) );
+		$content .= $field->get_field_value( true );
+	}
+
+	$content .= '</div>';
 
 	return $content;
 }

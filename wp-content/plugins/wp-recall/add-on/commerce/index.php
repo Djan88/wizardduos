@@ -260,7 +260,7 @@ add_action( 'rcl_success_pay_system', 'rcl_add_payment_order', 10 );
 add_action( 'rcl_success_pay_balance', 'rcl_add_payment_order', 10 );
 function rcl_add_payment_order( $pay ) {
 
-	if ( $pay->pay_type != 2 )
+	if ( $pay->pay_type != 'order-payment' )
 		return false;
 
 	$order = rcl_get_order( $pay->pay_id );
@@ -273,7 +273,10 @@ function rcl_add_payment_order( $pay ) {
 			//если оплата с баланса пользователя
 
 			$result = array(
-				'success'		 => __( 'Your order has been successfully paid! A notification has been sent to the administration.', 'wp-recall' ),
+				'success'		 => rcl_get_notice( [
+					'type'	 => 'success',
+					'text'	 => __( 'Your order has been successfully paid! A notification has been sent to the administration.', 'wp-recall' )
+				] ),
 				'user_balance'	 => rcl_get_user_balance( $order->user_id ),
 				'order_id'		 => $order->order_id,
 				'pay_balance'	 => 1

@@ -1,5 +1,6 @@
 <?php
 
+//deprecated
 function rcl_get_custom_post_meta( $post_id ) {
 
 	$get_fields = rcl_get_custom_fields( $post_id );
@@ -214,7 +215,6 @@ function rcl_update_post_custom_fields( $post_id, $id_form = false ) {
 					foreach ( $value as $val ) {
 						rcl_delete_temp_media( $val );
 					}
-					exit;
 				} else if ( $field->type == 'file' ) {
 					rcl_delete_temp_media( $value );
 				}

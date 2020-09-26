@@ -781,6 +781,81 @@ function rcl_init_table( table_id ) {
 
 }
 
+function rcl_table_search( e, key, submit ) {
+
+	if ( submit ) {
+
+		if ( typeof submit == 'string' ) {
+
+			return window[submit].call( this, e, key, submit );
+
+		} else if ( key == 'Enter' ) {
+			jQuery( e ).parents( 'form' ).submit();
+		}
+
+		return;
+
+	}
+
+	var table_id = jQuery( e ).parents( '.rcl-table' ).attr( 'id' );
+
+	var inputs = jQuery( e ).parents( '.rcl-table' ).find( '.rcl-table__row-search input' );
+
+	var search = [ ];
+	inputs.each( function( i, a ) {
+
+		if ( jQuery( a ).val() !== '' ) {
+			search.push( [ jQuery( a ).parent().data( 'rcl-ttitle' ),
+				jQuery( a ).val() ] );
+		}
+
+	} );
+
+	jQuery( '#' + table_id + ' .rcl-table__row-must-sort' ).show();
+
+	if ( !search.length ) {
+		return;
+	}
+
+	var list = jQuery( '#' + table_id + ' .rcl-table__row-must-sort' );
+
+	list.each( function( i, r ) {
+
+		var success = true;
+
+		var cells = jQuery( r ).find( '.rcl-table__cell' );
+
+		cells.each( function( x, c ) {
+
+			search.forEach( function( s ) {
+
+				if ( jQuery( c ).data( 'rcl-ttitle' ) == s[0] ) {
+
+					var value = jQuery( c ).data( 'value' );
+
+					if ( typeof value == 'number' && jQuery( c ).data( 'value' ) != s[1] ||
+						typeof value == 'string' && value.indexOf( s[1] ) < 0 ) {
+						success = false;
+						return;
+					}
+
+				}
+
+			} );
+
+			if ( !success ) {
+				return;
+			}
+
+		} );
+
+		if ( !success ) {
+			jQuery( r ).hide();
+		}
+
+	} );
+}
+
 function RclForm( form ) {
 
 	this.form = form;
@@ -1319,13 +1394,13 @@ function RclUploader( props, sk ) {
 			inGalleryNow++;
 
 			if ( file.size > options.max_size * 1024 ) {
-				errors.push( 'Превышен размер загружаемого файла. Макс: ' + options.max_size + 'Kb' );
+				errors.push( Rcl.errors.file_max_size + '. Max: ' + options.max_size + 'Kb' );
 			}
 
 		} );
 
 		if ( options.multiple && inGalleryNow > options.max_files ) {
-			errors.push( 'Превышено количество загруженных файлов. Макс: ' + options.max_files );
+			errors.push( Rcl.errors.file_max_num + '. Max: ' + options.max_files );
 		}
 
 		errors = this.filterErrors( errors, data.files, uploader );
@@ -1433,7 +1508,7 @@ function RclUploader( props, sk ) {
 			var maxSize = parseInt( uploader.options.max_size );
 
 			if ( file.size > maxSize * 1024 ) {
-				rcl_notice( 'Превышен максимальный размер файла. Макс:' + ' ' + maxSize + 'Kb', 'error', 10000 );
+				rcl_notice( Rcl.errors.file_max_size + '. Max:' + ' ' + maxSize + 'Kb', 'error', 10000 );
 				return false;
 			}
 
@@ -1465,7 +1540,7 @@ function RclUploader( props, sk ) {
 					var width = img.width();
 
 					if ( height < minHeightCrop || width < minWidthCrop ) {
-						rcl_notice( 'Недостаточный размер изображения. Min:' + ' ' + minWidthCrop + '*' + minHeightCrop + ' px', 'error', 10000 );
+						rcl_notice( Rcl.errors.file_min_size + '. Min:' + ' ' + minWidthCrop + '*' + minHeightCrop + ' px', 'error', 10000 );
 						return false;
 					}
 
@@ -1488,14 +1563,14 @@ function RclUploader( props, sk ) {
 						className: 'rcl-hand-uploader',
 						buttons: [ {
 								className: 'btn-success',
-								label: 'Загрузить',
+								label: Rcl.local.upload,
 								closeAfter: true,
 								method: function() {
 									data.submit();
 								}
 							}, {
 								className: 'btn-cancel',
-								label: 'Отмена',
+								label: Rcl.local.cancel,
 								closeAfter: true,
 								method: function() {
 									jcrop_api.destroy();

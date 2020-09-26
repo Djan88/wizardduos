@@ -748,6 +748,8 @@ a.data-filter.filter-active:hover {
 }
 .rcl-field .rcl-field-title{
 	font-weight: bold;
+	margin-bottom: 5px;
+    display: inline-block;
 }
 .rcl-field-notice {
     align-items: center;
@@ -855,6 +857,12 @@ a.data-filter.filter-active:hover {
 .type-dynamic-input .dynamic-values {
     display: block;
 }
+.type-dynamic-input .dynamic-values.ui-sortable a {
+    height: 14px;
+    position: absolute;
+    top: 3px;
+    right: 33px;
+}
 .type-dynamic-input .dynamic-value {
     align-items: center;
     display: flex;
@@ -878,6 +886,7 @@ a.data-filter.filter-active:hover {
     vertical-align: middle;
     width: auto;
 }
+
 .type-dynamic-input .dynamic-value a:hover {
     background-color: #fff;
     text-decoration: none !important;
@@ -941,7 +950,6 @@ div.rcl-custom-fields .rcl-field-value .fa-upload {
     border: 1px solid #e2e2e2;
     cursor: pointer;
     display: inline-block;
-    float: left;
     font-family: Verdana,Tahoma,sans-serif; /*если другое семейство - то блоки плывут*/
     font-size: 12px;
     font-weight: normal;
@@ -1061,12 +1069,13 @@ div.rcl-custom-fields .rcl-field-value .fa-upload {
     clear: both;
     padding: 6px 5px;
 	margin: 10px 0;
+	line-height: 1;
 }
-.rcl-pager .rcl-page-navi > span{
+.rcl-pager > span{
 	margin: 0 2px;
 }
-.rcl-pager .rcl-page-navi > span a.rcl-bttn{
-	margin: 0;
+body .rcl-pager > span a.rcl-bttn{
+	margin: 0!important;
 }
 /*end*/
 

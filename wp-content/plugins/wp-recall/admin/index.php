@@ -4,6 +4,24 @@ require_once "metaboxes.php";
 
 add_action( 'admin_init', 'rcl_admin_scripts', 10 );
 
+add_filter( 'display_post_states', 'rcl_mark_own_page', 10, 2 );
+function rcl_mark_own_page( $post_states, $post ) {
+
+	if ( $post->post_type === 'page' ) {
+
+		$plugin_pages = get_site_option( 'rcl_plugin_pages' );
+
+		if ( ! $plugin_pages )
+			return $post_states;
+
+		if ( in_array( $post->ID, $plugin_pages ) ) {
+			$post_states[] = __( 'The page of plugin WP-Recall' );
+		}
+	}
+
+	return $post_states;
+}
+
 add_filter( 'rcl_field_options', 'rcl_edit_field_options', 10, 3 );
 function rcl_edit_field_options( $options, $field, $manager_id ) {
 
@@ -24,17 +42,18 @@ function rcl_edit_field_options( $options, $field, $manager_id ) {
 
 function rmag_global_options() {
 
-	$content = ' <div id="recall" class="left-sidebar wrap">
-        <form method="post" action="">
-        ' . wp_nonce_field( 'update-options-rmag', '_wpnonce', true, false );
+	require_once RCL_PATH . 'admin/classes/class-rcl-options-manager.php';
 
-	$content = apply_filters( 'admin_options_rmag', $content );
+	$Manager = new Rcl_Options_Manager( array(
+		'option_name'	 => 'primary-rmag-options',
+		'page_options'	 => 'manage-wpm-options',
+		) );
 
-	$content .= '<div class="submit-block">
-                <input type="submit" class="rcl-save-button" name="primary-rmag-options" value="' . __( 'Save settings', 'wp-recall' ) . '" />
-            </div>
-        </form>
-    </div>';
+	$Manager = apply_filters( 'rcl_commerce_options', $Manager );
+
+	$content = '<h2>' . __( 'Settings of commerce', 'wp-recall' ) . '</h2>';
+
+	$content .= $Manager->get_content();
 
 	echo $content;
 }

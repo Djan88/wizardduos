@@ -110,19 +110,16 @@ class RCL_Install {
 			) );
 
 		foreach ( $pages as $key => $page ) {
+
 			if ( is_array( $page ) ) {
-				$page_id = wp_insert_post(
-					array(
+
+				if ( ! rcl_isset_plugin_page( $key ) ) {
+					$rcl_options[$key] = rcl_create_plugin_page_if_need( $key, [
 						'post_title'	 => $page['title'],
 						'post_content'	 => $page['content'],
 						'post_name'		 => $page['name'],
-						'post_status'	 => 'publish',
-						'post_author'	 => 1,
-						'post_type'		 => 'page'
-					)
-				);
-
-				$rcl_options[$key] = $page_id;
+						] );
+				}
 			}
 		}
 	}
