@@ -2395,6 +2395,10 @@ button.wizard_starter_alt.btn.btn-success
   padding: 5px;
   padding-bottom: 7px;
 }
+.wau-accounts-box p
+{
+  display: none;
+}
 
 /*Animation*/
 
