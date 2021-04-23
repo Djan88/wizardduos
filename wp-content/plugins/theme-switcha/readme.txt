@@ -9,9 +9,9 @@ Contributors: specialk
 Author URI: https://plugin-planet.com/
 Donate link: https://monzillamedia.com/donate.html
 Requires at least: 4.1
-Tested up to: 5.5
-Stable tag: 2.5
-Version: 2.5
+Tested up to: 5.7
+Stable tag: 2.7
+Version: 2.7
 Requires PHP: 5.6.20
 Text Domain: theme-switcha
 Domain Path: /languages
@@ -308,14 +308,14 @@ Theme Switcha provides a function that returns the name of the currently active 
 This can be used just like any other WP function, in plugins and theme templates.
 
 
-**Uninstalling**
-
-This plugin cleans up after itself. All plugin settings will be removed from your database when the plugin is uninstalled via the Plugins screen.
-
-
 **Like the plugin?**
 
 If you like Theme Switcha, please take a moment to [give a 5-star rating](https://wordpress.org/support/plugin/theme-switcha/reviews/?rate=5#new-post). It helps to keep development and support going strong. Thank you!
+
+
+**Uninstalling**
+
+This plugin cleans up after itself. All plugin settings will be removed from your database when the plugin is uninstalled via the Plugins screen.
 
 
 
@@ -335,9 +335,9 @@ Thanks to Ryan Boren for the original [Theme Switcher](https://plugins.trac.word
 
 == Frequently Asked Questions ==
 
-**Does the plugin enable anyone to switch themes (and not just logged in users)?**
+**Does the plugin enable anyone to switch themes?**
 
-Yes, just set the "Allowed Users" option to "Everyone", and then add any shortcode to your page.
+Yes, just set the "Allowed Users" option to "Everyone", and then add any shortcode to your page. After you do that, any user will be able to switch themes even if they are not logged in to your site.
 
 
 **I click the links but the theme does not switch?**
@@ -365,12 +365,14 @@ Two things: 1) deactivate the plugin or remove via FTP, and 2) [report the issue
 For better performance, the styles are included inline. The styles for each shortcode are minimal, so it's faster to include them inline via style tags rather than chewing up another HTTP request. If you are concerned for whatever reason, you can use disable the styles in the `[theme_switcha_thumbs]` shortcode, like so: `[theme_switcha_thumbs style="false"]`. That way the styles won't be included and you can add your own however desired.
 
 
-**Do I need to activate my alternate theme via Appearance &gt; Themes?**
+**Do I need to activate my alternate theme?**
+
+Question: Do I need to activate my alternate theme via Appearance &gt; Themes?
 
 Short answer: "no", stay away from the Appearance &gt; Themes screen while switching themes. Long answer: whenever you activate a theme via the Appearance &gt; Themes screen in the WP Admin Area, that theme will be the one that is publicly displayed (live). That's why, with Theme Switcha, you don't make any changes via the Themes screen; rather, you just visit the plugin settings and click on whichever theme you want to view privately. Complete instructions are available [here](https://wordpress.org/plugins/theme-switcha/installation/) and in the plugin's readme.txt.
 
 
-**Theme settings are not saved after theme switching is disabled?**
+**Theme settings not saved after theme switching disabled?**
 
 As explained in the plugin documentation, Theme Switcha should not be used with admin-related functionality like Gutenberg, Customizer, Widgets, Menus, etc. You can learn more about this [here](https://wordpress.org/support/topic/important-please-read-2/).
 
@@ -390,14 +392,16 @@ Great question. Theme-switching uses cookies to work, so it is browser-specific.
 You can use any of the front-end shortcodes to enable visitors to select any available theme. It's also possible to exclude themes from switching. Visit the [Installation Docs](https://wordpress.org/plugins/theme-switcha/installation/) for more information (under "Usage: Display Menus" and "Excluding Themes", respectively).
 
 
-**When switching themes, will visitors still be able to see content from the database?**
+**When switching themes, will visitors see the same content?**
 
 Yes, the same database/content will be displayed regardless of which theme is enabled or switched. The WP database provides the content for ALL themes.
 
 
-**How can I test demo content (like posts and pages) while switching themes?**
+**How can I test demo content while switching themes?**
 
-Just make sure that all of the demo content is added as "Draft" or "Pending" instead of "Published". Then only logged-in users with proper capabilities will be able to see it.
+Question: How can I test demo content (like posts and pages) while switching themes?
+
+Answer: Just make sure that all of the demo content is added as "Draft" or "Pending" instead of "Published". Then only logged-in users with proper capabilities will be able to see it.
 
 
 **I still don't get it.. how do I switch themes?**
@@ -405,16 +409,16 @@ Just make sure that all of the demo content is added as "Draft" or "Pending" ins
 Here are the steps to use the plugin: __1)__ Visit the plugin settings and enable the setting, “Enable Switching”. __2)__ Under “Available Themes”, you will see all themes that are available for switching; click one to enable it only for you (admin). Whichever theme you enable via the plugin settings will be available to you only, so you can work on the theme while regular visitors see whichever theme is activated under the Appearance menu. Note that changes made to the switched theme will be visible only by you and other admins. Changes made to content (like post content, page content, categories, tags, etc.), on the other hand, affect all themes and will be visible to your regular visitors. For more information, check out the [Installation Docs](https://wordpress.org/plugins/theme-switcha/installation/).
 
 
-**If I want to permanently switch themes then I have to do it in the theme portion of the site and not the plugin. Right?**
+**How do I switch themes?**
 
-Correct. Theme Switcha is meant for temporarily switching themes. To actually change the current default active theme, visit the Themes page in the WordPress Admin Area.
+Theme Switcha is meant for temporarily switching themes. To actually change the current default active theme, visit the Themes page in the WordPress Admin Area.
 
 
-**I am assuming the switches made in your plugin takes effect for the world to see once the switch is made permanently. Right?**
+**How do I go live with changes made to my theme?**
 
-Yes this is correct for any changes made to the theme template files. So if you switch to "Awesome" theme using Theme Switcha, and then modify the theme template files, those changes will be made public once you change the default active theme to "Awesome" (via the WP Themes page). 
+First, as explained [here](https://wordpress.org/support/topic/important-please-read-2/), Theme Switcha is for making changes to your theme template. With that in mind. If you switch to the "Awesome" theme using Theme Switcha, and then modify the theme template files, those changes will be made public once you change the default active theme to "Awesome" (via the WP Themes page). 
 
-But for any admin-related features like the Customizer, Widgets, Menus, and other theme-related options, any changes made to a switched theme may or may not be remembered after activating the theme as the site's default active theme. This is why Theme Switcha is not recommended for use with admin features like Customizer, Widgets, etc. To learn more, read this [Important Information](https://wordpress.org/support/topic/important-please-read-2/).
+__Note:__ For any admin-related features like the Customizer, Widgets, Menus, and other theme-related options, any changes made to a switched theme may or may not be remembered after activating the theme as the site's default active theme. This is why Theme Switcha is not recommended for use with admin features like Customizer, Widgets, etc. To learn more, read this [Important Information](https://wordpress.org/support/topic/important-please-read-2/).
 
 
 **Got a question?**
@@ -437,7 +441,7 @@ And/or purchase one of my premium WordPress plugins:
 * [BBQ Pro](https://plugin-planet.com/bbq-pro/) - Super fast WordPress firewall
 * [Blackhole Pro](https://plugin-planet.com/blackhole-pro/) - Automatically block bad bots
 * [Banhammer Pro](https://plugin-planet.com/banhammer-pro/) - Monitor traffic and ban the bad guys
-* [GA Google Analytics Pro](https://plugin-planet.com/ga-google-analytics-pro/) - Connect your WordPress to Google Analytics
+* [GA Google Analytics Pro](https://plugin-planet.com/ga-google-analytics-pro/) - Connect WordPress to Google Analytics
 * [USP Pro](https://plugin-planet.com/usp-pro/) - Unlimited front-end forms
 
 Links, tweets and likes also appreciated. Thanks! :)
@@ -448,6 +452,18 @@ Links, tweets and likes also appreciated. Thanks! :)
 
 If you like Theme Switcha, please take a moment to [give a 5-star rating](https://wordpress.org/support/plugin/theme-switcha/reviews/?rate=5#new-post). It helps to keep development and support going strong. Thank you!
 
+
+**2.7 (2021/02/10)**
+
+* Tests on WordPress 5.7
+
+**2.6 (2020/11/14)**
+
+* Fixes bug with dashboard widget display
+* Updates plugin script to account for changes in jQuery UI
+* Adds `small-text` class to settings number input
+* Tests on PHP 7.4 and 8.0
+* Tests on WordPress 5.6
 
 **2.5 (2020/08/09)**
 

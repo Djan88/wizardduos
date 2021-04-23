@@ -4,7 +4,7 @@
  */
 if ( ! class_exists( 'Gglcptch_Settings_Tabs' ) ) {
 	class Gglcptch_Settings_Tabs extends Bws_Settings_Tabs {
-		private $keys, $versions, $forms, $sections, $themes;
+		private $keys, $versions, $forms, $sections;
 
 		/**
 		 * Constructor.
@@ -22,7 +22,9 @@ if ( ! class_exists( 'Gglcptch_Settings_Tabs' ) ) {
 				'settings'      => array( 'label' => __( 'Settings', 'google-captcha' ) ),
 				'misc'          => array( 'label' => __( 'Misc', 'google-captcha' ) ),
 				'custom_code'   => array( 'label' => __( 'Custom Code', 'google-captcha' ) ),
+                /*pls */
 				'license'       => array( 'label' => __( 'License Key', 'google-captcha' ) )
+                /* pls*/
 			);
 
 			parent::__construct( array(
@@ -32,10 +34,13 @@ if ( ! class_exists( 'Gglcptch_Settings_Tabs' ) ) {
 				'default_options'    => gglcptch_get_default_options(),
 				'options'            => $gglcptch_options,
 				'tabs'               => $tabs,
-				'doc_link'			 => 'https://docs.google.com/document/d/1yTDdMSLqvgATbo5lPzuNn4QRF0EyEPFuLoFB15beMww/',
+                'doc_link'			 => 'https://docs.google.com/document/d/1yTDdMSLqvgATbo5lPzuNn4QRF0EyEPFuLoFB15beMww/',
+                'doc_video_link'     => 'https://www.youtube.com/watch?v=ZFv6txtic0Y/',
+                /*pls */
 				'wp_slug'            => 'google-captcha',
 				'link_key'           => 'b850d949ccc1239cab0da315c3c822ab',
 				'link_pn'            => '109'
+                /* pls*/
 			) );
 
 			$this->all_plugins = get_plugins();
@@ -64,15 +69,8 @@ if ( ! class_exists( 'Gglcptch_Settings_Tabs' ) ) {
 			$this->forms = gglcptch_get_forms();
 			$this->sections = gglcptch_get_sections();
 
-			/* Google captcha themes */
-			$this->themes = array(
-				array( 'red', 'Red' ),
-				array( 'white', 'White' ),
-				array( 'blackglass', 'Blackglass' ),
-				array( 'clean', 'Clean' ),
-			);
-
 			add_action( get_parent_class( $this ) . '_display_custom_messages', array( $this, 'display_custom_messages' ) );
+            add_action( get_parent_class( $this ) . '_additional_misc_options', array( $this, 'additional_misc_options' ) );
 			add_action( get_parent_class( $this ) . '_display_metabox', array( $this, 'display_metabox' ) );
 		}
 
@@ -110,7 +108,7 @@ if ( ! class_exists( 'Gglcptch_Settings_Tabs' ) ) {
 				$this->options['need_keys_verified_check'] = true;
 			}
 
-			$this->options['whitelist_message']	    = stripslashes( sanitize_text_field( $_POST['gglcptch_whitelist_message'] ) );
+			$this->options['allowlist_message']	    = stripslashes( sanitize_text_field( $_POST['gglcptch_allowlist_message'] ) );
 			$this->options['public_key']			= stripslashes( sanitize_text_field( $_POST['gglcptch_public_key'] ) );
 			$this->options['private_key']		    = stripslashes( sanitize_text_field( $_POST['gglcptch_private_key'] ) );
 			$this->options['recaptcha_version']	    = in_array( $_POST['gglcptch_recaptcha_version'], array( 'v2', 'invisible', 'v3' ) ) ? $_POST['gglcptch_recaptcha_version'] : $this->options['recaptcha_version'];
@@ -131,6 +129,7 @@ if ( ! class_exists( 'Gglcptch_Settings_Tabs' ) ) {
 				}
 			}
 
+            $this->options = apply_filters( 'gglcptch_before_save_options', $this->options );
 			update_option( 'gglcptch_options', $this->options );
 			$message = __( "Settings saved.", 'google-captcha' );
 
@@ -230,6 +229,7 @@ if ( ! class_exists( 'Gglcptch_Settings_Tabs' ) ) {
 					</td>
 				</tr>
 			</table>
+            <!-- pls -->
 			<?php if ( ! $this->hide_pro_tabs ) { ?>
 				<div class="bws_pro_version_bloc">
 					<div class="bws_pro_version_table_bloc">
@@ -240,6 +240,7 @@ if ( ! class_exists( 'Gglcptch_Settings_Tabs' ) ) {
 					<?php $this->bws_pro_block_links(); ?>
 				</div>
 			<?php } ?>
+            <!-- end pls -->
 			<table class="form-table">
 				<tr valign="top">
 					<th scope="row"><?php _e( 'Hide reCaptcha for', 'google-captcha' ); ?></th>
@@ -266,7 +267,7 @@ if ( ! class_exists( 'Gglcptch_Settings_Tabs' ) ) {
                     <td>
                         <input<?php echo $this->change_permission_attr; ?> id="gglcptch_hide_badge" type="checkbox" <?php checked( ! empty( $this->options['hide_badge'] ) ); ?> name="gglcptch_hide_badge" value="1" />&nbsp;
                         <span class="bws_info">
-							<?php _e( 'Enable to hide reCaptcha Badge for Version 3 and Invisble reCaptcha.', 'google-captcha' ); ?>
+							<?php _e( 'Enable to hide reCaptcha Badge for Version 3 and Invisible reCaptcha.', 'google-captcha' ); ?>
 						</span>
                     </td>
                 </tr>
@@ -292,6 +293,7 @@ if ( ! class_exists( 'Gglcptch_Settings_Tabs' ) ) {
                     </td>
                 </tr>
 			</table>
+            <!-- pls -->
 			<?php if ( ! $this->hide_pro_tabs ) { ?>
 				<div class="bws_pro_version_bloc">
 					<div class="bws_pro_version_table_bloc">
@@ -302,6 +304,7 @@ if ( ! class_exists( 'Gglcptch_Settings_Tabs' ) ) {
 					<?php $this->bws_pro_block_links(); ?>
 				</div>
 			<?php } ?>
+            <!-- end pls -->
 			<table class="form-table">
                 <tr valign="top">
                     <th scope="row">
@@ -315,9 +318,9 @@ if ( ! class_exists( 'Gglcptch_Settings_Tabs' ) ) {
                     </td>
                 </tr>
 				<tr valign="top">
-					<th scope="row"><?php _e( 'Whitelist Notification', 'google-captcha' ); ?></th>
+					<th scope="row"><?php _e( 'Allow List Notification', 'google-captcha' ); ?></th>
 					<td>
-						<textarea name="gglcptch_whitelist_message"><?php echo $this->options['whitelist_message']; ?></textarea>
+						<textarea name="gglcptch_allowlist_message"><?php echo $this->options['allowlist_message']; ?></textarea>
 						<div class="bws_info"><?php _e( 'This message will be displayed instead of the reCaptcha.', 'google-captcha' ); ?></div>
 					</td>
 				</tr>
@@ -354,6 +357,10 @@ if ( ! class_exists( 'Gglcptch_Settings_Tabs' ) ) {
 				<div class="updated inline bws-notice"><p><strong><?php _e( 'reCaptcha version was changed. Please submit "Test reCaptcha" and regenerate Site and Secret keys if necessary.', 'google-captcha' ); ?></strong></p></div>
 			<?php }
 		}
+
+        public function additional_misc_options() {
+            do_action( 'gglcptch_settings_page_misc_action', $this->options );
+        }
 
 		/**
 		 * Display custom metabox

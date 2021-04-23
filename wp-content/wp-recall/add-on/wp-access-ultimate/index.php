@@ -31,8 +31,8 @@ function wau_scripts() {
 add_action( 'rcl_activate_wp-access-ultimate', 'wau_activate_actions' );
 function wau_activate_actions() {
 
-	if ( ! get_option( 'wau_options' ) ) {
-		update_option( 'wau_options', array(
+	if ( ! get_site_option( 'wau_options' ) ) {
+		update_site_option( 'wau_options', array(
 			'access-text-archive'	 => '<span style="color:red;font-weight:bold;">Данный контент имеет ограниченный доступ</span>',
 			'access-text-single'	 => '<span style="color:red;font-weight:bold;">Данный контент имеет ограниченный доступ</span>',
 			'mail-text-remind'		 => __( 'Уважаемый, {userName}!<br />'
@@ -105,7 +105,8 @@ add_action( 'rcl_cron_daily', 'wau_daily_cron_actions', 10 );
 function wau_daily_cron_actions() {
 
 	$access = wau_get_access_by_args( array(
-		'number' => -1
+		'number' => -1,
+		'is_prolong' => 1
 		) );
 
 	if ( ! $access )
@@ -154,8 +155,10 @@ function wau_payment( $payData ) {
 
 	$tariff_price = wau_get_tariff_price( $baggage->tariff_id, $payData->user_id );
 
-	if ( $tariff_price != $payData->pay_summ )
+	if ( rcl_commercial_round( $tariff_price ) != rcl_commercial_round( $payData->pay_summ ) ) {
+		rcl_add_log( 'wau_payment', ['tariff_price' => $tariff_price, $payData ], 1 );
 		return false;
+	}
 
 	do_action( 'wau_pre_payment_access', $payData, $tariff );
 
@@ -187,7 +190,7 @@ function wau_send_email_about_payment_access( $payment_id ) {
     <p>Приобретенный аккаунт: ' . $payment->account_name . '.</p>
     <p>Время по тарифу: ' . wau_time_to_strdate( $payment->access_time ) . '</p>';
 
-	rcl_mail( get_option( 'admin_email' ), $subject, $textmail );
+	rcl_mail( get_site_option( 'admin_email' ), $subject, $textmail );
 
 	//Отправляем письмо об оплате покупателю
 	$textmail = '
@@ -199,21 +202,6 @@ function wau_send_email_about_payment_access( $payment_id ) {
     <p>Время по тарифу: ' . wau_time_to_strdate( $payment->access_time ) . '</p>';
 
 	rcl_mail( get_the_author_meta( 'user_email', $payment->user_id ), $subject, $textmail, $headers );
-}
-
-/* интеграция с партнерской программой */
-add_filter( 'rcl_partner_actions', 'wau_add_payment_action' );
-function wau_add_payment_action( $actions ) {
-	$actions['wau-payment'] = __( 'Оплата платного доступа' );
-	return $actions;
-}
-
-add_action( 'wau_payment_access', 'wpa_insert_partners_refill_paid', 10, 2 );
-function wpa_insert_partners_refill_paid( $payment_id ) {
-	if ( ! function_exists( 'add_partner_incentive' ) )
-		return false;
-	$payment = wau_get_payment( $payment_id );
-	add_partner_incentive( $payment->user_id, $payment->tariff_price, 'wau-payment' );
 }
 
 //добавление своего поля в дефолтные произвольные поля формы публикации
@@ -490,3 +478,45 @@ function wau_filter_pre_get_posts( $query ) {
 		}
 	}
 }
+
+/* интеграция с партнерской программой */
+add_filter( 'rcl_partner_actions', 'wau_add_payment_action' );
+function wau_add_payment_action( $actions ) {
+	$actions['wau-payment'] = __( 'Оплата платного доступа' );
+	return $actions;
+}
+
+add_action( 'wau_payment_access', 'wpa_insert_partners_refill_paid', 10, 2 );
+function wpa_insert_partners_refill_paid( $payment_id ) {
+	if ( ! function_exists( 'add_partner_incentive' ) )
+		return false;
+	$payment = wau_get_payment( $payment_id );
+	add_partner_incentive( $payment->user_id, $payment->tariff_price, 'wau-payment' );
+}
+/****/
+
+/* поддержка Partner Network */
+add_action( 'pnt_init_events', 'wau_init_partner_network_events', 10 );
+function wau_init_partner_network_events() {
+
+	PartnersNet()->init_event( new PNT_Event( 'wau-payment', [
+		'labels' => [
+			'name'			 => __( 'Оплата платного доступа' ),
+			'title_awards'	 => __( 'Оплата платного доступа' )
+		]
+	] ) );
+
+}
+
+add_action( 'wau_payment_access', 'wpa_insert_partners_network_paid', 10, 2 );
+function wpa_insert_partners_network_paid( $payment_id ) {
+	if ( ! class_exists( 'PartnersNet' ) )
+		return false;
+
+	$payment = wau_get_payment( $payment_id );
+
+	PartnersNet()->get_event( 'wau-payment' )->launch( $payment->user_id, 1, $payment->tariff_price );
+
+}
+
+/****/

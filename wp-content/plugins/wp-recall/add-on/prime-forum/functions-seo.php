@@ -52,6 +52,12 @@ function pfm_print_noindex_meta_tag() {
 add_action( 'pfm_init', 'pfm_add_seo_filters', 10 );
 function pfm_add_seo_filters() {
 
+    /* the support of the plugin Rank Math SEO */
+    add_filter( 'rank_math/frontend/canonical', 'pfm_replace_canonical_url', 30 );
+    add_filter ('rank_math/frontend/title', 'pfm_replace_title', 30 );
+    add_filter ('rank_math/frontend/description', 'pfm_replace_description', 30 );
+    /**/
+
 	add_filter( 'the_title', 'pfm_setup_page_title', 30, 2 );
 	add_filter( 'document_title_parts', 'pfm_replace_title', 30 );
 	add_filter( 'wp_title', 'pfm_replace_title', 30 );
@@ -59,9 +65,9 @@ function pfm_add_seo_filters() {
 	add_filter( 'get_canonical_url', 'pfm_replace_canonical_url', 30 );
 	add_filter( 'get_shortlink', 'pfm_replace_shortlink', 30 );
 
-	add_filter( 'aioseop_canonical_url', 'pfm_replace_canonical_url', 30 );
-	add_filter( 'aioseop_description', 'pfm_replace_description', 30 );
-	add_filter( 'aioseop_title_page', 'pfm_replace_title', 30 );
+	add_filter( 'aioseo_canonical_url', 'pfm_replace_canonical_url', 30 );
+	add_filter( 'aioseo_description', 'pfm_replace_description', 30 );
+	add_filter( 'aioseo_title_page', 'pfm_replace_title', 30 );
 
 	add_filter( 'wpseo_title', 'pfm_replace_title', 30 );
 	add_filter( 'wpseo_canonical', 'pfm_replace_canonical_url', 30 );

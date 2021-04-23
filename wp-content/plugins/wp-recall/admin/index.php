@@ -104,16 +104,6 @@ function rcl_postmeta_post() {
 	add_meta_box( 'recall_meta', __( 'WP-Recall settings', 'wp-recall' ), 'rcl_options_box', 'page', 'normal', 'high' );
 }
 
-add_filter( 'rcl_post_options', 'rcl_gallery_options', 10, 2 );
-function rcl_gallery_options( $options, $post ) {
-	$mark_v = get_post_meta( $post->ID, 'recall_slider', 1 );
-	$options .= '<p>' . __( 'Output images via WP-Recall gallery?', 'wp-recall' ) . ':
-        <label><input type="radio" name="wprecall[recall_slider]" value="" ' . checked( $mark_v, '', false ) . ' />' . __( 'No', 'wp-recall' ) . '</label>
-        <label><input type="radio" name="wprecall[recall_slider]" value="1" ' . checked( $mark_v, '1', false ) . ' />' . __( 'Yes', 'wp-recall' ) . '</label>
-    </p>';
-	return $options;
-}
-
 function rcl_options_box( $post ) {
 	$content = '';
 	echo apply_filters( 'rcl_post_options', $content, $post );
@@ -202,11 +192,11 @@ function rcl_add_cover_options( $options ) {
 			'temp_media' => 1,
 			'max_size'	 => 5120,
 			'multiple'	 => 0,
-			'crop'		 => 1,
+			'crop'		 => ['ratio' => 0 ],
 			'filetitle'	 => 'rcl-default-cover',
 			'filename'	 => 'rcl-default-cover',
 			'slug'		 => 'default_cover',
-			'title'		 => __( 'Default cover', 'wp-recall' )
+			'title'		 => __( 'Default cover', 'wp-recall' ),
 		),
 		array(
 			'type'		 => 'runner',
@@ -466,7 +456,7 @@ function rcl_send_addon_activation_notice( $addon_id, $addon_headers ) {
 
 /* new fields manager functions */
 
-rcl_ajax_action( 'rcl_manager_get_new_field', false, false );
+rcl_ajax_action( 'rcl_manager_get_new_field', false );
 function rcl_manager_get_new_field() {
 
 	$managerProps = $_POST['props'];
@@ -486,7 +476,7 @@ function rcl_manager_get_new_field() {
 	) );
 }
 
-rcl_ajax_action( 'rcl_manager_get_custom_field_options', false, false );
+rcl_ajax_action( 'rcl_manager_get_custom_field_options', false );
 function rcl_manager_get_custom_field_options() {
 
 	$new_type	 = $_POST['newType'];

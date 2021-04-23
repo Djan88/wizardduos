@@ -162,7 +162,7 @@ function rcl_register_rating_product_type() {
 }
 
 //инициализация вкладки личного кабинета
-add_action( 'init', 'rcl_tab_orders' );
+add_action( 'init', 'rcl_tab_orders', 10 );
 function rcl_tab_orders() {
 
 	$tab_data = array(
@@ -273,10 +273,7 @@ function rcl_add_payment_order( $pay ) {
 			//если оплата с баланса пользователя
 
 			$result = array(
-				'success'		 => rcl_get_notice( [
-					'type'	 => 'success',
-					'text'	 => __( 'Your order has been successfully paid! A notification has been sent to the administration.', 'wp-recall' )
-				] ),
+				'success'		 => __( 'Your order has been successfully paid! A notification has been sent to the administration.', 'wp-recall' ),
 				'user_balance'	 => rcl_get_user_balance( $order->user_id ),
 				'order_id'		 => $order->order_id,
 				'pay_balance'	 => 1

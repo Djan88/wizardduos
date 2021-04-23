@@ -34,8 +34,12 @@ function wau_ajax_get_payment_form() {
 	$result = array(
 		'dialog' => array(
 			'content'	 =>
-			'<h3>' . __( 'Оплата доступа' ) . ' "' . $accountName . '"' . '</h3>'
-			. '<p>' . __( 'оплачиваемый срок доступа' ) . ': ' . wau_time_to_strdate( $tariff->access_time ) . '</p>'
+			rcl_get_notice( [
+				'text' => __( 'Оплата доступа' ) . ' "' . $accountName . '"'
+			] )
+			. rcl_get_notice( [
+				'text' => __( 'оплачиваемый срок доступа' ) . ': ' . wau_time_to_strdate( $tariff->access_time )
+			] )
 			. rcl_get_pay_form( apply_filters( 'wau_payment_form_args', array(
 				'baggage_data'		 => array(
 					'tariff_id' => $tariff_id

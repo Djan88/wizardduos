@@ -12,13 +12,13 @@ function wau_check_post_type( $post_type ) {
 
 function wau_get_option( $name, $default = false ) {
 
-	$WAUOptions = get_option( 'wau_options' );
+	$WAUOptions = get_site_option( 'wau_options' );
 
 	if ( ! isset( $WAUOptions[$name] ) || $WAUOptions[$name] == '' ) {
 		return $default;
 	}
 
-	return $WAUOptions[$name];
+	return wp_unslash( $WAUOptions[$name] );
 }
 
 function wau_setup_time( $data ) {

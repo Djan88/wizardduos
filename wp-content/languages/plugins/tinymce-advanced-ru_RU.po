@@ -1,15 +1,15 @@
-# Translation of Plugins - TinyMCE Advanced - Stable (latest release) in Russian
-# This file is distributed under the same license as the Plugins - TinyMCE Advanced - Stable (latest release) package.
+# Translation of Plugins - Advanced Editor Tools (previously TinyMCE Advanced) - Stable (latest release) in Russian
+# This file is distributed under the same license as the Plugins - Advanced Editor Tools (previously TinyMCE Advanced) - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2020-04-01 05:12:45+0000\n"
+"PO-Revision-Date: 2020-11-18 10:30:35+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: GlotPress/2.4.0-alpha\n"
+"Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
+"X-Generator: GlotPress/3.0.0-alpha.2\n"
 "Language: ru\n"
-"Project-Id-Version: Plugins - TinyMCE Advanced - Stable (latest release)\n"
+"Project-Id-Version: Plugins - Advanced Editor Tools (previously TinyMCE Advanced) - Stable (latest release)\n"
 
 #: tadv_admin.php:383
 msgid "(this will replace the default text color popup in WP 5.4 and newer)"
@@ -27,7 +27,7 @@ msgstr "Расширяет и улушает редактор блоков (Gute
 msgid "Keep paragraph tags in the Classic block and the Classic Editor"
 msgstr "Сохранять теги параграфов в классическом редакторе и классическом блоке"
 
-#: tinymce-advanced.php:900
+#: tinymce-advanced.php:927
 msgid "Clear formatting"
 msgstr "Чистое форматирование"
 
@@ -189,31 +189,31 @@ msgstr "Импорт настроек"
 msgid "The settings are imported from a previously exported settings file."
 msgstr "Настройки импортированы из ранее экспортированного файла настроек."
 
-#: tinymce-advanced.php:908
+#: tinymce-advanced.php:935
 msgid "Text Background Color"
 msgstr "Цвет фона текста"
 
-#: tinymce-advanced.php:906
+#: tinymce-advanced.php:933
 msgid "Text Color"
 msgstr "Цвет текста"
 
-#: tinymce-advanced.php:904
+#: tinymce-advanced.php:931
 msgid "Underline"
-msgstr "Нижнее подчеркивание"
+msgstr "Подчеркивание"
 
-#: tinymce-advanced.php:903
+#: tinymce-advanced.php:930
 msgid "Mark"
 msgstr "Отметка"
 
-#: tinymce-advanced.php:902
+#: tinymce-advanced.php:929
 msgid "Subscript"
-msgstr "Субскрипт"
+msgstr "Нижний индекс"
 
-#: tinymce-advanced.php:901
+#: tinymce-advanced.php:928
 msgid "Superscript"
-msgstr "Суперскрипт"
+msgstr "Верхний индекс"
 
-#: tinymce-advanced.php:870
+#: tinymce-advanced.php:897
 msgid "For use instead of the Paragraph Block. Supports transforming to and from multiple Paragraph blocks, Image, Table, List, Quote, Custom HTML, and most other blocks."
 msgstr "для использования вместо блока параграфа (поддерживает преобразование в и из множественных блоков параграфов, изображения, таблицы, списка, цитаты, произвольного HTML и большинства других блоков)."
 
@@ -261,11 +261,11 @@ msgstr "Да"
 msgid "Enable setting of selected text color"
 msgstr "Включить настройки цветов выделенного текста"
 
-#: tinymce-advanced.php:909 tadv_admin.php:374
+#: tinymce-advanced.php:936 tadv_admin.php:374
 msgid "Selected text background color"
 msgstr "Цвет фона выделенного текста"
 
-#: tinymce-advanced.php:907 tadv_admin.php:370
+#: tinymce-advanced.php:934 tadv_admin.php:370
 msgid "Selected text color"
 msgstr "Цвет выделенного текста"
 
@@ -277,7 +277,7 @@ msgstr "Цвет текста"
 msgid "Unused buttons for the blocks toolbars"
 msgstr "Неиспользуемые кнопки для панелей инструментов блоков"
 
-#: tinymce-advanced.php:899 tadv_admin.php:312
+#: tinymce-advanced.php:926 tadv_admin.php:312
 msgid "Formatting"
 msgstr "Форматирование"
 
@@ -321,7 +321,7 @@ msgstr "Вы можете добавить множественные параг
 msgid "The Classic Paragraph block includes the familiar TinyMCE editor and is an extended and enhanced Classic block."
 msgstr "Блок классический параграф включает знакомый вам редактор TinyMCE и расширенный и улучшенный классический блок."
 
-#: tinymce-advanced.php:868
+#: tinymce-advanced.php:895
 msgid "Classic Paragraph"
 msgstr "Классический параграф"
 
@@ -381,7 +381,7 @@ msgstr "Заменить настройки размера доступные д
 msgid "A stylesheet file named editor-style.css was not added by your theme."
 msgstr "Файл таблицы стилей с именем editor-style.css не был добавлен вашей темой."
 
-#: tinymce-advanced.php:1311
+#: tinymce-advanced.php:1338
 msgid "Settings"
 msgstr "Настройки"
 
@@ -419,7 +419,7 @@ msgstr "Включить больше возможностей списков: �
 
 #: tadv_admin.php:753
 msgid "Options"
-msgstr "Параметры"
+msgstr "Настройки"
 
 #. Author URI of the plugin
 msgid "http://www.laptoptips.ca/"
@@ -437,11 +437,11 @@ msgstr "http://www.laptoptips.ca/projects/tinymce-advanced/"
 msgid "TinyMCE Advanced"
 msgstr "TinyMCE Advanced"
 
-#: tinymce-advanced.php:378
+#: tinymce-advanced.php:381
 msgid "Please upgrade your WordPress installation or download an <a href=\"%s\">older version of the plugin</a>."
 msgstr "Пожалуйста, обновите Ваш WordPress или скачайте <a href=\"%s\">старую версию плагина</a> ."
 
-#: tinymce-advanced.php:370
+#: tinymce-advanced.php:373
 msgid "TinyMCE Advanced requires WordPress version %1$s or newer. It appears that you are running %2$s. This can make the editor unstable."
 msgstr "Для работы TinyMCE Advanced требуется WordPress версии %1$s или выше. Похоже, что Вы работаете на %2$s. Это может сделать работу редактора неустойчивой."
 

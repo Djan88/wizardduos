@@ -4,22 +4,50 @@ var rcl_beats = [ ];
 var rcl_beats_delay = 0;
 var rcl_url_params = rcl_get_value_url_params();
 
-jQuery.fn.extend( {
-	animateCss: function( animationNameStart, functionEnd ) {
-		var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-		this.addClass( 'animated ' + animationNameStart ).one( animationEnd, function() {
-			jQuery( this ).removeClass( 'animated ' + animationNameStart );
+jQuery( document ).ready( function( $ ) {
 
-			if ( functionEnd ) {
-				if ( typeof functionEnd == 'function' ) {
-					functionEnd( this );
+	$.fn.extend( {
+		insertAtCaret: function( myValue ) {
+			return this.each( function( i ) {
+				if ( document.selection ) {
+					// Для браузеров типа Internet Explorer
+					this.focus();
+					var sel = document.selection.createRange();
+					sel.text = myValue;
+					this.focus();
+				} else if ( this.selectionStart || this.selectionStart == '0' ) {
+					// Для браузеров типа Firefox и других Webkit-ов
+					var startPos = this.selectionStart;
+					var endPos = this.selectionEnd;
+					var scrollTop = this.scrollTop;
+					this.value = this.value.substring( 0, startPos ) + myValue + this.value.substring( endPos, this.value.length );
+					this.focus();
+					this.selectionStart = startPos + myValue.length;
+					this.selectionEnd = startPos + myValue.length;
+					this.scrollTop = scrollTop;
 				} else {
-					jQuery( this ).animateCss( functionEnd );
+					this.value += myValue;
+					this.focus();
 				}
-			}
-		} );
-		return this;
-	}
+			} )
+		},
+		animateCss: function( animationNameStart, functionEnd ) {
+			var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+			this.addClass( 'animated ' + animationNameStart ).one( animationEnd, function() {
+				jQuery( this ).removeClass( 'animated ' + animationNameStart );
+
+				if ( functionEnd ) {
+					if ( typeof functionEnd == 'function' ) {
+						functionEnd( this );
+					} else {
+						jQuery( this ).animateCss( functionEnd );
+					}
+				}
+			} );
+			return this;
+		}
+	} );
+
 } );
 
 function rcl_do_action( action_name ) {
@@ -153,7 +181,7 @@ function rcl_init_cookie() {
 			if ( document.cookie && document.cookie !== '' ) {
 				var cookies = document.cookie.split( ';' );
 				for ( var i = 0; i < cookies.length; i++ ) {
-					var cookie = jQuery.trim( cookies[i] );
+					var cookie = cookies[i].trim();
 					if ( cookie.substring( 0, name.length + 1 ) === ( name + '=' ) ) {
 						cookieValue = decodeURIComponent( cookie.substring( name.length + 1 ) );
 						break;
@@ -179,15 +207,6 @@ function rcl_remove_dynamic_field( e ) {
 	jQuery( e ).parents( '.dynamic-value' ).remove();
 }
 
-function rcl_update_require_checkbox( e ) {
-	var name = jQuery( e ).attr( 'name' );
-	var chekval = jQuery( 'form input[name="' + name + '"]:checked' ).val();
-	if ( chekval )
-		jQuery( 'form input[name="' + name + '"]' ).attr( 'required', false );
-	else
-		jQuery( 'form input[name="' + name + '"]' ).attr( 'required', true );
-}
-
 function rcl_rand( min, max ) {
 	if ( max ) {
 		return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
@@ -211,16 +230,18 @@ function rcl_notice( text, type, time_close ) {
 	var notice_id = rcl_rand( 1, 1000 );
 
 	var html = '<div id="notice-' + notice_id + '" class="notice-window type-' + options.type + '"><a href="#" class="close-notice"><i class="rcli fa-times"></i></a>' + options.text + '</div>';
-	if ( !jQuery( '#rcl-notice' ).size() ) {
+	if ( !jQuery( '#rcl-notice' ).length ) {
 		jQuery( 'body > div' ).last().after( '<div id="rcl-notice">' + html + '</div>' );
 	} else {
-		if ( jQuery( '#rcl-notice > div' ).size() )
+		if ( jQuery( '#rcl-notice > div' ).length )
 			jQuery( '#rcl-notice > div:last-child' ).after( html );
 		else
 			jQuery( '#rcl-notice' ).html( html );
 	}
 
-	jQuery( '#rcl-notice > div' ).last().animateCss( 'slideInLeft' );
+	if ( typeof animateCss !== 'undefined' ) {
+		jQuery( '#rcl-notice > div' ).last().animateCss( 'slideInLeft' );
+	}
 
 	if ( time_close ) {
 		setTimeout( function() {
@@ -375,7 +396,7 @@ function rcl_init_field_maxlength( fieldID ) {
 	var field = jQuery( '#' + fieldID );
 	var maxlength = field.attr( 'maxlength' );
 
-	if ( !field.parent().find( '.maxlength' ).size() ) {
+	if ( !field.parent().find( '.maxlength' ).length ) {
 
 		if ( field.val() ) {
 			maxlength = maxlength - field.val().length;
@@ -503,7 +524,7 @@ function rcl_proccess_ajax_return( result ) {
 
 			if ( dialog.content ) {
 
-				if ( jQuery( '#ssi-modalContent' ).size() )
+				if ( jQuery( '#ssi-modalContent' ).length )
 					ssi_modal.close();
 
 				var ssiOptions = {
@@ -677,6 +698,9 @@ function rcl_send_form_data( action, e ) {
 		rcl_preloader_show( jQuery( e ).parents( '.preloader-parent' ) );
 	}
 
+	if ( typeof tinyMCE !== 'undefined' )
+		tinyMCE.triggerSave();
+
 	rcl_ajax( {
 		data: form.serialize() + '&action=' + action
 	} );
@@ -762,11 +786,12 @@ function rcl_init_table( table_id ) {
 		list.sort( function( a, b ) {
 			var aVal = jQuery( a ).find( '[data-' + sortby + '-value]' ).data( sortby + '-value' );
 			var bVal = jQuery( b ).find( '[data-' + sortby + '-value]' ).data( sortby + '-value' );
-			//if(isNaN(aVal))
-			if ( route == 'asc' )
-				return ( aVal < bVal ) - ( aVal > bVal ); //по возрастанию
-			else
-				return ( aVal > bVal ) - ( aVal < bVal ); //по убыванию
+
+			if ( route == 'desc' ) {
+				return (aVal < bVal) - (aVal > bVal); //по возрастанию
+			}else {
+				return (aVal > bVal) - (aVal < bVal); //по убыванию
+			}
 		} );
 
 		sortCell.attr( 'data-route', ( route == 'desc' ? 'asc' : 'desc' ) );
@@ -984,7 +1009,7 @@ function RclForm( form ) {
 				var value = false;
 
 				if ( field.attr( 'type' ) == 'checkbox' ) {
-					if ( field.is( ":checked" ) )
+					if ( jQuery( 'input[name="' + field.attr( 'name' ) + '"]:checked' ).val() )
 						value = true;
 				} else if ( field.attr( 'type' ) == 'radio' ) {
 					if ( jQuery( 'input[name="' + field.attr( 'name' ) + '"]:checked' ).val() )
@@ -1203,7 +1228,7 @@ var RclUploaders = [ ];
 		jQuery( 'body' ).on( 'drop', function( e ) {
 			return false;
 		} );
-		jQuery( document.body ).bind( "drop", function( e ) {
+		jQuery( document.body ).on( "drop", function( e ) {
 			e.preventDefault();
 		} );
 
@@ -1280,6 +1305,7 @@ function RclUploader( props, sk ) {
 
 		var formData = {
 			options: JSON.stringify( uploader.options ),
+			is_wp_admin_page: typeof adminpage ? 1 : 0,
 			sk: sk
 		};
 
@@ -1716,8 +1742,6 @@ function rcl_add_attachment_in_editor( attach_id, editor_name, e ) {
 
 	jQuery( "textarea[name=" + editor_name + "]" ).insertAtCaret( image + "&nbsp;" );
 
-	//var editor_id = jQuery( 'textarea[name="' + editor_name + '"]' ).attr( 'id' );
-
 	if ( typeof tinyMCE != 'undefined' ) {
 		tinyMCE.editors.forEach( function( editor ) {
 
@@ -1731,3 +1755,25 @@ function rcl_add_attachment_in_editor( attach_id, editor_name, e ) {
 }
 
 /** new uploader scripts end **/
+
+function rcl_update_require_checkbox( e ) {
+	var name = jQuery( e ).attr( 'name' );
+	var chekval = jQuery( 'form input[name="' + name + '"]:checked' ).val();
+	if ( chekval )
+		jQuery( 'form input[name="' + name + '"]' ).attr( 'required', false );
+	else
+		jQuery( 'form input[name="' + name + '"]' ).attr( 'required', true );
+}
+
+/*rcl_add_action( 'rcl_init', 'rcl_init_update_requared_checkbox' );*/
+function rcl_init_update_requared_checkbox() {
+
+	jQuery( 'body form' ).find( '.required-checkbox' ).each( function() {
+		rcl_update_require_checkbox( this );
+	} );
+
+	jQuery( 'body form' ).on( 'click', '.required-checkbox', function() {
+		rcl_update_require_checkbox( this );
+	} );
+
+}

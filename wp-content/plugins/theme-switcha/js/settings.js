@@ -13,7 +13,8 @@ jQuery(document).ready(function($) {
 			title: theme_switcha_settings.reset_title,
 			buttons: button_names,
 			modal: true,
-			width: 350
+			width: 350,
+			closeText: ''
 		});
 	});
 	

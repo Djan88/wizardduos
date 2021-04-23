@@ -1,9 +1,8 @@
 === Basic User Avatars ===
-Contributors: jaredatch
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AD8KTWTTDX9JL
+Contributors: strangerstudios, jaredatch
 Tags: avatar, gravatar, bbpress, profiles
-Requires at least: 4.0
-Tested up to: 4.2
+Requires at least: 4.5
+Tested up to: 5.5
 Stable tag: trunk
  
 Adds an avatar upload field to user profiles. Front-end support. bbPress support.
@@ -16,7 +15,7 @@ Provides a plugin for front-end avatar management for sites that what to keep us
 
 Automatically adds avatar support to bbPress (2.3+) user profiles if bbPress is activated.
 
-**[This plugin is on GitHub!](https://github.com/jaredatch/basic-user-avatars/)** Pull requests are welcome. If possible please report issues throug Github.
+**[This plugin is on GitHub!](https://github.com/strangerstudios/basic-user-avatars/)** Pull requests are welcome. If possible please report issues throug Github.
 
 Note: This plugin is a fork of Simple Local Avatars v1.3.1 by Jake Goldman (10up). If you want snazzy ajax and some other nifty features, check out [Simple Local Avatars 2.x](http://wordpress.org/plugins/simple-local-avatars).
 
@@ -37,9 +36,9 @@ Shortcode for front-end support is `[basic-user-avatars]`.
 
 While this plugin has been tested with common server setups, some enviroments could cause an issue.
 
-If you are having a problem deactivate all plugins other than this one and then switch you theme to TwentyTweleve (or similar). If things then work, then the issue is with a 3rd party theme or plugin.
+If you are having a problem deactivate all plugins other than this one and then switch your theme to TwentyTweleve (or similar). If things work, then the issue is with a 3rd party theme or plugin.
 
-If things are still not functioning incorrectly then proceed to reporting an issue. The ideal method is via [GitHub issues](https://github.com/jaredatch/basic-user-avatars/issues/).
+If things are still not functioning properly then proceed to reporting an issue. The ideal method is via [GitHub issues](https://github.com/strangerstudios/basic-user-avatars/issues/).
 
 == Screenshots ==
 
@@ -48,16 +47,23 @@ If things are still not functioning incorrectly then proceed to reporting an iss
 1. Option on the bbPress user profile edit page. 
 
 == Changelog ==
+= 1.0.4 - 2020-01-12 =
+* BUG FIX: Fixed typos on readme.txt - Thanks @fred-pedro
+* ENHANCEMENT: Added translation for Spanish - Thanks @ricardpriet
+* ENHANCEMENT: Added translation for Brazilian Portuguese - Thanks @allysonsouza
+* ENHANCEMENT: Added translation for Catalan - Thanks @alvaromartinezmajado
+* ENHANCEMENT: Added proper SSL support - Thanks @zachwills
+* ENHANCEMENT: Escaped strings.
 
-= 1.0.3 (5/8/2015)
-* Added Swedish and Finnish translations - props dmaester
+= 1.0.3 - 2015-08-05 =
+* ENHANCEMENT: Added Swedish and Finnish translations - Thanks @dmaester
 
-= 1.0.2 (4/17/2015)
-* Added POT file for translation
+= 1.0.2 - 2015-04-17 =
+* ENHANCEMENT: Added POT file for translation
 
-= 1.0.1 (3/17/2015)
-* Updated textdomain for better support
-* Added plugin to GitHub for better collaboration
+= 1.0.1 - 2015-03-17 =
+* BUG FIX: Updated textdomain for better support
+* ENHANCEMENT: Added plugin to GitHub for better collaboration
 
 = 1.0.0 =
 * Initial launch, should be considered beta. Use with caution.

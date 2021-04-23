@@ -1,5 +1,5 @@
 Name: WP Access Ultimate;
-Version: 1.11.1;
+Version: 1.12.0;
 Support Core: 16.24.0;
 Item ID: 17342;
 Key ID: wau;

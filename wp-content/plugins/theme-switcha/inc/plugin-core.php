@@ -595,7 +595,9 @@ function theme_switcha_dashboard_widget() {
 	
 	global $theme_switcha_options;
 	
-	if (theme_switcha_check_permissions($theme_switcha_options)) {
+	$enable = isset($theme_switcha_options['enable_plugin']) ? $theme_switcha_options['enable_plugin'] : 0;
+	
+	if ($enable && theme_switcha_check_permissions($theme_switcha_options)) {
 		
 		wp_add_dashboard_widget('theme_switcha_dashboard_widget', __('Theme Switcha', 'theme-switcha'), 'theme_switcha_display_dropdown_echo');
 		

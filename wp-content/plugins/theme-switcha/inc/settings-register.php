@@ -154,7 +154,7 @@ function theme_switcha_callback_number($args) {
 	$label = isset($args['label']) ? $args['label'] : '';
 	$value = isset($options[$id]) ? sanitize_text_field($options[$id]) : '';
 	
-	echo '<input name="theme_switcha_options['. $id .']" type="number" min="0" value="'. $value .'" /> ';
+	echo '<input name="theme_switcha_options['. $id .']" type="number" class="small-text" min="0" value="'. $value .'" /> ';
 	echo '<label class="custom-label inline-block" for="theme_switcha_options['. $id .']">'. $label .'</label>';
 	
 }

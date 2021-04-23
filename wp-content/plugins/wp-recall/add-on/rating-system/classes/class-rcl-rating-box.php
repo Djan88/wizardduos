@@ -162,7 +162,7 @@ class Rcl_Rating_Box {
 		if ( ! $object || ! isset( $object->post_type ) )
 			return false;
 
-		$this->rating_none = ($object->ID == $post->ID && isset( $post->rating_none )) ? $post->rating_none : get_post_meta( $object->ID, 'rayting-none', 1 );
+		$this->rating_none = (isset($post->ID) && $object->ID == $post->ID && isset( $post->rating_none )) ? $post->rating_none : get_post_meta( $object->ID, 'rayting-none', 1 );
 	}
 
 	function get_box() {
@@ -413,7 +413,12 @@ class Rcl_Rating_Box {
 					$procent += 100;
 			}
 
-			$stars = '<span class="rcli fa-star stars__out" aria-hidden="true">'
+			$class = '';
+			if ( round( $args['rating_value'] ) == $a ) {
+				$class = 'stars__fin';
+			}
+
+			$stars = '<span class="rcli fa-star stars__out '.$class.'" aria-hidden="true">'
 				. '<span class="rcli fa-star stars__in" style="width:' . $procent . '%;" aria-hidden="true"></span>'
 				. '</span>';
 

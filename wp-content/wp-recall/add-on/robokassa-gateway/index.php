@@ -19,7 +19,7 @@ class Rcl_Gateway_Robokassa extends Rcl_Gateway_Core {
 
 	function get_options() {
 
-		if ( false !== array_search( rcl_get_commerce_option( 'primary_cur', 'RUB' ), array( 'RUB', 'USD', 'EUR' ) ) ) {
+		if ( false !== array_search( rcl_get_commerce_option( 'primary_cur', 'RUB' ), array( 'RUB', 'USD', 'EUR', 'KZT' ) ) ) {
 
 			$options = array(
 				array(
@@ -318,10 +318,11 @@ class Rcl_Gateway_Robokassa extends Rcl_Gateway_Core {
 
 		if ( ! $this->get_payment( $_REQUEST["InvId"] ) ) {
 			$this->insert_payment( array(
-				'pay_id'	 => $_REQUEST["InvId"],
-				'pay_type'	 => $_REQUEST["shp_b"],
-				'pay_summ'	 => $_REQUEST["OutSum"],
-				'user_id'	 => $_REQUEST["shp_a"]
+				'pay_id'		 => $_REQUEST["InvId"],
+				'pay_type'		 => $_REQUEST["shp_b"],
+				'pay_summ'		 => $_REQUEST["OutSum"],
+				'user_id'		 => $_REQUEST["shp_a"],
+				'baggage_data'	 => $_REQUEST["shp_c"]
 			) );
 		}
 

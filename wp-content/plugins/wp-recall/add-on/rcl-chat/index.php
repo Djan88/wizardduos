@@ -3,6 +3,8 @@
 include_once 'chats-query.php';
 include_once 'core.php';
 
+rcl_init_beat( 'rcl_chat_beat_core' );
+
 if ( ! is_admin() ):
 	add_action( 'rcl_enqueue_scripts', 'rcl_chat_scripts', 10 );
 else:
@@ -274,7 +276,7 @@ function rcl_get_user_contacts_list( $user_id ) {
 
 		return rcl_get_notice( [
 			'text' => apply_filters( 'rcl_chat_no_contacts_notice', $notice, $user_id )
-		] );
+			] );
 	}
 
 	rcl_dialog_scripts();

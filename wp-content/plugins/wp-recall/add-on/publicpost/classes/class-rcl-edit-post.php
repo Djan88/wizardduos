@@ -12,7 +12,7 @@ class Rcl_EditPost {
 		'upload'	 => false
 	);
 
-	function __construct() {
+	function __construct($post_id = false) {
 
 		if ( isset( $_FILES ) ) {
 			require_once(ABSPATH . "wp-admin" . '/includes/image.php');
@@ -24,9 +24,12 @@ class Rcl_EditPost {
 			$this->post_type = sanitize_text_field( $_POST['post_type'] );
 		}
 
-		if ( isset( $_POST['post_id'] ) && $_POST['post_id'] ) {
+		if(!$post_id)
+			$post_id = isset( $_POST['post_ID'] ) && $_POST['post_ID'] ? $_POST['post_ID'] : (isset( $_POST['post_id'] ) && $_POST['post_id'] ? $_POST['post_id'] : 0);
 
-			$this->post_id = intval( $_POST['post_id'] );
+		if ( $post_id ) {
+
+			$this->post_id = intval( $post_id );
 
 			$post = get_post( $this->post_id );
 
@@ -43,10 +46,6 @@ class Rcl_EditPost {
 			$this->error( __( 'Error publishing!', 'wp-recall' ) . ' Error 100' );
 
 		do_action( 'init_update_post_rcl', $this );
-
-		add_filter( 'pre_update_postdata_rcl', array( &$this, 'add_data_post' ), 5, 2 );
-
-		$this->update_post();
 	}
 
 	function error( $error ) {
@@ -64,7 +63,7 @@ class Rcl_EditPost {
 
 			if ( $this->post_type == 'post-group' ) {
 
-				if ( rcl_can_user_edit_post_group( $this->post_id ) )
+				if ( !function_exists('rcl_can_user_edit_post_group') || rcl_can_user_edit_post_group( $this->post_id ) )
 					$this->user_can['edit'] = true;
 			}else {
 
@@ -98,14 +97,11 @@ class Rcl_EditPost {
 		$this->user_can = apply_filters( 'rcl_public_update_user_can', $this->user_can, $this );
 	}
 
-	function update_thumbnail( $postdata ) {
+	function update_thumbnail() {
 
-		$thumbnail_id = (isset( $_POST['post_thumbnail'] )) ? $_POST['post_thumbnail'] : 0;
+		$thumbnail_id = isset( $_POST['post_thumbnail'] ) ? $_POST['post_thumbnail'] : 0;
 
-		if ( ! $this->update )
-			return $this->rcl_add_attachments_in_temps( $postdata );
-
-		$currentThID = get_post_meta( $this->post_id, '_thumbnail_id', 1 );
+		$currentThID = $this->post_id ? get_post_meta( $this->post_id, '_thumbnail_id', 1 ) : 0;
 
 		if ( $thumbnail_id ) {
 
@@ -120,9 +116,7 @@ class Rcl_EditPost {
 		}
 	}
 
-	function rcl_add_attachments_in_temps( $postdata ) {
-
-		$user_id = $postdata['post_author'];
+	function rcl_add_attachments_in_temps( $user_id ) {
 
 		$temps = rcl_get_temp_media( array(
 			'user_id'			 => $user_id,
@@ -134,9 +128,6 @@ class Rcl_EditPost {
 			$thumbnail_id = isset( $_POST['post_thumbnail'] ) ? $_POST['post_thumbnail'] : 0;
 
 			foreach ( $temps as $temp ) {
-
-				if ( $thumbnail_id && $thumbnail_id == $temp->media_id )
-					add_post_meta( $this->post_id, '_thumbnail_id', $temp->media_id );
 
 				$attachData = array(
 					'ID'			 => $temp->media_id,
@@ -151,7 +142,7 @@ class Rcl_EditPost {
 		return $temps;
 	}
 
-	function update_post_gallery( $postdata ) {
+	function update_post_gallery() {
 
 		$postGallery = isset( $_POST['rcl-post-gallery'] ) ? $_POST['rcl-post-gallery'] : false;
 
@@ -171,8 +162,6 @@ class Rcl_EditPost {
 		} else {
 			delete_post_meta( $this->post_id, 'rcl_post_gallery' );
 		}
-
-		delete_post_meta( $this->post_id, 'recall_slider' );
 	}
 
 	function get_status_post( $moderation ) {
@@ -208,13 +197,6 @@ class Rcl_EditPost {
 		return $post_status;
 	}
 
-	function add_data_post( $postdata, $data ) {
-
-		$postdata['post_status'] = $this->get_status_post( rcl_get_option( 'moderation_public_post' ) );
-
-		return $postdata;
-	}
-
 	function update_post() {
 		global $user_ID;
 
@@ -225,7 +207,7 @@ class Rcl_EditPost {
 			'post_content'	 => (isset( $_POST['post_content'] )) ? $_POST['post_content'] : ''
 		);
 
-		if ( ! $post || ! $post->post_name ) {
+		if ( ! $this->post || ! $this->post->post_name ) {
 			$postdata['post_name'] = sanitize_title( $postdata['post_title'] );
 		}
 
@@ -235,6 +217,8 @@ class Rcl_EditPost {
 		} else {
 			$postdata['post_author'] = $user_ID;
 		}
+
+		$postdata['post_status'] = $this->get_status_post( rcl_get_option( 'moderation_public_post' ) );
 
 		$postdata = apply_filters( 'pre_update_postdata_rcl', $postdata, $this );
 
@@ -269,14 +253,15 @@ class Rcl_EditPost {
 			wp_update_post( $postdata );
 		}
 
-		$this->update_thumbnail( $postdata );
+		$this->update_thumbnail();
+
+		if ( ! $this->update ) {
+			$this->rcl_add_attachments_in_temps( $postdata['post_author'] );
+		}
 
 		$this->update_post_gallery( $postdata );
 
-		if ( isset( $_POST['add-gallery-rcl'] ) && $_POST['add-gallery-rcl'] == 1 )
-			update_post_meta( $this->post_id, 'recall_slider', 1 );
-		else
-			delete_post_meta( $this->post_id, 'recall_slider' );
+		delete_post_meta( $this->post_id, 'recall_slider' );
 
 		rcl_update_post_custom_fields( $this->post_id, $formID );
 
@@ -305,7 +290,7 @@ class Rcl_EditPost {
 			wp_send_json( array( 'redirect' => $redirect_url ) );
 		}
 
-		wp_redirect( $redirect_url );
+		header( "Location: $redirect_url", true, 302 );
 		exit;
 	}
 

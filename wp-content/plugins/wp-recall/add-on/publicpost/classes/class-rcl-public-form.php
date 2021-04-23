@@ -409,23 +409,17 @@ class Rcl_Public_Form extends Rcl_Public_Form_Fields {
 						) );
 
 					$contentField .= $field->get_notice();
-				}
-
-				if ( $field_id == 'post_excerpt' ) {
+				} else if ( $field_id == 'post_excerpt' ) {
 
 					$field->set_prop( 'value', $dataPost->post_excerpt );
 
 					$contentField = $field->get_field_input();
-				}
-
-				if ( $field_id == 'post_title' ) {
+				} else if ( $field_id == 'post_title' ) {
 
 					$field->set_prop( 'value', esc_textarea( $dataPost->post_title ) );
 
 					$contentField = $field->get_field_input( esc_textarea( $dataPost->post_title ) );
-				}
-
-				if ( $field->type == 'uploader' ) {
+				} else if ( $field->type == 'uploader' ) {
 
 					if ( $field_id == 'post_thumbnail' ) {
 
@@ -473,12 +467,7 @@ class Rcl_Public_Form extends Rcl_Public_Form_Fields {
 						$uploader = $field->get_uploader();
 
 						if ( $this->post_id ) {
-							global $wpdb;
-
-							$imagIds = RQ::tbl( new Rcl_Query( [
-									'name'	 => $wpdb->posts,
-									'cols'	 => ['ID', 'post_parent', 'post_type', 'post_status' ]
-								] ) )->select( ['ID' ] )->where( [
+							$imagIds = RQ::tbl( new Rcl_Posts_Query() )->select( ['ID' ] )->where( [
 									'post_parent'	 => $this->post_id,
 									'post_type'		 => 'attachment',
 								] )->limit( -1 )->order( 'ASC' )->get_col();
@@ -497,6 +486,8 @@ class Rcl_Public_Form extends Rcl_Public_Form_Fields {
 						$contentField = $uploader->get_gallery( $imagIds );
 
 						$contentField .= $uploader->get_uploader();
+
+						$contentField .= $field->get_notice();
 					}
 				}
 			} else {
@@ -623,13 +614,11 @@ class Rcl_Public_Form extends Rcl_Public_Form_Fields {
 		if ( ! is_array( $t_args ) || $t_args === false )
 			return false;
 
+		$values = [];
+		$checkedVals = [];
 		$post_tags = ($this->post_id) ? $this->get_tags( $this->post_id, $taxonomy ) : array();
 
-		$content = '<div id="rcl-tags-list-' . $taxonomy . '" class="rcl-tags-list">';
-
 		if ( $t_args['number'] != 0 && $tags = get_terms( $taxonomy, $t_args ) ) {
-
-			$content .= '<span class="rcl-field-input type-checkbox-input">';
 
 			foreach ( $tags as $tag ) {
 
@@ -640,50 +629,39 @@ class Rcl_Public_Form extends Rcl_Public_Form_Fields {
 					unset( $post_tags[$tag->slug] );
 				}
 
-				$args = array(
-					'type'		 => 'checkbox',
-					'id'		 => 'tag-' . $tag->slug,
-					'name'		 => 'tags[' . $taxonomy . '][]',
-					'checked'	 => $checked,
-					'label'		 => $tag->name,
-					'value'		 => $tag->name
-				);
-
-				if ( $this->current_field->get_prop( 'required' ) ) {
-					$args['required']	 = true;
-					$args['class']		 = 'required-checkbox';
+				if($checked){
+					$checkedVals[] = $tag->name;
 				}
 
-				$content .= rcl_form_field( $args );
+				$values[$tag->name] = $tag->name;
+
 			}
 
-			$content .= '</span>';
 		}
 
 		if ( $post_tags ) {
 
-			$content .= '<span class="rcl-field-input type-checkbox-input">';
-
 			foreach ( $post_tags as $tag ) {
 
-				$args = array(
-					'type'		 => 'checkbox',
-					'id'		 => 'tag-' . $tag->slug,
-					'name'		 => 'tags[' . $taxonomy . '][]',
-					'checked'	 => true,
-					'label'		 => $tag->name,
-					'value'		 => $tag->name
-				);
+				$checkedVals[] = $tag->name;
 
-				$content .= rcl_form_field( $args );
+				$values[$tag->name] = $tag->name;
+
 			}
 
-			$content .= '</span>';
 		}
 
-		$content .= '</div>';
+		if(!$values)
+			return false;
 
-		return $content;
+		return Rcl_Field::setup( [
+			'type' => 'checkbox',
+			'slug' => $taxonomy.'-tags',
+			'input_name' => 'tags[' . $taxonomy . ']',
+			'required' => $this->current_field->get_prop( 'required' ),
+			'values' => $values,
+			'value' => $checkedVals
+		] )->get_field_input();
 	}
 
 	function get_tags( $post_id, $taxonomy = 'post_tag' ) {

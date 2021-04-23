@@ -9,9 +9,9 @@
 	Author URI: https://plugin-planet.com/
 	Donate link: https://monzillamedia.com/donate.html
 	Requires at least: 4.1
-	Tested up to: 5.5
-	Stable tag: 2.5
-	Version: 2.5
+	Tested up to: 5.7
+	Stable tag: 2.7
+	Version: 2.7
 	Requires PHP: 5.6.20
 	Text Domain: theme-switcha
 	Domain Path: /languages
@@ -32,7 +32,7 @@
 	You should have received a copy of the GNU General Public License
 	with this program. If not, visit: https://www.gnu.org/licenses/
 	
-	Copyright 2020 Monzilla Media. All rights reserved.
+	Copyright 2021 Monzilla Media. All rights reserved.
 */
 
 if (!defined('ABSPATH')) die();
@@ -91,7 +91,7 @@ if (!class_exists('Theme_Switcha')) {
 		private function constants() {
 			
 			if (!defined('THEME_SWITCHA_REQUIRE')) define('THEME_SWITCHA_REQUIRE', '4.1');
-			if (!defined('THEME_SWITCHA_VERSION')) define('THEME_SWITCHA_VERSION', '2.5');
+			if (!defined('THEME_SWITCHA_VERSION')) define('THEME_SWITCHA_VERSION', '2.7');
 			if (!defined('THEME_SWITCHA_NAME'))    define('THEME_SWITCHA_NAME',    'Theme Switcha');
 			if (!defined('THEME_SWITCHA_AUTHOR'))  define('THEME_SWITCHA_AUTHOR',  'Jeff Starr');
 			if (!defined('THEME_SWITCHA_HOME'))    define('THEME_SWITCHA_HOME',    'https://perishablepress.com/theme-switcha/');

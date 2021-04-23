@@ -477,22 +477,6 @@ function rcl_decode_post( $string ) {
 	return json_decode( base64_decode( $string ) );
 }
 
-function rcl_get_wp_upload_dir() {
-	if ( defined( 'MULTISITE' ) ) {
-		$upload_dir = array(
-			'basedir'	 => WP_CONTENT_DIR . '/uploads',
-			'baseurl'	 => WP_CONTENT_URL . '/uploads'
-		);
-	} else {
-		$upload_dir = wp_upload_dir();
-	}
-
-	if ( is_ssl() )
-		$upload_dir['baseurl'] = str_replace( 'http://', 'https://', $upload_dir['baseurl'] );
-
-	return $upload_dir;
-}
-
 //запрещаем доступ в админку
 add_action( 'init', 'rcl_admin_access', 1 );
 function rcl_admin_access() {
@@ -936,7 +920,7 @@ function rcl_get_button( $args, $depr_url = false, $depr_args = false ) {
 		return $bttn->get_button();
 	}
 
-	_deprecated_argument( __FUNCTION__, '16.21.0' );
+	//_deprecated_argument( __FUNCTION__, '16.21.0' );
 
 	$button = '<a href="' . $depr_url . '" ';
 	if ( isset( $depr_args['attr'] ) && $depr_args['attr'] )
@@ -1044,6 +1028,7 @@ function rcl_is_register_open() {
 
 /* 16.0.0 */
 function rcl_update_profile_fields( $user_id, $profileFields = false ) {
+	global $user_ID;
 
 	require_once(ABSPATH . "wp-admin" . '/includes/image.php');
 	require_once(ABSPATH . "wp-admin" . '/includes/file.php');
@@ -1076,7 +1061,7 @@ function rcl_update_profile_fields( $user_id, $profileFields = false ) {
 
 			$value = (isset( $_POST[$slug] )) ? $_POST[$slug] : false;
 
-			if ( isset( $field['admin'] ) && $field['admin'] == 1 && ! is_admin() ) {
+			if ( isset( $field['admin'] ) && $field['admin'] == 1 && ! is_admin() && ! rcl_is_user_role( $user_ID, ['administrator' ] ) ) {
 
 				if ( in_array( $slug, array( 'display_name', 'user_url' ) ) ) {
 
@@ -1373,11 +1358,29 @@ function rcl_filter_custom_tab_usermetas( $content ) {
 	if ( ! $metas[1] )
 		return $content;
 
+	$tblUsers = [
+		'display_name',
+		'user_url',
+		'user_login',
+		'user_nicename',
+		'user_email',
+		'user_registered'
+	];
+
 	$matchs = array();
 
 	foreach ( $metas[1] as $meta ) {
-		$value								 = get_user_meta( $rcl_office, $meta, 1 ) ? : __( 'not specified', 'wp-recall' );
-		$matchs['{RCL-UM:' . $meta . '}']	 = (is_array( $value )) ? implode( ', ', $value ) : $value;
+
+		if ( in_array( $meta, $tblUsers ) ) {
+			$value = get_the_author_meta( $meta, $rcl_office );
+		} else {
+			$value = get_user_meta( $rcl_office, $meta, 1 );
+		}
+
+		if ( ! $value )
+			$value = __( 'not specified', 'wp-recall' );
+
+		$matchs['{RCL-UM:' . $meta . '}'] = (is_array( $value )) ? implode( ', ', $value ) : $value;
 	}
 
 	return strtr( $content, $matchs );
@@ -1462,4 +1465,9 @@ function rcl_get_pages_ids() {
 	$pages = array( __( 'Not selected', 'wp-recall' ) ) + $pages;
 
 	return $pages;
+}
+
+function rcl_init_beat($beatName){
+	global $rcl_beats;
+	$rcl_beats[$beatName] = [];
 }

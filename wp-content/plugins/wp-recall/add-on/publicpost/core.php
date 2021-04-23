@@ -119,28 +119,27 @@ function rcl_get_custom_fields_edit_box( $post_id, $post_type = false, $form_id 
 
 	$fields = $RclForm->get_custom_fields();
 
+	if ( $RclForm->is_active_field( 'post_uploader' ) ) {
+
+		$postUploader = $RclForm->get_field( 'post_uploader' );
+		$postUploader->set_prop( 'fix_editor', 'content' );
+
+		$fields = $fields ? ['post_uploader' => $postUploader ] + $fields : ['post_uploader' => $postUploader ];
+	}
+
 	if ( ! $fields )
 		return false;
 
-	$content = '<div class="rcl-custom-fields-box">';
+	rcl_publics_scripts();
+
+	$content = '<div id="rcl-post-fields-admin-box">';
 
 	foreach ( $fields as $field_id => $field ) {
 
 		if ( ! isset( $field->slug ) )
 			continue;
 
-		if ( ! isset( $field->value ) )
-			$field->value = ($post_id) ? get_post_meta( $post_id, $field->slug, 1 ) : '';
-
-		$content .= '<div class="rcl-custom-field">';
-
-		$content .= '<label>' . $field->get_title() . '</label>';
-
-		$content .= '<div class="field-value">';
-		$content .= $field->get_field_input();
-		$content .= '</div>';
-
-		$content .= '</div>';
+		$content .= $RclForm->get_field_form( $field_id );
 	}
 
 	$content .= '</div>';
@@ -221,6 +220,7 @@ function rcl_update_post_custom_fields( $post_id, $id_form = false ) {
 			}
 		}
 	}
+
 }
 
 rcl_ajax_action( 'rcl_save_temp_async_uploaded_thumbnail', true );
@@ -236,7 +236,10 @@ function rcl_save_temp_async_uploaded_thumbnail() {
 		) );
 	}
 
-	rcl_update_tempgallery( $attachment_id, $attachment_url );
+	rcl_add_temp_media(array(
+		'media_id' => $attachment_id,
+		'uploader_id' => 'post_uploader'
+	));
 
 	wp_send_json( array(
 		'save' => true

@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Basic User Avatars
- * Plugin URI:  http://wordpress.org/extend/basic-user-avatars
+ * Plugin URI:  https://wordpress.org/plugins/basic-user-avatars/
  * Description: Adds an avatar upload field to user profiles. Also provides front-end avatar management via a shortcode and bbPress support. No frills. Fork of Simple Local Avatars 1.3.
- * Version:     1.0.3
- * Author:      Jared Atchison
- * Author URI:  http://jaredatchison.com
+ * Version:     1.0.4
+ * Author:      Stranger Studios
+ * Author URI:  https://www.strangerstudios.com/
  *
  * ---------------------------------------------------------------------------//
  * This plugin is a fork of Simple Local Avatars v1.3.1 by Jake Goldman (10up).
@@ -28,13 +28,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with WP Forms. If not, see <http://www.gnu.org/licenses/>.
+ * along with Basic User Avatars. If not, see <http://www.gnu.org/licenses/>.
  *
- * @author     Jared Atchison
- * @version    1.0.3
+ * @author     Stranger Studios
+ * @version    1.0.4
  * @package    JA_BasicLocalAvatars
- * @copyright  Copyright (c) 2015, Jared Atchison
- * @link       http://jaredatchison.com
+ * @copyright  Copyright (c) 2015, Jared Atchison, 2020 Stranger Studios
+ * @link       https://www.strangerstudios.com/
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
@@ -95,7 +95,7 @@ class basic_user_avatars {
 
 		// Register/add the Discussion setting to restrict avatar upload capabilites
 		register_setting( 'discussion', 'basic_user_avatars_caps', array( $this, 'sanitize_options' ) );
-		add_settings_field( 'basic-user-avatars-caps', __( 'Local Avatar Permissions', 'basic-user-avatars' ), array( $this, 'avatar_settings_field' ), 'discussion', 'avatars' );
+		add_settings_field( 'basic-user-avatars-caps', esc_html__( 'Local Avatar Permissions', 'basic-user-avatars' ), array( $this, 'avatar_settings_field' ), 'discussion', 'avatars' );
 	}
 
 	/**
@@ -109,7 +109,7 @@ class basic_user_avatars {
 		?>
 		<label for="basic_user_avatars_caps">
 			<input type="checkbox" name="basic_user_avatars_caps" id="basic_user_avatars_caps" value="1" <?php checked( $options['basic_user_avatars_caps'], 1 ); ?>/>
-			<?php _e( 'Only allow users with file upload capabilities to upload local avatars (Authors and above)', 'basic-user-avatars' ); ?>
+			<?php esc_html_e( 'Only allow users with file upload capabilities to upload local avatars (Authors and above)', 'basic-user-avatars' ); ?>
 		</label>
 		<?php
 	}
@@ -166,14 +166,19 @@ class basic_user_avatars {
 			$upload_path      = wp_upload_dir();
 			$avatar_full_path = str_replace( $upload_path['baseurl'], $upload_path['basedir'], $local_avatars['full'] );
 			$image            = wp_get_image_editor( $avatar_full_path );
+			$image_sized      = null;
 
 			if ( ! is_wp_error( $image ) ) {
 				$image->resize( $size, $size, true );
 				$image_sized = $image->save();
 			}
 
-			// Deal with original being >= to original image (or lack of sizing ability)
-			$local_avatars[$size] = is_wp_error( $image_sized ) ? $local_avatars[$size] = $local_avatars['full'] : str_replace( $upload_path['basedir'], $upload_path['baseurl'], $image_sized['path'] );
+			// Deal with original being >= to original image (or lack of sizing ability).
+			if ( empty( $image_sized ) || is_wp_error( $image_sized ) ) {
+				$local_avatars[ $size ] = $local_avatars['full'];
+			} else {
+				$local_avatars[ $size ] = str_replace( $upload_path['basedir'], $upload_path['baseurl'], $image_sized['path'] );
+			}
 
 			// Save updated avatar sizes
 			update_user_meta( $user_id, 'basic_user_avatar', $local_avatars );
@@ -182,10 +187,14 @@ class basic_user_avatars {
 			$local_avatars[$size] = home_url( $local_avatars[$size] );
 		}
 
+		if ( is_ssl() ) {
+			$local_avatars[ $size ] = str_replace( 'http:', 'https:', $local_avatars[ $size ] );
+		}
+
 		$author_class = is_author( $user_id ) ? ' current-author' : '' ;
 		$avatar       = "<img alt='" . esc_attr( $alt ) . "' src='" . $local_avatars[$size] . "' class='avatar avatar-{$size}{$author_class} photo' height='{$size}' width='{$size}' />";
 
-		return apply_filters( 'basic_user_avatar', $avatar );
+		return apply_filters( 'basic_user_avatar', $avatar, $user_id );
 	}
 
 	/**
@@ -203,10 +212,10 @@ class basic_user_avatars {
 			return;
 		?>
 
-		<h3><?php _e( 'Avatar', 'basic-user-avatars' ); ?></h3>
+		<h2><?php _e( 'Avatar', 'basic-user-avatars' ); ?></h2>
 		<table class="form-table">
 			<tr>
-				<th><label for="basic-user-avatar"><?php _e( 'Upload Avatar', 'basic-user-avatars' ); ?></label></th>
+				<th><label for="basic-user-avatar"><?php esc_html_e( 'Upload Avatar', 'basic-user-avatars' ); ?></label></th>
 				<td style="width: 50px;" valign="top">
 					<?php echo get_avatar( $profileuser->ID ); ?>
 				</td>
@@ -221,17 +230,17 @@ class basic_user_avatars {
 					echo '<input type="file" name="basic-user-avatar" id="basic-local-avatar" /><br />';
 
 					if ( empty( $profileuser->basic_user_avatar ) ) {
-						echo '<span class="description">' . __( 'No local avatar is set. Use the upload field to add a local avatar.', 'basic-user-avatars' ) . '</span>';
+						echo '<span class="description">' . esc_html__( 'No local avatar is set. Use the upload field to add a local avatar.', 'basic-user-avatars' ) . '</span>';
 					} else {
-						echo '<input type="checkbox" name="basic-user-avatar-erase" value="1" /> ' . __( 'Delete local avatar', 'basic-user-avatars' ) . '<br />';
-						echo '<span class="description">' . __( 'Replace the local avatar by uploading a new avatar, or erase the local avatar (falling back to a gravatar) by checking the delete option.', 'basic-user-avatars' ) . '</span>';
+						echo '<input type="checkbox" name="basic-user-avatar-erase" id="basic-user-avatar-erase" value="1" /><label for="basic-user-avatar-erase">' . esc_html__( 'Delete local avatar', 'basic-user-avatars' ) . '</label><br />';
+						echo '<span class="description">' . esc_html__( 'Replace the local avatar by uploading a new avatar, or erase the local avatar (falling back to a gravatar) by checking the delete option.', 'basic-user-avatars' ) . '</span>';
 					}
 
 				} else {
 					if ( empty( $profileuser->basic_user_avatar ) ) {
-						echo '<span class="description">' . __( 'No local avatar is set. Set up your avatar at Gravatar.com.', 'basic-user-avatars' ) . '</span>';
+						echo '<span class="description">' . esc_html__( 'No local avatar is set. Set up your avatar at Gravatar.com.', 'basic-user-avatars' ) . '</span>';
 					} else {
-						echo '<span class="description">' . __( 'You do not have media management permissions. To change your local avatar, contact the site administrator.', 'basic-user-avatars' ) . '</span>';
+						echo '<span class="description">' . esc_html__( 'You do not have media management permissions. To change your local avatar, contact the site administrator.', 'basic-user-avatars' ) . '</span>';
 					}	
 				}
 				?>
@@ -282,10 +291,14 @@ class basic_user_avatars {
 			if ( empty( $avatar['file'] ) ) {  
 				switch ( $avatar['error'] ) {
 				case 'File type does not meet security guidelines. Try another.' :
-					add_action( 'user_profile_update_errors', create_function( '$a', '$a->add("avatar_error",__("Please upload a valid image file for the avatar.","basic-user-avatars"));' ) );
+					add_action( 'user_profile_update_errors', function( $error = 'avatar_error' ){
+						esc_html__("Please upload a valid image file for the avatar.","basic-user-avatars");
+					} );
 					break;
 				default :
-					add_action( 'user_profile_update_errors', create_function( '$a', '$a->add("avatar_error","<strong>".__("There was an error uploading the avatar:","basic-user-avatars")."</strong> ' . esc_attr( $avatar['error'] ) . '");' ) );
+					add_action( 'user_profile_update_errors', function( $error = 'avatar_error' ){
+						"<strong>".esc_html__("There was an error uploading the avatar:","basic-user-avatars")."</strong> ". esc_attr( $avatar['error'] );
+					} );
 				}
 				return;
 			}
@@ -332,21 +345,21 @@ class basic_user_avatars {
 				echo '<p><input type="file" name="basic-user-avatar" id="basic-local-avatar" /></p>';
 
 				if ( empty( $profileuser->basic_user_avatar ) ) {
-					echo '<p class="description">' . __( 'No local avatar is set. Use the upload field to add a local avatar.', 'basic-user-avatars' ) . '</p>';
+					echo '<p class="description">' . apply_filters( 'bu_avatars_no_avatar_set_text',esc_html__( 'No local avatar is set. Use the upload field to add a local avatar.', 'basic-user-avatars' ), $profileuser ) . '</p>';
 				} else {
-					echo '<input type="checkbox" name="basic-user-avatar-erase" value="1" /> ' . __( 'Delete local avatar', 'basic-user-avatars' ) . '<br />';
-					echo '<p class="description">' . __( 'Replace the local avatar by uploading a new avatar, or erase the local avatar (falling back to a gravatar) by checking the delete option.', 'basic-user-avatars' ) . '</p>';
+					echo '<input type="checkbox" name="basic-user-avatar-erase" value="1" /> ' . apply_filters( 'bu_avatars_delete_avatar_text', esc_html__( 'Delete local avatar', 'basic-user-avatars' ), $profileuser ) . '<br />';
+					echo '<p class="description">' . apply_filters( 'bu_avatars_replace_avatar_text', esc_html__( 'Replace the local avatar by uploading a new avatar, or erase the local avatar (falling back to a gravatar) by checking the delete option.', 'basic-user-avatars' ), $profileuser ) . '</p>';
 				}
 
 			} else {
 				if ( empty( $profileuser->basic_user_avatar ) ) {
-					echo '<p class="description">' . __( 'No local avatar is set. Set up your avatar at Gravatar.com.', 'basic-user-avatars' ) . '</p>';
+					echo '<p class="description">' . apply_filters( 'bu_avatars_no_avatar_set_text', esc_html__( 'No local avatar is set. Set up your avatar at Gravatar.com.', 'basic-user-avatars' ), $profileuser ) . '</p>';
 				} else {
-					echo '<p class="description">' . __( 'You do not have media management permissions. To change your local avatar, contact the site administrator.', 'basic-user-avatars' ) . '</p>';
+					echo '<p class="description">' . apply_filters( 'bu_avatars_permissions_text', esc_html__( 'You do not have media management permissions. To change your local avatar, contact the site administrator.', 'basic-user-avatars' ), $profileuser ) . '</p>';
 				}	
 			}
 			?>
-			<input type="submit" name="manage_avatar_submit" value="<?php _e( 'Update Avatar', 'basic-user-avatars' ); ?>" />
+			<input type="submit" name="manage_avatar_submit" value="<?php echo apply_filters( 'bu_avatars_update_button_text', esc_attr__( 'Update Avatar', 'basic-user-avatars' ) ); ?>" />
 		</form>
 		<?php
 		return ob_get_clean();
@@ -366,7 +379,7 @@ class basic_user_avatars {
 		$profileuser = get_userdata( $user_id );
 
 		echo '<div>';
-			echo '<label for="basic-local-avatar">' . __( 'Avatar', 'basic-user-avatars' ) . '</label>';
+			echo '<label for="basic-local-avatar">' . esc_html__( 'Avatar', 'basic-user-avatars' ) . '</label>';
  			echo '<fieldset class="bbp-form avatar">';
 
 	 			echo get_avatar( $profileuser->ID );
@@ -379,17 +392,17 @@ class basic_user_avatars {
 					echo '<br /><input type="file" name="basic-user-avatar" id="basic-local-avatar" /><br />';
 
 					if ( empty( $profileuser->basic_user_avatar ) ) {
-						echo '<span class="description" style="margin-left:0;">' . __( 'No local avatar is set. Use the upload field to add a local avatar.', 'basic-user-avatars' ) . '</span>';
+						echo '<span class="description" style="margin-left:0;">' . apply_filters( 'bu_avatars_no_avatar_set_text', esc_html__( 'No local avatar is set. Use the upload field to add a local avatar.', 'basic-user-avatars' ), $profileuser ) . '</span>';
 					} else {
-						echo '<input type="checkbox" name="basic-user-avatar-erase" value="1" style="width:auto" /> ' . __( 'Delete local avatar', 'basic-user-avatars' ) . '<br />';
-						echo '<span class="description" style="margin-left:0;">' . __( 'Replace the local avatar by uploading a new avatar, or erase the local avatar (falling back to a gravatar) by checking the delete option.', 'basic-user-avatars' ) . '</span>';
+						echo '<input type="checkbox" name="basic-user-avatar-erase" value="1" style="width:auto" /> ' . apply_filters( 'bu_avatars_delete_avatar_text', __( 'Delete local avatar', 'basic-user-avatars' ), $profileuser ) . '<br />';
+						echo '<span class="description" style="margin-left:0;">' . apply_filters( '', esc_html__( 'Replace the local avatar by uploading a new avatar, or erase the local avatar (falling back to a gravatar) by checking the delete option.', 'basic-user-avatars' ), $profileuser ) . '</span>';
 					}
 
 				} else {
 					if ( empty( $profileuser->basic_user_avatar ) ) {
-						echo '<span class="description" style="margin-left:0;">' . __( 'No local avatar is set. Set up your avatar at Gravatar.com.', 'basic-user-avatars' ) . '</span>';
+						echo '<span class="description" style="margin-left:0;">' . apply_filters( 'bu_avatars_no_avatar_set_text', esc_html__( 'No local avatar is set. Set up your avatar at Gravatar.com.', 'basic-user-avatars' ), $profileuser ) . '</span>';
 					} else {
-						echo '<span class="description" style="margin-left:0;">' . __( 'You do not have media management permissions. To change your local avatar, contact the site administrator.', 'basic-user-avatars' ) . '</span>';
+						echo '<span class="description" style="margin-left:0;">' . apply_filters( 'bu_avatars_permissions_text', esc_html__( 'You do not have media management permissions. To change your local avatar, contact the site administrator.', 'basic-user-avatars' ), $profileuser ) . '</span>';
 					}	
 				}
 
@@ -464,7 +477,7 @@ $basic_user_avatars = new basic_user_avatars;
  */
 function basic_user_avatars_uninstall() {
 	$basic_user_avatars = new basic_user_avatars;
-	$users = get_users_of_blog();
+	$users = get_users();
 
 	foreach ( $users as $user )
 		$basic_user_avatars->avatar_delete( $user->user_id );

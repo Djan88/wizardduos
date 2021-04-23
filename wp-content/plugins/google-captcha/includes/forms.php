@@ -101,10 +101,11 @@ if ( ! function_exists( 'gglcptch_add_lmtttmpts_forms' ) ) {
 if ( ! function_exists( 'gglcptch_get_section_notice' ) ) {
 	function gglcptch_get_section_notice( $section_slug = '' ) {
 		$section_notice = "";
-		$plugins = array(
-			/* example: */
-			/* 'bbpress'			=> 'bbpress/bbpress.php' */
-		);
+        $plugins = array(
+	        /* example: */
+	        /* 'bbpress'    => 'bbpress/bbpress.php' */
+        );
+		$plugins = apply_filters( 'gglcptch_custom_plugin_section_notice', $plugins );
 
 		$is_network_admin = is_network_admin();
 
@@ -251,6 +252,9 @@ if ( ! function_exists( 'gglcptch_login_check' ) ) {
 			return $user;
 		if ( is_wp_error( $user ) && isset( $user->errors["empty_username"] ) && isset( $user->errors["empty_password"] ) )
 			return $user;
+		/* Skip check if connecting to XMLRPC */
+		if ( defined( 'XMLRPC_REQUEST' ) )
+			return $user;
 
 		$gglcptch_check = gglcptch_check( 'login_form' );
 
@@ -278,6 +282,10 @@ if ( ! function_exists( 'gglcptch_register_check' ) ) {
 	function gglcptch_register_check( $allow ) {
 		if ( gglcptch_is_woocommerce_page() )
 			return $allow;
+		/* Skip check if connecting to XMLRPC */
+		if ( defined( 'XMLRPC_REQUEST' ) )
+			return $allow;
+
 		$gglcptch_check = gglcptch_check( 'registration_form' );
 		if ( ! $gglcptch_check['response'] ) {
 			return $gglcptch_check['errors'];

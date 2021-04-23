@@ -1,5 +1,6 @@
 Name: Robokassa Gateway;
-Version: 1.6.0;
+Parent Addon: user-balance;
+Version: 1.6.2;
 ItemID:11423;
 Support Core: 16.24.0;
 Description: Подключение сайта к платежному агрегатору Robokassa https://Robokassa.ru (ФЗ-54);
