@@ -4563,8 +4563,8 @@ msgid "Users not found"
 msgstr "Пользователи не найдены"
 
 #: functions/shortcodes.php:8 functions/shortcodes.php:162
-msgid "To use your personal account, please log in or register on this site"
-msgstr "Начните пользоваться возможностями своего личного кабинета, войдите или зарегистрируйтесь на сайте"
+msgid "To use your personal account"
+msgstr "Начните пользоваться возможностями своего личного кабинета"
 
 #: functions/authorize.php:26
 msgid "Your account is unconfirmed! Confirm your account by clicking on the link in the email"
