@@ -63,7 +63,6 @@
     </button>
     <?php if(is_user_logged_in()){ ?>
       <?php 
-        $cur_user_id = get_current_user_id();
         $user = get_userdata($cur_user_id);
         $user_date  =  strtotime($user->user_registered);
         $cur_date  =  strtotime("now");
@@ -103,7 +102,7 @@
         <ul>
           <?php if(is_user_logged_in()){ ?>
             <li><a href="/">Программа</a></li>
-            <li><a href="'<?php echo home_url()?>. $rcl_user_URL . '">Личный кабинет</a></li>
+            <li><a href="/kabinet/?user=<?php $cur_user_id ?>">Личный кабинет</a></li>
             <?php if(current_user_can('administrator')){ ?>
               <li><a href="/wp-admin">Панель управления</a></li>
             <?php } ?>
