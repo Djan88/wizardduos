@@ -101,9 +101,9 @@
       <nav class="main-nav float-right d-none d-lg-block">
         <ul>
           <?php if(is_user_logged_in()){ ?>
-            $user = get_userdata($cur_user_id);
+            <?php $user = get_userdata($cur_user_id); ?>
             <li><a href="/">Программа</a></li>
-            <li><a href="/kabinet/?user=<?php echo $user?>">Личный кабинет <?php echo $user ?></a></li>
+            <li><a href="/kabinet/?user=<?php echo $user ?>">Личный кабинет <?php echo $user ?></a></li>
             <?php if(current_user_can('administrator')){ ?>
               <li><a href="/wp-admin">Панель управления</a></li>
             <?php } ?>
