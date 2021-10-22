@@ -178,10 +178,13 @@
         <div class="row justify-content-center align-self-center">
           <div class="col-md-12 intro-info order-md-first order-last">
             <?php if(is_user_logged_in()){ ?>
+              <?php
+                $cur_user_id = get_current_user_id();
+              ?>
               <?php if(current_user_can('subscriber') && $new_registred == 0){ ?>
                 <h2>Доступ к программе закрыт!<br>Оплатите доступ в личном кабинете<span> и пользуйтесь программой целый год!</span></h2>
                 <div>
-                  <a href="/kabinet" class="btn-get-started">Личный кабинет</a>
+                  <a href="/kabinet/?user=<?php echo $cur_user_id; ?>" class="btn-get-started">Личный кабинет</a>
                 </div>
               <?php } else if (current_user_can('contributor') || current_user_can('administrator') || (current_user_can('subscriber') && $new_registred == 1)) { ?>
                 <h2>
