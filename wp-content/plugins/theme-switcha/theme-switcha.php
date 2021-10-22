@@ -9,9 +9,9 @@
 	Author URI: https://plugin-planet.com/
 	Donate link: https://monzillamedia.com/donate.html
 	Requires at least: 4.1
-	Tested up to: 5.7
-	Stable tag: 2.7
-	Version: 2.7
+	Tested up to: 5.8
+	Stable tag: 2.8
+	Version: 2.8
 	Requires PHP: 5.6.20
 	Text Domain: theme-switcha
 	Domain Path: /languages
@@ -64,6 +64,7 @@ if (!class_exists('Theme_Switcha')) {
 				add_action('admin_init',            'theme_switcha_register_settings');
 				add_action('admin_init',            'theme_switcha_reset_options');
 				add_action('admin_menu',            'theme_switcha_menu_pages');
+				add_action('admin_menu',            'theme_switcha_disable_widget');
 				
 				add_action('wp_dashboard_setup', 'theme_switcha_dashboard_widget');
 				add_action('plugins_loaded',     'theme_switcha_add_filters');
@@ -78,11 +79,12 @@ if (!class_exists('Theme_Switcha')) {
 		public static function options() {
 			
 			$options = array(
-				'enable_plugin' => false,
-				'enable_admin'  => false,
-				'allowed_users' => 'admin',
-				'cookie_expire' => 3600,
-				'passkey'       => uniqid(mt_rand()),
+				'enable_plugin'  => false,
+				'enable_admin'   => false,
+				'allowed_users'  => 'admin',
+				'cookie_expire'  => 3600,
+				'passkey'        => uniqid(mt_rand()),
+				'disable_widget' => false,
 			);
 			
 			return apply_filters('theme_switcha_options', $options);
@@ -91,7 +93,7 @@ if (!class_exists('Theme_Switcha')) {
 		private function constants() {
 			
 			if (!defined('THEME_SWITCHA_REQUIRE')) define('THEME_SWITCHA_REQUIRE', '4.1');
-			if (!defined('THEME_SWITCHA_VERSION')) define('THEME_SWITCHA_VERSION', '2.7');
+			if (!defined('THEME_SWITCHA_VERSION')) define('THEME_SWITCHA_VERSION', '2.8');
 			if (!defined('THEME_SWITCHA_NAME'))    define('THEME_SWITCHA_NAME',    'Theme Switcha');
 			if (!defined('THEME_SWITCHA_AUTHOR'))  define('THEME_SWITCHA_AUTHOR',  'Jeff Starr');
 			if (!defined('THEME_SWITCHA_HOME'))    define('THEME_SWITCHA_HOME',    'https://perishablepress.com/theme-switcha/');

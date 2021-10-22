@@ -8,10 +8,11 @@ class RQ {
 		return $tableQuery;
 	}
 
-	static function union( $queries ) {
+	/*static function union( $queries ) {
 		$this->queries = $queries;
+
 		return $this;
-	}
+	}*/
 
 	function get_walker() {
 		return new Rcl_Walker( $this->get_results() );
@@ -52,38 +53,45 @@ class RQ {
 	private function get_operator_data( $operator, $field_name = false ) {
 		global $wpdb;
 
-		if ( ! $this->queries )
+		if ( ! $this->queries ) {
 			return false;
+		}
 
-		$sql	 = array();
+		$sql     = array();
 		$groupby = false;
 
 		foreach ( $this->queries as $unionQuery ) {
 
-			if ( isset( $unionQuery->query['groupby'] ) && $unionQuery->query['groupby'] )
+			if ( isset( $unionQuery->query['groupby'] ) && $unionQuery->query['groupby'] ) {
 				$groupby = true;
+			}
 
 			$sql[] = $unionQuery->get_sql( array(
-				'select'	 => array( $operator . '(' . $unionQuery->table['as'] . '.' . $field_name . ') AS total' ),
-				'where'		 => $unionQuery->query['where'],
-				'groupby'	 => $unionQuery->query['groupby']
-				) );
+				'select'  => array( $operator . '(' . $unionQuery->table['as'] . '.' . $field_name . ') AS total' ),
+				'where'   => $unionQuery->query['where'],
+				'groupby' => $unionQuery->query['groupby']
+			) );
 		}
 
 		$sql = array( 'SELECT SUM(total) FROM (' . implode( ' UNION ALL ', $sql ) . ') x' );
 
-		if ( $groupby )
-			$result	 = $wpdb->query( $sql );
-		else
-			$result	 = $wpdb->get_var( $sql );
+		//phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+		if ( $groupby ) {
+			$result = $wpdb->query( $sql );
+		} else {
+			$result = $wpdb->get_var( $sql );
+		}
+
+		//phpcs:enable WordPress.DB.PreparedSQL.NotPrepared
 
 		return $result;
 	}
 
 	private function get_sql() {
 
-		if ( ! $this->queries )
+		if ( ! $this->queries ) {
 			return false;
+		}
 
 		$sql = array();
 
@@ -102,10 +110,11 @@ class RQ {
 		$sql = $this->get_sql();
 
 		if ( $use_cache ) {
-			$cachekey	 = md5( $sql );
-			$cache		 = wp_cache_get( $cachekey );
-			if ( $cache !== false )
+			$cachekey = md5( $sql );
+			$cache    = wp_cache_get( $cachekey );
+			if ( $cache !== false ) {
 				return $cache;
+			}
 		}
 
 		$data = $wpdb->$method( $sql );
@@ -116,8 +125,9 @@ class RQ {
 
 		$data = wp_unslash( $data );
 
-		if ( $use_cache )
+		if ( $use_cache ) {
 			wp_cache_add( $cachekey, $data );
+		}
 
 		return $data;
 	}

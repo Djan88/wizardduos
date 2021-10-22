@@ -6,7 +6,7 @@ Description: Protect WordPress website forms from spam entries with Google Captc
 Author: BestWebSoft
 Text Domain: google-captcha
 Domain Path: /languages
-Version: 1.60
+Version: 1.65
 Author URI: https://bestwebsoft.com/
 License: GPLv3 or later
 */
@@ -93,7 +93,7 @@ if ( ! function_exists( 'gglcptch_plugins_loaded' ) ) {
 
 if ( ! function_exists( 'gglcptch_init' ) ) {
 	function gglcptch_init() {
-		global $gglcptch_plugin_info, $gglcptch_options;
+		global $gglcptch_plugin_info, $gglcptch_options, $pagenow;
 
 		require_once( dirname( __FILE__ ) . '/bws_menu/bws_include.php' );
 		bws_include_init( plugin_basename( __FILE__ ) );
@@ -108,7 +108,9 @@ if ( ! function_exists( 'gglcptch_init' ) ) {
 		/* Function check if plugin is compatible with current WP version */
 		bws_wp_min_version_check( plugin_basename( __FILE__ ), $gglcptch_plugin_info, '4.5' );
 
-		$is_admin = is_admin() && ! defined( 'DOING_AJAX' );
+		$is_user_edit_page = isset( $pagenow ) && 'user-edit.php' == $pagenow;
+		$is_admin = is_admin() && ( ! defined( 'DOING_AJAX' ) || ! $is_user_edit_page );
+		
 		/* Call register settings function */
 		if ( ! $is_admin || ( isset( $_GET['page'] ) && 'google-captcha.php' == $_GET['page'] ) ) {
 			register_gglcptch_settings();
@@ -500,13 +502,21 @@ if ( ! function_exists( 'gglcptch_allowlisted_ip' ) ) {
 if ( ! function_exists( 'gglcptch_add_settings_page' ) ) {
 	function gglcptch_add_settings_page() {
 		global $gglcptch_plugin_info;
-		require_once( dirname( __FILE__ ) . '/includes/pro_banners.php' ); ?>
+		/*pls */
+		require_once( dirname( __FILE__ ) . '/includes/pro_banners.php' );
+		/* pls*/ 
+		if ( 'google-captcha.php' == $_GET['page'] ) {
+			if ( ! class_exists( 'Bws_Settings_Tabs' ) ) {
+				require_once( dirname( __FILE__ ) . '/bws_menu/class-bws-settings.php' );
+			}
+			require_once( dirname( __FILE__ ) . '/includes/class-gglcptch-settings-tabs.php' );
+			$page = new Gglcptch_Settings_Tabs( plugin_basename( __FILE__ ) );
+			if ( method_exists( $page, 'add_request_feature' ) ) {
+                $page->add_request_feature();
+			}
+		} ?>
 		<div class="wrap">
-			<?php if ( 'google-captcha.php' == $_GET['page'] ) {
-				if ( ! class_exists( 'Bws_Settings_Tabs' ) )
-					require_once( dirname( __FILE__ ) . '/bws_menu/class-bws-settings.php' );
-				require_once( dirname( __FILE__ ) . '/includes/class-gglcptch-settings-tabs.php' );
-				$page = new Gglcptch_Settings_Tabs( plugin_basename( __FILE__ ) ); ?>
+			<?php if ( 'google-captcha.php' == $_GET['page'] ) { ?>
 				<h1><?php _e( 'reCaptcha Settings', 'google-captcha' ); ?></h1>
                 <noscript><div class="error below-h2"><p><strong><?php _e( "Please enable JavaScript in your browser.", 'google-captcha' ); ?></strong></p></div></noscript>
 				<?php $page->display_content();
@@ -516,7 +526,6 @@ if ( ! function_exists( 'gglcptch_add_settings_page' ) ) {
 				if ( is_object( $page ) ) {
 					$page->display_content();
 				}
-
 				/*pls */
                 bws_plugin_reviews_block( $gglcptch_plugin_info['Name'], 'google-captcha' );
 				/* pls*/
@@ -773,7 +782,12 @@ if ( ! function_exists( 'gglcptch_check' ) ) {
 				);
 			} else {
 				$response = gglcptch_get_response( $gglcptch_options['private_key'], $gglcptch_remote_addr );
-				if ( isset( $response['success'] ) && !! $response['success'] ) {
+				if ( empty( $response ) ) {
+					$result = array(
+							'response' => false,
+							'reason' => $debug ? __( 'Response is empty', 'google-captcha' ) : 'VERIFICATION_FAILED'
+						);
+				} elseif ( isset( $response['success'] ) && !! $response['success'] ) {
 					if ( 'v3' ==  $gglcptch_options['recaptcha_version'] && $response['score'] <  $gglcptch_options['score_v3'] ) {
                         $result = array(
                             'response' => false,
@@ -929,7 +943,7 @@ if ( ! function_exists( 'gglcptch_handle_by_limit_attempts' ) ) {
 			$gglcptch_forms = gglcptch_get_forms();
 		}
 
-		$la_form_slug = "{$form_slug}_recaptcha_check";
+		$la_form_slug = "{$form_slug}_captcha_check";
 
 		/* if reCAPTCHA answer is right */
 		if ( true == $check_result ) {
@@ -940,7 +954,10 @@ if ( ! function_exists( 'gglcptch_handle_by_limit_attempts' ) ) {
 			/* if reCAPTCHA answer is wrong */
 			$form_data = array( 'form_name' => $gglcptch_forms[ $form_slug ]['form_name'] );
 
-			$la_error = apply_filters( 'lmtttmpts_form_fail', $la_form_slug, '', $form_data );
+			if ( 'login_form_captcha_check' != $form_slug ) {
+				$la_error = apply_filters( 'lmtttmpts_form_fail', $la_form_slug, '', $form_data );
+			}
+
 			if ( ! empty( $la_error ) && $la_form_slug != $la_error ) {
 				if ( is_wp_error( $check_result ) ) {
 					$check_result->add( "gglcptch_error_lmttmpts", $la_error );

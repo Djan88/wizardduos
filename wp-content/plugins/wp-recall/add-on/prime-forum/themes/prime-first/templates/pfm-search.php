@@ -2,9 +2,9 @@
 
 	<?php if ( pfm_have_topics() ): ?>
 
-		<div class="prime-topics prime-parent-box">
-			<div class="prime-item-label"><span><?php _e( 'Search results', 'wp-recall' ); ?></span></div>
-			<div class="prime-topics-list prime-loop-list">
+        <div class="prime-topics prime-parent-box">
+            <div class="prime-item-label"><span><?php esc_html_e( 'Search results', 'wp-recall' ); ?></span></div>
+            <div class="prime-topics-list prime-loop-list">
 
 				<?php pfm_page_navi(); ?>
 
@@ -16,8 +16,8 @@
 
 				<?php pfm_page_navi(); ?>
 
-			</div>
-		</div>
+            </div>
+        </div>
 
 	<?php else: ?>
 
@@ -26,4 +26,3 @@
 	<?php endif; ?>
 
 </div>
-

@@ -122,11 +122,11 @@ $sql = "CREATE TABLE IF NOT EXISTS " . $table . " (
 dbDelta( $sql );
 
 add_action( 'rcl_activate_prime-forum', 'pfm_activate_theme' );
-function pfm_activate_theme( $addonData ) {
+function pfm_activate_theme() {
 
 	$defaultTheme = 'prime-first';
 
-	$forumTheme	 = ($theme		 = get_site_option( 'rcl_pforum_template' )) ? $theme : $defaultTheme;
+	$forumTheme = ( $theme = get_site_option( 'rcl_pforum_template' ) ) ? $theme : $defaultTheme;
 
 	rcl_activate_addon( $forumTheme, true, dirname( __FILE__ ) . '/themes' );
 
@@ -146,10 +146,10 @@ if ( ! isset( $PfmOptions['home-page'] ) ) {
 
 	if ( ! rcl_isset_plugin_page( 'forum-page' ) ) {
 		$PfmOptions['home-page'] = rcl_create_plugin_page( 'forum-page', [
-			'post_title'	 => __( 'Forum', 'wp-recall' ),
-			'post_content'	 => '[prime-forum]',
-			'post_name'		 => 'forum'
-			] );
+			'post_title'   => __( 'Forum', 'wp-recall' ),
+			'post_content' => '[prime-forum]',
+			'post_name'    => 'forum'
+		] );
 	}
 
 	update_site_option( 'rcl_pforum_options', $PfmOptions );

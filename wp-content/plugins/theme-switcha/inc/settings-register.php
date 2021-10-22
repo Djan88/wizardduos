@@ -22,6 +22,7 @@ function theme_switcha_register_settings() {
 	add_settings_field('enable_plugin',  'Enable Switching',    'theme_switcha_callback_checkbox', 'theme_switcha_options', 'settings', array('id' => 'enable_plugin',  'label' => esc_html__('Enable theme switching', 'theme-switcha')));
 	add_settings_field('enable_admin',   'Enable Admin Area',   'theme_switcha_callback_checkbox', 'theme_switcha_options', 'settings', array('id' => 'enable_admin',   'label' => esc_html__('Apply switched theme to Admin Area', 'theme-switcha') .' (<a target="_blank" rel="noopener noreferrer" href="https://wordpress.org/support/topic/important-please-read-2/">'. esc_html__('Important Note', 'theme-switcha') .'</a>)'));
 	add_settings_field('enable_toolbar', 'Enable Toolbar Menu', 'theme_switcha_callback_checkbox', 'theme_switcha_options', 'settings', array('id' => 'enable_toolbar', 'label' => esc_html__('Enable Theme Switch menu in Toolbar', 'theme-switcha')));
+	add_settings_field('disable_widget', 'Dashboard Widget',    'theme_switcha_callback_checkbox', 'theme_switcha_options', 'settings', array('id' => 'disable_widget', 'label' => esc_html__('Disable dashboard widget for non-admin users', 'theme-switcha')));
 	add_settings_field('allowed_users',  'Allowed Users',       'theme_switcha_callback_select',   'theme_switcha_options', 'settings', array('id' => 'allowed_users',  'label' => esc_html__('Allow these users to switch themes', 'theme-switcha')));
 	add_settings_field('cookie_expire',  'Cookie Expiration',   'theme_switcha_callback_number',   'theme_switcha_options', 'settings', array('id' => 'cookie_expire',  'label' => esc_html__('Cookie Expiration (in seconds)', 'theme-switcha')));
 	add_settings_field('passkey',        'Passkey',             'theme_switcha_callback_text',     'theme_switcha_options', 'settings', array('id' => 'passkey',        'label' => esc_html__('Passkey for theme-switch links (alphanumeric only)', 'theme-switcha') .' <a target="_blank" rel="noopener noreferrer" href="https://wordpress.org/plugins/theme-switcha/#installation">'. esc_html__('More info &raquo;', 'theme-switcha') .'</a>'));
@@ -40,6 +41,9 @@ function theme_switcha_validate_options($input) {
 	
 	if (!isset($input['enable_toolbar'])) $input['enable_toolbar'] = null;
 	$input['enable_toolbar'] = ($input['enable_toolbar'] == 1 ? 1 : 0);
+	
+	if (!isset($input['disable_widget'])) $input['disable_widget'] = null;
+	$input['disable_widget'] = ($input['disable_widget'] == 1 ? 1 : 0);
 	
 	$allowed_users = theme_switcha_allowed_users();
 	if (!isset($input['allowed_users'])) $input['allowed_users'] = null;
@@ -103,6 +107,7 @@ function theme_switcha_themes_section_options() {
 	echo '<li class="theme-switcha-status-public">'.   esc_html__('Public Theme:',   'theme-switcha') .' <span>'. esc_html($public_theme)   .'</span></li>';
 	echo '<li class="theme-switcha-status-switched">'. esc_html__('Switched Theme:', 'theme-switcha') .' <span>'. esc_html($switched_theme) .'</span></li>';
 	echo '</ul>';
+	echo '<p><strong>'. esc_html__('Tip:', 'theme-switcha') .'</strong> '. esc_html__('right-click any thumbnail and copy the link address to get the theme-switch URL.', 'theme-switcha') .'</p>';
 	
 	echo theme_switcha_display_themes();
 	

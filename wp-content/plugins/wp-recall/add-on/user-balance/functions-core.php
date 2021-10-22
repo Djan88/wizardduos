@@ -2,6 +2,7 @@
 
 function rcl_gateways() {
 	global $rcl_gateways;
+
 	return $rcl_gateways;
 }
 
@@ -12,20 +13,22 @@ function rcl_gateway_register( $gateway_id, $gatewayClassName ) {
 //получение данных из таблицы произведенных платежей
 function rcl_get_payments( $args = false ) {
 	require_once 'classes/class-rcl-payments.php';
+
 	return RQ::tbl( new Rcl_Payments() )->parse( $args )->get_results();
 }
 
 function rcl_get_user_balance( $user_id = false ) {
 	global $wpdb, $user_ID;
 
-	if ( ! $user_id )
+	if ( ! $user_id ) {
 		$user_id = $user_ID;
+	}
 
 	if ( $user_id == $user_ID && isset( RCL()->User()->balance ) ) {
 		return RCL()->User()->balance;
 	}
-
-	$balance = $wpdb->get_var( $wpdb->prepare( "SELECT user_balance FROM " . RMAG_PREF . "users_balance WHERE user_id='%d'", $user_id ) );
+	//phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+	$balance = $wpdb->get_var( $wpdb->prepare( "SELECT user_balance FROM " . RMAG_PREF . "users_balance WHERE user_id=%d", $user_id ) );
 
 	$userBalance = $balance ? $balance : 0;
 
@@ -40,19 +43,22 @@ function rcl_update_user_balance( $newmoney, $user_id, $comment = '' ) {
 	global $wpdb, $user_ID;
 
 	$newmoney = rcl_commercial_round( str_replace( ',', '.', $newmoney ) );
-
-	$balance = $wpdb->get_var( $wpdb->prepare( "SELECT user_balance FROM " . RMAG_PREF . "users_balance WHERE user_id='%d'", $user_id ) );
+	//phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+	$balance = $wpdb->get_var( $wpdb->prepare( "SELECT user_balance FROM " . RMAG_PREF . "users_balance WHERE user_id=%d", $user_id ) );
 
 	if ( isset( $balance ) ) {
 
 		do_action( 'rcl_pre_update_user_balance', $newmoney, $user_id, $comment );
 
-		$result = $wpdb->update( RMAG_PREF . 'users_balance', array( 'user_balance' => $newmoney ), array( 'user_id' => $user_id )
-		);
+		$result = $wpdb->update( RMAG_PREF . 'users_balance', array( 'user_balance' => $newmoney ), array( 'user_id' => $user_id ) );
 
 		if ( ! $result ) {
 			rcl_add_log(
-				'rcl_update_user_balance: ' . __( 'Failed to refresh user balance', 'wp-recall' ), array( $newmoney, $user_id, $comment )
+				'rcl_update_user_balance: ' . __( 'Failed to refresh user balance', 'wp-recall' ), array(
+					$newmoney,
+					$user_id,
+					$comment
+				)
 			);
 		}
 
@@ -73,7 +79,11 @@ function rcl_add_user_balance( $money, $user_id, $comment = '' ) {
 
 	if ( ! $result ) {
 		rcl_add_log(
-			'rcl_add_user_balance: ' . __( 'Failed to add user balance', 'wp-recall' ), array( $money, $user_id, $comment )
+			'rcl_add_user_balance: ' . __( 'Failed to add user balance', 'wp-recall' ), array(
+				$money,
+				$user_id,
+				$comment
+			)
 		);
 	}
 
@@ -91,21 +101,22 @@ function rcl_get_html_usercount() {
 
 	$user_count = rcl_get_user_balance();
 
-	if ( ! $user_count )
+	if ( ! $user_count ) {
 		$user_count = 0;
+	}
 
 	$content = '<div class="rcl-balance-widget">';
 	$content .= '<div class="balance-amount">';
-	$content .= '<span class="amount-title">' . __( 'Your balance', 'wp-recall' ) . ':</span>';
+	$content .= '<span class="amount-title">' . esc_html__( 'Your balance', 'wp-recall' ) . ':</span>';
 	$content .= '<span class="amount-size">' . apply_filters( 'rcl_html_usercount', $user_count . ' ' . rcl_get_primary_currency( 1 ), $user_count ) . '</span>';
 
 	if ( $rcl_gateways && count( $rcl_gateways->gateways ) > 1 ) {
 		$content .= ' ' . rcl_get_button( [
-				'label'		 => __( 'replenish', 'wp-recall' ),
-				'onclick'	 => 'rcl_switch_view_balance_form(this);return false;',
-				'icon'		 => 'fa-plus-circle',
-				'type'		 => 'clear',
-				'class'		 => 'update-link'
+				'label'   => __( 'replenish', 'wp-recall' ),
+				'onclick' => 'rcl_switch_view_balance_form(this);return false;',
+				'icon'    => 'fa-plus-circle',
+				'type'    => 'clear',
+				'class'   => 'update-link'
 			] );
 	}
 
@@ -125,6 +136,7 @@ function rcl_get_html_usercount() {
 function rcl_mail_payment_error( $hash = false, $other = false ) {
 	global $post;
 
+	$textmail = '';
 	if ( $other ) {
 		foreach ( $other as $k => $v ) {
 			$textmail .= $k . ' - ' . $v . '<br>';
@@ -137,7 +149,7 @@ function rcl_mail_payment_error( $hash = false, $other = false ) {
 
 	if ( $hash ) {
 		$textmail .= 'Cформированный хеш - ' . $hash . '<br>';
-		$title = 'Неудачная оплата';
+		$title    = 'Неудачная оплата';
 	} else {
 		$title = 'Данные платежа';
 	}

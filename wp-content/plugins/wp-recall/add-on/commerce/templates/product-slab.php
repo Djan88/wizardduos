@@ -5,10 +5,10 @@
 
 global $post;
 
-$attrWidth	 = (isset( $width ) && is_numeric( $width )) ? 'style="width:' . $width . 'px;"' : '';
-$imagesize	 = (isset( $width )) ? array( $width, $width ) : 'thumbnail';
+$attrWidth = ( isset( $width ) && is_numeric( $width ) ) ? 'width:' . $width . 'px;' : '';
+$imagesize = ( isset( $width ) ) ? array( $width, $width ) : 'thumbnail';
 ?>
-<div class="product" <?php echo $attrWidth; ?> id="product-<?php the_ID(); ?>">
+<div class="product" style="<?php echo esc_attr( $attrWidth ); ?>" id="product-<?php the_ID(); ?>">
     <a class="product-thumbnail" href="<?php the_permalink(); ?>">
 		<?php the_post_thumbnail( $imagesize, array( 'alt' => $post->post_title ) ); ?>
     </a>
@@ -25,15 +25,16 @@ $imagesize	 = (isset( $width )) ? array( $width, $width ) : 'thumbnail';
                 </span>
             </div>
 
-			<?php echo rcl_get_product_terms( $post->ID ); ?>
+			<?php echo wp_kses_post( rcl_get_product_terms( $post->ID ) ); ?>
 
         </div>
 
 		<?php
-		echo rcl_get_cart_box( $post->ID, array(
+
+		echo wp_kses( rcl_get_cart_box( $post->ID, array(
 			'variations' => false,
-			'quantity'	 => false,
-		) );
+			'quantity'   => false,
+		) ), rcl_kses_allowed_html() );
 		?>
     </div>
 </div>

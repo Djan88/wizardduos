@@ -9,9 +9,9 @@ Contributors: specialk
 Author URI: https://plugin-planet.com/
 Donate link: https://monzillamedia.com/donate.html
 Requires at least: 4.1
-Tested up to: 5.7
-Stable tag: 2.7
-Version: 2.7
+Tested up to: 5.8
+Stable tag: 2.8
+Version: 2.8
 Requires PHP: 5.6.20
 Text Domain: theme-switcha
 Domain Path: /languages
@@ -37,6 +37,7 @@ There are many theme-switch plugins but none of them provide the simplicity, per
 Theme Switcha:
 
 * Enables visitors to switch themes via the frontend
+* Enables admins to test alternate themes for debugging
 * Enables developers to build/customize themes privately
 * Enables you to create links that switch to specific themes
 * Enables live private previews of any installed theme
@@ -452,6 +453,13 @@ Links, tweets and likes also appreciated. Thanks! :)
 
 If you like Theme Switcha, please take a moment to [give a 5-star rating](https://wordpress.org/support/plugin/theme-switcha/reviews/?rate=5#new-post). It helps to keep development and support going strong. Thank you!
 
+
+**2.8 (2021/07/17)**
+
+* Adds option to disable dashboard widget for non-admin users
+* Improves localhost support (Thanks to [the8thcelljr](https://wordpress.org/support/topic/cookie-creation-fails-for-localhostxxxx-hosts/))
+* Generates new default translation template
+* Tests on WordPress 5.8
 
 **2.7 (2021/02/10)**
 

@@ -20,14 +20,15 @@
                 </span>
             </div>
 
-			<?php echo rcl_get_product_terms( $post->ID ); ?>
+			<?php echo rcl_get_product_terms( $post->ID );//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
         </div>
 
 		<?php
+		//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo rcl_get_cart_box( $post->ID, array(
 			'variations' => false,
-			'quantity'	 => false,
+			'quantity'   => false,
 		) );
 		?>
     </div>

@@ -18,9 +18,10 @@ function pfm_get_shortcodes() {
 
 	$PrimeShorts = array();
 	foreach ( $shortcode_tags as $tag => $function ) {
-		if ( ! in_array( $tag, $whiteList ) )
+		if ( ! in_array( $tag, $whiteList ) ) {
 			continue;
-		$PrimeShorts[$tag] = $function;
+		}
+		$PrimeShorts[ $tag ] = $function;
 	}
 
 	return $PrimeShorts;
@@ -29,10 +30,11 @@ function pfm_get_shortcodes() {
 add_filter( 'pfm_whitelist_shortcodes', 'pfm_add_admin_support_shortcodes', 10 );
 function pfm_add_admin_support_shortcodes( $whiteList ) {
 	$adminShorts = array_map( 'trim', explode( "\n", pfm_get_option( 'support-shortcodes' ) ) );
-	if ( ! $adminShorts )
+	if ( ! $adminShorts ) {
 		return $whiteList;
-	$whiteList	 = array_merge( $whiteList, $adminShorts );
-	return $whiteList;
+	}
+
+	return array_merge( $whiteList, $adminShorts );
 }
 
 function pfm_do_shortcode( $content, $ignore_html = false ) {
@@ -42,8 +44,9 @@ function pfm_do_shortcode( $content, $ignore_html = false ) {
 		return $content;
 	}
 
-	if ( empty( $PrimeShorts ) || ! is_array( $PrimeShorts ) )
+	if ( empty( $PrimeShorts ) || ! is_array( $PrimeShorts ) ) {
 		return $content;
+	}
 
 	// Find all registered tag names in $content.
 	preg_match_all( '@\[([^<>&/\[\]\x00-\x20=]++)@', $content, $matches );
@@ -59,33 +62,31 @@ function pfm_do_shortcode( $content, $ignore_html = false ) {
 	$content = preg_replace_callback( "/$pattern/", 'do_shortcode_tag', $content );
 
 	// Always restore square braces so we don't break things like <!--[if IE ]>
-	$content = unescape_invalid_shortcodes( $content );
-
-	return $content;
+	return unescape_invalid_shortcodes( $content );
 }
 
 add_shortcode( 'spoiler', 'pfm_get_spoiler_content' );
 function pfm_get_spoiler_content( $attrs, $content ) {
 	return '<div class="prime-spoiler">'
-		. '<a href="#" class="prime-spoiler-link" onclick="pfm_spoiler(this); return false;">'
-		. '<i class="rcli fa-plus-square-o"></i> ' . __( 'Spoiler', 'wp-recall' )
-		. '</a>'
-		. '<div class="prime-spoiler-content">'
-		. $content
-		. '</div>'
-		. '</div>';
+	       . '<a href="#" class="prime-spoiler-link" onclick="pfm_spoiler(this); return false;">'
+	       . '<i class="rcli fa-plus-square-o"></i> ' . __( 'Spoiler', 'wp-recall' )
+	       . '</a>'
+	       . '<div class="prime-spoiler-content">'
+	       . $content
+	       . '</div>'
+	       . '</div>';
 }
 
 add_shortcode( 'offtop', 'pfm_get_offtop_content' );
 function pfm_get_offtop_content( $attrs, $content ) {
 	return '<div class="prime-offtop">'
-		. '<span class="prime-offtop-title">'
-		. '<i class="rcli fa-coffee"></i> ' . __( 'Off-topic', 'wp-recall' )
-		. '</span>'
-		. '<div class="prime-offtop-content">'
-		. $content
-		. '</div>'
-		. '</div>';
+	       . '<span class="prime-offtop-title">'
+	       . '<i class="rcli fa-coffee"></i> ' . __( 'Off-topic', 'wp-recall' )
+	       . '</span>'
+	       . '<div class="prime-offtop-content">'
+	       . $content
+	       . '</div>'
+	       . '</div>';
 }
 
 add_shortcode( 'prime-forum', 'pfm_get_forum_content' );
@@ -105,7 +106,5 @@ function pfm_get_posts_shortcode( $attrs ) {
 		return '<p>' . __( 'Not found', 'wp-recall' ) . '</p>';
 	}
 
-	$content = $LastPosts->get_content();
-
-	return $content;
+	return $LastPosts->get_content();
 }

@@ -6,92 +6,99 @@ function rcl_get_custom_post_meta( $post_id ) {
 	$get_fields = rcl_get_custom_fields( $post_id );
 
 	if ( $get_fields ) {
-		$show_custom_field	 = '';
-		$cf					 = new Rcl_Custom_Fields();
+		$show_custom_field = '';
+		$cf                = new Rcl_Custom_Fields();
 		foreach ( $get_fields as $custom_field ) {
-			$custom_field			 = apply_filters( 'rcl_custom_post_meta', $custom_field );
-			if ( ! $custom_field || ! isset( $custom_field['slug'] ) || ! $custom_field['slug'] )
+			$custom_field = apply_filters( 'rcl_custom_post_meta', $custom_field );
+			if ( ! $custom_field || ! isset( $custom_field['slug'] ) || ! $custom_field['slug'] ) {
 				continue;
-			$custom_field['value']	 = get_post_meta( $post_id, $custom_field['slug'], true );
-			$show_custom_field .= Rcl_Field::setup( $custom_field )->get_field_value( 'title' );
+			}
+			$custom_field['value'] = get_post_meta( $post_id, $custom_field['slug'], true );
+			$show_custom_field     .= Rcl_Field::setup( $custom_field )->get_field_value( 'title' );
 		}
 
 		return $show_custom_field;
 	}
 }
 
+function rcl_edit_post() {
+
+	$edit = new Rcl_EditPost();
+
+	$edit->update_post();
+
+}
+
 function rcl_get_postslist( $post_type, $type_name ) {
 	global $user_LK;
 
-	if ( ! class_exists( 'Rcl_Postlist' ) )
+	if ( ! class_exists( 'Rcl_Postlist' ) ) {
 		include_once RCL_PATH . 'add-on/publicpost/rcl_postlist.php';
+	}
 
 	$list = new Rcl_Postlist( $user_LK, $post_type, $type_name );
 
 	return $list->get_postlist_block();
 }
 
-function rcl_tab_postform( $master_id ) {
+function rcl_tab_postform() {
 	return do_shortcode( '[public-form form_id="' . rcl_get_option( 'form-lk', 1 ) . '"]' );
 }
 
 //Прикрепление новой миниатюры к публикации из произвольного места на сервере
 function rcl_add_thumbnail_post( $post_id, $filepath ) {
 
-	require_once(ABSPATH . "wp-admin" . '/includes/image.php');
-	require_once(ABSPATH . "wp-admin" . '/includes/file.php');
-	require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+	require_once( ABSPATH . "wp-admin" . '/includes/image.php' );
+	require_once( ABSPATH . "wp-admin" . '/includes/file.php' );
+	require_once( ABSPATH . "wp-admin" . '/includes/media.php' );
 
-	$filename	 = basename( $filepath );
-	$file		 = explode( '.', $filename );
-	$thumbpath	 = $filepath;
+	$filename  = basename( $filepath );
+	$file      = explode( '.', $filename );
+	$thumbpath = $filepath;
 
 	//if($file[0]=='image'){
-	$data	 = getimagesize( $thumbpath );
-	$mime	 = $data['mime'];
+	$data = getimagesize( $thumbpath );
+	$mime = $data['mime'];
 	//}else $mime = mime_content_type($thumbpath);
 
-	$cont	 = file_get_contents( $thumbpath );
-	$image	 = wp_upload_bits( $filename, null, $cont );
+	$cont  = file_get_contents( $thumbpath );
+	$image = wp_upload_bits( $filename, null, $cont );
 
 	$attachment = array(
 		'post_mime_type' => $mime,
-		'post_title'	 => preg_replace( '/\.[^.]+$/', '', basename( $image['file'] ) ),
-		'post_content'	 => '',
-		'guid'			 => $image['url'],
-		'post_parent'	 => $post_id,
-		'post_status'	 => 'inherit'
+		'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $image['file'] ) ),
+		'post_content'   => '',
+		'guid'           => $image['url'],
+		'post_parent'    => $post_id,
+		'post_status'    => 'inherit'
 	);
 
-	$attach_id	 = wp_insert_attachment( $attachment, $image['file'], $post_id );
+	$attach_id   = wp_insert_attachment( $attachment, $image['file'], $post_id );
 	$attach_data = wp_generate_attachment_metadata( $attach_id, $image['file'] );
 	wp_update_attachment_metadata( $attach_id, $attach_data );
 
 	$oldthumb = get_post_meta( $post_id, '_thumbnail_id', 1 );
-	if ( $oldthumb )
+	if ( $oldthumb ) {
 		wp_delete_attachment( $oldthumb );
+	}
 
 	update_post_meta( $post_id, '_thumbnail_id', $attach_id );
 }
 
 function rcl_edit_post_button_html( $post_id ) {
 	return '<p class="post-edit-button">'
-		. '<a title="' . __( 'Edit', 'wp-recall' ) . '" object-id="none" href="' . get_edit_post_link( $post_id ) . '">'
-		. '<i class="rcli fa-pencil-square-o"></i>'
-		. '</a>'
-		. '</p>';
+	       . '<a title="' . esc_html__( 'Edit', 'wp-recall' ) . '" object-id="none" href="' . esc_url( get_edit_post_link( $post_id ) ) . '">'
+	       . '<i class="rcli fa-pencil-square-o"></i>'
+	       . '</a>'
+	       . '</p>';
 }
 
 function rcl_get_editor_content( $post_content ) {
-	global $rcl_box;
-
 	remove_filter( 'the_content', 'add_button_bmk_in_content', 20 );
 	remove_filter( 'the_content', 'get_notifi_bkms', 20 );
 	remove_filter( 'the_content', 'rcl_get_edit_post_button', 999 );
 
-	$content = apply_filters( 'the_content', $post_content );
-
-	return $content;
+	return apply_filters( 'the_content', $post_content );
 }
 
 function rcl_is_limit_editing( $post_date ) {
@@ -99,9 +106,10 @@ function rcl_is_limit_editing( $post_date ) {
 	$timelimit = apply_filters( 'rcl_time_editing', rcl_get_option( 'time_editing' ) );
 
 	if ( $timelimit ) {
-		$hours = (strtotime( current_time( 'mysql' ) ) - strtotime( $post_date )) / 3600;
-		if ( $hours > $timelimit )
+		$hours = ( strtotime( current_time( 'mysql' ) ) - strtotime( $post_date ) ) / 3600;
+		if ( $hours > $timelimit ) {
 			return true;
+		}
 	}
 
 	return false;
@@ -112,10 +120,10 @@ function rcl_get_custom_fields_edit_box( $post_id, $post_type = false, $form_id 
 	$post = get_post( $post_id );
 
 	$RclForm = new Rcl_Public_Form( array(
-		'post_type'	 => $post->post_type,
-		'post_id'	 => $post_id,
-		'form_id'	 => $form_id
-		) );
+		'post_type' => $post->post_type,
+		'post_id'   => $post_id,
+		'form_id'   => $form_id
+	) );
 
 	$fields = $RclForm->get_custom_fields();
 
@@ -124,11 +132,12 @@ function rcl_get_custom_fields_edit_box( $post_id, $post_type = false, $form_id 
 		$postUploader = $RclForm->get_field( 'post_uploader' );
 		$postUploader->set_prop( 'fix_editor', 'content' );
 
-		$fields = $fields ? ['post_uploader' => $postUploader ] + $fields : ['post_uploader' => $postUploader ];
+		$fields = $fields ? [ 'post_uploader' => $postUploader ] + $fields : [ 'post_uploader' => $postUploader ];
 	}
 
-	if ( ! $fields )
+	if ( ! $fields ) {
 		return false;
+	}
 
 	rcl_publics_scripts();
 
@@ -136,8 +145,9 @@ function rcl_get_custom_fields_edit_box( $post_id, $post_type = false, $form_id 
 
 	foreach ( $fields as $field_id => $field ) {
 
-		if ( ! isset( $field->slug ) )
+		if ( ! isset( $field->slug ) ) {
 			continue;
+		}
 
 		$content .= $RclForm->get_field_form( $field_id );
 	}
@@ -149,15 +159,15 @@ function rcl_get_custom_fields_edit_box( $post_id, $post_type = false, $form_id 
 
 function rcl_update_post_custom_fields( $post_id, $id_form = false ) {
 
-	require_once(ABSPATH . "wp-admin" . '/includes/image.php');
-	require_once(ABSPATH . "wp-admin" . '/includes/file.php');
-	require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+	require_once( ABSPATH . "wp-admin" . '/includes/image.php' );
+	require_once( ABSPATH . "wp-admin" . '/includes/file.php' );
+	require_once( ABSPATH . "wp-admin" . '/includes/media.php' );
 
 	$post = get_post( $post_id );
 
 	$formFields = new Rcl_Public_Form_Fields( $post->post_type, array(
 		'form_id' => $id_form
-		) );
+	) );
 
 	$fields = $formFields->get_custom_fields();
 
@@ -167,7 +177,7 @@ function rcl_update_post_custom_fields( $post_id, $id_form = false ) {
 
 		foreach ( $fields as $field_id => $field ) {
 
-			$value = isset( $POST[$field_id] ) ? $POST[$field_id] : false;
+			$value = isset( $POST[ $field_id ] ) ? $POST[ $field_id ] : false;
 
 			if ( $field->type == 'file' ) {
 
@@ -186,7 +196,7 @@ function rcl_update_post_custom_fields( $post_id, $id_form = false ) {
 				if ( $value && is_array( $value ) ) {
 					foreach ( $value as $val ) {
 						for ( $a = 0; $a < $count_field; $a ++ ) {
-							if ( $field->values[$a] == $val ) {
+							if ( $field->values[ $a ] == $val ) {
 								$vals[] = $val;
 							}
 						}
@@ -201,10 +211,18 @@ function rcl_update_post_custom_fields( $post_id, $id_form = false ) {
 			} else {
 
 				if ( $value || $value == 0 ) {
+
+					if ( in_array( $field->type, [ 'select', 'radio' ] ) ) {
+						if ( ! in_array( $value, $field->values ) ) {
+							continue;
+						}
+					}
+
 					update_post_meta( $post_id, $field_id, $value );
 				} else {
-					if ( get_post_meta( $post_id, $field_id, 1 ) )
+					if ( get_post_meta( $post_id, $field_id, 1 ) ) {
 						delete_post_meta( $post_id, $field_id );
+					}
 				}
 			}
 
@@ -226,20 +244,22 @@ function rcl_update_post_custom_fields( $post_id, $id_form = false ) {
 rcl_ajax_action( 'rcl_save_temp_async_uploaded_thumbnail', true );
 function rcl_save_temp_async_uploaded_thumbnail() {
 	rcl_verify_ajax_nonce();
-
-	$attachment_id	 = intval( $_POST['attachment_id'] );
-	$attachment_url	 = $_POST['attachment_url'];
+	/**
+	 * todo fix
+	 */
+	$attachment_id  = isset( $_POST['attachment_id'] ) ? intval( $_POST['attachment_id'] ) : 0;
+	$attachment_url = isset( $_POST['attachment_url'] ) ? sanitize_text_field( wp_unslash( $_POST['attachment_url'] ) ) : '';
 
 	if ( ! $attachment_id || ! $attachment_url ) {
 		wp_send_json( array(
-			'error' => __( 'Error', 'wp-recall' )
+			'error' => esc_html__( 'Error', 'wp-recall' )
 		) );
 	}
 
-	rcl_add_temp_media(array(
-		'media_id' => $attachment_id,
+	rcl_add_temp_media( array(
+		'media_id'    => $attachment_id,
 		'uploader_id' => 'post_uploader'
-	));
+	) );
 
 	wp_send_json( array(
 		'save' => true
@@ -249,16 +269,17 @@ function rcl_save_temp_async_uploaded_thumbnail() {
 function rcl_update_tempgallery( $attach_id, $attach_url ) {
 	global $user_ID;
 
-	$user_id = ($user_ID) ? $user_ID : $_COOKIE['PHPSESSID'];
+	$user_id = ( $user_ID ) ? $user_ID : ( ! empty( $_COOKIE['PHPSESSID'] ) ? sanitize_text_field( wp_unslash( $_COOKIE['PHPSESSID'] ) ) : '' );
 
 	$temp_gal = get_site_option( 'rcl_tempgallery' );
 
-	if ( ! $temp_gal )
+	if ( ! $temp_gal ) {
 		$temp_gal = array();
+	}
 
-	$temp_gal[$user_id][] = array(
-		'ID'	 => $attach_id,
-		'url'	 => $attach_url
+	$temp_gal[ $user_id ][] = array(
+		'ID'  => $attach_id,
+		'url' => $attach_url
 	);
 
 	update_site_option( 'rcl_tempgallery', $temp_gal );
@@ -276,16 +297,17 @@ function rcl_get_attachment_box( $attachment_id, $mime = 'image', $addToClick = 
 
 		if ( $addToClick ) {
 
-			if ( $default = rcl_get_option( 'default_size_thumb' ) )
-				$sizes	 = wp_get_attachment_image_src( $attachment_id, $default );
-			else
-				$sizes	 = $small_url;
+			if ( $default = rcl_get_option( 'default_size_thumb' ) ) {
+				$sizes = wp_get_attachment_image_src( $attachment_id, $default );
+			} else {
+				$sizes = $small_url;
+			}
 
-			$full_url	 = wp_get_attachment_image_src( $attachment_id, 'full' );
-			$act_sizes	 = wp_constrain_dimensions( $full_url[1], $full_url[2], $sizes[1], $sizes[2] );
+			$full_url  = wp_get_attachment_image_src( $attachment_id, 'full' );
+			$act_sizes = wp_constrain_dimensions( $full_url[1], $full_url[2], $sizes[1], $sizes[2] );
 
 			return '<a onclick="rcl_add_image_in_form(this,\'<a href=' . $full_url[0] . '><img height=' . $act_sizes[1] . ' width=' . $act_sizes[0] . ' class=aligncenter  src=' . $full_url[0] . '></a>\');return false;" href="#">' . $image . '</a>';
-		}else {
+		} else {
 			return $image;
 		}
 	} else {

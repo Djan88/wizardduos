@@ -2,7 +2,7 @@
 
 function pfm_the_topic_name() {
 	global $PrimeTopic;
-	echo $PrimeTopic->topic_name;
+	echo esc_html( $PrimeTopic->topic_name );
 }
 
 function pfm_get_topic_name( $topic_id ) {
@@ -17,22 +17,23 @@ function pfm_get_topic_name( $topic_id ) {
 
 function pfm_the_post_count() {
 	global $PrimeTopic;
-	echo $PrimeTopic->post_count;
+	echo esc_html( $PrimeTopic->post_count );
 }
 
 function pfm_time_diff_last_post() {
 	global $PrimeTopic;
-	echo human_time_diff( strtotime( $PrimeTopic->last_post_date ), current_time( 'timestamp' ) );
+	echo esc_html( human_time_diff( strtotime( $PrimeTopic->last_post_date ), current_time( 'timestamp' ) ) );
 }
 
 function pfm_topic_field( $field_name, $echo = 1 ) {
 	global $PrimeTopic;
 
 	if ( isset( $PrimeTopic->$field_name ) ) {
-		if ( $echo )
-			echo $PrimeTopic->$field_name;
-		else
+		if ( $echo ) {
+			echo esc_html( $PrimeTopic->$field_name );
+		} else {
 			return $PrimeTopic->$field_name;
+		}
 	}
 
 	return false;
@@ -56,7 +57,7 @@ function pfm_the_topic_classes() {
 
 	$classes = apply_filters( 'pfm_topic_classes', $classes );
 
-	echo implode( ' ', $classes );
+	echo esc_attr( implode( ' ', $classes ) );
 }
 
 function pfm_get_topic_meta_box( $topic_id ) {
@@ -67,14 +68,17 @@ function pfm_get_topic_meta_box( $topic_id ) {
 
 	$fields = array();
 
-	if ( $groupFields = get_site_option( 'rcl_fields_pfm_group_' . $group_id ) )
-		$fields		 = $groupFields;
+	if ( $groupFields = get_site_option( 'rcl_fields_pfm_group_' . $group_id ) ) {
+		$fields = $groupFields;
+	}
 
-	if ( $forumFields = get_site_option( 'rcl_fields_pfm_forum_' . $forum_id ) )
-		$fields		 = array_merge( $fields, $forumFields );
+	if ( $forumFields = get_site_option( 'rcl_fields_pfm_forum_' . $forum_id ) ) {
+		$fields = array_merge( $fields, $forumFields );
+	}
 
-	if ( ! $fields )
+	if ( ! $fields ) {
 		return false;
+	}
 
 	$content = '';
 
@@ -85,24 +89,23 @@ function pfm_get_topic_meta_box( $topic_id ) {
 		$content .= Rcl_Field::setup( $field )->get_field_value( true );
 	}
 
-	if ( ! $content )
+	if ( ! $content ) {
 		return false;
+	}
 
-	$content = '<div class="prime-topic-metabox">' . $content . '</div>';
-
-	return $content;
+	return '<div class="prime-topic-metabox">' . $content . '</div>';
 }
 
 function pfm_the_last_post_url() {
 	global $PrimeTopic;
-	echo pfm_get_post_permalink( $PrimeTopic->last_post_id );
+	echo esc_url( pfm_get_post_permalink( $PrimeTopic->last_post_id ) );
 }
 
 function pfm_update_topic_custom_fields( $topic_id ) {
 
-	require_once(ABSPATH . "wp-admin" . '/includes/image.php');
-	require_once(ABSPATH . "wp-admin" . '/includes/file.php');
-	require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+	require_once( ABSPATH . "wp-admin" . '/includes/image.php' );
+	require_once( ABSPATH . "wp-admin" . '/includes/file.php' );
+	require_once( ABSPATH . "wp-admin" . '/includes/media.php' );
 
 	$forum_id = pfm_get_topic_field( $topic_id, 'forum_id' );
 
@@ -110,72 +113,73 @@ function pfm_update_topic_custom_fields( $topic_id ) {
 
 	$fields = array();
 
-	if ( $groupFields = get_site_option( 'rcl_fields_pfm_group_' . $group_id ) )
-		$fields		 = $groupFields;
+	if ( $groupFields = get_site_option( 'rcl_fields_pfm_group_' . $group_id ) ) {
+		$fields = $groupFields;
+	}
 
-	if ( $forumFields = get_site_option( 'rcl_fields_pfm_forum_' . $forum_id ) )
-		$fields		 = array_merge( $fields, $forumFields );
+	if ( $forumFields = get_site_option( 'rcl_fields_pfm_forum_' . $forum_id ) ) {
+		$fields = array_merge( $fields, $forumFields );
+	}
 
-	if ( ! $fields )
+	if ( ! $fields ) {
 		return false;
+	}
 
-	if ( $fields ) {
+	$POST = filter_input_array( INPUT_POST, FILTER_SANITIZE_STRING );
 
-		$POST = filter_input_array( INPUT_POST, FILTER_SANITIZE_STRING );
+	foreach ( $fields as $field ) {
 
-		foreach ( $fields as $field ) {
+		$slug  = $field['slug'];
+		$value = isset( $POST[ $slug ] ) ? $POST[ $slug ] : false;
 
-			$slug	 = $field['slug'];
-			$value	 = isset( $POST[$slug] ) ? $POST[$slug] : false;
+		if ( $field['type'] == 'file' ) {
 
-			if ( $field['type'] == 'file' ) {
+			$attach_id = pfm_get_topic_meta( $topic_id, $slug );
 
-				$attach_id = pfm_get_topic_meta( $topic_id, $slug, 1 );
-
-				if ( $value != $attach_id ) {
-					wp_delete_attachment( $attach_id );
-				}
+			if ( $value != $attach_id ) {
+				wp_delete_attachment( $attach_id );
 			}
+		}
 
-			if ( $field['type'] == 'checkbox' ) {
-				$vals = array();
+		if ( $field['type'] == 'checkbox' ) {
+			$vals = array();
 
-				$count_field = count( $field['values'] );
+			$count_field = count( $field['values'] );
 
-				if ( $value && is_array( $value ) ) {
-					foreach ( $value as $val ) {
-						for ( $a = 0; $a < $count_field; $a ++ ) {
-							if ( $field['values'][$a] == $val ) {
-								$vals[] = $val;
-							}
+			if ( $value && is_array( $value ) ) {
+				foreach ( $value as $val ) {
+					for ( $a = 0; $a < $count_field; $a ++ ) {
+						if ( $field['values'][ $a ] == $val ) {
+							$vals[] = $val;
 						}
 					}
 				}
-
-				if ( $vals ) {
-					pfm_update_topic_meta( $topic_id, $slug, $vals );
-				} else {
-					pfm_delete_topic_meta( $topic_id, $slug );
-				}
-			} else {
-
-				if ( $value ) {
-					pfm_update_topic_meta( $topic_id, $slug, $value );
-				} else {
-					if ( pfm_get_topic_meta( $topic_id, $slug, 1 ) )
-						pfm_delete_topic_meta( $topic_id, $slug );
-				}
 			}
 
-			if ( $value ) {
+			if ( $vals ) {
+				pfm_update_topic_meta( $topic_id, $slug, $vals );
+			} else {
+				pfm_delete_topic_meta( $topic_id, $slug );
+			}
+		} else {
 
-				if ( $field['type'] == 'uploader' ) {
-					foreach ( $value as $val ) {
-						rcl_delete_temp_media( $val );
-					}
-				} else if ( $field['type'] == 'file' ) {
-					rcl_delete_temp_media( $value );
+			if ( $value ) {
+				pfm_update_topic_meta( $topic_id, $slug, $value );
+			} else {
+				if ( pfm_get_topic_meta( $topic_id, $slug ) ) {
+					pfm_delete_topic_meta( $topic_id, $slug );
 				}
+			}
+		}
+
+		if ( $value ) {
+
+			if ( $field['type'] == 'uploader' ) {
+				foreach ( $value as $val ) {
+					rcl_delete_temp_media( $val );
+				}
+			} else if ( $field['type'] == 'file' ) {
+				rcl_delete_temp_media( $value );
 			}
 		}
 	}
@@ -185,15 +189,17 @@ add_action( 'pfm_add_topic', 'pfm_send_admin_mail_new_topic', 10 );
 function pfm_send_admin_mail_new_topic( $topic_id ) {
 	global $user_ID;
 
-	if ( ! pfm_get_option( 'admin-notes' ) || rcl_is_user_role( $user_ID, 'administrator' ) )
+	if ( ! pfm_get_option( 'admin-notes' ) || rcl_is_user_role( $user_ID, 'administrator' ) ) {
 		return false;
+	}
 
 	$topic = pfm_get_topic( $topic_id );
 
-	if ( ! $topic )
+	if ( ! $topic ) {
 		return false;
+	}
 
-	$email	 = get_site_option( 'admin_email' );
+	$email   = get_site_option( 'admin_email' );
 	$subject = __( 'New forum topic', 'wp-recall' );
 
 	$textmail = '<p>' . sprintf( __( 'On the forum of the site "%s" created a new topic!', 'wp-recall' ), get_bloginfo( 'name' ) ) . '</p>';
@@ -209,8 +215,9 @@ function pfm_add_topic_form_custom_meta( $topic_id ) {
 
 	$topic = pfm_get_topic( $topic_id );
 
-	if ( ! $topic )
+	if ( ! $topic ) {
 		return false;
+	}
 
 	if ( isset( $_REQUEST['pfm-action'] ) ) {
 
@@ -218,19 +225,21 @@ function pfm_add_topic_form_custom_meta( $topic_id ) {
 			'topic_migrate'
 		);
 
-		if ( in_array( $_REQUEST['pfm-action'], $actions ) )
+		if ( in_array( $_REQUEST['pfm-action'], $actions ) ) {
 			return false;
+		}
 	}
 
-	if ( defined( 'DOING_AJAX' ) && DOING_AJAX && $_REQUEST['method'] ) {
+	if ( defined( 'DOING_AJAX' ) && DOING_AJAX && ! empty( $_REQUEST['method'] ) ) {
 
 		$actions = array(
 			'topic_fix',
 			'topic_unfix'
 		);
 
-		if ( in_array( $_REQUEST['method'], $actions ) )
+		if ( in_array( $_REQUEST['method'], $actions ) ) {
 			return false;
+		}
 	}
 
 	pfm_update_topic_custom_fields( $topic_id );
@@ -240,15 +249,16 @@ add_action( 'pfm_delete_topic', 'pfm_delete_topic_form_custom_meta', 10 );
 function pfm_delete_topic_form_custom_meta( $topic_id ) {
 
 	$metas = pfm_get_metas( array(
-		'object_id'		 => $topic_id,
-		'object_type'	 => 'topic',
-		'fields'		 => array(
+		'object_id'   => $topic_id,
+		'object_type' => 'topic',
+		'fields'      => array(
 			'meta_key'
 		)
-		) );
+	) );
 
-	if ( ! $metas )
+	if ( ! $metas ) {
 		return false;
+	}
 
 	foreach ( $metas as $meta ) {
 		pfm_delete_topic_meta( $topic_id, $meta->meta_key );
@@ -260,8 +270,9 @@ function pfm_update_topic_count( $topic_id ) {
 
 	$topic = pfm_get_topic( $topic_id );
 
-	if ( ! $topic )
+	if ( ! $topic ) {
 		return false;
+	}
 
 	pfm_update_forum_counter( $topic->forum_id );
 }
@@ -272,12 +283,13 @@ function pfm_update_topic_author_count( $topic_id ) {
 
 	$topic = pfm_get_topic( $topic_id );
 
-	if ( ! $topic )
+	if ( ! $topic ) {
 		return false;
+	}
 
 	$topicCount = RQ::tbl( new PrimeTopics() )
-		->where( array( 'user_id' => $topic->user_id ) )
-		->get_count();
+	                ->where( array( 'user_id' => $topic->user_id ) )
+	                ->get_count();
 
 	pfm_update_author_meta( $topic->user_id, 'topic_count', $topicCount );
 }

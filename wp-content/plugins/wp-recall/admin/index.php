@@ -11,8 +11,9 @@ function rcl_mark_own_page( $post_states, $post ) {
 
 		$plugin_pages = get_site_option( 'rcl_plugin_pages' );
 
-		if ( ! $plugin_pages )
+		if ( ! $plugin_pages ) {
 			return $post_states;
+		}
 
 		if ( in_array( $post->ID, $plugin_pages ) ) {
 			$post_states[] = __( 'The page of plugin WP-Recall' );
@@ -32,7 +33,7 @@ function rcl_edit_field_options( $options, $field, $manager_id ) {
 		foreach ( $options as $k => $option ) {
 
 			if ( $option['slug'] == 'required' ) {
-				unset( $options[$k] );
+				unset( $options[ $k ] );
 			}
 		}
 	}
@@ -45,115 +46,140 @@ function rmag_global_options() {
 	require_once RCL_PATH . 'admin/classes/class-rcl-options-manager.php';
 
 	$Manager = new Rcl_Options_Manager( array(
-		'option_name'	 => 'primary-rmag-options',
-		'page_options'	 => 'manage-wpm-options',
-		) );
+		'option_name'  => 'primary-rmag-options',
+		'page_options' => 'manage-wpm-options',
+	) );
 
 	$Manager = apply_filters( 'rcl_commerce_options', $Manager );
 
-	$content = '<h2>' . __( 'Settings of commerce', 'wp-recall' ) . '</h2>';
+	$content = '<h2>' . esc_html__( 'Settings of commerce', 'wp-recall' ) . '</h2>';
 
 	$content .= $Manager->get_content();
 
-	echo $content;
+	echo wp_kses( $content, rcl_kses_allowed_html() );
 }
 
 function rmag_update_options() {
-	if ( isset( $_POST['primary-rmag-options'] ) ) {
-		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'update-options-rmag' ) )
+	if ( current_user_can( 'administrator' ) && isset( $_POST['primary-rmag-options'], $_POST['_wpnonce'] ) ) {
+		if ( ! wp_verify_nonce( sanitize_key( $_POST['_wpnonce'] ), 'update-options-rmag' ) ) {
 			return false;
-		$_POST = filter_input_array( INPUT_POST, FILTER_SANITIZE_STRING );
-
-		foreach ( $_POST['global'] as $key => $value ) {
-			if ( $key == 'primary-rmag-options' )
-				continue;
-			$options[$key] = $value;
 		}
 
-		update_site_option( 'primary-rmag-options', $options );
+		if ( isset( $_POST['global'] ) ) {
+			//phpcs:ignore
+			foreach ( $_POST['global'] as $key => $value ) {
+				if ( $key == 'primary-rmag-options' ) {
+					continue;
+				}
+				//TODO sanitize options
+				$options[ sanitize_key( $key ) ] = $value;
+			}
+
+			update_site_option( 'primary-rmag-options', $options );
+		}
 
 		if ( isset( $_POST['local'] ) ) {
+			//phpcs:ignore
 			foreach ( ( array ) $_POST['local'] as $key => $value ) {
-				update_site_option( $key, $value );
+				//TODO sanitize options
+				update_site_option( sanitize_key( $key ), $value );
 			}
 		}
 
-		wp_redirect( admin_url( 'admin.php?page=manage-wpm-options' ) );
+		wp_safe_redirect( admin_url( 'admin.php?page=manage-wpm-options' ) );
 		exit;
 	}
 }
 
 add_action( 'init', 'rmag_update_options' );
 function rcl_wp_list_current_action() {
-	if ( isset( $_REQUEST['filter_action'] ) && ! empty( $_REQUEST['filter_action'] ) )
+	if ( isset( $_REQUEST['filter_action'] ) && ! empty( $_REQUEST['filter_action'] ) ) {
 		return false;
+	}
 
-	if ( isset( $_REQUEST['action'] ) && -1 != $_REQUEST['action'] )
-		return $_REQUEST['action'];
+	if ( isset( $_REQUEST['action'] ) && - 1 != $_REQUEST['action'] ) {
+		return sanitize_text_field( wp_unslash( $_REQUEST['action'] ) );
+	}
 
-	if ( isset( $_REQUEST['action2'] ) && -1 != $_REQUEST['action2'] )
-		return $_REQUEST['action2'];
+	if ( isset( $_REQUEST['action2'] ) && - 1 != $_REQUEST['action2'] ) {
+		return sanitize_text_field( wp_unslash( $_REQUEST['action2'] ) );
+	}
 
 	return false;
 }
 
-if ( is_admin() )
+if ( is_admin() ) {
 	add_action( 'admin_init', 'rcl_postmeta_post' );
+}
 function rcl_postmeta_post() {
 	add_meta_box( 'recall_meta', __( 'WP-Recall settings', 'wp-recall' ), 'rcl_options_box', 'post', 'normal', 'high' );
 	add_meta_box( 'recall_meta', __( 'WP-Recall settings', 'wp-recall' ), 'rcl_options_box', 'page', 'normal', 'high' );
 }
 
 function rcl_options_box( $post ) {
-	$content = '';
-	echo apply_filters( 'rcl_post_options', $content, $post );
+	//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	echo apply_filters( 'rcl_post_options', '', $post );
 	?>
-	<input type="hidden" name="rcl_fields_nonce" value="<?php echo wp_create_nonce( __FILE__ ); ?>" />
+    <input type="hidden" name="rcl_fields_nonce" value="<?php echo esc_attr( wp_create_nonce( __FILE__ ) ); ?>"/>
 	<?php
 }
 
 function rcl_postmeta_update( $post_id ) {
-	if ( ! isset( $_POST['rcl_fields_nonce'] ) )
+	if ( ! isset( $_POST['rcl_fields_nonce'] ) ) {
 		return false;
-	if ( ! wp_verify_nonce( $_POST['rcl_fields_nonce'], __FILE__ ) )
+	}
+	if ( ! wp_verify_nonce( sanitize_key( $_POST['rcl_fields_nonce'] ), __FILE__ ) ) {
 		return false;
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+	}
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 		return false;
-	if ( ! current_user_can( 'edit_post', $post_id ) )
+	}
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
 		return false;
+	}
 
-	if ( ! isset( $_POST['wprecall'] ) )
+	if ( ! isset( $_POST['wprecall'] ) ) {
 		return false;
-
-	$POST = $_POST['wprecall'];
+	}
+	//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$POST = rcl_recursive_map( 'sanitize_text_field', wp_unslash( $_POST['wprecall'] ) );
 
 	foreach ( $POST as $key => $value ) {
-		if ( ! is_array( $value ) )
+		if ( ! is_array( $value ) ) {
 			$value = trim( $value );
-		if ( $value == '' )
+		}
+		if ( $value == '' ) {
 			delete_post_meta( $post_id, $key );
-		else
+		} else {
 			update_post_meta( $post_id, $key, $value );
+		}
 	}
+
 	return $post_id;
 }
 
 rcl_ajax_action( 'rcl_update_options', false );
 function rcl_update_options() {
 
+	if ( ! current_user_can( 'administrator' ) ) {
+		wp_send_json( [ 'error' => esc_html__( 'Error', 'wp-recall' ) ] );
+	}
+
 	rcl_verify_ajax_nonce();
 
-	$POST = $_POST; //filter_input_array( INPUT_POST, FILTER_SANITIZE_STRING );
+	$POST = $_POST;
 
 	array_walk_recursive(
-		$POST, function(&$v, $k) {
+		$POST, function ( &$v, $k ) {
+		//TODO sanitize options
 		$v = trim( $v );
 	} );
 
 	foreach ( $POST as $option_name => $values ) {
 
-		if ( ! is_array( $values ) )
+		if ( ! is_array( $values ) ) {
 			continue;
+		}
 
 		$values = apply_filters( $option_name . '_pre_update', $values );
 
@@ -170,44 +196,46 @@ function rcl_update_options() {
 	do_action( 'rcl_update_options' );
 
 	wp_send_json( array(
-		'success' => __( 'Settings saved!', 'wp-recall' )
+		'success' => esc_html__( 'Settings saved!', 'wp-recall' )
 	) );
 }
 
 add_action( 'rcl_update_options', 'rcl_delete_temp_default_avatar_cover', 10 );
 function rcl_delete_temp_default_avatar_cover() {
 
-	if ( isset( $_POST['rcl_global_options']['default_avatar'] ) )
-		rcl_delete_temp_media( $_POST['rcl_global_options']['default_avatar'] );
+	if ( isset( $_POST['rcl_global_options']['default_avatar'] ) ) {
+		rcl_delete_temp_media( intval( $_POST['rcl_global_options']['default_avatar'] ) );
+	}
 
-	if ( isset( $_POST['rcl_global_options']['default_cover'] ) )
-		rcl_delete_temp_media( $_POST['rcl_global_options']['default_cover'] );
+	if ( isset( $_POST['rcl_global_options']['default_cover'] ) ) {
+		rcl_delete_temp_media( intval( $_POST['rcl_global_options']['default_cover'] ) );
+	}
 }
 
 function rcl_add_cover_options( $options ) {
 
 	$options->box( 'primary' )->group( 'design' )->add_options( [
 		array(
-			'type'		 => 'uploader',
+			'type'       => 'uploader',
 			'temp_media' => 1,
-			'max_size'	 => 5120,
-			'multiple'	 => 0,
-			'crop'		 => ['ratio' => 0 ],
-			'filetitle'	 => 'rcl-default-cover',
-			'filename'	 => 'rcl-default-cover',
-			'slug'		 => 'default_cover',
-			'title'		 => __( 'Default cover', 'wp-recall' ),
+			'max_size'   => 5120,
+			'multiple'   => 0,
+			'crop'       => [ 'ratio' => 0 ],
+			'filetitle'  => 'rcl-default-cover',
+			'filename'   => 'rcl-default-cover',
+			'slug'       => 'default_cover',
+			'title'      => __( 'Default cover', 'wp-recall' ),
 		),
 		array(
-			'type'		 => 'runner',
-			'value_min'	 => 0,
-			'value_max'	 => 5120,
+			'type'       => 'runner',
+			'value_min'  => 0,
+			'value_max'  => 5120,
 			'value_step' => 256,
-			'default'	 => 1024,
-			'slug'		 => 'cover_weight',
-			'title'		 => __( 'Max weight of cover', 'wp-recall' ) . ', Kb',
-			'notice'	 => __( 'Set the image upload limit in kb, by default', 'wp-recall' ) . ' 1024Kb' .
-			'. ' . __( 'If 0 is specified, download is disallowed.', 'wp-recall' )
+			'default'    => 1024,
+			'slug'       => 'cover_weight',
+			'title'      => __( 'Max weight of cover', 'wp-recall' ) . ', Kb',
+			'notice'     => __( 'Set the image upload limit in kb, by default', 'wp-recall' ) . ' 1024Kb' .
+			                '. ' . __( 'If 0 is specified, download is disallowed.', 'wp-recall' )
 		)
 	] );
 
@@ -223,23 +251,31 @@ add_action( 'admin_init', 'rcl_update_custom_fields', 10 );
 function rcl_update_custom_fields() {
 	global $wpdb;
 
-	if ( ! isset( $_POST['rcl_save_custom_fields'] ) )
+	if ( ! current_user_can( 'administrator' ) ) {
 		return false;
+	}
 
-	if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'rcl-update-custom-fields' ) )
+	if ( ! isset( $_POST['rcl_save_custom_fields'] ) || ! isset( $_POST['_wpnonce'] ) ) {
 		return false;
+	}
+
+	if ( ! wp_verify_nonce( sanitize_key( $_POST['_wpnonce'] ), 'rcl-update-custom-fields' ) ) {
+		return false;
+	}
 
 	$fields = array();
 
 	$table = 'postmeta';
 
-	if ( $_POST['rcl-fields-options']['name-option'] == 'rcl_profile_fields' )
+	if ( isset( $_POST['rcl-fields-options']['name-option'] ) && $_POST['rcl-fields-options']['name-option'] == 'rcl_profile_fields' ) {
 		$table = 'usermeta';
+	}
 
-	$POSTDATA = apply_filters( 'rcl_pre_update_custom_fields_options', $_POST );
+	$POSTDATA = apply_filters( 'rcl_pre_update_custom_fields_options', rcl_recursive_map( 'sanitize_text_field', $_POST ) );
 
-	if ( ! $POSTDATA )
+	if ( ! $POSTDATA ) {
 		return false;
+	}
 
 	if ( isset( $POSTDATA['rcl_deleted_custom_fields'] ) ) {
 
@@ -248,7 +284,7 @@ function rcl_update_custom_fields() {
 		if ( $deleted ) {
 
 			foreach ( $deleted as $slug ) {
-				$wpdb->query( $wpdb->prepare( "DELETE FROM " . $wpdb->$table . " WHERE meta_key = '%s'", $slug ) );
+				$wpdb->query( $wpdb->prepare( "DELETE FROM " . $wpdb->$table . " WHERE meta_key = %s", $slug ) );
 			}
 		}
 	}
@@ -260,35 +296,41 @@ function rcl_update_custom_fields() {
 		$nKey = 0;
 
 		foreach ( $POSTDATA['new-field'] as $optionSlug => $vals ) {
-			$newFields[$nKey] = $vals;
+			$newFields[ $nKey ] = $vals;
 			$nKey ++;
 		}
 	}
 
-	$fields	 = array();
-	$nKey	 = 0;
+	$fields = array();
+	$nKey   = 0;
 
 	foreach ( $POSTDATA['fields'] as $k => $slug ) {
 
 		if ( ! $slug ) {
 
-			if ( ! isset( $newFields[$nKey] ) || ! $newFields[$nKey]['title'] )
+			if ( ! isset( $newFields[ $nKey ] ) || ! $newFields[ $nKey ]['title'] ) {
 				continue;
+			}
 
-			if ( isset( $newFields[$nKey]['slug'] ) && $newFields[$nKey]['slug'] )
-				$slug	 = $newFields[$nKey]['slug'];
-			else
-				$slug	 = str_replace( array( '-', ' ' ), '_', rcl_sanitize_string( $newFields[$nKey]['title'] ) . '-' . rand( 10, 100 ) );
+			if ( isset( $newFields[ $nKey ]['slug'] ) && $newFields[ $nKey ]['slug'] ) {
+				$slug = $newFields[ $nKey ]['slug'];
+			} else {
+				$slug = str_replace( array(
+					'-',
+					' '
+				), '_', rcl_sanitize_string( $newFields[ $nKey ]['title'] ) . '-' . rand( 10, 100 ) );
+			}
 
-			$field = $newFields[$nKey];
+			$field = $newFields[ $nKey ];
 
 			$nKey ++;
-		}else {
+		} else {
 
-			if ( ! isset( $POSTDATA['field'][$slug] ) )
+			if ( ! isset( $POSTDATA['field'][ $slug ] ) ) {
 				continue;
+			}
 
-			$field = $POSTDATA['field'][$slug];
+			$field = $POSTDATA['field'][ $slug ];
 		}
 
 		$field['slug'] = $slug;
@@ -302,12 +344,13 @@ function rcl_update_custom_fields() {
 
 			$values = array();
 			foreach ( $field['values'] as $val ) {
-				if ( $val == '' )
+				if ( $val == '' ) {
 					continue;
+				}
 				$values[] = $val;
 			}
 
-			$fields[$k]['values'] = $values;
+			$fields[ $k ]['values'] = $values;
 		}
 	}
 
@@ -315,20 +358,25 @@ function rcl_update_custom_fields() {
 		$fields['options'] = $POSTDATA['options'];
 	}
 
-	update_site_option( $_POST['rcl-fields-options']['name-option'], $fields );
+	update_site_option( sanitize_key( $_POST['rcl-fields-options']['name-option'] ), $fields );
 
 	do_action( 'rcl_update_custom_fields', $fields, $POSTDATA );
 
-	wp_redirect( $_POST['_wp_http_referer'] );
+	if ( isset( $_POST['_wp_http_referer'] ) ) {
+		wp_safe_redirect( wp_unslash( $_POST['_wp_http_referer'] ) );
+	}
 	exit;
 }
 
 rcl_ajax_action( 'rcl_get_new_custom_field', false );
 function rcl_get_new_custom_field() {
 
-	$post_type	 = $_POST['post_type'];
-	$primary	 = ( array ) json_decode( wp_unslash( $_POST['primary_options'] ) );
-	$default	 = ( array ) json_decode( wp_unslash( $_POST['default_options'] ) );
+	$post_type = isset( $_POST['post_type'] ) ? sanitize_key( $_POST['post_type'] ) : '';
+	//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$primary = isset( $_POST['primary_options'] ) ? rcl_recursive_map( 'sanitize_text_field', (array) json_decode( wp_unslash( $_POST['primary_options'] ) ) ) : [];
+	//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$default = isset( $_POST['default_options'] ) ? rcl_recursive_map( 'sanitize_text_field', (array) json_decode( wp_unslash( $_POST['default_options'] ) ) ) : [];
+
 
 	$manageFields = new Rcl_Custom_Fields_Manager( $post_type, $primary );
 
@@ -351,14 +399,14 @@ function rcl_get_new_custom_field() {
 rcl_ajax_action( 'rcl_get_custom_field_options', false );
 function rcl_get_custom_field_options() {
 
-	$type_field	 = $_POST['type_field'];
-	$old_type	 = $_POST['old_type'];
-	$post_type	 = $_POST['post_type'];
-	$slug_field	 = $_POST['slug'];
-
-	$primary = ( array ) json_decode( wp_unslash( $_POST['primary_options'] ) );
-	$default = ( array ) json_decode( wp_unslash( $_POST['default_options'] ) );
-
+	$type_field = isset( $_POST['type_field'] ) ? sanitize_key( $_POST['type_field'] ) : '';
+	$old_type   = isset( $_POST['old_type'] ) ? sanitize_key( $_POST['old_type'] ) : '';
+	$post_type  = isset( $_POST['post_type'] ) ? sanitize_key( $_POST['post_type'] ) : '';
+	$slug_field = isset( $_POST['slug_field'] ) ? sanitize_key( $_POST['slug_field'] ) : '';
+	//phpcs:disable
+	$primary = isset( $_POST['primary_options'] ) ? ( array ) json_decode( wp_unslash( $_POST['primary_options'] ) ) : [];
+	$default = isset( $_POST['default_options'] ) ? ( array ) json_decode( wp_unslash( $_POST['default_options'] ) ) : [];
+	//phpcs:enable
 	$manageFields = new Rcl_Custom_Fields_Manager( $post_type, $primary );
 
 	if ( $default ) {
@@ -378,7 +426,7 @@ function rcl_get_custom_field_options() {
 	} else {
 
 		$manageFields->field['slug'] = '';
-		$manageFields->new_slug		 = $slug_field;
+		$manageFields->new_slug      = $slug_field;
 	}
 
 	$content = $manageFields->get_options();
@@ -393,7 +441,7 @@ function rcl_get_custom_field_options() {
 	if ( in_array( $type_field, $multiVars ) ) {
 
 		$content .= '<script>'
-			. "jQuery('#field-" . $slug_field . " .rcl-field-input .dynamic-values').sortable({
+		            . "jQuery('#field-" . $slug_field . " .rcl-field-input .dynamic-values').sortable({
              containment: 'parent',
              placeholder: 'ui-sortable-placeholder',
              distance: 15,
@@ -409,7 +457,7 @@ function rcl_get_custom_field_options() {
 
              }
          });"
-			. '</script>';
+		            . '</script>';
 	}
 
 	wp_send_json( array(
@@ -440,16 +488,17 @@ function rcl_admin_footer_text( $footer_text ) {
 }
 
 function rcl_send_addon_activation_notice( $addon_id, $addon_headers ) {
-	wp_remote_post( RCL_SERVICE_HOST . '/products-files/api/add-ons.php?rcl-addon-info=add-notice', array( 'body' => array(
-			'rcl-key'	 => get_site_option( 'rcl-key' ),
-			'addon-id'	 => $addon_id,
-			'headers'	 => array(
-				'version'	 => $addon_headers['version'],
-				'item-id'	 => $addon_headers['item-id'],
-				'key-id'	 => $addon_headers['key-id'],
-			),
-			'host'		 => $_SERVER['SERVER_NAME']
-		)
+	wp_remote_post( RCL_SERVICE_HOST . '/products-files/api/add-ons.php?rcl-addon-info=add-notice', array(
+			'body' => array(
+				'rcl-key'  => get_site_option( 'rcl-key' ),
+				'addon-id' => $addon_id,
+				'headers'  => array(
+					'version' => $addon_headers['version'],
+					'item-id' => $addon_headers['item-id'],
+					'key-id'  => $addon_headers['key-id'],
+				),
+				'host'     => ( isset( $_SERVER['SERVER_NAME'] ) ? sanitize_text_field( wp_unslash( $_SERVER['SERVER_NAME'] ) ) : '' )
+			)
 		)
 	);
 }
@@ -458,17 +507,22 @@ function rcl_send_addon_activation_notice( $addon_id, $addon_headers ) {
 
 rcl_ajax_action( 'rcl_manager_get_new_field', false );
 function rcl_manager_get_new_field() {
-
-	$managerProps = $_POST['props'];
+	if ( ! current_user_can( 'administrator' ) ) {
+		wp_send_json( array(
+			'error' => esc_html__( 'Error', 'wp-recall' )
+		) );
+	}
+	//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$managerProps = isset( $_POST['props'] ) ? rcl_recursive_map( 'sanitize_text_field', wp_unslash( $_POST['props'] ) ) : [];
 
 	$Manager = new Rcl_Fields_Manager( $managerProps['manager_id'], $managerProps );
 
 	$field_id = 'newField-' . rand( 1, 10000 );
 
 	$Manager->add_field( array(
-		'slug'	 => $field_id,
-		'type'	 => $Manager->types[0],
-		'_new'	 => true
+		'slug' => $field_id,
+		'type' => $Manager->types[0],
+		'_new' => true
 	) );
 
 	wp_send_json( array(
@@ -479,26 +533,31 @@ function rcl_manager_get_new_field() {
 rcl_ajax_action( 'rcl_manager_get_custom_field_options', false );
 function rcl_manager_get_custom_field_options() {
 
-	$new_type	 = $_POST['newType'];
-	$old_type	 = $_POST['oldType'];
-	$field_id	 = $_POST['fieldId'];
+	if ( ! current_user_can( 'administrator' ) ) {
+		wp_send_json( array(
+			'error' => esc_html__( 'Error', 'wp-recall' )
+		) );
+	}
 
-	$managerProps = $_POST['manager'];
+	$new_type = isset( $_POST['newType'] ) ? sanitize_key( $_POST['newType'] ) : '';
+	$field_id = isset( $_POST['fieldId'] ) ? sanitize_text_field( wp_unslash( $_POST['fieldId'] ) ) : '';
+	//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$managerProps = isset( $_POST['manager'] ) ? rcl_recursive_map( 'sanitize_text_field', wp_unslash( $_POST['manager'] ) ) : [];
 
 	$Manager = new Rcl_Fields_Manager( $managerProps['manager_id'], $managerProps );
 
-	if ( stristr( $field_id, 'newField' ) !== FALSE ) {
+	if ( stristr( $field_id, 'newField' ) !== false ) {
 
 		$Manager->add_field( array(
-			'slug'	 => $field_id,
-			'type'	 => $new_type,
-			'_new'	 => true
+			'slug' => $field_id,
+			'type' => $new_type,
+			'_new' => true
 		) );
 	} else {
 
 		$Manager->set_field_prop( $field_id, 'type', $new_type );
 
-		$Manager->fields[$field_id] = $Manager::setup( ( array ) $Manager->fields[$field_id] );
+		$Manager->fields[ $field_id ] = $Manager::setup( ( array ) $Manager->fields[ $field_id ] );
 	}
 
 	$content = $Manager->get_field_options_content( $field_id );
@@ -523,7 +582,14 @@ function rcl_manager_get_custom_field_options() {
 rcl_ajax_action( 'rcl_manager_get_new_area', false );
 function rcl_manager_get_new_area() {
 
-	$managerProps = $_POST['props'];
+	if ( ! current_user_can( 'administrator' ) ) {
+		wp_send_json( array(
+			'error' => esc_html__( 'Error', 'wp-recall' )
+		) );
+	}
+
+	//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$managerProps = isset( $_POST['props'] ) ? rcl_recursive_map( 'sanitize_text_field', wp_unslash( $_POST['props'] ) ) : [];
 
 	$Manager = new Rcl_Fields_Manager( 'any', $managerProps );
 
@@ -535,7 +601,14 @@ function rcl_manager_get_new_area() {
 rcl_ajax_action( 'rcl_manager_get_new_group', false );
 function rcl_manager_get_new_group() {
 
-	$managerProps = $_POST['props'];
+	if ( ! current_user_can( 'administrator' ) ) {
+		wp_send_json( array(
+			'error' => esc_html__( 'Error', 'wp-recall' )
+		) );
+	}
+
+	//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$managerProps = isset( $_POST['props'] ) ? rcl_recursive_map( 'sanitize_text_field', wp_unslash( $_POST['props'] ) ) : [];
 
 	$Manager = new Rcl_Fields_Manager( 'any', $managerProps );
 
@@ -546,6 +619,10 @@ function rcl_manager_get_new_group() {
 
 rcl_ajax_action( 'rcl_manager_update_fields_by_ajax', false );
 function rcl_manager_update_fields_by_ajax() {
+
+	if ( ! current_user_can( 'administrator' ) ) {
+		wp_send_json( [ 'error' => __( 'Error', 'wp-recall' ) ] );
+	}
 
 	rcl_verify_ajax_nonce();
 
@@ -558,49 +635,60 @@ add_action( 'admin_init', 'rcl_manager_update_fields_by_post', 10 );
 function rcl_manager_update_fields_by_post() {
 	global $wpdb;
 
-	if ( ! isset( $_POST['rcl_manager_update_fields_by_post'] ) )
+	if ( ! isset( $_POST['rcl_manager_update_fields_by_post'] ) || ! isset( $_POST['_wpnonce'] ) ) {
 		return false;
+	}
 
-	if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'rcl-update-custom-fields' ) )
+	if ( ! current_user_can( 'administrator' ) ) {
 		return false;
+	}
+
+	if ( ! wp_verify_nonce( sanitize_key( $_POST['_wpnonce'] ), 'rcl-update-custom-fields' ) ) {
+		return false;
+	}
 
 	rcl_manager_update_data_fields();
-
-	wp_redirect( $_POST['_wp_http_referer'] );
+	if ( isset( $_POST['_wp_http_referer'] ) ) {
+		wp_safe_redirect( wp_unslash( $_POST['_wp_http_referer'] ) );
+	}
 	exit;
 }
 
 function rcl_manager_update_data_fields() {
 	global $wpdb;
 
-	$copy		 = $_POST['copy'];
-	$manager_id	 = $_POST['manager_id'];
-	$option_name = $_POST['option_name'];
+	$copy        = isset( $_POST['copy'] ) ? sanitize_text_field( wp_unslash( $_POST['copy'] ) ) : '';
+	$manager_id  = isset( $_POST['manager_id'] ) ? sanitize_key( $_POST['manager_id'] ) : '';
+	$option_name = isset( $_POST['option_name'] ) ? sanitize_key( $_POST['option_name'] ) : '';
+	//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$fieldsData = isset( $_POST['fields'] ) ? rcl_recursive_map( 'sanitize_text_field', wp_unslash( $_POST['fields'] ) ) : [];
+	//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$structure = isset( $_POST['structure'] ) ? rcl_recursive_map( 'sanitize_text_field', wp_unslash( $_POST['structure'] ) ) : false;
 
-	$fieldsData	 = wp_unslash( $_POST['fields'] );
-	$structure	 = isset( $_POST['structure'] ) ? $_POST['structure'] : false;
+	$fields    = array();
+	$keyFields = array();
+	$changeIds = array();
+	$isset_new = false;
 
-	$fields		 = array();
-	$keyFields	 = array();
-	$changeIds	 = array();
-	$isset_new	 = false;
 	foreach ( $fieldsData as $field_id => $field ) {
 
-		if ( ! $field['title'] )
+		if ( ! $field['title'] ) {
 			continue;
+		}
 
 		if ( isset( $field['values'] ) ) {
 			//удаляем из массива values пустые значения
 			$values = array();
 			foreach ( $field['values'] as $k => $v ) {
-				if ( $v == '' )
+				if ( $v == '' ) {
 					continue;
-				$values[$k] = $v;
+				}
+				$values[ $k ] = $v;
 			}
 			$field['values'] = $values;
 		}
 
-		if ( stristr( $field_id, 'newField' ) !== FALSE ) {
+		if ( stristr( $field_id, 'newField' ) !== false ) {
 
 			$isset_new = true;
 
@@ -608,17 +696,20 @@ function rcl_manager_update_data_fields() {
 
 			if ( ! $field['id'] ) {
 
-				$field_id = str_replace( array( '-', ' ' ), '_', rcl_sanitize_string( $field['title'] ) . '-' . rand( 1, 100 ) );
+				$field_id = str_replace( array(
+					'-',
+					' '
+				), '_', rcl_sanitize_string( $field['title'] ) . '-' . rand( 1, 100 ) );
 			} else {
 				$field_id = $field['id'];
 			}
 
-			$changeIds[$old_id] = $field_id;
+			$changeIds[ $old_id ] = $field_id;
 		}
 
 		$field['slug'] = $field_id;
 
-		$keyFields[$field_id] = 1;
+		$keyFields[ $field_id ] = 1;
 
 		unset( $field['id'] );
 
@@ -627,23 +718,23 @@ function rcl_manager_update_data_fields() {
 
 	if ( $structure ) {
 
-		$strArray	 = array();
-		$area_id	 = -1;
-
+		$strArray = array();
+		$area_id  = - 1;
+		$group_id = 0;
 		foreach ( $structure as $value ) {
 
 			if ( is_array( $value ) ) {
 
 				if ( isset( $value['group_id'] ) ) {
 					$group_id = $value['group_id'];
-
-					$strArray[$group_id] = isset( $_POST['structure-groups'][$group_id] ) ? $_POST['structure-groups'][$group_id] : array();
+					//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+					$strArray[ $group_id ] = isset( $_POST['structure-groups'][ $group_id ] ) ? rcl_recursive_map( 'sanitize_text_field', wp_unslash( $_POST['structure-groups'][ $group_id ] ) ) : array();
 				} else if ( isset( $value['field_id'] ) ) {
-					$strArray[$group_id]['areas'][$area_id]['fields'][] = $value['field_id'];
+					$strArray[ $group_id ]['areas'][ $area_id ]['fields'][] = $value['field_id'];
 				}
 			} else {
 				$area_id ++;
-				$strArray[$group_id]['areas'][$area_id]['width'] = isset( $_POST['structure-areas'][$area_id]['width'] ) ? $_POST['structure-areas'][$area_id]['width'] : 0;
+				$strArray[ $group_id ]['areas'][ $area_id ]['width'] = isset( $_POST['structure-areas'][ $area_id ]['width'] ) ? intval( $_POST['structure-areas'][ $area_id ]['width'] ) : 0;
 			}
 		}
 
@@ -655,29 +746,31 @@ function rcl_manager_update_data_fields() {
 				$group_id = $group['id'];
 			}
 
-			$endStructure[$group_id]			 = $group;
-			$endStructure[$group_id]['areas']	 = array();
+			$endStructure[ $group_id ]          = $group;
+			$endStructure[ $group_id ]['areas'] = array();
 
 			foreach ( $group['areas'] as $area ) {
 
 				$fieldsArea = array();
 
-				foreach ( $area['fields'] as $k => $field_id ) {
+				if ( ! empty( $area['fields'] ) ) {
+					foreach ( $area['fields'] as $k => $field_id ) {
 
-					if ( isset( $changeIds[$field_id] ) ) {
-						$field_id = $changeIds[$field_id];
+						if ( isset( $changeIds[ $field_id ] ) ) {
+							$field_id = $changeIds[ $field_id ];
+						}
+
+						if ( ! isset( $keyFields[ $field_id ] ) ) {
+							unset( $area['fields'][ $k ] );
+							continue;
+						}
+
+						$fieldsArea[] = $field_id;
 					}
-
-					if ( ! isset( $keyFields[$field_id] ) ) {
-						unset( $area['fields'][$k] );
-						continue;
-					}
-
-					$fieldsArea[] = $field_id;
 				}
 
-				$endStructure[$group_id]['areas'][] = array(
-					'width'	 => round( $area['width'], 0 ),
+				$endStructure[ $group_id ]['areas'][] = array(
+					'width'  => round( $area['width'], 0 ),
 					'fields' => $fieldsArea
 				);
 			}
@@ -691,18 +784,24 @@ function rcl_manager_update_data_fields() {
 	update_site_option( $option_name, $fields );
 
 	$args = array(
-		'success' => __( 'Settings saved!', 'wp-recall' )
+		'success' => esc_html__( 'Settings saved!', 'wp-recall' )
 	);
 
-	if ( $structure )
+	if ( $structure ) {
 		update_site_option( 'rcl_fields_' . $manager_id . '_structure', $structure );
-	else
+	} else {
 		delete_site_option( 'rcl_fields_' . $manager_id . '_structure' );
+	}
 
-	if ( isset( $_POST['deleted_fields'] ) && $_POST['deleted_fields'] ) {
-		if ( isset( $_POST['delete_table_data'] ) ) {
-			foreach ( $_POST['delete_table_data'] as $table_name => $colname ) {
-				$wpdb->query( "DELETE FROM $table_name WHERE $colname IN ('" . implode( "','", $_POST['deleted_fields'] ) . "')" );
+	if ( ! empty( $_POST['deleted_fields'] ) && isset( $_POST['delete_table_data'] ) ) {
+		//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$deleteFields = rcl_recursive_map( 'sanitize_text_field', wp_unslash( $_POST['delete_table_data'] ) );
+		if ( ! empty( $deleteFields ) ) {
+			foreach ( $deleteFields as $table_name => $colname ) {
+				//phpcs:disable
+				$fields_to_delete = rcl_recursive_map( 'sanitize_text_field', wp_unslash( $_POST['deleted_fields'] ) );
+				$wpdb->query( "DELETE FROM $table_name WHERE $colname IN ('" . implode( "','", $fields_to_delete ) . "')" );
+				//phpcs:enable
 			}
 
 			$args['reload'] = true;
@@ -713,8 +812,9 @@ function rcl_manager_update_data_fields() {
 
 		update_site_option( 'rcl_fields_' . $copy, $fields );
 
-		if ( $structure )
+		if ( $structure ) {
 			update_site_option( 'rcl_fields_' . $copy . '_structure', $structure );
+		}
 
 		do_action( 'rcl_fields_copy', $fields, $manager_id, $copy );
 
@@ -731,3 +831,4 @@ function rcl_manager_update_data_fields() {
 }
 
 /* new fields manager functions end */
+

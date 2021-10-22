@@ -2,7 +2,7 @@
 
 function pfm_add_ajax_action( $action, $functionName ) {
 	global $PrimeActions;
-	$PrimeActions[$action] = $functionName;
+	$PrimeActions[ $action ] = $functionName;
 }
 
 function pfm_get_manager( $actions, $itemType, $itemID = false ) {
@@ -12,12 +12,13 @@ function pfm_get_manager( $actions, $itemType, $itemID = false ) {
 	foreach ( $actions as $action => $options ) {
 
 		$args = array(
-			'item_type'	 => $itemType,
-			'method'	 => $action
+			'item_type' => $itemType,
+			'method'    => $action
 		);
 
-		if ( $itemID )
+		if ( $itemID ) {
 			$args['item_id'] = $itemID;
+		}
 
 		if ( isset( $options['options'] ) ) {
 			$args = array_merge( $args, $options['options'] );
@@ -25,7 +26,7 @@ function pfm_get_manager( $actions, $itemType, $itemID = false ) {
 
 
 		$item = '<a href="#" title="' . $options['name'] . '" class="topic-action action-' . $action . '" onclick=\'pfm_ajax_action(' . json_encode( $args ) . ');return false;\'>';
-		$item .= (isset( $options['icon'] )) ? '<i class="rcli ' . $options['icon'] . '" aria-hidden="true"></i>' : $options['name'];
+		$item .= ( isset( $options['icon'] ) ) ? '<i class="rcli ' . $options['icon'] . '" aria-hidden="true"></i>' : $options['name'];
 		$item .= '</a>';
 
 		$items[] = $item;
@@ -54,26 +55,27 @@ function pfm_the_author_manager() {
 		if ( function_exists( 'rcl_get_user_details' ) ) {
 
 			$actions['get_author_info'] = array(
-				'name'	 => __( 'Details about the author', 'wp-recall' ),
-				'icon'	 => 'fa-info-circle'
+				'name' => __( 'Details about the author', 'wp-recall' ),
+				'icon' => 'fa-info-circle'
 			);
 		}
 
 		if ( rcl_exist_addon( 'rcl-chat' ) ) {
 
 			$actions['get_private_chat'] = array(
-				'name'	 => __( 'Go to the private chat', 'wp-recall' ),
-				'icon'	 => 'fa-comments-o'
+				'name' => __( 'Go to the private chat', 'wp-recall' ),
+				'icon' => 'fa-comments-o'
 			);
 		}
 	}
 
-	if ( ! $actions )
+	if ( ! $actions ) {
 		return false;
+	}
 
 	$content = pfm_get_manager( $actions, 'author', $PrimePost->user_id );
 
-	echo $content;
+	echo wp_kses( $content, rcl_kses_allowed_html() );
 }
 
 function pfm_get_primary_manager() {
@@ -81,42 +83,41 @@ function pfm_get_primary_manager() {
 
 	$actions = array(
 		'get_last_updated_topics' => array(
-			'name'	 => __( 'Get the list of updated topics', 'wp-recall' ),
-			'icon'	 => 'fa-bell-o'
+			'name' => __( 'Get the list of updated topics', 'wp-recall' ),
+			'icon' => 'fa-bell-o'
 		)
 	);
 
 	if ( $user_ID ) {
 		$actions['get_author_topics'] = array(
-			'name'	 => __( 'Get your started topics', 'wp-recall' ),
-			'icon'	 => 'fa-address-book'
+			'name' => __( 'Get your started topics', 'wp-recall' ),
+			'icon' => 'fa-address-book'
 		);
 	}
 
 	$actions['get_structure'] = array(
-		'name'	 => __( 'Jump to the needed forum', 'wp-recall' ),
-		'icon'	 => 'fa-rocket'
+		'name' => __( 'Jump to the needed forum', 'wp-recall' ),
+		'icon' => 'fa-rocket'
 	);
 
-	$content = pfm_get_manager( $actions, 'primary' );
-
-	return $content;
+	return pfm_get_manager( $actions, 'primary' );
 }
 
 function pfm_the_post_manager() {
 	global $PrimePost, $PrimeTopic;
 
-	if ( ! $PrimePost->post_id )
+	if ( ! $PrimePost->post_id ) {
 		return false;
+	}
 
 	$actions = array();
 
 	if ( pfm_is_can_post_delete( $PrimePost->post_id ) ) {
 
 		$actions['post_delete'] = array(
-			'name'		 => __( 'Delete message', 'wp-recall' ),
-			'icon'		 => 'fa-trash',
-			'options'	 => array(
+			'name'    => __( 'Delete message', 'wp-recall' ),
+			'icon'    => 'fa-trash',
+			'options' => array(
 				'confirm' => __( 'Are you sure?', 'wp-recall' )
 			)
 		);
@@ -125,59 +126,61 @@ function pfm_the_post_manager() {
 	if ( pfm_is_can( 'post_migrate' ) ) {
 
 		$actions['start_post_migrate'] = array(
-			'name'	 => __( 'Transfer to the existing topic', 'wp-recall' ),
-			'icon'	 => 'fa-share-square-o'
+			'name' => __( 'Transfer to the existing topic', 'wp-recall' ),
+			'icon' => 'fa-share-square-o'
 		);
 
 		$actions['get_form_topic_create'] = array(
-			'name'	 => __( 'Transfer to the new topic', 'wp-recall' ),
-			'icon'	 => 'fa-code-fork'
+			'name' => __( 'Transfer to the new topic', 'wp-recall' ),
+			'icon' => 'fa-code-fork'
 		);
 	}
 
 	if ( pfm_is_can_post_edit( $PrimePost->post_id ) ) {
 
 		$actions['get_form_post_edit'] = array(
-			'name'	 => __( 'Edit message', 'wp-recall' ),
-			'icon'	 => 'fa-pencil-square-o'
+			'name' => __( 'Edit message', 'wp-recall' ),
+			'icon' => 'fa-pencil-square-o'
 		);
 	}
 
 	if ( pfm_is_can( 'post_create' ) && $PrimeTopic && ! $PrimeTopic->topic_closed && ! $PrimeTopic->forum_closed ) {
 
 		$actions['get_post_excerpt'] = array(
-			'name'	 => __( 'Quote message', 'wp-recall' ),
-			'icon'	 => 'fa-quote-right'
+			'name' => __( 'Quote message', 'wp-recall' ),
+			'icon' => 'fa-quote-right'
 		);
 	}
 
 	$actions = apply_filters( 'pfm_post_manager_actions', $actions, $PrimePost );
 
-	if ( ! $actions )
+	if ( ! $actions ) {
 		return false;
+	}
 
 	$content = pfm_get_manager( $actions, 'post', $PrimePost->post_id );
 
-	echo $content;
+	echo wp_kses( $content, rcl_kses_allowed_html() );
 }
 
 function pfm_the_topic_manager() {
 	global $PrimeTopic;
 
-	if ( ! $PrimeTopic->topic_id )
+	if ( ! $PrimeTopic->topic_id ) {
 		return false;
+	}
 
 	$actions = array();
 
 	if ( pfm_is_can( 'post_migrate' ) ) {
 
 		if ( isset( $_COOKIE['pfm_migrate_post'] ) ) {
-			$actions['end_post_migrate']	 = array(
+			$actions['end_post_migrate']    = array(
 				'name' => __( 'Transfer to this topic', 'wp-recall' )
 			);
-			$actions['cancel_post_migrate']	 = array(
-				'name'	 => __( 'Cancel transfer', 'wp-recall' ),
-				'icon'	 => 'fa-times'
+			$actions['cancel_post_migrate'] = array(
+				'name' => __( 'Cancel transfer', 'wp-recall' ),
+				'icon' => 'fa-times'
 			);
 		}
 	}
@@ -185,9 +188,9 @@ function pfm_the_topic_manager() {
 	if ( pfm_is_can_topic_delete( $PrimeTopic->topic_id ) ) {
 
 		$actions['topic_delete'] = array(
-			'name'		 => __( 'Delete topic', 'wp-recall' ),
-			'icon'		 => 'fa-trash',
-			'options'	 => array(
+			'name'    => __( 'Delete topic', 'wp-recall' ),
+			'icon'    => 'fa-trash',
+			'options' => array(
 				'confirm' => __( 'Are you sure?', 'wp-recall' )
 			)
 		);
@@ -196,8 +199,8 @@ function pfm_the_topic_manager() {
 	if ( pfm_is_can( 'topic_migrate' ) ) {
 
 		$actions['get_form_topic_migrate'] = array(
-			'name'	 => __( 'Transfer topic', 'wp-recall' ),
-			'icon'	 => 'fa-chain-broken'
+			'name' => __( 'Transfer topic', 'wp-recall' ),
+			'icon' => 'fa-chain-broken'
 		);
 	}
 
@@ -205,13 +208,13 @@ function pfm_the_topic_manager() {
 
 		if ( $PrimeTopic->topic_fix ) {
 			$actions['topic_unfix'] = array(
-				'name'	 => __( 'Unpin topic', 'wp-recall' ),
-				'icon'	 => 'fa-star'
+				'name' => __( 'Unpin topic', 'wp-recall' ),
+				'icon' => 'fa-star'
 			);
 		} else {
 			$actions['topic_fix'] = array(
-				'name'	 => __( 'Pin topic', 'wp-recall' ),
-				'icon'	 => 'fa-star-o'
+				'name' => __( 'Pin topic', 'wp-recall' ),
+				'icon' => 'fa-star-o'
 			);
 		}
 	}
@@ -220,13 +223,13 @@ function pfm_the_topic_manager() {
 
 		if ( $PrimeTopic->topic_closed ) {
 			$actions['topic_unclose'] = array(
-				'name'	 => __( 'Open topic', 'wp-recall' ),
-				'icon'	 => 'fa-lock'
+				'name' => __( 'Open topic', 'wp-recall' ),
+				'icon' => 'fa-lock'
 			);
 		} else {
 			$actions['topic_close'] = array(
-				'name'	 => __( 'Close topic', 'wp-recall' ),
-				'icon'	 => 'fa-unlock'
+				'name' => __( 'Close topic', 'wp-recall' ),
+				'icon' => 'fa-unlock'
 			);
 		}
 	}
@@ -234,19 +237,20 @@ function pfm_the_topic_manager() {
 	if ( pfm_is_can_topic_edit( $PrimeTopic->topic_id ) ) {
 
 		$actions['get_form_topic_edit'] = array(
-			'name'	 => __( 'Change name', 'wp-recall' ),
-			'icon'	 => 'fa-pencil-square-o'
+			'name' => __( 'Change name', 'wp-recall' ),
+			'icon' => 'fa-pencil-square-o'
 		);
 	}
 
 	$actions = apply_filters( 'pfm_topic_manager_actions', $actions, $PrimeTopic );
 
-	if ( ! $actions )
+	if ( ! $actions ) {
 		return false;
+	}
 
 	$content = pfm_get_manager( $actions, 'topic', $PrimeTopic->topic_id );
 
-	echo $content;
+	echo wp_kses( $content, rcl_kses_allowed_html() );
 }
 
 add_action( 'rcl_init', 'pfm_init_actions_in_office' );
@@ -262,164 +266,164 @@ add_action( 'pfm_after_init_query', 'pfm_init_actions', 30 );
 function pfm_init_actions() {
 	global $user_ID;
 
-	if ( ! isset( $_REQUEST['pfm-action'] ) || ! isset( $_REQUEST['_wpnonce'] ) )
+	if ( ! isset( $_REQUEST['pfm-action'] ) || ! isset( $_REQUEST['_wpnonce'] ) ) {
 		return;
+	}
 
-	if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'pfm-nonce' ) )
+	if ( ! wp_verify_nonce( sanitize_key( $_REQUEST['_wpnonce'] ), 'pfm-nonce' ) ) {
 		return;
+	}
 
-	$action = $_REQUEST['pfm-action'];
+	$action = sanitize_key( $_REQUEST['pfm-action'] );
 
 	switch ( $action ) {
 		case 'topic_create': //создание топика
 
-			if ( ! pfm_is_can( 'topic_create' ) || ! $_REQUEST['forum_id'] )
+			if ( empty( $_REQUEST['topic_name'] ) || empty( $_REQUEST['forum_id'] ) || ! pfm_is_can( 'topic_create' ) ) {
 				return false;
+			}
 
-			if ( ! $_REQUEST['post_content'] ) {
-				wp_die( __( 'Empty message! Go back and write something.', 'wp-recall' ) );
+			if ( empty( $_REQUEST['post_content'] ) ) {
+				wp_die( esc_html__( 'Empty message! Go back and write something.', 'wp-recall' ) );
 			}
 
 			$topic_id = pfm_add_topic(
 				array(
-				'topic_name' => $_REQUEST['topic_name'],
-				'forum_id'	 => $_REQUEST['forum_id']
+					'topic_name' => sanitize_text_field( wp_unslash( $_REQUEST['topic_name'] ) ),
+					'forum_id'   => absint( $_REQUEST['forum_id'] )
 				), array(
-				'post_content' => $_REQUEST['post_content']
+					'post_content' => wp_kses_post( wp_unslash( $_REQUEST['post_content'] ) )
 				)
 			);
 
-			wp_redirect( pfm_get_topic_permalink( $topic_id ) );
+			wp_safe_redirect( pfm_get_topic_permalink( $topic_id ) );
 			exit;
-
-			break;
 		case 'post_edit': //редактирование поста
 
-			if ( ! pfm_is_can_post_edit( $_REQUEST['post_id'] ) || ! $_REQUEST['topic_id'] || ! $_REQUEST['post_id'] )
+			if ( empty( $_REQUEST['topic_id'] ) || empty( $_REQUEST['post_id'] ) || ! pfm_is_can_post_edit( intval( $_REQUEST['post_id'] ) ) ) {
 				return false;
+			}
 
 			$post_edit = '';
 
 			if ( pfm_get_option( 'reason-edit', 1 ) ) {
 
-				$post_edit = maybe_unserialize( pfm_get_post_field( $_REQUEST['post_id'], 'post_edit' ) );
+				$post_edit = maybe_unserialize( pfm_get_post_field( absint( $_REQUEST['post_id'] ), 'post_edit' ) );
 
 				$reasonEdit = '';
-				if ( isset( $_POST['reason_edit'] ) && $_POST['reason_edit'] ) {
+				if ( ! empty( $_POST['reason_edit'] ) ) {
 
-					$reasonEdit = $_POST['reason_edit'];
+					$reasonEdit = sanitize_textarea_field( wp_unslash( $_POST['reason_edit'] ) );
 				}
 
 				$post_edit[] = array(
-					'time'	 => current_time( 'mysql' ),
+					'time'   => current_time( 'mysql' ),
 					'author' => pfm_get_user_name( $user_ID ),
 					'reason' => $reasonEdit
 				);
 			}
 
 			pfm_update_post( array(
-				'post_content'	 => $_REQUEST['post_content'],
-				'post_id'		 => $_REQUEST['post_id'],
-				'post_edit'		 => $post_edit
+				'post_content' => wp_kses_post( wp_unslash( $_REQUEST['post_content'] ) ),
+				'post_id'      => absint( $_REQUEST['post_id'] ),
+				'post_edit'    => $post_edit
 			) );
 
-			wp_redirect( pfm_get_post_permalink( $_REQUEST['post_id'] ) );
+			wp_safe_redirect( pfm_get_post_permalink( absint( $_REQUEST['post_id'] ) ) );
 			exit;
-
-			break;
 
 		case 'topic_from_post_create': //создание топика из поста
 
-			if ( ! pfm_is_can( 'post_migrate' ) || ! $_REQUEST['forum_id'] )
+			if ( ! pfm_is_can( 'post_migrate' ) || empty( $_REQUEST['forum_id'] ) ) {
 				return false;
+			}
 
-			$migratedPost = pfm_get_post( $_REQUEST['post_id'] );
+			$migratedPost = pfm_get_post( absint( $_REQUEST['post_id'] ) );
 
 			$topic_id = pfm_add_topic( array(
-				'topic_name' => $_REQUEST['topic_name'],
-				'forum_id'	 => $_REQUEST['forum_id'],
-				'user_id'	 => $migratedPost->user_id
+					'topic_name' => sanitize_text_field( wp_unslash( $_REQUEST['topic_name'] ) ),
+					'forum_id'   => absint( $_REQUEST['forum_id'] ),
+					'user_id'    => $migratedPost->user_id
 				)
 			);
 
-			if ( isset( $_REQUEST['next_posts'] ) && $_REQUEST['next_posts'] ) {
+			if ( ! empty( $_REQUEST['next_posts'] ) ) {
 
 				$posts = pfm_get_posts( array(
-					'topic_id'			 => $migratedPost->topic_id,
-					'post_index__from'	 => $migratedPost->post_index,
-					'number'			 => -1
-					) );
+					'topic_id'         => $migratedPost->topic_id,
+					'post_index__from' => $migratedPost->post_index,
+					'number'           => - 1
+				) );
 
 				foreach ( $posts as $post ) {
 					pfm_update_post( array(
-						'post_id'	 => $post->post_id,
-						'topic_id'	 => $topic_id
+						'post_id'  => $post->post_id,
+						'topic_id' => $topic_id
 					) );
 				}
 			} else {
 
 				pfm_update_post( array(
-					'post_id'	 => $migratedPost->post_id,
-					'topic_id'	 => $topic_id
+					'post_id'  => $migratedPost->post_id,
+					'topic_id' => $topic_id
 				) );
 			}
 
 			pfm_update_topic_data( $migratedPost->topic_id );
 			pfm_update_topic_data( $topic_id );
 
-			wp_redirect( pfm_get_topic_permalink( $topic_id ) );
+			wp_safe_redirect( pfm_get_topic_permalink( $topic_id ) );
 			exit;
 
-			break;
 		case 'topic_migrate': //перенос топика в другой форум
 
-			if ( ! pfm_is_can( 'topic_migrate' ) || ! $_REQUEST['forum_id'] )
+			if ( ! pfm_is_can( 'topic_migrate' ) || empty( $_REQUEST['forum_id'] ) ) {
 				return false;
+			}
 
-			$migratedTopic = pfm_get_topic( $_REQUEST['topic_id'] );
+			$migratedTopic = pfm_get_topic( absint( $_REQUEST['topic_id'] ) );
 
 			pfm_update_topic( array(
-				'topic_id'	 => $_REQUEST['topic_id'],
-				'forum_id'	 => $_REQUEST['forum_id']
+				'topic_id' => absint( $_REQUEST['topic_id'] ),
+				'forum_id' => absint( $_REQUEST['forum_id'] )
 			) );
 
 			pfm_update_forum_counter( $migratedTopic->forum_id );
-			pfm_update_forum_counter( $_REQUEST['forum_id'] );
+			pfm_update_forum_counter( absint( $_REQUEST['forum_id'] ) );
 
-			do_action( 'pfm_migrate_topic', $_REQUEST['topic_id'], $_REQUEST['forum_id'] );
+			do_action( 'pfm_migrate_topic', absint( $_REQUEST['topic_id'] ), absint( $_REQUEST['forum_id'] ) );
 
-			wp_redirect( pfm_get_topic_permalink( $_REQUEST['topic_id'] ) );
+			wp_safe_redirect( pfm_get_topic_permalink( absint( $_REQUEST['topic_id'] ) ) );
 			exit;
 
-			break;
 		case 'topic_edit': //изменение заголовка топика
 
-			if ( ! pfm_is_can_topic_edit( $_REQUEST['topic_id'] ) )
+			if ( ! pfm_is_can_topic_edit( intval( $_REQUEST['topic_id'] ) ) ) {
 				return false;
+			}
 
-			$topic_id = pfm_update_topic( array(
-				'topic_id'	 => $_REQUEST['topic_id'],
-				'topic_name' => $_REQUEST['topic_name']
-				) );
+			pfm_update_topic( array(
+				'topic_id'   => absint( $_REQUEST['topic_id'] ),
+				'topic_name' => sanitize_text_field( wp_unslash( $_REQUEST['topic_name'] ) )
+			) );
 
 			if ( rcl_is_office( $user_ID ) ) {
-				wp_redirect( rcl_get_tab_permalink( $user_ID, 'prime-forum' ) );
+				wp_safe_redirect( rcl_get_tab_permalink( $user_ID, 'prime-forum' ) );
 				exit;
 			}
 
-			wp_redirect( pfm_get_topic_permalink( $_REQUEST['topic_id'] ) );
+			wp_safe_redirect( pfm_get_topic_permalink( absint( $_REQUEST['topic_id'] ) ) );
 			exit;
 
-			break;
 		case 'member_go':
 
-			wp_redirect( pfm_get_forum_permalink( $_REQUEST['forum_id'] ) );
+			wp_safe_redirect( pfm_get_forum_permalink( absint( $_REQUEST['forum_id'] ) ) );
 			exit;
-
-			break;
+	}
+	if ( isset( $_POST['_wp_http_referer'] ) ) {
+		wp_safe_redirect( wp_unslash( $_POST['_wp_http_referer'] ) );
 	}
 
-	wp_redirect( $_POST['_wp_http_referer'] );
 	exit;
 }
 
@@ -429,12 +433,13 @@ function pfm_ajax_action() {
 
 	rcl_verify_ajax_nonce();
 
-	$method		 = $_POST['method'];
-	$itemType	 = isset( $_POST['item_type'] ) ? $_POST['item_type'] : false;
-	$itemID		 = (isset( $_POST['item_id'] )) ? $_POST['item_id'] : null;
+	$method = isset( $_POST['method'] ) ? sanitize_key( $_POST['method'] ) : '';
 
-	if ( ! isset( $PrimeActions[$method] ) )
+	$itemID = ( isset( $_POST['item_id'] ) ) ? absint( $_POST['item_id'] ) : null;
+
+	if ( ! $method || ! isset( $PrimeActions[ $method ] ) ) {
 		exit;
+	}
 
 	rcl_enqueue_script( 'pfm-scripts', rcl_addon_url( 'js/scripts.js', __FILE__ ) );
 
@@ -444,7 +449,7 @@ function pfm_ajax_action() {
 
 	do_action( 'pfm_pre_ajax_action' );
 
-	$funcName = $PrimeActions[$method];
+	$funcName = $PrimeActions[ $method ];
 
 	$result = $funcName( $itemID );
 
@@ -463,16 +468,28 @@ function pfm_ajax_action() {
 pfm_add_ajax_action( 'confirm_migrate_post', 'pfm_action_confirm_migrate_post' );
 function pfm_action_confirm_migrate_post( $post_id ) {
 
-	if ( ! pfm_is_can( 'post_migrate' ) )
+	if ( ! pfm_is_can( 'post_migrate' ) ) {
 		return false;
+	}
+	$formdata = array();
 
 	if ( isset( $_POST['formdata'] ) ) {
-		$formdata = array();
-		parse_str( $_POST['formdata'], $formdata );
+		if ( isset( $_POST['formdata'] ) ) {
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			parse_str( wp_unslash( $_POST['formdata'] ), $formdata );
+
+			foreach ( $formdata as $k => $v ) {
+				if ( $k == 'post_content' ) {
+					$formdata[ $k ] = wp_kses_post( $v );
+				} else {
+					$formdata[ $k ] = sanitize_text_field( $v );
+				}
+			}
+		}
 	}
 
 	$migrateData = array(
-		'post_id'	 => $post_id,
+		'post_id'    => $post_id,
 		'next_posts' => 0
 	);
 
@@ -481,12 +498,12 @@ function pfm_action_confirm_migrate_post( $post_id ) {
 		$migrateData['next_posts'] = 1;
 	}
 
-	setcookie( 'pfm_migrate_post', json_encode( $migrateData ), time() + 3600, '/', $_SERVER['HOST'] );
+	setcookie( 'pfm_migrate_post', json_encode( $migrateData ), time() + 3600, '/', isset( $_SERVER['HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HOST'] ) ) : '' );
 
 	return array(
-		'content'	 => pfm_get_notice( __( 'Go to the page of the necessary topic and press the "Transfer to this topic" button to end message transfer', 'wp-recall' ), 'warning' ),
-		'title'		 => __( 'Data is ready to be transferred', 'wp-recall' ),
-		'dialog'	 => true
+		'content' => pfm_get_notice( __( 'Go to the page of the necessary topic and press the "Transfer to this topic" button to end message transfer', 'wp-recall' ), 'warning' ),
+		'title'   => __( 'Data is ready to be transferred', 'wp-recall' ),
+		'dialog'  => true
 	);
 }
 
@@ -494,13 +511,14 @@ function pfm_action_confirm_migrate_post( $post_id ) {
 pfm_add_ajax_action( 'start_post_migrate', 'pfm_action_start_post_migrate' );
 function pfm_action_start_post_migrate( $post_id ) {
 
-	if ( ! pfm_is_can( 'post_migrate' ) )
+	if ( ! pfm_is_can( 'post_migrate' ) ) {
 		return false;
+	}
 
 	$fields = array(
 		array(
-			'type'	 => 'checkbox',
-			'slug'	 => 'next_posts_migrate',
+			'type'   => 'checkbox',
+			'slug'   => 'next_posts_migrate',
 			'values' => array(
 				1 => __( 'Also transfer all subsequent messages', 'wp-recall' )
 			)
@@ -508,9 +526,9 @@ function pfm_action_start_post_migrate( $post_id ) {
 	);
 
 	$args = array(
-		'method'		 => 'confirm_migrate_post',
+		'method'         => 'confirm_migrate_post',
 		'serialize_form' => 'manager-migrate-form',
-		'item_id'		 => $post_id
+		'item_id'        => $post_id
 	);
 
 	$content = '<div id="manager-migrate" class="rcl-custom-fields-box">';
@@ -535,27 +553,28 @@ function pfm_action_start_post_migrate( $post_id ) {
 
 	$content .= '<div class="form-field fields-submit">';
 	$content .= rcl_get_button( array(
-		'label'		 => __( 'Confirm transfer', 'wp-recall' ),
-		'class'		 => 'topic-action action-migrate_posts',
-		'onclick'	 => 'pfm_ajax_action(' . json_encode( $args ) . ');return false;'
-		) );
+		'label'   => __( 'Confirm transfer', 'wp-recall' ),
+		'class'   => 'topic-action action-migrate_posts',
+		'onclick' => 'pfm_ajax_action(' . json_encode( $args ) . ');return false;'
+	) );
 	$content .= '</div>';
 
 	$content .= '</form>';
 	$content .= '</div>';
 
 	return array(
-		'content'	 => $content,
-		'title'		 => __( 'Transfer messages to another topic', 'wp-recall' ),
-		'dialog'	 => true
+		'content' => $content,
+		'title'   => __( 'Transfer messages to another topic', 'wp-recall' ),
+		'dialog'  => true
 	);
 }
 
 pfm_add_ajax_action( 'cancel_post_migrate', 'pfm_action_cancel_post_migrate' );
-function pfm_action_cancel_post_migrate( $topic_id ) {
-	setcookie( 'pfm_migrate_post', '', time() + 3600, '/', $_SERVER['HOST'] );
+function pfm_action_cancel_post_migrate() {
+	setcookie( 'pfm_migrate_post', '', time() + 3600, '/', isset( $_SERVER['HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HOST'] ) ) : '' );
+
 	return array(
-		'update-page'	 => true,
+		'update-page'    => true,
 		'preloader_live' => true
 	);
 }
@@ -564,10 +583,11 @@ function pfm_action_cancel_post_migrate( $topic_id ) {
 pfm_add_ajax_action( 'end_post_migrate', 'pfm_action_end_post_migrate' );
 function pfm_action_end_post_migrate( $topic_id ) {
 
-	if ( ! pfm_is_can( 'post_migrate' ) )
+	if ( ! isset( $_COOKIE['pfm_migrate_post'] ) || ! pfm_is_can( 'post_migrate' ) ) {
 		return false;
-
-	$migrateData = json_decode( wp_unslash( $_COOKIE['pfm_migrate_post'] ) );
+	}
+	//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$migrateData = rcl_recursive_map( 'sanitize_text_field', json_decode( wp_unslash( $_COOKIE['pfm_migrate_post'] ) ) );
 
 	$post_id = intval( $migrateData->post_id );
 
@@ -577,40 +597,41 @@ function pfm_action_end_post_migrate( $topic_id ) {
 
 	$post = pfm_get_post( $post_id );
 
-	if ( ! $post )
+	if ( ! $post ) {
 		return false;
+	}
 
 	$topicOld = $post->topic_id;
 
 	if ( isset( $migrateData->next_posts ) && $migrateData->next_posts ) {
 
 		$posts = pfm_get_posts( array(
-			'topic_id'			 => $topicOld,
-			'post_index__from'	 => $post->post_index,
-			'number'			 => -1
-			) );
+			'topic_id'         => $topicOld,
+			'post_index__from' => $post->post_index,
+			'number'           => - 1
+		) );
 
 		foreach ( $posts as $post ) {
 			pfm_update_post( array(
-				'post_id'	 => $post->post_id,
-				'topic_id'	 => $topic_id
+				'post_id'  => $post->post_id,
+				'topic_id' => $topic_id
 			) );
 		}
 	} else {
 
 		pfm_update_post( array(
-			'post_id'	 => $post_id,
-			'topic_id'	 => $topic_id
+			'post_id'  => $post_id,
+			'topic_id' => $topic_id
 		) );
 	}
 
-	setcookie( 'pfm_migrate_post', '', time() + 3600, '/', $_SERVER['HOST'] );
+	setcookie( 'pfm_migrate_post', '', time() + 3600, '/', isset( $_SERVER['HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HOST'] ) ) : '' );
 
 	pfm_update_topic_data( $topicOld );
 	pfm_update_topic_data( $topic_id );
 
 	return array(
-		'url-redirect'	 => pfm_get_post_permalink( $post_id ),
+		'url-redirect'   => pfm_get_post_permalink( $post_id ),
 		'preloader_live' => 1
 	);
 }
@@ -619,30 +640,31 @@ function pfm_action_end_post_migrate( $topic_id ) {
 pfm_add_ajax_action( 'get_form_topic_create', 'pfm_action_get_form_topic_create' );
 function pfm_action_get_form_topic_create( $post_id ) {
 
-	if ( ! pfm_is_can( 'post_migrate' ) )
+	if ( ! pfm_is_can( 'post_migrate' ) ) {
 		return false;
+	}
 
 	$post = pfm_get_post( $post_id );
 
 	return array(
-		'content'	 => pfm_get_form( array(
-			'action'	 => 'topic_from_post_create',
-			'submit'	 => __( 'Save changes', 'wp-recall' ),
+		'content' => pfm_get_form( array(
+			'action'     => 'topic_from_post_create',
+			'submit'     => __( 'Save changes', 'wp-recall' ),
 			'forum_list' => true,
-			'post_id'	 => $post_id,
-			'values'	 => array(
+			'post_id'    => $post_id,
+			'values'     => array(
 				'post_content' => wp_slash( $post->post_content )
 			),
-			'fields'	 => array(
+			'fields'     => array(
 				array(
-					'type'	 => 'checkbox',
-					'slug'	 => 'next_posts',
+					'type'   => 'checkbox',
+					'slug'   => 'next_posts',
 					'values' => array( 1 => __( 'Also transfer all subsequent messages', 'wp-recall' ) )
 				)
 			)
 		) ),
-		'title'		 => __( 'Transfer message to a new topic', 'wp-recall' ),
-		'dialog'	 => true
+		'title'   => __( 'Transfer message to a new topic', 'wp-recall' ),
+		'dialog'  => true
 	);
 }
 
@@ -650,25 +672,26 @@ function pfm_action_get_form_topic_create( $post_id ) {
 pfm_add_ajax_action( 'get_form_post_edit', 'pfm_action_get_form_post_edit' );
 function pfm_action_get_form_post_edit( $post_id ) {
 
-	if ( ! pfm_is_can_post_edit( $post_id ) )
+	if ( ! pfm_is_can_post_edit( $post_id ) ) {
 		return false;
+	}
 
 	$post = pfm_get_post( $post_id );
 
 	return array(
-		'content'	 => pfm_get_form(
+		'content' => pfm_get_form(
 			array(
-				'action'	 => 'post_edit',
-				'submit'	 => __( 'Save changes', 'wp-recall' ),
-				'post_id'	 => $post_id,
-				'topic_id'	 => $post->topic_id,
-				'values'	 => array(
+				'action'   => 'post_edit',
+				'submit'   => __( 'Save changes', 'wp-recall' ),
+				'post_id'  => $post_id,
+				'topic_id' => $post->topic_id,
+				'values'   => array(
 					'post_content' => wp_slash( $post->post_content )
 				)
 			)
 		),
-		'title'		 => __( 'Edit messages', 'wp-recall' ),
-		'dialog'	 => true
+		'title'   => __( 'Edit messages', 'wp-recall' ),
+		'dialog'  => true
 	);
 }
 
@@ -676,8 +699,9 @@ function pfm_action_get_form_post_edit( $post_id ) {
 pfm_add_ajax_action( 'post_delete', 'pfm_action_post_delete' );
 function pfm_action_post_delete( $post_id ) {
 
-	if ( ! pfm_is_can_post_delete( $post_id ) )
+	if ( ! pfm_is_can_post_delete( $post_id ) ) {
 		return false;
+	}
 
 	$post = pfm_get_post( $post_id );
 
@@ -694,8 +718,8 @@ function pfm_action_post_delete( $post_id ) {
 	$topic = pfm_get_topic( $post->topic_id );
 
 	if ( $topic->post_count == 1 ) {
-		$result['url-redirect']		 = pfm_get_forum_permalink( $topic->forum_id );
-		$result['preloader_live']	 = 1;
+		$result['url-redirect']   = pfm_get_forum_permalink( $topic->forum_id );
+		$result['preloader_live'] = 1;
 	}
 
 	return $result;
@@ -705,8 +729,9 @@ function pfm_action_post_delete( $post_id ) {
 pfm_add_ajax_action( 'topic_close', 'pfm_action_topic_close' );
 function pfm_action_topic_close( $topic_id ) {
 
-	if ( ! pfm_is_can( 'topic_close' ) )
+	if ( ! pfm_is_can( 'topic_close' ) ) {
 		return false;
+	}
 
 	$topic = pfm_get_topic( $topic_id );
 
@@ -717,7 +742,7 @@ function pfm_action_topic_close( $topic_id ) {
 	pfm_topic_close( $topic_id );
 
 	return array(
-		'update-page'	 => true,
+		'update-page'    => true,
 		'preloader_live' => 1
 	);
 }
@@ -726,8 +751,9 @@ function pfm_action_topic_close( $topic_id ) {
 pfm_add_ajax_action( 'topic_unclose', 'pfm_action_topic_unclose' );
 function pfm_action_topic_unclose( $topic_id ) {
 
-	if ( ! pfm_is_can( 'topic_close' ) )
+	if ( ! pfm_is_can( 'topic_close' ) ) {
 		return false;
+	}
 
 	$topic = pfm_get_topic( $topic_id );
 
@@ -738,7 +764,7 @@ function pfm_action_topic_unclose( $topic_id ) {
 	pfm_topic_unclose( $topic_id );
 
 	return array(
-		'update-page'	 => 1,
+		'update-page'    => 1,
 		'preloader_live' => 1
 	);
 }
@@ -747,8 +773,9 @@ function pfm_action_topic_unclose( $topic_id ) {
 pfm_add_ajax_action( 'topic_delete', 'pfm_action_topic_delete' );
 function pfm_action_topic_delete( $topic_id ) {
 
-	if ( ! pfm_is_can_topic_delete( $topic_id ) )
+	if ( ! pfm_is_can_topic_delete( $topic_id ) ) {
 		return false;
+	}
 
 	$topic = pfm_get_topic( $topic_id );
 
@@ -760,10 +787,11 @@ function pfm_action_topic_delete( $topic_id ) {
 
 	$url = pfm_get_forum_permalink( $topic->forum_id );
 
-	if ( isset( $_POST['topic_id'] ) && $_POST['topic_id'] )
-		$result	 = array( 'url-redirect' => $url );
-	else
-		$result	 = array( 'url-redirect' => pfm_add_number_page( $url, $_POST['current_page'] ) );
+	if ( ! empty( $_POST['topic_id'] ) ) {
+		$result = array( 'url-redirect' => $url );
+	} else if ( isset( $_POST['current_page'] ) ) {
+		$result = array( 'url-redirect' => pfm_add_number_page( $url, absint( $_POST['current_page'] ) ) );
+	}
 
 	$result['preloader_live'] = 1;
 
@@ -774,8 +802,9 @@ function pfm_action_topic_delete( $topic_id ) {
 pfm_add_ajax_action( 'get_form_topic_migrate', 'pfm_action_get_form_topic_migrate' );
 function pfm_action_get_form_topic_migrate( $topic_id ) {
 
-	if ( ! pfm_is_can( 'topic_migrate' ) )
+	if ( ! pfm_is_can( 'topic_migrate' ) ) {
 		return false;
+	}
 
 	$topic = pfm_get_topic( $topic_id );
 
@@ -785,21 +814,21 @@ function pfm_action_get_form_topic_migrate( $topic_id ) {
 
 	$content = '<div id="post-manager" class="manager-box">';
 	$content .= pfm_get_form( array(
-		'action'		 => 'topic_migrate',
-		'submit'		 => __( 'Transfer topic', 'wp-recall' ),
-		'topic_id'		 => $topic_id,
-		'forum_list'	 => true,
+		'action'         => 'topic_migrate',
+		'submit'         => __( 'Transfer topic', 'wp-recall' ),
+		'topic_id'       => $topic_id,
+		'forum_list'     => true,
 		'exclude_fields' => array(
 			'topic_name',
 			'post_content'
 		)
-		) );
+	) );
 	$content .= '</div>';
 
 	return array(
-		'content'	 => $content,
-		'dialog'	 => true,
-		'title'		 => __( 'Transfer topic to another forum', 'wp-recall' )
+		'content' => $content,
+		'dialog'  => true,
+		'title'   => __( 'Transfer topic to another forum', 'wp-recall' )
 	);
 }
 
@@ -807,8 +836,9 @@ function pfm_action_get_form_topic_migrate( $topic_id ) {
 pfm_add_ajax_action( 'get_form_topic_edit', 'pfm_action_get_form_topic_edit' );
 function pfm_action_get_form_topic_edit( $topic_id ) {
 
-	if ( ! pfm_is_can_topic_edit( $topic_id ) )
+	if ( ! pfm_is_can_topic_edit( $topic_id ) ) {
 		return false;
+	}
 
 	$topic = pfm_get_topic( $topic_id );
 
@@ -817,11 +847,11 @@ function pfm_action_get_form_topic_edit( $topic_id ) {
 	}
 
 	$args = array(
-		'action'		 => 'topic_edit',
-		'submit'		 => __( 'Save changes', 'wp-recall' ),
-		'forum_id'		 => $topic->forum_id,
-		'topic_id'		 => $topic_id,
-		'values'		 => array(
+		'action'         => 'topic_edit',
+		'submit'         => __( 'Save changes', 'wp-recall' ),
+		'forum_id'       => $topic->forum_id,
+		'topic_id'       => $topic_id,
+		'values'         => array(
 			'topic_name' => $topic->topic_name
 		),
 		'exclude_fields' => array(
@@ -830,15 +860,15 @@ function pfm_action_get_form_topic_edit( $topic_id ) {
 	);
 
 	if ( $metas = RQ::tbl( new PrimeMeta() )->select( [
-			'meta_key',
-			'meta_value'
-		] )->where( [
-			'object_id'		 => $topic_id,
-			'object_type'	 => 'topic',
-		] )->get_results() ) {
-		$metadata = array();
+		'meta_key',
+		'meta_value'
+	] )->where( [
+		'object_id'   => $topic_id,
+		'object_type' => 'topic',
+	] )->get_results() ) {
 		foreach ( $metas as $meta ) {
-			$args['values'][$meta->meta_key] = $meta->meta_value;
+			//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+			$args['values'][ $meta->meta_key ] = $meta->meta_value;
 		}
 	}
 
@@ -847,9 +877,9 @@ function pfm_action_get_form_topic_edit( $topic_id ) {
 	$content .= '</div>';
 
 	return array(
-		'content'	 => $content,
-		'dialog'	 => true,
-		'title'		 => __( 'Edit topic', 'wp-recall' )
+		'content' => $content,
+		'dialog'  => true,
+		'title'   => __( 'Edit topic', 'wp-recall' )
 	);
 }
 
@@ -857,8 +887,9 @@ function pfm_action_get_form_topic_edit( $topic_id ) {
 pfm_add_ajax_action( 'topic_fix', 'pfm_action_topic_fix' );
 function pfm_action_topic_fix( $topic_id ) {
 
-	if ( ! pfm_is_can( 'topic_fix' ) )
+	if ( ! pfm_is_can( 'topic_fix' ) ) {
 		return false;
+	}
 
 	$topic = pfm_get_topic( $topic_id );
 
@@ -867,12 +898,12 @@ function pfm_action_topic_fix( $topic_id ) {
 	}
 
 	pfm_update_topic( array(
-		'topic_id'	 => $topic_id,
-		'topic_fix'	 => 1
+		'topic_id'  => $topic_id,
+		'topic_fix' => 1
 	) );
 
 	return array(
-		'update-page'	 => true,
+		'update-page'    => true,
 		'preloader_live' => 1
 	);
 }
@@ -881,8 +912,9 @@ function pfm_action_topic_fix( $topic_id ) {
 pfm_add_ajax_action( 'topic_unfix', 'pfm_action_topic_unfix' );
 function pfm_action_topic_unfix( $topic_id ) {
 
-	if ( ! pfm_is_can( 'topic_fix' ) )
+	if ( ! pfm_is_can( 'topic_fix' ) ) {
 		return false;
+	}
 
 	$topic = pfm_get_topic( $topic_id );
 
@@ -891,12 +923,12 @@ function pfm_action_topic_unfix( $topic_id ) {
 	}
 
 	pfm_update_topic( array(
-		'topic_id'	 => $topic_id,
-		'topic_fix'	 => 0
+		'topic_id'  => $topic_id,
+		'topic_fix' => 0
 	) );
 
 	return array(
-		'update-page'	 => true,
+		'update-page'    => true,
 		'preloader_live' => 1
 	);
 }
@@ -905,8 +937,9 @@ function pfm_action_topic_unfix( $topic_id ) {
 pfm_add_ajax_action( 'get_post_excerpt', 'pfm_action_get_post_excerpt' );
 function pfm_action_get_post_excerpt( $post_id ) {
 
-	if ( ! pfm_is_can( 'post_create' ) )
+	if ( ! pfm_is_can( 'post_create' ) ) {
 		return false;
+	}
 
 	$post = pfm_get_post( $post_id );
 
@@ -916,9 +949,9 @@ function pfm_action_get_post_excerpt( $post_id ) {
 
 	$author_name = $post->user_id ? pfm_get_user_name( $post->user_id ) : $post->guest_name;
 
-	if ( isset( $_POST['excerpt'] ) && $_POST['excerpt'] ) {
+	if ( ! empty( $_POST['excerpt'] ) ) {
 
-		$content = wp_unslash( $_POST['excerpt'] );
+		$content = wp_kses_post( wp_unslash( $_POST['excerpt'] ) );
 
 		if ( strpos( $post->post_content, $content ) !== false ) {
 			$content = '<blockquote><strong>' . $author_name . ' ' . __( 'said', 'wp-recall' ) . ' </strong><br />' . $content . '</blockquote><br />';
@@ -937,7 +970,7 @@ function pfm_action_get_post_excerpt( $post_id ) {
 		'<br />',
 		'<br/>',
 		'<br>'
-		), "\n", $content );
+	), "\n", $content );
 
 	$content = str_replace( '<p></p>', "\n\n", $content );
 	$content = str_replace( '<p> </p>', "\n\n", $content );
@@ -947,8 +980,8 @@ function pfm_action_get_post_excerpt( $post_id ) {
 	$content = htmlspecialchars_decode( $content, ENT_COMPAT );
 
 	return array(
-		'content'	 => $content,
-		'place-id'	 => '#editor-action_post_create'
+		'content'  => $content,
+		'place-id' => '#editor-action_post_create'
 	);
 }
 
@@ -958,20 +991,20 @@ function pfm_action_get_structure() {
 
 	$content = '<div id="forum-manager" class="manager-box">';
 	$content .= pfm_get_form( array(
-		'action'		 => 'member_go',
-		'submit'		 => __( 'Go to the selected forum', 'wp-recall' ),
-		'forum_list'	 => true,
+		'action'         => 'member_go',
+		'submit'         => __( 'Go to the selected forum', 'wp-recall' ),
+		'forum_list'     => true,
 		'exclude_fields' => array(
 			'topic_name',
 			'post_content'
 		)
-		) );
+	) );
 	$content .= '</div>';
 
 	return array(
-		'content'	 => $content,
-		'dialog'	 => true,
-		'title'		 => __( 'Jump to the forum', 'wp-recall' )
+		'content' => $content,
+		'dialog'  => true,
+		'title'   => __( 'Jump to the forum', 'wp-recall' )
 	);
 }
 
@@ -981,9 +1014,9 @@ function pfm_action_get_author_topics() {
 	global $user_ID;
 
 	return array(
-		'content'	 => pfm_get_user_topics_list( $user_ID, false ),
-		'dialog'	 => true,
-		'title'		 => __( 'Last started topics', 'wp-recall' )
+		'content' => pfm_get_user_topics_list( $user_ID, false ),
+		'dialog'  => true,
+		'title'   => __( 'Last started topics', 'wp-recall' )
 	);
 }
 
@@ -994,6 +1027,7 @@ function pfm_action_get_last_updated_topics() {
 
 	$theme = pfm_get_current_theme();
 
+	//phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
 	$topics = $wpdb->get_results(
 		"SELECT "
 		. "ptopics.*, "
@@ -1006,6 +1040,7 @@ function pfm_action_get_last_updated_topics() {
 		. "ORDER BY MAX(pfm_posts.post_date) DESC "
 		. "LIMIT 20"
 	);
+	//phpcs:enable WordPress.DB.PreparedSQL.NotPrepared
 
 	$PrimeQuery->last['posts'] = $PrimeQuery->get_topics_last_post( $topics );
 
@@ -1025,9 +1060,9 @@ function pfm_action_get_last_updated_topics() {
 	$content .= '</div>';
 
 	return array(
-		'content'	 => $content,
-		'dialog'	 => true,
-		'title'		 => __( 'Updated forum topics', 'wp-recall' )
+		'content' => $content,
+		'dialog'  => true,
+		'title'   => __( 'Updated forum topics', 'wp-recall' )
 	);
 }
 
@@ -1038,11 +1073,11 @@ function pfm_action_get_private_chat( $user_id ) {
 	$chatdata = rcl_get_chat_private( $user_id );
 
 	return array(
-		'content'		 => $chatdata['content'],
-		'dialog'		 => true,
-		'dialog-width'	 => 'small',
-		'title'			 => __( 'Chat with', 'wp-recall' ) . ' ' . get_the_author_meta( 'display_name', $user_id ),
-		'onClose'		 => array( 'rcl_chat_clear_beat', array( $chatdata['token'] ) )
+		'content'      => $chatdata['content'],
+		'dialog'       => true,
+		'dialog-width' => 'small',
+		'title'        => __( 'Chat with', 'wp-recall' ) . ' ' . get_the_author_meta( 'display_name', $user_id ),
+		'onClose'      => array( 'rcl_chat_clear_beat', array( $chatdata['token'] ) )
 	);
 }
 
@@ -1050,21 +1085,31 @@ function pfm_action_get_private_chat( $user_id ) {
 pfm_add_ajax_action( 'get_author_info', 'pfm_action_get_author_info' );
 function pfm_action_get_author_info( $user_id ) {
 	return array(
-		'content'		 => rcl_get_user_details( $user_id, array( 'zoom' => false ) ),
-		'dialog'		 => true,
-		'dialog-width'	 => 'auto',
-		'dialog-class'	 => 'rcl-user-getails',
-		'title'			 => __( 'Detailed information', 'wp-recall' )
+		'content'      => rcl_get_user_details( $user_id, array( 'zoom' => false ) ),
+		'dialog'       => true,
+		'dialog-width' => 'auto',
+		'dialog-class' => 'rcl-user-getails',
+		'title'        => __( 'Detailed information', 'wp-recall' )
 	);
 }
 
 //предпросмотр сообщения
 pfm_add_ajax_action( 'get_preview', 'pfm_action_get_preview' );
-function pfm_action_get_preview( $action ) {
+function pfm_action_get_preview() {
+
+	$formdata = array();
 
 	if ( isset( $_POST['formdata'] ) ) {
-		$formdata = array();
-		parse_str( $_POST['formdata'], $formdata );
+		//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		parse_str( wp_unslash( $_POST['formdata'] ), $formdata );
+
+		foreach ( $formdata as $k => $v ) {
+			if ( $k == 'post_content' ) {
+				$formdata[ $k ] = wp_kses_post( $v );
+			} else {
+				$formdata[ $k ] = sanitize_text_field( $v );
+			}
+		}
 	}
 
 	$postContent = wp_unslash( $formdata['post_content'] );
@@ -1074,21 +1119,21 @@ function pfm_action_get_preview( $action ) {
 		return array( 'error' => __( 'Empty message!', 'wp-recall' ) );
 	}
 
-	global $PrimeShorts, $PrimePost, $PrimeUser, $user_ID;
+	global $PrimeShorts, $PrimePost, $user_ID;
 
 	$PrimeShorts = pfm_get_shortcodes();
 
 	$theme = rcl_get_addon( get_site_option( 'rcl_pforum_template' ) );
 
 	$postData = array(
-		'post_id'			 => 0,
-		'user_id'			 => $user_ID,
-		'post_content'		 => $postContent,
-		'post_date'			 => current_time( 'mysql' ),
-		'display_name'		 => $user_ID ? get_the_author_meta( 'display_name', $user_ID ) : '',
-		'guest_name'		 => ! $user_ID ? $formdata['guest_name'] : '',
-		'guest_email'		 => ! $user_ID ? $formdata['guest_email'] : '',
-		'user_registered'	 => $user_ID ? get_the_author_meta( 'user_registered', $user_ID ) : ''
+		'post_id'         => 0,
+		'user_id'         => $user_ID,
+		'post_content'    => $postContent,
+		'post_date'       => current_time( 'mysql' ),
+		'display_name'    => $user_ID ? get_the_author_meta( 'display_name', $user_ID ) : '',
+		'guest_name'      => ! $user_ID ? sanitize_text_field( $formdata['guest_name'] ) : '',
+		'guest_email'     => ! $user_ID ? sanitize_email( wp_unslash( $formdata['guest_email'] ) ) : '',
+		'user_registered' => $user_ID ? get_the_author_meta( 'user_registered', $user_ID ) : ''
 	);
 
 	$PrimePost = apply_filters( 'pfm_preview_postdata', $postData );
@@ -1102,10 +1147,10 @@ function pfm_action_get_preview( $action ) {
 	$content .= '</div>';
 
 	return array(
-		'content'		 => $content,
-		'dialog'		 => true,
-		'dialog-width'	 => 'small',
-		'title'			 => __( 'Preview', 'wp-recall' )
+		'content'      => $content,
+		'dialog'       => true,
+		'dialog-width' => 'small',
+		'title'        => __( 'Preview', 'wp-recall' )
 	);
 }
 
@@ -1113,16 +1158,26 @@ pfm_add_ajax_action( 'post_create', 'pfm_action_post_create' );
 function pfm_action_post_create() {
 	global $user_ID;
 
+	$formdata = array();
+
 	if ( isset( $_POST['formdata'] ) ) {
-		$formdata = array();
-		parse_str( $_POST['formdata'], $formdata );
+		//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		parse_str( wp_unslash( $_POST['formdata'] ), $formdata );
+
+		foreach ( $formdata as $k => $v ) {
+			if ( $k == 'post_content' ) {
+				$formdata[ $k ] = wp_kses_post( $v );
+			} else {
+				$formdata[ $k ] = sanitize_text_field( $v );
+			}
+		}
 	}
 
 	if ( ! pfm_is_can( 'post_create' ) || ! $formdata['topic_id'] ) {
 		return array( 'error' => __( 'Insufficient rights to publish', 'wp-recall' ) );
 	}
 
-	$topic = pfm_get_topic( $formdata['topic_id'] );
+	$topic = pfm_get_topic( absint( $formdata['topic_id'] ) );
 
 	if ( $topic->topic_closed ) {
 		return array( 'error' => __( 'Topic closed', 'wp-recall' ) );
@@ -1132,25 +1187,25 @@ function pfm_action_post_create() {
 		return array( 'error' => __( 'Empty message! Go back and write something.', 'wp-recall' ) );
 	}
 
-	$lastPost = get_topic_last_post( $formdata['topic_id'] );
+	$lastPost = get_topic_last_post( absint( $formdata['topic_id'] ) );
 
 	if ( $lastPost->post_content == wp_unslash( $formdata['post_content'] ) ) {
 		return array( 'error' => __( 'Repeat the last message!', 'wp-recall' ) );
 	}
 
 	$args = array(
-		'post_content'	 => $formdata['post_content'],
-		'topic_id'		 => $formdata['topic_id']
+		'post_content' => $formdata['post_content'],
+		'topic_id'     => absint( $formdata['topic_id'] )
 	);
 
 	if ( ! $user_ID ) {
 
-		if ( ! $formdata['guest_email'] || ! $formdata['guest_name'] ) {
+		if ( ! sanitize_email( wp_unslash( $formdata['guest_email'] ) ) || ! $formdata['guest_name'] ) {
 			return array( 'error' => __( 'Error', 'wp-recall' ) );
 		}
 
-		$args['guest_email'] = $formdata['guest_email'];
-		$args['guest_name']	 = $formdata['guest_name'];
+		$args['guest_email'] = sanitize_email( wp_unslash( $formdata['guest_email'] ) );
+		$args['guest_name']  = sanitize_text_field( $formdata['guest_name'] );
 	}
 
 	do_action( 'pfm_before_add_post', $args );
@@ -1165,7 +1220,7 @@ function pfm_action_post_create() {
 
 			if ( $topicClose ) {
 				return array(
-					'url-redirect'	 => pfm_get_post_permalink( $post_id ),
+					'url-redirect'   => pfm_get_post_permalink( $post_id ),
 					'preloader_live' => 1
 				);
 			}
@@ -1174,19 +1229,19 @@ function pfm_action_post_create() {
 
 	if ( isset( $formdata['redirect'] ) && $formdata['redirect'] == 'post-url' ) {
 		return array(
-			'url-redirect'	 => pfm_get_post_permalink( $post_id ),
+			'url-redirect'   => pfm_get_post_permalink( $post_id ),
 			'preloader_live' => 1
 		);
 	}
 
 	$lastPosts = RQ::tbl( new PrimePosts() )
-		->select( ['post_id' ] )
-		->where( [
-			'topic_id' => $formdata['topic_id'],
-		] )
-		->date( 'post_date', '>', $formdata['form_load'] )
-		->orderby( 'post_id', 'ASC' )
-		->get_col();
+	               ->select( [ 'post_id' ] )
+	               ->where( [
+		               'topic_id' => $formdata['topic_id'],
+	               ] )
+	               ->date( 'post_date', '>', $formdata['form_load'] )
+	               ->orderby( 'post_id', 'ASC' )
+	               ->get_col();
 
 	$result = array();
 
@@ -1196,11 +1251,11 @@ function pfm_action_post_create() {
 		}
 	}
 
-	$result['post_id']		 = $post_id;
-	$result['topic_id']		 = $formdata['topic_id'];
-	$result['current_url']	 = pfm_get_post_permalink( $post_id );
-	$result['form_load']	 = current_time( 'mysql' );
-	$result['append']		 = '#prime-forum .prime-posts';
+	$result['post_id']     = $post_id;
+	$result['topic_id']    = $formdata['topic_id'];
+	$result['current_url'] = pfm_get_post_permalink( $post_id );
+	$result['form_load']   = current_time( 'mysql' );
+	$result['append']      = '#prime-forum .prime-posts';
 
 	return $result;
 }

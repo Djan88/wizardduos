@@ -42,6 +42,14 @@ function theme_switcha_check_cookie() {
 		
 		$domain = sanitize_text_field($_SERVER['HTTP_HOST']);
 		
+		$port = parse_url($domain, PHP_URL_PORT);
+		
+		if (!empty($port)) { // localhost
+			
+			$domain = parse_url($domain, PHP_URL_HOST);
+			
+		}
+		
 		// setcookie($name, $value, $expires, $path, $domain, $secure, $httponly)
 		
 		setcookie('theme_switcha_theme_'. COOKIEHASH, $theme, $expire, COOKIEPATH, $domain, false, true);
@@ -603,6 +611,20 @@ function theme_switcha_dashboard_widget() {
 		
 	}
 	
+}
+
+function theme_switcha_disable_widget() {
+	
+	global $theme_switcha_options;
+	
+	$disable_widget = (isset($theme_switcha_options['disable_widget']) && !empty($theme_switcha_options['disable_widget'])) ? 1 : 0;
+	
+	if ($disable_widget && !current_user_can('manage_options')) {
+		
+   		remove_meta_box('theme_switcha_dashboard_widget', 'dashboard', 'normal');
+   		
+   	}
+   	
 }
 
 function theme_switcha_display_text_link($attr, $content = null) {

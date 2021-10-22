@@ -4,44 +4,52 @@
 rcl_ajax_action( 'rcl_ajax_delete_post', true );
 function rcl_ajax_delete_post() {
 	global $user_ID;
-
+	/**
+	 * todo check
+	 */
 	rcl_verify_ajax_nonce();
 
-	$user_id = ($user_ID) ? $user_ID : $_COOKIE['PHPSESSID'];
+	$user_id = ( $user_ID ) ? $user_ID : ( ! empty( $_COOKIE['PHPSESSID'] ) ? sanitize_text_field( wp_unslash( $_COOKIE['PHPSESSID'] ) ) : 0 );
 
-	$temps		 = get_site_option( 'rcl_tempgallery' );
-	$temp_gal	 = $temps[$user_id];
+	$temps    = get_site_option( 'rcl_tempgallery' );
+	$temp_gal = $temps[ $user_id ];
+
+	$attach_to_remove = 0;
 
 	if ( $temp_gal ) {
-
+		$new_temp = false;
 		foreach ( ( array ) $temp_gal as $key => $gal ) {
-			if ( $gal['ID'] == $_POST['post_id'] )
-				unset( $temp_gal[$key] );
+			if ( isset( $_POST['post_id'] ) && $gal['ID'] == absint( $_POST['post_id'] ) ) {
+				unset( $temp_gal[ $key ] );
+				//post_id should be in user temp
+				$attach_to_remove = $gal['ID'];
+			}
 		}
 		foreach ( ( array ) $temp_gal as $t ) {
 			$new_temp[] = $t;
 		}
 
-		if ( $new_temp )
-			$temps[$user_id] = $new_temp;
-		else
-			unset( $temps[$user_id] );
+		if ( $new_temp ) {
+			$temps[ $user_id ] = $new_temp;
+		} else {
+			unset( $temps[ $user_id ] );
+		}
 	}
 
 	update_site_option( 'rcl_tempgallery', $temps );
 
-	$post = get_post( intval( $_POST['post_id'] ) );
+	$post = get_post( $attach_to_remove );
 
-	if ( ! $post ) {
-		$log['success']		 = __( 'Material successfully removed!', 'wp-recall' );
-		$log['post_type']	 = 'attachment';
+	if ( ! $attach_to_remove || ! $post ) {
+		$log['success']   = __( 'Material successfully removed!', 'wp-recall' );
+		$log['post_type'] = 'attachment';
 	} else {
 
 		$res = wp_delete_post( $post->ID );
 
 		if ( $res ) {
-			$log['success']		 = __( 'Material successfully removed!', 'wp-recall' );
-			$log['post_type']	 = $post->post_type;
+			$log['success']   = __( 'Material successfully removed!', 'wp-recall' );
+			$log['post_type'] = $post->post_type;
 		} else {
 			$log['error'] = __( 'Deletion failed!', 'wp-recall' );
 		}
@@ -51,18 +59,19 @@ function rcl_ajax_delete_post() {
 }
 
 //вызов быстрой формы редактирования публикации
-rcl_ajax_action( 'rcl_get_edit_postdata', false );
+rcl_ajax_action( 'rcl_get_edit_postdata' );
 function rcl_get_edit_postdata() {
-	global $user_ID;
 
 	rcl_verify_ajax_nonce();
 
-	$post_id = intval( $_POST['post_id'] );
-	$post	 = get_post( $post_id );
+	$post_id = isset( $_POST['post_id'] ) ? intval( $_POST['post_id'] ) : 0;
 
-	if ( $user_ID ) {
-		$log['result']	 = 100;
-		$log['content']	 = "
+	if ( $post_id && current_user_can( 'edit_post', $post_id ) ) {
+
+		$post = get_post( $post_id );
+
+		$log['result']  = 100;
+		$log['content'] = "
         <form id='rcl-edit-form' method='post'>
                 <label>" . __( "Name", 'wp-recall' ) . ":</label>
                  <input type='text' name='post_title' value='$post->post_title'>
@@ -78,20 +87,27 @@ function rcl_get_edit_postdata() {
 }
 
 //сохранение изменений в быстрой форме редактирования
-rcl_ajax_action( 'rcl_edit_postdata', false );
+rcl_ajax_action( 'rcl_edit_postdata' );
 function rcl_edit_postdata() {
 	global $wpdb;
 
 	rcl_verify_ajax_nonce();
 
-	$post_array					 = array();
-	$post_array['post_title']	 = sanitize_text_field( $_POST['post_title'] );
-	$post_array['post_content']	 = esc_textarea( $_POST['post_content'] );
+	$post_id                    = isset( $_POST['post_id'] ) ? intval( $_POST['post_id'] ) : 0;
+	$post_array                 = array();
+	$post_array['post_title']   = isset( $_POST['post_title'] ) ? sanitize_text_field( wp_unslash( $_POST['post_title'] ) ) : '';
+	$post_array['post_content'] = isset( $_POST['post_content'] ) ? sanitize_textarea_field( wp_unslash( $_POST['post_content'] ) ) : '';
+
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		wp_send_json( [ 'error' => __( 'Error', 'wp-recall' ) ] );
+	}
 
 	$post_array = apply_filters( 'rcl_pre_edit_post', $post_array );
-
+	/**
+	 * todo wp_update_post
+	 */
 	$result = $wpdb->update(
-		$wpdb->posts, $post_array, array( 'ID' => intval( $_POST['post_id'] ) )
+		$wpdb->posts, $post_array, array( 'ID' => $post_id )
 	);
 
 	if ( ! $result ) {
@@ -99,36 +115,29 @@ function rcl_edit_postdata() {
 	}
 
 	wp_send_json( array(
-		'success'	 => __( 'Publication updated', 'wp-recall' ),
-		'dialog'	 => array( 'close' )
+		'success' => __( 'Publication updated', 'wp-recall' ),
+		'dialog'  => array( 'close' )
 	) );
-}
-
-function rcl_edit_post() {
-	$edit = new Rcl_EditPost();
-	$edit->update_post();
 }
 
 //выборка меток по введенным значениям
 rcl_ajax_action( 'rcl_get_like_tags', true );
 function rcl_get_like_tags() {
-	global $wpdb;
-
 	rcl_verify_ajax_nonce();
 
-	if ( ! $_POST['query'] ) {
+	if ( empty( $_POST['query'] ) || empty( $_POST['taxonomy'] ) ) {
 		wp_send_json( array( array( 'id' => '' ) ) );
-	};
+	}
 
-	$query		 = $_POST['query'];
-	$taxonomy	 = $_POST['taxonomy'];
+	$query    = sanitize_text_field( wp_unslash( $_POST['query'] ) );
+	$taxonomy = sanitize_key( $_POST['taxonomy'] );
 
 	$terms = get_terms( $taxonomy, array( 'hide_empty' => false, 'name__like' => $query ) );
 
 	$tags = array();
 	foreach ( $terms as $key => $term ) {
-		$tags[$key]['id']	 = $term->name;
-		$tags[$key]['name']	 = $term->name;
+		$tags[ $key ]['id']   = $term->name;
+		$tags[ $key ]['name'] = $term->name;
 	}
 
 	wp_send_json( $tags );
@@ -137,58 +146,67 @@ function rcl_get_like_tags() {
 add_filter( 'rcl_preview_post_content', 'rcl_add_registered_scripts' );
 rcl_ajax_action( 'rcl_preview_post', true );
 function rcl_preview_post() {
-	global $user_ID;
 
 	rcl_verify_ajax_nonce();
 	rcl_reset_wp_dependencies();
 
-	$log		 = array();
-	$postdata	 = $_POST;
+	$data_post_id    = isset( $_POST['post_id'] ) ? absint( $_POST['post_id'] ) : 0;
+	$data_user_email = ! empty( $_POST['email-user'] ) ? sanitize_email( wp_unslash( $_POST['email-user'] ) ) : '';
+	$data_user_login = ! empty( $_POST['name-user'] ) ? sanitize_user( wp_unslash( $_POST['name-user'] ) ) : '';
+	$data_post_type  = ! empty( $_POST['post_type'] ) ? sanitize_key( $_POST['post_type'] ) : '';
+	$data_post_title = ! empty( $_POST['post_title'] ) ? sanitize_text_field( wp_unslash( $_POST['post_title'] ) ) : '';
+	$data_form_id    = ! empty( $_POST['form_id'] ) ? absint( $_POST['form_id'] ) : 1;
 
-	if ( ! rcl_get_option( 'public_access' ) && ! $user_ID ) {
-
-		$email_new_user	 = sanitize_email( $postdata['email-user'] );
-		$name_new_user	 = $postdata['name-user'];
-
-		if ( ! $email_new_user ) {
-			$log['error'] = __( 'Enter your e-mail!', 'wp-recall' );
-		}
-		if ( ! $name_new_user ) {
-			$log['error'] = __( 'Enter your name!', 'wp-recall' );
-		}
-
-		$res_email		 = email_exists( $email_new_user );
-		$res_login		 = username_exists( $email_new_user );
-		$correctemail	 = is_email( $email_new_user );
-		$valid			 = validate_username( $email_new_user );
-
-		if ( $res_login || $res_email || ! $correctemail || ! $valid ) {
-
-			if ( ! $valid || ! $correctemail ) {
-				$log['error'] .= __( 'You have entered an invalid email!', 'wp-recall' );
+	if ( $data_post_id ) {
+		if ( ! current_user_can( 'administrator' ) ) {
+			$post = get_post( $data_post_id );
+			if ( ! $post || $post->post_author != get_current_user_id() ) {
+				wp_send_json( [ 'error' => __( 'Error', 'wp-recall' ) ] );
 			}
-			if ( $res_login || $res_email ) {
-				$log['error'] .= __( 'This email is already used!', 'wp-recall' ) . '<br>'
-					. __( 'If this is your email, then log in and publish your post', 'wp-recall' );
-			}
-		}
-
-		if ( $log['error'] ) {
-			wp_send_json( $log );
 		}
 	}
 
-	$formFields = new Rcl_Public_Form_Fields( $postdata['post_type'], array(
-		'form_id' => isset( $postdata['form_id'] ) ? $postdata['form_id'] : 1
-		) );
+	if ( ! rcl_get_option( 'public_access' ) && ! is_user_logged_in() ) {
+
+		if ( ! $data_user_email ) {
+			wp_send_json( [ 'error' => __( 'Enter your e-mail!', 'wp-recall' ) ] );
+		}
+
+		if ( ! $data_user_login ) {
+			wp_send_json( [ 'error' => __( 'Enter your name!', 'wp-recall' ) ] );
+		}
+
+		if ( ! $data_user_email || ! is_email( $data_user_email ) ) {
+			wp_send_json( [ 'error' => __( 'You have entered an invalid email!', 'wp-recall' ) ] );
+		}
+		if ( ! $data_user_login || ! validate_username( $data_user_login ) ) {
+			wp_send_json( [ 'error' => __( 'You have entered an invalid name!', 'wp-recall' ) ] );
+		}
+
+		if ( email_exists( $data_user_email ) ) {
+			wp_send_json( [ 'error' => __( 'This email is already used!', 'wp-recall' ) . '<br>' . __( 'If this is your email, then log in and publish your post', 'wp-recall' ) ] );
+		}
+
+		if ( username_exists( $data_user_login ) ) {
+			wp_send_json( [ 'error' => __( 'This name is already used!', 'wp-recall' ) ] );
+		}
+	}
+
+	if ( ! $data_post_type || ! $data_form_id ) {
+		wp_send_json( [ 'error' => __( 'Error', 'wp-recall' ) ] );
+	}
+
+	$formFields = new Rcl_Public_Form_Fields( $data_post_type, array(
+		'form_id' => $data_form_id
+	) );
 
 	foreach ( $formFields->fields as $field ) {
 
-		if ( in_array( $field->type, array( 'runner' ) ) ) {
+		if ( $field->type == 'runner' ) {
 
-			$value	 = isset( $postdata[$field->id] ) ? $postdata[$field->id] : 0;
-			$min	 = $field->value_min;
-			$max	 = $field->value_max;
+			$value = isset( $_POST[ $field->id ] ) && is_numeric( $_POST[ $field->id ] ) ? sanitize_key( $_POST[ $field->id ] ) : 0;
+			$min   = $field->value_min;
+			$max   = $field->value_max;
 
 			if ( $value < $min || $value > $max ) {
 				wp_send_json( array( 'error' => __( 'Incorrect values of some fields, enter the correct values!', 'wp-recall' ) ) );
@@ -198,7 +216,7 @@ function rcl_preview_post() {
 
 	if ( $formFields->is_active_field( 'post_thumbnail' ) ) {
 
-		$thumbnail_id = (isset( $postdata['post-thumbnail'] )) ? $postdata['post-thumbnail'] : 0;
+		$thumbnail_id = ( isset( $_POST['post_thumbnail'] ) ) ? absint( $_POST['post_thumbnail'] ) : 0;
 
 		$field = $formFields->get_field( 'post_thumbnail' );
 
@@ -211,62 +229,79 @@ function rcl_preview_post() {
 
 	if ( $formFields->is_active_field( 'post_content' ) ) {
 
-		$postContent = $postdata['post_content'];
+		$postContent = isset( $_POST['post_content'] ) ? wp_kses_post( wp_unslash( $_POST['post_content'] ) ) : '';
 
 		$field = $formFields->get_field( 'post_content' );
 
 		if ( $field->get_prop( 'required' ) && ! $postContent ) {
-			wp_send_json( array( 'error' => __( 'Add contents of the publication!', 'wp-recall' ) ) );
+			wp_send_json( [ 'error' => __( 'Add contents of the publication!', 'wp-recall' ) ] );
 		}
 
-		$post_content = wpautop( do_shortcode( stripslashes_deep( $postContent ) ) );
+		$post_content = wpautop( do_shortcode( $postContent ) );
 	}
 
-	do_action( 'rcl_preview_post', $postdata );
+	do_action( 'rcl_preview_post', [
+		'post_id'   => $data_post_id,
+		'post_type' => $data_post_type,
+		'form_id'   => $data_form_id
+	] );
 
-	if ( $postdata['publish'] ) {
+	if ( ! empty( $_POST['publish'] ) ) {
 		wp_send_json( [
 			'submit' => true
 		] );
 	}
 
-	if ( rcl_get_option( 'pm_rcl' ) && $customFields = $formFields->get_custom_fields() ) {
+	$customFields = $formFields->get_custom_fields();
+
+	if ( rcl_get_option( 'pm_rcl' ) && $customFields ) {
 
 		$types = rcl_get_option( 'pm_post_types' );
 
-		if ( ! $types || in_array( $postdata['post_type'], $types ) ) {
+		if ( ! $types || in_array( $data_post_type, $types ) ) {
 
 			$fieldsBox = '<div class="rcl-custom-fields">';
 
 			foreach ( $customFields as $field_id => $field ) {
-				$field->set_prop( 'value', isset( $_POST[$field_id] ) ? $_POST[$field_id] : false  );
+				//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+				$data_field_val = isset( $_POST[ $field_id ] ) ? wp_unslash( $_POST[ $field_id ] ) : false;
+
+				if ( $field->type == 'editor' ) {
+					$data_field_val = wp_kses_post( $data_field_val );
+				} else {
+					$data_field_val = rcl_recursive_map( 'sanitize_text_field', $data_field_val );
+				}
+
+				$field->set_prop( 'value', $data_field_val );
+
 				$fieldsBox .= $field->get_field_value( true );
+
 			}
 
 			$fieldsBox .= '</div>';
 
-			if ( rcl_get_option( 'pm_place' ) == 1 )
+			if ( rcl_get_option( 'pm_place' ) == 1 ) {
 				$post_content .= $fieldsBox;
-			else
+			} else {
 				$post_content = $fieldsBox . $post_content;
+			}
 		}
 	}
 
-	if ( isset( $_POST['rcl-post-gallery'] ) && $postGallery = $_POST['rcl-post-gallery'] ) {
+	//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$post_gallery_ids = ! empty( $_POST['rcl-post-gallery'] ) ? rcl_recursive_map( 'intval', wp_unslash( $_POST['rcl-post-gallery'] ) ) : [];
 
-		$gallery = array();
+	if ( $post_gallery_ids ) {
 
-		if ( $postGallery ) {
-			$postGallery = array_unique( $postGallery );
-			foreach ( $postGallery as $attachment_id ) {
-				$attachment_id	 = intval( $attachment_id );
-				if ( $attachment_id )
-					$gallery[]		 = $attachment_id;
+		$post_gallery_ids = array_unique( $post_gallery_ids );
+		foreach ( $post_gallery_ids as $key => $attachment_id ) {
+			if ( ! $attachment_id ) {
+				unset( $post_gallery_ids[ $key ] );
 			}
 		}
 
-		if ( $gallery ) {
-			$post_content = '<div id="primary-preview-gallery">' . rcl_get_post_gallery( 'preview', $gallery ) . '</div>' . $post_content;
+		if ( $post_gallery_ids ) {
+			$post_content = '<div id="primary-preview-gallery">' . rcl_get_post_gallery( 'preview', $post_gallery_ids ) . '</div>' . $post_content;
 		}
 	}
 
@@ -274,32 +309,44 @@ function rcl_preview_post() {
 
 	$preview .= rcl_get_notice( [
 		'text' => __( 'If everything is correct – publish it! If not, you can go back to editing.', 'wp-recall' )
-		] );
+	] );
 
-	do_action( 'rcl_pre_send_preview_post', $postdata );
+	do_action( 'rcl_pre_send_preview_post', [
+		'post_id'   => $data_post_id,
+		'post_type' => $data_post_type,
+		'form_id'   => $data_form_id
+	] );
 
 	wp_send_json( array(
-		'title'		 => $postdata['post_title'],
-		'content'	 => $preview
+		'title'   => $data_post_title,
+		'content' => $preview
 	) );
 }
 
 rcl_ajax_action( 'rcl_set_post_thumbnail', true );
 function rcl_set_post_thumbnail() {
 
-	$thumbnail_id	 = intval( $_POST['thumbnail_id'] );
-	$parent_id		 = intval( $_POST['parent_id'] );
-	$form_id		 = intval( $_POST['form_id'] );
-	$post_type		 = $_POST['post_type'];
+	$thumbnail_id = isset( $_POST['thumbnail_id'] ) ? intval( $_POST['thumbnail_id'] ) : 0;
+	$parent_id    = isset( $_POST['parent_id'] ) ? intval( $_POST['parent_id'] ) : 0;
+	$form_id      = isset( $_POST['form_id'] ) ? intval( $_POST['form_id'] ) : 0;
+	$post_type    = isset( $_POST['post_type'] ) ? sanitize_key( $_POST['post_type'] ) : '';
+
+	if ( $parent_id && ! current_user_can( 'administrator' ) ) {
+		$post = get_post( $parent_id );
+		if ( ! $post || $post->post_author != get_current_user_id() ) {
+			wp_send_json( [ 'error' => __( 'Error', 'wp-recall' ) ] );
+		}
+	}
 
 	$formFields = new Rcl_Public_Form_Fields( $post_type, array(
-		'form_id' => $form_id ? $form_id : 1
-		) );
+		'form_id' => $form_id ?: 1
+	) );
 
-	if ( ! $formFields->is_active_field( 'post_thumbnail' ) )
+	if ( ! $formFields->is_active_field( 'post_thumbnail' ) ) {
 		wp_send_json( [
 			'error' => __( 'The field of the thumbnail is inactive!', 'wp-recall' )
 		] );
+	}
 
 	if ( $parent_id ) {
 		update_post_meta( $parent_id, '_thumbnail_id', $thumbnail_id );
@@ -308,16 +355,16 @@ function rcl_set_post_thumbnail() {
 	$field = $formFields->get_field( 'post_thumbnail' );
 
 	$field->set_prop( 'uploader_props', array(
-		'post_parent'	 => $parent_id,
-		'form_id'		 => $form_id,
-		'post_type'		 => $post_type,
-		'multiple'		 => 0,
-		'crop'			 => 1
+		'post_parent' => $parent_id,
+		'form_id'     => $form_id,
+		'post_type'   => $post_type,
+		'multiple'    => 0,
+		'crop'        => 1
 	) );
 
 	$result = array(
-		'html'	 => $field->get_uploader()->gallery_attachment( $thumbnail_id ),
-		'id'	 => $thumbnail_id
+		'html' => $field->get_uploader()->gallery_attachment( $thumbnail_id ),
+		'id'   => $thumbnail_id
 	);
 
 	wp_send_json( $result );
@@ -326,8 +373,9 @@ function rcl_set_post_thumbnail() {
 add_action( 'rcl_upload', 'rcl_upload_post_thumbnail', 10, 2 );
 function rcl_upload_post_thumbnail( $uploads, $uploader ) {
 
-	if ( $uploader->uploader_id != 'post_thumbnail' )
+	if ( $uploader->uploader_id != 'post_thumbnail' ) {
 		return false;
+	}
 
 	$thumbnail_id = $uploads['id'];
 
@@ -337,19 +385,19 @@ function rcl_upload_post_thumbnail( $uploads, $uploader ) {
 	} else {
 
 		rcl_add_temp_media( array(
-			'media_id'		 => $thumbnail_id,
-			'uploader_id'	 => $uploader->uploader_id
+			'media_id'    => $thumbnail_id,
+			'uploader_id' => $uploader->uploader_id
 		) );
 	}
 
 	do_action( 'rcl_upload_post_thumbnail', $thumbnail_id, $uploader );
 
-	$uploader->uploader_id	 = 'post_uploader';
-	$uploader->input_attach	 = 'post_uploader';
-	$uploader->multiple		 = 1;
+	$uploader->uploader_id  = 'post_uploader';
+	$uploader->input_attach = 'post_uploader';
+	$uploader->multiple     = 1;
 
 	wp_send_json( [
-		'thumbnail'	 => $uploads,
-		'postmedia'	 => $uploader->gallery_attachment( $thumbnail_id )
+		'thumbnail' => $uploads,
+		'postmedia' => $uploader->gallery_attachment( $thumbnail_id )
 	] );
 }
