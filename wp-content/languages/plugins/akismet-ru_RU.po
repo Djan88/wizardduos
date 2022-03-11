@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Akismet Spam Protection - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-10-03 19:26:56+0000\n"
+"PO-Revision-Date: 2022-01-08 08:56:29+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,6 +20,11 @@ msgstr "Обновить до %s"
 #: views/notice.php:272
 msgid "Upgrade your Subscription Level"
 msgstr "Повысить уровень подписки"
+
+#: views/notice.php:233 views/notice.php:241 views/notice.php:249
+#: views/notice.php:258
+msgid "Learn more about usage limits."
+msgstr "Узнайте больше о лимитах использования."
 
 #. translators: The placeholder is a URL.
 #: views/notice.php:123

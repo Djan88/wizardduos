@@ -49,7 +49,7 @@ class Rcl_Users_List extends Rcl_Users_Query {
 		$this->data = ( $this->data ) ? array_map( 'trim', explode( ',', $this->data ) ) : array();
 
 		if ( isset( $_GET['usergroup'] ) ) {
-			$this->usergroup = sanitize_key( $_GET['usergroup'] );
+			$this->usergroup = sanitize_text_field( wp_unslash( $_GET['usergroup'] ) );
 		}
 
 		if ( $this->filters ) {
@@ -200,11 +200,10 @@ class Rcl_Users_List extends Rcl_Users_Query {
 		foreach ( $usergroup as $k => $filt ) {
 			$f        = explode( ':', $filt );
 			$uniq     = uniqid( 'meta_' );
-			$search   = sanitize_text_field( $f[1] );
-			$meta_key = sanitize_key( str_replace( '-', '_', $f[0] ) );
+			$search   = $f[1];
+			$meta_key = str_replace( '-', '_', $f[0] );
 
 			$query['join'][] = "INNER JOIN $wpdb->usermeta AS $uniq ON wp_users.ID=$uniq.user_id";
-			//phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$query['where'][] = $wpdb->prepare( "($uniq.meta_key=%s AND $uniq.meta_value LIKE %s)", $meta_key, '%' . $wpdb->esc_like( $search ) . '%' );
 		}
 

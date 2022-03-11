@@ -40,6 +40,10 @@ function rcl_insert_chat( $chat_room, $chat_status ) {
 function rcl_delete_chat( $chat_id ) {
 	global $wpdb;
 
+	if(empty($chat_id) || !(new Rcl_Chats_Query())->where(['chat_id' => $chat_id])->get_row()){
+		return false;
+	}
+
 	$result = $wpdb->query( "DELETE FROM " . RCL_PREF . "chats WHERE chat_id='$chat_id'" );//phpcs:ignore
 
 	do_action( 'rcl_delete_chat', $chat_id );
@@ -321,4 +325,33 @@ function rcl_chat_get_new_messages( $post ) {
 	$res['current_time'] = current_time( 'mysql' );
 
 	return $res;
+}
+
+function rcl_chat_message_allowed_tags() {
+	return apply_filters( 'rcl_chat_message_allowed_tags', [
+		'a'          => [
+			'href'   => true,
+			'title'  => true,
+			'target' => true
+		],
+		'img'        => [
+			'src'   => true,
+			'alt'   => true,
+			'class' => true,
+		],
+		'p'          => [
+			'class' => true
+		],
+		'blockquote' => [],
+		'del'        => [],
+		'em'         => [],
+		'strong'     => [],
+		'details'    => [],
+		'summary'    => [],
+		'span'       => [
+			'class' => true,
+			'style' => true
+		],
+		'b' => []
+	] );
 }

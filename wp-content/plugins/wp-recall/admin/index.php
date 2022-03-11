@@ -271,7 +271,7 @@ function rcl_update_custom_fields() {
 		$table = 'usermeta';
 	}
 
-	$POSTDATA = apply_filters( 'rcl_pre_update_custom_fields_options', rcl_recursive_map( 'sanitize_text_field', $_POST ) );
+	$POSTDATA = apply_filters( 'rcl_pre_update_custom_fields_options', $_POST );
 
 	if ( ! $POSTDATA ) {
 		return false;
@@ -318,7 +318,7 @@ function rcl_update_custom_fields() {
 				$slug = str_replace( array(
 					'-',
 					' '
-				), '_', rcl_sanitize_string( $newFields[ $nKey ]['title'] ) . '-' . rand( 10, 100 ) );
+				), '_', rcl_sanitize_string( $newFields[ $nKey ]['title'] ) . '-' . uniqid() );
 			}
 
 			$field = $newFields[ $nKey ];
@@ -517,7 +517,7 @@ function rcl_manager_get_new_field() {
 
 	$Manager = new Rcl_Fields_Manager( $managerProps['manager_id'], $managerProps );
 
-	$field_id = 'newField-' . rand( 1, 10000 );
+	$field_id = 'newField-' . uniqid();
 
 	$Manager->add_field( array(
 		'slug' => $field_id,
@@ -661,7 +661,7 @@ function rcl_manager_update_data_fields() {
 	$manager_id  = isset( $_POST['manager_id'] ) ? sanitize_key( $_POST['manager_id'] ) : '';
 	$option_name = isset( $_POST['option_name'] ) ? sanitize_key( $_POST['option_name'] ) : '';
 	//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-	$fieldsData = isset( $_POST['fields'] ) ? rcl_recursive_map( 'sanitize_text_field', wp_unslash( $_POST['fields'] ) ) : [];
+	$fieldsData = isset( $_POST['fields'] ) ? wp_unslash( $_POST['fields'] ) : [];
 	//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 	$structure = isset( $_POST['structure'] ) ? rcl_recursive_map( 'sanitize_text_field', wp_unslash( $_POST['structure'] ) ) : false;
 
@@ -699,7 +699,7 @@ function rcl_manager_update_data_fields() {
 				$field_id = str_replace( array(
 					'-',
 					' '
-				), '_', rcl_sanitize_string( $field['title'] ) . '-' . rand( 1, 100 ) );
+				), '_', rcl_sanitize_string( $field['title'] ) . '-' . uniqid() );
 			} else {
 				$field_id = $field['id'];
 			}
